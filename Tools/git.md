@@ -18,3 +18,24 @@ git push origin <您的分支名>
 git branch -D <您的分支名>
 删除服务端的一个分支
 git push origin :<您的分支名>
+
+
+
+
+
+应该右上角会有ssh和https转换，然而并没有。但是两者使用是一样的。
+git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
+
+2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
+a. 重命名远程分支对应的本地分支
+
+git branch -m oldName newName
+b. 删除远程分支
+
+git push --delete origin oldName
+c. 上传新命名的本地分支
+
+git push origin newName
+d.把修改后的本地分支与远程分支关联
+
+git branch --set-upstream-to origin/newName

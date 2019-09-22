@@ -114,3 +114,28 @@ C语言中是不存在引用的，也就是说C语言中&表示的不是引用�
 # DHCP 
 动态主机设置协议（英语：Dynamic Host Configuration Protocol，DHCP）是一个局域网的网络协议，使用UDP协议工作，主要有两个用途：用于内部网或网络服务供应商自动分配IP地址；给用户用于内部网管理员作为对所有计算机作中央管理的手段。
 
+
+# [Linux下C获取所有可用网卡信息](https://www.cnblogs.com/fnlingnzb-learner/p/6427388.html)
+使用ioctl函数虽然可以获取所有的信息，但是使用起来比较麻烦，如果不需要获取MAC地址，那么使用getifaddrs函数来获取更加方便与简洁。值得一提的是，在MacOS或iOS系统上（如iPhone程序开发），上述iotcl函数没法获得mac地址跟子网掩码，这个使用，使用getifaddrs函数便更有优势了。
+
+http://blog.chinaunix.net/uid-29147497-id-4043423.html好像getifaddrs还可以获取到ipv6地址。
+
+## 示例
+https://blog.csdn.net/lyh2529/article/details/25957701
+https://www.iteye.com/blog/naso-1815538
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
