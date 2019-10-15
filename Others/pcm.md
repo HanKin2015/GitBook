@@ -13,10 +13,34 @@
 
 在录音时采用多级或者串联抽选的数字滤波器（减低采样频率），在重放时采用多级的内插的数字滤波器（提高采样频率），为了控制小信号在编码时的失真，两者又都需要加入重复定量噪声。这样就限制了PCM技术在音频还原时的保真度。
 
+[与音频相关的技术知识点总结（Linux方向的开发）](https://yq.aliyun.com/articles/237048?spm=a2c4e.11153940.0.0.166e592dwK3j2C)
 
 
 
+- https://www.jianshu.com/p/ca2cb00418a7
+
+- # [PCM音量控制（高级篇）](http://blog.jianchihu.net/pcm-vol-control-advance.html)
+
+# 降噪
+
+**PCM音频处理——使用WebRTC音频降噪模块**】(https://www.meiwen.com.cn/subject/jmfeottx.html)
+
+# linux 下录音alsa介绍
+
+https://blog.csdn.net/u012611644/article/details/84565429
+
+alsamixer、record、aplay
 
 
 
+## Mic boost
 
+Mic boost是一款话筒增益的软件，可以增大[麦克风](https://baike.baidu.com/item/麦克风)的音量，不过也有可能会产生比较大的杂音和回声，音质也可能大大下降。
+
+
+
+[pcm的表示方法](https://blog.csdn.net/ffmpeg4976/article/details/52198427)
+
+[PCM音频格式的深入理解](https://blog.csdn.net/lifei092/article/details/80990813)
+
+https://blog.csdn.net/lifei092/article/details/80990813
