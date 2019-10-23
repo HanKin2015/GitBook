@@ -2,7 +2,7 @@
 
 有时候默认主机名过于长，操作很别扭。
 
-$之前是[linux系统](https://www.baidu.com/s?wd=linux系统&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)的主机名。
+$之前@之后是[linux系统](https://www.baidu.com/s?wd=linux系统&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)的主机名。
 查看主机名命令：
 
 > uname -n
@@ -32,6 +32,8 @@ GATEWAY=192.168.1.1
 systemd
 
 3、修改配置文件 /etc/hosts
+
+ 需要把主机名和ip绑定在一起时，才需要修改这个hosts文件 。
 
 > vi /etc/hosts
 

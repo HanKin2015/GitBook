@@ -1,3 +1,5 @@
+[TOC]
+
 # 1、"$OPTARG"
 
 [linux shell命令行选项与参数用法详解](https://www.jb51.net/article/48691.htm)
@@ -57,4 +59,43 @@ echo $0
 echo $*
 ```
 
-# linux c解析命令行选项getopt、optarg、optind、opterr、optopt
+# 2、linux c解析命令行选项getopt、optarg、optind、opterr、optopt
+
+## getopts/getopt
+
+ 处理命令行参数是一个相似而又复杂的事情，为此，c提供了getopt/getopt_long等函数，
+c++的boost提供了options库，在shell中，处理此事的是getopts和getopt.
+getopts和getopt功能相似但又不完全相同，其中getopt是独立的可执行文件，而getopts是由bash内置的。 
+
+
+
+- getopts它不支持长选项。 
+
+- 短选项参数-，长短项参数--。
+
+# 3、Shell脚本中$X的含义
+
+$$
+Shell本身的PID（ProcessID）
+$!
+Shell最后运行的后台Process的PID
+$?
+最后运行的命令的结束代码（返回值）
+$-
+使用Set命令设定的Flag一览
+$*
+所有参数列表。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。
+$@
+所有参数列表。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。
+$#
+添加到Shell的参数个数
+$0
+Shell本身的文件名
+$1～$n
+添加到Shell的各参数值。$1是第1参数、$2是第2参数…。
+
+
+
+- lsusb
+- 
+

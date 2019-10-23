@@ -23,6 +23,13 @@
 推荐：du -h[a]
 
 
+
+注意：
+
+- du -h是查看当前文件夹的大小，及当前目录大小
+- du -h 指定文件夹或文件
+
+
 # 2、df
 显示磁盘分区上可以使用的磁盘空间
 
@@ -85,6 +92,43 @@ wget -c 后面是该网络地址和文件的位置。
 例如：wget -c http://apache.opncas.or/MySQL/MySQL-7/v7.0.67/bin/MySQL.zip就是下载该网络想的MySQL.zip压缩包。
 
 其中-c：[断点续传](https://www.baidu.com/s?wd=断点续传&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)，如果下载中断，那么连接恢复时会从上次断点开始下载。
+
+# 7、dirname
+
+dirname $0   当前脚步文件的目录（路径）
+
+输出文件的目录
+
+``这个符号可以输出shell命令的结果，如：
+
+echo \`pwd\`     ====   echo $PWD   ====   pwd
+
+
+
+# 8、--prefix参数
+
+Linux编译安装中的--prefix。
+
+1、源码安装一般包括几个步骤：**配置（configure）**，**编译（make）**，**安装（make install）**。
+
+2、其中configure是一个可执行脚本，在源码目录中执行可以完成自动的配置工作，即`./configure`。
+
+3、在实际的安装过程中，我们可以增加`--prefix`参数，这样可以将要安装的应用安装到**指定的目录**中，如，我们要安装git应用，在配置环节可以使用如下命令：
+
+```bash
+# --prefix
+./configure --prefix=/usr/local/git
+```
+
+之后再执行`make & make install`命令就可以将git安装到了/usr/local/git目录中，这样做的好处就是方便以后的维护。
+
+
+
+# 9、运行脚本时nohub和&的区别
+
+
+
+
 
 # 快捷键
 

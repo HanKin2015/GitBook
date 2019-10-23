@@ -15,12 +15,6 @@ Qt 中有两种方式编译：一种是MinGW ，另一种MSVC，是两种不同�
 1、MSVC是指微软的VC编译器
 
 2、MingGW是指是Minimalist GNU on Windows的缩写。它是一个可自由使用和自由发布的Windows特定头文件和使用GNU工具集导入库的集合，允许你     在GNU/Linux和Windows平台生成本地的Windows程序而不需要第三方运行时库。
-
-
-
-#　注意
-
-MinGW版本的QT需要使用MinGW版本的gcc编译，默认是使用ms编译器。（lib里文件会是prl）
-
-还要注意x86和arm架构的不同。
-
+————————————————
+版权声明：本文为CSDN博主「好儿郎-志在四方」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/rl529014/article/details/52643685

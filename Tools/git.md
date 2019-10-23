@@ -57,6 +57,10 @@ git pull origin master    //下载
 
 git clone -b branch git@github.com:github/test.git 
 
+
+
+**重点看这里**：
+
 # 2、git add命令参数说明
 
 git add -u：将文件的修改、文件的删除，添加到暂存区。
