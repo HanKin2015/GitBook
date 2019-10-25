@@ -144,5 +144,7 @@ grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找�
 
 
 
-
+1. `QWebView *view = new QWebView(this->centralWidget());`
+2. `view->load(QUrl("file:///home//test.html"));`
+3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
 

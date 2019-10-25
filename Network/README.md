@@ -36,6 +36,10 @@ SSL能使用户/服务器应用之间的通信不被攻击者窃听，并且始�
 
 
 
+# ip
+
+ service network restart 
+
 
 
 

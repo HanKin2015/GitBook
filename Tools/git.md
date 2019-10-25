@@ -53,6 +53,8 @@ git remote add origin git@github.com:mygithub/test.git  //这里换成你要克�
 git pull origin master    //下载
 ```
 
+ https://blog.csdn.net/qq_35860352/article/details/80313078 不行
+
 ## 下载指定分支
 
 git clone -b branch git@github.com:github/test.git 
