@@ -99,3 +99,19 @@ $1～$n
 - lsusb
 - 
 
+# 4、大小写转换
+
+ m="abc"
+echo $m # 输出为abc
+declare -u m
+echo $m # 输出为abc,
+m="cde"
+echo $m # 输出为CDE
+declare -l m="HELL"
+echo $m # 输出为hell 
+
+
+
+echo 'hello' | tr 'a-z' 'A-Z'
+
+echo 'HELLO' | tr 'A-Z' 'a-z'

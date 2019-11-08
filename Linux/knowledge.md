@@ -77,13 +77,97 @@ scp是最常用的Linux远程拷贝命令， 无论是拷贝单个文件还是�
 
 
 
+# 7、[E:无法修正错误,因为您要求某些软件包保持现状,就是它们破坏了软件包间的依赖关系](https://www.cnblogs.com/mliudong/p/4217945.html)
+
+源的问题
 
 
 
+# 8、10-disable-suspend.rules
+
+### 禁用挂起和休眠
+
+下面规则禁止所有用户通过 Polkit 进行挂起和休眠。
+
+```
+/etc/polkit-1/rules.d/10-disable-suspend.rules
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.login1.suspend" ||
+        action.id == "org.freedesktop.login1.suspend-multiple-sessions" ||
+        action.id == "org.freedesktop.login1.hibernate" ||
+        action.id == "org.freedesktop.login1.hibernate-multiple-sessions")
+    {
+        return polkit.Result.NO;
+    }
+});
+```
 
 
 
+# 9、查看桌面
+
+ 查了好久，有如下几种：
+1、cat /etc/sysconfig/desktop ubuntu下不可用；
+2、echo $DESKTOP_SESSION 貌似没有版本信息，而且不知道其他环境下效果怎样；
+3、GNOME特性的查看版本命令：
+gnome3版本以下使用下面可查：
+gnome-panel --versionSample output:
+GNOME gnome-panel 2.24.1Or type the following on modern gnome desktop systems:
+$ gnome-about --gnome-version
+Sample outputs:
+Version: 2.30.2
+Distributor: Debian
+Build Date: Friday 12 November 2010
+gnome3以上用以下命令Gnome 3.x user need to use the following command:
+$ gnome-session --version
+或者
+gnome-shell --version
+输出：
+$ gnome-shell --version
+GNOME Shell 3.4.1
+但是这种无法查看其他的桌面版本。 
 
 
 
+ $DESKTOP_SESSION 
+
+
+
+# 10、中英文系统切换
+
+```
+vim /etc/sysconfig/i18n
+#LANG="zh_CN.UTF-8"
+LANG="en_US.UTF-8"
+
+重启
+```
+
+
+
+# 11、网络配置
+
+ **/etc/sysconfig/network-scripts/ifcfg-eth0** 
+
+ sudo /etc/init.d/networking  
+
+[Linux中DNS配置及用命令方式修改网络]( https://blog.csdn.net/weixin_43314056/article/details/83347296 )
+
+ 本地DNS解析
+修改配置文件`vim /etc/hosts` 
+
+
+
+ 指定DNS作域名解析
+修改配置文件 `vim /etc/resolv.conf` 
+
+ nmcli device ###显示设备 
+
+ nmcli device show	###显示全部设备信息 
+
+# 12、304zhaungtaima 
+
+本词条缺少**概述图**，补充相关内容使词条更完整，还能快速升级，赶紧来编辑吧！
+
+如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。简单的表达就是：服务端已经执行了GET，但文件未变化。
 

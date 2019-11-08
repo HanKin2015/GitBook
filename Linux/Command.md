@@ -126,7 +126,25 @@ Linux编译安装中的--prefix。
 
 # 9、运行脚本时nohub和&的区别
 
+ https://www.jianshu.com/p/93a45927f013 
 
+ https://www.cnblogs.com/laoyeye/p/9346330.html 
+
+在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 & 在程序结尾来让程序自动运行。
+
+比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &
+
+可是有很多程序并不像mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。
+
+nohup ./start.sh &
+
+&的意思是在后台运行， 什么意思呢？ 意思是说， 当你在执行 ./start.sh & 的时候， 即使你用ctrl C, 那么start.sh照样运行（因为对SIGINT信号免疫）。 但是要注意， 如果你直接关掉shell后， 那么，start.sh进程同样消失。 可见， &的后台并不硬（因为对SIGHUP信号不免疫）。
+
+nohup的意思是忽略SIGHUP信号， 所以当运行nohup ./start.sh的时候， 关闭shell, 那么start.sh进程还是存在的（对SIGHUP信号免疫）。 但是， 要注意， 如果你直接在shell中用Ctrl C, 那么start.sh进程也是会消失的（因为对SIGINT信号不免疫）
+
+
+
+所以， &和nohup没有半毛钱的关系， 要让进程真正不受shell中Ctrl C和shell关闭的影响， 那该怎么办呢？ 那就用nohup ./start.sh &吧， 两全其美。
 
 
 
@@ -148,3 +166,24 @@ grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找�
 2. `view->load(QUrl("file:///home//test.html"));`
 3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
 
+# 10、 **blkid命令**
+
+**blkid命令**对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。 
+
+
+
+# 11、[Linux 下查看字体](https://www.cnblogs.com/yangzp/p/10791694.html)
+
+1.查看所有字体
+
+命令：fc-list
+
+2.查看中文字体
+
+命令：fc-list :lang=zh
+
+3.查看更多字体
+
+命令：fc-match -v "AR PL UKai CN"
+
+# 12、
