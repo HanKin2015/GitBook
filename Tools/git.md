@@ -1,5 +1,11 @@
 [TOC]
 
+# 0、前言
+
+## 0-1、安装git
+
+
+
 # 1、使用git下载单个指定的文件夹
 
 更多搜索“稀疏检出”。
@@ -123,8 +129,9 @@ git branch -m oldBranchName newBranchName 重命名
 ## 4-1、删除分支
 
 ```
-git branch -d [分支名]
-git branch -D [分支名]
+git branch -d [本地分支名]
+git branch -D [本地分支名]
+git branch -r -D [远程分支名]
 ```
 
 ## 4-2、合并分支
@@ -132,7 +139,13 @@ git branch -D [分支名]
 1. git pull (git checkout -b newBname Bname)
 2. 
 
+## 4-3、远程分支覆盖本地分支
 
+有时候同一个分支，远程的和本地的都被修改的面目全非了，如果想要把本地的替换成远程的，用下面的命令
+
+git fetch --all
+git reset --hard origin/master (这里master要修改为对应的分支名)
+git pull
 
 # 5、git冲突
 
@@ -154,7 +167,14 @@ git status
 git log
 git show
 
+### 6-1、删除commit
 
+> git reset HEAD^    删除最新commit记录
+
+### 6-2、误删除commit
+
+- git reflog
+- git reset commitId
 
 # 7、多个commit合并(git rebase)
 
@@ -233,20 +253,56 @@ git stash list
 
 git stash -h
 
-## 删除分支
 
-git branch -D LocalBranch     D一定要大写
-git branch -r -D RomateBranch
 
-## 
+## 10、Git 全局设置（必须）
 
-# 远程分支覆盖本地分支
+```
+  git config --global user.name "王德为49660"
+  git config --global user.email "49660@sangfor.com"
+```
 
-有时候同一个分支，远程的和本地的都被修改的面目全非了，如果想要把本地的替换成远程的，用下面的命令
+- git config --list     查看配置信息
+- git config -l
+- 
 
-git fetch --all
-git reset --hard origin/master (这里master要修改为对应的分支名)
-git pull
+## 11、回退命令
+
+```
+git reflog
+git reset --hard 7edb984	放弃修改
+git reset --soft 7edb984 回到commit之前
+git checkout -- filename	撤销文件的修改
+HEAD
+HEAD~3
+commit_id
+
+强推到远程
+git push origin HEAD --force
+
+```
+
+可引用git checkout或者用git clean -df至修改前的状态。就可以放弃所有修改。
+
+1、git checkout功能是本地所有修改的。没有的提交的，都返回到原来的状态
+
+2、git stash功能是把所有没有提交的修改暂存到stash里面。可用git stash [pop](https://www.baidu.com/s?wd=pop&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)回复。
+
+3、git reset --hard HASH功能是返回到某个节点，不保留修改。
+
+4、git reset --soft HASH功能是返回到某个节点。保留修改。
+
+5、git clean -df功能是保留修改，返回到某个节点。
+
+**拓展资料**：
+
+1、Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
+
+[![img](https://img3.mukewang.com/5c773adf000145dc06000425.jpg)](https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/7acb0a46f21fbe094c3be72c66600c338744ada4.jpg)
+
+2、Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper，后者之前一直是 Linux 内核开发人员在全球使用的主要源代码工具。开放源码社区中的有些人觉得BitKeeper 的许可证并不适合开放源码社区的工作，因此 Torvalds 决定着手研究许可证更为灵活的版本控制系统。尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是我们已经发现在很多其他自由软件项目中也使用了 Git。例如 很多 Freedesktop 的项目迁移到了 Git 上。
+
+
 
 #### Updates were rejected because the tip of your current branch is behind
 
@@ -262,16 +318,7 @@ $ git pull origin master
 
 $ git push -u origin master   （后续就是解决冲突）
 
-![](ping.png)
 
-### 删除commit
-
-> git reset HEAD^    删除最新commit记录
-
-### 误删除commit
-
-- git reflog
-- git reset commitId
 
 ## 其他
 
@@ -327,50 +374,6 @@ $ git push -u origin master   （后续就是解决冲突）
 
 
 
-[https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)](https://wiki.archlinux.org/index.php/Wireless_network_configuration_(简体中文))
-
-https://blog.csdn.net/u012349696/article/details/52524124
-
-如果您想连接的网络是没有加密的，您可以用下面的命令直接连接：
-
-```
-$ sudo iw dev wlan0 connect [网络 SSID]
-```
-
-**如果网络是用 WEP 加密的，也非常容易：**
-
-```
-$ sudo iw dev wlan0 connect [网络 SSID] key 0:[WEP 密钥]
-```
-
-但网络使用的是 WPA 或 WPA2 协议的话，事情就不好办了。这种情况，您就得使用叫做 wpa*supplicant 的工具，它默认是没有的。然后需要修改 /etc/wpa*supplicant/wpa_supplicant.conf 文件，增加如下行：
-
-```
-network={    ssid="[网络 ssid]"    psk="[密码]"    priority=1}
-```
-
-我建议你在文件的末尾添加它，并确保其他配置都注释掉。要注意 SSID 和密码字串都是大小写敏感的。在技术上您也可以把接入点的名称当做是 SSID，使用 wpa_supplicant 工具的话会有合适的 SSID 来替代这个名字。
-
-一旦配置文件修改完成后，在后台启动此命令：
-
-```
-$ sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
-```
-
-最后，无论是连到开放的网络还是加密的安全网络，您都得获取 IP 地址。简单地使用如下命令：
-
-```
-$ sudo dhcpcd wlan0
-```
-
-如果一切顺利的话，您应该已经通过 DHCP 获取到了一个全新的本地 IP，这个过程是在后台自动完成的。如果想确认下是否真正连接上的话，您可以再一次输入如下命令检查：
-
-```
-$ iwconfig
-```
-
-
-
 
 
 
@@ -408,7 +411,7 @@ git push origin :<您的分支名>
 git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
 
 2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
-a. 重命名远程分支对应的本地分支
+   a. 重命名远程分支对应的本地分支
 
 git branch -m oldName newName
 b. 删除远程分支
@@ -424,52 +427,3 @@ git branch --set-upstream-to origin/newName
 
 
 http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
-
-
-
-## 10、Git 全局设置（必须）
-
-```
-  git config --global user.name "王德为49660"
-  git config --global user.email "49660@sangfor.com"
-```
-
-- git config --list     查看配置信息
-- git config -l
-- 
-
-## 11、回退命令
-
-```
-git reflog
-git reset --hard 7edb984	放弃修改
-git reset --soft 7edb984 回到commit之前
-git checkout -- filename	撤销文件的修改
-HEAD
-HEAD~3
-commit_id
-
-强推到远程
-git push origin HEAD --force
-
-```
-
-可引用git checkout或者用git clean -df至修改前的状态。就可以放弃所有修改。
-
-1、git checkout功能是本地所有修改的。没有的提交的，都返回到原来的状态
-
-2、git stash功能是把所有没有提交的修改暂存到stash里面。可用git stash [pop](https://www.baidu.com/s?wd=pop&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)回复。
-
-3、git reset --hard HASH功能是返回到某个节点，不保留修改。
-
-4、git reset --soft HASH功能是返回到某个节点。保留修改。
-
-5、git clean -df功能是保留修改，返回到某个节点。
-
-**拓展资料**：
-
-1、Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
-
-[![img](https://img3.mukewang.com/5c773adf000145dc06000425.jpg)](https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/7acb0a46f21fbe094c3be72c66600c338744ada4.jpg)
-
-2、Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper，后者之前一直是 Linux 内核开发人员在全球使用的主要源代码工具。开放源码社区中的有些人觉得BitKeeper 的许可证并不适合开放源码社区的工作，因此 Torvalds 决定着手研究许可证更为灵活的版本控制系统。尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是我们已经发现在很多其他自由软件项目中也使用了 Git。例如 很多 Freedesktop 的项目迁移到了 Git 上。
