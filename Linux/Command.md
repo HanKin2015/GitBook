@@ -148,24 +148,6 @@ nohup的意思是忽略SIGHUP信号， 所以当运行nohup ./start.sh的时候�
 
 
 
-# 快捷键
-
-ctrl+alt+F1	切换命令行模式
-
-shift+tab	退tab
-
-cd -	返回上一层所在工作区
-
-grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找）
-
-
-
-
-
-1. `QWebView *view = new QWebView(this->centralWidget());`
-2. `view->load(QUrl("file:///home//test.html"));`
-3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
-
 # 10、 **blkid命令**
 
 **blkid命令**对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。 
@@ -186,4 +168,30 @@ grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找�
 
 命令：fc-match -v "AR PL UKai CN"
 
-# 12、
+# 12、快捷键
+
+ctrl+alt+F1	切换命令行模式
+
+shift+tab	退tab
+
+cd -	返回上一层所在工作区
+
+
+
+
+
+1. `QWebView *view = new QWebView(this->centralWidget());`
+2. `view->load(QUrl("file:///home//test.html"));`
+3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
+
+# 13、grep
+
+grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找）
+
+grep --color 可以为查找的内容加颜色
+
+通常修改alias。
+
+# 14、alias
+
+命令别名

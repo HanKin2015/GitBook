@@ -117,7 +117,22 @@ git push origin [Bname] 将空分支上传可以看作删除远程分支
 git push origin --delete [Bname] 删除远程分支
 git ls-remote origin [Bname] 查看远程仓库是否有这个分支，有就有返回值，没有就什么都没有
 git remote [-v] 查看远程仓库地址
+git branch -m oldBranchName newBranchName 重命名
 ```
+
+## 4-1、删除分支
+
+```
+git branch -d [分支名]
+git branch -D [分支名]
+```
+
+## 4-2、合并分支
+
+1. git pull (git checkout -b newBname Bname)
+2. 
+
+
 
 # 5、git冲突
 
@@ -148,8 +163,8 @@ git show
 
 - 1、git status当前所有修改是否都commit。如果没有后面rebase无法继续。
 - 2、git log查看commitId
-- 3、git rebase -i commitId（commitId是合并后的commitId的前一个）
-- 4、将删除的commit记录前面的pick改为squash，保存退出
+- 3、git rebase -i commitId（commitId是合并后的commitId的前一个）**即不影响的log**
+- 4、**将删除的commit记录前面的pick改为squash，保存退出**
 - 5、修改commit内容
 - 6、git log查看合并结果 
 - 7、git push origin [Bname] -f 可能提交会产生冲突，建议强制
@@ -205,6 +220,18 @@ git stash list
 好习惯：master作为备份更新，第一步是创建新分支。当有新问题的时候，stash后去master分支创建新分支。
 
 上面的commit一定是最新的。
+
+
+
+超级好用：
+
+git stash
+
+git stash pop
+
+git stash list
+
+git stash -h
 
 ## 删除分支
 
@@ -410,3 +437,39 @@ http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
 - git config --list     查看配置信息
 - git config -l
 - 
+
+## 11、回退命令
+
+```
+git reflog
+git reset --hard 7edb984	放弃修改
+git reset --soft 7edb984 回到commit之前
+git checkout -- filename	撤销文件的修改
+HEAD
+HEAD~3
+commit_id
+
+强推到远程
+git push origin HEAD --force
+
+```
+
+可引用git checkout或者用git clean -df至修改前的状态。就可以放弃所有修改。
+
+1、git checkout功能是本地所有修改的。没有的提交的，都返回到原来的状态
+
+2、git stash功能是把所有没有提交的修改暂存到stash里面。可用git stash [pop](https://www.baidu.com/s?wd=pop&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)回复。
+
+3、git reset --hard HASH功能是返回到某个节点，不保留修改。
+
+4、git reset --soft HASH功能是返回到某个节点。保留修改。
+
+5、git clean -df功能是保留修改，返回到某个节点。
+
+**拓展资料**：
+
+1、Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
+
+[![img](https://img3.mukewang.com/5c773adf000145dc06000425.jpg)](https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/7acb0a46f21fbe094c3be72c66600c338744ada4.jpg)
+
+2、Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper，后者之前一直是 Linux 内核开发人员在全球使用的主要源代码工具。开放源码社区中的有些人觉得BitKeeper 的许可证并不适合开放源码社区的工作，因此 Torvalds 决定着手研究许可证更为灵活的版本控制系统。尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是我们已经发现在很多其他自由软件项目中也使用了 Git。例如 很多 Freedesktop 的项目迁移到了 Git 上。
