@@ -4,7 +4,23 @@
 
 ## 0-1、安装git
 
+使用镜像网站不错。
+[下载Windows下的Git命令行客户端](https://repo.huaweicloud.com/git-for-windows/)
+[下载Windows下的Git小海龟客户端](https://repo.huaweicloud.com/tortoisegit/)
 
+1、 先安装Git.exe
+2、 再安装TortoiseGit.msi
+3、 根据自己喜欢安装中文翻译补丁包LanguagePack
+
+
+
+git update-git-for-windows   更新git客户端
+
+## 0-2、解决TortoiseGit文件夹和文件状态图标不显示问题
+
+- 先重启试试
+- 修改注册表
+- 设置里面设置显示icon overlays
 
 # 1、使用git下载单个指定的文件夹
 
@@ -137,7 +153,28 @@ git branch -r -D [远程分支名]
 ## 4-2、合并分支
 
 1. git pull (git checkout -b newBname Bname)
-2. 
+
+
+
+一、开发分支（dev）上的代码达到上线的标准后，要合并到 master 分支
+
+```
+git checkout dev
+git pull
+git checkout master
+git merge dev
+git push -u origin master
+```
+
+二、当master代码改动了，需要更新开发分支（dev）上的代码
+
+```
+git checkout master 
+git pull 
+git checkout dev
+git merge master 
+git push -u origin dev
+```
 
 ## 4-3、远程分支覆盖本地分支
 
@@ -151,11 +188,36 @@ git pull
 
 当上传的时候产生冲突时：
 
+## 5-1、在线git解决
+
+方便快捷操作简单。
+
+## 5-2、检出，在本地审查和合并
+
 - git pull origin 分支（生产冲突文件）
 - 在冲突文件里修改：删除和保留（git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容（数量为7））
 - git add 冲突文件
 - git commit
 - git push
+
+
+Step 1. 获取并检出此合并请求的分支
+
+git fetch origin
+git checkout -b [bName] origin/冲突分支
+
+Step 2. 本地审查变更（忽略）
+
+Step 3. 合并分支并修复出现的任何冲突
+
+git checkout master
+git merge --no-ff [bName]（本地就有冲突文件了，注意看产生冲突的文件）
+
+Step 4. 推送合并的结果到 GitLab
+
+git checkout -b [newBName]
+
+git push origin [newBName]
 
 # 6、git commit
 
@@ -255,7 +317,7 @@ git stash -h
 
 
 
-## 10、Git 全局设置（必须）
+# 10、Git 全局设置（必须）
 
 ```
   git config --global user.name "王德为49660"
@@ -266,12 +328,12 @@ git stash -h
 - git config -l
 - 
 
-## 11、回退命令
+# 11、回退命令（放弃所有本地修改）
 
 ```
 git reflog
 git reset --hard 7edb984	放弃修改
-git reset --soft 7edb984 回到commit之前
+git reset --soft 7edb984 	回到commit之前
 git checkout -- filename	撤销文件的修改
 HEAD
 HEAD~3
@@ -304,7 +366,7 @@ git push origin HEAD --force
 
 
 
-#### Updates were rejected because the tip of your current branch is behind
+# # 12、Updates were rejected because the tip of your current branch is behind
 
 1.使用强制push的方法：
 
@@ -319,6 +381,55 @@ $ git pull origin master
 $ git push -u origin master   （后续就是解决冲突）
 
 
+
+# 13、git clean 的用法（如何使用Git删除新增的文件？）
+
+git clean命令用来从你的工作目录中删除所有没有track过的文件
+git clean经常和git reset --hard一起使用. 记住reset只影响被track过的文件, 所以需要clean来删除没有track过的文件. 结合使用这两个命令能让你的工作目录完全回到一个指定的的状态
+
+```
+git clean -n
+```
+
+是一次clean的演习, 告诉你哪些文件会被删除. 记住它不会真正地删除文件, 只是一个提醒。
+
+```
+git clean -f
+```
+
+删除当前目录下所有没有track过的文件. 它不会删除 .gitignore 文件里指定的文件夹和文件, 不管这些文件有没有被track过
+
+```
+git clean -f <path>
+```
+
+删除指定路径下的没有被track过的文件
+
+```
+git clean -df
+```
+
+删除当前目录下没有被track过的文件和文件夹
+
+```
+git clean -xf
+```
+
+删除当前目录下所有没有track过的文件. 不管它是否是 .gitignore 文件里面指定的文件夹和文件
+
+`git reset --hard` 和 `git clean -f` 是一对好基友. 结合使用它们能让你的工作目录完全回退到最近一次commit的时候
+
+`git clean` 对于刚编译过的项目也非常有用. 如, 它能轻易删除掉编译后生成的 .o 和 .exe 等文件. 这个在打包要发布一个release的时候非常有用
+
+下面的例子要删除所有工作目录下面的修改, 包括新添加的文件. 假设你已经提交了一些快照了, 而且做了一些新的开发
+
+```
+git reset --hard
+
+git clean -df
+```
+
+运行后, 工作目录和缓存区回到最近一次commit时候一摸一样的状态，git status会告诉你这是一个干净的工作目录, 又是一个新的开始了！
 
 ## 其他
 
@@ -381,10 +492,6 @@ $ git push -u origin master   （后续就是解决冲突）
 
 
 
-
-使用镜像网站不错。
-[下载Windows下的Git命令行客户端](https://repo.huaweicloud.com/git-for-windows/)
-[下载Windows下的Git小海龟客户端](https://repo.huaweicloud.com/tortoisegit/)
 
 
 

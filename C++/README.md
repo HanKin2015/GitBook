@@ -86,13 +86,51 @@ int arr[10];
 memset(arr, 0, sizeof(arr));
 ```
 
+## 7、或运算不支持和等号简写
+
+```
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int ret = 0;
+    int x = 1;
+    //ret ||= x;  //错误expected primary-expression before ‘=’ token
+    ret = ret || x;
+    cout << ret << endl;
+    return 0;
+}
+```
+
+## 8、错误： 程序中有游离的‘\xxx’
+
+  这个错误一般是由于你程序（a.c）中使用了中文的标点符号，比如；，｝，＋。改成英文的就行了。甚至有时候空格也会出现类似错误，删掉该空格 重新输入。如果找不出来，解决的办法就是关闭中文输入法然后把有错这一行重新敲一遍。 
 
 
 
+我的原因是：#define MAX_CNT 8   最大数量
 
+错误提示地方是MAX_CNT使用的地方，实际是宏定义注释未//
 
+## 9、switch里面的参数只能是整型变量
 
+```
+switch(expression){
+    case constant-expression  :
+       statement(s);
+       break; // 可选的
+    case constant-expression  :
+       statement(s);
+       break; // 可选的
+  
+    // 您可以有任意数量的 case 语句
+    default : // 可选的
+       statement(s);
+}
+```
 
+ **switch** 语句中的 **expression** 必须是一个整型或枚举类型，或者是一个 class 类型，其中 class 有一个单一的转换函数将其转换为整型或枚举类型。 
 
 
 

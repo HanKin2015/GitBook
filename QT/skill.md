@@ -391,11 +391,38 @@ QLabel* timestampLabel = new QLabel(qDateTime.toString(tr("Ti'm'e:yy-MM-dd hh:mm
 
 注意：转换的时候，如果要显示m、d、M、y等的时候需要使用单引号。
 
+# 16、隐藏最大化和最小化按钮
+
+```
+MainWindow w;
+w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint);
+w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint|Qt::WindowMaxmizeButtonHint);
+
+在ubuntu16上，最大化按钮始终没有被隐藏，无从考证。
+```
 
 
 
+# 17、关闭webview滚动条
+
+关闭了有问题，无法进行鼠标滚轮滚动。
+
+头文件：#include <QWebFrame>
+
+```
+    view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+    view->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
+    view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, 100);
+    view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
+```
+
+wheelevent函数是鼠标滚轮事件。
 
 
+
+# 18、注销登录按钮样式非常棒
+
+圆角、颜色透明、内间距、字体
 
 
 

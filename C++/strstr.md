@@ -11,13 +11,13 @@ strstr是C语言中的函数，作用是返回字符串中首次出现子串的�
 函数原型：
 
 ```
-`extern` `char` `*``strstr``(``char` `*str1, ``const` `char` `*str2);`
+extern char *strstr(char *str1, const char *str2);
 ```
 
 语法：
 
 ```
-`* ``strstr``(str1,str2)`
+* strstr(str1,str2)
 ```
 
 str1: 被查找目标　string expression to search.
@@ -29,7 +29,9 @@ str2: 要查找对象　The string expression to find.
 例子：
 
 ```
-`char` `str[]=``"1234xyz"``;``char` `*str1=``strstr``(str,``"34"``);``cout << str1 << endl;`
+char str[]="1234xyz";
+char *str1=strstr(str,"34");
+cout << str1 << endl;
 ```
 
 显示的是: 34xyz
@@ -76,3 +78,4 @@ char *strstr(const char *str1, const char *str2)
     return(NULL);
 }
 ```
+
