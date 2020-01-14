@@ -418,12 +418,50 @@ w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint|Qt::WindowMaxmizeB
 
 wheelevent函数是鼠标滚轮事件。
 
-
+结论：无法修改样式，并且导航栏是向内占据一定的宽度。
 
 # 18、注销登录按钮样式非常棒
 
 圆角、颜色透明、内间距、字体
 
+```
+void MyPopDialog::initLogoutPushButton(){
+	QButton *logoutPushButton = new QButton(tr("Log Out"), this);
+	QIcon logoutPushButtonIcon(":/png/logout.png");
+	logoutPushButton->setNormalStyle("background-color:rgba(231, 231, 231, 25);"
+		"border:1px solid rgba(231, 231, 231, 51);font-size: 18px;color:white;");
+	logoutPushButton->setHoverStyle("background-color:rgba(231, 231, 231, 89);"
+		"border:1px solid rgba(231, 231, 231, 204);font-size: 18px;color:white;");
+	logoutPushButton->resize(136, 48);
+	logoutPushButton->setIcon(logoutPushButtonIcon);
+	logoutPushButton->setIconSize(QSize(24, 24));
+	logoutPushButton->setAutoDefault(true);
+	logoutPushButton->setVisible(true);
+	connect(logoutPushButton, SIGNAL(clicked()), this, SLOT(logoutPushButtonSlot()));
+}
+```
+
+
+
+
+
+# 19、给窗体加边框
+
+父窗口加边框后子窗口也会有。
+
+```
+border: 1px solid #A3A3A3;
+border: none;
+border-radius:5px;
+```
+
+
+
+
+
+# 20、禁止右键
+
+setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
 
 
 
@@ -431,10 +469,9 @@ wheelevent函数是鼠标滚轮事件。
 
 
 
+**Noto Sans CJK SC DemiLight Regular**字体：免费商用。
 
-
-
-
+字体分为：Regular、Blod、
 
 
 

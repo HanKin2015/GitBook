@@ -216,6 +216,14 @@ int main(int argc, char *argv[])
 
 
 
+# 18、qt编译解决-make[1]：lrelease：未找到命令
+
+ts文件翻译命令，需要安装。
+
+apt install -y qt5-linguist
+
+
+
 [*彩虹屁*_百度百科](https://www.baidu.com/link?url=0f4ZrtxF5t_wxTRaGNmiq9zmZnJA-3i82JyYnhFj4aK2A_0Q2rR8SWf1w4ntnSHuvtkgEPIRMAcxky2qNxsdRLKRuhw_AitQRhV97AV7as_&wd=&eqid=9371048f0012d79e000000035dc1420b)
 
 “彩虹屁，网络流行语，饭圈常用语，最早流行起来的时间是在2017年。意思为粉丝们花式吹捧自己的偶像，浑身是宝，全是优点，字面意思为就连偶像放屁都能把它出口成章面不改色的吹成是彩虹。”

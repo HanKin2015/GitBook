@@ -168,6 +168,58 @@ nohup的意思是忽略SIGHUP信号， 所以当运行nohup ./start.sh的时候�
 
 命令：fc-match -v "AR PL UKai CN"
 
+
+
+windows系统下字体：C://Windows/Fonts/微软雅黑（似乎里面没有ttf字体，格式为ttc）
+
+/usr/share/fonts/chinese/TrueType
+
+```
+cp -rf 	"$UNPACK_FILE_DIR"/common/usr/local/share/fonts/*  "${VDI_WORD_FONT_PATH}"
+chmod 755 "${VDI_WORD_FONT_PATH}"* 
+mkfontscale 
+mkfontdir
+fc-cache -fv
+cd /tmp
+		
+安装字体
+创建 /usr/share/fonts/opentype文件夹,将要的字体opentype文件放在这个文件下
+fontconfig-infinality_1-2_all.deb			字体渲染
+freetype-infinality_2.4.9-3_all.deb			字体渲染
+libfreetype-infinality6_2.4.9-3_amd64.deb	字体渲染
+/usr/share/fonts/opentype/NotoSansCJKsc-DemiLight.otf 字体
+执行如下命令
+cd /usr/share/fonts/opentype/
+mkfontscale
+mkfontdir
+fc-cache -fv
+```
+
+
+
+> 将字体文件ttf或者ttc拷贝到/usr/share/fonts/opentype
+>
+> 使用fc-cache -fv即安装成功
+>
+> fc-list可以查看到字体是否安装成功
+>
+> fc-list :lang=zh
+
+
+
+命名方式（公司或者系统常用）：
+
+- Windows系统：
+- Linux系统：
+- 谷歌：
+- Java：
+- C++：
+- Python：
+
+
+
+
+
 # 12、快捷键
 
 ctrl+alt+F1	切换命令行模式
@@ -195,3 +247,46 @@ grep --color 可以为查找的内容加颜色
 # 14、alias
 
 命令别名
+
+```
+alias显示当前别名列表
+unalias取消命令别名
+
+eg:
+alias ll='ls -l --color=auto'
+unalias ll
+```
+
+
+
+# 15、journalctl
+
+https://www.cnblogs.com/sparkdev/p/8795141.html
+
+**journalctl 用来查询 systemd-journald 服务收集到的日志。**systemd-journald 服务是 systemd init 系统提供的收集系统日志的服务。
+
+
+
+# 16、lsblk
+
+lsblk 列出所有块设备信息（除了RAM类型的块设备）。lsblk是通过读取/sys/fs文件系统信息和udev db来收集信息。
+
+lsblk命令包含在util-linux包中，现在该包改名为util-linux。
+
+## 名称
+
+udev — 动态设备管理
+
+## 描述
+
+udev 能够处理设备事件、管理设备文件的权限、 在 `/dev` 目录中创建额外的符号链接、重命名网络接口，等等。 内核通常仅根据设备被发现的先后顺序给设备文件命名， 因此很难在设备文件与物理硬件之间建立稳定的对应关系。 而根据设备的物理属性或配置特征创建有意义的符号链接名称或网络接口名称， 就可以在物理设备与设备文件名称之间建立稳定的对应关系。
+
+udev守护进程([systemd-udevd.service(8)](http://www.jinbuguo.com/systemd/systemd-udevd.service.html#)) 直接从内核接收设备的插入、拔出、改变状态等事件， 并根据这些事件的各种属性， 到规则库中进行匹配，以确定触发事件的设备。 被匹配成功的规则有可能提供额外的设备信息，这些信息可能会被记录到udev数据库中， 也可能会被用于创建符号链接。
+
+udev处理的所有设备信息都存储在udev数据库中， 并且会发送给可能的设备事件的订阅者。 可以通过 libudev 库访问udev数据库以及设备事件源。
+
+## 规则文件
+
+规则文件分别位于： 系统规则目录(`/usr/lib/udev/rules.d`)、 运行时规则目录(`/run/udev/rules.d`)、 本机规则目录(`/etc/udev/rules.d`)。 所有的规则文件(无论位于哪个目录中)，统一按照文件名的字典顺序处理。 对于不同目录下的同名规则文件，仅以优先级最高的目录中的那一个为准。 具体说来就是： `/etc/` 的优先级最高、 `/run/` 的优先级居中、 `/usr/lib/` 的优先级最低。 如果系统管理员想要屏蔽 `/usr/lib/` 目录中的某个规则文件， 那么最佳做法是在 `/etc/` 目录中创建一个指向 `/dev/null` 的同名符号链接， 即可彻底屏蔽 `/usr/lib/` 目录中的同名文件。 注意，规则文件必须以 `.rules` 作为后缀名，否则将被忽略。
+
+http://www.jinbuguo.com/systemd/udev.html

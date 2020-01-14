@@ -1,4 +1,38 @@
 [TOC]
+# 张宇
+
+张宇，本名张博翔，1967年4月30日出生于台湾省台北市，毕业于逢甲大学银行保险系，擅长钢琴及吉他。中国台湾流行乐男歌手、音乐创作人、主持人、演员。
+
+学生时代在民歌餐厅驻唱；1992年，经过[凡人二重唱](https://baike.baidu.com/item/凡人二重唱/2819954)（[莫凡](https://baike.baidu.com/item/莫凡/4769086)、[袁惟仁](https://baike.baidu.com/item/袁惟仁/1407371)）的引荐，被大滚唱片的制作人蔡宗政发掘而正式出道；1993年4月1日发行了首张张专辑《[走路有风](https://baike.baidu.com/item/走路有风/30076)》，同年11月发行的专辑《[用心良苦](https://baike.baidu.com/item/用心良苦/3432963)》，获得多个奖项，专辑同名主打歌成为其代表作之一；1995年发行专辑《[一言难尽](https://baike.baidu.com/item/一言难尽/4890750)》，获得台湾金曲龙虎榜全年排行总冠军 ；1998年发行专辑《月亮、太阳》，在台湾卖出80万张，主打歌《[月亮惹的祸](https://baike.baidu.com/item/月亮惹的祸/1497504)》为港剧《[圆月弯刀](https://baike.baidu.com/item/圆月弯刀/8385669)》主题曲，成为其代表作之一；1999年发行[专辑](https://baike.baidu.com/item/专辑/1051605)《[雨一直下](https://baike.baidu.com/item/雨一直下/83654)》，进一步扩大知名度 [1-3] ；2004年与前辈[张小燕](https://baike.baidu.com/item/张小燕/9448)搭档，主持华视综艺节目《[快乐星期天](https://baike.baidu.com/item/快乐星期天/7593618)》，进军主持界，同年即凭此节目同年即入围第39届台湾[金钟奖](https://baike.baidu.com/item/金钟奖/84450)综艺节目奖 [4-5] ；2014年参加湖南卫视《[我是歌手第二季](https://baike.baidu.com/item/我是歌手第二季/1748631)》节目竞演并担任主持工作，最终进入[总决赛](https://baike.baidu.com/item/总决赛/15540600)。
+
+# 四大家族（蒋宋孔陈四大家族）
+
+四大家族，一般是指蒋宋孔陈四大家族，指20世纪上半叶控制中国政治，经济命脉的四个家族，即[蒋中正](https://baike.baidu.com/item/蒋中正)家族、[宋子文](https://baike.baidu.com/item/宋子文/1052962)家族、[孔祥熙](https://baike.baidu.com/item/孔祥熙/553084)家族和[陈果夫](https://baike.baidu.com/item/陈果夫/584671)、[陈立夫](https://baike.baidu.com/item/陈立夫/1094987)家族。
+
+有道是：蒋家天下陈家党，宋氏姐妹孔家财。[蒋介石](https://baike.baidu.com/item/蒋介石/184548)是“四大家族”毋庸置疑的领军人物，有了[蒋中正](https://baike.baidu.com/item/蒋中正/1747266)的才能和野心才有了曾经煊赫无比的“四大家族”——“蒋宋孔陈”。蒋控制的是政治，陈控制的是党，宋孔两家先后担任财政部长，长期把持国家的财政大权。
+
+**晚年宋子文为何会被噎死**
+
+# 镂空
+
+镂空是一种雕刻技术。外面看起来是完整的图案，但里面是空的或者里面又镶嵌小的镂空物件。
+
+在当代，镂空一词在被更加广泛的运用。时尚界用此表现针织或裁剪技术，镂空时装是[通透](https://baike.baidu.com/item/通透/3678581)、性感的代名词。多家国际名牌都有自己经典的镂空款式，深受时尚人士喜爱。
+
+# NetSarang
+
+在全球市场研发、开拓和支持安全的连接方案。
+
+1. https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2)
+2. ▪ [Xmanager Enterprise 4](https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2_1)
+3. ▪ [Xmanager 4](https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2_2)
+
+1. ▪ [Xshell 4](https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2_3)
+2. ▪ [Xftp 4](https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2_4)
+3. ▪ [Xlpd 4](https://baike.baidu.com/item/NetSarang/2813886?fr=aladdin#2_5)
+
+NetSarang Computer, Inc. [1] 公司开发用于PC端的X server和PC-Unix PC-Linux SSH客户端软件，并扩展TCP/IP技术到其他互联网企业。公司产品遍及世界90多个国家。
+
 # 鲁班 （中国建筑鼻祖木匠鼻祖） 
 
 鲁班（公元前507年——公元前444年），春秋时期鲁国人，[姬姓](https://baike.baidu.com/item/姬姓/8973573)，[公输](https://baike.baidu.com/item/公输)氏，字依智 [1] ，名班，人称[公输盘](https://baike.baidu.com/item/公输盘/10490925)、[公输般](https://baike.baidu.com/item/公输般/1644966)、[班输](https://baike.baidu.com/item/班输/5660817)，尊称公输子，又称鲁盘或者[鲁般](https://baike.baidu.com/item/鲁般/9987472)，惯称**“**鲁班**”** [2] 。鲁班的名字实际上已经成为古代劳动人民智慧的象征。
