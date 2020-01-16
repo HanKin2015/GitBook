@@ -113,5 +113,34 @@ char *strstr(const char *str1, const char *str2)
 }
 ```
 
-# 4、
+# 4、判断为空
+
+成员函数empty
+
+```
+string str;
+if (str.empty()) {
+	//do anything
+}
+```
+
+成员函数size
+
+```
+string str;
+if (str.size() == 0) {
+	//do saomthing
+}
+```
+
+与空串比较
+
+```
+string str;
+if (str == "") {
+	//do something
+}
+```
+
+几种方法中，**empty函数**是效率最高也是最常用的一种。
 

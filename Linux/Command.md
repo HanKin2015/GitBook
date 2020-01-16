@@ -259,14 +259,6 @@ unalias ll
 
 
 
-# 15、journalctl
-
-https://www.cnblogs.com/sparkdev/p/8795141.html
-
-**journalctl 用来查询 systemd-journald 服务收集到的日志。**systemd-journald 服务是 systemd init 系统提供的收集系统日志的服务。
-
-
-
 # 16、lsblk
 
 lsblk 列出所有块设备信息（除了RAM类型的块设备）。lsblk是通过读取/sys/fs文件系统信息和udev db来收集信息。

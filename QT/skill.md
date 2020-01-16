@@ -420,6 +420,29 @@ wheelevent函数是鼠标滚轮事件。
 
 结论：无法修改样式，并且导航栏是向内占据一定的宽度。
 
+改变QWebView的滚动条样式。找了很多资料，并没有找到合适的方法。网上有个在网页中css修改，不太实际。
+
+对于 QWebView 控件来说，直接设置滚动条无效。
+
+QWebView 基于 Webkit，Webkit 则可以通过 CSS3 来修改浏览器的滚动条样式的。
+
+将样式写到 CSS 中，在 HTML 中引用它，然后用 QWebView::setHtml() 调用，就可以了。
+
+```
+通过QT端没有找到方法。
+最后只有在网页中设置添加样式
+
+html.append("<style>");
+html.append(" ::-webkit-scrollbar{width:0.8em;}");
+html.append(" ::-webkit-scrollbar-track{background:rgb(241,241,241);}");
+html.append(" ::-webkit-scrollbar-thumb{background:rgb(188,188,188);}");
+html.append("</style>");
+```
+
+
+
+
+
 # 18、注销登录按钮样式非常棒
 
 圆角、颜色透明、内间距、字体
@@ -462,6 +485,80 @@ border-radius:5px;
 # 20、禁止右键
 
 setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
+
+
+
+# 21、QT判断鼠标是否在某子窗口控件上方
+
+需要注意的是，子窗口获取geometry，是相对于父窗口的相对位置，QCursor::pos()获取的是鼠标绝对位置，要不将父窗口的相对位置进行换算，要不将鼠标的绝对位置进行换算，这里本文采用将鼠标绝对位置换算到控件上，示例代码如下：
+
+```
+if(ui->groupBox->geometry().contains(this->mapFromGlobal(QCursor::pos())))
+```
+
+
+
+# 22、QPoint和SpicePoint类相像，都包含x和y值
+
+# 23、模态和非模态
+
+**1、主要讲的是对QWidget设置模态窗口**
+
+第一种方法：是在构造函数中写上：
+
+```cpp
+setWindowFlags(Qt::FramelessWindowHint);
+
+
+
+setAttribute(Qt::WA_showModal, true);    
+```
+
+
+
+但这种方法已经在Qt4.5中被摒弃了，因为按照这样设置，对话框是无法使用触摸屏输入法的，只能用按键输入；
+
+**第二种方法：是在构造函数中写上：**
+
+```cpp
+setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+
+
+
+setWindowModality(Qt::WindowModal);   
+```
+
+ 其中Qt::Dialog这个属性是要加的，因为这个属性会告诉Qt这个窗口是要被当做对话框对待的，从而实现预期的效果。而下面那个函数的参数有3种：Qt::NonModal ：该窗口不是模态，不会阻塞其它界面接受输入信息；Qt::WindowModal：该窗口是一个当以层次的模态窗口，会阻塞它的父窗口、祖父窗口和各个兄弟窗口接受输入信息；Qt::ApplicationModal：该窗口是应用模态窗口，会阻塞所有窗口接受输入信息。用第二种就能够在弹出来的对话框中接收输入法信息。
+
+**2、但是用了上面第二种方法设置了模态，还是没用的原因：**
+
+答案：因为你没设置父窗口，qt帮助文档原文是：
+
+  The window is modal to a single window hierarchy and blocks input to its parent window, all grandparent windows, and all siblings of its parent and grandparent window
+
+
+
+  因为设置模态会的时候，Qt会根据当前窗口的父窗口是哪个，递归往上层找，然后将应该阻塞的全部阻塞，故没有效果的原因是该Widget没有父窗口。
+
+
+
+  或许有些人说在new widget的时候，将父窗口的this指针传进去了，但是模态窗口的属性是在对话框创建的时候确定的，可若是父窗口QWidget根本就还没有完全创建完，因此parent还是0，故设置对话框失效！
+
+  **解决办法就是自定义一个槽函数，当按键按下时才在槽函数里面创建对话框，此时QWidget已经创建完成，可以将this传入，这样就能够获得预想的结果。**
+
+# 24、
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

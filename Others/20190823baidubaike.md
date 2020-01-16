@@ -1,4 +1,34 @@
 [TOC]
+# ZFS
+
+ZFS文件系统的英文名称为Zettabyte File System,也叫动态文件系统（Dynamic File System）,是第一个128位文件系统。最初是由Sun公司为Solaris 10[操作系统](https://baike.baidu.com/item/操作系统/192)开发的文件系统。作为OpenSolaris开源计划的一部分，ZFS于2005年11月发布，被Sun称为是终极文件系统，经历了 10 年的活跃开发。而最新的开发将全面开放，并重新命名为 OpenZFS。
+
+# 事业部
+
+事业部是指以某个产品、地区或顾客为依据，将相关的研究开发、采购、生产、销售等部门结合成一个相对独立单位的组织结构形式。它表现为，在总公司领导下设立多个事业部，各事业部有各自独立的产品或市场，在经营[管理](https://baike.baidu.com/item/管理)上有很强的自主性，实行[独立核算](https://baike.baidu.com/item/独立核算/9739719)，是一种分权式管理结构。[事业部制](https://baike.baidu.com/item/事业部制/5300793)又称[M型组织](https://baike.baidu.com/item/M型组织)结构，即多[单位企业](https://baike.baidu.com/item/单位企业/6715841)、分权组织，或[部门化](https://baike.baidu.com/item/部门化/6310730)结构。
+
+
+
+市场剥削资本家，资本家就是剥削员工。
+
+# NTFS
+
+NTFS（New Technology File System）是Windows NT内核的系列操作系统支持的、一个特别为网络和磁盘配额、文件加密等管理安全特性设计的磁盘格式，提供长文件名、数据保护和恢复，能通过目录和文件许可实现安全性，并支持跨越分区。 [1] 
+
+NTFS对[FAT](https://baike.baidu.com/item/FAT)和[HPFS](https://baike.baidu.com/item/HPFS)作了若干改进，例如，支持元数据，并且使用了[高级数据结构](https://baike.baidu.com/item/高级数据结构/7546193)，以便于改善性能、可靠性和磁盘空间利用率，并提供了若干附加扩展功能
+
+# 网络文件系统
+
+网络文件系统，英文Network File System(NFS)，是由[SUN](https://baike.baidu.com/item/SUN/69463)公司研制的[UNIX](https://baike.baidu.com/item/UNIX/219943)[表示层](https://baike.baidu.com/item/表示层/4329716)协议(pressentation layer protocol)，能使使用者访问网络上别处的文件就像在使用自己的计算机一样。
+
+# Sun Microsystems
+
+Sun Microsystems是IT及互联网技术服务公司（已被[甲骨文](https://baike.baidu.com/item/甲骨文/471435)收购）Sun Microsystems 创建于1982年。主要产品是[工作站](https://baike.baidu.com/item/工作站/217955)及[服务器](https://baike.baidu.com/item/服务器/100571)。1986年在美国成功上市。1992年sun推出了市场上第一台多处理器台式机SPARCstation 10 system，并于1993年进入财富500强。
+
+# Clonezilla
+
+**再生龙**（*Clonezilla*）是一个免费的[灾难恢复](https://baike.baidu.com/item/灾难恢复)、[硬盘克隆](https://baike.baidu.com/item/硬盘克隆)、硬盘映像档制作的部署和解决方案，由[台湾](https://baike.baidu.com/item/台湾)的高速网络与计算中心所开发，以[GNU通用公共许可协议](https://baike.baidu.com/item/GNU通用公共许可协议)（GPL）发布。
+
 # 张宇
 
 张宇，本名张博翔，1967年4月30日出生于台湾省台北市，毕业于逢甲大学银行保险系，擅长钢琴及吉他。中国台湾流行乐男歌手、音乐创作人、主持人、演员。

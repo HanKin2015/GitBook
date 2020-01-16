@@ -1,3 +1,14 @@
+# 犯错
+
+- 等号左右两边不能有空格
+- 中括号左右两边要有空格
+
+
+
+
+
+
+
 # shell
 
 printf输出
@@ -77,4 +88,25 @@ su root转换到root账户   =====  su （账户密码，及root）
 内网wifi：TP未限速
 
 桌面巡检工具
+
+---
+
+$？获取上一个命令的退出状态
+
+```
+
+function kill_lock_process()
+{
+	local lock_pid=$(lsof /var/lib/dpkg/lock | grep /var/lib/dpkg/lock | awk '{print $2}')
+	if [ -n "${lock_pid}" ]; then
+		kill -9 ${lock_pid}
+		dpkg --configure -a
+	fi
+}
+
+kill_lock_process
+if [ $? -ne 0 ]; then
+	kill_lock_process
+fi
+```
 

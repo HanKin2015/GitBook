@@ -53,3 +53,58 @@ err=%u, %s", errno, strerror(errno));
 
 [金步国作品集](http://www.jinbuguo.com/)
 
+
+
+
+
+datafountain网站注册：微信号
+
+flyai.com网站注册
+
+好好学习正则表达式，顺便再次深入了解模式匹配，KMP，自动机
+
+
+
+mii-tool和ethtool工具很少见啊。
+
+```
+应用检测网口是否插入网线。
+```
+
+## MII（媒体独立接口）
+
+MII即媒体独立接口，也叫[介质](https://baike.baidu.com/item/介质/5419484)无关接口。它是IEEE-802.3定义的以太网行业标准。它包括一个[数据接口](https://baike.baidu.com/item/数据接口/6659495)，以及一个MAC和PHY之间的管理接口(图1)。数据接口包括分别用于发送器和接收器的两条独立信道。每条信道都有自己的数据、时钟和控制信号。MII数据接口总共需16个信号。管理接口是个双信号接口：一个是时钟信号，另一个是数据信号。通过管理接口，上层能监视和控制PHY。
+
+https://sites.uclouvain.be/SystInfo/usr/include/linux/mii.h.html
+
+## 小海龟git如何在文件夹显示改动
+
+安装后可能没有生效，建议重启电脑。
+
+## qwebview边框border
+
+似乎也设置不了它的边框，最后是在父窗口加入边框，qwebview缩小窗体大小。
+
+QMessageBox mybox = new QMessageBox();
+
+mybox->exec();
+
+需要执行完后才能进行后面的事情。
+
+
+
+# [10个非常有趣的Linux命令](https://www.cnblogs.com/1394htw/p/6358737.html)
+
+还找到了另一个命令：linuxlogo
+
+$linuxlogo -L ubuntu  与  $linuxlogo 显示了两幅不同的画面，感觉挺有意思的。
+
+好奇心试了一下 $linuxlogo -L ubun 显示了另外一幅。
+
+于是简单百度了一下，发现了各类彩蛋。
+
+# 40个超有趣的Linux命令行彩蛋和游戏（https://www.jianshu.com/p/dd24e4227deb）
+
+https://blog.csdn.net/zhongbeida_xue/article/details/78820731
+
+https://www.cnblogs.com/sukai/archive/2013/06/08/3127031.html
