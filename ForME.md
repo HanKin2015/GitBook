@@ -1,5 +1,8 @@
 [TOC]
 
+[全国组织机构统一社会信用代码公示查询平台](https://www.cods.org.cn/)
+
+
 - 总是忘记，时刻提醒自己！
 - 命名风格应该细化到函数里（不要着眼于整个文件）
 - 不要沉迷游戏
@@ -108,3 +111,20 @@ $linuxlogo -L ubuntu  与  $linuxlogo 显示了两幅不同的画面，感觉挺
 https://blog.csdn.net/zhongbeida_xue/article/details/78820731
 
 https://www.cnblogs.com/sukai/archive/2013/06/08/3127031.html
+
+
+
+
+
+
+
+# 简历
+qq邮箱：hejian0616@qq.com（1058198502@qq.com）
+备用qq：1429291381
+163邮箱：18712779076@163.com
+手机号码：18712779076（河北秦皇岛）
+
+
+
+
+

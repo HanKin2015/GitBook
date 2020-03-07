@@ -2,11 +2,11 @@
 
 # 1、常用工具的安装
 
-## winrar
+## 1-1、winrar
 
 个人一直使用的解压软件。7zip也不错，免费开源。其他不建议：快压、360、winzip、bandizip。
 
-## BusHound
+## 1-2、BusHound
 
 sn码破解：4**40
 
@@ -45,13 +45,13 @@ Hardware ID：VID和PID
 
 保存文件需将软件最大化。
 
-## AMCap-ok.exe
+## 1-3、AMCap-ok.exe
 
 小型摄像头使用软件。设备-选项-预览。
 
 
 
-## usbmon
+## 1-4、usbmon
 
 抓包工具通过命令行，没有找到软件。估计只有Linux软件。
 
@@ -77,7 +77,7 @@ VID:PID=046d:081b
 
 抓设备枚举包：不需要grep管道
 
-## USBTrace
+## 1-5、USBTrace
 
 crack：破裂 、裂缝、优秀的
 
@@ -90,6 +90,23 @@ capture：捕获、攻占
 摄像头时时刻刻在传输数据，就会不停的在抓包。
 
 抓取usb枚举数据包：开启热插拔监听。
+
+---
+usbtrace抓包数据更加详细，能看见每个包的大小；但是可能有些包没有抓取到
+bus hound抓包数据更加完整，但是内容不是很详细
+
+## 1-6、adb工具
+adb工具即Android Debug Bridge（安卓调试桥） tools，它就是一个命令行窗口。
+发现：前面是路径，永远在后面的是目标路径
+```
+adb devices	#查看已连接的设备
+adb push path1 path2	#推送文件
+adb pull path1 path2	#拉取文件
+
+```
+
+
+
 
 # 2、usb协议学习
 

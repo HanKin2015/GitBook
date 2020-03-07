@@ -2,6 +2,30 @@
 
 三丰云服务器  bibi07078
 
+第一步：小娜搜索“windows powershell”，并右键以管理员身份运行.
+
+第二步：在弹出“windows powershell”窗口界面后，输入如下命令代码.
+
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+
+窗口界面上将显示出“电源方案 GUID: xxxxxxxx (卓越性能)”字符串提示，这时我们便成功开启了“卓越性能模式”。
+
+
+
+FileZilla是一个免费开源的[FTP](https://baike.baidu.com/item/FTP/13839)软件，分为客户端版本和服务器版本，具备所有的FTP软件功能。可控性、有条理的界面和管理多站点的简化方式使得Filezilla客户端版成为一个方便高效的FTP客户端工具，而FileZilla Server则是一个小巧并且可靠的支持FTP&SFTP的FTP服务器软件。
+
+FileZilla是一种快速、可信赖的FTP客户端以及服务器端开放[源代码](https://baike.baidu.com/item/源代码/3814213)程式，具有多种特色、直接的接口。FileZilla在2002年11月获选为当月最佳推荐专案。
+
+说白了，这款软件跟xftp一个性质。
+
+
+
+
+
+一个类的例子，初始化static，还有就是友元，重构=，输出。
+
+
+
 
 
 # 三句半
