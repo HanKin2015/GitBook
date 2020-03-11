@@ -13,3 +13,19 @@
 Options-》File Type Options
 
 还原界面布局：View-》Reset Layout
+
+# 4、插件
+[Source Insight 3.X 插件支持utf8，完美解决中文乱码，另附优美的配置文件一份](https://blog.csdn.net/wowocpp/article/details/83658976)
+
+非常适用的Sourceinsight插件，提高效率事半功倍](https://blog.csdn.net/weixin_37985816/article/details/79128436)
+
+
+
+
+
+
+
+
+
+
+

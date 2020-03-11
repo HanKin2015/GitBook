@@ -27,7 +27,9 @@ EP（端点） 编号最高位表示方向 1为OUT 81为IN
 
 descriptor描述符
 description描述
+---
 
+设备描述符：14项
 
 
 
