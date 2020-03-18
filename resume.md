@@ -377,26 +377,39 @@ minor：较小的; 次要的;未成年人; 辅修科目; 辅修课程;
 privacy：隐私
 privilege：荣耀、特权
 peer：同龄人、同辈、对端
-
+fake：假的，伪造者，赝品
+alter：改变
 
 
 [开发者知识库](https://www.itdaan.com/index.html)
 
 
 
+我已然放弃找寻sourceinsight的tab标签之sihook之4.X。
+现在还有一个办法看他人配置。
+
+
+#include <assert.h>			断言
+#include <sys/types.h>
+#include <sys/time.h>     Linux平台下
+
+
+# 主引导记录
+主引导记录（MBR，Master Boot Record）是位于磁盘最前边的一段引导（Loader）代码。它负责磁盘操作系统(DOS)对磁盘进行读写时分区合法性的判别、分区引导信息的定位，它由磁盘操作系统(DOS)在对硬盘进行初始化时产生的。
 
 
 
+SCSI：是小型计算机系统接口的意思，就是早期硬盘或者光驱的接口类型，多用在服务器电脑上。数据线有50芯或者68芯的
+SATA：是现在的硬盘或者光驱接口，是串行接口。现在的电脑一般都用这种类型，数据线是7芯的。
+
+
+仅批量传输协议中，数据传输的结构和过程：命令阶段、数据阶段和状态阶段。
+命令块封包CBW：Command Block Wrapper
+命令状态封包CSW：Command Status Wrapper
+CDB：Command Block？？？
 
 
 
-
-
-
-
-
-
-
-
-
+signature：签名
+delimiter：分隔符
 

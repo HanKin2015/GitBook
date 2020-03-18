@@ -1,4 +1,44 @@
 # 宏定义
+```
+ #include <iostream>
+ #include <cstring>
+ using namespace std;
+
+ //int num = 250;
+ //刚好__FILE__也是类似string的字符串，所以不加双引号的时候相当于赋值
+ string strs[] = {__FILE__, "__LINE__", "__DATE__", "__TIME__", "__STDC__"};
+
+
+ int main()
+ {
+     for (int i = 0; i < 5; i++) {
+         cout << strs[i] << endl;
+     }
+     cout << __FILE__ << endl;
+     return 0;
+ }
+```
+
+c++的输出有个好处就是不用指定数据的格式
+```
+ #include <iostream>
+ #include <cstring>
+ #include <cstdio>
+ using namespace std;
+
+ int main()
+ {
+    printf("%s\n", __FILE__);
+	cout <<  __STDC__ << endl;
+	cout << __LINE__ << endl;
+	cout << __FUNCTION__ << endl;
+	cout <<  __DATE__ << endl;
+	cout << 	__TIME__ << endl;
+    return 0;
+ }
+```
+
+
 1.预处理器
 
 1.1预处理符号：
@@ -7,11 +47,13 @@
 
 　　__LINE__　　：文件当前行的行号
 
-　　__DATA__　　：文件被编译的日期
+　　__DATE__　　：文件被编译的日期
 
 　　__TIME__　　：文件被编译的时间
 
 　　__STDC__　　：如果编译器遵循ANSIC，其值就为1，否则未定义
+
+	__FUNCTION__：当前的函数名
 
 2.#define宏
 
@@ -41,7 +83,6 @@ SQUARE(5)
 SQUARE(a+1)
 　　2.如果宏定义中的语句非常长，那么可以写成多行，除了最后一行之外，每行的末尾都要加一个反斜杠 “ \ ”
 
-　　
 
 #define  DEBUG_PRINT  printf("FILE %s line %d:"  \
                                                 "x=%d,y=%d,z=%d"\

@@ -2,15 +2,20 @@
 
 # 1、常用工具的安装
 
+[USB 之三 常用抓包/协议分析工具（Bus Hound、USBlyzer、USBTrace、USB Monitor Pro等）](https://blog.csdn.net/ZCShouCSDN/article/details/81448023/)
+
 ## 1-1、winrar
 
 个人一直使用的解压软件。7zip也不错，免费开源。其他不建议：快压、360、winzip、bandizip。
 
 ## 1-2、BusHound
+不再更新：最新版6.01
+sn码破解：49940
 
-sn码破解：4**40
-
-需要重启，否则无法读取usb接口。
+缺点：
+- 对于某些USB报文无法抓取，这是个硬伤。
+- 其也不具备USB协议分析功能。
+- 需要重启，否则无法读取usb接口。
 
 - 枚举数据包
 - 普通usb数据包
@@ -104,10 +109,18 @@ adb devices	#查看已连接的设备
 adb push path1 path2	#推送文件
 adb pull path1 path2	#拉取文件
 adb shell screencap path	#截屏
-
+-v 显示日志格式  -v time 以时间为显示格式
 ```
 
+## 1-7、USBlyzer
+具备分析功能，需重启计算机
+不再更新：最新版2.2
 
+
+
+## 1-8、DebugView
+https://blog.csdn.net/baidu_37503452/article/details/87599038
+https://blog.csdn.net/baidu_37503452/article/details/87598982
 
 
 # 2、usb协议学习
