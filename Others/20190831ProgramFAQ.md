@@ -1,5 +1,53 @@
 [TOC]
 
+要对每个文件说明这个是做什么的，不然过了几年就不明白这里面写的是啥东西。
+
+
+偶尔遇到的问题归纳。
+
+# 破解VS
+一次百度就解决了，so easy。
+[Visual Studio 2015(企业版/专业版/社区版带激活密钥)](https://qsh5.cn/584.html)
+
+# leanote笔记
+感觉这个软件还不错，但是似乎没有显示编辑器的行号。
+
+# free命令
+free查询内存，df查询磁盘
+```
+free -h
+free -g
+cat /proc/meminfo
+vmstat
+
+slab内核内存
+tmpfs基于内存的文件系统
+[tmpfs总结](https://blog.csdn.net/wz947324/article/details/80007122)
+```
+
+清理缓存
+执行以下命令：
+```
+echo 0 >/proc/sys/vm/drop_caches
+free -m #看内存是否已经释放掉了。
+如果我们需要释放所有缓存，就输入下面的命令：
+echo 3 > /proc/sys/vm/drop_caches
+
+0-3的参数含义：
+
+设置值说明：
+0：不释放（系统默认值）
+1：释放页缓存
+2：释放dentries和inodes
+3：释放所有缓存
+```
+
+ifstat工具是个网络接口监测工具,比较简单看网络流量
+
+# RTF格式
+使用wps就能打开，然而有乱码，尽量不使用吧。
+
+
 # 1、string和char*
 
 ```

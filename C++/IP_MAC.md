@@ -125,9 +125,101 @@ https://blog.csdn.net/lyh2529/article/details/25957701
 https://www.iteye.com/blog/naso-1815538
 
 
+```
+//必须先获得套接口清单，得到设备名，并导入进入才能获取其他的信息
+//设备eth1、lo
+//获取信息后保存在--.sa_data存在偏移，暂时没弄懂
+#include <stdio.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
 
+#include <sys/ioctl.h>
+#include <net/if.h>
 
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/param.h>
+#include <net/if_arp.h>
+#include <stdlib.h>
+#include <string.h>
 
+#define MAX_PHY_ADDR_LEN 32
+ 
+int get_ip_mac_address(uint32_t &ip_addr, uint8_t mac_addr[MAX_PHY_ADDR_LEN])
+{
+    const int MAXINTERFACE = 16;
+    int i, j;
+    char *device = "eth0";
+    struct ifreq ifr;
+    struct ifconf ifc;
+    struct ifreq buf[MAXINTERFACE];
+    int sockfd, interface_num, err;
+
+    ifc.ifc_len = sizeof(buf);
+    ifc.ifc_buf = (__caddr_t)buf;
+
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+    {
+        return -1;
+    }
+    err = ioctl(sockfd, SIOCGIFCONF, &ifc); // 获取所有接口信息
+    if (0 != err)                               
+    {
+        return -1;
+    }
+    interface_num = ifc.ifc_len / sizeof(struct ifreq); // 由此知存在几个设备接口
+
+    for (i = 1; i <= interface_num; i++)
+    {
+        if (0 == strcmp(device, buf[i].ifr_name)) {
+            strcpy(ifr.ifr_name,buf[i].ifr_name); // 必须导入设备名才能正常获取信息
+            err = ioctl(sockfd, SIOCGIFHWADDR, &ifr); // mac地址
+            if (0 == err)
+            {
+                for (j = 0; j < 6; j++) 
+                {
+                    mac_addr[j] = (uint8_t)ifr.ifr_hwaddr.sa_data[j];
+                }
+            }
+			mac_addr[6] = '0'; // 长度固定，末尾填充
+			mac_addr[7] = '0';
+			
+            err = ioctl(sockfd, SIOCGIFADDR, &ifr); // ip地址
+            if (0 == err)
+            {
+                char *ip = inet_ntoa(((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr);
+				printf("%d\n", ((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr.s_addr);
+				ip_addr = ((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr.s_addr;
+            }
+			else 
+			{
+				return -1;
+			}
+        }      
+    }
+    close(sockfd);
+    return 0;
+}
+ 
+     LOG_INFO("hj ip = %d", _local_addr.s_addr);
+    LOG_INFO("hj ip = %s", inet_ntoa(_local_addr));
+int main()
+{
+    uint8_t mac_addr[6];
+	uint32_t ip_addr;
+    get_ip_mac_address(ip_addr, mac_addr);
+    printf("ip addr: %d\n", ip_addr);
+	
+	in_addr ip;
+	ip.s_addr = ip_addr;
+	printf("sddasd%s:\n", inet_ntoa(ip));
+	
+    int i;
+    for (i = 0; i < 6; i++) printf("%02x:\n", mac_addr[i]);
+    return 0; 
+}
+```
 
 
 

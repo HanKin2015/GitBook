@@ -1,6 +1,6 @@
 # 编程比赛
-
-### [*fir.im* - 免费应用内测托管平台|iOS应用Beta测试分发|Android应用...](https://www.baidu.com/link?url=aw6N1ePQ3iDZHI3t6FOPoQQkDMEcCQqU9bMvJbXx2Ea&wd=&eqid=ad70804000018755000000065df86e5c)
+规定：使用一个文件进行总结，这样可以减少文件的赘余。经过一段时间后，一个文件的内容太多，可以对此进行压缩和归纳。
+所以写文章的时候要说明开始时间，最后会通过时间段来命名文件，方便后续的查询和归档。
 
 ## 1、sangfor练习
 

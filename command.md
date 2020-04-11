@@ -17,10 +17,13 @@ tail -f
 alas
 . hj.sh
 ls -l
+git clone xxx.git --branch 分支名
 
 # memory
 du -h -d 1 .
 df -h
+free -g
+cat /proc/meminfo
 
 # process
 pidof
@@ -31,7 +34,7 @@ iftop
 ifconfig
 ipconfig
 ip addr
-
+ifstat
 
 ```
 
@@ -56,7 +59,10 @@ https://blog.csdn.net/qq_27413937/article/details/99714197
 
 
 
-
+tail -f
+ps -ef|grep vdi
+killall
+ldd
 
 
 

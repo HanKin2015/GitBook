@@ -168,9 +168,7 @@ LANG="en_US.UTF-8"
 
  nmcli device show	###显示全部设备信息 
 
-# 12、304zhaungtaima 
-
-本词条缺少**概述图**，补充相关内容使词条更完整，还能快速升级，赶紧来编辑吧！
+# 12、304状态码
 
 如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。简单的表达就是：服务端已经执行了GET，但文件未变化。
 
@@ -189,4 +187,13 @@ Ctrl-［A-Z］， Alt+Shift+［A-Z］， F1-F12， Ctrl-F［1-12］， Alt-F［1
 其中热键对应的ASCII字符可以通过 “先按Ctrl-V， 然后按热键” 的方式来输入， 如Ctrl-G对应的字符为^G， Alt-P对应的字符为^［p， Ctrl-Alt-H对应的字符为^［^H.
 
 可以用/C来代替Ctrl，/M来代替Alt， /M-/C来代替Alt-Ctrl， 如/C-M = Ctrl-M， /M-/C-H = Alt-Ctrl-M. 另外还可以用/e代表^［。
+
+# 13、环境变量
+export DISPLAY=:0
+. /etc/profile
+source /etc/profile
+
+
+
+
 

@@ -534,3 +534,66 @@ git branch --set-upstream-to origin/newName
 
 
 http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
+
+
+## Git 恢复本地误删的文件
+起因：git clone下来的项目不久后就自动出现修改的红色感叹号标志，实际什么都没有做。后来猜测应该是杀毒软件之类的给我自动删除了，后来还真是。使用恢复方法恢复后，一会儿又给我删除了，要么关闭杀毒软件或者添加信任。
+
+使用git pull --force强制拉取
+
+正确的打开方式：
+```
+git reset HEAD 文件或文件夹
+git checkout 文件或文件夹
+```
+
+
+## 14、进阶
+### .gitignore
+一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。我们可以创建一个名为 .gitignore 的文件，列出要忽略的文件模式。来看一个实际的例子：
+$ cat .gitignore
+*.[oa]
+*~
+第一行告诉 Git 忽略所有以 .o 或 .a 结尾的文件。一般这类对象文件和存档文件都是编译过程中出现的，我们用不着跟踪它们的版本。第二行告诉 Git 忽略所有以波浪符（~）结尾的文件，许多文本编辑软件（比如 Emacs）都用这样的文件名保存副本。此外，你可能还需要忽略 log，tmp 或者 pid 目录，以及自动生成的文档等等。
+
+### 打patch
+生成patch：
+git format-patch commitID -1 生成当前commitID 的patch
+git format-patch commitID -3 从当前commitID开始往下生成总共三个commit的patch文件
+应用patch：
+git apply --check xxx.patch 检查当前patch是否可以成功打入
+git apply xxx.patch
+git apply *.patch 同时打入所有patch
+
+### 自定义别名（更高级的git log）
+```
+alias lg="git log --graph --pretty=format:’'Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
+```
+
+### git子模块使用
+一个大型工程总会被分拆为一些子工程,git-submodule 就是完成这样一种子工程拆分与整合的工具.
+
+添加一个子工程
+git submodule add git@xxxx:subproj.git subproj
+git commit -m “submodule added”
+
+克隆一个带submodule的git仓库
+git clone git@domain.com:massproj.git
+git submodule init
+git submodule update
+或者
+git clone --rescursive git@domain.com:massproj.git
+
+
+查看修改的文件
+git log --stat
+
+查看commitID的具体修改
+git log -p
+
+查看文件最后的修改人
+git blame -L 起始行号,结束行号
+
+
+
+
