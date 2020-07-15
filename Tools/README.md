@@ -6,3 +6,5 @@ Windows：certutil -hashfile {filename} {hash_algorithm}
 certutil：
 
 
+## 2、倒萨大
+

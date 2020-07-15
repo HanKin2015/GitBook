@@ -11,7 +11,7 @@
 
 # 1、自带错误
 
-err=%u, %s", errno, strerror(errno));
+printf("err=%u, %s", errno, strerror(errno));
 
 返回只类型为void的linux函数一般不会出错
 
@@ -35,7 +35,7 @@ err=%u, %s", errno, strerror(errno));
 
 3.printf（“%m"，errno）；
 
-也可一直接用printf("%m\n");
+也可以直接用printf("%m\n");
 
 这个用法也直接输出上一个函数的错误信息，第二个参数可以不要
 
@@ -123,6 +123,26 @@ qq邮箱：hejian0616@qq.com（1058198502@qq.com）
 备用qq：1429291381
 163邮箱：18712779076@163.com
 手机号码：18712779076（河北秦皇岛）
+
+# 下载外国软件的好地方
+https://sourceforge.net/
+https://www.fosshub.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

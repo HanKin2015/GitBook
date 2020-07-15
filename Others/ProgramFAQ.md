@@ -5,14 +5,14 @@
 
 偶尔遇到的问题归纳。
 
-# 破解VS
+# 1、破解VS
 一次百度就解决了，so easy。
 [Visual Studio 2015(企业版/专业版/社区版带激活密钥)](https://qsh5.cn/584.html)
 
-# leanote笔记
+# 2、leanote笔记
 感觉这个软件还不错，但是似乎没有显示编辑器的行号。
 
-# free命令
+# 3、free命令
 free查询内存，df查询磁盘
 ```
 free -h
@@ -188,10 +188,55 @@ git clone时出现这个错误，参考： https://blog.csdn.net/luozhonghua2014
 
 重启ssd
 
+# 9、win7系统 打印后台处理程序 服务没有运行 解决
 
+# 10、查询Windows开关机时间
+- systeminfo
+- 打开计算机事件查看器： 开始》管理工具》事件查看器》windows 日志》应用程序》查看日期
 
+来源为rvice User profile se ID 为1531 常规说明“已成功启动用户配置文件服务”此为开机记录。
 
+来源为rvice User profile se ID 为1532 常规说明“已停止用户配置文件服务”此为关机记录。如果中途注销了电脑同样有这样的记录，但看记录时间你就能看得出来。
+- https://blog.csdn.net/chao199512/article/details/86152449
+- eventvwr.exe
 
+# 11、DisplayLink 
+DisplayLink是一个通过USB接口实现显示器连接到电脑的连接技术，可以非常简单、方便的连接电脑和多个显示设备。该技术可以通过USB接口扩展虚拟的电脑的桌面。DisplayLink技术最多可以支持6台显示器同时显示32位色彩的任意分辨率画面。
+
+# 12、FreeNAS
+FreeNAS是一套免费的NAS服务器，它能将一部普通PC变成网络存储服务器。该软件基于FreeBSD， Python，支持CIFS (samba), FTP, NFS protocols, Software RAID (0,1,5) 及 web 界面的设定工具。
+
+# 13、莫队算法
+https://www.cnblogs.com/WAMonster/p/10118934.html
+
+# 14、dos清屏
+cls
+
+# 15、windows自带管理工具（exe/cpl/msc） 
+ https://blog.csdn.net/u014711094/article/details/81006315
+
+# 16、Qt：Invalid parameter passed to C runtime function.
+Qt调用C语言接口出现提示Invalid parameter passed to C runtime function.
+
+原因是调用函数的时候传递了空指针
+
+# 17、Windows带宽查询
+网络和共享中心-》本地连接-》速度
+可以使用在线的网络查询当前网速
+
+# 18、盒子刷Linux系统出现SQUASHFS error
+[ 5742.104968] SQUASHFS error: xz decompression failed, data probably corrupt
+[ 5742.118815] SQUASHFS error: squashfs_read_data failed to read block 0x302780
+[ 5742.132914] SQUASHFS error: Unable to read data cache entry [302780]
+[ 5742.145672] SQUASHFS error: Unable to read page, block 302780, size a478
+[ 5742.159102] SQUASHFS error: Unable to read data cache entry [302780]
+[ 5742.171800] SQUASHFS error: Unable to read page, block 302780, size a478
+[ 5742.185204] SQUASHFS error: Unable to read data cache entry [302780]
+[ 5742.197907] SQUASHFS error: Unable to read page, block 302780, size a478
+[ 5742.211323] SQUASHFS error: Unable to read data cache entry [302780]
+[ 5742.224040] SQUASHFS error: Unable to read page, block 302780, size a478
+
+未找到解决办法
 
 
 

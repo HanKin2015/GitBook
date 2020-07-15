@@ -1,3 +1,5 @@
+[TOC]
+
 # 每天一点一滴进步
 just do it
 奥利给
@@ -16,7 +18,7 @@ just do it
 - switch中case如果不加break语句，则后面的case都一定会执行，不再依据case条件。case仅仅是提供起点，对switch关键字起作用。
 
   
-# sys/time.h 和 time.h
+# 1、sys/time.h 和 time.h
 https://blog.csdn.net/kkknd007/article/details/80762666
 
 time.h 是 ISO C99 标准日期时间头文件。
@@ -35,7 +37,7 @@ sys/time.h 中虽然包含了 #include <time.h>，但是通过 #define __need_ti
 
 到底是包含 time.h 还是 sys/time.h，还是应该依据代码中使用的数据结构和函数来决定。
 
-# strtok   &    strchr
+# 2、strtok   &    strchr
 const char * strchr ( const char * str, int character );
       char * strchr (       char * str, int character );
 	  
@@ -85,7 +87,7 @@ int main()
 }
 ```
 
-# struct赋值
+# 3、struct赋值
 ```
 #include <iostream>
 #include <cstdio>
@@ -116,6 +118,70 @@ int main()
 }
 ```
 
+# 4、error: unterminated #ifndef
+检查发现是因为文件开头使用了#ifndef而后面缺少了#endif
+注意：每个if语句都需要一个endif。
+
+# 5、strerror was not declared in this scope
+#include "string.h"
+#include “errno.h”
+
+strerror
+这个库必须要添加string.h头文件，少了.h都不行
+
+# 6、注意new int(100)和new int[100]
+相当于int a=100或int *b=new int(100);
+如int *arr=new int[100];
+
+释放空间数组空间用delete[ ] arr;千万不能这样用delete arr,这样只释放第一个数组的空间而已。
+
+# 7、C++查看数据类型
+```
+#include <iostream>
+#include <string.h>
+
+#include <typeinfo>
+using namespace std;
+
+int main()
+{
+    int *len = new int(100);
+    int *arr = NULL;
+    arr = new int[100];
+    cout << "len type = " << typeid(len).name() << endl;
+    cout << "arr type = " << typeid(arr).name() << endl;
+
+    arr[55] = 100;
+    arr[4] = 55;
+    cout << arr[55] << endl;
+    memset(arr, 0, *len);
+    cout << arr[55] << endl;
+    cout << arr[4] << endl;
+    memset(arr, 0, sizeof(arr)*100);
+    cout << arr[55] << endl;
+    cout << len[0] << endl;
+    cout << len[1] << endl;
+
+    cout << sizeof(unsigned char) << endl;
+    cout << sizeof(unsigned char *) << endl;
+    return 0;
+}
+```
+
+# 8、Rotate dual monitor screen 90 degrees on Ubuntu 15.10
+```
+xrandr --output VGA-1-0 --rotate right
+xrandr: output VGA-1-0 cannot use rotation "right" reflection "none"
+```
+说好的升级xserver呢，升级了还是没有解决，至少20版本没有
+https://askubuntu.com/questions/793572/rotate-dual-monitor-screen-90-degrees-on-ubuntu-15-10
+
+apt install xorg-xserver
+
+# 9、gcc: dereferencing pointer to incomplete type错误
+你的指针，有一个类型，这个类型是不完全的。也就是说，你只给出了这个类型的声明，没有给出其定义。你这里的类型多半是结构，联合之类的东西。
+
+这个错误其实是因为某结构体或联合的字段名所指的变量定义的头文件没有引入到当前Ｃ代码中而造成的错误，只要找到出错对应的变量的结构体或联合的定义的头文件，并把这些头文件包含进来即可解决此问题；
 
 
 
