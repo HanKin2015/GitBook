@@ -1,4 +1,4 @@
-
+[TOC] 
 # 常用的Linux命令（超级简洁版）
 匹配串---
 文件---text.txt
@@ -49,6 +49,10 @@ ip addr
 adb shell
 adb disconnect
 adb devices
+tail -f
+ps -ef|grep vdi
+killall
+ldd
 
 ```
 
@@ -73,10 +77,7 @@ https://blog.csdn.net/qq_27413937/article/details/99714197
 
 
 
-tail -f
-ps -ef|grep vdi
-killall
-ldd
+
 
 
 

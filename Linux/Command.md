@@ -282,3 +282,35 @@ udev处理的所有设备信息都存储在udev数据库中， 并且会发送�
 规则文件分别位于： 系统规则目录(`/usr/lib/udev/rules.d`)、 运行时规则目录(`/run/udev/rules.d`)、 本机规则目录(`/etc/udev/rules.d`)。 所有的规则文件(无论位于哪个目录中)，统一按照文件名的字典顺序处理。 对于不同目录下的同名规则文件，仅以优先级最高的目录中的那一个为准。 具体说来就是： `/etc/` 的优先级最高、 `/run/` 的优先级居中、 `/usr/lib/` 的优先级最低。 如果系统管理员想要屏蔽 `/usr/lib/` 目录中的某个规则文件， 那么最佳做法是在 `/etc/` 目录中创建一个指向 `/dev/null` 的同名符号链接， 即可彻底屏蔽 `/usr/lib/` 目录中的同名文件。 注意，规则文件必须以 `.rules` 作为后缀名，否则将被忽略。
 
 http://www.jinbuguo.com/systemd/udev.html
+
+# 17、alias
+https://blog.csdn.net/chuangjinweilai/article/details/51850803
+alias soff='sleep 5 && xset dpms force off'
+
+
+# xset
+用xset q 可以查看当前屏保的设置情况，黑屏方式的屏保有两种状态：
+1.    xset 的s参数后面可接两个数字参数，前一个即是进入屏保的秒数，如果想立刻进入屏保：
+    xset s 2 600  这样，两秒种后进入屏保。
+    如果想恢复默认值，即比较长的时间进入屏保：xset s 0 600
+    取消屏保：xset s off
+2.    dpms 是屏保的另一种状态，将其断电，与关机后的显示器同样的效果：
+    开启：xset dpms 1 1 2
+    取消：xset -dpms
+
+正因为X的屏幕保护由两部分控制, 单纯的关闭DPMS或者BlankTime都不行, 必须都关掉. 所以我在.xinitrc中加入了下面的命令, 具体解释和其它xset命令参数见Manual.
+
+xset s off
+xset dpms 0 0 0
+
+但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
+
+
+
+
+
+
+
+
+
+

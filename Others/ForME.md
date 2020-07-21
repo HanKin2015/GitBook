@@ -124,13 +124,6 @@ qq邮箱：hejian0616@qq.com（1058198502@qq.com）
 163邮箱：18712779076@163.com
 手机号码：18712779076（河北秦皇岛）
 
-# 下载外国软件的好地方
-https://sourceforge.net/
-https://www.fosshub.com/
-
-
-
-
 
 
 

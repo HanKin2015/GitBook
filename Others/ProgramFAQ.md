@@ -238,6 +238,9 @@ Qt调用C语言接口出现提示Invalid parameter passed to C runtime function.
 
 未找到解决办法
 
+# 19、谷歌浏览器提示未安装flash
+安装后还是提示，在左上角安全里面允许flash
+
 
 
 
