@@ -18,7 +18,10 @@ https://www.fosshub.com/
 
 # 免费下载无损音乐
 http://music.jsososo.com/
+另外一个差些：http://gequdaquan.net/gqss/
 
 # 免费观看大量影视综艺
 http://zyplayer.fun/
 
+# 壁纸
+https://ss.netnr.com/wallpaper

@@ -26,7 +26,10 @@
         "donate",
         "sharing-plus",
         "anchor-navigation-ex",
-        "favicon"
+        "favicon",
+		"toggle-chapters",
+		"theme-comscore",
+		"summary"
     ],
     "pluginsConfig": {
         "edit-link": {
@@ -76,7 +79,7 @@
             ]
         },
         "anchor-navigation-ex": {
-            "showLevel": false
+            "showLevel": true
         },
         "favicon":{
             "shortcut": "./Source/Images/favicon-32x32.ico",
