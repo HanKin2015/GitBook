@@ -1,5 +1,7 @@
 [TOC]
 
+# 安装包命令
+
 # 1、deb
 dbkg -i **.deb
 

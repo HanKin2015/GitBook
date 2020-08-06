@@ -1,5 +1,7 @@
 [TOC]
 
+# string中的子函数
+
 # 1、size_t
 
 ## 用法

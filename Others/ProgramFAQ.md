@@ -1,5 +1,8 @@
 [TOC]
 
+# 问题集锦
+
+
 要对每个文件说明这个是做什么的，不然过了几年就不明白这里面写的是啥东西。
 
 
@@ -241,7 +244,7 @@ Qt调用C语言接口出现提示Invalid parameter passed to C runtime function.
 # 19、谷歌浏览器提示未安装flash
 安装后还是提示，在左上角安全里面允许flash
 
-
+QTAILQ队列是QEMU重要的数据结构，例如用来保存QEMU参数等。
 
 
 

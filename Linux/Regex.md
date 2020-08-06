@@ -1,4 +1,5 @@
 # 管道命令
+
 中间的|是管道命令 是指ps命令与grep同时执行
 
 grep全称是Global Regular Expression Print，表示全局正则表达式输出，它的使用权限是所有用户。

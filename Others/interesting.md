@@ -1,3 +1,6 @@
+[TOC]
+# 有趣的灵魂
+
 有趣的7个网站
 
 - [恐龙快跑]([chrome://dino/](chrome://dino/))

@@ -1,4 +1,5 @@
 [TOC]
+# nodejs安装那些事儿
 
 # 1、nodejs
 常常对nvm和npm搞混淆。

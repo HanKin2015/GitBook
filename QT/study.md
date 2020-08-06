@@ -1,4 +1,6 @@
- [TOC]
+
+[TOC]
+# QT学习笔记3
 
 # QStandardItemModel 
 

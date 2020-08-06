@@ -1,6 +1,8 @@
 [TOC]
 
-# 1、介绍os-release文件
+# os-release文件
+　
+# 1、介绍
 
 详情看：[os-release 中文手册]( http://www.jinbuguo.com/systemd/os-release.html )
 

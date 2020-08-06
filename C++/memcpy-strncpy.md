@@ -1,3 +1,7 @@
+[TOC]
+# memcpy_s和memcpy
+
+
 # 1、memcpy_s相比memcpy，安全在哪？
 
 strcpy_s、memcpy_s等具有缓冲区大小检查的函数，可以有效的检测内存溢出，找到出错的代码。但是strcpy、memcpy这样的出错了需要自己扒代码。

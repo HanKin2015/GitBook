@@ -1,5 +1,7 @@
 [TOC]
 
+# 重新开始
+
 # 1、pair
 使用map<int key, int value>键值对扩展数组内存不足问题。
 pair则可以返回两个绑定的值对。

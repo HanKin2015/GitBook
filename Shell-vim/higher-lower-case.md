@@ -1,3 +1,6 @@
+[TOC]
+# 大小写转换
+
 tmp="abcDEF"
 
 delcare -l ret1=$tmp

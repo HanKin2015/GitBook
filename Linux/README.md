@@ -1,4 +1,4 @@
-# Linux
+# Linux入门学习
 
 ubuntu左侧叫做dock，一般有个优化工具叫做tweak。也可以在桌面背景设置-》行为。
 

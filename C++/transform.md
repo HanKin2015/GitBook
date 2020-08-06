@@ -1,5 +1,7 @@
 [TOC]
 
+# 类型转换小结
+
 # 1、string转int
 
 atoi

@@ -1,3 +1,6 @@
+[TOC]
+# shell脚本与vim编辑器
+
 # 1、ctrl+s冻结
 
 使用Xshell的时候在vim下按ctrl + s 之后就把终端锁定了。

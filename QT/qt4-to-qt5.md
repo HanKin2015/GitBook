@@ -1,3 +1,5 @@
+# qt4和qt5区别及转换
+
 # 焦点问题 
 
 Qt::WA_X11DoNotAcceptFocus 
