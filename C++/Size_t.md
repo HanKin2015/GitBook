@@ -1,4 +1,8 @@
+[TOC]
+
 # size_t和size_type 以及int\ssize_t
+
+
 size_t是为了方便系统之间的移植而定义的。
 在32位系统上定义为 unsigned int
 在64位系统上定义为 unsigned long
