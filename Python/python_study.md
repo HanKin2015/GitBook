@@ -8,11 +8,7 @@ import os
 if __name__ == "__main__":
     app_dir = r'G:\yeshen\Nox\bin\Nox.exe'#指定应用程序目录
 	os.startfile(app_dir) #os.startfile（）打开外部应该程序，与windows双击相同
-	
-	
-	
 ```
-
 
 # 2、线程
 Windows下没有fork函数。
@@ -41,6 +37,25 @@ c = dict(zip(a, b))
 ```
 
 # 8、rsa加密解密
+
+
+
+# 9、异常
+# 10、字符串拼接
+- 使用join
+- 使用逗号
+- 使用加号
+- 使用format
+
+
+
+
+
+
+
+
+
+
 
 
 

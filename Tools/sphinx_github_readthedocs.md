@@ -1,7 +1,9 @@
 [TOC]
-
 # 使用sphinx、github、readthedocs搭建书环境
 
+参考：https://www.jianshu.com/p/78e9e1b8553a
+
+## 0、简介
 GitHub Wiki，适合做知识整理，但排版一般，不方便本地查看。（第一次晓得这个功能的用途）
 GitBook，丑，慢。（？？？）
 
@@ -57,8 +59,18 @@ html_theme = 'sphinx_rtd_theme'
 ## 6、部署到readthedocs官网上
 最终项目网站：https://ml-booknote.readthedocs.io
 
+显示特点：左侧栏显示文章的一级标题，分级显示
 
 
+## 7、后期维护使用
+访问网站：https://ml-booknote.readthedocs.io
+readthedocs网站（使用github账号登录）：https://readthedocs.org/
+github仓库：https://github.com/HanKin2015/ML_BookNote.git
+
+- 在ML_BookNote\source\usage目录下添加新文章，支持md和rst文件
+- 还需要在ML_BookNote\source\index.rst里面添加新的文件。。。
+- 使用anaconda窗口执行make html即可
+- 上库：先将项目上传到git上，然后使用readthedocs的Build version即可
 
 
 

@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+toggle：切换
 plugin：插件
 captcha：验证码
 issue：重要议题，问题

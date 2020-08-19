@@ -223,7 +223,11 @@ git push origin [newBName]
 
 # 6、git commit
 
+### 修改commit内容
 当我们想要对上一次的提交进行修改时，我们可以使用git commit –amend命令。git commit –amend既可以对上次提交的内容进行修改，也可以修改提交说明。
+
+如果有新的文件修改，需要合并到最近一次提交的commit里面，也可以使用上面命令直接修改即可。
+
 
 > git commit --amend -no-edit
 
@@ -240,7 +244,7 @@ git show
 - git reflog
 - git reset commitId
 
-# 7、多个commit合并(git rebase)
+# 7、多个commit合并(git rebase)  
 
 实战中终于理解这条命令的作用。当我们在合并请求时又双叒叕发现一个小错误，又不得不commit一次，真想删除分支全部重新提交。但是commit是可以合并的。
 [git 几个commit点合并成一个commit点](https://blog.csdn.net/u013276277/article/details/82470177)
@@ -595,6 +599,63 @@ git log -p
 
 查看文件最后的修改人
 git blame -L 起始行号,结束行号
+
+
+
+# git学习笔记
+
+# 1、下载安装git
+>sudo apt install git
+
+明白为啥使用sudo而不是直接root账户，防止错误操作，sudo进一步确认了一下。
+
+Windows下载安装很随意。有个注意点：尽量选择下载和上传git仓库的时候不要进行Linux和Windows的换行符的转换，否则在不同环境下运行代码的时候很尴尬。
+
+# 2、配置
+## 配置家门，即上传者的身份
+设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。
+
+设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。以前并没有觉得多大作用，慢慢地发现一个git仓库是可以多人上传的，而这个配置就是显示上传者的身份，一般会填写个人的GitHub相关的信息，比如GitHub用户名和注册邮箱。乱写也是🆗的。
+
+```
+$ git config -l  ===  git config --list
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+还有一个local参数，即为单独仓库配置单独的上传者身份。
+global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+```
+
+## 修改global配置
+简单粗暴：直接使用命令git config --global user.name "Your Name"。。。。
+修改配置.gitconfig文件。
+
+## 配置SSH-Key
+提交代码需要的github权限，下载私有仓库代码时也会需要这个配置，主要在于上传代码，不配置就会每次输入账户和密码。
+
+如果你想要使用 SSH url 克隆的话，你必须是这个项目的拥有者。否则你是无法添加 SSH key 的。
+使用https url很好用？？？
+
+### https 和 SSH 的区别：
+1、前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key ，否则无法克隆。
+
+2、https url 在push的时候是需要验证用户名和密码的；而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。
+
+```
+ssh -T git@github.com    查看是否配置好
+ssh-keygen -t rsa -C "邮件地址"
+```
+
+代码参数含义：
+
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+
+以上代码省略了 -f 参数，使用默认文件名（推荐），那么就会生成 id_rsa 和 id_rsa.pub 两个秘钥文件。
+接着又会提示你输入两次密码（该密码是你push文件的时候要输入的密码，而不是github管理者的密码），
+
+当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码（推荐），直接提交到github上了。
 
 
 

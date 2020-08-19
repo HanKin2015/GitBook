@@ -246,7 +246,9 @@ Qt调用C语言接口出现提示Invalid parameter passed to C runtime function.
 
 QTAILQ队列是QEMU重要的数据结构，例如用来保存QEMU参数等。
 
-
+# 20、2K分辨率
+2K分辨率（英文名2K resolution）是一个通用术语，指屏幕或者内容的水平分辨率达约2000像素的分辨率等级。
+因为16:9的比例是高清晰度视频规格的国际标准，所以2K分辨率在视频制作、显示屏等领域常见格式为1440P（Quad HD）和1080P（Full HD）。
 
 
 
