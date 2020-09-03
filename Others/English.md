@@ -54,7 +54,7 @@ feedback：反馈
 syntax：语法
 daemon：守护进程
 Mstsc (Microsoft terminal services client)
-
+gang：帮派，一群，一帮
 
 
 

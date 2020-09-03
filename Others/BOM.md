@@ -1,6 +1,27 @@
 
 ＃　字符编码
 
+重点：不带BOM就完事了。
+
+
+Utf8 与 Utf8-BOM 的差异
+1.先说差异，Utf8-BOM编码的字符串比Utf8编码的字符串，多了前缀\xEF\xBF\xBD，肉眼是看不出来的，解析出来的字符串的长度也正常
+
+比如："123456"，Encoding.Utf8.GetBytes获取字节流
+
+Utf8-BOM编码为9位，Utf8编码为6位
+
+分别通过上面的字节流通过Encoding.Utf8.GetString，得到的都是"123456"
+
+但是：
+
+以Utf8-BOM编码的字符串写库的时候（Oracle、MySql）都会出现异常.
+
+
+
+
+
+
 BOM——Byte Order Mark，就是字节序标记
 
 在UCS 编码中有一个叫做"ZERO WIDTH NO-BREAK SPACE"的字符，它的编码是FEFF。而FFFE在UCS中是不存在的字符，所以不应该出现在实际传输中。UCS规范建议我们在传输字节流前，先传输字符"ZERO WIDTH NO-BREAK SPACE"。这样如果接收者收到FEFF，就表明这个字节流是Big-Endian的；如果收到FFFE，就表明这个字节流是Little-Endian的。因此字符"ZERO WIDTH NO-BREAK SPACE"又被称作BOM。

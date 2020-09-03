@@ -308,10 +308,22 @@ xset dpms 0 0 0
 但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
 
 
+# 18、chown
+将文件 file1.txt 的拥有者设为 runoob，群体的使用者 runoobgroup :
 
+chown runoob:runoobgroup file1.txt
+将目前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup:
 
+chown -R runoob:runoobgroup *
 
-
+# 19、999用户组
+usermod -g 999 abc
+[root@iZ282bgtwmcZ ~dao]# grep 999 /etc/passwd
+polkitd:x:999:998:User for polkitd:/:/sbin/nologin
+[root@iZ282bgtwmcZ ~]# grep 999 /etc/group
+ssh_keys:x:999:
+一个用户至少要属于一个用户组
+一个用户可以属于多个用户组
 
 
 

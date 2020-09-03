@@ -2,6 +2,9 @@
 
 # 磁盘那些事儿
 
+相关命令：lsblk,fdisk,du,df,lspci,mount
+
+
 # 1、lspci	
 
 查看Linux主机的硬件配备
