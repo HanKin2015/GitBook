@@ -1,6 +1,7 @@
 # tkinter学习
 
 示例可以看python文件夹中study_tkinter.py。
+参考文档：https://docs.python.org/3/library/tkinter.ttk.html
 
 ## 1、text获取内容和设置内容
 目前来看，先删除文本，然后再插入内容。
@@ -25,7 +26,22 @@ entry.get()
 
 Label
 
-## 
+## 3、小组件上的焦点
+takefocus选项设置为0将禁用选项卡专注于创建按钮。
+
+## 4、小组件上的字体
+
+
+
+```
+style = ttk.Style()
+style.configure("BW.TLabel", foreground="black", background="white")
+
+l1 = ttk.Label(text="Test", style="BW.TLabel")
+l2 = ttk.Label(text="Test", style="BW.TLabel")
+```
+
+## tk
 
 
 

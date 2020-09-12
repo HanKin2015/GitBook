@@ -26,18 +26,31 @@ Windows：certutil -hashfile {filename} {hash_algorithm}
 其中hash_algorithm可以指定MD5、SHA1、SHA256等
 certutil：
 
+## 2、Dism++
+官网：http://www.chuyu.me/zh-Hans/
+dism++是一款非常好用的系统清理和维护工具，使用它可以更好的精简系。
+
+FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 
 
 ## 2、工具推荐
 用途	           |	       工具
 :-------------:|:-------------:
 流程图软件   |diagrams
-笔记|
-C/C++|
-看图|wps
-进程监视器|apimonitor
-查看依赖|procexp
+笔记		       |蚂蚁、有道云
+C/C++        |codeblocks
+看图            |wps
+进程监视器   |apimonitor
+查看依赖      |procexp
 文件搜索神器|everithing
+下载工具       |迅雷
+在线视频播放 |ZY Player
+卸载工具		|geek
+本地搜索      | everything
+解压工具		| 7z
+代码编辑器   |vs code、sublime、notepad++、southinsight
+md5校验     | md5sum
+md文件编辑|typro
 
 
 

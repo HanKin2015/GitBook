@@ -34,7 +34,7 @@ Windows下没有fork函数。
 安装打包软件：pip install pyinstaller
 示例：pyinstaller -F -w -i F:\code\image.ico demo.py
 注意：icon可能需要是绝对路径
-
+icon是指定点击的图标，并不是demo中的title。
 
 # 4、程序：枚举Windows下运行的程序
 
@@ -62,6 +62,9 @@ c = dict(zip(a, b))
 
 
 # 9、异常
+
+
+
 # 10、字符串拼接
 - 使用join
 - 使用逗号
@@ -83,10 +86,12 @@ MB_YESNO、MB_HELP、MB_ICONWARNING、MB_ICONQUESTION、MB_ICONASTERISK、MB_OKC
 # 12、UnicodeDecodeError: 'utf-8' codec can't decode byte 0xbc in position 2: invalid start byte
 无外乎两种类型，utf-8和gbk。
 
-# 13、
+# 13、ImportError: no module named md5
+md5 is (from the python docs:) "deprecated since version 2.5: Use the hashlib module instead".
 
-
-
+# 14、pyinstaller无法打包图片到exe问题
+打包成功后，报failed execute script xxx错误。
+本来想打印日志来查错误，这也是最好的方法
 
 
 
