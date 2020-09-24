@@ -36,7 +36,11 @@ SVN相对于的RCS、CVS，采用了分支管理系统，它的设计目标就�
 template.svnprops导入到你的代码项目根路径（.svn目录）
 TortoiseSVN--》Properties--》import
 
-
+# 2、Linux下使用svn
+svn和svnadmin命令
+svnadmin create dir_name
+svn log
+svn status
 
 
 

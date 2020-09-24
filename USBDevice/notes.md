@@ -17,6 +17,30 @@
 深信服的SRAP 协议是根据什么协议开发的？ RDP 还是 SPICE ?
 云桌面需要通过网络交付给前端设备，其中最重要的组成部分就是桌面交付协议。为实现云桌面的高效交付，深信服专门为虚拟桌面及远程应用程序设计并研制了SRAP协议。深信服自研的SRAP高效交付协议，采用高效流压缩、智能数据缓存、动态图像优化等多项优化技术，相对RDP协议提升6倍传输效率，最大程度保障用户桌面体验。
 
+# lsusb
+标准unix/linux下的grep通过下面參数控制上下文
+
+grep -C 5 foo file 显示file文件里匹配foo字串那行以及上下5行
+grep -B 5 foo file 显示foo及前5行
+grep -A 5 foo file 显示foo及后5行
+
+
+dmesg
+lsusb -v
+find /dev/bus
+lsusb -t
+12M 意味着 USB 1.0 / 1.1的速率是 12Mbit/s
+480M 意味着 USB 2.0的速率是 480Mbit/s
+如果你找到5.0G，那意味这你有USB 3.0类型接口。它有5.0Gbit/s的传输速率。
+
+
+
+
+
+
+
+
+
 
 
 

@@ -63,3 +63,32 @@ cat命令退出：ctrl+z
 网上邻居如何操作
 
 映射网络磁盘
+
+
+FileViewPro的创建是因为我们许多人每天都遇到挫折:没有安装正确的程序来打开文件。 因为这是一个常见的头痛问题，我们决定创建一个易于使用的程序，允许普通计算机用户用一个程序打开所有不同类型的文件。就这样，FileViewPro诞生了！
+
+什么是文件扩展名 BCF?
+首先 BCF 文件扩展是Business Card Designer Pro File为 Belltech Business Card Designer Pro 软件程序开发的 Belltech systems文件类型。 网站访问者分析表明，BCF 文件通常在 Windows 10 用户计算机上找到，在 Romania中最受欢迎。 统计上，这些用户很可能正在运行Google Chrome internet浏览器。
+
+
+# windows驱动编译
+使用WDK进行一键编译，20200322目前最新版是WDK10，这个一般要结合VS2015版本及以上使用。
+官网：https://docs.microsoft.com/zh-cn/windows-hardware/drivers/download-the-wdk
+
+一般安装WDK7.1或WDK7.0即可，安装时，全部选择安装。但是全部安装时，会提示安装.NET framework3.5（包括.NET framework2.0），由于电脑已经安装.NET framework4.5，不能再安装低版本的。仔细发现，可以撤销安装.NET framework2.0，并不影响使用，要仔细看，不要粗心大意。
+
+
+https://mp.weixin.qq.com/s/9zBoE80Cn_MDNuteF7vGkQ
+### [*fir.im* - 免费应用内测托管平台|iOS应用Beta测试分发|Android应用...](https://www.baidu.com/link?url=aw6N1ePQ3iDZHI3t6FOPoQQkDMEcCQqU9bMvJbXx2Ea&wd=&eqid=ad70804000018755000000065df86e5c)
+
+
+screen3
+叹号杀手
+旋风加速器
+
+我如果那天早上跑步了，那天手就不会出汗，所以就经常跑，但跑着跑着好像就没有什么效果了，空了好久没跑，昨晚我又去跑步了，今天手就没有出汗，
+
+
+linux虚拟机登录vdc会卡在加载中界面
+解决：升级火狐浏览器，vdc需要52+版本的火狐浏览器
+

@@ -8,6 +8,20 @@ MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 
 
 破解20.2软件：https://www.jianshu.com/p/fa5a2fac4148
 
+
+其他个性化设置
+打开Settings – Configuration 进行相关设置
+1）在Terminal下，如果需要鼠标右键快速复制粘贴，把“Paste using right-click”勾选上
+2）可以修改字体，字号
+3）自行选择喜欢的配色(Colors scheme)
+4）勾选Log terminal output to the following directory记录日志文件
+5）在Settings->Configuration->SSH下勾选SSH settings下面的SSH keepalive，防止自动退出。
+
+MobaTextEditor
+
+
+
+
 ## 2、xshell
 
 

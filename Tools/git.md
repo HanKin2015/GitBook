@@ -35,7 +35,7 @@ git update-git-for-windows   更新git客户端
 
 更多搜索“稀疏检出”。
 
-
+git log -p filename   注意-p参数必须在log后面
 
 ```
 稀疏检出恢复：

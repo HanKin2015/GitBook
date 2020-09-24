@@ -41,7 +41,44 @@ l1 = ttk.Label(text="Test", style="BW.TLabel")
 l2 = ttk.Label(text="Test", style="BW.TLabel")
 ```
 
-## tk
+## 5、pyinstaller无法打包图片到exe问题
+打包成功后，报failed execute script xxx错误。
+本来想打印日志来查错误，这也是最好的方法
+https://blog.csdn.net/sinat_27382047/article/details/81304065
+
+解决方案：将图片转换成编码保存到py文件里面，然后使用的时候导入py文件然后解码成图片。
+
+Python\Python38-32\Scripts\build路径下打包项目文件里的warn-XXX.txt文件，一打开发现很多包丢失了missing，然后各种百度找解决办法，改路径hooks和rthook文件，折腾了大半天并没有解决问题。实际上根本就不是missing包引起的。
+因为正常打包的文件可以使用的也同样有大量的missing包，例如我打包可以正常用的这个软件文件夹下同样有warn，实际上这都是误导。
+
+
+
+## 6、ftp连接几分钟后自动断开
+except ftplib.error_perm as err:
+
+数据库、FTP等连接在长时间不使用之后会自动断开，导致下次使用时尚未登录而直接进行操作，将会导致出错。
+
+原因
+FTP或数据库服务器设置了会话无操作的timeout，当无操作的时间大于这个值的时候，将会导致服务器将连接切断(connection reset by peer)
+
+解决
+方法一：将服务器的timeout值设置得更长或者禁止服务器自动切断连接
+方法二：曲线救国：在程序中使用一个定时任务或线程，每隔一段时间就向服务器发送一些无关紧要的请求使连接保持活跃，这样就不会超出timeout时间，因此就不会被服务器自动切断了。
+
+线程写个timeout心跳？看其他人说心跳不管用，由于ftp连接本身的超时时间就已经挺大了，所以超时后再重新连接吧。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

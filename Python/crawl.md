@@ -21,7 +21,22 @@ URL管理器：包括待爬取的URL地址和已爬取的URL地址，防止重�
 
 
 
+# 如何爬取网页表格数据
+https://www.zhihu.com/question/26385408
+爬山虎采集
+直接用pandas啊，简单方便selenium
+
+import pandas as pd
+data =pd.read_html(url)[0]
 
 
+gooseeker.com
 
+http://www.pa1pa.com
+
+使用requests + BeautifulSoup 使用简单。
+
+八爪鱼数据采集器
+
+使用requests+re的路线
 

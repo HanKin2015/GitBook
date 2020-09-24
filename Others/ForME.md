@@ -1,6 +1,11 @@
 [TOC]
 # 超越自己
 
+姓名：hejian
+自我介绍（读研时间、研究方向、论文发表情况、兴趣爱好）：I spent a good time as a graduate student in Wuhan University in 2017-2019, mainly do research on k-truss-based dense sub-graph community search, and my hobbies are singing, jumping, rap and basketball.
+目前所在地：changsha, hunan
+工作单位：sangfor
+联系电话：18712779076
 
 [全国组织机构统一社会信用代码公示查询平台](https://www.cods.org.cn/)
 

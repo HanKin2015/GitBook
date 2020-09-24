@@ -89,9 +89,43 @@ MB_YESNO、MB_HELP、MB_ICONWARNING、MB_ICONQUESTION、MB_ICONASTERISK、MB_OKC
 # 13、ImportError: no module named md5
 md5 is (from the python docs:) "deprecated since version 2.5: Use the hashlib module instead".
 
-# 14、pyinstaller无法打包图片到exe问题
-打包成功后，报failed execute script xxx错误。
-本来想打印日志来查错误，这也是最好的方法
+# 14、repr()函数
+https://blog.csdn.net/fate252/article/details/94576506
+```
+>>> print('123'.__repr__())
+'123'
+>>> print('123'.__str__())
+123
+```
+
+# 15、raise()函数
+因此，虽然程序中使用了 raise 语句引发异常，但程序的执行是正常的，手动抛出的异常并不会导致程序崩溃。
+
+# 16、startswith()方法
+```
+str = "this string example....wow!!!";
+print(str.startswith('str', 4, 10))
+print(str.startswith('is', 3, 8))
+print(str.startswith('is', 2, 8))
+print(str.startswith('this', 2, 4))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

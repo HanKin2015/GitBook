@@ -84,22 +84,159 @@ yum install ssh
 service sshd start
 ssh -p 50022 my@127.0.0.1
 
+# 5、文件基本属性
+chown (change ownerp) ： 修改所属用户与组。
+chmod (change mode) ： 修改用户的权限。
+文件类型+所有者权限+同组用户+其他用户
+[](https://www.runoob.com/wp-content/uploads/2014/06/file-llls22.jpg)
+chgrp：更改文件属组
+chown：更改文件属主，也可以同时更改文件属组
+
+[s]：当一个具有执行权限的文件设置 [s](SetUID) 权限后，用户执行这个文件时将以文件所有者的身份执行。
+[t]: 任何用户均可以往此目录写入文件，可以删除自己所创建的文件，root 自然有权限删除.
 
 
+rmdir（英文全拼：remove directory）：删除一个空的目录
+
+ls命令：ls -ld dir_name这样可以看文件夹详细信息，而不是文件夹里面的文件
+-d ：仅列出目录本身，而不是列出目录内的文件数据(常用)
+
+---
+- cat  由第一行开始显示文件内容
+- tac  从最后一行开始显示，可以看出 tac 是 cat 的倒着写！
+- nl   显示的时候，顺道输出行号！
+- more 一页一页的显示文件内容
+- less 与 more 类似，但是比 more 更好的是，他可以往前翻页！
+- head 只看头几行
+- tail 只看尾巴几行
 
 
+符号连接（Symbolic Link），也叫软连接
+ln -s 原文件 软链接文件
+ 1).删除符号连接f3,对f1,f2无影响；
+ 2).删除硬连接f2，对f1,f3也无影响；
+ 3).删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；
+ 4).同时删除原文件f1,硬连接f2，整个文件会真正的被删除。
+
+useradd –d  /home/sam -m sam
+usermod
+userdel
+groupadd
+groupdel
+groupmod
+如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限:newgrp
+cat /etc/passwd
+cat /etc/shadow
+newusers
+pwunconv
+chpasswd
+pwconv
+
+# 6、磁盘管理
+df：列出文件系统的整体磁盘使用量
+du：检查磁盘空间使用量
+fdisk：用于磁盘分区
+磁盘格式化：mkfs（mkfs -t ext3 /dev/hdc6）
+fsck（file system check）用来检查和维护不一致的文件系统。
+Linux 的磁盘挂载使用 mount 命令，卸载使用 umount 命令。
+在 Linux 中，可以使用 stat 命令查看某个文件的 inode 信息
+磁盘顺序读取时是从一个磁头换到另一个磁头（磁头不用移动位置），而不是由一个磁柱换到另一个磁柱。
+
+# 7、vi/vim
+所有的 Unix Like 系统都会内建 vi 文书编辑器，其他的文书编辑器则不一定会存在。
+因此，学好vi命令的重要性。
+
+如向下移动 30 行，可以使用 "30j" 或 "30↓" 的组合按键
+[Ctrl] + [f]	屏幕『向下』移动一页，相当于 [Page Down]按键 (常用)
+[Ctrl] + [b]	屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)
+n<space>	按下数字后再按空格键，光标会向右移动这一行的 n 个字符。
+0 或功能键[Home]	这是数字『 0 』：移动到这一行的最前面字符处 (常用)
+$ 或功能键[End]	移动到这一行的最后面字符处(常用)
+G	移动到这个档案的最后一行(常用)
+nG	n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行(可配合 :set nu)
+gg	移动到这个档案的第一行，相当于 1G 啊！ (常用)
+n<Enter>	n 为数字。光标向下移动 n 行(常用)
+
+搜索关键字：/和？
+
+vim 是一个程序开发工具而不是文字处理软件
+~表示没有任何东西
+
+:1,$s/word1/word2/gc 或 :%s/word1/word2/gc	从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2 ！且在取代前显示提示字符给用户确认 (confirm) 是否需要取代！(常用)
+
+p 为将已复制的数据在光标下一行贴上，P 则为贴在游标上一行
+u	复原前一个动作。(常用)
+[Ctrl]+r	重做上一个动作。(常用）
+想要重复删除、重复贴上等等动作，按下小数点『.』就好了！ (常用)
+
+ZZ	这是大写的 Z 喔！如果修改过，保存当前文件，然后退出！效果等同于(保存并退出)
+ZQ	不保存，强制退出。效果等同于 :q!。
 
 
+## 8、vim 中批量添加注释
+
+方法一 ：块选择模式
+
+批量注释：
+
+Ctrl + v 进入块选择模式，然后移动光标选中你要注释的行，再按大写的 I 进入行首插入模式输入注释符号如 // 或 #，输入完毕之后，按两下 ESC，Vim 会自动将你选中的所有行首都加上注释，保存退出完成注释。
+
+取消注释：
+
+Ctrl + v 进入块选择模式，选中你要删除的行首的注释符号，注意 // 要选中两个，选好之后按 d 即可删除注释，ESC 保存退出。
+
+方法二: 替换命令
+
+批量注释。
+
+使用下面命令在指定的行首添加注释。
+
+使用名命令格式： :起始行号,结束行号s/^/注释符/g（注意冒号）。
+
+取消注释：
+
+使用名命令格式： :起始行号,结束行号s/^注释符//g（注意冒号）。
+
+例子：
+
+1、在 10 - 20 行添加 // 注释
+
+:10,20s#^#//#g
+2、在 10 - 20 行删除 // 注释
+
+:10,20s#^//##g
+3、在 10 - 20 行添加 # 注释
+
+:10,20s/^/#/g
+4、在 10 - 20 行删除 # 注释
+
+:10,20s/#//g
+
+## 9、yum
+yum（ Yellow dog Updater, Modified）是一个在 Fedora 和 RedHat 以及 SUSE 中的 Shell 前端软件包管理器。基于 RPM 包管理
+
+网易（163）yum源是国内最好的yum源之一 
+http://mirrors.163.com
+中科大的 yum 源，安装方法查看：https://lug.ustc.edu.cn/wiki/mirrors/help/centos
+
+sohu 的 yum 源安装方法查看: http://mirrors.sohu.com/help/centos.html
 
 
+对于 Linux 软件安装时提示缺失库的，可以使用 yum 的 provides 参数查看 libstdc++.so.6 的库文件包含在那个安装包中只需要执行：
 
+yum provides libstdc++.so.6
 
+## 10、apt
+apt（Advanced Packaging Tool）是一个在 Debian 和 Ubuntu 中的 Shell 前端软件包管理器。
 
+安装 mplayer 如果存在则不要升级：
+sudo apt install mplayer --no-upgrade
 
+查看 pinta 包的相关信息：
+apt show pinta
 
-
-
-
+清理不再使用的依赖和库文件：
+sudo apt autoremove
 
 
 

@@ -8,8 +8,36 @@ JupyterLab作为一种基于web的集成开发环境，你可以使用它编写n
 
 ## 2、jupyter lab
 ### 安装
+注意conda的安装。
 ```
 pip install jupyterlab
 conda install -c conda-forge jupyterlab
 ```
+
+- 界面变得更加美观，使用F11全屏达到更好的效果
+
+
+
+
+
+
+
+
+
+
+
+
+## 3、Grid studio
+一个界面上同时展示可视化表格与代码，而且同时通过表格与代码修改数据，这不就是 Python 与 Excel 的结合吗？
+
+### 安装
+```
+git clone https://github.com/ricklamers/gridstudio
+cd gridstudio && ./run.sh
+```
+
+
+
+
+
 
