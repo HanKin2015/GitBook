@@ -105,6 +105,7 @@ public slots:  //注意slots声明需要修饰符private或其他
     void testButtonClickedSlot();
 ```
 
+对于添加参数
 
 
 # 4、字体大小加粗

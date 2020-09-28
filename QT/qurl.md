@@ -5,9 +5,9 @@
 # 查询资料
 
  **分析：**在qt中实现web显示，根据qt的版本和对应编译器的版本，有如下选择：
-(1)5.6以下的版本，基于QtWebkit
+(1)5.6以下的版本，基于QtWebkit。但Qt5.6以后，移除了QtWebkit这个组件。
 (2)5.6以上的MSVC版本，移除了QtWebkit 模块，可采用基于 Chromium 的浏览器引擎 Qt WebEngine
-(3)5.6以上的mingw 版本，没有Qt WebEngine ，只能采用QAxWidget 控件 
+(3)5.6以上的mingw 版本，由于移除了QtWebkit，mingw版本不能使用QtWebEngine，只能采用QAxWidget 控件 
 
 5.9及以上版本是进行了整合，软件包会很大。
 

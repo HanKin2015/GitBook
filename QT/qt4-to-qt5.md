@@ -41,7 +41,7 @@ Summary:
 
 QT5.8.0+MSVC2015安装以及环境配置（不需要安装VS2015）]( https://blog.csdn.net/snow_rain_1314/article/details/82929322 )
 
-可以不完全安装vs，只使用其中的c++环境即可
+可以不完全安装vs，只使用其中的c++环境即可。
 
 
 
