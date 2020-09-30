@@ -111,11 +111,11 @@ Qt窗体设置Qt::WA_TranslucentBackground
 
 
 # 10、vs2015安装时提示“安装包丢失或损坏”解决办法
+https://blog.csdn.net/qq_19307465/article/details/87869639
+
 
 # 11、Electron使用快速入门
-
  https://baijiahao.baidu.com/s?id=1622258269985547290&wfr=spider&for=pc 
-
  https://cloud.tencent.com/developer/doc/1070 
 
 跨越平台桌面应用开发框架electron使用的心路历程

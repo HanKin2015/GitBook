@@ -19,7 +19,14 @@ chmod +x test.sh
 - 只读变量：变量定义后换行readonly your_name
 - 使用 unset 命令可以删除变量， 不能删除只读变量
 
+## 3、bash上一步参数
+!^
+!$
+!:1
 
+强大如斯的：ctrl + r
+
+## 4、
 
 
 

@@ -133,12 +133,17 @@ switch(expression){
  **switch** 语句中的 **expression** 必须是一个整型或枚举类型，或者是一个 class 类型，其中 class 有一个单一的转换函数将其转换为整型或枚举类型。 
 
 
+## error: cast from 'void*' to 'int' loses precision
 
 
+博饼
+博饼(跋饼)，起源于福建泉州府同安县（今福建厦门地区），是闽南地区特有的由饼文化外延的一种传统民俗活动。 [1] 
+2019年11月，《国家级非物质文化遗产代表性项目保护单位名单》公布，中秋民俗文化研究会获得中秋博饼项目保护单位资格。
 
-
-
-
+## 去掉warning：cast to pointer from integer of different size（从不同大小的整数转化为指针）
+如何去掉warning呢,
+(void*)(long)virt_to_bus(yuv_frames)
+这样warning就去掉
 
 
 

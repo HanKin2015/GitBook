@@ -37,7 +37,7 @@ ip addr
 
 
 
-unzip *.zip -d 解压到的文件夹
+
 
 
 

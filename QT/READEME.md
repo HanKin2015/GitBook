@@ -27,6 +27,31 @@ http://c.biancheng.net/view/3851.html
 MinGW版本可以在qt安装包直接安装所需的编译环境，但是msvc版本不行，必须另外安装vs编译环境。
 电脑上安装了vs2015x86版本的软件，无奈qt5.14.2最低要求是vs2015x64版本和vs2017x86_x64版本高了和低了都不行。
 
+## 运行vs2015发现无法创建c++项目
+你十有八九是点击了blend for vs2015图标了，我一开始也给整懵逼，怪只怪在win10装好vs2015，快捷访问里只出现一个blend版本的vs，到所有程序里找真正的vs2015入口吧
+
+blend那个是设计UI的。vs在XAML的高级UI设计上功能有缺失，blend多了些东西。
+
+## Qt错误: 程序数据库管理器不匹配 请检查安装
+到D:\VisualStudio2015\VC\bin目录下面拷贝mspdbsrv.exe、mspdb140.dll、mspdbcore.dll、mspdbst.dll到D:\VisualStudio2015\Common7\IDE下面，或者到D:\VisualStudio2015\Common7\IDE目录下面拷贝mspdbsrv.exe、mspdb140.dll、mspdbcore.dll、mspdbst.dll到D:\VisualStudio2015\VC\bin下面，总之就是让这两个文件夹中同时含以上四个文件（如下图）。重Qt启即可。
+
+## TLS
+安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。
+该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
+
+## 安装msvc版本后kit出现黄色感叹号
+鼠标放在上面可以看见提示，根据提示安装相关插件，可能是Windows SDK未安装啥的。
+
+
+
+
+
+
+
+
+
+
+
 
 
 

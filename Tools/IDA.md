@@ -15,6 +15,7 @@ expire到期
 软件安装包：链接：https://pan.baidu.com/s/1GKAfmtQB6IlclPIfAqHPrQ 提取码：wggb
 
 ## 1、示例程序
+https://www.cnblogs.com/endv/p/6847843.html
 ```test.cpp
 #include <stdio.h>
 
@@ -54,14 +55,19 @@ Open strings window: 打开字符串显示窗口，会列出程序中的所有�
 
 
 
-
-
-
+### 3、反汇编常用功能
 IDA Pro切换图形或代码模式
 1、空格
-
 2、右键选择Text View/Graph View切换
 
+
+安装完成后有32位和64位，如果需要反编译出C代码需要对应版本。
+- load a new file直接点击ok即可。
+- view->open subviews->strubgs
+- ctrl+f搜索相应的字符串
+- 双击搜索结果
+- 选择db前面的变量右键jump to xref to operand....
+- F5一键搞定反编译成C代码。
 
 
 
