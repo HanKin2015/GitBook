@@ -1,4 +1,4 @@
-# 基本操作及模板
+# qt软件打包
 
 ## 1、qt+c语言打包成单个exe文件
 - 将现有的项目在QT Creater中用release方式编译成test.exe

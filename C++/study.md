@@ -183,10 +183,11 @@ apt install xorg-xserver
 
 这个错误其实是因为某结构体或联合的字段名所指的变量定义的头文件没有引入到当前Ｃ代码中而造成的错误，只要找到出错对应的变量的结构体或联合的定义的头文件，并把这些头文件包含进来即可解决此问题；
 
+# 10、无法启动此程序，因为计算机中丢失 api-ms-win-crt-runtime-l1-1-0.dll 的解决办法
 
+安装Visual C++ Redistributable for Visual Studio 2015 组件
 
-
-
+Redistributable：可再发行
 
 
 
