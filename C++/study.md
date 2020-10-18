@@ -189,8 +189,15 @@ apt install xorg-xserver
 
 Redistributable：可再发行
 
+# 11、关于Linux下C编译错误（警告）cast from 'void*' to 'int' loses precision
+char *ptr;  //此后省略部分代码    
+if( (int)ptr==-1 )  //出错地方  
+那句话的意思是从 void* 到 int 的转换丢失精度，相信看到解释有些人就明白了，
+此问题只会出现在X64位的Linux上，因为在64位的机器上指针占用8个字节，int 占用四个字节，所以才会出现这样的问题，
 
+解决方法：
 
+（long）ptr == -1 就好了
 
 
 

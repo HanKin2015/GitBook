@@ -9189,7 +9189,7 @@ git clean -df
 
 
 
-## mintty.exe.stackdump文件
+# 14、mintty.exe.stackdump文件
 
 关于Git bash在win10重装系统情况下闪退并生成mintty.exe.stackdump文件的问题
 
@@ -9199,7 +9199,7 @@ git clean -df
 
 
 
-# 哭笑不得：git branch -a看不见一个分支
+# 15、哭笑不得：git branch -a看不见一个分支
 
 如果是下载项目就不要使用`git init test && cd test`初始化。
 
@@ -9207,11 +9207,14 @@ git clean -df
 
 由于先前init初始化后，导致没有进入项目的文件夹中，使用git branch -a看不见任何分支。
 
+# 16、git pull和git fetch区别
+git pull看起来像git fetch+get merge
+![](https://pic1.zhimg.com/80/v2-af3bf6fee935820d481853e452ed2d55_720w.jpg?source=1940ef5c)
+pull=fetch+merge，pull的话，下拉远程分支并与本地分支合并。fetch只是下拉远程分支，怎么合并，可以自己再做选择。
 
-
-
-
-
+# 17、远程分支（本地已有）内容更新，同步到本地
+git pull不行，只能更新分支数量及存在与否
+git pull origin 分支名
 
 
 

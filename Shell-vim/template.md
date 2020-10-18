@@ -2,15 +2,14 @@
 # shell脚本模板
 
 # 1、目标
-- 指定执行的shell命令
-- 判断输入参数，包括切割
 - 帮助参数说明
+- 判断脚本运行时输入参数，包括切割
 - Linux命令执行
 - 命令执行是否成功判断
 - Linux命令执行后对结果进行切割
 - 函数的使用
-- 
-
+- 输入输出
+- 调用其他shell脚本
 
 
 # 2、容易犯的错
@@ -19,6 +18,47 @@
 - 中括号左右两边要有空格
 
 # 3、题目要求
+要写一个神马脚本呢？？？
+先把基本功能实现了，再来进行完善。
+
+帮助参数说明：usage()
+输入参数：是否从文件读取ip还是手动输入ip（-f ip_addr_filename）
+
+
+## 文件
+- ip_addr.txt
+- result.txt
+- ping_ip.sh
+
+
+```
+#!/bin/bash
+
+# 变量定义
+path=`pwd`
+echo $path
+
+# 版本信息
+version()
+{
+	echo "version: 1.0"
+}
+
+# 用法说明
+usage()
+{
+	cat << EOF
+		Usage: $0 [options] [directroy]
+		Options:
+			-h, 	显示帮助信息
+			-V,	显示当前脚本版本信息
+			-f file,	从文件读取ip地址
+		Examples:
+			$0 -f ip_addr.txt
+	EOF
+}
+
+```
 
 
 
@@ -37,6 +77,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+# set命令
+set -x与set +x指令用于脚本调试
+set -x 开启 
+set +x关闭（默认）
+
+你写的每个脚本都应该在文件开头加上set -e,这句语句告诉bash如果任何语句的执行结果不是true则应该退出。
+这样的好处是防止错误像滚雪球般变大导致一个致命的错误，而这些错误本应该在之前就被处理掉。如果要增加可读性，可以使用set -o errexit，它的作用与set -e相同。
+set -e
+set +e
 
 # shell
 

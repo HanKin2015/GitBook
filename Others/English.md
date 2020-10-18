@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+prune：修剪
 toggle：切换
 plugin：插件
 captcha：验证码

@@ -11,7 +11,9 @@ TeamViewer->其他->选项->高级->
 ## 2、Windows自带的远程桌面工具
 mstsc
 
-
+scons
+autoconfig
+so
 
 
 
