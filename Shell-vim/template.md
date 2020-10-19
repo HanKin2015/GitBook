@@ -16,6 +16,8 @@
 
 - 等号左右两边不能有空格
 - 中括号左右两边要有空格
+- 字符串中使用变量值时必须使用双引号
+- 变量调用时建议使用大括号圈起来
 
 # 3、题目要求
 要写一个神马脚本呢？？？
@@ -58,6 +60,8 @@ usage()
 	EOF
 }
 
+
+
 ```
 
 
@@ -83,9 +87,33 @@ usage()
 
 
 
+# 读取文件
+```
+#!/bin/bash
 
+while read line
+do
+    echo $line
+done < test.txt
 
+cat test.txt | while read line
+do
+    echo $line
+done
 
+for line in `cat  test.txt`
+do
+    echo $line
+done
+```
+
+# 保存文件
+使用>是覆盖保存到文件
+使用>>是追加保存到文件
+
+# 注释或者cat输出重定向
+EOF或者EOT都可以，并不是需要指定什么字符串。
+注意：最后的结束字符一定要在最左边，能缩进。
 
 # set命令
 set -x与set +x指令用于脚本调试

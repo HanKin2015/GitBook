@@ -5,7 +5,9 @@
 # 0、以游戏的方式学习
 游戏叫VIM Adventures[https://vim-adventures.com/]
 
+官方教程：使用命令vimtutor
 
+https://mp.weixin.qq.com/s/SeeJ3N9zGwrjQKTKM6ze7w
 
 # 1、tab键
 
