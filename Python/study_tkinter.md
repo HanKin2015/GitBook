@@ -69,7 +69,18 @@ FTP或数据库服务器设置了会话无操作的timeout，当无操作的时�
 
 
 
+记事本参考：https://blog.csdn.net/lys_828/article/details/105380540
 
+## 7、解决from PIL import ImageTk问题
+注意细节，继承的类错误，找了半天网络答案。
+
+## 8、python3tkinter去掉边框
+```
+import tkinter as tk
+root = tk.Tk()
+root.overrideredirect(True)
+root.mainloop()
+```
 
 
 

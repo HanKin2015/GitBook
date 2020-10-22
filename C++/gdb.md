@@ -66,6 +66,55 @@ Program received signal SIGSEGV, Segmentation fault.
 (gdb) quit
 ```
 
+# 4、GDB：调试死锁
+## 4-1、参考
+https://blog.csdn.net/guowenyan001/article/details/46238355
+
+## 4-2、编译运行
+编译程序：gcc -g test.c -lpthread -o test
+-g：添加调试符号表
+-lpthread：解决线程函数定义
+
+两个终端窗口，一个负责程序运行，另一个负责调试。
+
+## 4-3、查看进程号
+ps aux|grep test
+ps -ef|grep test
+
+## 4-4、查看进程中所有线程(查看线程号)
+pstree -p 123
+
+## 4-5、通过线程号调试
+gdb
+attach 线程号
+bt
+
+## 4-6、调试所有线程
+gdb
+attach 进程号
+thread apply all bt
+
+## 4-7、常用调试方法
+ps -e|grep test
+gdb test 进程号   启动gdb attach 进程
+info threads        显示所有线程信息
+thread 2              调到第2个线程
+bt                        查看第2个线程的堆栈，即可可以看到线程死锁的地方
+
+注意：这种方式需要正确指定test执行文件的路径位置，否则会出现无法找到符号表错误。
+
+## 5、总结
+gdb调试只是找到程序出现异常的位置，具体问题原因还是需要结合代码查看问题关键所在。
+
+
+
+
+
+https://developer.aliyun.com/mirror/
+
+
+
+
 
 
 

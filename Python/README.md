@@ -52,6 +52,14 @@ you-get --output-dir %outputdir% %proxy% "%*"
 ## 使用pip和conda安装软件时注意
 Linux都有个问题，首先需要做的事情是更新安装脚本命令
 
+## 资料
+https://blog.csdn.net/lys_828/article/list/2?t=1
+阿里巴巴淘宝镜像网站：
+
+
+
+
+
 
 
 

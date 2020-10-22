@@ -2,6 +2,9 @@
 
 [TOC]
 
+配置文件：.vimrc
+ps://blog.csdn.net/qq_41113081/article/details/1001
+
 # 0、以游戏的方式学习
 游戏叫VIM Adventures[https://vim-adventures.com/]
 
@@ -57,20 +60,20 @@ u		   返回上次修改
 隐藏行号：输入:set nonu
 
 
-### 多行注释
+### 6-1、多行注释
 - 先ctrl+v选择需要注释的行
 - shift+i
 - 输入注释符号//
 - 连续按两次esc
 
-### vim中的高亮全部同样单词的方法
+### 6-2、vim中的高亮全部同样单词的方法
 用vim时，想高亮显示一个单词并查找的方发。将光标移动到所找单词.
 1: shift + "*"  向下查找并高亮显示
 2: shift + "#"  向上查找并高亮显示
 3: "g" + "d"    高亮显示光标所属单词。"n" 查找。
 取消高亮：输入:noh
 
-### 设置高亮行和列有两种方式进行设置
+### 6-3、设置高亮行和列有两种方式进行设置
 ```
 set cursorcolumn
 set cursorline
@@ -89,7 +92,7 @@ shift+enter组合在编辑文字中是否换行
 
 
 
-## Vim光标定位
+## 7、Vim光标定位
 https://www.cnblogs.com/dytl/p/3830838.html
 
 *定位到指定行n: 

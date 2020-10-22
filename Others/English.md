@@ -1,6 +1,8 @@
 # 英语学习
 
 ```
+uyghur：维吾尔族
+purchasing：采购，购买
 prune：修剪
 toggle：切换
 plugin：插件

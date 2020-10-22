@@ -146,7 +146,16 @@ switch(expression){
 这样warning就去掉
 
 
+## 没有包含头文件unistd.h
+```
+close’ was not declared in this scope
+‘read’ was not declared in this scope
+‘sysconf’ was not declared in this scope
+```
+没有包含头文件 unistd.h 造成的。
 
+加上
+> #include <unistd.h>
 
 
 
