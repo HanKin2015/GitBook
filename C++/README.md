@@ -71,7 +71,7 @@ void sleep（）
 
 
 
-## 6、memset
+## 6、结构体使用memset初始化
 
 像结构体使用地址符号：
 
@@ -104,17 +104,13 @@ int main()
 ```
 
 ## 8、错误： 程序中有游离的‘\xxx’
-
-  这个错误一般是由于你程序（a.c）中使用了中文的标点符号，比如；，｝，＋。改成英文的就行了。甚至有时候空格也会出现类似错误，删掉该空格 重新输入。如果找不出来，解决的办法就是关闭中文输入法然后把有错这一行重新敲一遍。 
-
-
+这个错误一般是由于你程序（a.c）中使用了中文的标点符号，比如；，｝，＋。改成英文的就行了。甚至有时候空格也会出现类似错误，删掉该空格 重新输入。如果找不出来，解决的办法就是关闭中文输入法然后把有错这一行重新敲一遍。 
 
 我的原因是：#define MAX_CNT 8   最大数量
-
 错误提示地方是MAX_CNT使用的地方，实际是宏定义注释未//
+宏定义必须换行定义
 
 ## 9、switch里面的参数只能是整型变量
-
 ```
 switch(expression){
     case constant-expression  :
@@ -132,21 +128,17 @@ switch(expression){
 
  **switch** 语句中的 **expression** 必须是一个整型或枚举类型，或者是一个 class 类型，其中 class 有一个单一的转换函数将其转换为整型或枚举类型。 
 
+## 10、error: cast from 'void*' to 'int' loses precision
 
-## error: cast from 'void*' to 'int' loses precision
 
 
-博饼
-博饼(跋饼)，起源于福建泉州府同安县（今福建厦门地区），是闽南地区特有的由饼文化外延的一种传统民俗活动。 [1] 
-2019年11月，《国家级非物质文化遗产代表性项目保护单位名单》公布，中秋民俗文化研究会获得中秋博饼项目保护单位资格。
-
-## 去掉warning：cast to pointer from integer of different size（从不同大小的整数转化为指针）
+## 11、去掉warning：cast to pointer from integer of different size（从不同大小的整数转化为指针）
 如何去掉warning呢,
 (void*)(long)virt_to_bus(yuv_frames)
 这样warning就去掉
 
 
-## 没有包含头文件unistd.h
+## 12、没有包含头文件unistd.h
 ```
 close’ was not declared in this scope
 ‘read’ was not declared in this scope
@@ -157,7 +149,7 @@ close’ was not declared in this scope
 加上
 > #include <unistd.h>
 
-
+13、
 
 
 

@@ -199,6 +199,26 @@ if( (int)ptr==-1 )  //出错地方
 
 （long）ptr == -1 就好了
 
+# 12、function declaration isn't a prototype解决办法
+在网上查到解决办法是：即使函数括号内没有任何参数，也要加一个void类型，来避免这种warning。
+如：int func(); ==> int func(void);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

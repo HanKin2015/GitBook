@@ -19,7 +19,9 @@ MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 
 
 MobaTextEditor
 
-
+### 如何设置MobaXterm内鼠标右键粘贴的快捷键
+Settings-》Terminal-》找到Paste using right-click,选择打钩，然后点ok。
+只有新打开的窗口才能生效。
 
 
 ## 2、xshell

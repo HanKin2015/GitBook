@@ -1,6 +1,8 @@
 [TOC]
 # c语言编译器
 
+建议使用codeblocks。
+
 # 1、c-free5
 ## 1-1、安装
 官网：http://www.programarts.com/cfree_ch/
@@ -12,7 +14,7 @@
 电子邮件：quart@163.com
 注册码：2NnUqd3shO2agta0xNjcusfK1LXO
 ```
-
+缺点：差编译器、支持的编译标准少
 
 
 ## 1-2、配置
@@ -42,17 +44,56 @@ c-free配置c++11，呵呵，配置了半天没有配置成功。提示语法错
 # 2、dev-cpp
 让Dev C++支持C++11](https://blog.csdn.net/u011500062/article/details/44628441)
 
-
+缺点：支持的编译标准少
 
 # 3、codeblocks
 https://www.fosshub.com/Code-Blocks.html?dwl=codeblocks-20.03-setup.exe
-
-
 
 C语言初学者，在电脑性能足够的情况下，VS2017，codeblocks，devcpp如何选择？
 这三个都不是编译器。所以没法在这三个之内选择出编译器。
 性能如果不是问题，那首选VS2017。codeblocks的debug能力有所不足。devcpp早已停止正式维护。
 
+
+安装codeblocks时建议安装带有编译环境的版本。
+
+## 3-1、使用新出的JetBrains Mono字体时不时出现报错弹框
+参考：https://my.oschina.net/wwfifi/blog/4282989
+修改：%USERPROFILE%\AppData\Roaming\CodeBlocks\default.conf
+
+搜索FONT
+修改其中第二项数字为整数，如原先的13.8被我修改为13.
+
+```
+	<FIND_LATIN2 bool="0" />
+	<USE_SYSTEM bool="1" />
+</default_encoding>
+<ZOOM int="7" />
+<FONT>
+	<str>
+		<![CDATA[1;13;-23;0;0;0;400;0;0;0;0;3;2;1;49;JetBrains Mono]]>
+	</str>
+</FONT>
+<AUTO_INDENT bool="1" />
+<SMART_INDENT bool="1" />
+<BRACE_COMPLETION bool="1" />
+```
+
+## 3-2、引入自定义封装的头文件
+结果报错：
+
+正确方式：建立项目，在项目中使用，可以明显看到编译过程，会先编译头文件为链接文件xxx.o。
+https://blog.csdn.net/nzjdsds/article/details/85617006
+
+
+## 3-3、error: stray '\343' in program
+这个常见，一般从网上直接拷贝代码来运行，会有一些编码错误，对出现错误的行重新编写即可。
+
+## 3-4、error: invalid conversion from 'const char*' to 'char*' [-fpermissive]|
+如：string s = "abc";
+    char* c = s.c_str();
+
+这时会报错：invalid conversion from `const char*' to `char*'
+解决方法： char* c = const_cast<char *>(s.c_str());
 
 # 4、gcc编译器
 c++支持foreach语句在c++11，所以必须要有高版本的编译器。
