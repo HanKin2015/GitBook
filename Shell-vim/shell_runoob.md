@@ -96,6 +96,22 @@ EOF 也可以使用其他符号:
 ```
 
 ## 7、Linux 的字符串截取很有用
+```
+#!/bin/bash
+# 字符串截取（界定字符本身也会被删除）
+str="www.runoob.com/linux/linux-shell-variable.html"
+echo "str    : ${str}"
+echo "str#*/    : ${str#*/}"   # 从 字符串开头 删除到 左数第一个'/'
+echo "str##*/    : ${str##*/}"  # 从 字符串开头 删除到 左数最后一个'/'
+echo "str%/*    : ${str%/*}"   # 从 字符串末尾 删除到 右数第一个'/'
+echo "str%%/*    : ${str%%/*}"  # 从 字符串末尾 删除到 右数最后一个'/'
+echo
+echo "str#/*    : ${str#/*}"   # 无效果
+echo "str##/*    : ${str##/*}"  # 无效果
+echo "str%*/    : ${str%*/}"   # 无效果
+echo "str%%*/    : ${str%%*/}"  # 无效果
+```
+
 有八种方法。
 假设有变量 var=http://www.aaa.com/123.htm
 
@@ -189,6 +205,20 @@ read -p "input b val:" b    #获取键盘输入的 b 变量数字
 r=$[a+b]                    #计算a+b的结果 赋值给r  不能有空格
 echo "result = ${r}"        #输出显示结果 r
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -120,8 +120,8 @@ bt                        查看第2个线程的堆栈，即可可以看到线�
 注意：这种方式需要正确指定test执行文件的路径位置，否则会出现无法找到符号表错误。
 
 # 5、获取程序中的变量值并对其修改重新运行
-
-
+print
+set
 
 
 
@@ -130,7 +130,32 @@ gdb调试只是找到程序出现异常的位置，具体问题原因还是需�
 https://developer.aliyun.com/mirror/
 
 
+```
+#include <iostream>
+#include <cassert>
+#include <cstdlib>
+using namespace std;
 
+bool judge(int n)
+{
+    assert(n > 0);
+    if (n > 5) return true;
+    return false;
+}
+
+int main(int argc, char *argv[])
+{
+    if (argc != 2) {
+        cout << "argument error!" << endl;
+        return -1;
+    }
+    cout << "is larger than 5?" << endl;
+    bool ret = judge(atoi(argv[1]));
+    cout << boolalpha << ret << endl;
+    long val = 5 / 0;
+    return 0;
+}
+```
 
 
 
