@@ -12058,6 +12058,20 @@ ssh-keygen -t rsa -C "邮件地址"
 
 当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码（推荐），直接提交到github上了。
 
+# git cherry-pick教程
+
+http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
+
+手动版：
+git dfii commitHash1 commitHash2 > 123.patch
+git apply --reject 123.patch
+
+
+
+
+
+
+
 
 
 

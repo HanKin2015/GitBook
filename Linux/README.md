@@ -62,6 +62,12 @@ apt-get -y install这个指令则是跳过系统提示，直接安装。
 
  DHCP（动态主机配置协议）是一个局域网的网络协议。指的是由服务器控制一段lP地址范围，客户机登录服务器时就可以自动获得服务器分配的lP地址和子网掩码。默认情况下，DHCP作为Windows Server的一个服务组件不会被系统自动安装，还需要管理员手动安装并进行必要的配置。 
 
+# chroot: failed to run command ‘/bin/bash’: No such file or directory
+可以看下需要chroot的文件夹下bash命令的依赖
+ldd ./dir/bin/bash
+
+结果发现并不是一个可以chroot的目录。
+
 
 
 
