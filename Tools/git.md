@@ -12067,8 +12067,26 @@ git dfii commitHash1 commitHash2 > 123.patch
 git apply --reject 123.patch
 
 
+# LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master' 
+remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a manual "git lfs push --all".
 
+无解，只能重新创建本地仓库。
 
+出现这种情况有3种原因：
+
+- 如果这些文件是你从别处克隆过来的，说明源头就不对，或者你克隆的方式不对，或者网络出错了；
+- 如果这些文件是你在本地新增的，说明.git目录下有些文件被你误删了；
+- 如果这些文件是你在本地新增的，但是是从别处目录拷贝过来的，你有可能拷贝的是git lfs pointer文件，这些文件会出发git lfs命令的bug，也就是文件被添加了，但.git下没有，也就遇到了上述git lfs fsck输出的错误。
+
+# git 查看最近或某一次提交修改的文件列表相关命令整理。
+git log --name-status 每次修改的文件列表, 显示状态
+git log --name-only 每次修改的文件列表
+git log --stat 每次修改的文件列表, 及文件修改的统计
+git whatchanged 每次修改的文件列表
+git whatchanged --stat 每次修改的文件列表, 及文件修改的统计
+git show 显示最后一次的文件改变的具体内容
+git show -5 显示最后 5 次的文件改变的具体内容
+git show commitid 显示某个 commitid 改变的具体内容
 
 
 

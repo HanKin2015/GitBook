@@ -6,7 +6,7 @@
 
 MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 数、SSH tunnels 数和其他一些定制化配置外限制外，免费版在终端底部还多了一个 “UNREGISTERED VERSION” 提示。
 
-破解20.2软件：https://www.jianshu.com/p/fa5a2fac4148
+破解MobaXterm20.2软件方法步骤：https://www.jianshu.com/p/fa5a2fac4148
 
 
 其他个性化设置
