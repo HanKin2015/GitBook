@@ -9,17 +9,6 @@
 
 
 # 2、爬取百度百科
-## 头文件
-```
-import  requests
-import  bs4
-import time
-```
-
-## 基本框架模板
-```
-
-```
 
 
 
