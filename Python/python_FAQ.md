@@ -22,6 +22,75 @@ SocketServer.ForkingMixIn 替换为 SocketServer.ThreadingMixIn
 # 4、靶场测试
 靶场测试，即 range test，指的是对武器弹药的技术性能作各种测试验证，与药物的临床试验一样，都是在最终产品交付前的一项关键性测试。
 
+# 5、dataframe插入空行
+```
+    analysis_result = pd.DataFrame(columns=['对应栋号', '出售状态', '总共数量', '100平方', '124平方', '142平方'])
+    for sheet_name in sheet_names:
+        sold_list, unsold_list, rate_list = analysis_house_sold(data)
+        
+        sold_list.insert(0, '全部')
+        sold_list.insert(0, sheet_name)
+        unsold_list.insert(0, '未售')
+        unsold_list.insert(0, sheet_name)
+        rate_list.insert(0, '去化率')
+        rate_list.insert(0, sheet_name)
+        nan_list = [np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN]
+        
+        df = pd.DataFrame([sold_list, unsold_list, rate_list, nan_list], columns=analysis_result.columns)
+        analysis_result = analysis_result.append(df, ignore_index=True)
+        print(analysis_result)
+```
+
+# 6、将小数转换为半分数字符串
+```
+sold_cnt = data.shape[0]
+unsold_cnt = unsold_data.shape[0]
+rate = (sold_cnt - unsold_cnt) / sold_cnt
+rate = format(rate, '.2%')	# 保留两位小数
+print(rate)
+```
+
+# 7、python调用python文件使用
+```main.py
+from slave import var
+from slave import func
+
+print('var = ', var)
+print('10 + 20 = ', func(10, 20))
+```
+
+```
+var = 12345
+def func(a, b):
+    return a + b
+```
+
+运行结果：
+```
+var = 12345
+10 + 20 = 30
+```
+
+# 8、python的import并不能将其py文件中的库文件import进来
+
+# 9、class类的继承和重写函数
+```
+#父类
+class Animal(object):
+    def run(self):
+        print("animal running-----")
+ 
+#子类
+class Cat(Animal):
+	# 重写
+    def run(self):
+        print("cat running-----")
+```
+
+# 10、
+
+
+
 
 
 
