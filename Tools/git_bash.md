@@ -10,9 +10,10 @@ git bash是一个不错的Linux终端，可以在Windows下畅所欲言的使用
 
 这样就无需再去安装其他Linux终端，如。
 
-
-
-
+## 升级更新
+输入：git update-git-for-windows
+国内镜像站下载：https://github.com/waylau/git-for-win
+https://npm.taobao.org/mirrors/git-for-windows/
 
 
 

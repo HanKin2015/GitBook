@@ -87,13 +87,93 @@ class Cat(Animal):
         print("cat running-----")
 ```
 
-# 10、
+# 10、数组转list
+ndarray.tolist()
 
+# 11、Python中有没有类似c语言中#define的功能？
+首先python是动态语言，不用声明变量的类型所以  #define uchar unsigned char  这个没有。#define a x-y在python 中，简单粗暴的 a = x-y
+>>> total = lambda x, y: x+y
+>>> total(3, 5)8
 
+# 12、tkinter鼠标点击事件
+各种点击事件
+事件一览表
+事件	代码	备注
+鼠标左键单击按下	1/Button-1/ButtonPress-1	 
+鼠标左键单击松开	ButtonRelease-1	 
+鼠标右键单击	3	 
+鼠标左键双击	Double-1/Double-Button-1	 
+鼠标右键双击	Double-3	 
+鼠标滚轮单击	2	 
+鼠标滚轮双击	Double-2	 
+鼠标移动	B1-Motion	 
+鼠标移动到区域	Enter	 
+鼠标离开区域	Leave	 
+获得键盘焦点	FocusIn	 
+失去键盘焦点	FocusOut	 
+键盘事件	Key	 
+回车键	Return	 
+控件尺寸变	Configure
 
+# 13、浮点数比较相等
+https://blog.csdn.net/xfxf996/article/details/107789006
 
+# 14、python中import其他文件夹下的模块
+将该文件夹加入系统路径下面：
+```
+# 增加libary库的搜索路径
+sys.path.append('../../libary/')
+```
 
+# 15、_tkinter.TclError: image "pyimage1" doesn't exist
+因為在一個程式中只能存在一個根視窗，也就是說只能存在一個Tk()，其他的視窗只能以頂層視窗（Toplevel()）的形式存在。
 
+如果是作为一个库文件调用的话，可以这样写：
+```
+def picture_browser(master=None):
+    if master == None:
+        root = tk.Tk()
+    else:
+        root = tk.Toplevel()   #创建一个Tk根窗口组件
+	root.title('测试')
+```
+
+# 16、解决treeview的颜色样式个性化
+找了好久都没有解决，几乎到了快放弃的阶段，最终在两个网站中找到了灵感。
+https://www.it1352.com/1887538.html
+https://www.cnpython.com/qa/113726
+改变一行数据的颜色，即一个选定的项目，不能改变一个单元格。如果需要改变，则需要使用到Canvas。
+[python3使用tkinter做界面之颜色](https://blog.csdn.net/chl0000/article/details/7657887)
+
+# 17、添加tkinter.ttk.Style()变量后打开窗口会多出一个tk窗口
+发现是由于把tkinter.ttk.Style()弄成全局变量了，改成局部变量后解决。
+
+# 18、_tkinter.TclError: couldn't recognize data in image file "D:\images\1 (10).jpg"
+不清楚原因，主要是不要使用tk.PhotoImage调用图片，
+```
+import tkinter as tk
+ 
+filename = 'D:\\images\\1 (10).jpg'
+root = tk.Tk()
+photo = tk.PhotoImage(file=filename)
+label1 = tk.Label(root,text='学习python', justify='left', 
+                  image=photo,compound='center',font=('Consolas',10),fg='white')
+label1.pack()
+root.mainloop()
+```
+
+而是使用PIL库。
+```
+from PIL import ImageTk,Image
+
+img_pil = Image.open(r'./image/'+self.files[self.index])
+if img_pil.size[0] > self.img_max_width or img_pil.size[1] > self.img_max_height:
+	img_pil = img_pil.resize((self.img_max_width, self.img_max_height))
+self.img = ImageTk.PhotoImage(img_pil)
+```
+
+# 19、AttributeError: module 'tkinter' has no attribute 'ttk'
+很奇怪，添加from tkinter.ttk import Scrollbar, Checkbutton, Label, Button即可
 
 
 
