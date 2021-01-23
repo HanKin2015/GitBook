@@ -33,8 +33,8 @@ lsusb -t
 480M 意味着 USB 2.0的速率是 480Mbit/s
 如果你找到5.0G，那意味这你有USB 3.0类型接口。它有5.0Gbit/s的传输速率。
 
-
-
+# 系统里面有个Realtek Semiconductor Corp设备
+这个是音频驱动程序。
 
 
 

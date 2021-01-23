@@ -4,20 +4,15 @@
 
 2020年1月1日停止更新python2.x。
 
-# python3.8新特性
-
-https://baijiahao.baidu.com/s?id=1648205145573514287&wfr=spider&for=pc
-
-https://baijiahao.baidu.com/s?id=1639375363426418681&wfr=spider&for=pc
-
-海象运算符。
-
-
+# python安装包下载
+https://www.python.org/ftp/python/
 
 # 学习预告
 - 下载：使用you-get
 you-get -d 视频网址
 youtube-dl
+
+词云学习：https://blog.csdn.net/lys_828/article/details/105200000
 
 ```
 @echo off
@@ -56,9 +51,9 @@ Linux都有个问题，首先需要做的事情是更新安装脚本命令
 https://blog.csdn.net/lys_828/article/list/2?t=1
 阿里巴巴淘宝镜像网站：
 
-
-
-
+## 有趣的小发现，在多文件夹路径下的原位置重命名文件
+很有意思，写代码时需要注意
+https://blog.csdn.net/lys_828/article/details/107843255
 
 
 

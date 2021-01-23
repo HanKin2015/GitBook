@@ -175,6 +175,25 @@ self.img = ImageTk.PhotoImage(img_pil)
 # 19、AttributeError: module 'tkinter' has no attribute 'ttk'
 很奇怪，添加from tkinter.ttk import Scrollbar, Checkbutton, Label, Button即可
 
+# 20、RuntimeError: main thread is not in main loop
+https://www.maixj.net/ict/runtimeerror-main-thread-is-not-in-main-loop-21037
+
+网络上几乎找不到对这个问题的简单有效解决方案，后来自己看python官方文档，发现在线程start之前，设置一个daemon属性为True，这个问题就解决了。代码大概是这样的：
+```
+msg_handle = threading.Thread(target=msg_pp, args=(sock,))
+msg_handle.daemon = True
+msg_handle.start()
+```
+
+# 21、Failed to eexecute script ***
+怀疑跟ftp服务器不能使用有关。
+
+
+
+
+
+
+
 
 
 

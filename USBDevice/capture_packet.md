@@ -1,5 +1,8 @@
 [TOC]
-# 入门必备
+# 数据包抓取工具
+
+参考：https://blog.csdn.net/zcshoucsdn/article/details/81448023
+介绍的比较详细，几乎是现在主流的一些抓包工具。
 
 # 1、常用工具的安装
 
@@ -200,10 +203,49 @@ MIDI(Musical Instrument Digital Interface)乐器数字接口
 它能把计算机的数字信号翻译成可沿普通电话线传送的脉冲信号，而这些脉冲信号又可被线路另一端的另一个调制解调器接收，并译成计算机可懂的语言。
 计算机内的信息是由“0”和“1”组成数字信号，而在电话线上传递的却只能是模拟电信号。于是，当两台计算机要通过电话线进行数据传输时，就需要一个设备负责数模的转换。
 
+# Bus Hound
+phase：阶段、时期
+人体学输入设备可以理解为HID设备吗？？？但可以肯定的是HID设备属于人体学输入设备。
+
+一个比较轻量级纯软件工具，软件界面看着就像上一个世纪的风格。官网为http://perisoft.net/index.htm。使用上也不是很麻烦，但是在实际使用中发现，对于某些USB报文无法抓取，这是个硬伤。而且，其也不具备USB协议分析功能。拿到报文后需要自行进行分析。安装后需要重启计算机才可用！
+  这是一个收费工具，目前不怎么更新了，最新版为 6.01。但是网上放出去了其最新版的注册码。还有个简单的中文使用说明。
+
+# udevadm monitor
+Linux下实时监控usb设备的拔插情况。
+
+# tcpdump抓包工具+wireshark
+查看端口：tcpdump -D
+tcpdump -i usbmon2 > xxxx.pcap
+
+低版本无法使用tcpdump抓usb数据包
+`0` 代表所有的USB总线，`1，2` 代表不同USB总线，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
+
+https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
+
+## strace命令
+https://www.cnblogs.com/bangerlee/archive/2012/02/20/2356818.html
+
+## mknod
+创建块设备或者字符设备文件。此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、SUSE、openSUSE、Fedora。
+
+
+# USBLzyer2.2
+软件功能
+1、USB协议分析仪的窗口，提供了一个完整而简单的理解分析USB主机控制器、USB集线器和USB设备活动器
+2、可以查看所有USB设备和子组件的详细信息
+3、可通过USB驱动器使用URB请求和相关的结构
+4、可捕获、解码和显示USB的重要信息
+5、由PnP子系统使用IRP，内核模式和用户模式I/O控制要求的USB客户端驱动程序和用户模式应用程序的使用
+6、可以帮助你测试和解决硬件和软件
+软件特点
+1、可以提供所有与USB设备相关的资料
+2、可以对USB Hubs的活动进行全面周详的分析
+3、可以对USB Devices的活动进行全面周详的分析
+4、可以对USB Host Controllers的活动进行全面周详的分析
+5、一个完整的软件解决方案，所以你不需要安装任何额外的软件或硬件
 
 
 
-【TD】航信自助办税桌面云测试—厦门思明区税务局-福建航天信息科技有限公司-TD202001166000
 
 
 

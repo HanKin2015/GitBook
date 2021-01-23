@@ -80,3 +80,22 @@ http://www.asciima.com/
 百度知道：字符0和整数0区别
 http://zhidao.baidu.com/question/351626505.html
 
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	char s1[] = "123045";
+	int len = sizeof(s1);
+	char s2[10], s3[10];
+
+	strncpy(s2, s1, len);
+	memcpy(s3, s1, len);
+	cout << "s2 = " << s2 << ' ' << sizeof(s2) << endl;
+	cout << "s3 = " << s3 << ' ' << sizeof(s3) << endl;
+	return 0;
+}
+```
+

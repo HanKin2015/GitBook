@@ -901,7 +901,7 @@ git push origin [newBName]
 # 6、git commit
 
 ### 修改commit内容
-当我们想要对上一次的提交进行修改时，我们可以使用git commit –amend命令。git commit –amend既可以对上次提交的内容进行修改，也可以修改提交说明。
+当我们想要对上一次的提交进行修改时，我们可以使用git commit –-amend命令。git commit –amend既可以对上次提交的内容进行修改，也可以修改提交说明。
 
 如果有新的文件修改，需要合并到最近一次提交的commit里面，也可以使用上面命令直接修改即可。
 
@@ -12087,6 +12087,29 @@ git whatchanged --stat 每次修改的文件列表, 及文件修改的统计
 git show 显示最后一次的文件改变的具体内容
 git show -5 显示最后 5 次的文件改变的具体内容
 git show commitid 显示某个 commitid 改变的具体内容
+
+## 20210112
+今天发现git上库时间是根据本地系统时间来设定的，因此如果本地时间有错误，上库后会出现 有***提交于11个月后 的情况。
+
+特别有趣。
+
+git blame xxx.cpp可以查看文件每一行修改的情况。
+
+git log -p xxx.cpp：查看某个文件每次提交的详细修改
+
+查看文件在某次提交的修改内容：git show commitId xxx.cpp
+
+## 20200113
+git切换到某次提交：	 
+
+git reset commitId和 在分支上面git checkout commitId都不是想要的结果。问题在于本地还是会包含后面的所有修改的东西。
+
+正确做法：git checkout -b backtocommitid commitId
+建立新的分支，这时候就没有了后面修改的东西。
+
+
+
+
 
 
 

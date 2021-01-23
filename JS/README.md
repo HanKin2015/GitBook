@@ -14,3 +14,16 @@ if (Object.prototype.toString.call(varStr) === "[object Undefined]") {
 }
 ```
 
+## 排序
+
+arr = ['1230x1024', '800x600', '1920x1080',  '1024x768']
+arr.sort().reverse()
+
+arr.sort(function(a, b) {
+	var x = a.split('x').map(Number);
+	var y = b.split('x').map(Number);
+	if (x[0] == y[0]) {
+		return x[1] < y[1];
+	}
+	return x[0] < y[0];
+);

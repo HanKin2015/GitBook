@@ -68,7 +68,17 @@ ldd ./dir/bin/bash
 
 结果发现并不是一个可以chroot的目录。
 
+# linux系统中的i386/i686和x86_64有什么区别
 
+许下诺言 2017-03-25 15:34:16  59258  收藏 9
+版权
+Linux的的版本众多，包括服务器版本、桌面版本等，在下载安装镜像时候总会有i386/i686和x86_64这样的区别，带着疑问查了一下相关资料：
+
+（1）参考一：http://blog.csdn.net/yandaqijian/article/details/41748759?locationNum=14点击打开链接
+
+（2）参考二：http://blog.csdn.net/yandaqijian/article/details/41748599点击打开链接
+
+总结来说：i386对应的是32位系统、而i686是i386的一个子集,i686仅对应P6及以上级别的CPU，i386则广泛适用于80386以上的各种CPU；x86_64主要是64位系统。
 
 
 

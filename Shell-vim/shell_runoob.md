@@ -35,7 +35,6 @@ chmod +x test.sh
 双引号里可以有变量
 双引号里可以出现转义字符
 
-
 获取字符串长度
 string="abcd"
 echo ${#string} #输出 4
@@ -194,7 +193,7 @@ expr 5 + 6       // 输出 11
 对于某些运算符，还需要我们使用符号"\"进行转义，否则就会提示语法错误。
 
 expr 5 * 6       // 输出错误
-expr 5 \* 6      // 输出30
+expr 5 \\* 6      // 输出30
 
 ## 9、read 命令用于获取键盘输入信息
 -p 参数由于设置提示信息：
@@ -578,6 +577,169 @@ Thu Jul 24 10:08:46 CST 2014
 | 单引号   | 否           | 否             | 否                                     |
 | 双引号   | 能           | 能             | 能                                     |
 | 无引号   | 能           | 能             | 否                                     |
+
+# 16、Shell printf 命令
+
+```
+#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+ 
+printf "%-10s %-8s %-4s\n" 姓名 性别 体重kg  
+printf "%-10s %-8s %-4.2f\n" 郭靖 男 66.1234
+printf "%-10s %-8s %-4.2f\n" 杨过 男 48.6543
+printf "%-10s %-8s %-4.2f\n" 郭芙 女 47.9876
+```
+
+执行脚本，输出结果如下所示：
+
+```
+姓名     性别   体重kg
+郭靖     男      66.12
+杨过     男      48.65
+郭芙     女      47.99
+```
+
+**%s %c %d %f** 都是格式替代符，**％s** 输出一个字符串，**％d** 整型输出，**％c** 输出一个字符，**％f** 输出实数，以小数形式输出。
+
+**%-10s** 指一个宽度为 10 个字符（**-** 表示左对齐，没有则表示右对齐），任何字符都会被显示在 10 个字符宽的字符内，如果不足则自动以空格填充，超过也会将内容全部显示出来。
+
+**%-4.2f** 指格式化为小数，其中 **.2** 指保留2位小数。
+
+# 17、Shell test 命令
+
+Shell中的 test 命令用于检查某个条件是否成立，它可以进行数值、字符和文件三个方面的测试。
+
+**符号含义：**
+
+1. eq （equal的缩写），表示等于为真
+
+2. ne  (not equal的缩写），表示不等于为真
+
+3. gt   (greater than的缩写），表示大于为真
+
+4. ge （greater&equal的缩写），表示大于等于为真
+
+5. lt  （lower than的缩写），表示小于为真
+
+6. le  （lower&equal的缩写），表示小于等于为真
+
+除非你清楚自己在干什么，**否则请避免在”Shell test命令“中使用单引号**——使用它可能会导致难以察觉的错误，尤其是对于Shell初学者。
+
+**[]** 内部两端要有空格、**-d** 参数和其他内容之间要有空格， 如果 then 另起一行的话 then 前不需要加 **;** 否则需要在 then 前加 **;**。
+
+相当于[]
+
+# 18、Shell 流程控制
+
+## 实例:注意是空格
+
+```
+for loop in 1 2 3 4 5
+do
+    echo "The value is: $loop"
+done
+```
+
+输出结果：
+
+```
+The value is: 1
+The value is: 2
+The value is: 3
+The value is: 4
+The value is: 5
+```
+
+### 无限循环
+
+无限循环语法格式：
+
+```
+while :
+do
+    command
+done
+```
+
+或者
+
+```
+while true
+do
+    command
+done
+```
+
+或者
+
+```
+for (( ; ; ))
+```
+
+## until 循环
+
+until 循环执行一系列命令直至条件为 true 时停止。
+
+until 循环与 while 循环在处理方式上刚好相反。重点：判断方式相反。
+
+一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。
+
+## case实例
+
+```
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+read aNum
+case $aNum in
+    1)  echo '你选择了 1'
+    ;;
+    2)  echo '你选择了 2'
+    ;;
+    3)  echo '你选择了 3'
+    ;;
+    4)  echo '你选择了 4'
+    ;;
+    *)  echo '你没有输入 1 到 4 之间的数字'
+    ;;
+esac
+```
+
+ for 循环可以做到与 C 中相似，但并不完全相同。
+
+通常情况下 shell 变量调用需要加 $,但是 for 的 (()) 中不需要,下面来看一个例子：
+
+```
+#!/bin/bash
+for((i=1;i<=5;i++));do
+    echo "这是第 $i 次调用";
+done;
+```
+
+# 19、shell函数
+
+可以带function fun() 定义，也可以直接fun() 定义,不带function。
+
+```
+#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+
+funWithReturn(){
+    echo "这个函数会对输入的两个数字进行相加运算..."
+    echo "输入第一个数字: "
+    read aNum
+    echo "输入第二个数字: "
+    read anotherNum
+    echo "两个数字分别为 $aNum 和 $anotherNum !"
+    return $(($aNum+$anotherNum))
+}
+funWithReturn
+echo "输入的两个数字之和为 $? !"
+```
+
+
+
 
 
 

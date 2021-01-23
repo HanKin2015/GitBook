@@ -107,6 +107,10 @@ Manually remove C:\Users\hj159\AppData\Roaming\nvm\v10.16.3.
 
 但是安装的时候npm还是安装失败了，但是下载相应的安装包在temp里面。好像启动了360还是不会下载npm安装包？？卸载了，但是下载后安装好像还是失败了，并且删除了temp文件夹，算了还是手动安装吧。
 
+### 问题3：win7安装nodejs失败 显示only supported on Windows 8.1, Windows Server 2012 R2, or higher.
+原因是因为nodejs版本太高了，v12.16.2以上版本不支持win7系统
+
+nodejs 下载v12.16.2及之前的版本即可安装
 
 ## 2-3、手动下载单独安装npm
 好坑啊，居然折腾了半天。
@@ -143,7 +147,32 @@ gitbook其实跟hexo一样，都是一个编译器，编译成静态网页，然
 ## 4-1、安装
 npm install gitbook-cli -g 
 安装在了nodejs文件夹下，主要在node_modules下。
-gitbook -v  安装是否成功（但我的看不见，成功了）
+gitbook -V  安装是否成功（但我的看不见，成功了）
+
+
+陷入瓶颈：gitbook版本太低
+使用命令安装的是2.3.2版本，实际上gitbook已经达到了3.2.3，使用gitbook -V命令查看时会自动安装，然鹅失败。
+```
+C:\Users\Administrator>gitbook -V
+CLI version: 2.3.2
+Installing GitBook 3.2.3
+...
+```
+
+然鹅多等等是能自动安装成功的。
+$ gitbook serve
+Live reload server started on port: 35729
+Press CTRL+C to quit ...
+
+info: 17 plugins are installed
+info: 19 explicitly listed
+
+Error: Couldn't locate plugins "toggle-chapters, summary, theme-comscore", Run 'gitbook install' to install plugins from registry.
+
+gitbook install安装需要的组件
+
+
+
 
 ## 4-2、使用
 gitbook init  初始化（会突然安装gitbook。。。。可能是升级）
