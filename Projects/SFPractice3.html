@@ -1,0 +1,2877 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>shell+gdb实现单元测试和非交互调试 · HanKin's Gitbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="HanKin">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="skill.html" />
+    
+    
+    <link rel="prev" href="SFPractice2.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../Source/Images/favicon-32x32.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../Source/Images/avatar.jpg' type="image/x-icon">
+    
+    
+        <link rel="apple-touch-icon" href='../Source/Images/avatar.jpg'>
+    
+    
+        
+        <link rel="apple-touch-icon" sizes="120x120" href="../Source/Images/avatar.jpg">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="../Source/Images/avatar.jpg">
+        
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"HanKin2015","repo":"GitBook","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://hankin2015.github.io" target="_blank" class="custom-link">HanKin</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ACM/">
+            
+                <a href="../ACM/">
+            
+                    
+                    编程比赛
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ACM/hihocoder.html">
+            
+                <a href="../ACM/hihocoder.html">
+            
+                    
+                    hihocoder编程练习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ACM/interview_experience.html">
+            
+                <a href="../ACM/interview_experience.html">
+            
+                    
+                    面经
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ACM/leetcode.html">
+            
+                <a href="../ACM/leetcode.html">
+            
+                    
+                    leetcode编程练习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ACM/leetcode_team2020spring.html">
+            
+                <a href="../ACM/leetcode_team2020spring.html">
+            
+                    
+                    2020 力扣杯！Code Your Future 春季全国编程大赛 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ACM/SF4-1.html">
+            
+                <a href="../ACM/SF4-1.html">
+            
+                    
+                    sangfor练习1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ACM/SF4-3.html">
+            
+                <a href="../ACM/SF4-3.html">
+            
+                    
+                    sangfor练习3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ACM/SF4-4.html">
+            
+                <a href="../ACM/SF4-4.html">
+            
+                    
+                    sangfor练习4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ACM/start_again.html">
+            
+                <a href="../ACM/start_again.html">
+            
+                    
+                    重新开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Blog/">
+            
+                <a href="../Blog/">
+            
+                    
+                    迁移至hexo博客
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Books/">
+            
+                <a href="../Books/">
+            
+                    
+                    读书笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Books/RUNOOB_Linux.html">
+            
+                <a href="../Books/RUNOOB_Linux.html">
+            
+                    
+                    RUNOOB之Linux
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../C++/">
+            
+                <a href="../C++/">
+            
+                    
+                    C++/C
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../C++/20190823CallBackFunction.md">
+            
+                <span>
+            
+                    
+                    回调函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../C++/20190831Explicit.md">
+            
+                <span>
+            
+                    
+                    explict关键字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../C++/abbreviation.html">
+            
+                <a href="../C++/abbreviation.html">
+            
+                    
+                    C语言参数通用缩写表]( https://blog.csdn.net/zer1123/article/details/54881910 )
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../C++/context.html">
+            
+                <a href="../C++/context.html">
+            
+                    
+                    编程中什么是「Context(上下文)」？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../C++/data0.html">
+            
+                <a href="../C++/data0.html">
+            
+                    
+                    变长数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../C++/define.html">
+            
+                <a href="../C++/define.html">
+            
+                    
+                    宏定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../C++/endian.html">
+            
+                <a href="../C++/endian.html">
+            
+                    
+                    大端小端
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../C++/fork.html">
+            
+                <a href="../C++/fork.html">
+            
+                    
+                    fork函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../C++/function.html">
+            
+                <a href="../C++/function.html">
+            
+                    
+                    各种函数区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../C++/htonl_ntohl.html">
+            
+                <a href="../C++/htonl_ntohl.html">
+            
+                    
+                    htonl和ntohl函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../C++/IP_MAC.html">
+            
+                <a href="../C++/IP_MAC.html">
+            
+                    
+                    IP和MAC地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../C++/lambda.html">
+            
+                <a href="../C++/lambda.html">
+            
+                    
+                    C++之Lambda表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../C++/memcpy-strncpy.html">
+            
+                <a href="../C++/memcpy-strncpy.html">
+            
+                    
+                    memcpy_s和memcpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../C++/secure.html">
+            
+                <a href="../C++/secure.html">
+            
+                    
+                    使用安全函数编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../C++/size_t.md">
+            
+                <span>
+            
+                    
+                    size_t和size_type 以及int\ssize_t
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.16" data-path="../C++/socket.html">
+            
+                <a href="../C++/socket.html">
+            
+                    
+                    socket通信编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.17" data-path="../C++/static_cast.html">
+            
+                <a href="../C++/static_cast.html">
+            
+                    
+                    指针类型转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.18" data-path="../C++/string.html">
+            
+                <a href="../C++/string.html">
+            
+                    
+                    string中的子函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.19" data-path="../C++/strstr.html">
+            
+                <a href="../C++/strstr.html">
+            
+                    
+                    strstr函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.20" data-path="../C++/struct.html">
+            
+                <a href="../C++/struct.html">
+            
+                    
+                    C语言结构体嵌套
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.21" data-path="../C++/study.html">
+            
+                <a href="../C++/study.html">
+            
+                    
+                    每天一点一滴进步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.22" data-path="../C++/throw.html">
+            
+                <a href="../C++/throw.html">
+            
+                    
+                    分配空间的时候是否需要判空
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.23" data-path="../C++/timeval.html">
+            
+                <a href="../C++/timeval.html">
+            
+                    
+                    linux时间间隔计算
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.24" data-path="../C++/transform.html">
+            
+                <a href="../C++/transform.html">
+            
+                    
+                    类型转换小结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.25" data-path="../C++/var2file.html">
+            
+                <a href="../C++/var2file.html">
+            
+                    
+                    变量值写入文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.26" data-path="../C++/volatile.html">
+            
+                <a href="../C++/volatile.html">
+            
+                    
+                    volatile和sig_atomic_t
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../JS/">
+            
+                <a href="../JS/">
+            
+                    
+                    JS入门学习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Linux/">
+            
+                <a href="../Linux/">
+            
+                    
+                    Linux入门学习
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Linux/book1.html">
+            
+                <a href="../Linux/book1.html">
+            
+                    
+                    Unix高级环境编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Linux/Command.html">
+            
+                <a href="../Linux/Command.html">
+            
+                    
+                    Linux中常见的命令大全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Linux/command_easy.html">
+            
+                <a href="../Linux/command_easy.html">
+            
+                    
+                    常用的Linux命令（超级简洁版）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Linux/core.html">
+            
+                <a href="../Linux/core.html">
+            
+                    
+                    段错误查看core文件追踪
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Linux/dump.html">
+            
+                <a href="../Linux/dump.html">
+            
+                    
+                    Dump文件 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Linux/extendDisk.html">
+            
+                <a href="../Linux/extendDisk.html">
+            
+                    
+                    磁盘那些事儿
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Linux/file-permission.html">
+            
+                <a href="../Linux/file-permission.html">
+            
+                    
+                    权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Linux/filesystem.html">
+            
+                <a href="../Linux/filesystem.html">
+            
+                    
+                    文件系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.9" data-path="../Linux/fork.html">
+            
+                <a href="../Linux/fork.html">
+            
+                    
+                    fork函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.10" data-path="../Linux/global-var.html">
+            
+                <a href="../Linux/global-var.html">
+            
+                    
+                    Linux系统中默认的全局变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.11" data-path="../Linux/grub.html">
+            
+                <a href="../Linux/grub.html">
+            
+                    
+                    GRUB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.12" data-path="../Linux/hostname.html">
+            
+                <a href="../Linux/hostname.html">
+            
+                    
+                    linux的主机名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.13" data-path="../Linux/input-ibus-fcitx.html">
+            
+                <a href="../Linux/input-ibus-fcitx.html">
+            
+                    
+                    输入法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.14" data-path="../Linux/installation_package.html">
+            
+                <a href="../Linux/installation_package.html">
+            
+                    
+                    安装包命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.15" data-path="../Linux/journalctl.html">
+            
+                <a href="../Linux/journalctl.html">
+            
+                    
+                    journalctl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.16" data-path="../Linux/knowledge.html">
+            
+                <a href="../Linux/knowledge.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.17" data-path="../Linux/Ln.html">
+            
+                <a href="../Linux/Ln.html">
+            
+                    
+                    Linux ln命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.18" data-path="../Linux/local.html">
+            
+                <a href="../Linux/local.html">
+            
+                    
+                    shell笔记-local、export用法 、declare、set
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.19" data-path="../Linux/mail.html">
+            
+                <a href="../Linux/mail.html">
+            
+                    
+                    You have new mail in /var/spool/mail/root提示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.20" data-path="../Linux/os-release.html">
+            
+                <a href="../Linux/os-release.html">
+            
+                    
+                    os-release文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.21" data-path="../Linux/passwd.html">
+            
+                <a href="../Linux/passwd.html">
+            
+                    
+                    修改用户密码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.22" data-path="../Linux/PS.html">
+            
+                <a href="../Linux/PS.html">
+            
+                    
+                    进程知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.23" data-path="../Linux/Regex.html">
+            
+                <a href="../Linux/Regex.html">
+            
+                    
+                    管道命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.24" data-path="../Linux/restartnetworkfailed.html">
+            
+                <a href="../Linux/restartnetworkfailed.html">
+            
+                    
+                    None
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.25" data-path="../Linux/sed.html">
+            
+                <a href="../Linux/sed.html">
+            
+                    
+                    sed命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.26" data-path="../Linux/SIGTERM.html">
+            
+                <a href="../Linux/SIGTERM.html">
+            
+                    
+                    信号变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.27" data-path="../Linux/spice.html">
+            
+                <a href="../Linux/spice.html">
+            
+                    
+                    spice
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.28" data-path="../Linux/ssh.html">
+            
+                <a href="../Linux/ssh.html">
+            
+                    
+                    能ping得通服务器但却ssh不了的原因
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.29" data-path="../Linux/unmanaged.html">
+            
+                <a href="../Linux/unmanaged.html">
+            
+                    
+                    ubuntu 16.04网络连接出现：未找到合法的活动链接
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.30" data-path="../Linux/upan.html">
+            
+                <a href="../Linux/upan.html">
+            
+                    
+                    Linux挂载u盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.31" data-path="../Linux/version.html">
+            
+                <a href="../Linux/version.html">
+            
+                    
+                    Ubuntu各版本主要差异
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.32" data-path="../Linux/x11.html">
+            
+                <a href="../Linux/x11.html">
+            
+                    
+                    X.Org
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.33" data-path="../Linux/xrandr.html">
+            
+                <a href="../Linux/xrandr.html">
+            
+                    
+                    Linux双屏之xrandr
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../ML/">
+            
+                <a href="../ML/">
+            
+                    
+                    机器学习入门总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                    网络通信编程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Network/Base.html">
+            
+                <a href="../Network/Base.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Network/GET-POST.html">
+            
+                <a href="../Network/GET-POST.html">
+            
+                    
+                    GET和POST两种基本请求方法的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Network/HTTP_TCP_HTTPS.html">
+            
+                <a href="../Network/HTTP_TCP_HTTPS.html">
+            
+                    
+                    网络之HTTP协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Network/JSON.html">
+            
+                <a href="../Network/JSON.html">
+            
+                    
+                    JSON通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Network/polling&token&session.html">
+            
+                <a href="../Network/polling&token&session.html">
+            
+                    
+                    轮询
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Others/">
+            
+                <a href="../Others/">
+            
+                    
+                    其他
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Others/20190823baidubaike.md">
+            
+                <span>
+            
+                    
+                    百度百科大全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Others/20190823English.md">
+            
+                <span>
+            
+                    
+                    英语学习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Others/20190825Steam.md">
+            
+                <span>
+            
+                    
+                    游戏之steam
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Others/20190831Sources.md">
+            
+                <span>
+            
+                    
+                    一些稀有资源汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Others/20190831TimeManage.md">
+            
+                <span>
+            
+                    
+                    时间管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Others/20190831TopicNews.md">
+            
+                <span>
+            
+                    
+                    门新闻
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Others/alphabeta.html">
+            
+                <a href="../Others/alphabeta.html">
+            
+                    
+                    开发中产品的各版本定义(beta,alpha,rc,release...)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Others/BOM.html">
+            
+                <a href="../Others/BOM.html">
+            
+                    
+                    None
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Others/brush_machine.html">
+            
+                <a href="../Others/brush_machine.html">
+            
+                    
+                    hp瘦客户机刷机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Others/calender.html">
+            
+                <a href="../Others/calender.html">
+            
+                    
+                    日历
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.11" data-path="../Others/computer_baike.html">
+            
+                <a href="../Others/computer_baike.html">
+            
+                    
+                    序列 （被排成一列的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.12" data-path="../Others/CPU.html">
+            
+                <a href="../Others/CPU.html">
+            
+                    
+                    关键词：intel、arm、amd、x86
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.13" data-path="../Others/EverydayFAQ.html">
+            
+                <a href="../Others/EverydayFAQ.html">
+            
+                    
+                    每日一题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.14" data-path="../Others/FAT32.html">
+            
+                <a href="../Others/FAT32.html">
+            
+                    
+                    磁盘文件系统格式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.15" data-path="../Others/ForME.html">
+            
+                <a href="../Others/ForME.html">
+            
+                    
+                    超越自己
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.16" data-path="../Others/Games.html">
+            
+                <a href="../Others/Games.html">
+            
+                    
+                    忍者必须死3 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.17" data-path="../Others/gnu.html">
+            
+                <a href="../Others/gnu.html">
+            
+                    
+                    GNU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.18" data-path="../Others/install_operation_system.html">
+            
+                <a href="../Others/install_operation_system.html">
+            
+                    
+                    安装操作系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.19" data-path="../Others/interesting.html">
+            
+                <a href="../Others/interesting.html">
+            
+                    
+                    有趣的灵魂
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.20" data-path="../Others/jottings.html">
+            
+                <a href="../Others/jottings.html">
+            
+                    
+                    杂记随笔便条
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.21" data-path="../Others/operation_drivers.html">
+            
+                <a href="../Others/operation_drivers.html">
+            
+                    
+                    操作系统之驱动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.22" data-path="../Others/pcm.html">
+            
+                <a href="../Others/pcm.html">
+            
+                    
+                    深入理解pcm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.23" data-path="../Others/ProgramFAQ.html">
+            
+                <a href="../Others/ProgramFAQ.html">
+            
+                    
+                    问题集锦
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.24" data-path="../Others/program_style.html">
+            
+                <a href="../Others/program_style.html">
+            
+                    
+                    编码风格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.25" data-path="../Others/qcow2.html">
+            
+                <a href="../Others/qcow2.html">
+            
+                    
+                    qcow2镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.26" data-path="../Others/resume.html">
+            
+                <a href="../Others/resume.html">
+            
+                    
+                    成长==再出发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.27" data-path="../Others/rom.html">
+            
+                <a href="../Others/rom.html">
+            
+                    
+                    ROM （“只读内存”的简称） 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.28" data-path="../Others/sanjuban.html">
+            
+                <a href="../Others/sanjuban.html">
+            
+                    
+                    三句半
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.29" data-path="../Others/save_disk.html">
+            
+                <a href="../Others/save_disk.html">
+            
+                    
+                    磁盘、软盘和硬盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.30" data-path="../Others/ToDo-list.html">
+            
+                <a href="../Others/ToDo-list.html">
+            
+                    
+                    TO-DO_list
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.31" data-path="../Others/ucanuup.html">
+            
+                <a href="../Others/ucanuup.html">
+            
+                    
+                    成长
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    微小练习工程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="auto_summary.html">
+            
+                <a href="auto_summary.html">
+            
+                    
+                    自动生成gitbook目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="magic_tool.html">
+            
+                <a href="magic_tool.html">
+            
+                    
+                    magic_tool（初步叫魔法工具）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="movie.html">
+            
+                <a href="movie.html">
+            
+                    
+                    娱乐天堂
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="note.html">
+            
+                <a href="note.html">
+            
+                    
+                    笔记本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="password.html">
+            
+                <a href="password.html">
+            
+                    
+                    密码管理器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="SFPractice2.html">
+            
+                <a href="SFPractice2.html">
+            
+                    
+                    各类基础数据结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.11.7" data-path="SFPractice3.html">
+            
+                <a href="SFPractice3.html">
+            
+                    
+                    shell+gdb实现单元测试和非交互调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="skill.html">
+            
+                <a href="skill.html">
+            
+                    
+                    工程中常用的demo库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Python/">
+            
+                <a href="../Python/">
+            
+                    
+                    python学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Python/crawl.html">
+            
+                <a href="../Python/crawl.html">
+            
+                    
+                    python爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Python/crawl_practice.html">
+            
+                <a href="../Python/crawl_practice.html">
+            
+                    
+                    爬虫小练习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Python/python_argparse.html">
+            
+                <a href="../Python/python_argparse.html">
+            
+                    
+                    python之argparse模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Python/python_FAQ.html">
+            
+                <a href="../Python/python_FAQ.html">
+            
+                    
+                    python学习中的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Python/python_study.html">
+            
+                <a href="../Python/python_study.html">
+            
+                    
+                    python学习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Python/standard.html">
+            
+                <a href="../Python/standard.html">
+            
+                    
+                    python中的规范
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../QT/README.md">
+            
+                <span>
+            
+                    
+                    None
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../QT/event.html">
+            
+                <a href="../QT/event.html">
+            
+                    
+                    对事件进行重写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../QT/QLocalSocket.html">
+            
+                <a href="../QT/QLocalSocket.html">
+            
+                    
+                    QT中的socket通信编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../QT/qmenu.html">
+            
+                <a href="../QT/qmenu.html">
+            
+                    
+                    QT之Qmenu菜单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../QT/qss.html">
+            
+                <a href="../QT/qss.html">
+            
+                    
+                    QT之Qss
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.5" data-path="../QT/qt4-to-qt5.html">
+            
+                <a href="../QT/qt4-to-qt5.html">
+            
+                    
+                    qt4和qt5区别及转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.6" data-path="../QT/QThread.html">
+            
+                <a href="../QT/QThread.html">
+            
+                    
+                    QT之线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.7" data-path="../QT/question.html">
+            
+                <a href="../QT/question.html">
+            
+                    
+                    QT学习中遇到的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.8" data-path="../QT/qurl.html">
+            
+                <a href="../QT/qurl.html">
+            
+                    
+                    QT之Qurl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.9" data-path="../QT/qwebview.html">
+            
+                <a href="../QT/qwebview.html">
+            
+                    
+                    QT之Qwebview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.10" data-path="../QT/READEME.html">
+            
+                <a href="../QT/READEME.html">
+            
+                    
+                    QT入门学习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.11" data-path="../QT/rewrite.html">
+            
+                <a href="../QT/rewrite.html">
+            
+                    
+                    重写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.12" data-path="../QT/skill1.html">
+            
+                <a href="../QT/skill1.html">
+            
+                    
+                    QT学习笔记1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.13" data-path="../QT/skill2.html">
+            
+                <a href="../QT/skill2.html">
+            
+                    
+                    QT学习笔记2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.14" data-path="../QT/study.html">
+            
+                <a href="../QT/study.html">
+            
+                    
+                    QT学习笔记3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.15" data-path="../QT/translate.html">
+            
+                <a href="../QT/translate.html">
+            
+                    
+                    QT之国际语言翻译
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../Scripts/">
+            
+                <a href="../Scripts/">
+            
+                    
+                    脚本学习总结
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../Scripts/generate_summary.html">
+            
+                <a href="../Scripts/generate_summary.html">
+            
+                    
+                    生成summary目录脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../Scripts/scp-file.html">
+            
+                <a href="../Scripts/scp-file.html">
+            
+                    
+                    读取文件名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../Shell-vim/">
+            
+                <a href="../Shell-vim/">
+            
+                    
+                    shell脚本与vim编辑器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../Shell-vim/higher-lower-case.html">
+            
+                <a href="../Shell-vim/higher-lower-case.html">
+            
+                    
+                    大小写转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../Shell-vim/quertions.html">
+            
+                <a href="../Shell-vim/quertions.html">
+            
+                    
+                    shell编程中遇到的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../Shell-vim/study1.md">
+            
+                <span>
+            
+                    
+                    shell学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../Shell-vim/template.html">
+            
+                <a href="../Shell-vim/template.html">
+            
+                    
+                    shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../Shell-vim/vim.html">
+            
+                <a href="../Shell-vim/vim.html">
+            
+                    
+                    VIM操作笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../StudyNotes/">
+            
+                <a href="../StudyNotes/">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../StudyNotes/20190823git.md">
+            
+                <span>
+            
+                    
+                    git学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../StudyNotes/20190823terminology.md">
+            
+                <span>
+            
+                    
+                    terminology术语
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../StudyNotes/20190826Hexo.md">
+            
+                <span>
+            
+                    
+                    hexo搭建博客
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../Tools/">
+            
+                <a href="../Tools/">
+            
+                    
+                    程序猿工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../Tools/20190820gitbook.md">
+            
+                <span>
+            
+                    
+                    搭建gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../Tools/Bianqian.html">
+            
+                <a href="../Tools/Bianqian.html">
+            
+                    
+                    工具之便签
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../Tools/collect.html">
+            
+                <a href="../Tools/collect.html">
+            
+                    
+                    网站收藏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../Tools/c_c++_editor_compiler.html">
+            
+                <a href="../Tools/c_c++_editor_compiler.html">
+            
+                    
+                    c语言编译器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5" data-path="../Tools/docker.html">
+            
+                <a href="../Tools/docker.html">
+            
+                    
+                    The system is running in low-graphics mode时解决方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.6" data-path="../Tools/git.html">
+            
+                <a href="../Tools/git.html">
+            
+                    
+                    git入门知识汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.7" data-path="../Tools/markdown.html">
+            
+                <a href="../Tools/markdown.html">
+            
+                    
+                    markdown学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.8" data-path="../Tools/myBase.html">
+            
+                <a href="../Tools/myBase.html">
+            
+                    
+                    None
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.9" data-path="../Tools/nodejs.html">
+            
+                <a href="../Tools/nodejs.html">
+            
+                    
+                    nodejs安装那些事儿
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.10" data-path="../Tools/notepad++.html">
+            
+                <a href="../Tools/notepad++.html">
+            
+                    
+                    工具之notepad++
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.11" data-path="../Tools/QT.html">
+            
+                <a href="../Tools/QT.html">
+            
+                    
+                    QT入门学习
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.12" data-path="../Tools/skill.html">
+            
+                <a href="../Tools/skill.html">
+            
+                    
+                    必备工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.13" data-path="../Tools/sourceinsight.html">
+            
+                <a href="../Tools/sourceinsight.html">
+            
+                    
+                    工具之sourceinsight
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.14" data-path="../Tools/sphinx_github_readthedocs.html">
+            
+                <a href="../Tools/sphinx_github_readthedocs.html">
+            
+                    
+                    使用sphinx、github、readthedocs搭建书环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.15" data-path="../Tools/sublime.html">
+            
+                <a href="../Tools/sublime.html">
+            
+                    
+                    工具之sublime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.16" data-path="../Tools/svn.html">
+            
+                <a href="../Tools/svn.html">
+            
+                    
+                    svn知识汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.17" data-path="../Tools/typora.html">
+            
+                <a href="../Tools/typora.html">
+            
+                    
+                    工具之typora
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../USBDevice/">
+            
+                <a href="../USBDevice/">
+            
+                    
+                    外设
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../USBDevice/book1.html">
+            
+                <a href="../USBDevice/book1.html">
+            
+                    
+                    圈圈教你玩USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../USBDevice/book2.html">
+            
+                <a href="../USBDevice/book2.html">
+            
+                    
+                    cypress_USB2.0
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../USBDevice/firstblood.md">
+            
+                <span>
+            
+                    
+                    入门必备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.4" data-path="../USBDevice/OHCI_EHCI_UHCI.html">
+            
+                <a href="../USBDevice/OHCI_EHCI_UHCI.html">
+            
+                    
+                    主控制器接口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.5" data-path="../USBDevice/practice.md">
+            
+                <span>
+            
+                    
+                    Bus Hound
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.6" data-path="../USBDevice/USB-redirect-theory.html">
+            
+                <a href="../USBDevice/USB-redirect-theory.html">
+            
+                    
+                    USB重定向理论
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.7" data-path="../USBDevice/USB2.0_protocol.html">
+            
+                <a href="../USBDevice/USB2.0_protocol.html">
+            
+                    
+                    USB2.0规范初探（USB2.0协议中文版）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.8" data-path="../USBDevice/USB_system_by_graph.html">
+            
+                <a href="../USBDevice/USB_system_by_graph.html">
+            
+                    
+                    图解USB系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >shell+gdb实现单元测试和非交互调试</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#shellgdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;"><b>1. </b>shell+gdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;</a></li><ul><li><span class="title-icon "></span><a href="#&#x8BF4;&#x660E;"><b>1.1. </b>&#x8BF4;&#x660E;</a></li><li><span class="title-icon "></span><a href="#&#x8981;&#x6C42;"><b>1.2. </b>&#x8981;&#x6C42;</a></li></ul></ul></div><a href="#shellgdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><p>&#x3010;&#x91CD;&#x6784;-&#x673A;&#x5236;&#x7B56;&#x7565;&#x5206;&#x79BB;&#x3011;
+/<em>
+ </em>&#x601D;&#x8DEF;&#xFF1A;&#x4F7F;&#x7528;hash&#x601D;&#x8DEF;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x4F7F;&#x7528;&#x6570;&#x7EC4;hash&#x5206;&#x7EC4;&#x5B58;&#x50A8;&#x94FE;&#x8868;&#x6307;&#x9488;</p>
+<ul>
+<li>&#x6570;&#x7EC4;&#x548C;&#x94FE;&#x8868;&#x7684;&#x7ED3;&#x5408;</li>
+<li>&#x67E5;&#x627E;&#x63D2;&#x5165;&#x5220;&#x9664;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;O(logn)
+*/</li>
+</ul>
+<p>&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;<a href="http://200.200.1.35/designing/decoupling/logical_coupling.html" target="_blank">http://200.200.1.35/designing/decoupling/logical_coupling.html</a></p>
+<p>&#x8981;&#x6C42;&#xFF1A;</p>
+<ol>
+<li><p>&#x91CD;&#x6784;batch.c&#xFF0C;&#x5B9E;&#x73B0;&#x673A;&#x5236;&#x7B56;&#x7565;&#x5206;&#x79BB;&#xFF0C;</p>
+<p>1) &#x4EE4;&#x5176;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7CFB;&#x7EDF;&#x4E0A;&#x8FD0;&#x884C;&#xFF0C;&#x81F3;&#x5C11;&#x652F;&#x6301;win/linux&#xFF0C;&#x4E0D;&#x80FD;&#x4F9D;&#x8D56;&#x5177;&#x4F53;&#x7CFB;&#x7EDF;&#x4E0A;&#x7684;&#x547D;&#x4EE4;;</p>
+<p>2) &#x65B9;&#x4FBF;&#x5355;&#x5143;&#x6D4B;&#x8BD5;(&#x6BD4;&#x5982;&#x4E0D;&#x4F9D;&#x8D56;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x5373;&#x53EF;&#x5355;&#x6D4B;);</p>
+<p>3) &#x80FD;&#x7075;&#x6D3B;&#x62D3;&#x5C55;&#x529F;&#x80FD;&#x9700;&#x6C42;&#xFF0C;&#x4FEE;&#x6539;&#x7B97;&#x6CD5;&#x4E0D;&#x5F71;&#x54CD;&#x73B0;&#x6709;&#x903B;&#x8F91;;</p>
+<p>4) &#x65B9;&#x4FBF;&#x540E;&#x7EED;&#x91C7;&#x7528;&#x66F4;&#x5B8C;&#x5584;&#x7684;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x5224;&#x5B9A;&#x65B9;&#x6CD5;&#xFF0C;&#x4FEE;&#x6539;&#x7B97;&#x6CD5;&#x4E0D;&#x5F71;&#x54CD;&#x73B0;&#x6709;&#x903B;&#x8F91;&#xFF1B;</p>
+</li>
+<li><p>&#x5B8C;&#x5584;batch.c&#x5B9E;&#x73B0;&#x4E2D;&#x5B58;&#x5728;&#x95EE;&#x9898;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6BD4;&#x5982;&#x91C7;&#x7528;system&#x6267;&#x884C;&#x547D;&#x4EE4;&#x6709;&#x5B89;&#x5168;&#x6027;&#x95EE;&#x9898;&#xFF1B;</p>
+</li>
+<li><p>&#x62D3;&#x5C55;&#x4E09;&#x4E2A;&#x65B0;&#x9700;&#x6C42;&#xFF1A;</p>
+<p>1) &#x5F53;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x4E3A;pdf/doc/xls&#x7B49;&#x6587;&#x6863;&#x7C7B;&#x578B;&#x65F6;&#xFF0C;&#x8C03;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x6253;&#x5F00;&#x3002;</p>
+<p>2) &#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x52A0;&#x8F7D;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x7C7B;&#x578B;/&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x7C7B;&#x578B;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x540E;&#x7F00;&#x5217;&#x8868;&#xFF1B;</p>
+<p>3) &#x91C7;&#x7528;getopt_long&#x89E3;&#x6790;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#xFF1B;</p>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BF7;&#x91C7;&#x7528;json&#x6216;ini&#x683C;&#x5F0F;</p>
+</li>
+<li><p>&#x7B26;&#x5408;&#x516C;&#x53F8;&#x4EE3;&#x7801;&#x89C4;&#x8303;&#x7684;&#x8981;&#x6C42;&#xFF0C;&#x4EE3;&#x7801;&#x8BC4;&#x7EA7;&#x5373;&#x7EC3;&#x4E60;&#x6210;&#x7EE9;&#xFF1B;</p>
+</li>
+<li><p>&#x5B8C;&#x6210;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#xFF0C;&#x4EE3;&#x7801;&#x884C;&#x8986;&#x76D6;&#x7387;&#x8D85;&#x8FC7;90%</p>
+</li>
+</ol>
+<h1 id="shellgdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;"><a name="shellgdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;" class="anchor-navigation-ex-anchor" href="#shellgdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;"><i class="fa fa-link" aria-hidden="true"></i></a>1. shell+gdb&#x5B9E;&#x73B0;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x548C;&#x975E;&#x4EA4;&#x4E92;&#x8C03;&#x8BD5;</h1>
+<h2 id="&#x8BF4;&#x660E;"><a name="&#x8BF4;&#x660E;" class="anchor-navigation-ex-anchor" href="#&#x8BF4;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &#x8BF4;&#x660E;</h2>
+<ol>
+<li>&#x628A;gdfind&#x7F16;&#x8BD1;&#x6210;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;&#x5728;gdfind&#x76EE;&#x5F55;&#x8FD0;&#x884C;make</li>
+</ol>
+<ol>
+<li>&#x7F16;&#x5199;&#x811A;&#x672C;&#xFF0C;&#x5728;&#x811A;&#x672C;&#x4E2D;&#x8C03;&#x7528;gdb&#x8C03;&#x8BD5;gdfind&#x7A0B;&#x5E8F;&#x3002;&#x53EF;&#x5229;&#x7528;expect&#x4E0E;gdb&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#xFF0C;&#x5B9E;&#x73B0;&#x975E;&#x4EA4;&#x4E92;&#x7684;&#x8C03;&#x8BD5;&#x6D41;&#x7A0B;&#x3002;</li>
+</ol>
+<p>expect&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;</p>
+<p><a href="https://www.cnblogs.com/lzrabbit/p/4298794.html" target="_blank">https://www.cnblogs.com/lzrabbit/p/4298794.html</a></p>
+<p><a href="https://linux.die.net/man/1/expect" target="_blank">https://linux.die.net/man/1/expect</a></p>
+<p>gdb&#x7684;&#x7528;&#x6CD5;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;</p>
+<p><a href="http://www.gnu.org/software/gdb/documentation/" target="_blank">http://www.gnu.org/software/gdb/documentation/</a></p>
+<p><a href="https://sourceware.org/gdb/current/onlinedocs/gdb/" target="_blank">https://sourceware.org/gdb/current/onlinedocs/gdb/</a></p>
+<ol>
+<li>gbfind/dbg.sh&#x548C;gbfind/dbg_ReadLine.sh&#x662F;&#x793A;&#x4F8B;&#x811A;&#x672C;</li>
+</ol>
+<p>&#x5728;gbfind&#x76EE;&#x5F55;&#x6267;&#x884C;./dbg.sh&#x547D;&#x4EE4;&#xFF0C;&#x53EF;&#x4EE5;&#x89C2;&#x5BDF;&#x8BE5;&#x811A;&#x672C;&#x7684;&#x8FD0;&#x884C;&#x7ED3;&#x679C;&#x3002;</p>
+<ol>
+<li>&#x672C;&#x7EC3;&#x4E60;&#x7684;&#x76EE;&#x7684;&#x662F;:</li>
+</ol>
+<p>A) &#x5E2E;&#x52A9;&#x5B66;&#x5458;&#x638C;&#x63E1;gdb&#x7684;&#x7528;&#x6CD5;&#xFF08;&#x5305;&#x62EC;&#x4E00;&#x4E9B;&#x9AD8;&#x7EA7;&#x7528;&#x6CD5;&#xFF09;&#xFF1B;</p>
+<p>B) &#x5E2E;&#x52A9;&#x5B66;&#x5458;&#x638C;&#x63E1;&#x4E00;&#x79CD;&#x5229;&#x7528;expect+gdb&#x8FDB;&#x884C;&#x81EA;&#x52A8;&#x5316;&#x8C03;&#x8BD5;&#x7684;&#x65B9;&#x6CD5;(&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;&#x5F88;&#x591A;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x5927;&#x5927;&#x63D0;&#x5347;&#x8C03;&#x8BD5;&#x6548;&#x7387;)&#xFF1B;</p>
+<h2 id="&#x8981;&#x6C42;"><a name="&#x8981;&#x6C42;" class="anchor-navigation-ex-anchor" href="#&#x8981;&#x6C42;"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. &#x8981;&#x6C42;</h2>
+<ol>
+<li>&#x4F7F;&#x7528;expect+gdb&#x7684;&#x65B9;&#x5F0F;(&#x53C2;&#x8003;gbfind/dbg.sh)&#x5BF9;CheckPath&#xFF0C;ReadLine_NoSkip&#xFF0C;</li>
+</ol>
+<p>ReadLine_SkipCppComment&#xFF0C;ReadLine&#xFF0C;StatFile&#xFF0C;StatDirectory&#x8FD9;6&#x4E2A;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;ReadLine&#x8FD9;&#x7C7B;&#x6709;&#x590D;&#x6742;&#x53C2;&#x6570;&#x4F9D;&#x8D56;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;ReadLine&#x6216;&#x5176;&#x8C03;&#x7528;&#x8005;&#x4E0A;&#x8BBE;&#x65AD;&#x70B9;&#xFF0C;</p>
+<p>&#x7136;&#x540E;&#x5728;&#x6267;&#x884C;ReadLine&#x4E4B;&#x524D;&#x4FEE;&#x6539;&#x4F20;&#x9012;&#x7ED9;ReadLine&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;ReadLine&#x6267;&#x884C;&#x6B63;&#x5E38;&#x4E0D;&#x4F1A;&#x8DD1;&#x5230;&#x7684;&#x6D41;&#x7A0B;&#x3002;&#x76F8;&#x5173;&#x505A;&#x6CD5;&#x8BF7;&#x53C2;&#x8003;dbg_ReadLine.sh</p>
+<ol>
+<li>&#x6BCF;&#x4E2A;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x4E00;&#x4E2A;&#x6848;&#x4F8B;&#x811A;&#x672C;&#x3002;</li>
+</ol>
+<ol>
+<li>&#x5B8C;&#x6210;&#x4E00;&#x4E2A;shell&#x811A;&#x672C;(&#x91C7;&#x7528;bash)&#xFF0C;&#x6267;&#x884C;&#x4E0A;&#x8FF0;&#x6848;&#x4F8B;&#x811A;&#x672C;&#xFF0C;&#x5E76;&#x904D;&#x5386;&#x4E0A;&#x8FF0;&#x6848;&#x4F8B;&#x811A;&#x672C;&#x4EA7;&#x751F;&#x7684;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#xFF0C;&#x8F93;&#x51FA;&#x5355;&#x6D4B;&#x5931;&#x8D25;&#x7684;&#x6848;&#x4F8B;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x540D;&#x79F0;&#x3002;</li>
+</ol>
+<p>&#x8BF4;&#x660E;&#xFF1A;&#x5728;&#x4E0A;&#x8FF0;&#x6848;&#x4F8B;&#x6D4B;&#x8BD5;&#x811A;&#x672C;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5F02;&#x5E38;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;expect&#x8F93;&#x51FA;&#x7279;&#x5B9A;&#x65E5;&#x5FD7;&#x5185;&#x5BB9;&#x3002;</p>
+<p>shell&#x811A;&#x672C;&#x904D;&#x5386;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x65F6;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x6709;&#x7279;&#x5B9A;&#x65E5;&#x5FD7;&#x5185;&#x5BB9;&#xFF0C;&#x4EE5;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x6D4B;&#x8BD5;&#x6848;&#x4F8B;&#x6267;&#x884C;&#x4E0D;&#x6B63;&#x5E38;&#x3002;</p>
+<p>&#x4E0B;&#x8F7D;&#x9644;&#x4EF6;:php0adChk</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SFPractice2.html" class="navigation navigation-prev " aria-label="Previous page: 各类基础数据结构">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="skill.html" class="navigation navigation-next " aria-label="Next page: 工程中常用的demo库">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"shell+gdb实现单元测试和非交互调试","level":"1.11.7","depth":2,"next":{"title":"工程中常用的demo库","level":"1.11.8","depth":2,"path":"Projects/skill.md","ref":"./Projects/skill.md","articles":[]},"previous":{"title":"各类基础数据结构","level":"1.11.6","depth":2,"path":"Projects/SFPractice2.md","ref":"./Projects/SFPractice2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","edit-link","github","github-buttons","donate","sharing-plus","anchor-navigation-ex","favicon","toggle-chapters","theme-comscore","summary"],"styles":{"website":"./Styles/Website.css"},"pluginsConfig":{"github":{"url":"https://github.com/hankin2015"},"summary":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"donate":{"alipay":"./Source/Images/alipay.jpg","alipayText":" ","button":"打赏","title":"","wechat":"","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":{"shortcut":"./Source/Images/favicon-32x32.ico","bookmark":"./Source/Images/avatar.jpg","appleTouch":"./Source/Images/avatar.jpg","appleTouchMore":{"120x120":"./Source/Images/avatar.jpg","180x180":"./Source/Images/avatar.jpg"}},"theme-comscore":{},"github-buttons":{"buttons":[{"user":"HanKin2015","repo":"GitBook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/HanKin2015/GitBook/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"toggle-chapters":{}},"theme":"default","author":"HanKin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HanKin's Gitbook","language":"zh-hans","links":{"sidebar":{"HanKin":"http://hankin2015.github.io"}},"gitbook":"3.2.3","description":"select * from learn"},"file":{"path":"Projects/SFPractice3.md","mtime":"2019-09-10T08:40:13.573Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-25T01:15:43.349Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
