@@ -1,4 +1,5 @@
-# [shell笔记-local、export用法 、declare、set](https://www.cnblogs.com/itcomputer/p/5008164.html)
+# shell笔记-local、export用法 、declare、set
+https://www.cnblogs.com/itcomputer/p/5008164.html
 
 ## local一般用于局部变量声明，多在在函数内部使用。
 

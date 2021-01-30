@@ -1,4 +1,5 @@
-# C语言参数通用缩写表]( https://blog.csdn.net/zer1123/article/details/54881910 )
+# C语言参数通用缩写表
+https://blog.csdn.net/zer1123/article/details/54881910
 
 红色标记为常用缩写.
 

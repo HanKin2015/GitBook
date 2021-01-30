@@ -1,4 +1,5 @@
-# [GET和POST两种基本请求方法的区别](https://www.cnblogs.com/logsharing/p/8448446.html)
+# GET和POST两种基本请求方法的区别
+https://www.cnblogs.com/logsharing/p/8448446.html
 
 - 最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。
 

@@ -1,4 +1,5 @@
-# [ubuntu 16.04网络连接出现：未找到合法的活动链接](https://www.cnblogs.com/vitalq/p/7088978.html)
+# ubuntu 16.04网络连接出现：未找到合法的活动链接
+https://www.cnblogs.com/vitalq/p/7088978.html
 
 网络管理显示:未托管
 

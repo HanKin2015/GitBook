@@ -103,6 +103,95 @@ var targetStr = str[str.length-1]
 
 isNaN()函数
 
+## 这个错误居然是文件名错误......
+```
+D:\Github\Storage\html\httprequest>node https-url.js
+internal/modules/cjs/loader.js:983
+  throw err;
+  ^
+
+Error: Cannot find module 'D:\Github\Storage\html\httprequest\https-url.js'
+[90m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[
+[90m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[90m    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:
+[90m    at internal/main/run_main_module.js:18:47[39m {
+  code: [32m'MODULE_NOT_FOUND'[39m,
+  requireStack: []
+}
+```
+
+```
+正常现象
+D:\Github\Storage\html\httprequest>node http-timeout1.js
+STATUS: 200
+HEADERS: {"server":"nginx","date":"Mon, 25 Jan 2021 08:27:16 GMT","content-type":"text
+ncoding":"chunked","connection":"close","vary":"Accept-Encoding, Accept-Encoding","set
+d, 24-Feb-2021 08:27:16 GMT; Max-Age=2592000; Path=/","sid=1611563236785310; expires=W
+Age=2592000; Path=/"]}
+LOCATION: undefined
+BODY: sucess! client ip: 118.250.110.197
+response end...
+response close...
+
+协议错误，一般来说可能是端口错误，可能使用了http请求了443端口
+D:\Github\Storage\html\httprequest>node http-timeout1.js
+error got :write EPROTO 6920:error:1408F10B:SSL routines:ssl3_get_record:wrong version
+\ssl\record\ssl3_record.c:332:
+
+timeout got :have been timeout...
+
+80端口未开通，正确端口是8000
+D:\Github\Storage\html\httprequest>node http-timeout1.js
+error got :connect ECONNREFUSED 127.0.0.1:80
+timeout got :have been timeout...
+
+协议错误，一般来说可能是端口错误，可能使用了https请求了80端口
+D:\Github\Storage\html\httprequest>node http-timeout1.js
+error got :write EPROTO 14200:error:1408F10B:SSL routines:ssl3_get_record:wrong versio
+l\ssl\record\ssl3_record.c:332:
+
+timeout got :have been timeout...
+
+正常现象
+D:\Github\Storage\html\httprequest>node http-timeout1.js
+STATUS: 200
+HEADERS: {"content-type":"text/plain","date":"Mon, 25 Jan 2021 08:29:05 GMT","connecti
+hunked"}
+LOCATION: undefined
+BODY: Hello World
+
+response end...
+response close...
+```
+
+http默认端口是80
+https默认端口是443
+
+http状态码查询：https://www.runoob.com/http/http-status-codes.html
+
+http://dev.kdlapi.com/testproxy
+可以通过80端口访问
+
+https://dev.kdlapi.com/testproxy
+可以通过443端口访问
+
+## Nodejs HTTP请求的超时处理 Nodejs HTTP Client Request Timeout Handle
+https://blog.csdn.net/shulianghe/article/details/40108271
+https://www.cnblogs.com/flyingzl/articles/2286738.html
+
+代码中有一些错误需要修正。
+
+## 注意点
+split()函数：以某个字符串分割
+slice()函数：按位置切割子字符串
+startsWith()函数：判断是否是以某个字符串作为头部开始
+
+恒等：===
+不恒等：!==
+
+修改传参函数值不会有异步问题，全局变量会有异步问题。
+
+
 
 
 

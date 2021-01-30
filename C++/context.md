@@ -1,4 +1,5 @@
-# [编程中什么是「Context(上下文)」？]( https://www.zhihu.com/question/26387327 )
+# 编程中什么是「Context(上下文)」
+https://www.zhihu.com/question/26387327
 
 最近读Flask的文档，读到很多关于Context(上下文)的术语，如应用上下文，请求上下文等，查阅资料但没有得到理解？有没有比较好的解释？
 

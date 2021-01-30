@@ -99,6 +99,22 @@ npm install gitbook-cli -g
 gitbook -V
 5. 环境完成
 
+# 8、20210125
+- gitbook
+- master
 
+cd gitbook
+gitbook build . ../master
+
+它会删除原先的master文件夹，然后新建。这时候就不再是一个git仓库，需要重新添加remote等等。
+发现SUMMARY.md也变回去了。
+思考：是不是应该修改md文件名为中文名？？？
+
+
+git remote add origin git@github.com:HanKin2015/GitBook.git
+git push origin master报错如下面，原来是忘记git add了。
+error: src refspec master does not match any
+
+git push origin master --force强制替换
 
 

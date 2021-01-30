@@ -2,13 +2,10 @@
 
 # 安装包命令
 
-# 1、deb
+## 1、deb
 dbkg -i **.deb
 
-
-
-
-# 扩展屏关于使用xinput支持x86盒子鼠标校准的问题
+## 2、扩展屏关于使用xinput支持x86盒子鼠标校准的问题
 目前只有xinput_1.6.1-1_amd64.deb这个版本的xinput在x86盒子上面正常使用，新版本的如xinput_1.6.2-1+b1_amd64.deb可能会有问题。
 首先dpkg -i xinput_1.6.1-1_amd64.deb安装软件
 输入xinput查看是否检测到了VGA和HDMI屏
@@ -19,9 +16,13 @@ xinput map-to-output 10 HDMI1 把鼠标定位HDMI屏
 
 https://my.oschina.net/u/174445/blog/33329
 
+## 3、常见的安装命令
+apt
+yum
 
+apt 和 apt-get区别
 
-
+apt search 和 apt-cache search区别
 
 
 

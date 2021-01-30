@@ -1,4 +1,5 @@
-# [C++之Lambda表达式](https://www.cnblogs.com/jimodetiantang/p/9016826.html)
+# C++之Lambda表达式
+https://www.cnblogs.com/jimodetiantang/p/9016826.html
 
 C++ 11 中的 Lambda 表达式用于定义并创建匿名的函数对象，以简化编程工作。
 Lambda 的语法形式如下：
