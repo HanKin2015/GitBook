@@ -12107,6 +12107,28 @@ git reset commitId和 在分支上面git checkout commitId都不是想要的结�
 正确做法：git checkout -b backtocommitid commitId
 建立新的分支，这时候就没有了后面修改的东西。
 
+## 20210202
+### 分支合并那些事儿
+不同的仓库按道理来说是不能进行合并的，但是似乎也是有种可能的。
+
+合并有三种方式：
+提交合并请求后，发现有合并冲突。
+解决方案一：使用在线Web IDE查看冲突地方并修改。
+解决方案二：线下合并使用git merge命令，手动处理完毕后直接git add即可，缺点没有合并请求这一步注释地方。
+解决方案三：在已知冲突的地方，修改对应的单个分支内容，修改后重新提交到单个分支上，刷新合并请求发现冲突没有了。
+
+
+git checkout -b 新的分支名 原有的分支
+
+## 20210205
+撤销某次提交记录
+git revert commitId
+
+## 20210206
+git cherry-pick & git rebase
+
+
+
 
 
 

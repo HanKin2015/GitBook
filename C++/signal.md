@@ -20,7 +20,14 @@ pid_t waitpid(pid_t pid,int *status,int options)
 
 # 信号量
 
-
+SIGINT与SIGTERM区别
+1）SIGINT关联ctrl+c
+2）SIGINT只能结束前台进程
+3）通过ctrl+c对当前进程发送结束信号，信号被进程树接收到（即：不仅当前进程，子进程也会收到结束信号）
+SIGTERM与SIGKILL
+1）SIGTERM可以被阻塞、处理和忽略；因此有的进程不能按预期的结束
+2）kill不使用参数：发送SIGTERM信号，只有当前进程收到信号，若当前进程被kill，则子进程的父进程就会更改为init，即pid为1
+3）kill命令的默认不带参数发生的信号就是SIGTERM，让程序友好的退出 ，当程序未退出时，可以使用kill -9强制退出
 
 
 
