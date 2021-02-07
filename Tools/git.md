@@ -12127,7 +12127,8 @@ git revert commitId
 ## 20210206
 git cherry-pick & git rebase
 
-
+## 20210207
+删除远程分支：git push origin --delete 分支名
 
 
 
