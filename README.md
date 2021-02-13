@@ -118,3 +118,26 @@ error: src refspec master does not match any
 git push origin master --force强制替换
 
 
+使用GitBook+GitHub pages建立在线电子书笔记。
+
+# 网站地址
+>https://hankin2015.github.io/GitBook/
+
+
+master是解析的html文件，GitBook分支是源码。
+
+
+# 日常维护
+gitbook init（更新目录）
+
+README.md 前言简介说明文档
+
+SUMMARY.md 书的章节目录
+
+gitbook serve（生成html）
+
+_book 文件夹, 里面的内容即为生成的 html 文件
+
+gitbook build（生成网页而不开启服务器）
+
+book.json 存放配置信息
