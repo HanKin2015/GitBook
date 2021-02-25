@@ -11602,25 +11602,6 @@ git pull
 - git commit
 - git push
 
-
-Step 1. 获取并检出此合并请求的分支
-
-git fetch origin
-git checkout -b [bName] origin/冲突分支
-
-Step 2. 本地审查变更（忽略）
-
-Step 3. 合并分支并修复出现的任何冲突
-
-git checkout master
-git merge --no-ff [bName]（本地就有冲突文件了，注意看产生冲突的文件）
-
-Step 4. 推送合并的结果到 GitLab
-
-git checkout -b [newBName]
-
-git push origin [newBName]
-
 # 6、git commit
 
 ### 修改commit内容
@@ -12130,7 +12111,20 @@ git cherry-pick & git rebase
 ## 20210207
 删除远程分支：git push origin --delete 分支名
 
+## 20210225
+Step 1. 获取并检出此合并请求的分支
+git fetch origin
+git checkout -b [bName] origin/冲突分支
 
+Step 2. 本地审查变更（忽略）
+
+Step 3. 合并分支并修复出现的任何冲突
+git checkout master
+git merge --no-ff [bName]（本地就有冲突文件了，注意看产生冲突的文件）
+
+Step 4. 推送合并的结果到 GitLab
+git checkout -b [newBName]
+git push origin [newBName]
 
 
 

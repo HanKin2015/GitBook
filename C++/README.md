@@ -149,7 +149,8 @@ close’ was not declared in this scope
 加上
 > #include <unistd.h>
 
-13、
+13、C++ Builder
+C++ Builder是由Borland公司推出的一款可视化集成开发工具。C++ Builder具有快速的可视化开发环境：只要简单地把控件（Component）拖到窗体（Form）上，定义一下它的属性，设置一下它的外观，就可以快速地建立应用程序界面；C++ Builder内置了100多个完全封装了Windows公用特性且具有完全可扩展性（包括全面支持ActiveX控件）的可重用控件；C++ Builder具有一个专业C++开发环境所能提供的全部功能：快速、高效、灵活的编译器优化，逐步连接，CPU透视，命令行工具等。它实现了可视化的编程环境和功能强大的编程语言（C++）的完美结合。
 
 
 
