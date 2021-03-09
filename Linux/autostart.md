@@ -68,3 +68,14 @@ export DISPLAY=:0
 xset q
 
 之后再输入sleep 1 && xset dpms force off不再报错
+
+
+
+
+
+
+
+
+
+
+

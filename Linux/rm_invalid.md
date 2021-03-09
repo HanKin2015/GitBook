@@ -22,7 +22,7 @@ r
 strace rm xxxxx
 删除成功
 
-## 怀疑rm命令是不是被人动了手脚
+## 4、怀疑rm命令是不是被人动了手脚
 /bin/rm xxxxx
 结果：删除成功
 
@@ -43,6 +43,21 @@ alias ls='ls --color=auto'
 alias rm='wall'
 ```
 what???????
+
+## 5、alias删除
+unalias rm
+
+发现被人写在了/etc/profile中，需要删除对应的行
+
+
+
+
+
+
+
+
+
+
 
 
 

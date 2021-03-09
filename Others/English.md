@@ -58,8 +58,10 @@ syntax：语法
 daemon：守护进程
 Mstsc (Microsoft terminal services client)
 gang：帮派，一群，一帮
-
-
+Retrieve: 检索;取回;检索操作;重新得到;收回
+dump：垃圾场、抛弃
+allocate：分配
+claim: 声称，索取;认领;索要
 
 
 
