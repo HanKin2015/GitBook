@@ -20,3 +20,14 @@ lsof | grep delete    #如果怀疑删掉的数据还在占用磁盘空间试试
 kill -9 pid           #结束掉进程就能释放磁盘空间了
  
 #for i in `lsof | grep delete | awk '{print $2}'`; do kill -9 $i ;done
+
+
+
+
+
+
+
+
+
+
+

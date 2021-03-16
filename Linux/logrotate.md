@@ -127,8 +127,9 @@ delaycompress：缺少gzip这一步，下一次生效，一般不配置
 
 
 
-
-
+## 5、crontab命令
+crontab -e可以直接进行编辑，和系统的不冲突。
+生成的配置文件路径：/var/spool/cron/crontabs/root
 
 
 
