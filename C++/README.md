@@ -232,8 +232,10 @@ https://blog.csdn.net/ZhangSong051052/article/details/80670970
 
 
 
-
-
+## c语言报错-- no previous prototype for function
+当我们使用了一个函数，但是没有在头文件中声明时，就会出这个错误。
+有时是因为去掉了static。static的函数使用和普通函数还是有区别的。static函数不需要声明。
+解决办法，头文件中添加声明即可。
 
 
 

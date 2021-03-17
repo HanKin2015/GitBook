@@ -7,10 +7,16 @@ GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自[GNU](https
 
 
 - 有了这个会在启动电脑时会弹出选择操作系统选择提示框（多系统必备）
-
-  
-
 它是一个多重[操作系统](https://baike.baidu.com/item/操作系统)启动管理器。用来引导不同系统，如windows，linux。
+GRand Unified Bootloader：宏伟的 统一的 引导加载程序
+
+
+
+
+
+
+
+
 
 在[X86架构](https://baike.baidu.com/item/X86架构)的机器中，Linux、[BSD](https://baike.baidu.com/item/BSD) 或其它Unix类的[操作系统](https://baike.baidu.com/item/操作系统)中GRUB、[LILO](https://baike.baidu.com/item/LILO) 是大家最为常用，应该说是主流。
 

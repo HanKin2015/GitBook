@@ -67,7 +67,16 @@ static bool mkdirs(char *path)
 问题3：魔数256，char数组初始化不应该常用memset吗
 问题4：i初始化最好在for外面
 问题5：可以通过!=后continue减少一层嵌套，虽然效率上面没有任何变化
-问题6：
+问题6：if语句中每次调用strlen降低效率，有时候还是需要考虑到效率
+问题7：access函数返回值是什么？0或者-1，这里为真让人误解是大于0
+问题8：mkdir函数返回值同理
+问题9：后面一段代码编写重复，为啥不在最开始就判断自动添加斜杠
+
+结论：一个小小的函数抒写就出现了9个问题，这是个什么概念？？？
+
+```
+
+```
 
 
 
@@ -90,6 +99,27 @@ dest指目标，是destination的缩写
 ## 4、内存问题排查工具- sanitizer
 
 ## 5、不能在函数中返回一个局部变量的地址：warning :address of local variable returned
+```
+#include<stdio.h>
+#include<string.h>
+char *intToString(void){
+	char string[] = "hello world!";
+	return string;
+}
+int main(void){
+	puts(intToString());
+	return 0;
+}
+```
+
+"hello world!"字符串字面量是存储在静态存储区的，函数结束也不会被释放，但是，使用字符数组的时候，会在栈区新建一个备份，所以在函数结束时就被自动被销毁了（返回的是一个地址，但是在这个函数结束的时候，这个地址指向的那块内存空间放置的内容被释放了，所以通过那个返回的地址已经找不到那块地址对应的内容了），所以肯定是不对的（静态申请内存的变量不能跨函数使用）。
+
+推荐使用static设置为静态变量，最好是作为参数返回。
+
+
+
+
+
 
 
 
