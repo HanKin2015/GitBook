@@ -131,13 +131,16 @@ delaycompress：缺少gzip这一步，下一次生效，一般不配置
 crontab -e可以直接进行编辑，和系统的不冲突。
 生成的配置文件路径：/var/spool/cron/crontabs/root
 
+logrotate的行为也是受crontab控制，在/etc/cron.daily目录下。
+而crontab任务是受anacron控制，在/etc/anacron文件中配置(可能不存在这一层控制)
+
+logrotate是基于crond服务来运行的，其crond服务的脚本是/etc/cron.daily/logrotate，日志转储是系统自动完成的。实际运行时，logrotate会调用主配置文件 /etc/logrotate.conf，可以在 /etc/logrotate.d 目录里放置自定义好的配置文件，用来覆盖logrotate的缺省值。定时执行/etc/cron.daily目录下的文件的设置，则在/etc/anacrontab里定义的,那anacrontab怎么知道上次成功执行脚本的具体时间呢?通过查看/etc/cron.daily/logrotate得知有 /var/lib/logrotate/logrotate.status这样的一个文件,此文件的作用就是记录最近一次成功运行日志分割脚本的具体时间.
+
+所以logrotate执行脚本的命令其实是/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf。
 
 
-
-
-
-
-
+https://blog.csdn.net/qq_36470898/article/details/105978773
+https://www.runoob.com/w3cnote/linux-crontab-tasks.html
 
 
 

@@ -62,9 +62,9 @@ Retrieve: 检索;取回;检索操作;重新得到;收回
 dump：垃圾场、抛弃
 allocate：分配
 claim: 声称，索取;认领;索要
-
-
-
+placeholder：占位符
+rotate：旋转、轮换、转动
+probe：探查、盘问、探究
 
 
 
