@@ -144,7 +144,11 @@ https://www.runoob.com/w3cnote/linux-crontab-tasks.html
 
 
 
-
+rsyslog服务和logrotate服务
+======================================================================
+rsyslog 是一个 syslogd 的多线程增强版。
+现在Fedora和Ubuntu, rhel6默认的日志系统都是rsyslog了
+rsyslog负责写入日志, logrotate负责备份和删除旧日志, 以及更新日志文件
 
 
 
