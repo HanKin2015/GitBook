@@ -9,7 +9,7 @@ $之前@之后是[linux系统](https://www.baidu.com/s?wd=linux系统&tn=SE_PcZh
 
 > hostname
 
-# 修改主机名
+## 1、修改主机名
 
 1、通过hostname命令。
 命令格式：hostname newhostname
@@ -17,7 +17,7 @@ $之前@之后是[linux系统](https://www.baidu.com/s?wd=linux系统&tn=SE_PcZh
 
 PS:重启终端生效。
 
-2、 通过配置文件/etc/sysconfig/network修改。
+## 2、 通过配置文件/etc/sysconfig/network修改。
 
 cat /etc/sysconfig/network
 
@@ -31,7 +31,7 @@ GATEWAY=192.168.1.1
 
 systemd
 
-3、修改配置文件 /etc/hosts
+## 3、修改配置文件 /etc/hosts
 
  需要把主机名和ip绑定在一起时，才需要修改这个hosts文件 。
 
@@ -44,13 +44,13 @@ systemd
 127.0.0.1 yourname localhost.localdomain localhost
 ```
 
-# 注意
+## 4、注意
 
 /etc/sysconfig/*是红帽系统下服务初始化环境配置文件，ubuntu就没有这个文件夹，只能对各个服务的存放位置分别寻找，比如centos里的/etc/sysconfig/network对应ubuntu里的/etc/network/interfaces文件。
 
 
 
-# 修改linux命令行提示符路径显示
+## 5、修改linux命令行提示符路径显示
 
 修改环境变量PS1（命令行提示符）
 

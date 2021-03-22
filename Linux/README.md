@@ -66,6 +66,14 @@ ll -Sh | tac
 ll -rt
 ll -rt | tac
 ```
+参数的解释如下:
+
+-r, --reverse              reverse order while sorting
+-t                         sort by modification time
+-S                         sort by file size
+-h, --human-readable       with -l, print sizes in human readable format
+                               (e.g., 1K 234M 2G)
+
 
 pactl命令可以修改伺服器的设置以及配置，但pactl命令仅限于局限的范围
 若要完整的功能，就必須要回归到最基本的指令pacmd,通过pacmd指令
@@ -83,6 +91,8 @@ tial -n 5 /etc/passwd       显示文件后五行
 ```
 
 
+xrdb
+$TERM
 
 
 
