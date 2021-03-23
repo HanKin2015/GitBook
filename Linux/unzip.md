@@ -2,12 +2,11 @@
 
 unzip *.zip -d 解压到的文件夹
 
-## 如何将一个超大文件分割成等大的多个文件
-当u盘容量太小，有需要拷贝大文件时，使用等大分割压缩。
-
+## 1、如何将一个超大文件分割成等大的多个文件
+当u盘容量太小，又需要拷贝大文件时，使用等大分割压缩。
 解压时，只需要解压其中任何一个即可。
 
-
+## 2、压缩命令示例
 创建tar.xz文件：先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz
 
 解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。
@@ -85,5 +84,18 @@ rar
 　　rar a all *.jpg
 
 　　unrar e all.rar
+
+## 3、tar 压缩并删除源文件
+tar -cvzf  a.tar.gz a --remove-files
+
+
+
+
+
+
+
+
+
+
 
 

@@ -7,7 +7,7 @@ ps://blog.csdn.net/qq_41113081/article/details/1001
 
 vim打开文件出现中文乱码：
 方案一：
-# 命令行模式
+# 命令行模式(非常重要太常用了)
 :e ++enc=cp936
 
 方案二：
