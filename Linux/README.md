@@ -94,6 +94,22 @@ tial -n 5 /etc/passwd       显示文件后五行
 xrdb
 $TERM
 
+## 12、如何查看linux 文件内容换行符
+cat -A 要查看的文件路径
+或者使用vim打开你要查看的文件，在末行模式输入 :set list
+
+使用cat -A可以清楚看见换行符是Windows格式还是unix格式，然后就可以使用unix2dos或者dos2unix进行转换。
+
+
+
+
+
+
+
+
+
+
+
 
 
 

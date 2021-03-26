@@ -220,8 +220,9 @@ function kill_lock_process()
 	fi
 }
 
+# 等于0执行成功，不等于0执行失败
 kill_lock_process
-if [ $? -ne 0 ]; then
+if [ $? -ne 0 ]; then # 执行失败
 	kill_lock_process
 fi
 ```

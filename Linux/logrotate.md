@@ -151,6 +151,32 @@ rsyslog 是一个 syslogd 的多线程增强版。
 rsyslog负责写入日志, logrotate负责备份和删除旧日志, 以及更新日志文件
 
 
+## 6、如果logrotate 1并且是datetext能不能成功？
+
+如果不限制格式(dateformat)，默认是按照日期命名，如20210325。这样压缩会报错文件已存在。
+如果加了格式限制，如dateformat -%Y-%m-%d-%s，按秒命名，文件名不会出现重复，就不会有文件存在错误。
+delaycompress延迟压缩，当出现需要压缩的时候，只会把原先的文件重新命名，等到下一次触发压缩的时候再进行压缩。对于只转存一次的脚本来说不需要，也可以需要。
+su这个还是很重要的，不然可能会出现报错：error: skipping "/var/log/hj.json" because parent directory has insecure permissions (It's world writable or writable by group which is not "root") Set "su" directive in config file to tell logrotate which user/group should be used for rotation.
+配置里面随便写一些东西是不影响脚本运行的，如有人写su root root或者hourly都不是标准的，hourly没有这个配置，root root不需要填写。
+
+```
+/var/log/*.json {
+    su
+    missingok
+    rotate 1
+    compress
+    delaycompress
+    notifempty
+    noolddir
+    copytruncate
+    nomail
+    dateext
+    dateformat -%Y-%m-%d-%s
+    size 1M   
+}
+```
+
+
 
 
 
