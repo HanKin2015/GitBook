@@ -30,9 +30,14 @@ ps -ef | awk 'NR==1'
 获取最后一列呢？
 可以使用awk -F',' '{print $NF}' 来获取
 
+打印最后一行的第二列就这样：
+awk 'END{print $2}' yourfile
 
+打印指定行的指定列（例如第4行第2列）：
+awk 'NR==4{print $2}' yourfile
 
-
+可以连续通道：
+awk 'NR==4' | awk {print $2}' 不提倡
 
 
 

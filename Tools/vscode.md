@@ -14,3 +14,4 @@ User版本无法在系统分区(盘) 创建默认文件夹Microsoft VS Code，�
 前者是内测版，一般每个工作日都会有更新，后者是正式版。
 
 
+https://sourceforge.net/projects/mingw-w64/files/
