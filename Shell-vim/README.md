@@ -18,9 +18,15 @@
 一般来说，关闭在第二个单词加上no即可
 如：ser nohlsearch
 
+# 易混淆的-n和-z
+这两个的判断结果一定是相反的。
+```
+-n
+   string is not null.
 
-
-
+-z
+  string is null, that is, has zero length
+```
 
 
 
