@@ -65,7 +65,11 @@ claim: 声称，索取;认领;索要
 placeholder：占位符
 rotate：旋转、轮换、转动
 probe：探查、盘问、探究
-
+reply：回复回答
+collaboration scenarios：协作场景
+surface：表面、水面、地面、液面
+pixel：像素
+indicate：表明、暗示
 
 
 

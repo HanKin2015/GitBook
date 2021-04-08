@@ -100,8 +100,39 @@ cat -A 要查看的文件路径
 
 使用cat -A可以清楚看见换行符是Windows格式还是unix格式，然后就可以使用unix2dos或者dos2unix进行转换。
 
+## 13、查看Linux用的桌面是GNOME、KDE或者其他
+推荐使用ll /usr/bin/*session*命令
 
-
+```
+[root@ubuntu0006:/etc/network] #ll /usr/bin/*session*
+-rwxr-xr-x 1 root root  10224 6月  12  2020 /usr/bin/dbus-run-session*
+-rwxr-xr-x 1 root root   1059 3月  16  2016 /usr/bin/session-installer*
+-rwxr-xr-x 1 root root 178448 5月  26  2015 /usr/bin/xfce4-session*
+-rwxr-xr-x 1 root root  10672 5月  26  2015 /usr/bin/xfce4-session-logout*
+-rwxr-xr-x 1 root root 108808 5月  26  2015 /usr/bin/xfce4-session-settings*
+lrwxrwxrwx 1 root root     35 12月  7  2017 /usr/bin/x-session-manager -> /etc/alternatives/x-session-manager*
+[root@ubuntu0006:/etc/network] #ps -A | egrep -i "gnome|kde|mate|cinnamon|lxde|xfce|jwm"
+   16 ?        00:00:00 kdevtmpfs
+ 7178 ?        00:00:00 xfce4-terminal
+ 7198 ?        00:00:00 gnome-pty-helpe
+14523 ?        00:00:00 gnome-keyring-d
+15094 ?        00:00:00 xfce4-session
+15106 ?        00:00:00 xfce4-panel
+15113 ?        00:00:00 polkit-gnome-au
+15121 ?        00:00:00 xfce4-volumed
+15124 ?        00:00:00 xfce4-power-man
+[root@ubuntu0006:/etc/network] #pgrep -l "gnome|kde|mate|cinnamon|lxde|xfce|jwm"
+16 kdevtmpfs
+7178 xfce4-terminal
+7198 gnome-pty-helpe
+14523 gnome-keyring-d
+15094 xfce4-session
+15106 xfce4-panel
+15113 polkit-gnome-au
+15121 xfce4-volumed
+15124 xfce4-power-man
+```
+Xorg是图形界面的基础，任何桌面都需要Xorg的。
 
 
 

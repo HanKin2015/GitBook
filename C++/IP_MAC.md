@@ -6,6 +6,13 @@
 
 请求配置csp文件时，链接也需要发送版本号字段（js代码-猝）。
 
+https://zhuanlan.zhihu.com/p/93630586?from_voters_page=true
+```
+
+```
+
+
+
 # 1、查看ip地址、mac地址
 ## Windows
 >ipconfig

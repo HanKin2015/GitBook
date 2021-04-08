@@ -77,9 +77,9 @@ VSC只是一个纯文本编辑器(editor)，不是IDE(集成开发环境)，不�
 
 
 ## 6、插件离线安装
-将C:\Users\Administrator\.vscode\extensions下面的文件夹拷贝到环境中，重启两次vscode即可。
+教程一：将C:\Users\Administrator\.vscode\extensions下面的文件夹拷贝到环境中，重启两次vscode即可。
 
-
+教程二：https://www.jianshu.com/p/17bcf79f1c85
 
 
 
