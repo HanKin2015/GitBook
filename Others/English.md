@@ -70,8 +70,8 @@ collaboration scenarios：协作场景
 surface：表面、水面、地面、液面
 pixel：像素
 indicate：表明、暗示
-
-
+lvalue required as left operand of assignment:左值必须作为赋值的左操作数
+srap:SRAP(Sangfor Remote Access Protocol)即Sangfor远程接入协议
 
 
 还没试过使用md文件打开另外md文件的命令：

@@ -88,8 +88,9 @@ rar
 ## 3、tar 压缩并删除源文件
 tar -cvzf  a.tar.gz a --remove-files
 
-
-
+## 4、gzip: unknown suffix -- ignored
+gunzip file#识别后缀，必须把后缀改为.gz //解压后的文件名，去掉.gz
+错误原因：错把zip的压缩包使用gunzip命令解压，正确是unzip命令。
 
 
 
