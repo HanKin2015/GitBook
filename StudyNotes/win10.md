@@ -75,7 +75,8 @@ Windows Vista较上一个版本Windows XP增加了上百种新功能，其中包
 2011年7月12日，微软已终止Service Pack 1的支持。2012年4月10日，微软已终止Windows Vista的主流技术支持；
 微软于2017年4月11日正式终止对Windows Vista的一切支持。至此，Windows Vista寿终正寝。
 
-
+## 7、wmic查看运行进程的参数
+https://www.cnblogs.com/DiZhang/p/12544793.html
 
 
 

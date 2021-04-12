@@ -1,6 +1,11 @@
-# path环境变量
+# environment环境变量
+Windows下path是exe文件的环境变量
+linux下PATH也是脚本的环境变量
 
-## 为什么修改LD_LIBRARY_PATH呢
+但是，在linux下还有一种也称为环境变量，全局变量
+如使用env命令可查看
+
+## 1、为什么修改LD_LIBRARY_PATH呢
 因为运行时动态库的搜索路径的先后顺序是：
 1.编译目标代码时指定的动态库搜索路径；
 2.环境变量LD_LIBRARY_PATH指定的动态库搜索路径；
@@ -14,6 +19,20 @@
 
 为了让这种方法更完美一些，可以将该 LD_LIBRARY_PATH 的 export 语句写到系统文件中，例如 /etc/profile、/etc/export、~/.bashrc 或者 ~/.bash_profile 等等，取决于你正在使用的操作系统咯。
 
+linux下修改的所有文件如果要立即生效，请使用命令：source .
 
-source .
+## 2、env命令
+
+
+C++调用C
+func(func, n)???
+
+
+
+
+
+
+
+
+
 
