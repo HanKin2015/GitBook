@@ -22,6 +22,12 @@ linux下PATH也是脚本的环境变量
 linux下修改的所有文件如果要立即生效，请使用命令：source .
 
 ## 2、env命令
+env 查看当前系统的环境变量
+修改了/etc/environment文件后，并不是对所有用户生效，只对root用户生效，因为只有root用户修改
+修改/etc/profile  
+注意修改时不要直接LOG_LEVEL=123，记得需要export LOG_LEVEL=123
+但是还是有问题，并不对terminal重启生效。
+
 
 
 C++调用C
