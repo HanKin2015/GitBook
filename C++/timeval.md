@@ -17,18 +17,22 @@ time_t 这种类型就是用来存储从1970年到现在经过了多少秒，要
 ## 2、tm结构体
 需要特别注意的是，年份是从1900年起至今多少年，而不是直接存储如2011年，月份从0开始的，0表示一月，星期也是从0开始的， 0表示星期日，1表示星期一。
 ```
-struct tm
-{
-    int tm_sec;  /*秒，正常范围0-59， 但允许至61*/
-    int tm_min;  /*分钟，0-59*/
-    int tm_hour; /*小时， 0-23*/
-    int tm_mday; /*日，即一个月中的第几天，1-31*/
-    int tm_mon;  /*月， 从一月算起，0-11*/  1+p->tm_mon;
-    int tm_year;  /*年， 从1900至今已经多少年*/  1900＋ p->tm_year;
-    int tm_wday; /*星期，一周中的第几天， 从星期日算起，0-6*/
-    int tm_yday; /*从今年1月1日到目前的天数，范围0-365*/
-    int tm_isdst; /*日光节约时间的旗标*/
+#ifndef _TM_DEFINED
+struct tm {
+	int tm_sec; /* 秒 – 取值区间为[0,59] */
+	int tm_min; /* 分 - 取值区间为[0,59] */
+	int tm_hour; /* 时 - 取值区间为[0,23] */
+	int tm_mday; /* 一个月中的日期 - 取值区间为[1,31] */
+	int tm_mon; /* 月份（从一月开始，0代表一月） - 取值区间为[0,11] */
+	int tm_year; /* 年份，其值等于实际年份减去1900 */
+	int tm_wday; /* 星期 – 取值区间为[0,6]，其中0代表星期天，1代表星期一，以此类推 */
+	int tm_yday; /* 从每年的1月1日开始的天数 – 取值区间为[0,365]，其中0代表1月1日，1代表1月2日，以此类推 */
+	int tm_isdst; /* 夏令时标识符，实行夏令时的时候，tm_isdst为正。不实行夏令时的时候，tm_isdst为0；不了解情况时，tm_isdst()为负。
+	long int tm_gmtoff; /*指定了日期变更线东面时区中UTC东部时区正秒数或UTC西部时区的负秒数*/
+	const char *tm_zone; /*当前时区的名字(与环境变量TZ有关)*/
 };
+#define _TM_DEFINED
+#endif
 ```
 
 ## 3、timeval结构体
@@ -128,4 +132,40 @@ time_t interval = (now.tv_sec - timestamp.tv_sec) * MICRO_SECONDS +
 (now.tv_nsec - timestamp.tv_nsec) / ONE_SECONDS;    //毫秒级
 
 ```
+
+
+
+
+
+
+
+
+
+```
+#include <time.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <limits.h>
+
+int main()
+{
+    //struct tm tm_obj = {0, 0, 8, 1, 1-1, 1970-1900};
+    struct tm tm_obj = {0, 0, 7, 14, 4, 2021-1900};
+    //1970年之前计算出来的是负值
+    //注意不要使用lu，虽然减的是1900，但是计算的却是从1970开始的
+	//date [-u] -d "20210414 7:00:00" +%s可能时区不同，可加参数-u
+    printf("from 1970.01.01 total seconds: %ld\n", mktime(&tm_obj));
+    printf("%d %d %d %d %d %d %d %d %d %ld %s\n", tm_obj.tm_sec,
+        tm_obj.tm_min, tm_obj.tm_hour, tm_obj.tm_mday,
+        tm_obj.tm_mon, tm_obj.tm_year, tm_obj.tm_wday,
+        tm_obj.tm_yday, tm_obj.tm_isdst, tm_obj.tm_gmtoff,
+        tm_obj.tm_zone);
+    printf("%ld\n", LONG_MAX);
+    return 0;
+}
+```
+
+
+
+
 
