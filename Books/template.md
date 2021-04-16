@@ -62,6 +62,45 @@ void hideInputTool()
 }
 ```
 
+## 2、上库模板
+```
+[问题描述] 
+[问题单号] 20210329
+[问题原因] 
+[修改方案] 
+[影响模块] 模块
+[本地自测] 
+[测试建议] 参考自测
+```
+
+## 3、头文件备注
+```c/c++文件
+/* main.cpp
+ *
+ * 客户端程序
+ *
+ * author: hankin
+ * time  : 2021.03.29
+ *
+ * Copyright (c) 2021 HanKin. All rights reserved.
+ */
+```
+
+```shell脚本
+#!/bin/bash
+#
+# 拷贝test文件到服务器后台
+#
+# 用法: ./copy_test_to_apach.sh
+#
+# 使用前注意: 
+#   1. 需要安装expect, apt install expect
+#   2. 放置在/data/local/hj/目录下
+#
+# Created by hejian
+# Copyright (c) 2020 hejian. All rights reserved.
+#
+```
 
 
 

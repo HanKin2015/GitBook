@@ -237,5 +237,6 @@ https://blog.csdn.net/ZhangSong051052/article/details/80670970
 有时是因为去掉了static。static的函数使用和普通函数还是有区别的。static函数不需要声明。
 解决办法，头文件中添加声明即可。
 
-
+## !! 两次取反
+两次取反是将对应的类型转换为boolean。第一次取反将变量转换为了bool值，但结果是相反的，所以第二次取反获得正确的结果。
 

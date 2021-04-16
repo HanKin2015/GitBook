@@ -72,6 +72,10 @@ pixel：像素
 indicate：表明、暗示
 lvalue required as left operand of assignment:左值必须作为赋值的左操作数
 srap:SRAP(Sangfor Remote Access Protocol)即Sangfor远程接入协议
+lossy:有损的
+freeze：冻结
+migrate：迁移
+
 
 
 还没试过使用md文件打开另外md文件的命令：

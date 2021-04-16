@@ -44,7 +44,7 @@ export PS1="\[\033[1m\]\[\033[31m\][\[\033[0m\]${debian_chroot:+($debian_chroot)
 /etc/bash_complication
 /etc/bash_complication.d/git_promt
 ```
-这样可以
+这样就可以了：
 export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
 ``
 完全可以使用__git_ps1自带函数代替git_branch函数
