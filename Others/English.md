@@ -75,6 +75,7 @@ srap:SRAP(Sangfor Remote Access Protocol)即Sangfor远程接入协议
 lossy:有损的
 freeze：冻结
 migrate：迁移
+temporary：暂时的，临时的
 
 
 
