@@ -230,7 +230,75 @@ int main()
 ```
 
 
+# 1、查找本机的网卡名
 
+除了lo环回网卡之外的单网卡. 多网卡情况暂不处理，除了环回网卡lo就是网卡名。
+
+```
+int get_ip_mac_address(uint32_t &ip_addr, uint8_t *phy_addr, int phy_addr_len)
+{
+    ASSERT(NULL != phy_addr);
+
+    int ret, sockfd, err;
+    struct ifreq ifr;
+    struct ifaddrs *ifaddr, *ifa;
+    std::string netName;
+
+    ret = getifaddrs(&ifaddr);
+    if(ret < 0) {
+        LOG_ERROR("Get ifaddrs is failed(%d)", ret);
+        return -1;
+    }
+
+    //获取除了lo环回网卡之外的单网卡. 多网卡情况暂不处理
+    for(ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+        if(strncmp(ifa->ifa_name, LO_NET_NAME, strlen(LO_NET_NAME))) {
+            netName = ifa->ifa_name;
+        }
+    }
+    LOG_INFO("Eth name is :[ %s ]", netName.c_str());
+
+    memset(&ifr, 0, sizeof(ifr));
+    strncpy(ifr.ifr_name, netName.c_str(), sizeof(ifr.ifr_name) - 1);
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        LOG_ERROR("Open socket error, %d, %s", errno, strerror(errno));
+        return -1;
+    }
+ 
+    err = ioctl(sockfd, SIOCGIFADDR, &ifr); // ip地址
+    if (0 == err) {
+        ip_addr = ((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr.s_addr;
+    }
+    else {
+        LOG_ERROR("Get ip address fail, %d, %s", errno, strerror(errno));
+        goto FAIL;
+    }
+
+    memset(&ifr.ifr_addr, 0, sizeof(ifr.ifr_addr));
+    err = ioctl(sockfd, SIOCGIFHWADDR, &ifr); // mac地址
+    if (0 == err) {
+        if (phy_addr_len < PHY_ADDR_LEN || sizeof(ifr.ifr_hwaddr.sa_data) < PHY_ADDR_LEN) {
+            LOG_ERROR("Mac address format error.");
+            goto FAIL;
+        }
+        memcpy(phy_addr, ifr.ifr_hwaddr.sa_data, PHY_ADDR_LEN);
+    }
+    else {
+        LOG_ERROR("Get mac address fail, %d, %s", errno, strerror(errno));
+        goto FAIL;
+    }
+
+    freeifaddrs(ifaddr);
+    close(sockfd);
+    return 0;
+
+FAIL:
+    freeifaddrs(ifaddr);
+    close(sockfd);
+    return -1;
+}
+```
 
 
 

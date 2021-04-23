@@ -31,9 +31,33 @@ Options-》File Type Options
 ## 6、使用Source Insight时出现"Symbol not found"的问题 —代码跳转
 然后在右边的panel面板（有一个Project Files的地方），再箭头指向的地方右键，接下来点击Open Project，然后选择你需要打开的项目确定，然后它会问你是否要同步，当然选择是咯，那么接来下就是Synchronizing了 ，那么结束后你再点击刚才的View，你会发现能跳转了。
 
+## 7、新建项目
+- Project-》new
+- 如果有项目就关闭当前项目
+- 输入新建项目名称（建议与打开的文件夹同名）
+- OK-》OK
+- Add and Remove Project Files添加全部文件，并且勾选reserve递归添加
+- 在文件窗口下面右键Synchronize Files同步文件
+完成
 
+## 8、一些个人设置
+SI独特的字体显示风格关闭：View -> Mono Font View
+代码字体大小修改：没有在Options里面，快捷键Alt+Y，3.5版本的Alt+T。
 
-
+## 9、常用快捷键
+F5：跳行数(ctrl+G)
+F2：文件选项卡切换
+F8：高亮关键字
+F7：快速查找关键字
+F6：分屏操作
+后退 : Alt+,
+后退到索引 : Alt+M
+向前 : Alt+.
+选择一行 : Shift+F6
+F3
+本文件查找结果的上一个。 
+F4
+本文件查找结果的下一个。 
 
 
 

@@ -2,7 +2,7 @@
 
 我就仅仅想打开一个网页。
 
-# 查询资料
+## 1、查询资料
 
  **分析：**在qt中实现web显示，根据qt的版本和对应编译器的版本，有如下选择：
 (1)5.6以下的版本，基于QtWebkit。但Qt5.6以后，移除了QtWebkit这个组件。
@@ -19,7 +19,7 @@
 
  https://blog.csdn.net/qq_24571549/article/details/62893925?utm_source=blogxgwz4 
 
-# QtWebKit
+## 2、QtWebKit
 
 ```
 #include <QtWebKitWidgets/QWebView>
@@ -55,7 +55,7 @@ Qt5.0开始使用QWebView控件，按以下方法试试
 QDesktopServices::openUrl(QUrl(QLatin1String("https://www.baidu.com")));
 ```
 
-# Qt WebEngine
+## 3、Qt WebEngine
 
 qt5.2.1无法默认使用，没有头文件。
 
@@ -67,7 +67,7 @@ QWebEngineView  *myWeb = new QWebEngineView(this);
 myweb->setUrl(QUrl("https://www.baidu.com/"));
 ```
 
-# QAxWidget
+## 4、QAxWidget
 
 qt5.2.1无法默认使用，没有头文件。
 
@@ -77,7 +77,7 @@ qt5.2.1无法默认使用，没有头文件。
 
 #include <QAxWidget>
 
-# 解决 Project ERROR: Unknown module(s) in QT: webengine 办法
+## 5、解决 Project ERROR: Unknown module(s) in QT: webengine 办法
 
 
 
@@ -174,3 +174,40 @@ http://blog.csdn.net/ly305750665/article/details/77937997
 
 
  https://blog.csdn.net/sean_8180/article/details/81634425 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+## 解决url中空格和加号问题
+https://bugreports.qt.io/browse/QTBUG-31660
+https://codereview.qt-project.org/c/qt/qtbase/+/60266/
+http://www.voidcn.com/article/p-mqihrvse-bur.html
+https://blog.csdn.net/weixin_34415923/article/details/90525151
+
+处理空格和加号 (“+”)
+空格应该被编码成加号 ("+")，而如果字符本身就是加号 ("+")，则应该被编码成百分比编码格式 (%2B)然而，互联网规范管理 URL 不认为空格和加号字符等价。
+
+由于这样，QUrlQuery 不会将空格字符编码为 "+"，也不会将 "+" 解码为一个空格字符。相反，空格字符将在编码形式中呈现 "%20"。
+
+为了支持这样的 HTML 表单编码，QUrlQuery 既不会将 "%2B" 序列解码为一个加号，也不会编码一个加号。事实上，任何键、值、查询字符串中的 "%2B" 或 "+" 序列完全像写的一样 （除了 "%2b" 到 "%2B" 大写转换）。
+ 
+ 解决不了：在源头进行处理。
+ 这种编码方式很恼火，如果本身就是加号怎么办？翻译成空格？
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

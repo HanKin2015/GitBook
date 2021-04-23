@@ -6,11 +6,19 @@
 
 阻塞。
 
+
+
+
+
+
+
+
+
 - milliseconds  msleep毫秒
 
 - usleep微秒
 
-  - ```
+- ```
     功能与sleep类似，只是传入的参数单位是微妙。
     若想最佳利用cpu，在更小的时间情况下，选择用usleep。
     sleep传入的参数是整型，所以不能传了小数。
@@ -74,73 +82,5 @@ ns是纳秒=0.000000001秒
 版权声明：本文为CSDN博主「CBK888666」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
 原文链接：https://blog.csdn.net/cbk861110/article/details/40747139
 
-# 1、查找本机的网卡名
 
-除了lo环回网卡之外的单网卡. 多网卡情况暂不处理，除了环回网卡lo就是网卡名。
-
-```
-int get_ip_mac_address(uint32_t &ip_addr, uint8_t *phy_addr, int phy_addr_len)
-{
-    ASSERT(NULL != phy_addr);
-
-    int ret, sockfd, err;
-    struct ifreq ifr;
-    struct ifaddrs *ifaddr, *ifa;
-    std::string netName;
-
-    ret = getifaddrs(&ifaddr);
-    if(ret < 0) {
-        LOG_ERROR("Get ifaddrs is failed(%d)", ret);
-        return -1;
-    }
-
-    //获取除了lo环回网卡之外的单网卡. 多网卡情况暂不处理
-    for(ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
-        if(strncmp(ifa->ifa_name, LO_NET_NAME, strlen(LO_NET_NAME))) {
-            netName = ifa->ifa_name;
-        }
-    }
-    LOG_INFO("Eth name is :[ %s ]", netName.c_str());
-
-    memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, netName.c_str(), sizeof(ifr.ifr_name) - 1);
-
-    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        LOG_ERROR("Open socket error, %d, %s", errno, strerror(errno));
-        return -1;
-    }
- 
-    err = ioctl(sockfd, SIOCGIFADDR, &ifr); // ip地址
-    if (0 == err) {
-        ip_addr = ((struct sockaddr_in*)&(ifr.ifr_addr))->sin_addr.s_addr;
-    }
-    else {
-        LOG_ERROR("Get ip address fail, %d, %s", errno, strerror(errno));
-        goto FAIL;
-    }
-
-    memset(&ifr.ifr_addr, 0, sizeof(ifr.ifr_addr));
-    err = ioctl(sockfd, SIOCGIFHWADDR, &ifr); // mac地址
-    if (0 == err) {
-        if (phy_addr_len < PHY_ADDR_LEN || sizeof(ifr.ifr_hwaddr.sa_data) < PHY_ADDR_LEN) {
-            LOG_ERROR("Mac address format error.");
-            goto FAIL;
-        }
-        memcpy(phy_addr, ifr.ifr_hwaddr.sa_data, PHY_ADDR_LEN);
-    }
-    else {
-        LOG_ERROR("Get mac address fail, %d, %s", errno, strerror(errno));
-        goto FAIL;
-    }
-
-    freeifaddrs(ifaddr);
-    close(sockfd);
-    return 0;
-
-FAIL:
-    freeifaddrs(ifaddr);
-    close(sockfd);
-    return -1;
-}
-```
 

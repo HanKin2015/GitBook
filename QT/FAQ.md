@@ -94,7 +94,7 @@ pushButton->setStyleSheet("padding: -1");
 
 使用加号或者str = QString("%1 was born in %2.").arg("Joy").arg(1993); 
 
-# 13、键盘时间爱你
+# 13、键盘事件案例
 
 ```
 
