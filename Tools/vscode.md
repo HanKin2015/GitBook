@@ -34,6 +34,11 @@ VSC只是一个纯文本编辑器(editor)，不是IDE(集成开发环境)，不�
 
 添加bin环境变量，cmd输gcc -v可以显示出gcc的版本。
 
+## 6、搭建python运行环境
+python.exe路径添加
+run code插件直接运行
+
+
 ### 安装扩展(extension)
 
 - C/C++：又名 cpptools，提供Debug和Format功能

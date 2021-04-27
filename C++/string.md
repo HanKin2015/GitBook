@@ -33,9 +33,6 @@ size_t等价于unsigned int
  其中string是std::basic_string<T>的简写 。 
 
 # 3、strstr函数
-
-
-
 strstr是C语言中的函数，作用是返回字符串中首次出现子串的地址。
 
 ## 3-1、描述

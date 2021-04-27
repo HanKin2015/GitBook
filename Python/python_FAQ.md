@@ -188,6 +188,16 @@ msg_handle.start()
 # 21、Failed to eexecute script ***
 怀疑跟ftp服务器不能使用有关。
 
+## 22、python报错：'gbk' codec can't decode byte 0xb9 in position 14: illegal multibyte sequence解决办法
+原代码：
+f = open(r'E:\0 paper\shiyan\pjdata.txt')
+报错：
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xb9 in position 14: illegal multibyte sequence
+更正代码：
+f = open(r'E:\0 paper\shiyan\pjdata.txt',encoding='utf-8')
+ 
+
+解决办法：将open文件路径后加上encoding='utf-8'即可解决问题
 
 
 

@@ -1,4 +1,5 @@
 [TOC]
+
 # 工具之notepad++
 
 # 1、markdown主题包
@@ -6,9 +7,28 @@
 网址：https://github.com/Edditoria/markdown-plus-plus
 
 没有获得满意的主题，还是使用typora写md满意。
+真相了，原来是我配置错了。有些markdown主题需要配套其notepad++主题。真香~
 
 目前：tomorrow_night_blue  微软雅黑  18
 可能左边行号字体小，也可以调整。
+
+typora软件使用占用cpu偏高，通过修改主题还是能接受。
+
+```
+:: Check whether you have Node.js installed
+node -v
+
+:: Go to UDL folder of Notepad++. Usually...
+cd %AppData%\Notepad++\userDefineLangs
+
+:: Example: Download Zenburn UDL file
+npx markdown-plus-plus zenburn
+
+:: Read help for details
+npx markdown-plus-plus --help
+```
+
+推荐使用：Obsidian主题
 
 # 2、个性设置标签栏
 

@@ -1,7 +1,8 @@
+# Dump文件 
+
 参考：[Dump文件的生成和使用](https://blog.csdn.net/lk142500/article/details/80563552)
 
 
-# Dump文件 
 Dump文件是进程的内存镜像。可以把程序的执行状态通过调试器保存到dump文件中。Dump文件是用来给驱动程序编写人员调试驱动程序用的，这种文件必须用专用工具软件打开，比如使用WinDbg打开。
 
 一般以dmp格式结尾。
