@@ -69,9 +69,69 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
  - 强制解锁，删除锁文件
  - 使用ps aux找到占锁的进程，关键字apt或者apt-get
  
+ ## 7、The system is running in low-graphics mode时解决方法
+
+1. df -h
+2. cd /etc/X11
+3. sudo cp xorg.conf.failsafe xorg.conf
+4. sudo reboot
+
+## 8、获取系统位数
+命令1：getconf LONG_BIT
+结果：64
+
+命令2：uname -a
+结果：Linux Test004MUJUP 2.6.32-431.23.3.el6.x86_64 #1 SMP Wed Jul 16 06:12:23 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+命令3：uname -r
+结果：2.6.32-431.23.3.el6.x86_64
+
+命令4：cat /proc/version
+结果：Linux version 2.6.32-431.23.3.el6.x86_64 (mockbuild@x86-027.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Wed Jul 16 06:12:23 EDT 2014
+
+
+
+## 9、chroot: failed to run command `/bin/bash': No such file or directory
+
+缺少依赖，lib和lib64、sbin虽然是软链接，但是chroot后路径会变化
+
+ https://www.bbsmax.com/A/pRdBB4vDdn/ 
+
+
+
+## 10、linux 上删除所有的无效文件链接
+
+### linux删除文件夹软链接
+
+ (2018-09-02 00:00:29)
+
+错误：rm dirname/ 
+
+正确：rm dirname --> 只删除链接文件夹，元文件夹不变
+
+
+
+## 11、[shell之列表的定义与循环](https://www.cnblogs.com/zyy98877/p/10234527.html)
+https://cloud.tencent.com/developer/ask/92780 
  
- 
- 
+## 12、Linux 文件不能删除，没有权限问题
+
+shirandata 2020-07-01 23:21:20  1207  收藏
+分类专栏： Linux
+版权
+第一步：查看文件属性
+lsattr xxx  查看文件属性(xxx为文件名)
+1
+看到的情况
+
+-----a-------或者-----i-------
+1
+第二步：去除属性
+chattr -a xxx 或者 chattr -i xxx
+1
+第三步：删除文件
+rm -rf xxx
+
  
 
 

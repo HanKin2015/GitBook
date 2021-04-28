@@ -134,7 +134,8 @@ lrwxrwxrwx 1 root root     35 12月  7  2017 /usr/bin/x-session-manager -> /etc/
 ```
 Xorg是图形界面的基础，任何桌面都需要Xorg的。
 
-
+gdm是Linux的[图形界面](https://www.baidu.com/s?wd=图形界面&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)
+GDM (The GNOME Display Manager)是GNOME显示环境的管理器，并被用来替代原来的X Display Manager。与其竞争者(X3DM,KDM,WDM)不同，GDM是完全重写的，并不包含任何XDM的代码。GDM可以运行并管理本地和[远程登录](https://www.baidu.com/s?wd=远程登录&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)的X服务器(通过XDMCP)。gdm仅仅是一个脚本，实际上是通过他来运行GDM二进制可执行文件。gdm-stop是用来迅速终止当前正在运行的gdm守护进程的一个脚本。gdm-restart脚本将迅速重启当前守护进程。然而gdm-safe-restart会当所有人都注销后再重启。gdmsetup是一种可以很简单的修改多数常用选项的图形化界面工具。GNOM的帮助里有更完整的文档，在“应用程序”/“系统工具”这一章节。 
 
 
 

@@ -12150,14 +12150,30 @@ git clone时出现Permission denied(publickey). fatal: Could not read from remot
 ### 20210323
 git cherry-pick
 
+### 20210428
+修复git diff正文中文乱码
 
+$ git config --global core.quotepath false          # 显示 status 编码
+$ git config --global gui.encoding utf-8            # 图形界面编码
+$ git config --global i18n.commit.encoding utf-8    # 提交信息编码
+$ git config --global i18n.logoutputencoding utf-8  # 输出 log 编码
 
+不重启电脑快速测试的话，cmd输入命令
+set LESSCHARSET=utf-8
 
+在git bash的界面中右击空白处，弹出菜单，选择选项->文本->本地Locale，设置为zh_CN，而旁边的字符集选框选为UTF-8。
 
+git如何生成单个文件的补丁
+背景：有时候碰到一个commit包含了好几个文件的修改，但是我只需要其中一个文件的修改内容，那么这时候就需要以下方法来生成这一个文件对应修改内容的补丁
 
+答:git format-patch "参照的commit-id" filename1 filename2
 
+### 20210429
+GitHub的fork、start、watch使用
 
-
+fork：把别人的代码库中复制（fork）一份到你自己的代码库，包括原有库中的所有提交记录fork后代码库会出现在自己的代码仓库中，和别人的完全独立
+start：用于收藏（start）或者点赞别人的代码
+watch：用于关注（watch）别人代码库的动态，默认是Not watching，设置为watching就可以关注这个代码库的动态了，假如有人push或者其他动作，你的邮箱就会收到消息。
 
 
 

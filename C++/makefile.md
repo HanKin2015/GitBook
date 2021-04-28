@@ -76,3 +76,21 @@ clean:
 缺少命令：autoconf-2.68.tar.bz2、automake-1.11.1.tar.bz2、m4-1.4.14.tar.bz2
 
 
+修改c++编译标准只能在makefile里面 gcc -std=c99 -o xx xx.c 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

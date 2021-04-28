@@ -95,6 +95,44 @@ int main()
 ## 8、个性化配置core文件路径
 内核在coredump时所产生的core文件放在与该程序相同的目录中，并且文件名固定为core。很显然，如果有多个程序产生core文件，或者同一个程序多次崩溃，就会重复覆盖同一个core文件，因此我们有必要对不同程序生成的core文件进行分别命名。
 
+使用下面的命令使kernel生成名字为core.filename.pid格式的core dump文件：
+
+echo “/data/coredump/core.%e.%p” >/proc/sys/kernel/core_pattern
+
+这样配置后，产生的core文件中将带有崩溃的程序名、以及它的进程ID。上面的%e和%p会被替换成程序文件名以及进程ID。
+
+需要说明的是，在内核中还有一个与coredump相关的设置，就是/proc/sys/kernel/core_uses_pid。如果这个文件的内容被配置成1，那么即使core_pattern中没有设置%p，最后生成的core dump文件名仍会加上进程ID。
+
+```
+echo 1 > /proc/sys/kernel/core_uses_pid
+echo "/data/coredump/core.%e%p" >/proc/sys/kernel/core_pattern
+
+崩溃：
+core.exe231
+如果有%p就按照core_pattern配置，没有就默认在末尾.%p。
+```
+
+## 9、如何判断一个文件是coredump文件？
+在类unix系统下，coredump文件本身主要的格式也是ELF格式，因此，我们可以通过readelf命令进行判断。
+```
+readelf -h core 看type类型。
+file core       也能看见core字样
+```
+
+## 10、其他
+ulimit –c 4  (注意，这里的size如果太小，则可能不会产生对应的core文件，笔者设置过ulimit –c 1的时候，系统并不生成core文件，并尝试了1，2，3均无法产生core，至少需要4才生成core文件)
+
+但当前设置的ulimit只对当前会话有效，若想系统均有效，则需要进行如下设置：
+
+Ø  在/etc/profile中加入以下一行，这将允许生成coredump文件
+
+ulimit-c unlimited
+
+Ø  在rc.local中加入以下一行，这将使程序崩溃时生成的coredump文件位于/data/coredump/目录下:
+
+echo /data/coredump/core.%e.%p> /proc/sys/kernel/core_pattern 
+
+注意rc.local在不同的环境，存储的目录可能不同，susu下可能在/etc/rc.d/rc.local
 
 
 
