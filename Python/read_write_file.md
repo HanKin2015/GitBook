@@ -12,4 +12,4 @@ https://www.cnblogs.com/xiugeng/p/8635862.html
 　　缺点：比readlines慢得多
 
 三、readlines方法
-　　特点：一次性读取整个文件；自动将文件内容分析成一个行的列表。
+　　特点：一次性读取整个文件；自动将文件内容分解成一个行的列表。

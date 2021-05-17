@@ -80,7 +80,7 @@ void hideInputTool()
  * 客户端程序
  *
  * author: hankin
- * time  : 2021.03.29
+ * date  : 2021.03.29
  *
  * Copyright (c) 2021 HanKin. All rights reserved.
  */
@@ -92,22 +92,39 @@ void hideInputTool()
 # 拷贝test文件到服务器后台
 #
 # 用法: ./copy_test_to_apach.sh
-#
 # 使用前注意: 
 #   1. 需要安装expect, apt install expect
 #   2. 放置在/data/local/hj/目录下
 #
-# Created by hejian
+# author: hejian
+# date  : 2021.05.07
+#
 # Copyright (c) 2020 hejian. All rights reserved.
 #
 ```
 
+```python脚本
+# -*- coding: utf-8 -*-
+"""
+@description:
+    copy tool for ftp
+
+@author: hankin
+@date  : 2021.05.07
+	
+Copyright (c) 2021 HanKin. All rights reserved.
+"""
+```
 
 
+## 4、调试日志
+```C++
 
+```
 
+```python脚本
 
-
+```
 
 
 

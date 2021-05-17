@@ -72,7 +72,6 @@ cout << str1 << endl;
 ## 3-2、实现方式
 
 ```c
-//Copyright 1990 Software Development Systems, Inc.
 char *strstr(const char *s1,const char *s2)
 {
 　int len2;

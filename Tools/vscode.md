@@ -86,6 +86,59 @@ run code插件直接运行
 
 教程二：https://www.jianshu.com/p/17bcf79f1c85
 
+## 7、输出窗口中文乱码
+由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。
+
+在输出窗口除了g++能清晰看见，其余全是乱码。
+
+可以添加"code-runner.runInTerminal": true,让程序运行在终端窗口就不会有乱码问题。
+
+https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#!
+这个是对于python代码，不清楚有没有效果，待测试。
+
+
+## 8、设置默认的终端
+- 打开左下角设置
+- 找到 Terminal › Integrated › Shell: Windows 设置项
+```
+{
+    "window.zoomLevel": 2,
+    "workbench.colorTheme": "Monokai",
+    "terminal.integrated.automationShell.windows": "",
+    "code-runner.runInTerminal": true,
+    "terminal.integrated.shell.windows": "C:\\Windows\\system32\\cmd.exe"
+}
+```
+注意：不是automation shell。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

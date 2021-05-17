@@ -14,6 +14,7 @@
 
 typora软件使用占用cpu偏高，通过修改主题还是能接受。
 
+在线更新：
 ```
 :: Check whether you have Node.js installed
 node -v
@@ -27,6 +28,9 @@ npx markdown-plus-plus zenburn
 :: Read help for details
 npx markdown-plus-plus --help
 ```
+
+离线更新：
+将目录C:\Users\Administrator\AppData\Roaming\Notepad++\userDefineLangs下的xml文件拷贝到对应的目录下。该文件也可以在网站上面下载。
 
 推荐使用：Obsidian主题
 
