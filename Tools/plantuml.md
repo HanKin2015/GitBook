@@ -1,6 +1,20 @@
 # plantuml
 
-## 1、
+官网+学习：https://plantuml.com/zh/
+
+
+## 注释
+'这是个单行注释
+/'这是个多行注释
+'/
+
+注意：单行注释只能在行开头
+
+## 文件后缀
+.pu PlantUML Document
+.puml PlantUML Diagram
+
+## 1、安装
 1.安装graphviz
 2.如果没有安装过jdk，安装jdk，版本不限，可以使用目录中的openjdk-11
 3.安装IDE的插件，pycharm可以使用IDEA相同的安装包。
@@ -24,10 +38,37 @@
 顺序图用 -> , –>, <-, <– 来绘制参与者（Participants）之 间的消息（Message）。
 ( * ) –> Alice ：( * ) 表示起点
 
-## 注释
-‘这是个单行注释
-/’这是个多行注释
-‘/
+
+## 2、vscode使用plantuml
+安装插件jebbs.plantuml-2.13.8.six
+Alt+D运行预览
+
+基本语法：
+
+
+## 3、活动图（流程图）
+```
+@startuml
+start
+:Hello world;
+:This is on defined on
+several **lines**;
+end
+@enduml
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
