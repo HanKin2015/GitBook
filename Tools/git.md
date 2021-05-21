@@ -12175,6 +12175,85 @@ fork：把别人的代码库中复制（fork）一份到你自己的代码库，
 start：用于收藏（start）或者点赞别人的代码
 watch：用于关注（watch）别人代码库的动态，默认是Not watching，设置为watching就可以关注这个代码库的动态了，假如有人push或者其他动作，你的邮箱就会收到消息。
 
+### 2021051
+# 认识git
+工作区  本地仓库  暂存区
+
+# 配置账号
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+查看设置的命令:
+
+git config --list    
+
+然后通过以下命令既可以修改设置的全局用户名和邮箱:
+
+git config --global --replace-all user.name "yourNewName"
+
+git config --global --replace-all user.email "yourNewEmail"
+
+
+
+# 分支基础
+命令 | 说明
+:---|:---
+git branch | 查看分支
+git branch <分支名> | 新建分支
+git checkout <分支名> | 切换分支
+clear | 清理窗口
+git status | 查看仓库修改状态
+git checkout -- <文件名> | 撤销文件的修改操作
+git checkout -b <分支名> | 新建分支并切换
+git add . | 添加所有修改文件
+git reset HEAD <文件名> | 撤销文件的添加操作
+git commit -m "修改内容说明" | 添加描述信息
+git log | 查看提交日志
+git merge <分支名> | 将分支名的内容合并到当前分支
+git push origin <分支名> | 推送到分支
+git pull <分支名> | 更新本地仓库
+git stash | 储藏当前内容
+git stash list | 查看文件内容
+git stash pop | 恢复储藏的内容，即撤销
+
+
+# 备注
+HEAD 当前分支别名
+
+## stash和add的区别
+add添加到本地仓库，stash添加到磁盘中，断电后会消失
+
+# 代码冲突
+两个人修改了文件同一行代码
+
+git checkout master
+git pull origin master
+git checkout <个人分支名>
+git merge master
+如果这时候有冲突的时候，需要手动修改
+
+## 冲突文件内容
+7个向左的尖括号-起点
+7个向右的尖括号-终点
+7个等于号-隔开
+
+删除额外的备注内容（三行），选择合并的内容留下哪些，然后继续add。
+
+git branch -av 查看具体的分支内容
+
+# demo （"demonstration"的缩写）
+DEMO是"demonstration"的缩写。DEMO的中文含意为“示范”、“展示”、“样片”、“样稿”、“原型”，常被用来称呼具有示范或展示功能及意味的事物。
+
+
+
+
+
+
+
+
+
+
+
 
 
 
