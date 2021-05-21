@@ -33,3 +33,95 @@ folder 一般情况，是说某一个文件夹，通常不包含“路径”的�
 C:\News\test\My Pics\aerchi.txt 
 Please go to C:\News\test\ directory,    double click and open folder "My Pics" . you will see the file aerchi.txt  ...
 
+
+
+
+# 函数的复杂度
+- 80列（方便查看一般电脑一行屏幕显示完全）
+- 50行（函数行数）
+- 功能单一性（一个函数一个功能）
+- 5个（参数数量）
+- 20CC（CheckList、）
+
+# 提升可调实性
+- 模块化
+- 强隔离
+- 内部状态输出
+- 跟踪关键指标
+
+参数：Windows和Linux的区别
+
+
+# 从调试到测试
+- 调试
+- 自动化过程：单元测试
+- 
+- 黑盒测试：模块测试
+
+# 让代码更易于修改/易用/扩展
+## 更易于修改
+- 易于理解
+- 模块化
+- 数据隐藏
+
+## 函数级异常处理
+- 参数有效性检查
+- 返回值检查
+- 外部输入数据检查
+- 中间状态校验
+
+## 写好代码的4个好方法
+- 写带代码也要说人话
+- 把好的套路变成习惯
+- 善用工具
+- 请高手来给你Review
+
+https://www.v2ex.com/t/81563
+安装插件：
+删除插件：
+
+
+格式化工具：astyle
+风格检查工具：pclint/cccc/SourceMonitor
+静态扫描工具：cpptest
+动态调试工具：Valgrind
+
+
+[xml和json的区别](https://www.cnblogs.com/lsohvaen001/p/7887502.html)
+[json百度百科](https://baike.baidu.com/item/JSON/2462549?fr=aladdin)
+
+先写单元测试再写实现代码。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
