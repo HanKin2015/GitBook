@@ -24,4 +24,18 @@ https://blog.csdn.net/yibu_refresh/article/details/53219530
 
 Video Memory负责缓存图像，而对于交换链可简单理解为缓存的 buffer 控制。一般交换链有多个缓冲区，一个前缓冲（为正在显示的buffer），一个或者多个后缓冲。（例如：一帧图像在显示的时候，另一帧图像在一个后缓冲buffer中处理并等待显示。)
 
+## 4、#pragma comment(lib, "XXX.lib")学习
+#pragma comment(lib, "XXX.lib")是visual studio中使用的，
 
+#pragma comment ( lib,"wpcap.lib" ) 
+是导入1个库文件，以使程序可以调用相应的动态链接库。
+和在工程设置里写上链入wpcap.lib的效果一样，不过这种方法写的 程序别人在使用你的代码的时候就
+不用再设置工程settings了。告诉连接器连接的时候要找ws2_32.lib，这样你就不用在linker的lib设置
+里指定这个lib了。
+#pragma comment(lib, "c:\\1\\autozen\\debug\\mess.lib")
+只影响build时link的行为。
+#pragma  仅仅影响编译器编译的时候，link .lib 库的问题。和 运行时没有任何关系。
+此时仅仅告诉系统需要静态加载一个 .dll 文件。
+当程序运行时，需要加载这个 .dll 文件。
+此时如何加载这个 .dll 文件，有自己的加载方式程序发布后，只需向客户提供.exe和.dll，不需要.lib。
+dll和exe放在同一个目录、dll放在系统目录、dll放在PATH环境变量中的目录，exe都能正常运行

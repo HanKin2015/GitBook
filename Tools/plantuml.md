@@ -44,7 +44,11 @@
 Alt+D运行预览
 
 基本语法：
-
+```
+@startuml
+Alice -> Bob: test
+@enduml
+```
 
 ## 3、活动图（流程图）
 ```
@@ -58,7 +62,12 @@ end
 ```
 
 
-
+## 类图
+-表示private  
+#表示protected 
+~表示default,也就是包权限  
+_下划线表示static  
+斜体表示抽象 
 
 
 
