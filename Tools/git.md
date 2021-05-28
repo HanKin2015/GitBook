@@ -11402,6 +11402,8 @@ git config --global user.name "张三"
 git config --global user.email "49660@zhangsan.com"
 ssh-keygen -t rsa -C "邮件地址"
 拷贝生成的公钥到git的ssh钥匙中：/root/.ssh/id_rsa.pub
+
+访问令牌啥的应该不需要，添加完ssh秘钥之后需要稍微等待一段时间才能生效
 ```
 
 ## 0-1、安装git
@@ -12038,6 +12040,8 @@ ssh-keygen -t rsa -C "邮件地址"
 接着又会提示你输入两次密码（该密码是你push文件的时候要输入的密码，而不是github管理者的密码），
 
 当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码（推荐），直接提交到github上了。
+
+
 
 # git cherry-pick教程
 

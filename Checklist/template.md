@@ -119,7 +119,26 @@ Copyright (c) 2021 HanKin. All rights reserved.
 
 ## 4、调试日志
 ```C++
-
+// 调试日志文件只创建一次
+const char *file_path;
+file_path  = "D:/hejian.txt";
+if (_access(file_path, 0)) {
+	FILE *fp;
+	fp = fopen(file_path, "a");
+	if (fp == NULL) {
+		OUTPUT_DEBUG_PRINTF("[keyword] open file failed!");
+		break;
+	}
+	struct _timeb now;                                              
+	struct tm today;                                                
+	char datetime_str[20];                                          
+	_ftime_s(&now);                                                 
+	localtime_s(&today, &now.time);                                 
+	strftime(datetime_str, 20, "%Y-%m-%d %H:%M:%S", &today);
+	fprintf(fp, "%s [%04d/%04d] INFO [%s] WM_TIMER wparam is %d.\n", datetime_str, GetCurrentProcessId(), GetCurrentThreadId(), __FUNCTION__, wparam);
+	fclose(fp);
+	fp = NULL;
+}
 ```
 
 ```python脚本

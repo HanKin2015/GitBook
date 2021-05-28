@@ -58,4 +58,22 @@ Xen 具有非常高的难度，别说玩转，就算仅仅只是理解它，都�
 
 
 
+# 官网
+官网：https://www.qemu.org/contribute/
+代码仓库：https://gitlab.com/qemu-project/qemu
+
+15.7 MB Files 805.9 GB Storage
+不能被这些数字迷惑，实际下载大小约为211.87 MiB（20210526）
+ git clone https://gitlab.com/qemu-project/qemu.git
+
+
+
+
+
+
+
+
+
+
+
 

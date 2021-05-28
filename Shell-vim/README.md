@@ -79,5 +79,45 @@ cat 2.txt
 rm -rf 2.txt 3.txt
 ```
 
+## 进阶：使用find命令查询并拷贝文件到指定路径
+```
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.*
+./libavutil/libavutil.so.55
+./libswresample/libswresample.so.2
+./libavcodec/libavcodec.so.57
+./libavformat/libavformat.so.57
+./libswscale/libswscale.so.4
+./libavfilter/libavfilter.so.6
+./libavdevice/libavdevice.so.57
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.* -exec cp {} ../lib/
+find: missing argument to `-exec'
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.* | xargs -i cp {} ../lib/
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# cd ..
+root@family:/src/lib/FFmpeg-release-3.4# cd lib
+root@family:/src/lib/FFmpeg-release-3.4/lib# ll
+total 86712
+drwxr-xr-x 2 root root     4096 May 28 02:41 ./
+drwxr-xr-x 5 root root     4096 May 28 01:04 ../
+-rwxr-xr-x 1 root root 57170248 May 28 02:41 libavcodec.so.57*
+-rwxr-xr-x 1 root root   577680 May 28 02:41 libavdevice.so.57*
+-rwxr-xr-x 1 root root  8914120 May 28 02:41 libavfilter.so.6*
+-rwxr-xr-x 1 root root 17915136 May 28 02:41 libavformat.so.57*
+-rwxr-xr-x 1 root root  1437840 May 28 02:41 libavutil.so.55*
+-rwxr-xr-x 1 root root   302968 May 28 02:41 libswresample.so.2*
+-rwxr-xr-x 1 root root  2453384 May 28 02:41 libswscale.so.4*
+```
+
+## 进阶：批量重命名去掉末尾的数字
+```
+rename "s/.so.*/.so/" *
+```
+
+
+
+
+
+
+
+
 
 

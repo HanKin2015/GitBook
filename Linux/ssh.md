@@ -91,3 +91,16 @@ PermitRootLogin prohibit-password
 
 修改为yes即可。
 
+## 6、ssh配置正常却连接不上
+systemctl stop firewalld.service
+service firewalld stop
+
+发现ping不通，好办，一般来说是防火墙导致。
+
+银河麒麟中设置公共网络为办公网络。
+
+
+
+
+
+

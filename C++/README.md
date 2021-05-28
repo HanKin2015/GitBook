@@ -2,6 +2,9 @@
 
 # C++/C
 
+学习和膜拜：https://codechina.csdn.net/mirrors/fengbingchun/messy_test
+
+
 ## 1、isspace
 用于检查参数c是否为空格字符。
 头文件：ctype.h
