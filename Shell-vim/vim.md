@@ -5,17 +5,23 @@
 配置文件：.vimrc
 ps://blog.csdn.net/qq_41113081/article/details/1001
 
-vim打开文件出现中文乱码：
+# vim打开文件出现中文乱码
 方案一：
+```
 # 命令行模式(非常重要太常用了)
 :e ++enc=cp936
+```
 
 方案二：
+```
 vim ~/.vimrc添加
-set enc=utf8一般来说就够了（只针对vim乱码的情况，操作系统乱码另说）
+set enc=utf8一般来说就够了（只针对vim乱码的情况，操作系统乱码另说）成功过
+
 如果还不行，可以再添加
-set fencs=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
-还不行就把第一行的utf8换成gbk，第二行的gbk挪到最前。
+set fencs=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1    未验证成功过
+
+还不行就把第一行的utf8换成gbk，第二行的gbk挪到最前。  成功过
+```
 
 vim打开文件，中文乱码。而用cat命令，能正确显示中文。
 问题所在：vim终端编码方式
