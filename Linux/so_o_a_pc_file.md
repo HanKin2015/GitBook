@@ -21,3 +21,39 @@ lib,dll,exe都算是最终的目标文件，是最终产物。而c/c++属于源�
 .a为静态库,是好多个.o合在一起,用于静态连接
 
 
+## linux查看so文件的一些信息命令
+
+查看so文件是32位还是64位
+
+[root@n1 native]# file libhadoop.so.1.0.0
+
+libhadoop.so.1.0.0: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, not stripped
+
+
+
+nm用来列出目标文件的符号清单.
+
+ar命令可以用来创建、修改库，也可以从库中提出单个模块。
+
+
+
+objdump：显示目标文件中的详细信息
+objdump -d <command>，可以查看这些工具究竟如何完成这项任务
+ldd  查看可执行文件链接了哪些  系统动态链接库
+-d是ldd的缩写
+
+readelf 显示关于 ELF 目标文件的信息
+readelf -d libffmpeg.so | grep NEEDED
+
+
+
+objdump -V libhadoop.so.1.0.0
+
+## linux编译第三方库未生成so文件
+gcc a.c b.c c.c -fPIC -shared -o target.so
+添加-shared参数，使用官方提供的config命令默认竟然没有生成 .so，解决办法执行 ./config 时增加参数 shared
+
+
+
+
+

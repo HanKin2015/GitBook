@@ -84,6 +84,8 @@ void hideInputTool()
  *
  * Copyright (c) 2021 HanKin. All rights reserved.
  */
+ 
+int main(int argc, char *argv[])
 ```
 
 ```shell脚本

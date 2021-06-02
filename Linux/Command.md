@@ -246,6 +246,12 @@ grep --color 可以为查找的内容加颜色
 
 通常修改alias。
 
+at xxx.log | grep -A 10 ERROR 后10行
+cat xxx.log | grep -B 10 ERROR 前10行
+cat xxx.log | grep -C 30 ERROR 前后各30行  经常用  迅速定位ERROR上下文 
+
+
+
 # 14、alias
 
 命令别名
@@ -259,6 +265,14 @@ alias ll='ls -l --color=auto'
 unalias ll
 ```
 
+使用shell脚本执行alias命令未生效：
+```add_alias.sh
+#!/bin/bash
+
+alias cl='cd /home/hankin/log/'
+```
+
+执行add_alias.sh脚本后未生效，正确方式是source add_alias.sh这样就可以了。
 
 
 # 16、lsblk

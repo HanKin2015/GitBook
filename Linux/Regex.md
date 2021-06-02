@@ -11,6 +11,10 @@ grep全称是Global Regular Expression Print，表示全局正则表达式输出
 ## 2、Perl正则表达式
 发现prename和rename命令是同一个？？
 
+C版本：rename 原字符串 新字符串 文件名
+Perl版本：支持正则表达式
+Ubuntu默认是Perl版本
+CentOS默认是C版本，Perl版本是 prename命令，需安装
 
 
 三种形式
