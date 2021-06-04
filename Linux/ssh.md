@@ -99,6 +99,12 @@ service firewalld stop
 
 银河麒麟中设置公共网络为办公网络。
 
+## 重启ssh服务
+/etc/init.d/sshd restart
+service sshd restart
+/etc/init.d/ssh restart
+
+好奇怪，到底哪个是真的？
 
 
 

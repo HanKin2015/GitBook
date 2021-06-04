@@ -1,5 +1,9 @@
 # 编译警告
 
+-Wall，打开gcc的所有警告。
+-Werror，它要求gcc将所有的警告当成错误进行处理。
+-Wno-error，它要求gcc将所有的警告都忽略
+
 ## 1、warning: function declaration isn't a prototype [-Wstrict-prototypes]
 
 即使函数括号内没有任何参数，也要加一个void类型，来避免这种warning。
@@ -59,19 +63,83 @@ int main()
 -Wno-error=deprecated-declarations -Wno-deprecated-declarations
 
 ## 10、GCC警告提示错误“cc1:all warnings being treated as errors”
-这句话说明了编译中的所有警告都是错误，可以添加wno-error参数关闭。
+这句话说明了编译中的所有警告都是错误，可以添加-Wno-error参数关闭。
 
 ## 11、cp命令覆盖文件需要确认的解决方法
 我使用了-f选项，但是拷贝覆盖还是需要确认，最终发现是alias cp='cp -i'这条命令导致。删除即可。
 
+## 12、inline函数未定义的引用
+```inline_study.c
+#include <stdio.h>
 
+inline void func()
+{
+    printf("hello world!\n");
+}
 
+int main()
+{
+    func();
+    return 0;
+}
 
+oot@ubuntu0006:/media/hankin/vdb/perl] #gcc inline_study.c
+/tmp/cciZng2D.o：在函数‘main’中：
+inline_study.c:(.text+0x81)：对‘func’未定义的引用
+collect2: error: ld returned 1 exit status
+[root@ubuntu0006:/media/hankin/vdb/perl] #g++ inline_study.c
+[root@ubuntu0006:/media/hankin/vdb/perl] #
+```
 
+发现使用gcc编译有问题，使用g++就没有这个问题。
+解决方法：https://blog.csdn.net/chenxizhan1995/article/details/103004166
 
+## 13、在configure第三方库的时候出现cc1: all warnings being treated as errors
+很奇怪，一个环境configure正常，通畅无阻，另外一个环境惨不忍睹。
 
+无缘无故加了很多编译参数，gcc版本不同，结果是一样的。
 
+configure有各种参数可加：
+```
+./configure CFLAGS="-Wno-error"		//失败
+./configure CPPFLAGS="-Wno-error"	//成功
+```
+可能是g++版本不同，也是一样。
 
+高版本gcc(>=5)对库的链接顺序有依赖，先右后左，如果找不到引用，可以尝试调整一下链接的顺序。
+
+## 14、uinte32未定义
+#include <stdint.h>里面是包含了uint32_t类型。
+```
+#include <basetsd.h>
+
+or
+
+#ifndef uinte32
+#define uinte32 unsigned int
+#endif
+
+or
+
+#ifndef uinte32
+#define uinte32 uint32_t
+#endif
+
+or
+
+typedef uint32_t uint32;
+```
+
+## 15、编译在qemu中自己新加独立的文件可能报大量的错误
+```
+#include "qemu/osdep.h"  /* Always first... */
+#include <...>           /* then system headers... */
+#include "..."           /* and finally QEMU headers. */
+```
+
+"qemu/osdep.h"包含预处理器宏，这些宏影响核心的系统头文件，比如<stdint.h>。该头文件必须第一个被include，以使被其他函数库所引用的核心系统头文件可以得到正确的qemu依赖的预处理宏。
+
+相当于一个万能头文件。
 
 
 

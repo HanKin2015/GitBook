@@ -8,15 +8,43 @@
 批处理文件具有.bat或者.cmd的扩展名。
 
 
-## 2、
+## 2、注释和暂停命令
 ```
-注释：
+::和rem还是有区别的，当关闭回显时，rem和::后的内容都不会显示。但是当打开回显时，rem后的内容会显示出来，然而::后的内容仍然不会显示。
 
+暂停命令。运行 Pause 命令时，将显示下面的消息：
+Press any key to continue. . .（或：请按任意键继续. . .)
 ```
 
+## 3、没有理解的一句话
+在批处理文件的开头，通常有：
+@echo off
+原因是"@"可以将本行的命令关闭回显，搭配"echo off"就可以不显示"echo off"的回显了。
 
+回显，就是显示正在执行的批处理命令及执行的结果等。
 
+通过百度百科回显这一词终于明白了。
 
+```
+D:\Github\Storage\batch>Rem 输出hello world
+
+D:\Github\Storage\batch>echo hello world
+hello world
+
+D:\Github\Storage\batch>set /p "input=>"
+>well good
+
+D:\Github\Storage\batch>echo 您输入的是well good
+您输入的是well good
+
+D:\Github\Storage\batch>pause
+请按任意键继续. . .
+
+hello world
+>well good
+您输入的是well good
+请按任意键继续. . .
+```
 
 
 

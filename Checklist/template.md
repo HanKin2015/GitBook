@@ -74,7 +74,9 @@ void hideInputTool()
 ```
 
 ## 3、头文件备注
-```c/c++文件
+
+### c/c++文件
+```
 /* main.cpp
  *
  * 客户端程序
@@ -88,7 +90,8 @@ void hideInputTool()
 int main(int argc, char *argv[])
 ```
 
-```shell脚本
+### shell脚本
+```
 #!/bin/bash
 #
 # 拷贝test文件到服务器后台
@@ -105,7 +108,8 @@ int main(int argc, char *argv[])
 #
 ```
 
-```python脚本
+### python脚本
+```
 # -*- coding: utf-8 -*-
 """
 @description:
@@ -118,6 +122,19 @@ Copyright (c) 2021 HanKin. All rights reserved.
 """
 ```
 
+### batch脚本
+```
+::
+:: 学习batch脚本
+:: 学习网站：https://baike.baidu.com/item/%E6%89%B9%E5%A4%84%E7%90%86/1448600?fromtitle=Batch&fromid=1079355&fr=aladdin
+:: Rem和::都是注释，推荐::，美观简洁；脚本推荐使用ANCI编码，否则可能出现中文乱码
+::
+:: 作者：hankin
+:: 日期：2021.06.04
+::
+:: Copyright (c) 2020 hejian. All rights reserved.
+::
+```
 
 ## 4、调试日志
 ```C++
