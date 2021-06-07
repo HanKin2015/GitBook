@@ -240,6 +240,16 @@ cd -	返回上一层所在工作区
 
 # 13、grep
 
+grep是Linux中最常用的”文本处理工具”之一，grep与sed、awk合称为Linux中的三剑客。
+
+grep的全称为： Global search Regular Expression and Print out the line
+
+全称中的”Global search”为全局搜索之意。
+
+全称中的”Regular Expression”表示正则表达式。
+
+所以，从grep的全称中可以了解到，grep是一个可以利用”正则表达式”进行”全局搜索”的工具
+
 grep -rin 字符串 目标区域	（在目标区域内的文件内容中查找）
 
 grep --color 可以为查找的内容加颜色
@@ -250,7 +260,10 @@ at xxx.log | grep -A 10 ERROR 后10行
 cat xxx.log | grep -B 10 ERROR 前10行
 cat xxx.log | grep -C 30 ERROR 前后各30行  经常用  迅速定位ERROR上下文 
 
-
+模糊匹配
+$ grep "abc"   # 结果为abcd, abcde, abc等
+全匹配
+$ grep -Rw "abc" # 结果为abc 
 
 # 14、alias
 

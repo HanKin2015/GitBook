@@ -16,6 +16,10 @@ prototype：原型、雏形
 
 
 ## 3、warning: statement with no effect [-Wunused-value]
+for(j=1;j<m;j+2)
+j+2是没有任何效果的语句
+
+这里并不是未使用，而是无意义。
 
 ## 4、warning: nested extern declaration of 'XXXX' [-Wnested-externs]
 
@@ -141,6 +145,7 @@ typedef uint32_t uint32;
 
 相当于一个万能头文件。
 
+## 16、warning: statement with no effect [-Wunused-value]
 
 
 

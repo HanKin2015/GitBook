@@ -23,6 +23,12 @@ int main(int argc, char *argv[])
         return -1;
     }
 	
+	if (XShmQueryExtension (x_display) &&
+        XShmQueryVersion (x_display, &major, &minor, &pixmaps)) {
+        x_shm_avail = true;
+    }
+	
+	
 	// 请求创建窗口
 	int screenNumber = DefaultScreen(dsp);
     unsigned long white = WhitePixel(dsp,screenNumber);

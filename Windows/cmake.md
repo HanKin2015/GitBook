@@ -6,11 +6,18 @@ CMake是一个跨平台的安装（编译）工具，可以用简单的语句来
 
 “CMake”这个名字是“cross platform make”的缩写。虽然名字中含有“make”，但是CMake和Unix上常见的“make”系统是分开的，而且更为高阶。
 
-## 2、构建VS项目
+## 2、安装环境
+- 安装cmake，CMake官网 https://cmake.org/
+- 安装GCC、G++，mingW不错的选择
+
+安装好mingw32-make.exe以后，如果希望可以像Linux下那样键入 make 执行Makefile文件，就把mingw32-make.exe修改为make.exe，否则会提示找不到make命令。
+
+## 3、构建VS项目
 
 
-## 3、构建Makefile文件
-
+## 4、构建Makefile文件
+https://my.oschina.net/u/2501904/blog/1162753
+编写CMakeLists.txt 文件，编写和Linux下都一样，只是在设置编译器的时候，要指定头文件和库的路径，都要指向mingw。
 
 ```
 D:\Users\User\Desktop\xml>make Makefile

@@ -208,9 +208,43 @@ Leaving Handle Function.
 Leaving Main Function.
 ````
 
-# 带两个参数（猜测）
-int Handle(int x, int y, int (*Callback)(int, int))
-
+# 带参数的回调函数
+```
+#include <stdio.h>
+ 
+int add(int a,int b);
+int sub(int a,int b);
+ 
+void functionchoose(int a, int b, int (*pf)(int, int));
+ 
+ 
+int main()
+{
+    int a1=3,a2=4;
+    functionchoose(a1,a2,add);
+    functionchoose(a1,a2,sub);
+    return 0;
+}
+ 
+int add(int a, int b)
+{
+    printf("add function \n");
+    return a+b;
+ 
+}
+ 
+int sub(int a, int b)
+{
+    printf("sub function \n");
+    return a-b;
+}
+ 
+void functionchoose(int a,int b,int (*pf)(int,int))
+{
+    printf("the result is %d \n",(*pf)( a, b));
+ 
+}
+```
 
 
 

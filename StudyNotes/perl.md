@@ -196,8 +196,51 @@ print "4. \@sites  = @sites\n"."弹出元素为 ：$new_byte\n";
 # 移除数组开头的元素
 $new_byte = shift(@sites);
 print "5. \@sites  = @sites\n"."弹出元素为 ：$new_byte\n";
-```
 
+@nums = (1..20);
+print "替换前 - @nums\n";
+ 
+splice(@nums, 5, 5, 21..25); 
+print "替换后 - @nums\n";
+
+$var_names = "google,taobao,runoob,weibo";
+ 
+# 字符串转为数组
+@names  = split(',', $var_names);
+
+# 数组转为字符串
+$string1 = join( '-', @string );
+
+# 对数组进行排序
+@sites = sort(@sites);
+print "排序后: @sites\n";
+
+特殊变量 $[ 表示数组的第一索引值，一般都为 0 ，如果我们将 $[ 设置为 1，则数组的第一个索引值即为 1，第二个为 2，以此类推。
+# 定义数组
+@sites = qw(google taobao runoob facebook);
+print "网站: @sites\n";
+ 
+# 设置数组的第一个索引为 1
+$[ = 1;
+ 
+print "\@sites[1]: $sites[1]\n";
+print "\@sites[2]: $sites[2]\n";
+
+一般情况我们不建议使用特殊变量 $[，在新版 Perl 中，该变量已废弃。
+
+@odd = (1,3,5);
+@even = (2, 4, 6);
+# 合并数组
+@numbers = (@odd, @even);
+
+
+# 定义数组
+@sites = qw(google taobao runoob facebook);
+foreach(@sites){
+    print $_."\n";
+}
+```
+perl数组完。https://www.runoob.com/perl/perl-arrays.html
 
 
 

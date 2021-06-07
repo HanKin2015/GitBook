@@ -136,6 +136,24 @@ Copyright (c) 2021 HanKin. All rights reserved.
 ::
 ```
 
+### perl脚本
+```
+#!/usr/bin/perl
+#
+# 拷贝test文件到服务器后台
+#
+# 用法: ./copy_test_to_apach.sh
+# 使用前注意: 
+#   1. 需要安装expect, apt install expect
+#   2. 放置在/data/local/hj/目录下
+#
+# author: hejian
+# date  : 2021.05.07
+#
+# Copyright (c) 2020 hejian. All rights reserved.
+#
+```
+
 ## 4、调试日志
 ```C++
 // 调试日志文件只创建一次

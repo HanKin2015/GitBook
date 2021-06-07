@@ -53,7 +53,11 @@ objdump -V libhadoop.so.1.0.0
 gcc a.c b.c c.c -fPIC -shared -o target.so
 添加-shared参数，使用官方提供的config命令默认竟然没有生成 .so，解决办法执行 ./config 时增加参数 shared
 
+## la文件
+它是包括库的描述的文本文件。
+它允许libtool创建平台独立的名称。
 
+.la为libtool自动生成的一些共享库，vi编辑查看，主要记录了一些配置信息。
 
 
 

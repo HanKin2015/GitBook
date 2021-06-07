@@ -99,12 +99,55 @@ service firewalld stop
 
 银河麒麟中设置公共网络为办公网络。
 
-## 重启ssh服务
+## 7、重启ssh服务
 /etc/init.d/sshd restart
 service sshd restart
 /etc/init.d/ssh restart
 
 好奇怪，到底哪个是真的？
+
+## 8、ssh反映特别慢，但是网络没有问题的时怎么办
+vi sshd_config 找到注释的useDNS yes，修改为如下，并取消注释
+useDNS no
+
+完成添加后，保存退出
+
+重启sshd服务
+
+/etc/init.d/sshd restart
+
+退出连接session
+
+重新创建一个，感觉一下，是不是反映速度0.1秒都不到，特别迅速
+
+如果是想让图形化界面连接快的话
+
+还是找到vi sshd_config 
+
+找到#GSSAPIAuthentication  yes
+
+将yes修改为no  并且取消注释
+
+GSSAPIAuthentication  no
+
+重启sshd服务即可
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
