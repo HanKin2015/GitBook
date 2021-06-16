@@ -12248,7 +12248,19 @@ git branch -av 查看具体的分支内容
 # demo （"demonstration"的缩写）
 DEMO是"demonstration"的缩写。DEMO的中文含意为“示范”、“展示”、“样片”、“样稿”、“原型”，常被用来称呼具有示范或展示功能及意味的事物。
 
-
+### 将当前更改追加到某个commit上
+- git stash 保存工作空间的改动（如果新增文件则无需这步）
+- git rebase <指定commit的父commit> --interactive（注意父亲是下面的一个而不是上面的，必须是父亲，因为最终显示的是儿子节点commit及最新）
+- 将需要改动的commit前面的pick 改为 edit,然后保存退出（一般来说是第一个）
+- git stash pop
+- git add <更改的文件> 
+- git commit --amend 
+- git rebase --continue 
+这里如果有冲突, 需要先解决冲突: 
+编辑冲突文件, 解决冲突
+git add .
+git commit --amend
+解决冲突之后再执行git rebase --continue
 
 
 

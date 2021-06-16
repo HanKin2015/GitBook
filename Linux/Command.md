@@ -265,6 +265,19 @@ $ grep "abc"   # 结果为abcd, abcde, abc等
 全匹配
 $ grep -Rw "abc" # 结果为abc 
 
+## grep时显示"匹配到二进制文件"
+原因
+grep如果碰到\000 NUL字符，就会认为文件是二进制文件，而 grep 匹配 默认忽略二进制数据。
+我发现是匹配的那一行出现了中文，并且中文格式还有些问题，删除中文后grep正常。。。。。。。。。。。。。
+
+
+所以要使用grep -a属性：不忽略二进制的数据。
+grep的-a或--text参数功能：将 binary 文件以 text 文件的方式搜寻数据
+
+解决
+grep -a file_name
+grep --text file_name
+
 # 14、alias
 
 命令别名

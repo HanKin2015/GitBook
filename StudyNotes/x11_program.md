@@ -114,6 +114,15 @@ g++ hello.cpp -o hello -lX11
 g++ hello.cpp -o hello `pkg-config --cflags --libs x11`
 ```
 
+## x11/extensions/XShm.h: No such file or directory
+
+编译的时候增加lXext参数。
+
+
+止步于此
+https://www.dssz.com/305438.html
+https://wenku.baidu.com/view/a5af4fd8ad51f01dc281f1ce.html
+https://blog.csdn.net/arag2009/article/details/18408113
 
 
 

@@ -59,5 +59,7 @@ gcc a.c b.c c.c -fPIC -shared -o target.so
 
 .la为libtool自动生成的一些共享库，vi编辑查看，主要记录了一些配置信息。
 
+## pc文件
+经过proc预处理把.pc文件编译成.c文件。
 
 

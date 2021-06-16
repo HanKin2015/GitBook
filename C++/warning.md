@@ -145,9 +145,12 @@ typedef uint32_t uint32;
 
 相当于一个万能头文件。
 
-## 16、warning: statement with no effect [-Wunused-value]
+## 16、arm平台下char默认数据类型与-fsigned-char
+在PC上，char类型默认为signed-char,但是在一些嵌入式设备上，比如armi平台，char类型是当作unsigned char处理的，为了保持与PC一致，可以通过指定CFLAG += fsigned-char进行配置。
+
+char变量在不同CPU架构下默认符号不一致，在x86架构下为signed char，在ARM64平台为unsigned char，移植时需要指定char变量为signed char。不然编译器可能会告警：warning: comparison is always false due to limitedrange of data type
 
 
-
+##
 
 
