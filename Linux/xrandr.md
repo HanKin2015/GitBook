@@ -2,6 +2,30 @@
 官网：https://wiki.archlinux.org/index.php/Xrandr_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
 # Linux双屏之xrandr
+```
+[root@ubuntu0006:/media/hankin/vdb/app] #xrandr
+Screen 0: minimum 0 x 0, current 2048 x 1152, maximum 32768 x 32768
+default connected primary 2048x1152+0+0 541mm x 304mm
+   2048x1152      0.00*
+[root@ubuntu0006:/media/hankin/vdb/app] #export "DISPLAY=:0"
+[root@ubuntu0006:/media/hankin/vdb/app] #xrandr
+Screen 0: minimum 320 x 200, current 2560 x 1440, maximum 8192 x 8192
+qxl-0 connected 2560x1440+0+0 0mm x 0mm
+   1280x720      60.00
+   1920x1080-0    0.06
+   1680x1050-0    0.06
+   1280x1022-0    0.06
+   1440x900-0     0.06
+   1024x766-0     0.06
+   1400x1050-0    0.06
+   1600x900-0     0.06
+   2560x1440-0    0.06*
+   1600x1200-0    0.06
+   1152x864-0     0.06
+qxl-1 disconnected
+qxl-2 disconnected
+qxl-3 disconnected
+```
 
 执行之前使用：export DISPLAY=:0
 

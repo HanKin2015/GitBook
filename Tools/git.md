@@ -12262,8 +12262,13 @@ git add .
 git commit --amend
 解决冲突之后再执行git rebase --continue
 
+### Fast-Forward Git合并
+分支合并是Git中常见的操作，在默认情况下，Git采用fast-forward的方式进行分支合并。
 
+Git将执行fast-forward合并方式。分支历史是线性的；
+另一种不同的合并方式是使用 -no-ff 参数（意思是no fast-forward）。在这种情况下，分支历史会有稍许区别：多了一个commit（虚线的圆圈）来实现合并。这个commit还会用右边的信息提示我们这次分支合并。
 
+总结：fast-forward线性，把合并的提交直接挪用到目标分支。no fast-forward显著特点多一个commit，合并分支的提交记录。
 
 
 
