@@ -151,6 +151,22 @@ typedef uint32_t uint32;
 char变量在不同CPU架构下默认符号不一致，在x86架构下为signed char，在ARM64平台为unsigned char，移植时需要指定char变量为signed char。不然编译器可能会告警：warning: comparison is always false due to limitedrange of data type
 
 
-##
+## 17、编译参数
+编译选项没有使用-g选项生成调试信息。原因：生成调试信息方便出Core后调试，对于附带调试信息后体积过大问题，可以strip去掉调试信息，并保留一份没strip的原始程序
+编译选项没有开启-Wall选项开启所有告警。原因：开启后会将warning告警当error处理，需要消除所有warning
+编译选项没有开启-fsigned-char参数。原因：X86_64下char默认是有符号的，Arm64下默认参数是无符号的，需要强制添加该参数使不同平台的行为一致
+没有设置安全编码要求的编译选项-fPIE（程序）或-fPIC（动态库）
 
+## 18、执行make出现“Warning: File `xxx.c‘ has modification time 2.6e+04 s in the future“警告的解决方法
+原因是宿主机与虚拟机的系统时间没有同步造成的。
+由于时钟同步问题，出现 warning:  Clock skew detected.  Your build may be incomplete.这样的警告，
 
+解决办法：
+```
+find . -type f | xargs -n 5 touch
+make clean
+make
+```
+-n 5是显示5列的意思，touch命令居然可以做到同步文件时间，大概做了创建新文件但是内容不变操作。
+
+ 
