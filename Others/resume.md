@@ -68,19 +68,7 @@ libusb.h
 
 
 
-“#ifdef __cplusplus extern "C" { #endif”的定义
-有意思：https://www.cnblogs.com/nx520zj/p/5920782.html
-```
-#ifdef  __cplusplus
-extern "C" {
-#endif
 
-// 代码
-
-#ifdef  __cplusplus
-}
-#endif
-```
 
 
 

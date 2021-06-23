@@ -150,12 +150,38 @@ typedef uint32_t uint32;
 
 char变量在不同CPU架构下默认符号不一致，在x86架构下为signed char，在ARM64平台为unsigned char，移植时需要指定char变量为signed char。不然编译器可能会告警：warning: comparison is always false due to limitedrange of data type
 
-
 ## 17、编译参数
 编译选项没有使用-g选项生成调试信息。原因：生成调试信息方便出Core后调试，对于附带调试信息后体积过大问题，可以strip去掉调试信息，并保留一份没strip的原始程序
 编译选项没有开启-Wall选项开启所有告警。原因：开启后会将warning告警当error处理，需要消除所有warning
 编译选项没有开启-fsigned-char参数。原因：X86_64下char默认是有符号的，Arm64下默认参数是无符号的，需要强制添加该参数使不同平台的行为一致
 没有设置安全编码要求的编译选项-fPIE（程序）或-fPIC（动态库）
+
+```
+-fPIE与-fpie是等价的。这个选项与-fPIC/-fpic大致相同，不同点在于：-fPIC用于生成动态库，-fPIE用与生成可执行文件。再说得直白一点：-fPIE用来生成位置无关的可执行代码。
+
+可以看出，可执行文件属性从executable变成了shared object.
+$ gcc  helloworld.c
+$ file a.out
+a.out: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.9, not stripped
+$ gcc -fpie -pie helloworld.c
+$ file a.out
+a.out: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.9, not stripped
+接下来，我们就能实验了，使用strace命令来查看这两个a.out执行情况了。关于strace命令，可以参考strace命令介绍
+在博主电脑上，有PIE时，执行第一个brk(0)系统调用时，返回的地址一直是变化的。而无PIE时，brk(O)系统调用返回地址一直不变。内容太多，不再贴出。
+
+注：
+linux系统调用brk()：
+linux系统内部分配内存的系统调用，malloc()其实也是调用的brk().直接修改堆的大小，返回新内存区域的结束地址。
+————————————————–
+说实话，还是看的不是很懂，似懂非懂的感觉。
+
+gcc -fpie -pie helloworld.c
+gcc -fPIE -pie helloworld.c
+gcc -fPIC helloworld.c
+gcc -fpic helloworld.c
+```
+
+
 
 ## 18、执行make出现“Warning: File `xxx.c‘ has modification time 2.6e+04 s in the future“警告的解决方法
 原因是宿主机与虚拟机的系统时间没有同步造成的。

@@ -111,7 +111,12 @@ https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#
 ```
 注意：不是automation shell。
 
+## 9、解决vscode上编辑gb2312编码的源码导致乱码的问题
+痛点1：默认情况下vscode是用utf-8打开文件，因此我们打开一个gb2312编码的文件会是乱码的，必须手动调整用gb2312编码打开。
+痛点2：在默认用utf-8编码打开的情况下，改了一行gb2312编码格式的源文件，一保存，整个文件都乱码了，一旦提交之后，再恢复就会很麻烦。
+痛点3：通常又不能随便批量的该文件编码（不方便看上次修改记录，不方便Review…）
 
+解决方式：打开设置 -> 搜索“Auto Guess Encoding” -> 勾选。User,Remote,Workspace 都勾选上该选项。
 
 
 

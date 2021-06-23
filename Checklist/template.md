@@ -87,7 +87,18 @@ void hideInputTool()
  * Copyright (c) 2021 HanKin. All rights reserved.
  */
  
+ 
 int main(int argc, char *argv[])
+
+
+/*
+ * @brief 运行shell命令
+ * @note 运行结果输出长度不超过outputLen且只输出第一行，超过会截断
+ * @param cmd [in] shell命令
+ * @param output [out] 运行结果输出
+ * @param outputLen [in] 运行结果字符串长度
+ * @return 无
+ */
 ```
 
 ### shell脚本
@@ -106,6 +117,9 @@ int main(int argc, char *argv[])
 #
 # Copyright (c) 2020 hejian. All rights reserved.
 #
+
+
+
 ```
 
 ### python脚本

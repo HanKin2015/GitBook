@@ -25,9 +25,11 @@ set tabstop=4
 
 " 统一缩进为4(代码对齐=)
 set shiftwidth=4
+
+" 效果是tab键后向左移动变成4个空格
 set softtabstop=4
 
-" 
+" 將tab键转成space,注意makefile文件的缩进不能开启
 set expandtab
 
 " 搜索逐字符高亮

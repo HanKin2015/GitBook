@@ -19,7 +19,8 @@ lib,dll,exe都算是最终的目标文件，是最终产物。而c/c++属于源�
 .o,是目标文件,相当于windows中的.obj文件 
 .so 为共享库,是shared object,用于动态连接的,相当于windows下的dll 
 .a为静态库,是好多个.o合在一起,用于静态连接
-
+Archive档案文件档案室
+中间目标文件打个包，在Windows下这种包叫“库文件”（Library File），也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。
 
 ## linux查看so文件的一些信息命令
 
