@@ -112,7 +112,15 @@ drwxr-xr-x 5 root root     4096 May 28 01:04 ../
 rename "s/.so.*/.so/" *
 ```
 
+## 获取文件的绝对路径
+realpath test.sh
+ls `pwd`/test.sh
 
+## basename命令
+basename /home/test/test.sh .sh
+为basename指定一个路径，basename命令会删掉所有的前缀，末尾可以指定删除对应的后缀
+上面结果输出test
+suffix后缀 prefix前缀
 
 
 

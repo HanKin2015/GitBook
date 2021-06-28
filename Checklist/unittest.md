@@ -29,7 +29,7 @@ gtest是一个跨平台的(Liunx、Mac OS X、Windows 、Cygwin 、Windows CE an
 官网：https://github.com/google/googletest/releases/tag/release-1.11.0
 git clone https://github.com/google/googletest.git
 
-linux：
+#### linux
 ```
 unzip googletest-release-1.11.0.zip
 apt install cmake
@@ -65,6 +65,27 @@ cmake 需要编译的文件夹地址
 
 Doxygen
 Doxygen是一种开源跨平台的，以类似JavaDoc风格描述的文档系统，完全支持C、C++、Java、Objective-C和IDL语言，部分支持PHP、C#。注释的语法与Qt-Doc、KDoc和JavaDoc兼容。Doxygen可以从一套归档源文件开始，生成HTML格式的在线类浏览器，或离线的LATEX、RTF参考手册。
+
+#### windows
+真是日了狗，不知道为啥使用vs2015怎么也编译不出gtest的lib库。但是在同事的环境使用vs2015就正常，使用他生成的vcxproj库也不行，说明不是cmake导致。
+然后尝试使用vs2010，编译有提示gtest至少需要vs2015版本才能编译，但是vs2010有同样的问题。
+
+报错警告：
+```
+cl：D9002 忽略未知选项 "-utf-8"
+然后blabla错误，Aplying不能在std里面xxxx
+```
+最开始找错了方向，后来发现应该是警告导致，忽略了utf-8。因此可能是编码问题导致编译出错。
+
+后来使用everthing软件找到cl.exe，执行cl -help发现并没有/utf-8选项，但是vs2019的cl则可以，发现cl.exe的版本不同。
+
+网上没有找到cl.exe升级的方法，只找到一个提示：
+在VS2015版本(Visual Studio 2015 Update 2)，增加一个编译选项/utf-8，该编译选项的作用就是将源码字符集和执行文件字符集指定为UTF-8。增加该编译选项后，再重新编译运行，程序正确输出中文，问题解决。
+官方：https://docs.microsoft.com/en-us/cpp/build/reference/utf-8-set-source-and-executable-character-sets-to-utf-8?redirectedfrom=MSDN&view=msvc-160
+
+
+
+
 
 ### 1-3、本地测试
 注意：所有附加的编译参数都是需要的。
