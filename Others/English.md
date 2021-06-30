@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+sane：精神健全的;神志正常的;明智的;理智的;合乎情理的
 extend: 扩充，扩展，使延长（涉及范围，时间，距离）
 expand: 扩大，增加，增强（尺码、数量或重要性）；或扩展，发展（业务）
 backend：后端、后台
@@ -75,7 +76,7 @@ surface：表面、水面、地面、液面
 pixel：像素
 indicate：表明、暗示
 lvalue required as left operand of assignment:左值必须作为赋值的左操作数
-srap:SRAP(Sangfor Remote Access Protocol)即Sangfor远程接入协议
+srap:SRAP(hankin Remote Access Protocol)即hankin远程接入协议
 lossy:有损的
 freeze：冻结
 migrate：迁移

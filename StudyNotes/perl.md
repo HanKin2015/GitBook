@@ -25,18 +25,18 @@ $ make install
 
 ## 3、hello world
 ```
-[root@ubuntu0006:/media/sangfor/vdb/perl] #vim helloworld.pl
-[root@ubuntu0006:/media/sangfor/vdb/perl] #perl helloworld.pl
+[root@ubuntu0006:/media/hankin/vdb/perl] #vim helloworld.pl
+[root@ubuntu0006:/media/hankin/vdb/perl] #perl helloworld.pl
 Hello, World!
-[root@ubuntu0006:/media/sangfor/vdb/perl] #cat helloworld.pl
+[root@ubuntu0006:/media/hankin/vdb/perl] #cat helloworld.pl
 #!/usr/bin/perl -w
 
 print "Hello, World!\n";
 
-[root@ubuntu0006:/media/sangfor/vdb/perl] #whereis perl
+[root@ubuntu0006:/media/hankin/vdb/perl] #whereis perl
 perl: /usr/bin/perl /usr/bin/perl5.22-x86_64-linux-gnu /etc/perl /usr/share/perl /usr/share/man/man1/perl.1.gz
-[root@ubuntu0006:/media/sangfor/vdb/perl] #chmod +x helloworld.pl
-[root@ubuntu0006:/media/sangfor/vdb/perl] #./helloworld.pl
+[root@ubuntu0006:/media/hankin/vdb/perl] #chmod +x helloworld.pl
+[root@ubuntu0006:/media/hankin/vdb/perl] #./helloworld.pl
 Hello, World!
 Hello, world!
 

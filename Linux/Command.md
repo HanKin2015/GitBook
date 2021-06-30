@@ -266,7 +266,7 @@ $ grep "abc"   # 结果为abcd, abcde, abc等
 $ grep -Rw "abc" # 结果为abc 
 
 ```
-[root@ubuntu0006:/media/sangfor/vdb/app] #grep --help
+[root@ubuntu0006:/media/hankin/vdb/app] #grep --help
 用法: grep [选项]... PATTERN [FILE]...
 在每个 FILE 或是标准输入中查找 PATTERN。
 默认的 PATTERN 是一个基本正则表达式(缩写为 BRE)。

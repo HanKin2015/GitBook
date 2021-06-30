@@ -58,8 +58,8 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 
 ## 5、执行systemctl命令失败
 ```
-[root@ubuntu0006:/media/sangfor/vdb] #vim /etc/ssh/sshd_config
-[root@ubuntu0006:/media/sangfor/vdb] #/etc/init.d/ssh restart
+[root@ubuntu0006:/media/hankin/vdb] #vim /etc/ssh/sshd_config
+[root@ubuntu0006:/media/hankin/vdb] #/etc/init.d/ssh restart
 [....] Restarting ssh (via systemctl): ssh.serviceJob for ssh.service failed because the control process exited with error code. See "systemctl status ssh.service" and "journalctl -xe" for details.
  failed!
  ```

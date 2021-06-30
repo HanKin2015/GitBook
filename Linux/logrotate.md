@@ -91,26 +91,26 @@ In debug mode, no changes will be made to the logs or to the logrotate state fil
 
 ## 命令执行过程
 ```
-root@ubuntu0006:/var/log/sangfor/hj# logrotate -vf /etc/logrotate.d/usbrecord
+root@ubuntu0006:/var/log/hankin/hj# logrotate -vf /etc/logrotate.d/usbrecord
 reading config file /etc/logrotate.d/usbrecord
 
 Handling 1 logs
 
-rotating pattern: /var/log/sangfor/hj/1.json  forced from command line (2 rotations)
+rotating pattern: /var/log/hankin/hj/1.json  forced from command line (2 rotations)
 empty log files are not rotated, old logs are removed
-considering log /var/log/sangfor/hj/1.json
+considering log /var/log/hankin/hj/1.json
   log needs rotating
-rotating log /var/log/sangfor/hj/1.json, log->rotateCount is 2
+rotating log /var/log/hankin/hj/1.json, log->rotateCount is 2
 dateext suffix '-20210309'
 glob pattern '-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
-renaming /var/log/sangfor/hj/1.json.2.gz to /var/log/sangfor/hj/1.json.3.gz (rotatecount 2, logstart 1, i 2),
-renaming /var/log/sangfor/hj/1.json.1.gz to /var/log/sangfor/hj/1.json.2.gz (rotatecount 2, logstart 1, i 1),
-renaming /var/log/sangfor/hj/1.json.0.gz to /var/log/sangfor/hj/1.json.1.gz (rotatecount 2, logstart 1, i 0),
-old log /var/log/sangfor/hj/1.json.0.gz does not exist
-renaming /var/log/sangfor/hj/1.json to /var/log/sangfor/hj/1.json.1
-creating new /var/log/sangfor/hj/1.json mode = 0644 uid = 0 gid = 0
+renaming /var/log/hankin/hj/1.json.2.gz to /var/log/hankin/hj/1.json.3.gz (rotatecount 2, logstart 1, i 2),
+renaming /var/log/hankin/hj/1.json.1.gz to /var/log/hankin/hj/1.json.2.gz (rotatecount 2, logstart 1, i 1),
+renaming /var/log/hankin/hj/1.json.0.gz to /var/log/hankin/hj/1.json.1.gz (rotatecount 2, logstart 1, i 0),
+old log /var/log/hankin/hj/1.json.0.gz does not exist
+renaming /var/log/hankin/hj/1.json to /var/log/hankin/hj/1.json.1
+creating new /var/log/hankin/hj/1.json mode = 0644 uid = 0 gid = 0
 compressing log with: /bin/gzip
-removing old log /var/log/sangfor/hj/1.json.3.gz
+removing old log /var/log/hankin/hj/1.json.3.gz
 ```
 
 - 判断是否有notifempty参数，如果是空文件的话，不转储 

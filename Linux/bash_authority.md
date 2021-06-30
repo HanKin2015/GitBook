@@ -7,14 +7,14 @@
 解决：sudo setstatus softmode -p
 
 ```
-root@sangfor-KVM-Virtual-Machine:/home/sangfor# getstatus
+root@hankin-KVM-Virtual-Machine:/home/hankin# getstatus
 KySec status: Normal
 
 exec control: on
 file protect: on
 kmod protect: on
 three admin : off
-root@sangfor-KVM-Virtual-Machine:/home/sangfor# setstatus
+root@hankin-KVM-Virtual-Machine:/home/hankin# setstatus
 usage:  setstatus < Normal |Softmode > [ -p ]
         setstatus -f  < exectl | fpro | kmod >  < on | off >
 ```

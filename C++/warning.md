@@ -1,8 +1,15 @@
 # 编译警告
+编译选项查询1：https://blog.csdn.net/haohao456abc/article/details/80152413
+编译选项查询2：https://blog.csdn.net/pengfei240/article/details/55839106
 
 -Wall，打开gcc的所有警告。
 -Werror，它要求gcc将所有的警告当成错误进行处理。
 -Wno-error，它要求gcc将所有的警告都忽略
+-Wshadow：某语句块作用域变量与更大作用域的另一变量同名时发出警告（此警告未包含在-Wall选项中，需单独开启）
+-Wno-error  <<====>>  -Wno-error=error
+-Wno-error=strict-overflow  <<====>>  -Wno-strict-overflow
+
+注意：Werror需要在Wall参数下才能生效，默认是关闭所有警告的。
 
 ## 1、warning: function declaration isn't a prototype [-Wstrict-prototypes]
 
@@ -22,13 +29,7 @@ j+2是没有任何效果的语句
 这里并不是未使用，而是无意义。
 
 ## 4、warning: nested extern declaration of 'XXXX' [-Wnested-externs]
-
-
-
-
-
-
-
+-Wnested-externs	如果某extern声明出现在函数内部,编译器就发出警告
 
 ## 5、error: expected declaration specifiers or ‘...’ before numeric constant
 我实际解决是在qemu-common.h前面引入了一个头文件#include "qemu/osdep.h"。
@@ -68,6 +69,7 @@ int main()
 
 ## 10、GCC警告提示错误“cc1:all warnings being treated as errors”
 这句话说明了编译中的所有警告都是错误，可以添加-Wno-error参数关闭。
+configure的时候也会出现，应该有在系统里面设置了安全编译参数，需要./configure CPPFLAGS=-Wno-error。
 
 ## 11、cp命令覆盖文件需要确认的解决方法
 我使用了-f选项，但是拷贝覆盖还是需要确认，最终发现是alias cp='cp -i'这条命令导致。删除即可。
@@ -187,6 +189,10 @@ gcc -fpic helloworld.c
 原因是宿主机与虚拟机的系统时间没有同步造成的。
 由于时钟同步问题，出现 warning:  Clock skew detected.  Your build may be incomplete.这样的警告，
 
+最好的解决办法：
+date -s "2021-6-30 14:50:00"
+使用date命令同步时间。
+
 解决办法：
 ```
 find . -type f | xargs -n 5 touch
@@ -195,4 +201,26 @@ make
 ```
 -n 5是显示5列的意思，touch命令居然可以做到同步文件时间，大概做了创建新文件但是内容不变操作。
 
- 
+## 19、有趣的事情儿之configure
+忽然之间发现两个linux环境编译lzo库出现不同的结果。
+使用./configure CPPFLAGS="-Wall -Werror"进行生成Makefile文件，一个环境成功一个环境失败。
+
+两个怀疑的点：
+- 成功的环境没有警告，编译一切正常
+- 发现两个的gcc版本不同，一个是5.4.0编译失败，一个是4.7.2编译成功
+
+准备安装一个最新的gcc11.1.0试试。
+
+如果configure时不指定CPPFLAGS则会去找全局变量CPPFLAGS
+
+## 20、
+
+
+
+
+
+
+
+
+
+

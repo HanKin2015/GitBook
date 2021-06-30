@@ -95,8 +95,8 @@ https://blog.csdn.net/qq_27413937/article/details/99714197
 尾号应该是c3d7
 
 
-地址：http://nas.sangfor.org:5000/sharing/scvp7oO7i
-密码：sangfor123
+地址：http://nas.hankin.org:5000/sharing/scvp7oO7i
+密码：hankin123
 
 
 

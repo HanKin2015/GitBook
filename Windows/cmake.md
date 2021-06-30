@@ -13,7 +13,11 @@ CMake是一个跨平台的安装（编译）工具，可以用简单的语句来
 安装好mingw32-make.exe以后，如果希望可以像Linux下那样键入 make 执行Makefile文件，就把mingw32-make.exe修改为make.exe，否则会提示找不到make命令。
 
 ## 3、构建VS项目
-
+拿goolgetest项目为例，可以通过cmake命令生成vcproj文件，最好建议使用ui界面生成。
+第一栏：源代码文件夹地址
+第三栏：建议新建文件夹build，然后把这个文件夹地址填入，最后会把文件生成到这个文件夹下
+点击Configure，选择对应的VS版本
+点击Generate完成
 
 ## 4、构建Makefile文件
 https://my.oschina.net/u/2501904/blog/1162753

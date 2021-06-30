@@ -179,27 +179,27 @@ int munmap(void* start,size_t length);
 
 #### 不加锁现象
 ```
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----child---finally------share_var =   168073
 ----parent--finally------share_var =   169446
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   176043
 ----child---finally------share_var =   185715
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   200000
 ----child---finally------share_var =   300000
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----child---finally------share_var =   125893
 ----parent--finally------share_var =   135235
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   153174
 ----child---finally------share_var =   155752
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   248540
 ----child---finally------share_var =   253868
@@ -207,23 +207,23 @@ share_var = 0
 
 #### 加锁现象
 ```
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   288553
 ----child---finally------share_var =   300000
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----child---finally------share_var =   206120
 ----parent--finally------share_var =   300000
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----child---finally------share_var =   287948
 ----parent--finally------share_var =   300000
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   295982
 ----child---finally------share_var =   300000
-root@debian-sangfor:~/hejian/lock# ./main
+root@debian-hankin:~/hejian/lock# ./main
 share_var = 0
 ----parent--finally------share_var =   299717
 ----child---finally------share_var =   300000

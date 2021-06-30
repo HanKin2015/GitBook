@@ -18,6 +18,114 @@ $./x_shift.sh 1 2 3 4
 第一个参数为: 4 参数个数为: 1
 ```
 
+## 2、获取文件的绝对路径
+realpath test.sh
+ls `pwd`/test.sh
+
+## 3、basename命令
+basename /home/test/test.sh .sh
+为basename指定一个路径，basename命令会删掉所有的前缀，末尾可以指定删除对应的后缀
+上面结果输出test
+suffix后缀 prefix前缀
+
+## 4、易混淆的-n和-z
+这两个的判断结果一定是相反的。
+```
+-n
+   string is not null.
+
+-z
+  string is null, that is, has zero length
+```
+
+## 5、shell中的for循环
+https://blog.csdn.net/qq_18312025/article/details/78278989
+
+```
+#!/bin/bash
+read -p "请输入用户名的前缀：" a 
+read -p "请输入用户的数目：" num
+if (( $num<=10 ))
+then
+        n=0
+        for i in `seq $num`
+        do
+               if useradd $a$i &>/dev/null
+                then
+                        echo "用户$a$i创建成功！"
+                        (( n++ ))
+                        echo "123456"|passwd $a$i --stdin &>/dev/null
+                fi
+        done
+        echo "一共创建的用户数：$n个"
+else
+        echo "最多只能创建10个用户啦！"
+fi
+```
+
+```
+for i in {1..193}
+do
+    ( ping -c1 -i0.2 -w1 172.16.30.$i &>/dev/null
+    if ((  $?==0  ))
+    then
+            echo "172.16.30.$i up"    >>2.txt
+    else
+            echo "172.16.30.$i down"    >>3.txt
+    fi )&    --》这样就把这一段放到后台去执行了，大大加快了速度。
+done
+sleep 2
+live_pc_num=`cat 2.txt|wc -l`
+down_pc_num=`cat 3.txt|wc -l`
+echo "there are $down_pc_num is down"
+echo "there are $live_pc_num is up"
+echo "list:"
+cat 2.txt
+rm -rf 2.txt 3.txt
+```
+
+## 6、使用find命令查询并拷贝文件到指定路径
+```
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.*
+./libavutil/libavutil.so.55
+./libswresample/libswresample.so.2
+./libavcodec/libavcodec.so.57
+./libavformat/libavformat.so.57
+./libswscale/libswscale.so.4
+./libavfilter/libavfilter.so.6
+./libavdevice/libavdevice.so.57
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.* -exec cp {} ../lib/
+find: missing argument to `-exec'
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# find ./ -name *.so.* | xargs -i cp {} ../lib/
+root@family:/src/lib/FFmpeg-release-3.4/FFmpeg-release-3.4# cd ..
+root@family:/src/lib/FFmpeg-release-3.4# cd lib
+root@family:/src/lib/FFmpeg-release-3.4/lib# ll
+total 86712
+drwxr-xr-x 2 root root     4096 May 28 02:41 ./
+drwxr-xr-x 5 root root     4096 May 28 01:04 ../
+-rwxr-xr-x 1 root root 57170248 May 28 02:41 libavcodec.so.57*
+-rwxr-xr-x 1 root root   577680 May 28 02:41 libavdevice.so.57*
+-rwxr-xr-x 1 root root  8914120 May 28 02:41 libavfilter.so.6*
+-rwxr-xr-x 1 root root 17915136 May 28 02:41 libavformat.so.57*
+-rwxr-xr-x 1 root root  1437840 May 28 02:41 libavutil.so.55*
+-rwxr-xr-x 1 root root   302968 May 28 02:41 libswresample.so.2*
+-rwxr-xr-x 1 root root  2453384 May 28 02:41 libswscale.so.4*
+```
+
+## 7、批量重命名去掉末尾的数字
+```
+rename "s/.so.*/.so/" *
+```
+
+## 8、dirname命令
+输出文件夹路径，即删除文件名后缀的结果。
+如  :dirname /home/test/test.h
+结果:/home/test/
+
+## 9、检测二进制文件编译选项
+grep -m 1 "\-fsigned-char" xxx.so
+
+Binary file xxx.so 
 
 
 

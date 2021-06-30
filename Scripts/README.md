@@ -51,19 +51,19 @@ acc名单无关。最开始测试未配置acc名单发现登录过程中是46秒
 07-31 16:36:25.260  1199  8072 I USB     : device_removed_cb removed usb device:Unknown USB Device [101d:0003] at 3-8 {device_removed_cb:467}
 07-31 16:36:25.260    97   129 W Vold    : subsystem found in netlink event
 07-31 16:36:25.260    97   129 D Vold    : usb, 2
-07-31 16:36:25.260    97   129 W Vold    : sangforMoniterUSB event
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB enter
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB: current usb device: 101D/0003 
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB:analytical_busid error: /devices/platform/usb20_host/usb3/3-1/3-1.1/3-1.1:1.0
+07-31 16:36:25.260    97   129 W Vold    : hankinMoniterUSB event
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB enter
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB: current usb device: 101D/0003 
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB:analytical_busid error: /devices/platform/usb20_host/usb3/3-1/3-1.1/3-1.1:1.0
 07-31 16:36:25.260    97   129 W Vold    : subsystem found in netlink event
 07-31 16:36:25.260    97   129 D Vold    : usb, 2
-07-31 16:36:25.260    97   129 W Vold    : sangforMoniterUSB event
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB enter
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB: current usb device: 101D/0003 
-07-31 16:36:25.260    97   129 I Vold    : SangformoniterUSB remove
-07-31 16:36:25.260    97   129 D Vold    : SangformoniterUSB: busid=3-1.1#usbid=101d:0003#;
-07-31 16:36:25.260    97   129 I Vold    : SangformoniterUSB: return
-07-31 16:36:25.260   679   736 D MountService: SangforUsbRemoved intent Intent { act=android.intent.action.SANGFOR_USB_REMOVE (has extras) }
+07-31 16:36:25.260    97   129 W Vold    : hankinMoniterUSB event
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB enter
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB: current usb device: 101D/0003 
+07-31 16:36:25.260    97   129 I Vold    : hankinmoniterUSB remove
+07-31 16:36:25.260    97   129 D Vold    : hankinmoniterUSB: busid=3-1.1#usbid=101d:0003#;
+07-31 16:36:25.260    97   129 I Vold    : hankinmoniterUSB: return
+07-31 16:36:25.260   679   736 D MountService: hankinUsbRemoved intent Intent { act=android.intent.action.hankin_USB_REMOVE (has extras) }
 07-31 16:36:25.260   679   736 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.sendBroadcast:1050 com.android.server.MountService.onEvent:900 com.android.server.NativeDaemonConnector.handleMessage:102 android.os.Handler.dispatchMessage:95 android.os.Looper.loop:137 
 07-31 16:36:25.460  1199  8057 I TgsUSBDeviceManager: onRemoveUSBDevice, busId is:3 deviceId:8 {x:-1}
 07-31 16:36:25.460  1199  8057 I TgsUSBDeviceManager: 拔除一个USB设备, busId:3, deviceId:8 {x:-1}
@@ -79,21 +79,21 @@ acc名单无关。最开始测试未配置acc名单发现登录过程中是46秒
 07-31 16:36:28.700    97   129 W Vold    : subsystem found in netlink event
 07-31 16:36:28.700    97   129 D Vold    : usb, 1
 07-31 16:36:28.700    97   129 D Vold    : == current usb device: 101D/0003 ===
-07-31 16:36:28.700    97   129 W Vold    : sangforMoniterUSB event
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB enter
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB: current usb device: 101D/0003 
-07-31 16:36:28.700    97   129 I Vold    : SangformoniterUSB add 
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB: busid=3-1.1#usbid=101d:0003#;
-07-31 16:36:28.700    97   129 I Vold    : SangformoniterUSB: return
+07-31 16:36:28.700    97   129 W Vold    : hankinMoniterUSB event
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB enter
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB: current usb device: 101D/0003 
+07-31 16:36:28.700    97   129 I Vold    : hankinmoniterUSB add 
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB: busid=3-1.1#usbid=101d:0003#;
+07-31 16:36:28.700    97   129 I Vold    : hankinmoniterUSB: return
 07-31 16:36:28.700    97   129 W Vold    : subsystem found in netlink event
 07-31 16:36:28.700    97   129 D Vold    : usb, 1
-07-31 16:36:28.700    97   129 W Vold    : sangforMoniterUSB event
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB enter
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB: current usb device: 101D/0003 
+07-31 16:36:28.700    97   129 W Vold    : hankinMoniterUSB event
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB enter
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB: current usb device: 101D/0003 
 07-31 16:36:28.700  1199  8072 I TGS     : hotplug_idle_cb event:1. {spice_usb_device_manager_hotplug_idle_cb:1405}
 07-31 16:36:28.700  1199  8072 I TGS     : hotplug  device added 101d:0003 bcdDevice:0100 arrive {spice_usb_device_manager_add_dev:1216}
-07-31 16:36:28.700    97   129 D Vold    : SangformoniterUSB:analytical_busid error: /devices/platform/usb20_host/usb3/3-1/3-1.1/3-1.1:1.0
-07-31 16:36:28.700   679   736 D MountService: SangforUsbAdded intent Intent { act=android.intent.action.SANGFOR_USB_INSERT (has extras) }
+07-31 16:36:28.700    97   129 D Vold    : hankinmoniterUSB:analytical_busid error: /devices/platform/usb20_host/usb3/3-1/3-1.1/3-1.1:1.0
+07-31 16:36:28.700   679   736 D MountService: hankinUsbAdded intent Intent { act=android.intent.action.hankin_USB_INSERT (has extras) }
 07-31 16:36:28.700   679   736 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.sendBroadcast:1050 com.android.server.MountService.onEvent:894 com.android.server.NativeDaemonConnector.handleMessage:102 android.os.Handler.dispatchMessage:95 android.os.Looper.loop:137 
 07-31 16:36:28.710  1199  8072 I USB     : device_added_cb get usb device:Aisino USB Flash Disk [101d:0003] 3 9 {device_added_cb:448}
 07-31 16:36:28.710   679  1161 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.sendBroadcast:1050 com.android.server.usb.UsbSettingsManager.deviceAttached:619 com.android.server.usb.UsbHostManager.usbDeviceAdded:156 com.android.server.usb.UsbHostManager.monitorUsbHostBus:-2 com.android.server.usb.UsbHostManager.access$000:38 
@@ -153,13 +153,13 @@ acc名单无关。最开始测试未配置acc名单发现登录过程中是46秒
 07-31 16:36:29.130  1199  8057 D         :  [scanacc_normal_detec:29]
 07-31 16:36:29.130  1199  8057 W GLib+GLib: GError set over the top of a previous GError or uninitialized memory.
 07-31 16:36:29.130  1199  8057 W GLib+GLib: This indicates a bug in someone's code. You must ensure an error is NULL before it's set.
-07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:533)sangfor_scanner_opt_init_default_config failed!
+07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:533)hankin_scanner_opt_init_default_config failed!
 07-31 16:36:29.130  1199  8057 W GLib+GLib: GError set over the top of a previous GError or uninitialized memory.
 07-31 16:36:29.130  1199  8057 W GLib+GLib: This indicates a bug in someone's code. You must ensure an error is NULL before it's set.
-07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:768)sangfor_scanner_opt_init_config failed!!
+07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:768)hankin_scanner_opt_init_config failed!!
 07-31 16:36:29.130  1199  8057 W GLib+GLib: GError set over the top of a previous GError or uninitialized memory.
 07-31 16:36:29.130  1199  8057 W GLib+GLib: This indicates a bug in someone's code. You must ensure an error is NULL before it's set.
-07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:911)sangfor_scanner_opt_deinit success -===>>
+07-31 16:36:29.130  1199  8057 W GLib+GLib: The overwriting error message was: (line:911)hankin_scanner_opt_deinit success -===>>
 07-31 16:36:29.130  1199  8057 W TGS     : usbredirhost: ===== Enter set interrupt_normal_mode caps:0xe00000fe  (101d:0003) has_cap:0 disabel:0  tmp:(0000:0000)=====
 07-31 16:36:29.130  1199  8057 W TGS     :  {usbredir_log:867}
 07-31 16:36:29.130  1199  8057 W TGS     : usbredirhost: ===== interrupt_normal_mode was disabled, no need disable again 1=====

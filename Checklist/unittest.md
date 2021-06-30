@@ -79,13 +79,23 @@ cl：D9002 忽略未知选项 "-utf-8"
 
 后来使用everthing软件找到cl.exe，执行cl -help发现并没有/utf-8选项，但是vs2019的cl则可以，发现cl.exe的版本不同。
 
+网上铺天盖地都是忽略未知选项-std=c++11，测试发现也有这个问题，然后就想到会不会是c++标准不对导致。
+然后找到输出_cplusplus值看看，发现是199711，vs2015居然使用的是97标准，尝试修改为11标准失败，发现网上方法并不适用。
+
+从 Visual Studio 2017 版本 15.7 开始便已提供 /Zc:__cplusplus 选项，该选项在默认情况下处于禁用状态。
+https://docs.microsoft.com/zh-cn/cpp/build/reference/zc-cplusplus?view=msvc-160&viewFallbackFrom=vs-2019
+
+发现在vs2015怎么都是199711。可以使用/std:c++latest和/std:c++14，但是一样。或许
+不支持。。。
+
 网上没有找到cl.exe升级的方法，只找到一个提示：
 在VS2015版本(Visual Studio 2015 Update 2)，增加一个编译选项/utf-8，该编译选项的作用就是将源码字符集和执行文件字符集指定为UTF-8。增加该编译选项后，再重新编译运行，程序正确输出中文，问题解决。
 官方：https://docs.microsoft.com/en-us/cpp/build/reference/utf-8-set-source-and-executable-character-sets-to-utf-8?redirectedfrom=MSDN&view=msvc-160
 
-
-
-
+然后在msdn里面找到VS 2015 Update3下载安装。
+Update版本比正式版居然能多出4个G，多出正式版还多，搞不懂。
+安装后使用cl -help发现有/utf-8选项，并且版本从19.00.23026升级到了19.00.24210，成功编译出lib文件。
+最新版VS2019的cl.exe版本为19.29.30038.1。
 
 ### 1-3、本地测试
 注意：所有附加的编译参数都是需要的。
