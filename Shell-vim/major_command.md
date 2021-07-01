@@ -125,7 +125,11 @@ rename "s/.so.*/.so/" *
 ## 9、检测二进制文件编译选项
 grep -m 1 "\-fsigned-char" xxx.so
 
-Binary file xxx.so 
+Binary file xxx.so matchs
+
+## 10、删除环境变量
+export -n CPPFLAGS
+unset CPPFLAGS
 
 
 

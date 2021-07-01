@@ -213,9 +213,44 @@ make
 
 如果configure时不指定CPPFLAGS则会去找全局变量CPPFLAGS
 
+### configure时参数使用变量时居然想不到方法解决
+```
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #echo $CARGS
+CPPFLAGS='-Wno-error -fsigned-char' --enable-shared
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure $CARGS
+configure: error: unrecognized option: `-fsigned-char''
+Try `./configure --help' for more information
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #CARGS=CPPFLAGS="-Wno-error -fsigned-char" --enable-shared
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+ModuleNotFoundError: No module named 'CommandNotFound'
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #CARGS='CPPFLAGS="-Wno-error -fsigned-char" --enable-shared'
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #echo $CARGS
+CPPFLAGS="-Wno-error -fsigned-char" --enable-shared
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure $CARGS
+configure: error: unrecognized option: `-fsigned-char"'
+Try `./configure --help' for more information
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #CARGS='CPPFLAGS=-Wno-error -fsigned-char --enable-shared'
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #echo $CARGS
+CPPFLAGS=-Wno-error -fsigned-char --enable-shared
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure $CARGS
+configure: error: unrecognized option: `-fsigned-char'
+Try `./configure --help' for more information
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #CARGS="CPPFLAGS=-Wno-error -fsigned-char --enable-shared"
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure $CARGS
+configure: error: unrecognized option: `-fsigned-char'
+Try `./configure --help' for more information
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #CARGS="CPPFLAGS='-Wno-error -fsigned-char' '--enable-shared'"
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #echo $CARGS
+CPPFLAGS='-Wno-error -fsigned-char' '--enable-shared'
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure $CARGS
+configure: error: unrecognized option: `-fsigned-char''
+Try `./configure --help' for more information
+[root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure CPPFLAGS='-Wno-error -fsigned-char' --enable-shared
+```
+
 ## 20、
-
-
 
 
 
