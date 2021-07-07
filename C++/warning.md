@@ -250,7 +250,8 @@ Try `./configure --help' for more information
 [root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure CPPFLAGS='-Wno-error -fsigned-char' --enable-shared
 ```
 
-## 20、
+## 20、warning: enumeration value ‘XXXX’ not handled in switch [-Wswitch]
+zai
 
 
 

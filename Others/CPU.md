@@ -17,10 +17,10 @@ ARM也是一种架构，一般用于嵌入式设备，也是一个公司。
 mips也是一家公司，也是一种cpu架构。
 
 
-# CISC & RISC
+## 1、CISC & RISC
 要了解X86和ARM，就得先了解复杂指令集(CISC,complex instruction set computer)和精简指令集(RISC,Reduced Instruction-Set Computer)。从CPU发明到现在，有非常多种架构，从我们熟悉的X86，ARM，到不太熟悉的MIPS，IA64，它们之间的差距都非常大。但是如果从最基本的逻辑角度来分类的话，它们可以被分为两大类，即所谓的“复杂指令集”与“精简指令集”系统，也就是经常看到的“CISC”与“RISC”。
 
-## Intel和ARM处理器的区别
+## 2、Intel和ARM处理器的区别
 Intel使用CISC(复杂指令集计算机)
 ARM使用CISC(精简指令集计算机)
 举一个有趣的例子（没太大营养，可以直接看下一节）：
@@ -34,7 +34,7 @@ ARM和Intel处理器的一大区别是ARM从来只是设计低功耗处理器，
 
 参考：https://blog.csdn.net/gerwels_ji/article/details/83001611
 
-
+## 3、
 
 
 

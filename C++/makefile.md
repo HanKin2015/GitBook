@@ -150,22 +150,83 @@ extern "C" {
 实际上cc和gcc等价，都是指向同一个命令。
 使用realpath可以解开真面目。
 
+## 12、让make自动推导
+GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个 .o 文件后都写上类似的命令，因为，我们的make会自动识别，并自己推导命令。
 
+只要make看到一个 .o 文件，它就会自动的把 .c 文件加在依赖关系中，如果make找到一个 whatever.o ，那么 whatever.c 就会是 whatever.o 的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile再也不用写得这么复杂。我们的新makefile又出炉了。
+```
+objects = main.o kbd.o command.o display.o \
+    insert.o search.o files.o utils.o
 
+edit : $(objects)
+    cc -o edit $(objects)
 
+main.o : defs.h
+kbd.o : defs.h command.h
+command.o : defs.h command.h
+display.o : defs.h buffer.h
+insert.o : defs.h buffer.h
+search.o : defs.h buffer.h
+files.o : defs.h buffer.h command.h
+utils.o : defs.h
 
+.PHONY : clean
+clean :
+    rm edit $(objects)
+```
+这种方法，也就是make的“隐晦规则”。上面文件内容中， .PHONY 表示 clean 是个伪目标文件。
 
+```
+不喜欢这种风格的，一是文件的依赖关系看不清楚，二是如果文件一多，要加入几个新的 .o 文件，那就理不清楚了。
+objects = main.o kbd.o command.o display.o \
+    insert.o search.o files.o utils.o
 
+edit : $(objects)
+    cc -o edit $(objects)
 
+$(objects) : defs.h
+kbd.o command.o files.o : command.h
+display.o insert.o search.o files.o : buffer.h
 
+.PHONY : clean
+clean :
+    rm edit $(objects)
+	
+	
+	
+clean:
+    rm edit $(objects)
+更为稳健的做法是：
 
+.PHONY : clean
+clean :
+    -rm edit $(objects)
+前面说过， .PHONY 表示 clean 是一个“伪目标”。而在 rm 命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事。
+```
+Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用 # 字符。
 
+## 13、Makefile的文件名
+默认的情况下，make命令会在当前目录下按顺序找寻文件名为“GNUmakefile”、“makefile”、“Makefile”的文件，找到了解释这个文件。在这三个文件名中，最好使用“Makefile”这个文件名，因为，这个文件名第一个字符为大写，这样有一种显目的感觉。最好不要用“GNUmakefile”，这个文件是GNU的make识别的。有另外一些make只对全小写的“makefile”文件名敏感，但是基本上来说，大多数的make都支持“makefile”和“Makefile”这两种默认文件名。
 
+当然，你可以使用别的文件名来书写Makefile，比如：“Make.Linux”，“Make.Solaris”，“Make.AIX”等，如果要指定特定的Makefile，你可以使用make的 -f 和 --file 参数，如： make -f Make.Linux 或 make --file Make.AIX 。
 
+如果你的当前环境中定义了环境变量 MAKEFILES ，那么，make会把这个变量中的值做一个类似于 include 的动作。有时候你的Makefile出现了怪事，那么你可以看看当前环境中有没有定义这个变量。
 
+## 14、书写规则
+规则包含两个部分，一个是依赖关系，一个是生成目标的方法。
 
+在Makefile中，规则的顺序是很重要的，因为，Makefile中只应该有一个最终目标，其它的目标都是被这个目标所连带出来的，所以一定要让make知道你的最终目标是什么。一般来说，定义在Makefile中的目标可能会有很多，但是第一条规则中的目标将被确立为最终的目标。如果第一条规则中的目标有很多个，那么，第一个目标会成为最终的目标。make所完成的也就是这个目标。
+```
+targets : prerequisites ; command
+    command
+    ...
+```
+command是命令行，如果其不与“target:prerequisites”在一行，那么，必须以 Tab 键开头，如果和prerequisites在一行，那么可以用分号做为分隔。
 
+## 15、在规则中使用通配符
+如果我们想定义一系列比较类似的文件，我们很自然地就想起使用通配符。make支持三个通配符： ```* ， ? 和 ~ 。这是和Unix的B-Shell是相同的。```
 
+波浪号（ ~ ）字符在文件名中也有比较特殊的用途。如果是 ~/test ，这就表示当前用户的 $HOME 目录下的test目录。而 ~hchen/test 则表示用户hchen的宿主目录下的test 目录。（这些都是Unix下的小知识了，make也支持）而在Windows或是 MS-DOS下，用户没有宿主目录，那么波浪号所指的目录则根据环境变量“HOME”而定。
 
 
 

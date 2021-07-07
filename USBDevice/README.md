@@ -58,5 +58,16 @@ https://www.cnblogs.com/idorax/p/7691334.html
 
 常常看见human interface device，结果才发现是HID的全拼，人机接口设备。
 
+# U盘只读相关
+mount命令可以看见u盘设备当前是可读可写rw，可读不可写ro。
+dmesg -w也能看见write protect is on。
+银河麒麟出现界面无法写入，报错目标是只读的。但是终端和日志查看write protect is off，并且可以写入。
+解决：echo $DESKTOP_SESSION获取session类型，然后ps查找相关session进程，killall杀死进程，这时候界面重启，这时候就能正常写入了。
+
+
+
+
+
+
 
 
