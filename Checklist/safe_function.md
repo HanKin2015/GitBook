@@ -1,6 +1,7 @@
 # 安全函数
 
-## 1、snprintf
+## 1、拷贝函数
+snprintf函数
 ```
 [root@ubuntu0006:/media/hankin/vdb] #cat safe_function.cpp
 #include <stdio.h>
@@ -44,7 +45,7 @@ runo
 runoobco
 ```
 
-## 长度准则
+### 长度准则
 ```
 *char *strncpy(char *dest, const char *src, size_t size) 的size为缓冲区长度-1，并且需要外部保证缓存区最后一位置0，对于字符数组，建议使用 sizeof(数组)-1 计算长度*
 *注意：windows下strncpy为不安全函数，需要使用strncpy_s代替！*
@@ -52,3 +53,8 @@ runoobco
 
 char * strncat(char *dest, const char *src, size_t n) 的n为缓冲区长度，无需-1，-1后会少拷贝内容
 ```
+
+## 2、字符串数值转换
+### 不安全函数
+itoa，推荐使用atoi，
+

@@ -669,11 +669,44 @@ ssh-keygen -t rsa -C "邮件地址"
 
 
 # git cherry-pick教程
-
 http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
 
+对于多分支的代码库，将代码从一个分支转移到另一个分支是常见需求。
+
+这时分两种情况。一种情况是，你需要另一个分支的所有代码变动，那么就采用合并（git merge）。另一种情况是，你只需要部分代码变动（某几个提交），这时可以采用 Cherry pick。
+
+```
+举例来说，代码仓库有master和feature两个分支。
+
+    a - b - c - d   Master
+         \
+           e - f - g Feature
+		
+现在将提交f应用到master分支。		
+# 切换到 master 分支
+$ git checkout master
+
+# Cherry pick 操作
+$ git cherry-pick f
+	
+上面的操作完成以后，代码库就变成了下面的样子。
+
+    a - b - c - d - f   Master
+         \
+           e - f - g Feature
+
+
+$ git cherry-pick feature	将feature分支最新提交应用过来
+$ git cherry-pick <A> <B>	将A和B提交应用过来
+$ git cherry-pick A..B		将A之后到B应用过来
+$ git cherry-pick A^..B 	将包括A到B应用过来
+```
+
+
+
+
 手动版：
-git dfii commitHash1 commitHash2 > 123.patch
+git diff commitHash1 commitHash2 > 123.patch
 git apply --reject 123.patch
 
 
@@ -734,9 +767,6 @@ git checkout -b 新的分支名 原有的分支
 撤销某次提交记录
 git revert commitId
 
-## 20210206
-git cherry-pick & git rebase
-
 ## 20210207
 删除远程分支：git push origin --delete 分支名
 
@@ -776,9 +806,6 @@ git clean -nfd
 git clone时出现Permission denied(publickey). fatal: Could not read from remote repository问题
 是使用ssh远程到xubuntu系统进行git操作，但是在xubuntu系统中git操作没有任何问题。
 
-### 20210323
-git cherry-pick
-
 ### 20210428
 修复git diff/log正文中文乱码
 
@@ -800,7 +827,7 @@ $ git config --global core.quotepath false          # 显示 status 编码
 $ git config --global gui.encoding utf-8            # 图形界面编码
 $ git config --global i18n.commit.encoding utf-8    # 提交信息编码
 $ git config --global i18n.logoutputencoding utf-8  # 输出 log 编码
-
+```
 不重启电脑快速测试的话，cmd输入命令
 set LESSCHARSET=utf-8
 
@@ -818,7 +845,7 @@ fork：把别人的代码库中复制（fork）一份到你自己的代码库，
 start：用于收藏（start）或者点赞别人的代码
 watch：用于关注（watch）别人代码库的动态，默认是Not watching，设置为watching就可以关注这个代码库的动态了，假如有人push或者其他动作，你的邮箱就会收到消息。
 
-### 2021051
+### 20210501
 # 认识git
 工作区  本地仓库  暂存区
 
