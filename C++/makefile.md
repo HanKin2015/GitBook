@@ -228,7 +228,7 @@ command是命令行，如果其不与“target:prerequisites”在一行，那�
 
 波浪号（ ~ ）字符在文件名中也有比较特殊的用途。如果是 ~/test ，这就表示当前用户的 $HOME 目录下的test目录。而 ~hchen/test 则表示用户hchen的宿主目录下的test 目录。（这些都是Unix下的小知识了，make也支持）而在Windows或是 MS-DOS下，用户没有宿主目录，那么波浪号所指的目录则根据环境变量“HOME”而定。
 
-
+有时间继续学习：https://seisman.github.io/how-to-write-makefile/rules.html
 
 
 

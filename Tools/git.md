@@ -703,8 +703,6 @@ $ git cherry-pick A^..B 	将包括A到B应用过来
 ```
 
 
-
-
 手动版：
 git diff commitHash1 commitHash2 > 123.patch
 git apply --reject 123.patch
@@ -945,9 +943,70 @@ log/*           //忽略log下的所有文件
 css/*.css       //忽略css目录下的.css文件
 ```
 
+### 获取几次提交的合并修改
+git diff commit1 commit2
+获取commit1到commit2之间的修改内容
+
+### 不同仓库的提交怎么转移
+使用git apply失败
+git diff c1 c2 > 123.patch
+git format-patch -5
+git show commit1 > 234.patch
+https://blog.csdn.net/wenjin359/article/details/83270146
+
+果断放弃了，不行。
 
 
+但是在另外一个仓库搞定解决了。
+```
+git diff ${old-commit} ${new-commit}  > commit-operation.patch
 
+OR
+
+git format-patch --stdout -1 b1af44f > commit-operation.patch (recommend)
+
+THEN 
+
+git apply commit-operation.patch
+
+// 有几个^就会打几个patch，从最近一次打起
+git format-patch HEAD^
+// 最近的二个patch内容
+git format-patch HEAD^^
+
+// 最近一次的patch
+git format-patch -1
+// 最近两次的patch
+git format-patch -2
+```
+个人感觉还是要求比较高的，不能出现无法找到索引的问题。
+
+git apply只能合入修改，git am能合入提交时间和提交者。
+
+### 20210713
+```
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
+fatal: Unable to create '/home/vtcompile/vmps/.git/index.lock': File exists.
+
+If no other git process is currently running, this probably means a
+git process crashed in this repository earlier. Make sure no other git
+process is running and remove the file manually to continue.
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#rm /home/vtcompile/vmps/.git/index.lock
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
+error: pathspec './' did not match any file(s) known to git.
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git status
+# On branch Branches/VER6.6.6R1
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       deleted:    ../../.gitlab/gitlab_ci/ci_common_report.sh
+#       deleted:    ../../.gitlab/merge_request_templates/Bug.md
+
+终结办法：
+git clean -fd
+git checkout .
+git reset xxx
+```
 
 
 
