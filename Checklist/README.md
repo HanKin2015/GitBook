@@ -97,7 +97,7 @@ https://www.v2ex.com/t/81563
 
 
 
-
+有机会需要去学习学习一下文件锁flock和ring_buffer。
 
 
 

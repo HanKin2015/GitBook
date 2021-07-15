@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+radix：进制、基数
 skip: 跳过
 recommend: 推荐;介绍
 universal：通用的;普遍的;全体的;全世界的;共同的

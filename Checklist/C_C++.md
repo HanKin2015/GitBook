@@ -120,10 +120,19 @@ int main(void){
 推荐使用static设置为静态变量，最好是作为参数返回。
 
 
+# cpp 宏函数不用加分号
+肯定啊，看如下：
+```
+#define type_init(x, y) \
+static int sum(int a, int b) \
+{	\
+	return a + b;	\
+}	\
 
+type_init(int x, int y) 实际上这个还是一个函数定义
+```
 
-
-
+Sonar（SonarQube）是一个开源平台，用于管理源代码的质量。Sonar 不只是一个质量数据报告工具，更是代码质量管理平台。支持的语言包括：Java、PHP、C#、C、Cobol、PL/SQL、Flex 等。
 
 
 

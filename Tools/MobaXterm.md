@@ -23,7 +23,33 @@ MobaTextEditor
 Settings-》Terminal-》找到Paste using right-click,选择打钩，然后点ok。
 只有新打开的窗口才能生效。
 
+zip安装包大约在27M，免安装使用方便大约在14M。
 
 ## 2、xshell
+研究生的时候使用过，好像还不错。现在想想文件还挺大的，并且上下传文件还需要安装搭配的xshell ftp软件，整体下来整个安装包就很大。
+
+## 3、finalshell
+据说是一个非常强大的终端工具。
+安装包80M，没有免安装包。
+
+感觉还行，但是背景有点花，跟mobaxterm没太大区别，多了一些花里胡哨。
+相比之下还是更加推荐mobaxterm。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

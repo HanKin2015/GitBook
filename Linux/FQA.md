@@ -132,9 +132,13 @@ chattr -a xxx 或者 chattr -i xxx
 第三步：删除文件
 rm -rf xxx
 
- 
+## 13、Cannot set LC_CTYPE to default locale: No such file or directory解决方法
+执行程序时报错：UnicodeEncodeError: 'ascii' codec can't encode charrcters in position
+怀疑可能是编码问题，扫描前执行一下这个试试：export LC_ALL=en_US.UTF-8
+然后报错bash: waring: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+执行locale命令报错：Cannot set LC_CTYPE to default locale: No such file or directory
 
-
-
-
+locale -a查看系统内安装的locale
+发现没有en_US.UTF-8，进行手动安装locale-gen en_US.UTF-8
+搞定。
 

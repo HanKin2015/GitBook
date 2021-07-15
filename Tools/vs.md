@@ -76,7 +76,8 @@ printf("exec time is %lf s.\n", (double)spent_time / CLOCKS_PER_SEC);
 linux中有，unsigned int sleep(unsigned intseconds)，传入挂起时间，成功返回0，不成功则返回余下的秒数（这里sleep（1），暂停1s）。
 windows系统中有Sleep函数（注意大写），void Sleep(DWORD dwMilliseconds);提供挂起的毫秒数,并且需包含windows.h。
 
-
+## 9、'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa.
+https://blog.csdn.net/hou09tian/article/details/80616155
 
 
 
