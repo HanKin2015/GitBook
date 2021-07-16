@@ -24,7 +24,58 @@ apt 和 apt-get区别
 
 apt search 和 apt-cache search区别
 
+## 4、apt命令安装安装包时报其他错误
+```
+[root@ubuntu0006:/media/hankin/vdb/null] #apt upgrade
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树
+正在读取状态信息... 完成
+正在计算更新... 完成
+下列软件包是自动安装的并且现在不需要了：
+  libevent-core-2.0-5 linux-headers-4.4.0-164 linux-headers-4.4.0-164-generic linux-image-4.4.0-164-generic linux-modules-4.4.0-164-generic linux-modules-extra-4.4.0-164-generic
+使用'apt autoremove'来卸载它(它们)。
+下列软件包的版本将保持不变：
+  xorg
+升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 1 个软件包未被升级。
+有 4 个软件包没有被完全安装或卸载。
+解压缩后会消耗 0 B 的额外空间。
+您希望继续执行吗？ [Y/n] y
+正在设置 update-notifier-common (3.168.15) ...
+Traceback (most recent call last):
+  File "/usr/lib/update-notifier/package-data-downloader", line 24, in <module>
+    import debian.deb822
+ModuleNotFoundError: No module named 'debian'
+dpkg: 处理软件包 update-notifier-common (--configure)时出错：
+ 子进程 已安装 post-installation 脚本 返回错误状态 1
+正在设置 ubuntu-advantage-tools (27.1~16.04.1) ...
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+ModuleNotFoundError: No module named 'uaclient'
+dpkg: 处理软件包 ubuntu-advantage-tools (--configure)时出错：
+ 子进程 已安装 post-installation 脚本 返回错误状态 1
+dpkg: 依赖关系问题使得 ubuntu-minimal 的配置工作不能继续：
+ ubuntu-minimal 依赖于 ubuntu-advantage-tools；然而：
+  软件包 ubuntu-advantage-tools 尚未配置。
 
+dpkg: 处理软件包 ubuntu-minimal (--configure)时出错：
+ 依赖关系问题 - 仍未被配置
+因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                                                                    dpkg: 依赖关系问题使得 update-notifier 的配置工作不能继续：
+ update-notifier 依赖于 update-notifier-common (= 3.168.15)；然而：
+  软件包 update-notifier-common 尚未配置。
+
+dpkg: 处理软件包 update-notifier (--configure)时出错：
+ 依赖关系问题 - 仍未被配置
+由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                                    在处理时有错误发生：
+ update-notifier-common
+ ubuntu-advantage-tools
+ ubuntu-minimal
+ update-notifier
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+```
+https://blog.51cto.com/lovexx/1975545
+跟着教程走解决。
 
 
 

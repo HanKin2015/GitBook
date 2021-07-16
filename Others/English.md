@@ -1,6 +1,9 @@
 # 英语学习
 
 ```
+Defect：缺陷
+potentially：可能
+emit：发出;射出;散发(光、热、声音、气等)
 radix：进制、基数
 skip: 跳过
 recommend: 推荐;介绍

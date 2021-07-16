@@ -142,3 +142,24 @@ locale -a查看系统内安装的locale
 发现没有en_US.UTF-8，进行手动安装locale-gen en_US.UTF-8
 搞定。
 
+## 14、输出echo的帮助信息
+help echo
+/bin/echo --help
+`which echo` --help
+
+## 15、获取开机时间
+who -b 查看最后一次系统启动的时间。
+who -r 查看当前系统运行时间
+last reboot可以看到Linux系统历史启动的时间
+top命令显示up后表示系统到目前运行了多久时间。反过来推算系统重启时间。
+w命令显示up后表示系统到目前运行了多久时间。反过来推算系统重启时间。
+cat /proc/uptime
+date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
+
+
+
+
+
+
+
+

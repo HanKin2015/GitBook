@@ -34,10 +34,13 @@ ARM和Intel处理器的一大区别是ARM从来只是设计低功耗处理器，
 
 参考：https://blog.csdn.net/gerwels_ji/article/details/83001611
 
-## 3、
+## 3、alpha （DEC开发微处理器）
+DEC Alpha，64位RISC微处理器，支持VMS操作系统、Linux和BSD。
 
-
-
-
+Alpha是目前已知的内存模型最弱的架构。
+很弱的内存模型简化了硬件实现，提升了硬件性能。
+但这是以软件复杂性的提升为代价的。由于其上的系统编程较难，现在已淡出工业界。
+它的学术价值却不容小觑。
+https://www.zhihu.com/question/23685068?sort=created
 
 
