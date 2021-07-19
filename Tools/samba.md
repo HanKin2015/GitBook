@@ -64,12 +64,18 @@ smbpasswd -a sambauser
 重启服务
 /etc/init.d/samba restart
 
-ifconfig
+ifconfig查看服务器ip地址
 
+在Windows的运行，输入\\223.3.119.170（Samba对应的IP地址）
 
+这个时候会弹出登录界面，直接输入之前设置的登录账号和密码就行了
 
+## 2、出现一个问题
+需要确认新建的文件夹是新建用户有权限访问的。
+使用chown命令修改即可。
+chown sambauser /media/hankin/vdb/office
 
-
+有防火墙记得关闭。
 
 
 

@@ -40,9 +40,11 @@ SSL能使用户/服务器应用之间的通信不被攻击者窃听，并且始�
 
 # ip
 
- service network restart 
+service network restart 
 
-
+## 丢掉某个ip的网络包
+iptables -I INPUT -s 172.5.5.5 -j DROP
+iptables -I INPUT -s 172.5.5.5 -j ACCEPT
 
 
 

@@ -32,4 +32,31 @@ int main()
 }
 ```
 
+## 2、内存是否可以分段释放
+https://bbs.csdn.net/topics/200019746
+堆分配其实就是链表管理，每次申请内存产生一个节点，挂在busylist上，如果释放，那么就是把这个块从busylist上脱离，然后挂到freelist上，并且每个节点有头部记录上一节点位置，下一节点位置，以及本节点的大小
+
+
+如按照你的做法，回收节点的一部分，那么好，下面有2个问题需要确定
+
+1）每次被回收的内存也要被当作块，块就有头，记录了块大小等等消息，那么你这个块的块头是什么数据？不清楚，那么很可能就会破坏freelist
+
+2)假如我再次使用malloc将你回收的内存分配出去了，但是你原先的块并不知道他的大小已经改变了啊...当整个快都被使用的时候，就有可能出现数据覆盖
+
+```
+#include <iostream>
+#include <string>
+#include <memory>
+#include <stdlib.h>
+#include <stdint.h>
+using namespace std;
+
+int main()
+{
+        uint8_t *data = (uint8_t *) malloc(1000);
+        free(data + 100);
+        //free(data);
+        return 0;
+}
+```
 

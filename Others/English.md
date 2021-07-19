@@ -1,6 +1,10 @@
 # 英语学习
 
 ```
+prevent：阻止，防止
+pending：直到。。。为止，待定
+exact：准确的
+simulate：模拟
 Defect：缺陷
 potentially：可能
 emit：发出;射出;散发(光、热、声音、气等)
