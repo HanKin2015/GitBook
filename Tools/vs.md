@@ -79,6 +79,35 @@ windows系统中有Sleep函数（注意大写），void Sleep(DWORD dwMillisecon
 ## 9、'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa.
 https://blog.csdn.net/hou09tian/article/details/80616155
 
+## 10、Visual Studio之RelWithDebInfo模式，“被忽视”的编译模式
+https://blog.csdn.net/inter_peng/article/details/53933206
+
+在Visual Studio的编译模式选项中，一般有四个模式：Debug, Release, RelWithDebInfo, MinSizeRel。
+
+大家一般对前两个模式比较多。Debug版本是调试版本，对代码不做任何优化，可以debug项目中的任意文件；Release版本是发行版本，顾名思义就是当程序开发完成后，程序的一个发布版，它对代码做了优化，因此速度会非常快，但是遗憾的是，release版本无法跟踪代码。
+
+根据以上描述，debug和release版本各有自己的优势和缺陷。
+debug版本为了追求更全面的调试信息而放弃了速度；
+release版本为了追求性能优化而抛弃了调试信息。
+
+如果用户既需要调试代码，又无奈于debug版本的速度，那么你便可以开始考虑RelWithDebInfo这个版本了。
+
+顾名思义，从这个模式的名称来看，它是一种含有调试信息的Release版本。那么它相当于是结合了Debug和Release版本的优点的一个版本。
+
+以下是Stackoverflow上面的关于比较Debug和RelWithDebInfo版本区别的描述：
+http://stackoverflow.com/questions/1239845/build-mode-relwithdebinfo
+
+The main differences being that in Debug mode, the executable produced isn’t optimized (as this could make debugging harder) and the debug symbols are included.
+
+The difference between Debug and RelWithDebInfo is mentioned here:
+
+RelWithDebInfo is quite similar to Release mode. It produces fully optimized code, but also builds the program database, and inserts dubug line information to give a debugger a good chance at guessing where in the code you are at any time.
+RelWithDebInfo模式是非常近似于Release模式的。它生成出几乎完全优化的代码，而且也创建程序的数据库，插入一些调试信息以使调试人员能够有机会去跟踪你任意时刻正处于哪段代码中。
+
+关于Debug和RelWithRebInfo版本的区别如下：
+https://cmake.org/pipermail/cmake/2001-October/002479.html
+
+本文将讲解如何利用这种模式，在即保证速度快的情况下，同时还可以添加断点并进行代码调试。你一旦了解了这个模式，我想以后完全可以抛弃掉Debug模式了。至少对于我而言，自从我学会了如何正确地使用RelWithDebInfo模式后，我就再也不想启动Debug模式了。
 
 
 

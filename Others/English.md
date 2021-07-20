@@ -1,6 +1,11 @@
 # 英语学习
 
 ```
+double quote：双引号
+quote：引用
+globbing：通配符
+explicit：明确的;清楚明白的;易于理解的;(说话)清晰的;直言的;坦率的;不隐晦的;不含糊的
+contrib：贡献软件;贡献;普通发布版
 prevent：阻止，防止
 pending：直到。。。为止，待定
 exact：准确的

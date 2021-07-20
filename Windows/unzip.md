@@ -31,7 +31,10 @@ https://zhuanlan.zhihu.com/p/111110992
 ## 3、使用广泛认可的zlib库
 无详细教程，自研。
 官网下载地址：http://www.zlib.net/
-
+- 尝试使用VS2019的nmake进行编译，发现居然要求我运行./configure
+- 忽然之间看见makelist，就想起cmake
+- 新建build文件夹，cmake四部曲搞定
+- 其实源代码文件夹已有VS项目，在D:\Github\Storage\windows\zlib1211\zlib-1.2.11\contrib\vstudio目录下
 
 ### 无法打开 源 文件 "zconf.h"	StudySTL	D:\Github\Storage\windows\StudySTL\zlib.h	34	
 因此头文件zconf.h也是必备的。
@@ -39,7 +42,7 @@ https://zhuanlan.zhihu.com/p/111110992
 ### LNK2001 无法解析的外部符号 _uncompress
 百度了一半天，无果。
 _CRT_SECURE_NO_WARNINGS
-忽然之间
+忽然之间发现记得在编译zlib的时候是x64，现在测试的项目是x86.修改成x86后运行成功。
 
 
 

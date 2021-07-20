@@ -214,6 +214,7 @@ make
 如果configure时不指定CPPFLAGS则会去找全局变量CPPFLAGS
 
 ### configure时参数使用变量时居然想不到方法解决
+后来在shell代码审查中得到了答案。
 ```
 [root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #echo $CARGS
 CPPFLAGS='-Wno-error -fsigned-char' --enable-shared
@@ -249,9 +250,28 @@ configure: error: unrecognized option: `-fsigned-char''
 Try `./configure --help' for more information
 [root@ubuntu0006:/media/hankin/vdb/lzo/lzo-2.09] #./configure CPPFLAGS='-Wno-error -fsigned-char' --enable-shared
 ```
+CARGS=(CPPFLAGS=-Wno-error -fsigned-char --enable-shared)
+./configure CPPFLAGS=${CARGS}	# 编译半成品 -Wno-error
+./configure CPPFLAGS="${CARGS}"	# 编译半成品 -Wno-error
+CARGS=('CPPFLAGS=-Wno-error -fsigned-char' --enable-shared)
+./configure CPPFLAGS=${CARGS}	# 编译报错unrecognized option: `-fsigned-char'
+./configure CPPFLAGS="${CARGS}"	# 编译成功 -Wno-error -fsigned-char
+CARGS=("CPPFLAGS=-Wno-error -fsigned-char" --enable-shared)
+./configure CPPFLAGS=${CARGS}	# 编译报错unrecognized option: `-fsigned-char'
+./configure CPPFLAGS="${CARGS}"	# 编译成功 -Wno-error -fsigned-char
+
+代码审查地址：https://github.com/koalaman/shellcheck/wiki/SC2086
 
 ## 20、warning: enumeration value ‘XXXX’ not handled in switch [-Wswitch]
-zai
+switch语句中增加default: break;语句即可。
+
+
+
+
+
+
+
+
 
 
 

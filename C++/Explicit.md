@@ -12,9 +12,6 @@ CxString string2(10);
 CxString temp(10);  
 CxString string2 = temp; 
 但是, 上面的代码中的_size代表的是字符串内存分配的大小, 那么调用的第二句 "CxString string2 = 10;" 和第六句 "CxString string6 = 'c';" 就显得不伦不类, 而且容易让人疑惑. 有什么办法阻止这种用法呢? 答案就是使用explicit关键字.
- ———————————————— 
-版权声明：本文为CSDN博主「tiankong19999」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/guoyunfei123/article/details/89003369
 
 explicit关键字的作用就是防止类构造函数的隐式自动转换.
 
@@ -22,11 +19,38 @@ explicit关键字的作用就是防止类构造函数的隐式自动转换.
 
 但是, 也有一个例外, 就是当除了第一个参数以外的其他参数都有默认值的时候, explicit关键字依然有效, 此时, 当调用构造函数时只传入一个参数, 等效于只有一个参数的类构造函数,
 
+## 画重点
+强烈推荐：https://www.cnblogs.com/gklovexixi/p/5622681.html
+在C++中，我们有时可以将构造函数用作自动类型转换函数。但这种自动特性并非总是合乎要求的，有时会导致意外的类型转换，因此，C++新增了关键字explicit，用于关闭这种自动特性。即被explicit关键字修饰的类构造函数，不能进行自动地隐式类型转换，只能显式地进行类型转换。
 
+注意：只有一个参数的构造函数，或者构造函数有n个参数，但有n-1个参数提供了默认值，这样的情况才能进行类型转换。
 
+- 构造函数
+- 只有一个没有提供默认值的参数
 
+```
+/* 示例代码2 */
+class Demo
+{
+   public:
+    Demo();    　　　　　　　　　　　　　　   /* 构造函数1 */
+    explicit Demo(double a);　　　　　　　 /* 示例代码2 */
+    Demo(int a,double b);　　　　　　　　   /* 示例代码3 */
 
+    ~Demo();
+    void Func(void);
 
+    private:
+    int value1;
+    int value2;
+};
+```
+在上述构造函数2中，由于使用了explicit关键字，则无法进行隐式转换。即：Demo test;test = 12.2;是无效的！但是我们可以进行显示类型转换，如：
+```
+Demo test;
+test = Demo(12.2); 或者
+test = (Demo)12.2;
+```
 
 
 

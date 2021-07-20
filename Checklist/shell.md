@@ -8,13 +8,52 @@
 ShellCheck下载地址：https://github.com/koalaman/shellcheck/releases，下载对应平台的tar包解压，扫描命令：shellcheck -e SC1090,SC1091,SC2034,SC2002,SC2006,SC2181,SC2166,SC2219,SC2236,SC2044,SC2010,SC2009,SC2119,SC2120,SC2012,SC2003,SC2162 你的脚本文件
 对于规则不理解，可以访问 https://github.com/koalaman/shellcheck/wiki/Checks，或者直接通过 https://github.com/koalaman/shellcheck/wiki/SC1000 这种形式查询指定错误解释
 
+## SC2103
+https://github.com/koalaman/shellcheck/wiki/SC2103
+Use a ( subshell ) to avoid having to cd back.
 
+使用小括号增加一个subshell，这样在里面进行修改全局变量，完成无需还原操作；cd进入其他目录后也无需cd返回。
+主要是消除cd -或者cd ..语句。
 
+## SC2086
+https://github.com/koalaman/shellcheck/wiki/SC2086
+Double quote to prevent globbing and word splitting.
 
+```
+Sometimes you want to split on spaces, like when building a command line:
 
+options="-j 5 -B"
+make $options file
+Just quoting this doesn't work. Instead, you should have used an array (bash, ksh, zsh):
 
+options=(-j 5 -B) # ksh: set -A options -- -j 5 -B
+make "${options[@]}" file
+```
 
+## SC2164
+Use cd ... || exit in case cd fails.
 
+```
+cd generated_files || exit
+rm -r *.c
+
+# For functions, you may want to use return:
+func(){
+  cd foo || return
+  do_something
+}
+```
+
+## SC2046
+Quote this to prevent word splitting
+
+不是很理解例子。但是实战大体是：
+
+current_date_second=$(date -d `date +%Y%m%d` +%s)
+修改为
+current_date_second=$(date -d "`date +%Y%m%d`" +%s)
+
+单引号不行。
 
 
 
