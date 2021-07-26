@@ -1,6 +1,12 @@
 # 英语学习
 
 ```
+invalidate：使无效，使作废
+implent：实现
+Minimalistic：极简的，简约的
+offensive：攻击
+Milestone：里程碑
+async：异步
 double quote：双引号
 quote：引用
 globbing：通配符

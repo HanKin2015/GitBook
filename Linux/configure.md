@@ -42,8 +42,13 @@ set completeopt=preview,menu
 " 在处理未保存或只读文件的时候,弹出确认
 set confirm
 
- " 可以在buffer的任何地方使用鼠标(类似office中在工作区双击鼠标定位)
+" 可以在buffer的任何地方使用鼠标(类似office中在工作区双击鼠标定位) 打开鼠标功能
 set mouse=a
+
+" 关闭鼠标功能(建议关闭或者不设置,否则会出现鼠标右键不能复制问题)
+set mouse-=a
+set mouse=
+
 set selection=exclusive
 set selectmode=mouse,key
 

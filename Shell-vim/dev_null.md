@@ -1,4 +1,4 @@
-# Shell中 2>/dev/null
+# Shell中2>/dev/null
 
 https://blog.csdn.net/gramdog/article/details/80374119
 
