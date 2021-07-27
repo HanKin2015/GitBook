@@ -59,20 +59,26 @@ https://www.cnblogs.com/idorax/p/7691334.html
 
 常常看见human interface device，结果才发现是HID的全拼，人机接口设备。
 
-# U盘只读相关
+## U盘只读相关
 mount命令可以看见u盘设备当前是可读可写rw，可读不可写ro。
 dmesg -w也能看见write protect is on。
 银河麒麟出现界面无法写入，报错目标是只读的。但是终端和日志查看write protect is off，并且可以写入。
 解决：echo $DESKTOP_SESSION获取session类型，然后ps查找相关session进程，killall杀死进程，这时候界面重启，这时候就能正常写入了。
 
+## ioctl
+在计算机中，ioctl(input/output control)是一个专用于设备输入输出操作的系统调用,该调用传入一个跟设备有关的请求码，系统调用的功能完全取决于请求码。举个例子，CD-ROM驱动程序可以弹出光驱，它就提供了一个对应的Ioctl请求码。设备无关的请求码则提供了内核调用权限。ioctl这名字第一次出现在Unix第七版中，他在很多类unix系统（比如Linux、Mac OSX等）都有提供，不过不同系统的请求码对应的设备有所不同。Microsoft Windows在Win32 API里提供了相似的函数，叫做DeviceIoControl。
 
+## 会谈边界控制器
+会谈边界控制器（Session Border Controller, SBC），一种NAT穿透的方式。SBC可确保VoIP 安全，又可提供媒体代理服务器的套件。
+SBC架构于IMS网络之上，可作为IMS网络的SIP和RTSP的 Proxy Server，所有的SIP与RTSP讯息都会透过SBC来处理，SBC更具备NAT穿透的功能。思科与 Kagoor 对会谈边界控制技术有突破性的发展。
 
+SBC可以理解为远程应用。
 
+## oa系统办公
+办公自动化(OA: OFFICE AUTOMATION)就是采用Internet/Intranet技术，基于工作流概念，使企业内部人员方便快捷地共享信息，高效协同工作；改变过去复杂、低效的手工办公方式，实现迅速、全方位的信息采集、处理，为企业管理和决策提供科学依据。企业实现办公自动化程度也是衡量其实现现代化管理的标准。办公自动化不仅兼顾个人办公效率提高，更重要的是可实现群体协同工作。凭借网络，这种交流与协调几乎可以在瞬间完成。这里所说的群体工作，可以包括在地理上分布很广，甚至在全球上各个地方，以至于工作时间都不一样的一群工作人员。
 
-
-
-
-
+## TWAIN
+TWAIN（全写：Technology Without An Interesting Name）是一个软件和数码相机、扫描仪等图像输入设备之间的通讯标准。
 
 
 

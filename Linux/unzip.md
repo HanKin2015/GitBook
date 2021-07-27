@@ -45,7 +45,7 @@ bz2
 
 .tar.bz2
 
-　　解压：tar jxvf FileName.tar.bz2
+　　解压：tar jxvf FileName.tar.bz2（tar -xf FileName.tar.bz2）
 
 　　压缩：tar jcvf FileName.tar.bz2 DirName
 
