@@ -208,21 +208,21 @@ make[2]: *** Waiting for unfinished jobs....
 ```
 
 ```
-/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
+/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
 ../.././gcc/c/Make-lang.in:127: recipe for target 's-selftest-c' failed
 make[3]: *** [s-selftest-c] Error 1
 make[3]: *** 正在等待未完成的任务....
-/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1plus: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
+/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1plus: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
 ../.././gcc/cp/Make-lang.in:196: recipe for target 's-selftest-c++' failed
 make[3]: *** [s-selftest-c++] Error 1
 rm gcc.pod
-make[3]: Leaving directory '/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc'
+make[3]: Leaving directory '/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc'
 Makefile:4779: recipe for target 'all-stage1-gcc' failed
 make[2]: *** [all-stage1-gcc] Error 2
-make[2]: Leaving directory '/media/sangfor/vdb/test/gcc-11.1.0'
+make[2]: Leaving directory '/media/hankin/vdb/test/gcc-11.1.0'
 Makefile:25860: recipe for target 'stage1-bubble' failed
 make[1]: *** [stage1-bubble] Error 2
-make[1]: Leaving directory '/media/sangfor/vdb/test/gcc-11.1.0'
+make[1]: Leaving directory '/media/hankin/vdb/test/gcc-11.1.0'
 Makefile:1000: recipe for target 'all' failed
 make: *** [all] Error 2
 ```
@@ -232,7 +232,7 @@ make: *** [all] Error 2
 ## 安装gcc-5.4.0
 同样是安装失败。。。。。
 
-/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
+/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/cc1: error while loading shared libraries: libisl.so.23: cannot open shared object file: No such file or directory
 
 发现这样根本没用：
 ./configure --enable-languages=c,c++ --enable-multilib --enable-obsolete --disable-threads --without-headers --disable-multilib --disable-decimal-float --disable-libgomp --disable-libmudflap --disable-nls --disable-shared --disable-libssp --with-newlib --with-isl=/usr/local/lib
@@ -251,7 +251,7 @@ compilation terminated.
 
 
 ```
-/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/xgcc -B/media/sangfor/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/ -B/usr/local/x86_64-pc-linux-gnu/bin/ -B/usr/local/x86_64-pc-linux-gnu/lib/ -isystem /usr/local/x86_64-pc-linux-gnu/include -isystem /usr/local/x86_64-pc-linux-gnu/sys-include   -fno-checking -g -O2 -O2  -g -O2 -DIN_GCC    -W -Wall -Wno-narrowing -Wwrite-strings -Wcast-qual -Wno-format -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition  -isystem ./include   -fpic -mlong-double-80 -DUSE_ELF_SYMVER  -g -DIN_LIBGCC2 -fbuilding-libgcc -fno-stack-protector   -fpic -mlong-double-80 -DUSE_ELF_SYMVER  -I. -I. -I../../host-x86_64-pc-linux-gnu/gcc -I../.././libgcc -I../.././libgcc/. -I../.././libgcc/../gcc -I../.././libgcc/../include -I../.././libgcc/../libdecnumber/no -I../.././libgcc/../libdecnumber -DHAVE_CC_TLS  -DUSE_TLS -o decSingle.o -MT decSingle.o -MD -MP -MF decSingle.dep -c ../.././libgcc/../libdecnumber/decSingle.c
+/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/xgcc -B/media/hankin/vdb/test/gcc-11.1.0/host-x86_64-pc-linux-gnu/gcc/ -B/usr/local/x86_64-pc-linux-gnu/bin/ -B/usr/local/x86_64-pc-linux-gnu/lib/ -isystem /usr/local/x86_64-pc-linux-gnu/include -isystem /usr/local/x86_64-pc-linux-gnu/sys-include   -fno-checking -g -O2 -O2  -g -O2 -DIN_GCC    -W -Wall -Wno-narrowing -Wwrite-strings -Wcast-qual -Wno-format -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition  -isystem ./include   -fpic -mlong-double-80 -DUSE_ELF_SYMVER  -g -DIN_LIBGCC2 -fbuilding-libgcc -fno-stack-protector   -fpic -mlong-double-80 -DUSE_ELF_SYMVER  -I. -I. -I../../host-x86_64-pc-linux-gnu/gcc -I../.././libgcc -I../.././libgcc/. -I../.././libgcc/../gcc -I../.././libgcc/../include -I../.././libgcc/../libdecnumber/no -I../.././libgcc/../libdecnumber -DHAVE_CC_TLS  -DUSE_TLS -o decSingle.o -MT decSingle.o -MD -MP -MF decSingle.dep -c ../.././libgcc/../libdecnumber/decSingle.c
 make: *** No rule to make target '../.././libgcc/../libdecnumber/no/decimal32.c', needed by 'decimal32.o'。 停止。
 ```
 

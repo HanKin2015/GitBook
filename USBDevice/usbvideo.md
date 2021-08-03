@@ -17,7 +17,11 @@ CSDN积分下载攻略：https://mp.weixin.qq.com/s/jfJemxybmeaHSQiXxRpMOA
 早应该想想是不是有中国人早就翻译好了。
 还有应该找找qq群。
 
+## 3、linux使用摄像头
+安装茄子摄像头
+apt install cheese
 
+## 4、
 
 
 

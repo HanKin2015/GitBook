@@ -144,7 +144,14 @@ TEST(sum, testSum) {
         EXPECT_NE(3, sum(3, 4));        // 求和3+4!=3
         EXPECT_EQ(2, sum(1, 2));        // 求和1+2=2
 }
-// 如果在此处不写main函数，那么在链接库的时候还需要链接-lgtest_main, 否则只需链接-lgtest即可。
+/**
+ * 如果在此处不写main函数，那么在链接库的时候还需要链接-lgtest_main, 否则只需链接-lgtest即可。
+ *
+ * 否则报错：
+ * /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o：在函数‘_start’中：
+ * (.text+0x20)：对‘main’未定义的引用
+ * collect2: error: ld returned 1 exit status
+ */
 #if 0
 int main(int argc, char **argv)
 {
@@ -196,8 +203,37 @@ Running main() from /media/hankin/vdb/unittest/googletest-release-1.11.0/googlet
 详细见github/stroage/c++/unittest/。
 
 #### Windows
+详细代码见：D:\Github\Storage\windows\StudySTL\study_gtest.h
+```
+#pragma once
 
+#include "gtest/gtest.h"
 
+#pragma comment(lib, "library/gtestlib/gtest.lib")
+
+int add(int x, int y)
+{
+	return x + y;
+}
+
+TEST(add, add)
+{
+	EXPECT_EQ(5, add(2, 3));
+	EXPECT_NE(3, add(3, 4));
+	//EXPECT_EQ(2, add(1, 2, 0));
+}
+
+/*
+* 1.属性->C/C++->附加目录 增加gtest的include文件夹，这样才不能破坏库的其他文件调用
+* 2.属性->C/C++->代码生成->运行库->多线程 DLL (/MD) 修改为 多线程 (/MT)
+*/
+int test_study_gtest(int argc, char** argv)
+{
+	testing::InitGoogleTest(&argc, argv);
+	RUN_ALL_TESTS();
+	return 0;
+}
+```
 
 ### 1-4、断言
 1、ASSERT_系列：如果当前点检测失败则退出当前函数

@@ -1,4 +1,5 @@
 # 外设
+USB基础知识概论: https://www.crifan.com/files/doc/docbook/usb_basic/release/webhelp/index.html
 
 # USB协议
 
@@ -81,7 +82,19 @@ SBC可以理解为远程应用。
 TWAIN（全写：Technology Without An Interesting Name）是一个软件和数码相机、扫描仪等图像输入设备之间的通讯标准。
 
 
+# 主引导记录
+主引导记录（MBR，Master Boot Record）是位于磁盘最前边的一段引导（Loader）代码。它负责磁盘操作系统(DOS)对磁盘进行读写时分区合法性的判别、分区引导信息的定位，它由磁盘操作系统(DOS)在对硬盘进行初始化时产生的。
 
+
+
+SCSI：是小型计算机系统接口的意思，就是早期硬盘或者光驱的接口类型，多用在服务器电脑上。数据线有50芯或者68芯的
+SATA：是现在的硬盘或者光驱接口，是串行接口。现在的电脑一般都用这种类型，数据线是7芯的。
+
+
+仅批量传输协议中，数据传输的结构和过程：命令阶段、数据阶段和状态阶段。
+命令块封包CBW：Command Block Wrapper
+命令状态封包CSW：Command Status Wrapper
+CDB：Command Block？？？
 
 
 

@@ -265,7 +265,9 @@ CARGS=("CPPFLAGS=-Wno-error -fsigned-char" --enable-shared)
 ## 20、warning: enumeration value ‘XXXX’ not handled in switch [-Wswitch]
 switch语句中增加default: break;语句即可。
 
-
+## 21、warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+警告语句：char *str = "hello world";
+修改语句：const char *str = "hello world";
 
 
 

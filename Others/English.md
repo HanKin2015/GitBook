@@ -1,6 +1,49 @@
 # 英语学习
 
 ```
+idx===index
+中断、等时（同步）、批量、控制传输：control_packet、bulk_packet、iso_packet、interrupt_packet
+大数据块(bulk)传输方式，对不能容差的数据进行移动;同步(isochronous，ISO)传输方式，对不允许时延的数据进行移动
+back pointer反向指针
+interval间隔
+pkt===packget
+verbose：冗长的
+content===ctx
+devoce===devoce
+descriptor===desc
+quirks mode：怪异模式（兼容模式）
+pending：待定、吊着
+hack for People's Bank of China (PBC) USB Key但是中国人民银行是PBOC
+cmp：Certificate Management Protocol 
+dmz：隔离区，防火墙中间的区域
+cmp===compare
+gap：间隔、隔阂
+compatible：兼容
+mp===multiple多种多样的、倍数
+signature：签名
+delimiter：分隔符
+companion：伙伴，伴侣
+serial：串行
+parallel：并行
+compatible；可共存的、和睦相处的、兼容的
+already：已经
+caps：大写字母、胜过
+claim：声明、索赔、断言
+detach：分开、分派、拆卸
+attach：缠着、固定
+capability：能力、军事武器
+cap===capacity：容量
+allocate：分配、划
+call from：从...来
+callback：
+minor：较小的; 次要的;未成年人; 辅修科目; 辅修课程;
+privacy：隐私
+privilege：荣耀、特权
+peer：同龄人、同辈、对端
+fake：假的，伪造者，赝品
+alter：改变
+wire：铁丝网、将...连接到
+shark：鲨鱼、骗取、诈骗者
 invalidate：使无效，使作废
 implent：实现
 Minimalistic：极简的，简约的

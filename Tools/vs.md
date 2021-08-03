@@ -109,6 +109,35 @@ https://cmake.org/pipermail/cmake/2001-October/002479.html
 
 本文将讲解如何利用这种模式，在即保证速度快的情况下，同时还可以添加断点并进行代码调试。你一旦了解了这个模式，我想以后完全可以抛弃掉Debug模式了。至少对于我而言，自从我学会了如何正确地使用RelWithDebInfo模式后，我就再也不想启动Debug模式了。
 
+## 11、无法解析的外部符号
+引入头文件的时候会有编辑器编译前检查，但是如果在编译后报错“无法解析的外部符号”常常一脸懵逼。
+
+后来经验告诉我，可能是只找到了头文件，没有找到头文件中函数的实现方法。
+
+在头文件位置引入cpp后编译通过。
+
+https://docs.huihoo.com/doxygen/linux/kernel/3.7/index.html
+
+## 12、sln和vcxproj区别
+sln是解决方案的配置，主要是管理这个方案里的多个vcxproj
+vcxproj是工程的配置文件，管理工程中细节比如包含的文件，引用库等
+一般没有sln，也可以直接打开vcxproj，也可以重新生成sln
+sln里有多个工程，当你移除某个工程时sln会有变化，sln并不是太重要
+
+先优先使用vcxproj。
+
+我发现我的项目我修改过，但是通过git查看sln没有进行任何修改，但是vcxproj做了修改。
+
+## 13、解决提示“一个或多个多重定义的符号“这种错误
+发现重复定义的函数或者变量只在当前文件使用，为何不使用static修饰呢，增加static关键字后编译正常。
+
+## 14、严重性	代码	说明	项目	文件	行	禁止显示状态
+错误	LNK2038	检测到“RuntimeLibrary”的不匹配项: 值“MT_StaticRelease”不匹配值“MD_DynamicRelease”(StudySTL.obj 中)	StudySTL	D:\Github\Storage\windows\StudySTL\gtest.lib(gtest-all.obj)	1	
+
+## 15、如何让__FILE__字符串不是一个绝对路径
+属性->C/C++->高级->使用完全路径->否
+但还是会有相对路径的烦恼，因此还是老老实实做字符串切割吧。
+
 
 
 
