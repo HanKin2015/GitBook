@@ -1,6 +1,8 @@
 # 英语学习
 
 ```
+
+inappropriate：不恰当的
 idx===index
 中断、等时（同步）、批量、控制传输：control_packet、bulk_packet、iso_packet、interrupt_packet
 大数据块(bulk)传输方式，对不能容差的数据进行移动;同步(isochronous，ISO)传输方式，对不允许时延的数据进行移动
