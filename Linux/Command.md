@@ -237,14 +237,17 @@ cd -	返回上一层所在工作区
 1. `QWebView *view = new QWebView(this->centralWidget());`
 2. `view->load(QUrl("file:///home//test.html"));`
 3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
+
 # 13、chown
 将文件 file1.txt 的拥有者设为 runoob，群体的使用者 runoobgroup :
-
+```
 chown runoob:runoobgroup file1.txt
+```
+
 将目前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup:
-
+```
 chown -R runoob:runoobgroup *
-
+```
 
 # 14、alias
 
@@ -323,7 +326,8 @@ xset dpms 0 0 0
 
 但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
 
-
+# 18、find命令
+不递归查找：find . -maxdepth 1 -name “*.txt” 
 
 
 

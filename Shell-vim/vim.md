@@ -2,6 +2,8 @@
 
 # VIM操作笔记
 
+还可以见：Linux/bashrc.md
+
 配置文件：.vimrc
 ps://blog.csdn.net/qq_41113081/article/details/1001
 
@@ -94,11 +96,15 @@ u		   返回上次修改
 - 连续按两次esc
 
 ### 6-2、vim中的高亮全部同样单词的方法
+可能默认不是高亮，需要设置，set hlsearch
+
 用vim时，想高亮显示一个单词并查找的方发。将光标移动到所找单词.
 1: shift + "*"  向下查找并高亮显示
 2: shift + "#"  向上查找并高亮显示
 3: "g" + "d"    高亮显示光标所属单词。"n" 查找。
 取消高亮：输入:noh
+gd命令： Goto local Declaration
+语法高亮：syntax on
 
 ### 6-3、设置高亮行和列有两种方式进行设置
 ```
@@ -114,10 +120,6 @@ set cul
 ctrl+z
 ctrl+y
 shift+enter组合在编辑文字中是否换行
-
-
-
-
 
 ## 7、Vim光标定位
 https://www.cnblogs.com/dytl/p/3830838.html

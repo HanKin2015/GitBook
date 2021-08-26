@@ -1,65 +1,29 @@
 # Template
 
-## 1、c++执行shell命令
+## 1、makefile通用模板
 ```
-/*
- * @brief 运行shell命令
- * @note 运行结果输出长度不超过outputLen且只输出第一行，超过会截断
- * @param cmd [in] shell命令
- * @param output [out] 运行结果输出
- * @param outputLen [in] 运行结果字符串长度
- * @return 无
- */
-void ExecShellCmd(const char *cmd, char *output, int outputLen)
-{
-    if (cmd == NULL) {
-        LOGE("cmd is null");
-        return;
-    }
+CC      = g++
+TARGET  = test
+SRCS    = $(shell find -name "*.cpp")
+SRCS    += $(shell find -name "*.c")
+OBJS    = $(addsuffix .o,$(SRCS))
+CFLAGS  = -g -Os
+LDFLAGS = -lm
 
-    int bufferLen = 0;
-    FILE *fp = NULL;
-    char buffer[BUFSIZ] = { 0 };
+all: clean $(TARGET)
+	./$(TARGET)
 
-    fp = popen(cmd, "r");
-    if (!fp) {
-        LOGE("popen error: %m");
-        return;
-    }
+$(TARGET):$(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-    while (fgets(buffer, sizeof(buffer), fp)) {
-        bufferLen = strlen(buffer);
-        if (buffer[bufferLen - 1] == '\n') {
-            buffer[bufferLen - 1] = '\0';
-        }
-        if (*buffer != '\0') {
-            LOGD("%s", buffer);
-        }
+%.c.o:%.c
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-        if (output) {
-            if (outputLen < 1) {
-                LOGE("outputLen is invalid");
-                break;
-            }
-            strncpy(output, buffer, bufferLen > outputLen ? outputLen : bufferLen);
-            output[outputLen - 1] = '\0';
-            break;
-        }
-    }
+%.cpp.o:%.cpp
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-    if (fp) {
-        pclose(fp);
-    }
-}
-
-//隐藏输入法工具栏
-void hideInputTool()
-{
-    //隐藏ibus框架输入法工具栏
-    ExecShellCmd("ibus engine xkb:us::eng", NULL, 0);
-    //隐藏fcitx框架输入法工具栏
-    ExecShellCmd("fcitx-remote -c", NULL, 0);
-}
+clean:
+	rm -rf $(TARGET) *.o
 ```
 
 ## 2、上库模板
@@ -77,12 +41,12 @@ void hideInputTool()
 
 ### c/c++文件
 ```
-/* main.cpp
- *
- * 客户端程序
- *
- * author: hankin
- * date  : 2021.03.29
+/**
+ * 文 件 名: study_open.cpp
+ * 文件描述: 学习open函数
+ * 作    者: HanKin
+ * 创建日期: 2021.08.12
+ * 修改日期：2021.08.12
  *
  * Copyright (c) 2021 HanKin. All rights reserved.
  */
@@ -105,33 +69,26 @@ int main(int argc, char *argv[])
 ```
 #!/bin/bash
 #
-# 拷贝test文件到服务器后台
+# 文 件 名: video_tool.sh
+# 文件描述: 操作摄像头工具合集
+# 作    者: HanKin
+# 创建日期: 2021.08.05
+# 修改日期：2021.08.05
+# 
+# Copyright (c) 2021 HanKin. All rights reserved.
 #
-# 用法: ./copy_test_to_apach.sh
-# 使用前注意: 
-#   1. 需要安装expect, apt install expect
-#   2. 放置在/data/local/hj/目录下
-#
-# author: hejian
-# date  : 2021.05.07
-#
-# Copyright (c) 2020 hejian. All rights reserved.
-#
-
-
-
 ```
 
 ### python脚本
 ```
 # -*- coding: utf-8 -*-
 """
-@description:
-    copy tool for ftp
+文 件 名: brute_ftp_by_dict.py
+文件描述: 使用字典暴力破解登陆ftp
+作    者: HanKin
+创建日期: 2021.08.12
+修改日期：2021.08.12
 
-@author: hankin
-@date  : 2021.05.07
-	
 Copyright (c) 2021 HanKin. All rights reserved.
 """
 ```
@@ -139,14 +96,13 @@ Copyright (c) 2021 HanKin. All rights reserved.
 ### batch脚本
 ```
 ::
-:: 学习batch脚本
-:: 学习网站：https://baike.baidu.com/item/%E6%89%B9%E5%A4%84%E7%90%86/1448600?fromtitle=Batch&fromid=1079355&fr=aladdin
-:: Rem和::都是注释，推荐::，美观简洁；脚本推荐使用ANCI编码，否则可能出现中文乱码
-::
-:: 作者：hankin
-:: 日期：2021.06.04
-::
-:: Copyright (c) 2020 hejian. All rights reserved.
+:: 文 件 名: 删除SVN信息.bat
+:: 文件描述: 解决桌面图标左下角问号图标问题
+:: 作    者: HanKin
+:: 创建日期: 2021.08.11
+:: 修改日期：2021.08.11
+:: 
+:: Copyright (c) 2021 HanKin. All rights reserved.
 ::
 ```
 

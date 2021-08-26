@@ -62,4 +62,51 @@ char | .D | 4140304029
 double | .N | 667332678
 ```
 
+## 2、std :: typeid :: name（）的奇怪输出
+解决方法一：
+G ++使用实现定义的类型命名，但它也提供了实用程序c++filt，使它们具有人类可读性：
+```
+$ ./test | c++filt -t
+unsigned long
+A
+```
+实现的返回name是定义的：甚至不需要实现为不同类型返回不同的字符串。
+从g ++得到的是修饰的名称，您可以使用c++filt命令或来“分解” __cxa_demangle。
+
+解决方法二：
+```
+/*
+学习typeid函数
+*/
+static void study_typeid()
+{
+    int    a;
+    char   b;
+    short  c;
+    string d;
+    
+    // 只输出一个字符
+    cout << typeid(a).name() << endl;
+    cout << typeid(b).name() << endl;
+    cout << typeid(c).name() << endl;
+    cout << typeid(d).name() << endl;
+    
+    // 解决只输出一个字符问题
+    cout << abi::__cxa_demangle(typeid(a).name(), 0, 0, 0) << endl;
+    cout << abi::__cxa_demangle(typeid(b).name(), 0, 0, 0) << endl;
+    cout << abi::__cxa_demangle(typeid(c).name(), 0, 0, 0) << endl;
+    cout << abi::__cxa_demangle(typeid(d).name(), 0, 0, 0) << endl;
+    return;
+}
+```
+
+解决方法三：
+如最上面的raw_name()函数
+
+## 3、ABI （应用程序二进制接口）
+每个操作系统都会为运行在该系统下的应用程序提供应用程序二进制接口（Application Binary Interface，ABI）。ABI包含了应用程序在这个系统下运行时必须遵守的编程约定。ABI总是包含一系列的系统调用和使用这些系统调用的方法，以及关于程序可以使用的内存地址和使用机器寄存器的规定。从一个应用程序的角度看，ABI既是系统架构的一部分也是硬件体系结构的重点，因此只要违反二者之一的条件约束就会导致程序出现严重错误。在很多情况下，链接器为了遵守ABI的约定需要做一些重要的工作。例如，ABI要求每个应用程序包含一个程序中各例程使用的静态数据的所有地址表，链接器通过收集所有链接到程序中的模块的地址信息来创建地址表。ABI经常影响链接器的是对标准过程调用的定义 [1]  。
+
+https://itanium-cxx-abi.github.io/cxx-abi/
+
+关于cxxabi.h头文件
 

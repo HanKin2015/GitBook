@@ -381,3 +381,27 @@ cgdb主要功能是在调试时进行代码的同步显示，这无疑增加了�
 版权声明：本文为CSDN博主「花开蝶自来-liu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 原文链接：https://blog.csdn.net/niyaozuozuihao/article/details/91802994
 
+## 9、调试输出指针值
+```
+(gdb) bt
+#0  0x0000000000400e1b in thread_pool_destroy (pool=0x24be010) at thread_pool.c:138
+#1  0x0000000000400fe2 in main () at thread_pool.c:199
+(gdb) f 0
+#0  0x0000000000400e1b in thread_pool_destroy (pool=0x24be010) at thread_pool.c:138
+138         for (worker = pool->workers; worker != NULL; worker = pool->workers->next) {
+(gdb) p (pool->workers)
+$1 = (WORKER *) 0x24be5c0
+(gdb) p *(pool->workers)
+$2 = {thread = 139871947966208, terminate = true, pool = 0x24be010, pre = 0x0, next = 0x24be470}
+(gdb) p $2->next
+$3 = (WORKER *) 0x24be470
+(gdb) p *($2->next)
+$5 = {thread = 139871956358912, terminate = true, pool = 0x24be010, pre = 0x24be5c0, next = 0x24be320}
+(gdb) p *((struct WORKER *)0x24be320)
+$6 = {thread = 139871964751616, terminate = false, pool = 0x24be010, pre = 0x24be470, next = 0x24be1d0}
+(gdb) p 0x24be320
+$7 = 38527776
+(gdb) p *(0x24be320)
+$8 = 2059790080
+(gdb)
+```

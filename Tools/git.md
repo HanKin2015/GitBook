@@ -92,9 +92,11 @@ git pull origin master    //下载
 
 git clone -b branch git@github.com:github/test.git 
 
+## 20210813更新
+git clone --single-branch -b master url .
+git clone --depth=commit_num URL：可以只克隆最近几次提交的代码
+如：git clone --depth=2 --single-branch -b master git@yyds.hankin.org:OUR/YYDS.git .
 
-
-**重点看这里**：
 
 # 2、git add命令参数说明
 
@@ -1007,6 +1009,9 @@ git clean -fd
 git checkout .
 git reset xxx
 ```
+
+### 删除关闭的合并请求
+只有仓库的创建者才能删除issues.
 
 
 

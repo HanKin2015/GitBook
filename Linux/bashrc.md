@@ -1,4 +1,5 @@
 # linux终端terminal个性化配置
+
 linux打开终端快捷键：
 ctrl + alt + t  新窗口中打开
 ctrl + shift +t 新标签页中打开
@@ -46,12 +47,9 @@ export PS1="\[\033[1m\]\[\033[31m\][\[\033[0m\]${debian_chroot:+($debian_chroot)
 ```
 这样就可以了：
 export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
-``
+```
+
 完全可以使用__git_ps1自带函数代替git_branch函数
-
-
-
-
 
 ## 3、配置文件介绍
 /etc/profile:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从/etc/profile.d目录的配置文件中搜集shell的设置.此文件默认调用/etc/bash.bashrc文件。
@@ -146,7 +144,122 @@ fi
 export PROMPT_COMMAND='HISTTIMEFORMAT="[%F %T] " history 1 >> $HISTORY_FILE'
 ```
 
+## 7、vimrc配置
+https://blog.csdn.net/yujia_666/article/details/108153022
 
+```/etc/vimrc
+
+" 显示行号
+set number
+
+" 设置高亮行和列(简写cuc cul)
+set cursorline
+set cursorcolumn
+
+" 高亮行和列样式修改
+highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+
+" 自动缩进和对齐
+set autoindent
+set smartindent
+
+" Tab键的宽度
+set tabstop=4
+
+" 统一缩进为4(代码对齐=)
+set shiftwidth=4
+
+" 效果是tab键后向左移动变成4个空格
+set softtabstop=4
+
+" 將tab键转成space,注意makefile文件的缩进不能开启
+set expandtab
+
+" 搜索逐字符高亮
+set hlsearch
+set incsearch
+
+" 代码补全
+set completeopt=preview,menu
+
+" 在处理未保存或只读文件的时候,弹出确认
+set confirm
+
+" 可以在buffer的任何地方使用鼠标(类似office中在工作区双击鼠标定位) 打开鼠标功能
+set mouse=a
+
+" 关闭鼠标功能(建议关闭或者不设置,否则会出现鼠标右键不能复制问题)
+set mouse-=a
+set mouse=
+
+set selection=exclusive
+set selectmode=mouse,key
+
+" 搜索忽略大小写
+set ignorecase
+
+" 在被分割的窗口间显示空白,便于阅读
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+
+" 高亮显示匹配的括号
+set showmatch
+
+" 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
+
+
+
+set nocompatible                 "去掉有关vi一致性模式，避免以前版本的bug和局限    
+set nu!                                    "显示行号
+set guifont=Luxi/ Mono/ 9   " 设置字体，字体名称和字号
+filetype on                              "检测文件的类型     
+set history=1000                  "记录历史的行数
+set background=dark          "背景使用黑色
+syntax on                                "语法高亮度显示
+set autoindent                       "vim使用自动对齐，也就是把当前行的对齐格式应用到下一行(自动缩进）
+set cindent                             "（cindent是特别针对 C语言语法自动缩进）
+set smartindent                    "依据上面的对齐格式，智能的选择对齐方式，对于类似C语言编写上有用   
+set tabstop=4                        "设置tab键为4个空格，
+set shiftwidth =4                   "设置当行之间交错时使用4个空格     
+set ai!                                      " 设置自动缩进 
+set showmatch                     "设置匹配模式，类似当输入一个左括号时会匹配相应的右括号      
+set guioptions-=T                 "去除vim的GUI版本中得toolbar   
+set vb t_vb=                            "当vim进行编辑时，如果命令错误，会发出警报，该设置去掉警报       
+set ruler                                  "在编辑过程中，在右下角显示光标位置的状态行     
+set nohls                                "默认情况下，寻找匹配是高亮度显示，该设置关闭高亮显示     
+set incsearch                        "在程序中查询一单词，自动匹配单词的位置；如查询desk单词，当输到/d时，会自动找到第一个d开头的单词，当输入到/de时，会自动找到第一个以ds开头的单词，以此类推，进行查找；当找到要匹配的单词时，别忘记回车 
+set backspace=2           " 设置退格键可用
+修改一个文件后，自动进行备份，备份的文件名为原文件名加“~”后缀
+if has("vms")
+set nobackup
+else
+set backup
+endif
+```
+
+
+
+
+
+
+
+
+
+
+## 8、bashrc
+```/root/.bashrc
+export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
+```
+
+## Kconfig
+https://zhuanlan.zhihu.com/p/78254770
+自从 Linux 内核代码迁移到 Git 以来，Linux 内核配置/构建系统（也称为 Kconfig/kbuild）已存在很长时间了。然而，作为支持基础设施，它很少成为人们关注的焦点；甚至在日常工作中使用它的内核开发人员也从未真正思考过它。
+
+为了探索如何编译 Linux 内核，本文将深入介绍 Kconfig/kbuild 内部的过程，解释如何生成 .config 文件和 vmlinux/bzImage 文件，并介绍一个巧妙的依赖性跟踪技巧。
+
+Kconfig
+构建内核的第一步始终是配置。Kconfig 有助于使 Linux 内核高度模块化和可定制。
 
 
 

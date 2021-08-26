@@ -100,7 +100,7 @@ CDB：Command Block？？？
 
 
 
-
+SE(System Engineer)
 
 
 
@@ -130,6 +130,14 @@ https://github.com/libusb/libusb
 
 IRQ为 Interrupt ReQuest的缩写，中文可译为中断请求。因为计算机中每个组成组件都会拥有一个独立的IRQ，除了使用PCI总线的PCI卡之外，每一组件都会单独占用一个 IRQ，且不能重复使用。
 由于在计算机运行中，CPU是持续处于忙碌状态，而当硬件接口设备开始或结束收发信息，需要CPU处理信息运算时，便会透过IRQ对CPU送出中断请求讯号，让CPU储存正在进行的工作，然后暂停手边的工作，先行处理周边硬件提出的需求，这便是中断请求的作用。
+
+# 分辨率1080HFD是什么意思
+HFD ，是“高清屏”的英文缩写， 意思是支持1920X1080以上分辨率的显示屏。
+和1080p类似，就是全高清，FHD意思是全高清，即FULL HD，全称为Full High Definition。
+
+
+
+
 
 
 

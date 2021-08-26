@@ -269,14 +269,43 @@ switch语句中增加default: break;语句即可。
 警告语句：char *str = "hello world";
 修改语句：const char *str = "hello world";
 
+## 22、error: 'vector' does not name a type
+```
+#include <vector>
+using namespace std;
+```
+除了头文件，还有可能是域名空间std。
 
+## 23、C++ error: 'string' does not name a type
+```
+#include <iostream>
+#include <string.h>
+using namespace std;
+```
 
+## 24、‘gettid’ was not declared in this scope
+Additional to the solution provided by Glenn Maynard it might be appropriate to check the glibc version and only if it is lower than 2.30 define the suggested macro for gettid().
+```
+#if __GLIBC__ == 2 && __GLIBC_MINOR__ < 30
+#include <sys/syscall.h>
+#define gettid() syscall(SYS_gettid)
+#endif
+```
 
-
-
-
-
-
+## 25、
+```
+[root@ubuntu0006:/media/hankin/vdb/study/dup] #g++ study_keyword.cpp -o i -Wall -Werror -Wold-style-declaration
+cc1plus: error: command line option ‘-Wold-style-declaration’ is valid for C/ObjC but not for C++ [-Werror]
+cc1plus: all warnings being treated as errors
+[root@ubuntu0006:/media/hankin/vdb/study/dup] #gcc study_keyword.c -o i -Wall -Werror -Wold-style-declaration
+study_keyword.c: In function ‘main’:
+study_keyword.c:5:2: error: ‘static’ is not at beginning of declaration [-Werror=old-style-declaration]
+  const static int a = 12;
+  ^
+cc1: all warnings being treated as errors
+[root@ubuntu0006:/media/hankin/vdb/study/dup] #gcc study_keyword.c -Wall -Werror
+[root@ubuntu0006:/media/hankin/vdb/study/dup] #
+```
 
 
 

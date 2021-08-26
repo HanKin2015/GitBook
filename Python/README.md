@@ -4,8 +4,6 @@
 
 2020年1月1日停止更新python2.x。
 
-# python安装包下载
-https://www.python.org/ftp/python/
 
 # 学习预告
 - 下载：使用you-get
@@ -34,18 +32,6 @@ set outputdir="D:/迅雷下载"
 echo "%1" | findstr /i "youtube vimeo google" && set proxy=--socks-proxy 127.0.0.1:7070
 you-get --output-dir %outputdir% %proxy% "%*"
 ```
-
-
-
-## 安装whl文件
-直接使用pip install xxx.whl
-
-## pip2和pip3区别
-如果系统中只安装了Python3，那么既可以使用pip也可以使用pip3，二者是等价的。
-如果系统中同时安装了Python2和Python3，则pip默认给Python2用，pip3指定给Python3用。
-
-## 使用pip和conda安装软件时注意
-Linux都有个问题，首先需要做的事情是更新安装脚本命令
 
 ## 资料
 https://blog.csdn.net/lys_828/article/list/2?t=1

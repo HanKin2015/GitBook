@@ -22,3 +22,7 @@ $ readlink -f /usr/bin/awk
 Mac下的readlink没有-f参数
 ```
 
+## 和realpath的区别
+在识别软链接上面，realpath == readlink -f。
+realpath还能输出普通文件的全路径，readlink只支持软链接。
+

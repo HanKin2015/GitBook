@@ -1,7 +1,20 @@
 # 英语学习
 
 ```
-
+blank：空白的，空的
+field: 领域
+yield: 产出，产量
+probe：探查、盘问、探究
+still: 静止的;平静的;安静的
+trigger: 触发;引起;发动;开动;起动
+intersection: 十字路口;交叉路口;交点;横断;交叉;相交
+head count: 人数;人数统计;统计出的人数;雇员人数
+interpret：解释，说明，理解
+reinterpret：重新解释
+Buggy: 越野车;婴儿车;巴基;高尔夫球车;小车
+appropriate：合适的
+jitter: 抖动
+compliance：顺从;遵从;服从
 inappropriate：不恰当的
 idx===index
 中断、等时（同步）、批量、控制传输：control_packet、bulk_packet、iso_packet、interrupt_packet

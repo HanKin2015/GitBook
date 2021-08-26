@@ -79,6 +79,9 @@ windows系统中有Sleep函数（注意大写），void Sleep(DWORD dwMillisecon
 ## 9、'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa.
 https://blog.csdn.net/hou09tian/article/details/80616155
 
+在VS2015中选择“项目->XXX属性”，打开属性页。之后在左侧的树中选择“配置属性->C/C++->预处理器”
+最后，在弹出的预处理器定义的对话框中，输入“_CRT_NONSTDC_NO_DEPRECATE”和“_CRT_SECURE_NO_WARNINGS”，分别表示使用非标准函数和不弹出警告，最后点击“确定”按键
+
 ## 10、Visual Studio之RelWithDebInfo模式，“被忽视”的编译模式
 https://blog.csdn.net/inter_peng/article/details/53933206
 
