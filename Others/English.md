@@ -1,6 +1,8 @@
 # 英语学习
 
 ```
+trigger: 触发器
+tigger: 乞丐
 blank：空白的，空的
 field: 领域
 yield: 产出，产量

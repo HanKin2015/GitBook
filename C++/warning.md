@@ -292,7 +292,7 @@ Additional to the solution provided by Glenn Maynard it might be appropriate to 
 #endif
 ```
 
-## 25、
+## 25、-Wold-style-declaration是c文件专属
 ```
 [root@ubuntu0006:/media/hankin/vdb/study/dup] #g++ study_keyword.cpp -o i -Wall -Werror -Wold-style-declaration
 cc1plus: error: command line option ‘-Wold-style-declaration’ is valid for C/ObjC but not for C++ [-Werror]
@@ -305,7 +305,25 @@ study_keyword.c:5:2: error: ‘static’ is not at beginning of declaration [-We
 cc1: all warnings being treated as errors
 [root@ubuntu0006:/media/hankin/vdb/study/dup] #gcc study_keyword.c -Wall -Werror
 [root@ubuntu0006:/media/hankin/vdb/study/dup] #
+
+#include <stdio.h>
+
+int main()
+{
+        const static int a = 12;
+        static const int b = 12;
+        printf("%d %d\n", a, b);
+        return 0;
+}
 ```
+显示所有警告信息
+gcc hello.c -o hello -Wall
+禁止所有警告信息
+gcc hello.c -o hello -w
+
+但是无法显示上面这个警告，很奇怪。
+
+
 
 
 
