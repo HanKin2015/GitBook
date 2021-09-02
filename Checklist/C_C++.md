@@ -134,7 +134,7 @@ type_init(int x, int y) 实际上这个还是一个函数定义
 
 Sonar（SonarQube）是一个开源平台，用于管理源代码的质量。Sonar 不只是一个质量数据报告工具，更是代码质量管理平台。支持的语言包括：Java、PHP、C#、C、Cobol、PL/SQL、Flex 等。
 
-## 7、c++执行shell命令
+## 7、c++执行shell命令（没有处理返回结果）
 ```
 /*
  * @brief 运行shell命令

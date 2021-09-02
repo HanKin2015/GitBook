@@ -3,6 +3,15 @@
 示例可以看python文件夹中study_tkinter.py。
 参考文档：https://docs.python.org/3/library/tkinter.ttk.html
 
+## 0、简介
+类似qt。
+
+这个问题就像你写个文档, 可以用自带记事本, 也可以用word.简单写几句话用记事本没问题, 简单做个小GUI用TK也没问题.但复杂的文档, 还是用Word这类更好的工具吧, 同理, 复杂的GUI还是用QT吧.比尔盖茨说他可以用basic写出任何程序, 咱们不是盖茨, 还是选个好工具吧. TK是打包直接送给你的东西, 就像记事本就是Windows送给你的一样.不用去了解具体的不同, 如果你想真正做Python GUI, 选PyQt就好了. 这样以后转其实开发, C++什么的, QT还是那个QT...
+
+我们都知道当一个东西比较匮乏的时候，我们会比较苦恼，苦恼找不到好的替代。但是但一个东西比较丰富的时候，我们也会苦恼，苦恼的是如何进行选择。就比如每天我们都面临的一个巨大的难题就是今天中午吃什么？
+
+python开发图形界面也有这样的烦恼，有很多gui框架提供我们选择，让我们眼花缭乱，我们很难从中选择一个。目前主流的有三个python gui框架。
+
 ## 1、text获取内容和设置内容
 目前来看，先删除文本，然后再插入内容。
 
@@ -30,9 +39,6 @@ Label
 takefocus选项设置为0将禁用选项卡专注于创建按钮。
 
 ## 4、小组件上的字体
-
-
-
 ```
 style = ttk.Style()
 style.configure("BW.TLabel", foreground="black", background="white")
@@ -51,8 +57,6 @@ https://blog.csdn.net/sinat_27382047/article/details/81304065
 Python\Python38-32\Scripts\build路径下打包项目文件里的warn-XXX.txt文件，一打开发现很多包丢失了missing，然后各种百度找解决办法，改路径hooks和rthook文件，折腾了大半天并没有解决问题。实际上根本就不是missing包引起的。
 因为正常打包的文件可以使用的也同样有大量的missing包，例如我打包可以正常用的这个软件文件夹下同样有warn，实际上这都是误导。
 
-
-
 ## 6、ftp连接几分钟后自动断开
 except ftplib.error_perm as err:
 
@@ -67,8 +71,6 @@ FTP或数据库服务器设置了会话无操作的timeout，当无操作的时�
 
 线程写个timeout心跳？看其他人说心跳不管用，由于ftp连接本身的超时时间就已经挺大了，所以超时后再重新连接吧。
 
-
-
 记事本参考：https://blog.csdn.net/lys_828/article/details/105380540
 
 ## 7、解决from PIL import ImageTk问题
@@ -82,7 +84,8 @@ root.overrideredirect(True)
 root.mainloop()
 ```
 
-
+## 9、TclError: image "pyimage2" doesn't exist
+因为在一个程序中只能存在一个根窗口，也就是说只能存在一个Tk()，其他的窗口只能以顶层窗口（Toplevel()）的形式存在。
 
 
 

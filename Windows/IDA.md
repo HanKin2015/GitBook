@@ -57,7 +57,7 @@ Open strings window: 打开字符串显示窗口，会列出程序中的所有�
 
 ### 3、反汇编常用功能
 IDA Pro切换图形或代码模式
-1、空格
+1、空白处
 2、右键选择Text View/Graph View切换
 
 

@@ -97,19 +97,10 @@ pthread_t，在使用printf打印时，应转换为u类型。
 
 
 
-Beyond Compare 编辑
+Beyond Compare
 Beyond Compare是一套由Scooter Software推出的文件比较工具。主要用途是对比两个文件夹或者文件，并将差异以颜色标示。比较范围包括目录，文档内容等。
 
-[Windows] win10任务栏透明以及实时显示网速，CPU和内存占有率     [复制链接]
-伍_六_七
-
- 发表于 2019-3-19 21:30
-
- 
-
-本帖最后由 伍_六_七 于 2019-4-2 13:11 编辑
-
-
+[Windows] win10任务栏透明以及实时显示网速，CPU和内存占有率
 第一款Aero（大小：26.5 KB (27,136 字节)）
 单文件，不用安装没有花里胡哨的操作，双击就可以直接让任务栏透明
 
@@ -148,16 +139,7 @@ ip route
 
 [linux ip命令和ifconfig命令](https://www.cnblogs.com/0to9/p/9591315.html)
 
-# 函数定义
-```
-#include <stdio.h>
-FILE * popen(const char *command , const char *type );
-int pclose(FILE *stream);
-```
-# 函数说明
-popen()函数通过创建一个管道，调用fork()产生一个子进程，执行一个shell以运行命令来开启一个进程。这个管道必须由pclose()函数关闭，而不是fclose()函数。pclose()函数关闭标准I/O流，等待命令执行结束，然后返回shell的终止状态。如果shell不能被执行，则pclose()返回的终止状态与shell已执行exit一样。
 
-https://www.jb51.net/article/140783.htm
 
 
 

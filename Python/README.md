@@ -41,6 +41,15 @@ https://blog.csdn.net/lys_828/article/list/2?t=1
 很有意思，写代码时需要注意
 https://blog.csdn.net/lys_828/article/details/107843255
 
+## 
+```
+import os
+import shutil
 
+os.remove(path)   #删除文件
+os.removedirs(path)   #删除空文件夹
+
+shutil.rmtree(path)    #递归删除文件夹
+```
 
 

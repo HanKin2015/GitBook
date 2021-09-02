@@ -34,6 +34,7 @@ Go 语言最主要的特性：
 https://golang.org/dl/（打不开）
 https://golang.google.cn/dl/（打不开下载服务器）
 https://studygolang.com/dl（打不开下载服务器）
+推荐：https://golang.google.cn/
 
 只能另寻渠道，在百度网盘已经备份两个版本：
 go1.13.5.windows-amd64.msi
@@ -187,7 +188,16 @@ complex64
 complex128
 64 位实数和虚数
 
+## 8、2. GOPATH，GO111MODULE环境变量
+官方简介如下：
+The GOPATH environment variable is a fundamental part of writing Go code without Go modules. It specifies the location of your workspace, and it defaults to $HOME/go. A GOPATH directory contains src, bin, and pkg directories. Your code is typically located in the $GOPATH/src directory.
+If you are not familiar with Go and GOPATH, please first read about writing Go code with GOPATH.
+If you are just starting out with Go, we recommend using Go modules instead of GOPATH.
 
+大意是说：GOPATH在早期的go代码管理中，GOPATH变量用来指定工作空间，默认为 $home/go，go代码需要放在 $GOPATH/src中。
+但是在后续版本引入了Go Modules解决依赖管理问题，即GO111MODULE，当其值为on时，go会忽略 GOPATH 和 vendor 文件夹，只根据 go.mod 下载依赖。
+虽然但是，在使用模块的时候，GOPATH 是无意义的，不过它还是会把下载的依赖储存在 $GOPATH/src/mod 中，也会把 go install 的结果放在 $GOPATH/bin 中。
+公司已使用go modules管理项目，可以多熟悉下go mod命令
 
 
 
