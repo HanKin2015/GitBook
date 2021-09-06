@@ -323,6 +323,50 @@ gcc hello.c -o hello -w
 
 但是无法显示上面这个警告，很奇怪。
 
+## 26、warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+```
+[root@ubuntu0006:/media/hankin/vdb/study/between_c++_c] #gcc test1.c -Wall -Werror -Wliteral-suffix
+cc1: error: command line option ‘-Wliteral-suffix’ is valid for C++/ObjC++ but not for C [-Werror]
+cc1: all warnings being treated as errors
+[root@ubuntu0006:/media/hankin/vdb/study/between_c++_c] #g++ test2.cpp -std=c++11
+test2.cpp:7:31: warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+ #define pri2(fmt, ...) printf("["__FILE__"] [%s] %d ",__FUNCTION__,__LINE__ );\
+                               ^
+test2.cpp:12:9: warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+  printf("["__FILE__"] [%s] %d\n", __FUNCTION__, __LINE__);
+```
+
+## 27、undefined reference to `pthread_mutex_trylock'
+LOCAL_LDLIBS := -lpthread   -ldl
+
+## 28、64位系统下连接静态库报错：“could not read symbols: Bad value”的解决办法
+引用了一个静态库：“libjasgreen.a”，在连接该库的时候出错了，提示“can not be used when making a shared object”。
+解决办法为：“recompile with -fPIC”。很简单：使用 -fPIC选项重新编译一下libjasgreen.a即可。
+
+## 29、undefined reference to `clock_gettime'
+链接选项里漏了-lrt
+
+## 30、automake-1.14: command not found
+主编译系统automake-1.11，肯定找不到automake-1.14 。
+
+打开生成的makefile：
+
+ACLOCAL = ${SHELL} /xxx/strongswan/strongswan-5.3.2/missing aclocal-1.14
+ACLOCAL_AMFLAGS = -I m4/config
+
+提示错误的地方应该在这里：
+
+$(ACLOCAL_M4): $(am__aclocal_m4_deps)
+$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
+
+如果能把Makefile中的1.14改成1.11，问题解决。
+
+后面操作：automake aclocal automake
+
+
+
+
+
 
 
 

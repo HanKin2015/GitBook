@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+alongside：在…的侧面;在…旁边;与…并排
 trigger: 触发器
 tigger: 乞丐
 blank：空白的，空的

@@ -25,3 +25,33 @@ fork系统调用用于创建一个新进程，称为**子进程**，它与进程
 ```
 `#include/*#包含*/``#include/*#包含*/`
 ```
+
+## fork与vfork的区别
+fork（）与vfock（）都是创建一个进程，那他们有什么区别呢？总结有以下三点区别：
+1.  fork  （）：子进程拷贝父进程的数据段，代码段
+    vfork （ ）：子进程与父进程共享数据段
+2.  fork （）父子进程的执行次序不确定
+    vfork 保证子进程先运行，在调用exec 或exit 之前与父进程数据是共享的,在它调用exec
+     或exit 之后父进程才可能被调度运行。
+3.  vfork （）保证子进程先运行，在她调用exec 或exit 之后父进程才可能被调度运行。如果在
+   调用这两个函数之前子进程依赖于父进程的进一步动作，则会导致死锁。
+   
+https://blog.csdn.net/jianchi88/article/details/6985326
+
+## waitpid
+waitpid会暂时停止目前进程的执行，直到有信号来到或子进程结束。
+
+```
+#include<sys/types.h>
+#include<sys/wait.h>
+定义函数 pid_t waitpid(pid_t pid,int * status,int options);
+```
+如果执行成功则返回子进程识别码(PID) ,如果有错误发生则返回
+返回值-1。失败原因存于 errno 中。
+
+
+
+
+
+
+
