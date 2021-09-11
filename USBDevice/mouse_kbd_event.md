@@ -2,7 +2,7 @@
 
 
 安卓 : getevent
-linux: 
+linux: xev
 
 
 

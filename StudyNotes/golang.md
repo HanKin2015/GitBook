@@ -128,7 +128,7 @@ import (
 "./myMath"
 )
 
-func main(){
+func main() {
     fmt.Println("Hello World!")
     fmt.Println(mathClass.Add(1,1))
     fmt.Println(mathClass.Sub(1,1))
@@ -146,10 +146,10 @@ func Sub(x,y int) int {
 ```
 
 ## 6、go语言基础语法
-在 Go 程序中，一行代表一个语句结束。每个语句不需要像 C 家族中的其它语言一样以分号 ; 结尾，因为这些工作都将由 Go 编译器自动完成。
+行分隔符：在 Go 程序中，一行代表一个语句结束。每个语句不需要像 C 家族中的其它语言一样以分号 ; 结尾，因为这些工作都将由 Go 编译器自动完成。
 如果你打算将多个语句写在同一行，它们则必须使用 ; 人为区分，但在实际开发中我们并不鼓励这种做法。
 
-以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾。
+注释：以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾。
 
 Go 程序的一般结构: basic_structure.go
 ```
@@ -157,7 +157,7 @@ Go 程序的一般结构: basic_structure.go
 package main
 
 // 导入其他包
-import . "fmt"
+import "fmt"
 
 // 常量定义
 const PI = 3.14

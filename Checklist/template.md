@@ -48,27 +48,27 @@ clean:
 ### c/c++文件
 ```
 /**
- * 文 件 名: study_open.cpp
- * 文件描述: 学习open函数
- * 作    者: HanKin
- * 创建日期: 2021.08.12
- * 修改日期：2021.08.12
- *
- * Copyright (c) 2021 HanKin. All rights reserved.
- */
+* 文 件 名: study_open.cpp
+* 文件描述: 学习open函数
+* 作    者: HanKin
+* 创建日期: 2021.08.12
+* 修改日期：2021.08.12
+*
+* Copyright (c) 2021 HanKin. All rights reserved.
+*/
  
  
 int main(int argc, char *argv[])
 
 
-/*
- * @brief 运行shell命令
- * @note 运行结果输出长度不超过outputLen且只输出第一行，超过会截断
- * @param cmd [in] shell命令
- * @param output [out] 运行结果输出
- * @param outputLen [in] 运行结果字符串长度
- * @return 无
- */
+/**
+* @brief 运行shell命令
+* @note 运行结果输出长度不超过outputLen且只输出第一行，超过会截断
+* @param cmd [in] shell命令
+* @param output [out] 运行结果输出
+* @param outputLen [in] 运行结果字符串长度
+* @return 无
+*/
 ```
 
 ### shell脚本
@@ -128,6 +128,19 @@ Copyright (c) 2021 HanKin. All rights reserved.
 #
 # Copyright (c) 2020 hejian. All rights reserved.
 #
+```
+
+### golang语言
+```
+/**
+* 文 件 名: study_golang.go
+* 文件描述: 学习golang语言
+* 作    者: HanKin
+* 创建日期: 2021.09.09
+* 修改日期：2021.09.09
+*
+* Copyright (c) 2021 HanKin. All rights reserved.
+*/
 ```
 
 ## 4、调试日志

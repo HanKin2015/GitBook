@@ -43,6 +43,16 @@ int pthread_cond_init(pthread_cond_t *cond, pthread_condattr_t *cond_attr)
 
 ## 3、学习条件变量
 
+```
+pthread_cond_init(&cond, NULL); /* 动态初始化条件变量 */
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER; /* 静态初始化条件变量 */
+pthread_cond_wait(&cond); /* 等待条件变量触发 */
+pthread_cond_timedwait(&cond); /* 超时等待条件变量触发 */
+pthread_cond_signal(&cond); /* 激活一个等待该条件的线程，单播 */
+pthread_cond_broadcast(&cond); /* 激活所有等待该条件的线程，广播 */
+pthread_cond_destroy(&cond); /* 销毁条件变量 */
+```
+
 
 
 
