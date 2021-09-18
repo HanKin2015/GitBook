@@ -156,10 +156,44 @@ w命令显示up后表示系统到目前运行了多久时间。反过来推算�
 cat /proc/uptime
 date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
 
+## 16、浮点数计算
+```
+echo "4 * 0.2" | bc 
+#显示两位小数
+echo "scale=2;3/8" | bc
+#十进制转二进制
+echo "obase=2;100" | bc
+#二进制转十进制
+echo "obase=10,110100110" | bc
 
+# 附整数运算
+aa = `expr 3 + 4`
 
+aa = $(expr 3 + 4)
 
+aa = $[ 3 + 4]
 
+aa = $(( 3 + 4 ))
+#自加
 
+let i++
+#自减
 
+let i--
+
+#简写
+
+let no+=6 等同于 let no = no + 6
+```
+
+## 17、使用cp复制文件时如何显示传输进度和速度？
+https://qastack.cn/ubuntu/17275/how-to-show-the-transfer-progress-and-speed-when-copying-files-with-cp
+
+最终我选择：
+```
+date +%s; cp a b; date +%s
+手动计算的方法
+```
+
+rsync -av --progress t01/demo.zip t02/
 

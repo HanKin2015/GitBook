@@ -99,16 +99,16 @@ EOF 也可以使用其他符号，如'!:
 #!/bin/bash
 # 字符串截取（界定字符本身也会被删除）
 str="www.runoob.com/linux/linux-shell-variable.html"
-echo "str    : ${str}"
+echo "str       : ${str}"
 echo "str#*/    : ${str#*/}"   # 从 字符串开头 删除到 左数第一个'/'
-echo "str##*/    : ${str##*/}"  # 从 字符串开头 删除到 左数最后一个'/'
+echo "str##*/   : ${str##*/}"  # 从 字符串开头 删除到 左数最后一个'/'
 echo "str%/*    : ${str%/*}"   # 从 字符串末尾 删除到 右数第一个'/'
-echo "str%%/*    : ${str%%/*}"  # 从 字符串末尾 删除到 右数最后一个'/'
+echo "str%%/*   : ${str%%/*}"  # 从 字符串末尾 删除到 右数最后一个'/'
 echo
 echo "str#/*    : ${str#/*}"   # 无效果
-echo "str##/*    : ${str##/*}"  # 无效果
+echo "str##/*   : ${str##/*}"  # 无效果
 echo "str%*/    : ${str%*/}"   # 无效果
-echo "str%%*/    : ${str%%*/}"  # 无效果
+echo "str%%*/   : ${str%%*/}"  # 无效果
 ```
 
 有八种方法。

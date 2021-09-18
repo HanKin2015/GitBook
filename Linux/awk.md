@@ -39,6 +39,14 @@ awk 'NR==4{print $2}' yourfile
 可以连续通道：
 awk 'NR==4' | awk {print $2}' 不提倡
 
+## awk命令传入参数
+awk命令是使用单引号，所以无法进行变量解析，需要使用-v选项。
 
+```
+# 求路径的最后一个文件名或者文件夹名
+str='ab/cd/efg'
+awk -v arg=${str} 'BEGIN{match(arg, /.*\//);print RLENGTH;}'
 
+echo ${str##*/}
+```
 

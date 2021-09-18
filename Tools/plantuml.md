@@ -41,7 +41,7 @@
 
 ## 2、vscode使用plantuml
 安装插件jebbs.plantuml-2.13.8.six
-Alt+D运行预览
+快捷键：Alt+D运行预览
 
 基本语法：
 ```

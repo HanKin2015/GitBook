@@ -12,6 +12,8 @@ https://www.python.org/ftp/python/
 直接使用pip install xxx.whl
 
 需要注意查看当前系统能安装支持的版本，否则会报错：xxx.whl is not a supported wheel on this platform
+
+
 - 升级pip，安装pip.whl可能会报错“Error:could not install packages due to an environmenterror…
 Consider using the ‘–user’ option or check the permissions。”，使用--user参数即可，或者使用管理员运行dos窗口
 - pip debug --verbose查看当前系统支持的具体版本（Compatible tags）

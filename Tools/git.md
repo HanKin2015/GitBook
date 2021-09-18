@@ -1041,4 +1041,21 @@ git clean -nxdf（查看要删除的文件及目录，确认无误后再使用�
 git checkout . && git clean -xdf
 ```
 
+### fatal: unable to access 'https://github.com/HanKin2015/GitBook.git/': Failed
+git clone 遇到问题：fatal: unable to access 'https://github.comxxxxxxxxxxx': Failed to connect to xxxxxxxxxxxxx
+将命令行里的http改为git重新执行。
+
+不要把问题复杂化了。
+```
+git remote get-url origin
+
+错误方式：
+git remote set-url origin git@github.com:HanKin2015/GitBook.git/
+git push
+
+正确方式：
+git remote set-url origin git://github.com/HanKin2015/GitBook.git/
+git push
+```
+
 

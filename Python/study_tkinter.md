@@ -3,6 +3,8 @@
 示例可以看python文件夹中study_tkinter.py。
 参考文档：https://docs.python.org/3/library/tkinter.ttk.html
 
+https://blog.csdn.net/nilvya?t=1
+
 ## 0、简介
 类似qt。
 
