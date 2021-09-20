@@ -1,8 +1,9 @@
-# 1、Linux expr命令
+# Linux expr和exec命令
+
+## 1、expr命令
 
 expr命令是一个手工命令行计数器，用于在UNIX/LINUX下求表达式变量的值，一般用于整数值，也可用于字符串。
 
-## 实例
 1、计算字串长度
 > expr length “this is a test”
  14
@@ -32,7 +33,7 @@ is is
  > expr 30 * 3
  expr: Syntax error
 
-# 2、Linux exec命令
+## 2、Linux exec命令
 https://blog.csdn.net/qq_31186123/article/details/82190776
 
 shell 中的 exec 两种用法：
