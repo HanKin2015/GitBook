@@ -1058,4 +1058,15 @@ git remote set-url origin git://github.com/HanKin2015/GitBook.git/
 git push
 ```
 
+### 提交检出换行符自动转换设置
+git config -l
+git config --global -l
 
+提交时转换LF，检出时转换为CRLF
+git config --global core.autocrlf true
+
+提交时转换LF，检出时不转换
+git config --global core.autocrlf input
+
+提交检出均不转换
+git config --global core.autocrlf false

@@ -47,4 +47,19 @@ pip uninstall 包名：卸载python包
 pip uninstall 包名 -y：卸载python包时不用再输入参数y表示确定要卸载
 pip show 包名：显示安装的python包的详细信息，包括安装路径
 
+## 6、高级进阶之requirements.txt
+python项目如何在另一个环境上重新构建项目所需要的运行环境依赖包？
+
+使用的时候边记载是个很麻烦的事情，总会出现遗漏的包的问题，这个时候手动安装也很麻烦，不能确定代码报错的需要安装的包是什么版本。这些问题，requirements.txt都可以解决！
+
+生成requirements.txt，有两种方式：
+
+第一种 适用于 单虚拟环境的情况： 
+
+pip freeze > requirements.txt
+
+第二种 (推荐) 使用 pipreqs ，github地址为： https://github.com/bndr/pipreqs
+
+使用requirements.txt安装依赖的方式：
+pip install -r requirements.txt
 
