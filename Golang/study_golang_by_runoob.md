@@ -188,7 +188,7 @@ complex64
 complex128
 64 位实数和虚数
 
-## 8、2. GOPATH，GO111MODULE环境变量
+## 8、GOPATH，GO111MODULE环境变量
 官方简介如下：
 The GOPATH environment variable is a fundamental part of writing Go code without Go modules. It specifies the location of your workspace, and it defaults to $HOME/go. A GOPATH directory contains src, bin, and pkg directories. Your code is typically located in the $GOPATH/src directory.
 If you are not familiar with Go and GOPATH, please first read about writing Go code with GOPATH.

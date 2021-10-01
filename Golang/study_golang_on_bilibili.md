@@ -74,11 +74,16 @@ func main() {
 }
 ```
 
+编译：右键项目名-》
+
 直接在项目下执行go build即可。
 或者在cmd窗口执行go build github.com\HanKin2015\studygo\day01\helloworld(src目录后面的路径即可，生成在当前目录之下)
 
 ### 3-1、解决 Visual Studio Code terminal终端打开时为弹出式窗口问题
-打开系统CMD，右键点击属性，取消使用旧版控制台的勾选，重启CMD，问题解决
+打开系统CMD，右键点击属性，取消使用旧版控制台的勾选，重启CMD，问题解决。
+
+### 3-2、VSCode不要折叠/展开空白文件夹的方法
+左下角 齿轮 → 设置，输入 compactFolders ，勾选表示折叠空白文件夹，取消勾选表示不折叠。
 
 
 
