@@ -24,7 +24,7 @@ ipconfig /flushdns
 
 进阶可以写个爬虫程序。
 
-## 3、学习他人项目
+## 3、学习他人项目(能运行但无法在本地获取正确结果)
 https://github.com/HanKin2015/Hosts
 
 原理：python从域名解析出对应ip地址列，编辑hosts后GitHub域名直接映射到 ip 地址，从中间环节杜绝dns污染。
@@ -45,3 +45,11 @@ addrs = socket.getaddrinfo(domain, None)
    - 自动更新：24小时 （hosts地址变更不会特别频繁）
 
 ![image](https://user-images.githubusercontent.com/38210128/127502984-7ef25b7c-1901-4164-ab29-e5dbc487e63d.png)
+
+
+
+
+
+
+
+

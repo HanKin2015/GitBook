@@ -55,11 +55,15 @@ python项目如何在另一个环境上重新构建项目所需要的运行环�
 生成requirements.txt，有两种方式：
 
 第一种 适用于 单虚拟环境的情况： 
-
 pip freeze > requirements.txt
 
 第二种 (推荐) 使用 pipreqs ，github地址为： https://github.com/bndr/pipreqs
 
 使用requirements.txt安装依赖的方式：
 pip install -r requirements.txt
+
+使用pip help install查看r参数，结果如下：
+-r, --requirement <file>    Install from the given requirements file. This option can be used multiple times.
+
+
 
