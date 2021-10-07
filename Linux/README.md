@@ -217,3 +217,19 @@ echo “/usr/local/lib” >>/etc/ld.so.conf
 
 ## 18、Linux查看BIOS版本/信息详情
 命令如下：#dmidecode -t 0
+
+## 19、Ubuntu用户都应该安装的4个Linux应用
+Synaptic（新立得软件包管理器），卓越的包管理器
+Mainline，在 Ubuntu 中始终拥有最新的内核
+BleachBit，Ubuntu Ccleaner 的替代品
+Kodi：触手可及的多媒体中心
+
+
+
+
+
+
+
+
+
+

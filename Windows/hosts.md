@@ -1,12 +1,14 @@
 # hosts
 
-## 1、hosts仓库在线同步地址
-Github https://github.com/JohyC/Hosts/blob/main/hosts.txt
-Gitee https://gitee.com/yuchi-shentang/GithubHosts/blob/main/hosts.txt
-私人服务器hosts:
-https://www.suni.cf:8880/Hosts/hosts.txtGithubHosts:
-https://www.suni.cf:8880/Hosts/GithubHosts.txtEpicHosts:
-https://www.suni.cf:8880/Hosts/EpicHosts.txt
+## 1、hosts本仓库在线同步地址
+
+1. Github https://github.com/JohyC/Hosts/blob/main/hosts.txt
+2. Gitee    https://gitee.com/yuchi-shentang/GithubHosts/blob/main/hosts.txt
+3. 私人服务器 
+   - hosts:        		 https://www.suni.cf:8880/Hosts/hosts.txt 
+   - GithubHosts:        https://www.suni.cf:8880/Hosts/GithubHosts.txt
+   - EpicHosts:          https://www.suni.cf:8880/Hosts/EpicHosts.txt
+   - SteamDomains:       https://www.suni.cf:8880/Hosts/SteamDomains.txt
 
 使用 SwitchHosts （https://swh.app/zh/）工具（推荐）自动同步
 

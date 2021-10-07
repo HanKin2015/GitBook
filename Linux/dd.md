@@ -45,12 +45,18 @@ dd if=/home/write.zip of=/media/mnt/write.zip oflag=direct
 测试U盘读能力
 dd of=/home/write.zip if=/media/mnt/write.zip iflag=direct
 
+测试纯写入能力
+dd if=/dev/zero of=test bs=376M count=1 oflag=direct
+
+测试纯读取能力
+dd if=test of=/dev/null bs=376M count=1 iflag=direct
+
 注意需要每次拔插一次U盘
 ```
 
-
 cp命令有缓存功能，即使U盘拔插了也无法准确测试。
-
+发现硬盘使用sync，U盘使用direct比较准确。
+告知只有测试写能力时才需要oflag参数（未验证）
 
 
 

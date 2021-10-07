@@ -111,7 +111,7 @@ utility：多功能的，多用途的
 util是utility的缩写。
 errno：error numero sign
 proxy：代理
-Revision：调整
+Revision：调整、修订、复习、校对
 poll：轮询，投票
 slot：插槽、跟踪
 frame：帧，框架

@@ -16,12 +16,13 @@ https://transfer.sh/
 
 https://github.com/dutchcoders/transfer.sh
 
+## 4、
+https://github.com/shengxinjing/programmer-job-blacklist
 
+## 5、朋友圈转发截图生成工具
+https://gaohan086.xyz/wechat/
 
-
-
-
-
+https://github.com/TransparentLC/WechatMomentScreenshot
 
 
 
