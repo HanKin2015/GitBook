@@ -1070,3 +1070,17 @@ git config --global core.autocrlf input
 
 提交检出均不转换
 git config --global core.autocrlf false
+
+### Git diff 统计代码更改数量
+1. git diff HEAD~2 获取最近两次提交的具体不同 包括增删的文件以及行数以及每行具体的改动
+
+2.  git diff --stat 获取文件更改的个数 增加行数 删除行数
+
+3. git diff --numstat 表格形式获取增加行数和减少行数
+
+
+
+
+
+
+

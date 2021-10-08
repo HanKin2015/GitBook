@@ -163,7 +163,34 @@ using namespace std;
 一般来说
 ```
 
+## 15、理解一段代码
 
+```
+// 使用vscode可以看到展开结果
+// qualifier修饰符、修饰词
+
+#define Q_TAILQ_ENTRY(type, qual)                                       \
+struct {                                                                \
+        qual type *tqe_next;            /* next element */              \
+        qual type *qual *tqe_prev;      /* address of previous next element */\
+}
+#define QTAILQ_ENTRY(type)       Q_TAILQ_ENTRY(struct type,)
+#define QTAILQ_ENTRY_CONST(type)       Q_TAILQ_ENTRY(struct type, const)
+
+QTAILQ_ENTRY(int);
+/*
+Expands to:
+
+struct { struct int *tqe_next; struct int * *tqe_prev; }
+*/
+
+QTAILQ_ENTRY_CONST(int);
+/*
+Expands to:
+
+struct { const struct int *tqe_next; const struct int *const *tqe_prev; }
+*/
+```
 
 
 

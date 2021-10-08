@@ -12,6 +12,8 @@
 
 使用 SwitchHosts （https://swh.app/zh/）工具（推荐）自动同步
 
+由于私人服务器经常出现崩溃无法访问问题，而Gitee非常稳定，因此填写：https://gitee.com/yuchi-shentang/GithubHosts/raw/main/hosts.txt
+
 ## 2、手动查询需要翻墙的域名实际ip并配置
 打开https://www.ipaddress.com/网站，查询下面3个网址对应的IP地址
 ```

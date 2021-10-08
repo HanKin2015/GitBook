@@ -112,6 +112,10 @@ grep的-a或--text参数功能：将 binary 文件以 text 文件的方式搜寻
 grep -a file_name
 grep --text file_name
 
+grep时提示：Binary file (standard input) matches grep只递归匹配文本文件，不匹配二进制文件中的内容
+grep get_default_error_string /* -rFn --binary-files=without-match
+增加--binary-files=without-match参数即可。
+
 ## 7、使用grep搜索多个字符串
 三种方法：
 - 转义字符\
