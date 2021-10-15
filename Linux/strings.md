@@ -1,32 +1,18 @@
 # strings命令
 
 ## 1、简介
-Netstat 命令用于显示各种网络相关信息，如网络连接，路由表，接口状态 (Interface Statistics)，masquerade 连接，多播成员 (Multicast Memberships) 等等。
+打印文件中的可打印字符串（print the strings of printable characters in files）。常用来在二进制文件中查找字符串，与grep配合使用。strings命令输出的字符串长度为4个或4个以上的，长度小于4的字符串将不予打印，我们可以通过-n参数调整，strings -n 2 filename
 
-## 2、常见参数
--a (all)显示所有选项，默认不显示LISTEN相关
--t (tcp)仅显示tcp相关选项
--u (udp)仅显示udp相关选项
--n 拒绝显示别名，能显示数字的全部转化成数字。
--l 仅列出有在 Listen (监听) 的服務状态
+strings命令是在对象文件或者二进制文件中查找可打印的字符串，有很多的用途，例如一个用法就是在编译的so中定义字符串常量作为动态库的版本号，然后就可以使用strings+grep 组合命令查看当前编译的so的版本号了。
 
--p 显示建立相关链接的程序名
--r 显示路由信息，路由表
--e 显示扩展信息，例如uid等
--s 按各个协议进行统计
--c 每隔一个固定时间，执行该netstat命令。
+## 2、常用方法
+在libc.so.6是c标准库，而这个标准库的制作者为了让库的使用者知道该库兼容哪些版本的标准库，就在这个库中定义了一些字符串常量，比如我的系统是centos6.8-x64,我的c标准库在/lib64/libc.so.6，可以直接运行该标准库文件，或者使用ldd --version查看当前版本，以下显示当前版本为2.12
 
-提示：LISTEN和LISTENING的状态只有用-a或者-l才能看到
-
-## 3、常用命令
+而使用strings /lib64/libc.so.6 | grep GLIBC,可查看向下兼容的版本
 
 
-
-
-
-
-
-
+查找ls中包含libc的字符串，不区分大小写：
+strings /bin/ls | grep -i libc
 
 
 

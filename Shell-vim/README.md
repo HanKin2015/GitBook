@@ -21,9 +21,13 @@
 set cul
 e ++enc=cp936
 
-## 4\
-
-
+## 4、readonly用来定义只读变量，一旦使用readonly定义的变量在脚本中就不能更改
+```
+root@hankin:/usr/local/bin# echo $(printf "%d" "0xc")
+12
+root@hankin:/usr/local/bin# echo $(printf "%d" "0xcc")
+204
+```
 
 
 

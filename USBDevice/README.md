@@ -111,7 +111,12 @@ HFD ，是“高清屏”的英文缩写， 意思是支持1920X1080以上分辨
 
 
 
+USB设备文件对应路径为：“/dev/bus/usb/xxx/xxx”，使用了udev文件系统。
+可以使用 cat /sys/bus/usb/devices/2-2.1/speed 来获取usb速度。
+由于目录/sys/bus/usb/devices/经常被使用，在libusb源码中有以下宏定义：
+#define SYSFS_DEVICE_PATH "/sys/bus/usb/devices"
 
+dmidecode -t 1输出硬件设备序列号
 
 
 

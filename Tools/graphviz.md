@@ -77,9 +77,35 @@ digraph unix {
 }
 ```
 
+## 文件运行
+dot -Tpng first.gv -o d.png
 
+对于这条命令，dot表示用dot布局，-Tpng表示生成png图片格式，sample.dot是脚本文件名，-o sample.png表示生成输出的图片名称。
 
+改命令也可以写成dot -Kdot -Tpng sample.dot -o sample.png,其中-Kdot表示使用dot布局。
 
+Graphviz支持几种布局引擎：
+
+dot ： 默认布局方式，主要用于有向图
+neato ： 主要用于无向图
+twopi ： 主要用于径向布局
+circo ： 圆环布局
+fdp ： 主要用于无向图
+sfdp ： 主要绘制较大的无向图
+patchwork ： 主要用于树哈希图（tree map）
+Graphviz支持的输出图片格式更是相当的多，常用的有以下几种：
+
+pdf ：
+gif
+png ：
+jpeg ： 一种有损压缩图片格式
+bmp ： 一种位图格式
+svg ： 矢量图，一般用与Web，，可以用浏览器打开
+ps ： 矢量线图，多用于打印
+更多的输出格式可以浏览Graphviz输出格式进行查看。
+Step 3：查看生成结果
+
+输出的图片，可以用支持相应图片格式的软件打开。Graphviz软件安装好之后，有一个图片浏览器可以进行图片预览，只需输入命令display sample.png即可（sample.png为生成的图片文件名）
 
 
 
