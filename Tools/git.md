@@ -806,9 +806,8 @@ git clean -nfd
 git clone时出现Permission denied(publickey). fatal: Could not read from remote repository问题
 是使用ssh远程到xubuntu系统进行git操作，但是在xubuntu系统中git操作没有任何问题。
 
-### 20210428
+### 20210428（Windows）
 修复git diff/log正文中文乱码
-
 ```
 git config --global core.quotepath false 
 git config --global gui.encoding utf-8
@@ -822,7 +821,6 @@ export LESSCHARSET=utf-8
 # cmd环境下：
 set LESSCHARSET=utf-8
 ```
-
 $ git config --global core.quotepath false          # 显示 status 编码
 $ git config --global gui.encoding utf-8            # 图形界面编码
 $ git config --global i18n.commit.encoding utf-8    # 提交信息编码
@@ -832,6 +830,7 @@ $ git config --global i18n.logoutputencoding utf-8  # 输出 log 编码
 set LESSCHARSET=utf-8
 
 在git bash的界面中右击空白处，弹出菜单，选择选项->文本->本地Locale，设置为zh_CN，而旁边的字符集选框选为UTF-8。
+
 
 git如何生成单个文件的补丁
 背景：有时候碰到一个commit包含了好几个文件的修改，但是我只需要其中一个文件的修改内容，那么这时候就需要以下方法来生成这一个文件对应修改内容的补丁

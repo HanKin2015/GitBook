@@ -4,7 +4,10 @@
 
 
 
-
+# 倜
+读音:[tì]
+部首:亻五笔:WMFK
+释义:〔倜傥〕也作俶傥。洒脱；不拘束。傥（tǎng）。
 
 # 纳斯达克
 纳斯达克（NASDAQ），全称为美国全国证券交易商协会自动报价表（National Association of Securities Dealers Automated Quotations） [1]  ，是美国的一个电子证券交易机构，是由纳斯达克股票市场公司所拥有与操作的。NASDAQ是全国证券业协会行情自动传报系统的缩写，创立于1971年，迄今已成为世界最大的股票市场之一。

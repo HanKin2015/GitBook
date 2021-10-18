@@ -24,7 +24,7 @@ rmmod i40e ;modprobe i40e (该操作必须同时执行，否则会有网络中�
 ## 2、官网下载驱动
 https://www.intel.cn/content/www/cn/zh/download/14611/15817/intel-network-adapter-driver-for-pcie-intel-gigabit-ethernet-network-connections-under-linux.html?_ga=1.159975677.114505945.1484457019
 
-
+安装后即可。
 
 
 

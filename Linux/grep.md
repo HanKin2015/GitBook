@@ -146,3 +146,11 @@ ltext()
         ltext "${CBOLD}[T]${CLOG_PRE_WAPPER}${C0}$*";
 export -f ltext
 ```
+
+## 7、q参数
+
+
+
+
+
+

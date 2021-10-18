@@ -132,8 +132,12 @@ GSSAPIAuthentication  no
 
 重启sshd服务即可
 
+## 9、ssh/scp指定端口用法
+1、scp指定端口传输，端口需放在scp后面
+scp -P 34543 root@1.2.3.4:/home/admin/xx ./
 
-
+2、ssh指定端口登录：
+ssh -p 34543 root@1.2.3.4
 
 
 
