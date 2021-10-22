@@ -832,6 +832,18 @@ set LESSCHARSET=utf-8
 在git bash的界面中右击空白处，弹出菜单，选择选项->文本->本地Locale，设置为zh_CN，而旁边的字符集选框选为UTF-8。
 
 
+linux下面未生效：
+```
+usbredirproto.h:             C source, Non-ISO extended-ASCII text
+```
+可以解决方法（缺点无法高亮）：git diff | iconv -f gbk -t utf-8
+不知道为啥，按网上的方法有问题：https://www.cnblogs.com/Mr-Koala/p/14636585.html
+函数地方少写了分号。
+
+git diff的颜色显示开关：git config color.ui true
+
+
+
 git如何生成单个文件的补丁
 背景：有时候碰到一个commit包含了好几个文件的修改，但是我只需要其中一个文件的修改内容，那么这时候就需要以下方法来生成这一个文件对应修改内容的补丁
 

@@ -118,7 +118,8 @@ frame：帧，框架
 wave：波
 sound card：声卡
 ship：传送，船
-volume：音量，体积
+volume：音量;体积;容积;容量;量;额;响度
+column: 列
 allocate：分配，划给
 Wipe out：擦除，抹掉
 upgradable：可升级的

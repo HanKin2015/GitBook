@@ -37,8 +37,8 @@ https://api.github.com/repos/HanKin2015/MagicTool
 推荐网页版的gitzip：kinolien.github.io/gitzip/
 
 
-
-
+根本打不开：https://github.dev/
+在github仓库界面，然后按一下键盘的句号键即可。
 
 
 

@@ -29,8 +29,23 @@ root@hankin:/usr/local/bin# echo $(printf "%d" "0xcc")
 204
 ```
 
+## 5、终端单行函数需注意
+文件：
+```
+#!/bin/bash
 
+demoFun()
+{
+    echo "这是我的第一个 shell 函数!"
+}
 
+demoFun
+```
+
+终端：
+demoFun() { echo "这是我的第一个 shell 函数!"; }; demoFun
+
+注意多了一个分号。
 
 
 

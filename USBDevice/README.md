@@ -79,7 +79,9 @@ SE(System Engineer)
 
 
 
+# 什么是Quickstart?
 
+Quickstart，97年开发，首次被引入Pentium III处理器，它主要是通过监测CPU的工作负荷，当CPU处于空闲状态时，就把CPU置于休眠状态，到需要时再迅速恢复工作状态。处于休眠状态的CPU功耗，甚至能低到0.5W，以达到有效管理电源以获得更长的。
 
 
 
@@ -118,5 +120,5 @@ USB设备文件对应路径为：“/dev/bus/usb/xxx/xxx”，使用了udev文�
 
 dmidecode -t 1输出硬件设备序列号
 
-
+https://zhuanlan.zhihu.com/p/37664732
 

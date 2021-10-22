@@ -148,7 +148,51 @@ export -f ltext
 ```
 
 ## 7、q参数
+grep -q用于if逻辑判断
+ 
+突然发现grep -q 用于if 逻辑判断很好用。
+ 
+-q 参数，本意是 Quiet; do not write anything to standard output.  Exit immediately with zero status if any match is found, even if an error was detected.   中文意思为，安静模式，不打印任何标准输出。如果有匹配的内容则立即返回状态值0。
 
+test.sh:
+```
+#!/bin/bash
+
+if grep -q hello data.txt ; then
+        echo "data.txt has word 'hello'"
+else
+        echo "data.txt has not word 'hello'"
+fi
+
+
+if grep -q world data.txt; then
+        echo "data.txt has word 'world'"
+else
+        echo "data.txt has not word 'world'"
+fi
+
+success=0
+if echo ${success} ; then
+        echo yes
+else
+        echo no
+fi
+```
+
+data.txt:
+```
+nihao
+nihaooo
+hello
+```
+
+运行结果：
+```
+data.txt has word 'hello'
+data.txt has not word 'world'
+0
+yes
+```
 
 
 
