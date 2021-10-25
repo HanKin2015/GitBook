@@ -363,9 +363,10 @@ $(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 
 后面操作：automake aclocal automake
 
+## 31、undefined reference to `itoa'
+itoa不是c标准库的，有的编译环境有，有的则没有。
 
-
-
+itoa是广泛使用的非标准C语言和C++语言扩展功能。但因为它是一个非标准的C / C++语言功能,因此不能好好的被所有编译器使用。在大多数Windows下的编译器通常在<cstdlib>头文件包含非标准函数。itoa()函数把整数转换成字符串，并返回指向转换后的字符串的指针。
 
 
 

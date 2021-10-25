@@ -107,9 +107,21 @@ https://www.jianshu.com/p/8ea60a8d3abb
 ## 6、原理简介
 libevent默认情况下是单线程的，可以配置成多线程，每个线程有且只有一个event_base，对应一个struct event_base结构体以及附于其上的事件管理器，用来调度托管给它的一系列event，可以和操作系统的进程管理类比。当一个事件发生后，event_base会在合适的时间，不一定是立即去调用绑定在这个事件上的函数，直到这个函数执行完，再去调度其他的事件。
 
+## 7、evutil_socket_t
+在头文件<event2/util.h>中定义了许多有用的函数和类型来帮助实现可移植的程序。Libevent在内部使用这些类型和函数。
+一：基本类型
+evutil_socket_t
 
+         除了Windows之外的大多数系统，socket就是一个整数，而且操作系统按照数值顺序对它们进行处理。而在Windows socket API中，socket是SOCKET类型，该类型是一个类似于指针的OS句柄，而且得到它们的顺序也是未定义的。Libevent定义evutil_socket_t类型为一个整数，该整数可以表示socket或者accept函数的返回值，并且可以在Windows上避免指针截断的风险。
+```
+#ifdef WIN32
+#define evutil_socket_t  intptr_t
+#else
+#define evutil_socket_t  int
+#endif
+```
 
-
+[socket编程与libevent2的一些归纳总结](https://segmentfault.com/a/1190000003780387)
 
 
 

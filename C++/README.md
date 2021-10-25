@@ -322,3 +322,20 @@ struct k
 
 从以上分析可以看出，位域在本质上就是一种结构类型， 不过其成员是按二进位分配的。
 ```
+
+## C程序中的raise和kill两个函数有何不同？
+ 
+在Linux上执行“man raise”，即可看到两者的区别：
+LIBC库函数，raise基于系统调用kill或tgkill（如果内核支持）实现
+kill是系统调用，不是LIBC库函数
+单线程程序：raise(sig)效果等同kill(getpid(), sig)
+多线程程序：raise(sig)效果等同pthread_kill(pthread_self(), sig)
+
+在多线程程序中，进程给自己发SIGTERM信号退出，应当调用“kill(getpid(), SIGTERM)”，而不是“raise(SIGTERM)”
+
+
+
+
+
+
+
