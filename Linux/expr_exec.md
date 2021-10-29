@@ -9,17 +9,14 @@ expr命令是一个手工命令行计数器，用于在UNIX/LINUX下求表达式
  14
  
 2、抓取字串
-
 > expr substr “this is a test” 3 5
 is is
 
 3、抓取第一个字符数字串出现的位置
-
 > expr index "sarasara"  a
  2
  
 4、整数运算
-
  > expr 14 % 9
  5
  > expr 10 + 10
@@ -32,6 +29,20 @@ is is
  90
  > expr 30 * 3
  expr: Syntax error
+
+### 1-1、shell计算中使用除法，基本默认上都是整除。
+比如：
+num1=2
+num2=3
+num3=`expr $num1 / $num2`
+这个时候num3=0 ,是因为是因为expr不支持浮点除法
+解决的方法：
+num3=`echo "scale=2; $num1/$num2" | bc`
+使用bc工具，scale控制小数点后保留几位
+还有一种方法
+awk 'BEGIN{printf "%.2f\n",’$num1‘/’$num2‘}'
+如果用百分比表示
+awk 'BEGIN{printf "%.2f%\n",(’$num1‘/’$num2‘)*100}'
 
 ## 2、Linux exec命令
 https://blog.csdn.net/qq_31186123/article/details/82190776
@@ -55,11 +66,8 @@ exec 3>&-
 done
 ```
 
-
 shell 中的 exec 两种用法：
-
 1.exec 命令 ;命令代替shell程序，命令退出，shell 退出；比如 exec ls
-
 2.exec 文件重定向，可以将文件的重定向就看为是shell程序的文件重定向 比如 exec 5</dev/null;exec 5<&-
 
 =============================

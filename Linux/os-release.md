@@ -39,7 +39,7 @@ https://mangolassi.it/topic/18210/restarting-networking-service-fails-ubuntu-16-
 
 2. lsb_release -a ：FSG（Free Standards Group）组织开发的LSB (Linux Standard Base)标准的一个命令，用来查看linux兼容性的发行版信息。
 
-3. /proc/version 和 uname -a 显示的内容相同，显示[linux内核](https://www.baidu.com/s?wd=linux内核&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)版本号。
+3. /proc/version 和 uname -a 显示的内容大体相同，显示[linux内核](https://www.baidu.com/s?wd=linux内核&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)版本号。
 
 关于lsb_release -a和/etc/issue显示的发行版本号不同，原因只有一个：系统内核手动升级了。 
 

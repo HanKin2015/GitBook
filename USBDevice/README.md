@@ -122,3 +122,14 @@ dmidecode -t 1输出硬件设备序列号
 
 https://zhuanlan.zhihu.com/p/37664732
 
+BIOS EHCI Hand-Off Hand-Off是接手的意思，是否让BIOS接管EHCI控制。当操作系统不支持EHCI时，就要让BIOS来控制。EHCI是USB HiSpeed控制器的一种实现规范。
+
+BIOS是英文"Basic Input Output System"的缩略词，直译过来后中文名称就是"基本输入输出系统"。在IBM PC兼容系统上，是一种业界标准的固件接口。计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。
+
+
+
+
+
+
+
+

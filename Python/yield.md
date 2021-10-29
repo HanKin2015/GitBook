@@ -1,13 +1,13 @@
 # Python yield 使用浅析
 https://www.runoob.com/w3cnote/python-yield-used-analysis.html
 
-## 英文意思
+## 1、英文意思
 v.
 出产(作物);产生(收益、效益等);提供;屈服;让步;放弃;缴出
 n.
 产量;产出;利润
 
-## 理解yield
+## 2、理解yield
 带有 yield 的函数在 Python 中被称之为 generator（生成器）。
 
 如果要控制内存占用，最好不要用 List来保存中间结果，而是通过 iterable 对象来迭代。
@@ -69,4 +69,14 @@ while True:
 使用next函数需要注意会有抛出异常。
 
 yield无法知道genertor中有多少元素，需要用到的时候调用一次函数，因此无法和进度条结合使用。
+
+## 3、再次理解
+可以理解yield相当于是一个return。
+
+迭代器有终止的时候，因此需要抛出异常。
+
+
+
+
+
 

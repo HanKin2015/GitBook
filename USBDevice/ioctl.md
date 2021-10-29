@@ -1,4 +1,6 @@
 # ioctl
+
+## 1、简介
 在计算机中，ioctl(input/output control)是一个专用于设备输入输出操作的系统调用,该调用传入一个跟设备有关的请求码，系统调用的功能完全取决于请求码。举个例子，CD-ROM驱动程序可以弹出光驱，它就提供了一个对应的Ioctl请求码。设备无关的请求码则提供了内核调用权限。ioctl这名字第一次出现在Unix第七版中，他在很多类unix系统（比如Linux、Mac OSX等）都有提供，不过不同系统的请求码对应的设备有所不同。Microsoft Windows在Win32 API里提供了相似的函数，叫做DeviceIoControl。
 
 ioctl是设备驱动程序中对设备的I/O通道进行管理的函数。所谓对I/O通道进行管理，就是对设备的一些特性进行控制，例如串口的传输波特率、马达的转速等等。它的调用个数如下：int ioctl(int fd, ind cmd, …)；
@@ -27,8 +29,16 @@ _IOWR(type,nr, datatype) //双向传送
 #define MEM_IOCGQSET _IOR(MEM_IOC_MAGIC, 1, int)
 ```
 
+## 2、注意点
+linux内核中有：
+src/linux-source-5.3/include/uapi/linux/uvcvideo.h
+#define UVCIOC_GET_BUSID_DEVICEID _IOR('V',  104, struct v412_usb_device_info)
+#define UVCIOC_USB_CONTROL_MSG _IOWR('V',  105, struct v412_usb_control_msg)
 
-
+应用层一定要对齐好对应的序号（104、105），这个很重要：
+spicec/libcamera/src/include/kernel-5.3/include/uapi/linux/uvcvideo.h
+#define UVCIOC_GET_BUSID_DEVICEID _IOR('V',  104, struct v412_usb_device_info)
+#define UVCIOC_USB_CONTROL_MSG _IOWR('V',  105, struct v412_usb_control_msg)
 
 
 

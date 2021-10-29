@@ -51,8 +51,8 @@ clean:
 * 文 件 名: study_open.cpp
 * 文件描述: 学习open函数
 * 作    者: HanKin
-* 创建日期: 2021.08.12
-* 修改日期：2021.08.12
+* 创建日期: 2021.11.12
+* 修改日期：2021.11.12
 *
 * Copyright (c) 2021 HanKin. All rights reserved.
 */

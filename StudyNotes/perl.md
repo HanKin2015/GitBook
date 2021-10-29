@@ -242,9 +242,9 @@ foreach(@sites){
 ```
 perl数组完。https://www.runoob.com/perl/perl-arrays.html
 
-## 9、20210901
+## 9、20211027
+末尾的分号必须要添加，但是最后一行代码末尾可以省略。
 
-
-
+在Perl中想要使用state，必须在文件开头加上 use feature qw(state); 或者 use 5.010; 因为state功能是在5.010版本中才开始提供的。
 
 

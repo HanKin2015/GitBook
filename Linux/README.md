@@ -197,9 +197,6 @@ done
 再生龙（Clonezilla）是一个免费的灾难恢复、硬盘克隆、硬盘映像档制作的部署和解决方案，由台湾的高速网络与计算中心所开发，以GNU通用公共许可协议（GPL）发布。
 
 ## 16、其他
-在 要查找的 文件夹 ，打开命令行：
-find . -name "*" -type f -size 0c
-
 /lib /usr/lib /usr/local/lib 区别
 
 添加/usr/local/lib默认库路径

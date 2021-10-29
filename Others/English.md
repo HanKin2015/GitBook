@@ -1,6 +1,9 @@
 # 英语学习
 
 ```
+workaround: 应变方法;变通方法
+legacy: 遗产;遗赠财物;遗留;后遗症
+miscellaneous：混杂的; 各种各样的;
 alongside：在…的侧面;在…旁边;与…并排
 trigger: 触发器
 tigger: 乞丐
@@ -143,7 +146,7 @@ bind：绑定
 compat：契约
 couple：夫妻，情侣
 feedback：反馈
-syntax：语法
+syntax：语法;句法;句法规则;语构
 daemon：守护进程
 Mstsc (Microsoft terminal services client)
 gang：帮派，一群，一帮
