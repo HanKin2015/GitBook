@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+chipset: 芯片组
 workaround: 应变方法;变通方法
 legacy: 遗产;遗赠财物;遗留;后遗症
 miscellaneous：混杂的; 各种各样的;
@@ -39,7 +40,6 @@ cmp：Certificate Management Protocol
 dmz：隔离区，防火墙中间的区域
 cmp===compare
 gap：间隔、隔阂
-compatible：兼容
 mp===multiple多种多样的、倍数
 signature：签名
 delimiter：分隔符
@@ -47,6 +47,7 @@ companion：伙伴，伴侣
 serial：串行
 parallel：并行
 compatible；可共存的、和睦相处的、兼容的
+compat：兼容性、适配、兼容
 already：已经
 caps：大写字母、胜过
 claim：声明、索赔、断言
@@ -143,7 +144,6 @@ wink：眨眼
 denim：牛仔裤、劳动布
 overlap：重叠
 bind：绑定
-compat：契约
 couple：夫妻，情侣
 feedback：反馈
 syntax：语法;句法;句法规则;语构
