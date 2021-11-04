@@ -114,11 +114,8 @@ https://cmake.org/pipermail/cmake/2001-October/002479.html
 
 ## 11、无法解析的外部符号
 引入头文件的时候会有编辑器编译前检查，但是如果在编译后报错“无法解析的外部符号”常常一脸懵逼。
-
 后来经验告诉我，可能是只找到了头文件，没有找到头文件中函数的实现方法。
-
 在头文件位置引入cpp后编译通过。
-
 https://docs.huihoo.com/doxygen/linux/kernel/3.7/index.html
 
 ## 12、sln和vcxproj区别
@@ -135,11 +132,19 @@ sln里有多个工程，当你移除某个工程时sln会有变化，sln并不�
 发现重复定义的函数或者变量只在当前文件使用，为何不使用static修饰呢，增加static关键字后编译正常。
 
 ## 14、严重性	代码	说明	项目	文件	行	禁止显示状态
-错误	LNK2038	检测到“RuntimeLibrary”的不匹配项: 值“MT_StaticRelease”不匹配值“MD_DynamicRelease”(StudySTL.obj 中)	StudySTL	D:\Github\Storage\windows\StudySTL\gtest.lib(gtest-all.obj)	1	
+错误	LNK2038	检测到“RuntimeLibrary”的不匹配项: 值“MT_StaticRelease”不匹配值“MD_DynamicRelease”(StudySTL.obj 中)	StudySTL	D:\Github\Storage\windows\StudySTL\gtest.lib(gtest-all.obj)	
 
 ## 15、如何让__FILE__字符串不是一个绝对路径
 属性->C/C++->高级->使用完全路径->否
 但还是会有相对路径的烦恼，因此还是老老实实做字符串切割吧。
+
+## 16、VS显示函数名窗口
+水木连续剧，就是周三周四播出的电视连续剧，在韩国和日本一周分别用月 火 水 木 金 土 日表示。
+
+
+
+
+
 
 
 
