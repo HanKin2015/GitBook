@@ -221,7 +221,11 @@ Mainline，在 Ubuntu 中始终拥有最新的内核
 BleachBit，Ubuntu Ccleaner 的替代品
 Kodi：触手可及的多媒体中心
 
+## 20、
+/etc/rc.local
 
+/dev/bus/usb/
+/sys/bus/usb/
 
 
 

@@ -309,7 +309,7 @@ https://blog.csdn.net/chuangjinweilai/article/details/51850803
 alias soff='sleep 5 && xset dpms force off'
 
 
-# xset
+# 18、xset
 用xset q 可以查看当前屏保的设置情况，黑屏方式的屏保有两种状态：
 1.    xset 的s参数后面可接两个数字参数，前一个即是进入屏保的秒数，如果想立刻进入屏保：
     xset s 2 600  这样，两秒种后进入屏保。
@@ -326,9 +326,16 @@ xset dpms 0 0 0
 
 但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
 
+# 19、suspend命令
+Linux suspend命令用于暂停执行shell。
+suspend为shell内建指令，可暂停目前正在执行的shell。若要恢复，则必须使用SIGCONT信息。
 
-
-
+若目前执行的shell为登入的shell，则suspend预设无法暂停此shell。若要强迫暂停登入的shell，则必须使用-f参数。
+```
+# suspend 
+-bash: suspend: 无法挂起一个登录 shell
+# suspend -f
+```
 
 
 

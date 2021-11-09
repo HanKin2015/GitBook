@@ -1084,14 +1084,40 @@ git config --global core.autocrlf false
 
 ### Git diff 统计代码更改数量
 1. git diff HEAD~2 获取最近两次提交的具体不同 包括增删的文件以及行数以及每行具体的改动
-
-2.  git diff --stat 获取文件更改的个数 增加行数 删除行数
-
+2. git diff --stat 获取文件更改的个数 增加行数 删除行数
 3. git diff --numstat 表格形式获取增加行数和减少行数
 
+### 解决git diff没有高亮
+启用默认的颜色设置可以使用如下命令
+git config --global color.ui true
+git config --global color.ui false
 
+可以针对具体的内容进行设置如：
+color.branch
+color.diff
+color.interactive
+color.status
 
+例如：
+git config --global color.diff.meta "blue black bold"
+这样会将diff的输出以蓝色字体，黑色背景，粗体显示。
 
+颜色可用值有：
+normal
+black
+red
+green
+yellow
+blue
+magenta
+cyan
+white
 
+字体可选值有:
+bold
+dim
+ul
+blink
+reverse
 
 

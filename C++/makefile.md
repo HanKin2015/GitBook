@@ -249,7 +249,22 @@ command是命令行，如果其不与“target:prerequisites”在一行，那�
 
 -O3: 打开所有 -O2 的优化选项外增加 -finline-functions、-funswitch-loops、-fgcse-after-reload 优化选项。相对于 -O2 性能并未有较多提高，编译时间也最长，生成的目标文件也更大更占内存，有时性能不增反而降低，甚至产生不可预知的问题(包括错误)，所以并不被大多数软件安装推荐，除非有绝对把握方可使用此优化级别。
 
+## 17、自动生成Makefile的配置修改
+如下文件autogen.sh，调用configure文件生成Makefile。
 
+需求就是需要链接修改的第三方头文件以及生成的so库。
+```
+#!/bin/sh
+
+PWD_PATH=`pwd`
+export LIBUSB_CFLAGS=-I$PWD_PATH/../libusb-1.0.19/libusb/
+export LIBUSB_LIBS="-L$PWD_PATH/../libusb-1.0.19/libusb/.libs/ -lusb-1.0"
+autoreconf -fi
+if [ -z "$NOCONFIGURE" ]; then
+        chmod 777 ./configure
+    ./configure $@
+fi
+```
 
 
 

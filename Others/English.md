@@ -1,6 +1,8 @@
 # 英语学习
 
 ```
+globe：地球、球状物
+globbing：通配符、文件名扩展、展开
 chipset: 芯片组
 workaround: 应变方法;变通方法
 legacy: 遗产;遗赠财物;遗留;后遗症

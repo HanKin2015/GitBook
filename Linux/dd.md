@@ -52,6 +52,8 @@ dd if=/dev/zero of=test bs=376M count=1 oflag=direct
 dd if=test of=/dev/null bs=376M count=1 iflag=direct
 
 注意需要每次拔插一次U盘
+
+对于U盘写入的时候sync和direct基本都是在17MB/s左右，没有看出太大的区别。
 ```
 
 cp命令有缓存功能，即使U盘拔插了也无法准确测试。
