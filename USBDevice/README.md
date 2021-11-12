@@ -127,7 +127,43 @@ BIOS EHCI Hand-Off Hand-Off是接手的意思，是否让BIOS接管EHCI控制。
 BIOS是英文"Basic Input Output System"的缩略词，直译过来后中文名称就是"基本输入输出系统"。在IBM PC兼容系统上，是一种业界标准的固件接口。计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。
 
 
+# 键盘失效
+```
+  513  xev
+  514  xev -h
+  515  xev -display :0
+  516  xev -display :0
+  517  ls
+  518  ls /dev/input/
+  519  ls /dev/input/by-path/
+  520  ls /dev/input/by-path/ -l
+  521  lsusb -t
+  522  cat /dev/input/by-path/pci-0000:00:14.0-usb-0:4.3:1.0-event-kbd
+  523  ls
+  524  cd /var
+  525  ls
+  526  cd log
+  527  ls
+  528  tail Xorg.0.log
+  529* tail Xorg.0.log 1000
+  530  tail -f Xorg.0.log -n 1000
+  531  lsof
+  532  ls /dev/input/event9
+  533  ls /dev/input/event9
+  534  tail -f Xorg.0.log -n 1000
+  535  history
+```
+键盘有数据，内核能收到，发现是xev有问题。
 
+```
+[  6070.660] (**) SEM USB Keyboard: always reports core events
+[  6070.660] (**) evdev: SEM USB Keyboard: Device: "/dev/input/event9"
+[  6070.660] (WW) evdev: SEM USB Keyboard: device file is duplicate. Ignoring.
+[  6070.676] (EE) PreInit returned 8 for "SEM USB Keyboard"
+[  6070.676] (II) UnloadModule: "evdev"
+[  6070.677] (II) config/udev: Adding input device SEM USB Keyboard (/dev/input/event10)
+[  6070.677] (**) SEM USB Keyboard: Applying InputClass "evdev keyboard catchall"
+```
 
 
 
