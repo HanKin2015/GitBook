@@ -197,3 +197,30 @@ date +%s; cp a b; date +%s
 
 rsync -av --progress t01/demo.zip t02/
 
+## 18、-bash: cannot create temp file for here-document: No space left on device
+登陆Linux系统后, cd 到某个指定目录时使用tab键的时候报以下错误:
+
+-bash: cannot create temp file for here-document: No space left on device
+
+原因: 不能创建临时文件文档,设备上没有剩余空间(告诉我们磁盘空间满了)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

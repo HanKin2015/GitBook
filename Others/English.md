@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+realize：意识到、了解、实现、产生
 globe：地球、球状物
 globbing：通配符、文件名扩展、展开
 chipset: 芯片组

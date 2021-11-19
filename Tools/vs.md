@@ -159,5 +159,8 @@ Tools>Options>Text Editor>All Languages>Tabs>
 使用菜单, 打开Edit–> Advanced–> View White Space
 使用键盘的快捷键, 按下Ctrl+R, 然后按Ctrl+W.
 
+## 19、切换字体
+工具-》选项-》环境-》字体和颜色
 
+推荐Consolas字体
 
