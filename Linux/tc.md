@@ -1,4 +1,6 @@
 # linux环境下利用tc限制两台服务器间的网速
+
+## 1、简介
 http://www.iplocation.net/tools/traffic-control.php
 
 ts命令功能很强，同时也好难理解和使用，经常浪费了好半天还是搞不定。
@@ -8,15 +10,6 @@ ip命令可以进行简写：
 ip l  ==  ip link list
 ip a  ==  ip address show
 ip r  == ip route show
-
-
-
-
-
-
-
-
-
 
 ```
 #!/bin/bash
@@ -140,15 +133,34 @@ esac
 exit 0
 ```
 
+## 2、当遇到网络时延时
+（1）首先查看网卡名：ip addr | grep -B2 10.70 | awk '{print $2}' | head -n 1 | sed s/://g
+很奇怪，最终居然是yyds的eth0。
 
+（2）查看网卡eth0的流量配置
+tc qdisc show dev eth0
+```
+qdisc netem 8001: root refcnt 9 limit 1000 delay 100.0ms  10.0ms
+```
+直接找到原因。
 
-
-
-
-
-
-
-
+（3）删除所有规则
+tc qdisc del dev eth4 root
+执行之后再次查看流量配置
+```
+qdisc mq 0: root
+qdisc pfifo_fast 0: parent :8 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :7 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :6 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :5 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :4 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :3 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+```
+（4）然鹅又被人增加上了
+tc qdisc add dev eth0 root netem  delay 100ms 10ms
+想使用过滤器进行过滤，居然会失败。
 
 
 
