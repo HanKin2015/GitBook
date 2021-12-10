@@ -122,6 +122,11 @@ Windows运行\\1.1.2.3
 测试chmod 666 dir居然不行
 最终测试chmod 777 dir才行。。。。
 
+### 问题5：文件无法进行修改
+权限权限权限，重要的事情说三遍。
+
+一定要注意是修改当前修改的文件的权限，并不是文件夹。
+
 ## 5、查看SAMBA用户
 查看samba服务器中已拥有哪些用户：pdbedit -L
 
@@ -133,8 +138,11 @@ Windows运行\\1.1.2.3
 删除linux某个用户：userdel   用户名
 删除linux中某个用户所有信息：userdel   -r  用户名
 
-
-
-
+## 6、密码忘记了怎么办
+smbpasswd -a sambauser 可以修改密码
+smbstatus 可以查看用户
+vim /etc/samba/smb.conf 可以修改配置
+/etc/init.d/samba restart 重启服务
+\\10.22.33.44重新连接
 
 

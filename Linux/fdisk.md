@@ -1,4 +1,6 @@
-# 磁盘满的处理方式
+# 磁盘
+
+## 1、磁盘满的处理方式
 
 安装命令：apt install jq出现如下，
 
@@ -20,3 +22,10 @@ mount /dev/vdb /myroot/
 
 卸载命令
 umount /dev/vdb
+
+## 2、格式化U盘
+```
+fdisk -l
+umount /dev/sdb
+mkfs -V -t ntfs /dev/sdb4
+```

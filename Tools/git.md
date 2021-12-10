@@ -1120,4 +1120,43 @@ ul
 blink
 reverse
 
+git config --global core.quotepath false          # 显示 status 编码
+git config --global gui.encoding utf-8            # 图形界面编码
+git config --global i18n.commit.encoding utf-8    # 提交信息编码
+git config --global i18n.logoutputencoding utf-8  # 输出 log 编码
+export LESSCHARSET=utf-8
+324  git diff | iconv -f gbk -t utf-8
+325  git diff
+326  git diff --color=auto
+327  git diff | iconv -f gbk -t utf-8
+328  git diff | iconv --color=auto -f gbk -t utf-8
+329  git diff | iconv -f gbk -t utf-8
+330  iconv --help
+
+## 删除多个分支
+1、强制删除所有本地分支
+git branch |xargs git branch -D
+2、删除本地所有与远程仓库同步分支(本地修改过未提交的分支不删除）
+git branch |xargs git branch -d
+3、删除本地带有-new字符的分支
+git branch| grep ‘-new’|xargs git branch -D
+3、删除本地的分支（不包含带有-new字符的本地分支）
+git branch| grep -v ‘-new’|xargs git branch -D
+4、删除本地存在，远程已经被删除的分支
+git remote prune origin
+5、查看远程库信息
+git remote show origin
+6、查看那些分支需要被清理
+git remote prune origin --dry-run
+7、推送本地当前分支到远程$branch分支并建立和origin $branch的对应关系
+git push -u origin $branch
+
+8、删除本地分支和远程分支的关联关系
+git branch --unset-upstream
+注释：跟踪分支origin/$branch和远程分支一一对应，和本地分支多寡无关
+
+
+
+
+
 

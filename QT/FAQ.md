@@ -223,9 +223,13 @@ ts文件翻译命令，需要安装。
 
 apt install -y qt5-linguist
 
+# 19、defaultServiceProvider::requestService(): no service found for - "org.qt-project.qt.camera"
+发现在
 
 
-[*彩虹屁*_百度百科](https://www.baidu.com/link?url=0f4ZrtxF5t_wxTRaGNmiq9zmZnJA-3i82JyYnhFj4aK2A_0Q2rR8SWf1w4ntnSHuvtkgEPIRMAcxky2qNxsdRLKRuhw_AitQRhV97AV7as_&wd=&eqid=9371048f0012d79e000000035dc1420b)
+
+
+
 
 “彩虹屁，网络流行语，饭圈常用语，最早流行起来的时间是在2017年。意思为粉丝们花式吹捧自己的偶像，浑身是宝，全是优点，字面意思为就连偶像放屁都能把它出口成章面不改色的吹成是彩虹。”
 
@@ -241,28 +245,14 @@ apt install -y qt5-linguist
 
 
 
-## 哈达是什么意思?
-
-哈达是什么意思?哈达就是藏族和部分蒙古族人表示敬意和祝贺用的长条丝巾或纱巾，族人认为白色象征纯洁、吉利,所以,哈达多为白色，也有黄、蓝等色，而在藏族人心中五彩哈达是最为尊贵的，只有在特殊场合才会使用。
-
- 扯哈达是什么意思?因为哈达多为丝织品，像围脖、围巾等丝织品是轮匹,撕开成条，有点像一条长长的卫生纸,所以叫扯哈达。 
-
- 在藏族人送哈达时，往往会对客人说扎西德勒，藏语扎西德勒是什么意思呢?扎西德勒在藏语中是吉祥如意IDE意思。德勒”(delek，bde legs)是好的意思，连起来可以翻译成“吉祥如意”。在藏族，如果对方对说“扎西德勒”，可译为“欢迎”或“吉祥如意”，必须回答的是“扎西德勒，shu(第四声)”，而并不是“扎西德勒”。 
-
- 当时的情况是：
-
-小姑娘林茜是一名大三的学生，眼下正在[长沙](https://www.baidu.com/s?wd=长沙&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)某公司实习。到[单位一](https://www.baidu.com/s?wd=单位一&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)周，每天去厕所都能看到个别蹲位的挂钩上垂着长长短短的卫生纸，“想接着用，又怕不干净了。只想求那些姑娘少扯点。”
-
-　　2014年8月28日，林茜借鉴网上的图片，在[洗手间](https://www.baidu.com/s?wd=洗手间&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)也贴出一张告示——是扯卫生纸，不是扯哈达。
-
-林茜说，“我们又不要在厕所跳‘巴扎嘿’，扯那么多干吗?希望大家从点滴做起，节约用纸。” 
 
 
 
 
 
 
-
+https://github.com/flaneur2020/pua-lang
+https://flaneur2020.github.io/pua-lang/?s=BQRgDABA1BBMCUEBUEDMkYFYg
 
 
 

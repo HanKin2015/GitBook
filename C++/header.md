@@ -1,5 +1,14 @@
 # 头文件
 
+## 0、结论
+建议使用#ifndef，移植性更好
+```
+#ifndef STUDY_HEADER_H
+#define STUDY_HEADER_H
+
+#endif /* STUDY_HEADER_H */
+```
+
 ## 1、#pragma once和#ifndef
 为了避免同一个头文件被包含（include）多次，C/C++中有两种宏实现方式：一种是#ifndef方式；另一种是#pragma once方式。
 在能够支持这两种方式的编译器上，二者并没有太大的区别。但两者仍然有一些细微的区别。
@@ -7,7 +16,7 @@
 方式一：
 
 #ifndef  __SOMEFILE_H__
-#define   __SOMEFILE_H__
+#define  __SOMEFILE_H__
 ... ... // 声明、定义语句
 #endif
 
