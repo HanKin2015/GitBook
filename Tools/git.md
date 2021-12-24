@@ -1155,7 +1155,24 @@ git push -u origin $branch
 git branch --unset-upstream
 注释：跟踪分支origin/$branch和远程分支一一对应，和本地分支多寡无关
 
+## 忽略文件名大小写
+默认情况下，如果我把文件名从小写全部更改为大写，git无法识别，但是界面上有红色标志，很别扭。
 
+使用git config core.ignorecase命令查看大小写敏感。
+git config core.ignorecase false
+git config core.ignorecase true
+
+推荐方法
+使用git切换到相应的文件目录修改文件名：
+git mv oldfile(旧文件名) newfile(新文件名)
+
+## 修改后git没有检测到
+git diff不行
+git status . -uno不行
+
+结果发现居然是该文件是新加的，需要git status看见。。。。。。纯属乌龙
+
+git status . | grep "\.c\|\.cpp\|\.h"
 
 
 

@@ -2,11 +2,11 @@
 
 ```
 #ifndef interface
-#define  interface struct
+#define interface struct
 #endif
 ```
 
-可以移植到java环境中，如安卓
+可以移植到java环境中，如安卓。
 
 c语言中没有interface关键字，因此没有接口类和抽象类abstract关键字。
 

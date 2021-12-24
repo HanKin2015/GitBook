@@ -1,6 +1,9 @@
 # 英语学习
 
 ```
+preferences：喜好、偏好
+wrap lines：换行
+blank space：空格
 endure：忍耐、持续
 realize：意识到、了解、实现、产生
 globe：地球、球状物

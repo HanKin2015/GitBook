@@ -15,4 +15,7 @@ tool -> Preference-> Editor->Adevanced setting->4 spaces
 虽然Python是一种代码功能取决于空白量的语言，但美化工具永远无法以统一的方式真正格式化代码。
 但Autoep8不能解决被违反的代码格式化约定(如Pylint所示)。
 
+## 显示空格和tab键
+Tools-->>preferences-->>editor-->>display-->>show blank spaces
+
 

@@ -1,7 +1,7 @@
 # 理清gcc、libc、libstdc++的关系
 
-https://blog.csdn.net/p656456564545/article/details/89184141
-
+## 1、网上介绍
+参考：https://blog.csdn.net/p656456564545/article/details/89184141
 
 从libc说起。
 libc是Linux下原来的标准C库，也就是当初写hello world时包含的头文件#include < stdio.h> 定义的地方。
@@ -15,13 +15,93 @@ libc是Linux下原来的标准C库，也就是当初写hello world时包含的�
 
 还有一个glib看起来也很相似，那它又是什么呢？glib也是个c程序库，不过比较轻量级，glib将C语言中的数据类型统一封装成自己的数据类型，提供了C语言常用的数据结构的定义以及处理函数，有趣的宏以及可移植的封装等(注：glib是可移植的，说明你可以在linux下，也可以在windows下使用它）。那它跟glibc有什么关系吗？其实并没有，除非你的程序代码会用到glib库中的数据结构或者函数，glib库在ubuntu系统中并不会默认安装(可以通过apt-get install libglib2.0-dev手动安装)，著名的GTK+和Gnome底层用的都是glib库。想更详细了解glib？
 
+## 2、实战
+低版本的libstdc++编译使用正常，高版本的libstdc++编译使用异常，其实代码本身就存在问题，只是低版本编译的在运行中未出现异常。
+低版本编译支持在高版本运行，高版本编译不支持在低版本运行
+```
+# strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBC
+GLIBCXX_3.4
+GLIBCXX_3.4.1
+GLIBCXX_3.4.2
+GLIBCXX_3.4.3
+GLIBCXX_3.4.4
+GLIBCXX_3.4.5
+GLIBCXX_3.4.6
+GLIBCXX_3.4.7
+GLIBCXX_3.4.8
+GLIBCXX_3.4.9
+GLIBCXX_3.4.10
+GLIBCXX_3.4.11
+GLIBCXX_3.4.12
+GLIBCXX_3.4.13
+GLIBCXX_3.4.14
+GLIBCXX_3.4.15
+GLIBCXX_3.4.16
+GLIBCXX_3.4.17
+GLIBC_2.2.5
+GLIBC_2.3
+GLIBC_2.3.2
+GLIBCXX_DEBUG_MESSAGE_LENGTH
 
+# ./low_glibc
+[info] [1d3a040]hejian|ex_:hello wolrd|data_:401bdd|len_:3039
+[info] [1d3a040]hejian|ex_:hello wolrd|data_:401bdd|len_:3039
+msg: {[1d3a040]hejian|ex_:hello wolrd|data_:401bdd|len_:3039}
 
+# ./high_glibc
+./high_glibc: /usr/lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by ./high_glibc)
+```
 
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBC
+GLIBCXX_3.4
+GLIBCXX_3.4.1
+GLIBCXX_3.4.2
+GLIBCXX_3.4.3
+GLIBCXX_3.4.4
+GLIBCXX_3.4.5
+GLIBCXX_3.4.6
+GLIBCXX_3.4.7
+GLIBCXX_3.4.8
+GLIBCXX_3.4.9
+GLIBCXX_3.4.10
+GLIBCXX_3.4.11
+GLIBCXX_3.4.12
+GLIBCXX_3.4.13
+GLIBCXX_3.4.14
+GLIBCXX_3.4.15
+GLIBCXX_3.4.16
+GLIBCXX_3.4.17
+GLIBCXX_3.4.18
+GLIBCXX_3.4.19
+GLIBCXX_3.4.20
+GLIBCXX_3.4.21
+GLIBC_2.3
+GLIBC_2.2.5
+GLIBC_2.14
+GLIBC_2.4
+GLIBC_2.18
+GLIBC_2.3.4
+GLIBC_2.17
+GLIBC_2.3.2
+GLIBCXX_DEBUG_MESSAGE_LENGTH
+[root@ubuntu0006:/media/hankin/vdb/study] #./low_glibc
+[info] [73bc50]hejian|ex_:hello wolrd|data_:401bdd|len_:3039
+[info] [73bc50]hejian|ex_:hello wolrd|data_:401bdd|len_:3039
+msg: {[73bc50]hejian|ex_:hello wolrd|data_:401bdd|len_:3039}
 
+[root@ubuntu0006:/media/hankin/vdb/study] #./high_glibc
+[info] [8a2c20]hejian|ex_:hello wolrd|data_:401dd9|len_:3039
+[info] [8a2c20]hejian|ex_:hello wolrd|data_:401dd9|len_:3039
+msg: ▒0▒
 
+```
 
+gdb调试
+打断点 b Object::Dump
+运行   r
+进入其他函数 s
 
-
+代码见：D:\Github\Storage\c++\force_conversion
 
 
