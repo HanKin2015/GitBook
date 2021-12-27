@@ -86,6 +86,9 @@ run code插件直接运行
 
 教程二：https://www.jianshu.com/p/17bcf79f1c85
 
+教程三：https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
+在右边Resources-》Downloads Extension即可。
+
 ## 7、输出窗口中文乱码
 由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 
@@ -118,18 +121,28 @@ https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#
 
 解决方式：打开设置 -> 搜索“Auto Guess Encoding” -> 勾选。User,Remote,Workspace 都勾选上该选项。
 
+## 10、使用vscode搭建你的远程linux开发环境
+### 远程linux服务器的版本要求
+kernel >= 3.10        uname -r
+glibc >= 2.17         strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBC
+libstdc++ >= 3.4.18   dpkg -l | grep libstdc++
 
+通过VS Code官方支持的SSH Remote插件，我们可以直接进行远程开发，不需要进行各种麻烦的代码同步。
 
+### 安装最最最最重要的一个插件：Remote-SSH
+插件搜索安装：Remote-SSH
+离线安装：
+C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
+拷贝到另外一个环境中即可。
 
+注意版本的一致性，只要相差不大就行，如果一个是user版本一个是system版本就可能有问题，会出现安装成功，但是无法使用问题。
 
-
-
-
-
-
-
-
-
+- 左侧导航栏电脑图标
+- 放在SSH TARGETS上面，点击齿轮设置
+- 选择C:\Users\Administrator\.ssh\config配置
+- 第一行显示名称、第二行服务器ip地址、第三行登录账户，可以填写多个服务器
+- 点击打开窗口会显示Setting up SSH Host my_linux_vm: ([details](command:opensshremotes.showDetails "Show details")) Initializing VS Code Server
+- 由于未连接外网，所以肯定是无法正常连接的。
 
 
 

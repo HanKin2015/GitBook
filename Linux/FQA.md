@@ -155,6 +155,7 @@ top命令显示up后表示系统到目前运行了多久时间。反过来推算
 w命令显示up后表示系统到目前运行了多久时间。反过来推算系统重启时间。
 cat /proc/uptime
 date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
+cat /proc/driver/rtc
 
 ## 16、浮点数计算
 ```
