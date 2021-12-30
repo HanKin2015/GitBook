@@ -1,10 +1,12 @@
 # vscode
 
-## 自我操作笔记
+## 自我操作笔记（个性化）
 outline：大纲，在视图窗口中，列举函数列表
 timeline：git上库日志
 解决程序无法输入：打开文件 -> 首选项 -> 设置，在上方的搜索框里输入run in terminal，勾选此项设置
-
+显示空格和tab键：
+打开setting,在搜索框中输入renderControlCharacters,选中勾选框,即可显示tab.
+在搜索框中输入renderWhitespace,选择all,即可显示空格.
 
 ## 1、sublime工具缺点
 编译运行c或c++需要单独搭建环境，比较麻烦，并且不支持程序输入，中文乱码，代码追踪不完善等问题。

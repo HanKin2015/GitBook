@@ -163,6 +163,16 @@ git branch -D [本地分支名]
 git branch -r -D [远程分支名]
 ```
 
+d和D的区别：
+git branch -d 会在删除前检查merge状态（其与上游分支或者与head）。
+git branch -D 是git branch --delete --force的简写，它会直接删除。
+
+-d就是删除，会检验分支内容是不是都被合并到别的分支了，这样免得把修改内容弄丢了。
+-D就是强制删除，不做检验。
+使用场景嘛，你想。
+-d 一般就用它。
+-D 嘛，比如分支已在远端处理过了，已在远端合并了，那我本地就没必要保留可以删除了。还有就是你临时创建的几个分支，测试完保留一个然后把其它的就不保留删除了。
+
 ## 4-2、合并分支
 
 1. git pull (git checkout -b newBname Bname)
@@ -400,39 +410,34 @@ $ git push -u origin master   （后续就是解决冲突）
 
 
 
-# 13、git clean 的用法（如何使用Git删除新增的文件？）
+# 13、git clean的用法（如何使用Git删除新增的文件？）
 
 git clean命令用来从你的工作目录中删除所有没有track过的文件
-git clean经常和git reset --hard一起使用. 记住reset只影响被track过的文件, 所以需要clean来删除没有track过的文件. 结合使用这两个命令能让你的工作目录完全回到一个指定的的状态
+git clean经常和git reset --hard一起使用. 记住reset只影响被track过的文件, 所以需要clean来删除没有track过的文件。结合使用这两个命令能让你的工作目录完全回到一个指定的的状态。
 
 ```
 git clean -n
 ```
-
 是一次clean的演习, 告诉你哪些文件会被删除. 记住它不会真正地删除文件, 只是一个提醒。
 
 ```
 git clean -f
 ```
-
 删除当前目录下所有没有track过的文件. 它不会删除 .gitignore 文件里指定的文件夹和文件, 不管这些文件有没有被track过
 
 ```
 git clean -f <path>
 ```
-
 删除指定路径下的没有被track过的文件
 
 ```
 git clean -df
 ```
-
 删除当前目录下没有被track过的文件和文件夹
 
 ```
 git clean -xf
 ```
-
 删除当前目录下所有没有track过的文件. 不管它是否是 .gitignore 文件里面指定的文件夹和文件
 
 `git reset --hard` 和 `git clean -f` 是一对好基友. 结合使用它们能让你的工作目录完全回退到最近一次commit的时候
@@ -443,10 +448,8 @@ git clean -xf
 
 ```
 git reset --hard
-
 git clean -df
 ```
-
 运行后, 工作目录和缓存区回到最近一次commit时候一摸一样的状态，git status会告诉你这是一个干净的工作目录, 又是一个新的开始了！
 
 ## 其他

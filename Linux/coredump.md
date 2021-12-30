@@ -187,7 +187,7 @@ MYPID=<PID>
 
 要查看关于核心转储的信息，请使用此命令（使用 $MYPID 变量或替换 PID 编号）：
 coredumpctl info $MYPID
-
+```
 例 1. 列出所有文件名为 foo 的可执行程序的内存转储：
 # coredumpctl list foo
 
@@ -199,8 +199,11 @@ coredumpctl info $MYPID
 
 例 4. 提取 /usr/bin/bar 的最近一次内存转储数据(内存镜像)，并将其保存在 bar.coredump 文件中：
 # coredumpctl -o bar.coredump dump /usr/bin/bar
+```
 
-
+##  12、强制Linux进程产生coredump
+Linux对信号SIGQUIT(3)，SIGABRT(6), SIGFPE(8)和SIGSEGV(11)的默认处理，都可以强制让进程产生coredump文件。
+如果进程代码对这些信号做了其它处理，就不会产生了。
 
 
 

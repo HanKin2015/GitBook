@@ -11,6 +11,9 @@ ssh_config和sshd_config都是ssh服务器的配置文件，二者区别在于�
 ## 2、ssh配置文件
 /etc/ssh/sshd_config
 
+UOS:(openssh-client)
+/etc/ssh/ssh_config
+
 ## 3、不同Linux系统网络重启
 ```
 if [ "${ID_LIKE}" == "debian" ]; then
