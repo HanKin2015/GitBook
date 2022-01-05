@@ -171,7 +171,15 @@ if (_access(file_path, 0)) {
 
 ```
 
+## 5、日常测试脚本（含参数）
+### shell
+详细全面见Shell-vim/template.md文件
 
+```
+#!/bin/bash
+
+
+```
 
 
 

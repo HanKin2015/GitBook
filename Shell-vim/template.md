@@ -59,9 +59,6 @@ usage()
 			$0 -f ip_addr.txt
 	EOF
 }
-
-
-
 ```
 
 

@@ -79,7 +79,7 @@ gateway 192.168.1.1
 dhclient
 
 ## 6、无法ping通网关
-arping 1.2.255.254 正常
+arping 1.2.255.254 正常（后面是网关地址）
 ifconfig查看网络ip正常
 
 ### 6-1、ip冲突

@@ -72,6 +72,27 @@ https://www.cnblogs.com/icebutterfly/p/7834453.html
 各种卸载重装都不行，现在想想还是跟无法删除3的文件夹有关，重启电脑后解决。
 
 ## 7、win10拍照快捷键
+shift+win+s
+
+## 8、cd命令
+```
+C:\迅雷下载\tcpdump_windows>help cd
+显示当前目录名或改变当前目录。
+
+CHDIR [/D] [drive:][path]
+CHDIR [..]
+CD [/D] [drive:][path]
+CD [..]
+```
+
+## 9、DOS窗口中文显示乱码
+起因是wireshark中的dumpcap.exe -D命令执行显示中文乱码
+
+通过修改注册表·计算机\HKEY_CURRENT_USER\Console\%SystemRoot%_system32_cmd.exe\CodePage·值为936（十进制）
+
+
+
+
 
 
 
