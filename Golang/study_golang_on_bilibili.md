@@ -1,5 +1,8 @@
 # b站学习golang
 
+学习视频网址：https://www.bilibili.com/video/BV16E411H7og?spm_id_from=333.999.0.0
+作者博客：https://www.liwenzhou.com/
+
 ## 1、vscode搭建环境
 
 ### 1-1、安装go
@@ -60,8 +63,6 @@ vscode界面：ctrl+shift+p
 将作者更改为公司内部组织架构名
 
 ## 3、写hello world
-作者博客：https://www.liwenzhou.com/
-
 ```
 package main
 
@@ -74,10 +75,16 @@ func main() {
 }
 ```
 
-编译：右键项目名-》
+编译：右键项目名-》在集成终端打开-》go build-》xxx.exe
 
 直接在项目下执行go build即可。
 或者在cmd窗口执行go build github.com\HanKin2015\studygo\day01\helloworld(src目录后面的路径即可，生成在当前目录之下)
+
+-o参数指定二进制文件名
+
+go run main.go像脚本一样执行go
+
+go install会将生成的二进制文件拷贝到GOPATH/bin目录下
 
 ### 3-1、解决 Visual Studio Code terminal终端打开时为弹出式窗口问题
 打开系统CMD，右键点击属性，取消使用旧版控制台的勾选，重启CMD，问题解决。
@@ -85,7 +92,10 @@ func main() {
 ### 3-2、VSCode不要折叠/展开空白文件夹的方法
 左下角 齿轮 → 设置，输入 compactFolders ，勾选表示折叠空白文件夹，取消勾选表示不折叠。
 
+## 4、跨平台编译（交叉编译）
 
+## 5、变量声明
+https://www.bilibili.com/video/BV16E411H7og?p=8&spm_id_from=pageDriver
 
 
 
