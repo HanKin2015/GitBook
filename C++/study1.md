@@ -96,10 +96,6 @@ sizeof(pthread_t) =8
 pthread_t，在使用printf打印时，应转换为u类型。
 
 
-
-Beyond Compare
-Beyond Compare是一套由Scooter Software推出的文件比较工具。主要用途是对比两个文件夹或者文件，并将差异以颜色标示。比较范围包括目录，文档内容等。
-
 [Windows] win10任务栏透明以及实时显示网速，CPU和内存占有率
 第一款Aero（大小：26.5 KB (27,136 字节)）
 单文件，不用安装没有花里胡哨的操作，双击就可以直接让任务栏透明

@@ -194,7 +194,20 @@ marshall，英语单词，主要用作名词、及物动词、不及物动词，
 
 
 
+月份 英文简写 英文全称
 
+一月 Jan. January
+二月 Feb. February
+三月 Mar. March
+四月 Apr. April
+五月 May. May
+六月 Jun. June
+七月 Jul. July
+八月 Aug. August
+九月 Sept. September
+十月 Oct. October
+十一月 Nov. November
+十二月 Dec. December
 
 
 

@@ -60,11 +60,5 @@ C/C++        |codeblocks
 md5校验     | md5sum
 md文件编辑|typro
 
-## 3、Beyond Compare软件
-作为一个程序猿，一个称心的比较软件还是有必要的。
 
-不免费。
-
-永久使用Beyond compare4 的方法：
-打开我的电脑，在这个路径 C:\Users\Administrator\AppData\Roaming\Scooter Software  下找到Beyond Compare 4 文件夹 ，删掉。
 
