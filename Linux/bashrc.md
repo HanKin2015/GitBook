@@ -1,5 +1,12 @@
 # linux终端terminal个性化配置
 
+## 0、多个配置文件路径
+~/.profile
+~/.bashrc
+~/.viminfo
+
+
+
 linux打开终端快捷键：
 ctrl + alt + t  新窗口中打开
 ctrl + shift +t 新标签页中打开
@@ -231,6 +238,43 @@ https://zhuanlan.zhihu.com/p/78254770
 Kconfig
 构建内核的第一步始终是配置。Kconfig 有助于使 Linux 内核高度模块化和可定制。
 
+## 9、不错的ssh配置
+```
+# /.profile : env for login
 
+. /.PATH
+PS1="\[\033[01;31m\]Sangfor:aSV/\h \[\033[01;32m\]\w \[\033[01;31m\]# \[\033[00m\]"
+alias ls="ls -F --color=auto"
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -A"
+alias lsd="ls -d */"
+alias lh="ls -lAh"
+alias s="cd .."
+alias p="cd -"
+alias md="mkdir"
+alias rd="rmdir"
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias x="exit"
+alias h="history"
+alias du="du -h"
+alias df="df -h"
+which () { type -p "$@" ;}
+USER=`whoami`
+HOSTNAME=`hostname`
+HISTSIZE=1
+#HISTFILESIZE=1000
+#HISTFILE="/$LROOT/log/today/.$(date +%y%m%d.%H%M%S)-$(who am i | sed 's/ .* //g').hist"
+#date >> "${HISTFILE}"
+INPUTRC=/etc/inputrc
+export PATH PS1 USER HOSTNAME HISTSIZE HOME INPUTRC
+cd $LROOT
+#cat /etc/issue
+# 给SSH 用，客户端连接服务端，等保要求空闲10min就超时
+# 允许通过外部指定TMOUT超时值
+test -n "${TMOUT}" || export TMOUT=600
+```
 
 

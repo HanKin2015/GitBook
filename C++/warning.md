@@ -371,6 +371,23 @@ itoa是广泛使用的非标准C语言和C++语言扩展功能。但因为它是
 ## 32、C++ 遇到error: invalid use of incomplete type 'class '
 缺失头文件，在文件开头添加#include <>就正常了。所以遇到这类问题首先检查是否头文件缺失。
 
+## 33、sorry, unimplemented: non-trivial designated initializers not supported
+这是因为C和C++结构体初始化不同造成的。
+
+无法通过extern "C"来解决。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

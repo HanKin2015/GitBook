@@ -425,6 +425,47 @@ set x = y + 4
 cont
 end
 
+## 12、高级用法调试
+可以对函数进行下断点
+b tc_new
+b tc_delete
+
+对文件行数下断点
+b test.c:45
+
+踩内存会在gdb挂载时最上面显示出对应的地址
+如0x23781673
+直接print是打印不出具体的值，需要转换成对应的数据类型才行，如
+p *(my_class *)0x23781673
+
+下断点后执行程序
+r
+
+删除断点
+d 2
+
+查看断点
+i break
+
+s命令很重要，可以进入断点
+
+反汇编
+disassemble
+
+在gdb里，用handle SIGPIPE nostop去掉SIGPIPE信号。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

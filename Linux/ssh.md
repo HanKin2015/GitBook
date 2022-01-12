@@ -142,9 +142,136 @@ scp -P 34543 root@1.2.3.4:/home/admin/xx ./
 2、ssh指定端口登录：
 ssh -p 34543 root@1.2.3.4
 
+## 10、无法使用scp命令发送文件
+```
+[root@chroot <vtcompile> ]#ssh-keygen -t rsa
+PRNG is not seeded
+[root@chroot <vtcompile> ]#ps aux | grep sshd
+Error, do this: mount -t proc proc /proc
+[root@chroot <vtcompile> ]#ps aux
+Error, do this: mount -t proc proc /proc
+[root@chroot <vtcompile> ]#top
+Error, do this: mount -t proc proc /proc
+[root@chroot <vtcompile> ]#ls /proc/
+[root@chroot <vtcompile> ]#mount -t proc proc /proc
+[root@chroot <vtcompile> ]#ls /proc/
+1    12     13011  1624  20     23896  24729  24858  25184  28026  36   404  421   667  78    8     buddyinfo  crypto       fb           irq        kpagecount  modules       sched_debug  sys            uptime
+10   12837  141    17    20523  23898  24731  24873  25185  29     37   411  5     669  7880  80    bus        devices      filesystems  kallsyms   kpageflags  mounts        self         sysrq-trigger  version
+[root@chroot <vtcompile> ]#scp a.out root@1.2.3.4:/usr/bin/
+PRNG is not seeded
+lost connection
+[root@chroot <vtcompile> ]#ps aux | grep sshd
+root       416  0.0  0.1  55164  4688 ?        Ss    2021 105:11 /usr/sbin/sshd -D
+sshd       683  0.0  0.0  53236  1964 ?        Ss    2021   0:02 /usr/sbin/exim4 -bd -q30m
+root      7880  0.0  0.1  80628  6628 ?        Ss   Jan11   0:00 sshd: vtcompile@pts/2
+root      7882  0.0  0.1  80628  5796 ?        Ss   Jan11   0:00 sshd: vtcompile@notty
+root     12837  0.0  0.1  80632  6156 ?        Ss   Jan10   0:01 sshd: vtcompile@pts/1
+root     12842  0.0  0.1  80628  5796 ?        Ss   Jan10   0:00 sshd: vtcompile@notty
+root     23894  0.0  0.1  80628  6644 ?        Ss   Jan11   0:00 sshd: vtcompile@pts/0
+root     23896  0.0  0.1  80628  5916 ?        Ss   Jan11   0:00 sshd: vtcompile@notty
+root     24727  0.0  0.1  80628  6172 ?        Ss   03:16   0:00 sshd: vtcompile@pts/5
+root     24729  0.0  0.1  80628  5928 ?        Ss   03:16   0:00 sshd: vtcompile@notty
+root     24854  0.0  0.1  80640  6336 ?        Ss   Jan11   0:00 sshd: vtcompile@pts/3
+root     24856  0.0  0.1  80628  5772 ?        Ss   Jan11   0:00 sshd: vtcompile@notty
+root     25216  1.0  0.1  79280  5688 ?        Ss   03:23   0:00 sshd: root [priv]
+saned    25217  0.0  0.0  56508  3104 ?        S    03:23   0:00 sshd: root [net]
+root     25219  0.0  0.0   7840   516 ?        R+   03:23   0:00 grep sshd
+root     27980  0.0  0.1  80628  6620 ?        Ss   Jan11   0:00 sshd: vtcompile@pts/4
+root     27982  0.0  0.1  80628  5964 ?        Ss   Jan11   0:00 sshd: vtcompile@notty
+[root@chroot <vtcompile> ]#ssh-keygen -t rsa
+PRNG is not seeded 
+[root@chroot <vtcompile> ]#ls /dev/
+null
+```
+发现dev文件夹是空的，chroot环境。
 
+```
+[root@chroot <vtcompile> / ]#mount
+proc on /proc type proc (rw,relatime)
+[root@chroot <vtcompile> / ]#fdisk -l
+[root@chroot <vtcompile> / ]#df
+df: `/dev/pts': No such file or directory
+df: `/sys/kernel/security': No such file or directory
+df: `/dev/shm': No such file or directory
+df: `/sys/fs/cgroup': No such file or directory
+df: `/sys/fs/cgroup/systemd': No such file or directory
+df: `/sys/fs/pstore': No such file or directory
+df: `/sys/fs/cgroup/cpuset': No such file or directory
+df: `/sys/fs/cgroup/cpu,cpuacct': No such file or directory
+df: `/sys/fs/cgroup/devices': No such file or directory
+df: `/sys/fs/cgroup/freezer': No such file or directory
+df: `/sys/fs/cgroup/net_cls,net_prio': No such file or directory
+df: `/sys/fs/cgroup/blkio': No such file or directory
+df: `/sys/fs/cgroup/perf_event': No such file or directory
+df: `/dev/mqueue': No such file or directory
+df: `/sys/kernel/debug': No such file or directory
+df: `/dev/hugepages': No such file or directory
+df: `/home/envbaseroot/envbase_vt/run/lock': No such file or directory
+df: `/home/envbaseroot/envbase_vt/run/shm': No such file or directory
+df: `/home/envbaseroot/envbase_vt/dev': No such file or directory
+df: `/home/envbaseroot/envbase_vt/dev/pts': No such file or directory
+df: `/run/rpc_pipefs': No such file or directory
+df: `/home/envbaseroot/envbase_vt/home': No such file or directory
+df: `/home/envbaseroot/envbase_vt/part1': No such file or directory
+df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1': No such file or directory
+df: `/home/envbaseroot/envbase_vt/part1/VMP5.5.1/dev': No such file or directory
+df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1/VMP5.5.1/dev': No such file or directory
+df: `/home/envbaseroot/envbase_vt/part1/VMP5.4.14/dev': No such file or directory
+df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1/VMP5.4.14/dev': No such file or directory
+df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1/VMP5.4.14/dev': No such file or directory
+Filesystem     1K-blocks      Used Available Use% Mounted on
+rootfs         515930552 408669560  81030208  84% /
+sysfs          515930552 408669560  81030208  84% /sys
+udev           515930552 408669560  81030208  84% /dev
+tmpfs          515930552 408669560  81030208  84% /run
+/dev/vda1      515930552 408669560  81030208  84% /
+tmpfs          515930552 408669560  81030208  84% /run/lock
+[root@chroot <vtcompile> / ]#mount -t dev dev /dev
+mount: unknown filesystem type 'dev'
+[root@chroot <vtcompile> / ]#
+```
+无奈，百度也没有找到合适的方法，然后我从其他环境的dev目录拷贝到当前环境，然后就成功可用了。
 
+```
+[root@chroot <vtcompile> / ]#fdisk -l
 
+Disk /dev/vda: 214.7 GB, 214748364800 bytes
+255 heads, 63 sectors/track, 26108 cylinders, total 419430400 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x99b00d77
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vda1   *        2048   402372607   201185280   83  Linux
+/dev/vda2       402374654   419428351     8526849    5  Extended
+/dev/vda5       402374656   419428351     8526848   82  Linux swap / Solaris
+
+Disk /dev/vdb: 536.9 GB, 536870912000 bytes
+16 heads, 63 sectors/track, 1040253 cylinders, total 1048576000 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/vdb doesn't contain a valid partition table
+[root@chroot <vtcompile> / ]#df
+Filesystem     1K-blocks      Used Available Use% Mounted on
+rootfs         515930552 408669664  81030104  84% /
+sysfs          515930552 408669664  81030104  84% /sys
+udev           515930552 408669664  81030104  84% /dev
+devpts         515930552 408669664  81030104  84% /dev/pts
+tmpfs          515930552 408669664  81030104  84% /run
+/dev/vda1      515930552 408669664  81030104  84% /
+tmpfs          515930552 408669664  81030104  84% /dev/shm
+tmpfs          515930552 408669664  81030104  84% /run/lock
+mqueue         515930552 408669664  81030104  84% /dev/mqueue
+hugetlbfs      515930552 408669664  81030104  84% /dev/hugepages
+[root@chroot <vtcompile> / ]#ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): ^C
+[root@chroot <vtcompile> / ]#
+```
 
 
 

@@ -26,3 +26,18 @@ https://zhuanlan.zhihu.com/p/51432385
 查看gperftools的issue，发现有很多人core在相同的地方，谷歌官方回复说这种错误的根因是因为程序的内存管理出了问题，比如访问已经被free的地址，double free等等。
 顺着这个思路，一开始先入为主的认为是多线程竞态问题，改了好多代码，也用valgrind等方式查看内存错误。但是问题一直得不到解决。
 最后把之前的改动bisect，找了好久，终于找到是某个字符串被double free了。
+
+## 3、gperftools检查内存泄露/越界等问题的简易说明
+https://www.shangmayuan.com/a/5e114526e02a4e7e9ee215e3.html
+
+
+大名鼎鼎的Google的内存检查工具
+
+在实际工程的Makefile中添加LIB库依赖.
+通常来讲 -ltcmalloc就能够了
+若是须要使用Profiler的功能，那么用 -ltcmalloc_and_profiler
+若是须要检查数组越界等，那么须要用 -ltcmalloc_debug（会大大下降处理速度）
+
+
+
+
