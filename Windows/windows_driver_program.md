@@ -221,10 +221,49 @@ REGEDIT4
 
 重启之后可以从debugview里面看到log。
 
+另一个方法：
+https://blog.csdn.net/qinmi/article/details/1656536
+```
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\hello]
+
+#"ImagePath"="system32\\drivers\\StudyKMDF.sys"
+"ImagePath"=hex(2):73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,64,00,72,00,\
+  69,00,76,00,65,00,72,00,73,00,5c,00,53,00,74,00,75,00,64,00,79,00,4b,00,4d,\
+  00,44,00,46,00,2e,00,73,00,79,00,73,00,00,00
+
+"DisplayName"="hejian"
+
+"ErrorControl"=dword:00000001
+
+#
+# When to start the driver:
+# At boot: Start=1
+# Manually: Start=3
+#
+"Start"=dword:00000003
+
+"Type"=dword:00000001
+
+```
+将驱动拷贝到system32\\drivers\\目录下，重启电脑。可能出现无法捕捉KdPrint函数，使用另一个注册脚本。
+https://bbs.pediy.com/thread-246454.htm
+```
+Windows Registry Editor Version 5.00
+ 
+[HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/Session Manager/Debug Print Filter] 
+DEFAULT=dword:ffffffff
+
+```
+这是就需要一个工具来观察驱动运行的结果，工具叫：Dbgview.exe
+首先打开Dbgview.exe，然后运行cmd进入命令行，运行 net start hello，这时在Dbgview.exe中可以看到helloWorld。(注意管理员运行)
+
 ### 4-7、点击Capture中的Log Boot出现could not install debugview driver
 https://blog.csdn.net/qq_40353000/article/details/106434758
 
 C:\Windows\System32\drivers\dbgv.sys
+重命名即可。
 
 ## 5、WDF驱动开发（1）- 一个简单的WDF驱动(non-pnp)
 https://blog.csdn.net/zj510/article/details/16983863

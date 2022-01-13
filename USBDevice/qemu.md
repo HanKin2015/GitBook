@@ -1,9 +1,16 @@
 # qemu
 
-http://wiki.qemu.org/Main_Page
+## 1、官网
+官网：http://wiki.qemu.org/Main_Page
+官网：https://www.qemu.org/contribute/
+代码仓库：https://gitlab.com/qemu-project/qemu
 
+15.7 MB Files 805.9 GB Storage
+不能被这些数字迷惑，实际下载大小约为211.87 MiB（20210526）
+ git clone https://gitlab.com/qemu-project/qemu.git
+
+## 2、简介
 VMWare Workstation 就是这样一个可以完美满足我要求的桌面用户最满意的虚拟机。我经常使用它来折腾各个 Linux 发行版，而且运行流畅。当然，在 Linux 这个开源的世界我们是不该去使用破解版这样的东西的。不过不用担心，在 Linux 江湖中，还有 VirtualBox、QEMU 这样的虚拟机软件可用。
-
 
 QEMU 本身是一个非常强大的虚拟机，甚至在 Xen、KVM 这些虚拟机产品中都少不了 QEMU 的身影。在 QEMU 的官方文档中也提到，QEMU 可以利用 Xen、KVM 等技术来加速。为什么需要加速呢，那是因为如果单纯使用 QEMU 的时候，它自己模拟出了一个完整的个人电脑，它里面的 CPU 啊什么的都是模拟出来的，它甚至可以模拟不同架构的 CPU，比如说在使用 Intel X86 的 CPU 的电脑中模拟出一个 ARM 的电脑或 MIPS 的电脑，这样模拟出的 CPU 的运行速度肯定赶不上物理 CPU。使用加速以后呢，可以把客户操作系统的 CPU 指令直接转发到物理 CPU，自然运行效率大增。
 
@@ -56,15 +63,171 @@ Xen 具有非常高的难度，别说玩转，就算仅仅只是理解它，都�
 
 　　2.企业及客户可以考虑 Xen，因为它可以提供较好的性能和隔离性，企业级用户不需要桌面用户那么多的功能，所以可以把 Domain 0 做到很薄，可以完全不要图形界面，也不用经常升级内核，甚至可以选择一个经过修改优化的内核，这样就可以在一套硬件上运行尽可能多的虚拟机。
 
+## 3、在qemu中模拟设备
+https://zhuanlan.zhihu.com/p/57526565
+
+MemoryRegion
+
+存储区域
+
+硬件模拟无外乎两个东西，一个是中断，一个是IO访问。
+
+中断很简单，知道中断号，用qemu_set_irq()或者qemu_irq_pluse()往里种就可以了。
+
+MemoryRegion：这表示一组面向Guest的，具有相同属性的内存区。后面简称MR。系统有全局的总MR，你直接用get_system_memory()就可以拿到了。所以你实际上任何时候都可以访问全局任何内存。
+
+MemoryRegionCache：这表示一片为了满足Guest需要的一片临时的“真内存”。换句话说，MemoryRegion是描述一片内存区，MemoryRegionCache是真的要用的内存，Hypervisor根据需要动态申请，后面简称MRC。如果你不是要深入定制，一般你不管这个东西没有任何问题。
+
+AddressSpace：这表示一个地址空间，一个地址空间可以包含多个不同属性的MR。后面简称AS。AS是和MR直接对应的，所以你可以直接用address_space_memory拿到对应get_system_memory()的AS。
+
+FlatView：这表示看到的地址空间。这就比较绕了。这么说：AS是立体的，里面的MR是相互独立的，他们可以交叠，转义，动态开关等。但当你去访问的时候，某个时刻，某个物理地址总是对应着某个MR中的地址，FlatView用来表示层叠的结果。后面这个简称FV。FV大部分时候写设备模拟的时候都不用管，它是用于深入处理Host这边访问内存的时候用的，比如通过address_space_to_flatview(as)把as换成fv，然后用flatview_read/write()进行本地内存访问。
 
 
-# 官网
-官网：https://www.qemu.org/contribute/
-代码仓库：https://gitlab.com/qemu-project/qemu
+memory_region_init_io(&iomr, owner, ops, priv, name, size);
 
-15.7 MB Files 805.9 GB Storage
-不能被这些数字迷惑，实际下载大小约为211.87 MiB（20210526）
- git clone https://gitlab.com/qemu-project/qemu.git
+## 4、理解qemu中的xhci实现
+qemu/hw/usb/hcd-xhci.c
+->static void usb_xhci_realize(struct PCIDevice *dev, Error **errp)
+
+api文档：https://qemu.readthedocs.io/en/latest/devel/memory.html
+
+```
+void memory_region_init_io(MemoryRegion *mr, Object *owner, const MemoryRegionOps *ops, void *opaque, const char *name, uint64_t size)
+
+Initialize an I/O memory region.
+
+Description
+
+Accesses into the region will cause the callbacks in ops to be called. if size is nonzero, subregions will be clipped to size.
+
+void memory_region_init_io(MemoryRegion *mr,
+                           Object *owner,
+                           const MemoryRegionOps *ops,
+                           void *opaque,
+                           const char *name,
+                           uint64_t size)
+{
+    memory_region_init(mr, owner, name, size);
+    mr->ops = ops ? ops : &unassigned_mem_ops;
+    mr->opaque = opaque;
+    mr->terminates = true;
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+void memory_region_add_subregion(MemoryRegion *mr, hwaddr offset, MemoryRegion *subregion)
+
+Add a subregion to a container.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+void memory_region_init(MemoryRegion *mr, Object *owner, const char *name, uint64_t size)
+
+Initialize a memory region
+```
+
+qemu中：
+```
+#define MAXSLOTS 64
+#define LEN_DOORBELL    ((MAXSLOTS + 1) * 0x20)
+
+static const MemoryRegionOps xhci_doorbell_ops = {
+    .read = xhci_doorbell_read,
+    .write = xhci_doorbell_write,
+    .valid.min_access_size = 4,
+    .valid.max_access_size = 4,
+    .endianness = DEVICE_LITTLE_ENDIAN,
+};
+
+memory_region_init_io(&xhci->mem_doorbell, OBJECT(xhci), &xhci_doorbell_ops, xhci,
+                          "doorbell", LEN_DOORBELL);
+
+可以看出LEN_DOORBELL不为0
+
+#define OFF_DOORBELL    0x2000
+memory_region_add_subregion(&xhci->mem, OFF_DOORBELL, &xhci->mem_doorbell);
+```
+
+后面就太多了，发现这样也并没有什么意义。
+```
+memory_region_dispatch_write
+
+memory_region_write_accessor
+
+mr->ops->write(mr->opaque, addr, tmp, size);
+
+[root@chroot <vtcompile> ~/buildenv/Trunk/source/app/qemu/qemu-2.5.1 ]#grep -R memory_region_dispatch_write
+exec.c:                    result |= memory_region_dispatch_write(mr, addr1, val, 8,
+exec.c:                    result |= memory_region_dispatch_write(mr, addr1, val, 4,
+exec.c:                    result |= memory_region_dispatch_write(mr, addr1, val, 2,
+exec.c:                    result |= memory_region_dispatch_write(mr, addr1, val, 1,
+exec.c:        r = memory_region_dispatch_write(mr, addr1, val, 4, attrs);
+exec.c:        r = memory_region_dispatch_write(mr, addr1, val, 4, attrs);
+exec.c:        r = memory_region_dispatch_write(mr, addr1, val, 2, attrs);
+memory.c:MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+hw/s390x/s390-pci-inst.c:        memory_region_dispatch_write(mr, offset, data, len,
+hw/s390x/s390-pci-inst.c:        memory_region_dispatch_write(mr, env->regs[r3] + i * 8,
+hw/vfio/pci-quirks.c.bak:                memory_region_dispatch_write(&vdev->pdev.msix_table_mmio,
+hw/vfio/pci-quirks.c:                memory_region_dispatch_write(&vdev->pdev.msix_table_mmio,
+Binary file x86_64-softmmu/qemu-system-x86_64 matches
+Binary file x86_64-softmmu/memory.o matches
+Binary file x86_64-softmmu/hw/vfio/pci-quirks.o matches
+Binary file x86_64-softmmu/exec.o matches
+Binary file x86_64-softmmu/cputlb.o matches
+Binary file root@10.70.22.175 matches
+include/exec/memory.h: * memory_region_dispatch_write: perform a write directly to the specified
+include/exec/memory.h:MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+softmmu_template.h:    memory_region_dispatch_write(mr, physaddr, val, 1 << SHIFT,
+```
+
+## 5、追踪CR_STOP_ENDPOINT命令
+gdb调试打印全部堆栈：
+```
+pidof kvm
+gdb qemu-system-x86_64 -p 1234
+b memory_region_dispatch_write(不推荐太多)
+b xhci_process_commands
+handle SIGPIPE nostop(必须要有这个，不然c后就断了)
+c
+
+(gdb) bt
+#0  xhci_process_commands (xhci=0x5600a5a6e000) at hw/usb/hcd-xhci.c:2690
+#1  0x000056009ea71881 in memory_region_write_accessor (mr=<optimized out>, addr=<optimized out>, value=<optimized out>, size=<optimized out>, shift=<optimized out>,
+    mask=<optimized out>, attrs=...) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:451
+#2  0x000056009ea719cb in access_with_adjusted_size (addr=addr@entry=0, value=value@entry=0x7f656bbea958, size=size@entry=4, access_size_min=<optimized out>,
+    access_size_max=<optimized out>, access=access@entry=0x56009ea71850 <memory_region_write_accessor>, mr=mr@entry=0x5600a5a6ed50, attrs=attrs@entry=...)
+    at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:507
+#3  0x000056009ea73400 in memory_region_dispatch_write (mr=mr@entry=0x5600a5a6ed50, addr=0, data=0, size=size@entry=4, attrs=attrs@entry=...)
+    at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:1159
+#4  0x000056009ea2cb5e in address_space_rw (as=0x56009f421c80, addr=4227948544, attrs=..., buf=buf@entry=0x7f6580d6e028 "", len=4, is_write=true)
+    at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/exec.c:2551
+#5  0x000056009ea704b8 in kvm_cpu_exec (cpu=cpu@entry=0x5600a3a48000) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/kvm-all.c:3123
+#6  0x000056009ea57344 in qemu_kvm_cpu_thread_fn (arg=0x5600a3a48000) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/cpus.c:1066
+#7  0x00007f657a2d6b50 in start_thread () from /lib/x86_64-linux-gnu/libpthread.so.0
+#8  0x00007f657a020a7d in clone () from /lib/x86_64-linux-gnu/libc.so.6
+#9  0x0000000000000000 in ?? ()
+```
+
+## 6、根据google查找原因
+google：xhci: FIXME: endpoint stopped w/ xfers running, data might be lost
+
+https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=980833
+
+passthrough：透传;通过;直通;穿过;经过
+stick：枝条;枯枝;柴火棍儿;球棍;条状物;棍状物
+
+他使用了一个金士顿2.0的U盘（0951:1642 Kingston Technology DT101 G2）挂载到xhci主控，然后将U盘分区格式化成ext4文件系统。
+```
+fdisk -l
+mkfs.ext4 /dev/sd
+
+
+
+
+
+
+
+
 
 
 
