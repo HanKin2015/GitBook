@@ -265,24 +265,247 @@ https://blog.csdn.net/qq_40353000/article/details/106434758
 C:\Windows\System32\drivers\dbgv.sys
 重命名即可。
 
-## 5、WDF驱动开发（1）- 一个简单的WDF驱动(non-pnp)
+## 6、用于调试 WDF 驱动程序的注册表值
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/wdf/registry-values-for-debugging-kmdf-drivers
+
+## 7、Windows调试工具
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/debugger/
+
+## 8、官方教程
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/wdf/using-the-framework-to-develop-a-driver
+
+Windows 驱动程序框架 (WDF) 驱动程序由基于框架的驱动程序所使用的Windows 驱动程序框架对象定义的DriverEntry 例程和一组事件回调函数组成。 回调函数调用框架导出的对象方法。 Windows 驱动程序工具包 (WDK) 包含演示如何实现驱动程序的事件回调函数的示例 WDF 驱动程序。 可以从Windows 开发人员中心硬件下载这些示例。
+
+硬件。。。。。
+
+创建 WDF 驱动程序时，通常会执行以下操作：
+
+使用 框架驱动程序对象 来表示您的驱动程序。
+
+驱动程序的 DriverEntry 例程 必须调用 WdfDriverCreate 以创建表示该驱动程序的框架驱动程序对象。 WdfDriverCreate方法还会注册驱动程序的EvtDriverDeviceAdd回调函数即插即用，该函数 (PnP) 管理器报告驱动程序支持的设备是否存在。
+
+使用 框架设备对象 支持驱动程序中的 PnP 和电源管理。
+
+所有驱动程序都必须调用 WdfDeviceCreate ，以便为驱动程序支持的每个设备创建框架设备对象。 设备可以是插入到计算机中的一片硬件，也可以是仅限软件的设备。 框架设备对象支持 PnP 和电源管理操作，驱动程序可以注册事件回调函数，以便在设备进入或离开其工作状态时通知驱动程序。
+
+有关框架设备对象的详细信息，请参阅 在您的驱动程序中支持 PnP 和电源管理。
+
+使用 框架队列对象 和 框架请求对象 来支持驱动程序中的 i/o 操作。
+
+从应用程序或其他驱动程序接收读取、写入或设备 i/o 控制请求的所有驱动程序都必须调用 WdfIoQueueCreate ，以创建表示 i/o 队列的框架队列对象。 通常，驱动程序会为每个 i/o 队列注册一个或多个 请求处理程序 。 当 i/o 管理器向驱动程序发送 i/o 请求时，框架将为请求创建一个框架请求对象，将该请求对象放置在 i/o 队列中，并调用驱动程序的一个请求处理程序来通知驱动程序请求可用。 该驱动程序将获取 i/o 请求，并可以重新排队、完成、取消或转发该请求。
+
+有关使用框架的队列对象和请求对象的详细信息，请参阅 框架队列对象 和 框架请求对象。
+
+使用 框架中断对象 来处理设备中断。
+
+处理设备中断的驱动程序必须调用 WdfInterruptCreate ，以便为每个中断创建框架中断对象并注册回调函数。 这些回调函数启用和禁用中断，并充当中断服务例程 (ISR) ，并为中断 (DPC) 延迟过程调用。
+
+有关框架中断对象的详细信息，请参阅 处理硬件中断。
+
+### WDF 体系结构
+基于框架的驱动程序永远不会直接访问框架对象。 相反，驱动程序接收对象句柄，该对象句柄可以传递给对象的方法。
+
+框架定义了多个基于框架的驱动程序使用的对象类型：
+
+框架 驱动程序对象表示 每个驱动程序。
+
+框架 设备对象 表示驱动程序支持的每个设备。
+
+框架队列 对象表示接收设备的 I/O 请求的 I/O 队列。
+
+框架请求 对象表示每个 I/O 队列接收的 I/O 请求。
+
+### 编写简单的 WDF 驱动程序
+在创建新的 KMDF 或 UMDF 驱动程序时，必须选择一个不多于 32 个字符的驱动程序名称。
+
+WDF 驱动程序例程的 DriverEntry
+
+entry：进入(指权利等);进入(指行动);参与，加入(指权利、机会);参赛作品;参赛;参赛人数;（词典等的）条目;登记;大门
+
+DriverEntry 是加载驱动程序后调用的第一个驱动程序提供的例程。 它负责初始化驱动程序。
+
+
+有示例：
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/wdf/driverentry-for-kmdf-drivers
+
+
+### 例程
+例程的作用类似于函数，但含义更为丰富一些。例程是某个系统对外提供的功能接口或服务的集合。比如操作系统的API、服务等就是例程；Delphi或C++Builder提供的标准函数和库函数等也是例程。我们编写一个DLL的时候，里面的输出函数就是这个DLL的例程。
+
+可以这么简单地来理解：把一段相对独立的代码写成单独的一个模块就是函数的概念。我们可以在自己的程序中编写很多个函数，从而实现模块化编程。但这些模块或者说函数并不一定向外输出（即提供给别的程序使用），只用于当前这个程序里面。此时这些函数就仅仅具有独立函数的意义，但不是例程。
+
+但如果我们把这些函数编写为DLL动态库的输出函数的话，此时虽然对于编写这个DLL的程序员来讲，仍然可以用函数的概念来理解这些DLL提供的功能，但对于以后调用这个DLL的程序来说，DLL里面提供的输出函数（或者说服务）就是例程了。因此“例程”的基本概念就包含了“例行事务性子程序”的含义，既然是例行的事务子程序，则必然通用性和相对独立性都比较强，所以很适合通过DLL、静态库（各种编程语言里面的库函数）、API、操作系统服务等方式来实现了。
+
+## 9、WDF驱动开发（1）- 一个简单的WDF驱动(non-pnp)
 https://blog.csdn.net/zj510/article/details/16983863
 
-什么是pnp？？？
+什么是pnp？？？即插即用 (PnP) 设备
 
 WDF驱动其实是微软公司提供的一套驱动开发的框架。有了这个框架之后，开发驱动会简单一些。WDF本身是从WDM基础上封装而成的。WDF里面封装了很多对象，如WDFDRIVER等。如果要学习使用WDF来开发驱动，个人感觉还是需要WDM的一些基础，不然很多东西挺难理解的。
 
-### 
+### 错误提示：error C2220: 警告被视为错误 - 没有生成“object”文件
+错误原因：原因是该文件的代码页为英文，而我们系统中的代码页为中文。
+或者把cpp文件重新保存为BGK编码格式。
 
+属性-》c/c++-》常规-》警告等级-》从4改为3
 
+注意配置选项要匹配，搞了半天以为vs出故障了。
 
+### error LNK2001: unresolved external symbol _SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RW_RES_R
+Right click on the project > Properties > Linker > All Options > Additional Dependencies
 
+modify the default dependency:
 
+>%(AdditionalDependencies);
+to
+>%(AdditionalDependencies);$(DDK_LIB_PATH)\wdmsec.lib
 
+vs2015编译成功，但是使用DDK并没有编译成功，直接build报错。
 
+### 安装调试运行
+安装是重点，居然博主没有说。直接右键安装inf是不行的。（并且需要签名）
+打开设备管理器-》操作-》添加过时硬件-》安装我手动从列表选择-》所有设备-》从磁盘安装-》复制驱动文件夹路径
+报错：试图将驱动程序添加到存储区时遇到问题，需要签名cat文件才行。（本人使用company签名工具签名，签名之前需要命名cat后缀为cat.sys，签完名后还原）
 
+https://blog.csdn.net/u012308586/article/details/91869023
+这篇文章解决了我大部分问题：
+- 运行exe文件时报缺少vcruntime140d.dll和ucrtbased.dll
+	设置运行时库 - 将运行时库的版本从 DLL 版本更改为非 DLL 版本。如果没有此设置，则必须将 MSVC 运行时单独安装到目标计算机。
+	属性-》c/c++-》代码生成-》运行库-》多线程调试Mtd
+- 右键安装inf报错，驱动需要签名
+	属性-》Dirver signing-》Test sign。之所以必须这样做，是因为 Windows 要求对驱动程序进行签名。（这个无法解决）
+	bcdedit /set testsigning off
+	bcdedit /set testsigning on
+	需要开启和关闭win10系统的测试模式（重启电脑生效）
+	
+```
+inf文件生成cat文件，提示inf文件不存在，难道是版本不对？？？
+"C:\Program Files (x86)\Windows Kits\10\bin\x86\Inf2Cat.exe" /driver:"D:\Users\User\My Document\Visual Studio 2015\Projects\MyKMDF\x64\Debug\MyKMDF\MyKMDF.inf" /OS:xp_x86,7_x86,7_x64
 
+并不是，后来仔细一想，会不会是文件夹名，改成文件夹名成功了。
+"C:\WinDDK\7600.16385.0\bin\selfsign\Inf2Cat.exe" /driver:"D:\Users\User\My Document\Visual Studio 2015\Projects\MyKMDF\x64\Debug\MyKMDF" /OS:xp_x86,7_x86,7_x64
+```
 
+### 驱动程序签名工具
+Microsoft Windows 驱动程序工具包 (WDK) 包括以下工具，可用于创建代码签名证书、对驱动程序包的目录文件进行签名，以及将签名嵌入驱动程序文件中：
 
+CertMgr
+Inf2Cat
+MakeCat
+MakeCert
+Pvk2Pfx
+SignTool
+
+这些工具位于以下目录中：
+Inf2Cat 工具位于 %WindowsSdkDir%\bin\x86 目录中。
+其他工具位于 32 位 Windows 平台的目录中 (%WindowsSdkDir%\bin\x86) 和 64 位 Windows 平台 (%WindowsSdkDir%\bin\x64) 。
+注意Visual Studio 环境变量 %WindowsSdkDir% 表示安装此版本 WDK 的 Windows kits 目录的路径，例如 C：\Program Files (x86) \Windows Kits\10。
+
+```
+"C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /v /ac "D:\Users\User\My Document\Visual Studio 2015\Projects\MyKMDF\x64\Debug\MyKMDF.cer" /s My /n "HanKin Inc." /t http://timestamp.digicert.com mykmdf.cat
+
+"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe" sign /v /ac MSCV-VSClass3.cer /s My /n "MyCompany Inc." /t http://timestamp.digicert.com toaster.cat
+```
+
+指定时间戳服务器的 URL。 如果此选项不存在，则不会对签名的文件进行时间戳。 对于时间戳，签署的驱动程序包会无限期地保持有效，直到出于其他原因吊销 SPC 签名证书。
+
+必须按照上述说明正确执行每个签名步骤，否则将无法对驱动程序进行签名。 可能会出现如下错误。
+SignTool Error: No certificates were found that met all the given criteria
+
+我太难了。没结果，还是老老实实使用测试签名吧。
+
+### 测试模式
+https://blog.csdn.net/Zhu_Zhu_2009/article/details/80040471?utm_source=blogxgwz9
+```
+win7
+开启
+bcdedit.exe -set TESTSIGNING ON
+关闭
+bcdedit -set TESTSIGNING OFF
+
+win10（实践发现跟win7那样操作也可以）
+开启
+bcdedit -set loadoptions DDISABLE_INTEGRITY_CHECKS
+bcdedit -set TESTSIGNING ON
+
+关闭
+bcdedit -set loadoptions ENABLE_INTEGRITY_CHECKS
+bcdedit -set TESTSIGNING OFF
+```
+开启后桌面右下角会显示测试模式字样。
+右键inf居然成功了一次，但也只是昙花一现，还是老老实实添加过时硬件。
+
+### 测试运行
+https://docs.microsoft.com/zh-cn/sysinternals/downloads/winobj
+WinObj能看见设备，设备管理器也能Samples中看见设备。
+打开debugview.exe，再使用test.exe程序就会调用并打印出日志。
+
+### 证书安装
+在驱动文件的上一层文件夹下有一个.cer后缀的文件，即证书，双击安装即可。
+certmgr.msc在证书管理器查看，可能在个人下面，也可能在中间证书颁发机构。
+
+但是没有什么作用。
+
+## 10、驱动示例源码（最简介没有测试过）
+```
+#include<ntddk.h>
+ 
+// 驱动卸载
+VOID DDK_Unload(IN PDRIVER_OBJECT pDriverObject)
+ {
+ 
+    DbgPrint("驱动成功卸载...OK！");
+ }
+ 
+// 驱动入口
+NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING reg_panth)
+ {
+    DbgPrint("驱动加载成功...Success！");
+    pDriverObject->DriverUnload = DDK_Unload;
+ 
+    return STATUS_SUCCESS;
+}
+```
+
+## 11、WDF- 用户模式程序和驱动的数据交互
+通常用户模式程序和驱动的数据交互有3种办法：buffer方式，direct方式和其他方式。
+
+给WDF驱动增加一个功能：将WRITE请求的数据写入设备对象上下文，然后当READ请求过来的时候，将设备对象上下文里面的数据读出来并且返回给用户模式程序。
+
+WdfRequestRetrieveInputBuffer和WdfRequestRetrieveOutputBuffer函数
+
+WDF提供了2个函数，这2个函数可以获得请求的输入输出缓冲。READ请求只有OutputBuffer，WRITE请求只有InputBuffer. IO control请求同时拥有输入输出缓冲。
+
+比如
+
+char* in_buf = NULL;
+WdfRequestRetrieveInputBuffer(Request, 10, &in_buf, NULL);
+通过上面的代码，可以获得Request的输入请求，in_buf是一个指针，如果函数调用成功的话，那么in_buf将指向一个输入缓冲。in_buf指向一个内核模式下的地址。我们可以直接使用这个指针，比如读取或者写入数据。
+
+如果是READ请求的话，上面的函数会失败，因为READ请求是没有输入缓冲的。如果是WRITE请求的话，那么就可以成功获取输入缓冲。
+
+## 12、devcon.exe工具
+```
+D:\>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install "D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF\StudyKMDF.inf" root\StudyKMDF
+Device node created. Install is complete when drivers are installed...
+Updating drivers for root\StudyKMDF from D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF\StudyKMDF.inf.
+devcon.exe failed.
+
+D:\>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install "D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF\StudyKMDF.inf" root\STUDYKMDF
+Device node created. Install is complete when drivers are installed...
+Updating drivers for root\STUDYKMDF from D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF\StudyKMDF.inf.
+devcon.exe failed.
+
+D:\>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install "D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF" root\STUDYKMDF
+devcon.exe failed.
+
+D:\>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install "D:\Users\User\My Document\Visual Studio 2015\Projects\StudyKMDF\x64\Debug\StudyKMDF\" root\STUDYKMDF
+devcon.exe: Invalid use of install.
+For more information, type: devcon.exe help install
+```
+## 13、WDF驱动开发（2）- CONTEXT和IO QUEUE
+https://blog.csdn.net/zj510/article/details/16987349
+
+有待开发，但言归正传，还是需要去写高拍仪驱动了。
 
 

@@ -219,7 +219,37 @@ stick：枝条;枯枝;柴火棍儿;球棍;条状物;棍状物
 他使用了一个金士顿2.0的U盘（0951:1642 Kingston Technology DT101 G2）挂载到xhci主控，然后将U盘分区格式化成ext4文件系统。
 ```
 fdisk -l
-mkfs.ext4 /dev/sd
+设备       启动  起点     末尾     扇区  大小 Id 类型
+/dev/sda1  *     2048 61439999 61437952 29.3G  7 HPFS/NTFS/exFAT
+
+
+设备       启动  起点     末尾     扇区  大小 Id 类型
+/dev/sda1  *     2048 61439999 61437952 29.3G  7 HPFS/NTFS/exFAT
+root@ubuntu180001:~# mkfs.ext4 /dev/sda1
+mke2fs 1.44.1 (24-Mar-2018)
+/dev/sda1 有一个 ntfs 文件系统
+Proceed anyway? (y,N) y
+/dev/sda1 已经挂载； 取消建立 文件系统 ！
+root@ubuntu180001:~# umount !$
+umount /dev/sda1
+root@ubuntu180001:~# mkfs.ext4 /dev/sda1
+mke2fs 1.44.1 (24-Mar-2018)
+/dev/sda1 有一个 ntfs 文件系统
+Proceed anyway? (y,N) y
+创建含有 7679744 个块（每块 4k）和 1921360 个inode的文件系统
+文件系统UUID：a1a426ab-d82b-4dca-88e8-f3590bd056ce
+超级块的备份存储于下列块：
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000
+
+正在分配组表： 完成
+正在写入inode表： 完成
+创建日志（32768 个块） 完成
+写入超级块和文件系统账户统计信息： 已完成
+```
+
+然鹅并没有复现问题。
+
 
 
 
