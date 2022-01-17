@@ -143,7 +143,34 @@ xhost +
 
 网上还会有则从客户端ssh到服务器端后会自动设置DISPLAY环境变量, 允许在服务器端执行的图形程序将图形显示在客户端上. 在服务器上查看环境变量显示如下(这个结果不同的时候并不相同)。
 
-
+## 7、直接使用root登录的，看这是可以root显示的
+```
+[root@ubuntu0006:~] #whoami
+root
+[root@ubuntu0006:~] #xrandr
+Screen 0: minimum 0 x 0, current 2048 x 1152, maximum 32768 x 32768
+default connected primary 2048x1152+0+0 541mm x 304mm
+   2048x1152      0.00*
+[root@ubuntu0006:~] #echo $DISPLAY
+localhost:10.0
+[root@ubuntu0006:~] #export DISPLAY=:0
+[root@ubuntu0006:~] #xrandr
+Screen 0: minimum 320 x 200, current 2560 x 1440, maximum 8192 x 8192
+qxl-0 connected 2560x1440+0+0 0mm x 0mm
+   1280x720      60.00
+   2560x1440-0    0.06*
+   1920x1200-0    0.06
+   1920x1080-0    0.06
+   1680x1050-0    0.06
+   1600x900-0     0.06
+   1280x1022-0    0.06
+   1440x900-0     0.06
+   1152x864-0     0.06
+   1024x766-0     0.06
+qxl-1 disconnected
+qxl-2 disconnected
+qxl-3 disconnected
+```
 
 
 

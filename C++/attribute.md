@@ -56,6 +56,19 @@ used： This attribute, attached to a function, means that code must be emitted 
 向编译器说明这段代码有用，即使在没有用到的情况下编译器也不会警告！
 
 ## 3、alias
+__attribute__((alias)): 为一个symbol声明一个别名
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
