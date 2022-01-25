@@ -265,9 +265,6 @@ cout << "abc" "123" << endl;
 ## MTU
 https://yq.aliyun.com/articles/222535
 
-## UEFI  &  EFI  &  BIOS
-https://blog.csdn.net/ZhangSong051052/article/details/80670970
-
 
 
 

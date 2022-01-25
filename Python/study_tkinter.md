@@ -89,15 +89,42 @@ root.mainloop()
 ## 9、TclError: image "pyimage2" doesn't exist
 因为在一个程序中只能存在一个根窗口，也就是说只能存在一个Tk()，其他的窗口只能以顶层窗口（Toplevel()）的形式存在。
 
+## 10、读取文件内容存储到一个字符串中
+```
+content = ''
+try:
+    with open(file_path, 'r', encoding='utf-8') as f:
+		content = f.read() 
+except Exception as ex:
+    print('打开文件失败, error=', ex)
+```
 
+## 11、Failed to execute script copy_tool
+https://blog.csdn.net/haimianjie2012/article/details/108058354
 
+打包指令：pyinstaller -F -w copy_tool.py
 
+-F（注意大写）是所有库文件打包成一个exe，-w是不出黑色控制台窗口。
+不加-F参数生成一堆文件，但运行快。压缩后比单个exe文件还小一点点。
+加-F参数生成一个exe文件，运行起来慢。
 
+问题定位去掉w参数：pyinstaller -F copy_tool.py
+双击exe文件会一闪而过，使用dos窗口运行exe，出现报错的具体原因。
 
+原因：找不到库，修改相对路径为绝对路径解决
+```
+# 增加libary库的搜索路径
+#sys.path.append('../../libary/')
+sys.path.append('D:/Github/Storage/python/libary/')
+# 导入自定义的Entry库
+from entrywithplaceholder import EntryWithPlaceholder
+```
 
+然鹅把exe文件移到别处运行还是会报错，原因同样如此，最终发现是pyinstaller不会把自定义的module导入进来，解决办法如下：
+```
+https://q.cnblogs.com/q/111110
 
+pyinstaller -F -w copy_tool.py D:\Github\Storage\python\libary\entrywithplaceholder.py --onefile
 
-
-
-
-
+-F, --onefile         Create a one-file bundled executable.
+```

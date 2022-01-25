@@ -185,10 +185,7 @@ msg_handle.daemon = True
 msg_handle.start()
 ```
 
-# 21、Failed to eexecute script ***
-怀疑跟ftp服务器不能使用有关。
-
-## 22、python报错：'gbk' codec can't decode byte 0xb9 in position 14: illegal multibyte sequence解决办法
+## 21、python报错：'gbk' codec can't decode byte 0xb9 in position 14: illegal multibyte sequence解决办法
 原代码：
 f = open(r'E:\0 paper\shiyan\pjdata.txt')
 报错：
@@ -199,10 +196,10 @@ f = open(r'E:\0 paper\shiyan\pjdata.txt',encoding='utf-8')
 
 解决办法：将open文件路径后加上encoding='utf-8'即可解决问题
 
-## 23、NameError:name ‘xrange’ is not defined
+## 22、NameError:name ‘xrange’ is not defined
 在Python 3中，range()与xrange()合并为range( )。
 
-## 24、NameError: name 'unicode' is not defined
+## 23、NameError: name 'unicode' is not defined
 简单来说就是： Python2 的unicode 函数在 Python3 中被命名为 str。在 Python3 中使用 ·str 来代替 Python2 中的 unicode.
 
 

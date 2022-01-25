@@ -33,7 +33,7 @@ cw@Ubuntu18:~$ echo $DISPLAY
 通过上面发现该ubuntu没有使用qxl驱动，使用X -version查看版本。
 /usr/lib/xorg/modules/drivers/qxl_drv.so
 
-安装qxl驱动后，killall Xorg即可。
+从其他地方拷贝一个相近版本的qxl_drv_1_20.4.so到这个目录下，安装qxl驱动后，killall Xorg即可。
 ```
 cw@Ubuntu18:~$ xrandr
 Screen 0: minimum 320 x 200, current 1024 x 768, maximum 8192 x 8192

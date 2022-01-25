@@ -9,7 +9,10 @@
 ssh_config和sshd_config都是ssh服务器的配置文件，二者区别在于，前者是针对客户端的配置文件，后者则是针对服务端的配置文件。两个配置文件都允许你通过设置不同的选项来改变客户端程序的运行方式。下面列出来的是两个配置文件中最重要的一些关键词，每一行为“关键词&值”的形式，其中“关键词”是忽略大小写的
 
 ## 2、ssh配置文件
-/etc/ssh/sshd_config
+ubuntu默认存在：/etc/ssh/ssh_config
+但是安装ssh之后会有：/etc/ssh/sshd_config
+设置root远程登录：PermitRootLogin yes
+需要主机设置root密码：passwd
 
 UOS:(openssh-client)
 /etc/ssh/ssh_config

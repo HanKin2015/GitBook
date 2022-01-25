@@ -17,12 +17,27 @@ apt install linux-tools-generic
 使用perf时，看不到函数符号信息，可以安装 apt-get install libc6-dbg
 
 ## 3、火焰图
+Linux性能分析利器——火焰图(FlameGraph)
 
 火焰图（Flame Graph）是由Linux性能优化大师Brendan Gregg发明的，和所有其他的trace和profiling方法不同的是，Flame Graph以一个全局的视野来看待时间分布，它从底部往顶部，列出所有可能的调用栈。其他的呈现方法，一般只能列出单一的调用栈或者非层次化的时间分布。
 
 以典型的分析CPU时间花费到哪个函数的on-cpu火焰图为例来展开。CPU火焰图中的每一个方框是一个函数，方框的长度，代表了它的执行时间，所以越宽的函数，执行越久。火焰图的楼层每高一层，就是更深一级的函数被调用，最顶层的函数，是叶子函数。
 
 脚本获取：git clone https://github.com/brendangregg/FlameGraph
+
+```
+1). 采集数据的设备上（使用perf工具采集指定进程的调用栈，并生成unfold数据）
+
+perf record -F 99 -p 1155 -g -o dash-border-revised.data -- sleep 10
+perf script -i dash-border-revised.data > dash-border-revised.unfold
+2). 安装了火焰图工具的设备上
+
+stackcollapse-perf.pl dash-border-revised.unfold > dash-border-revised.folded
+flamegraph.pl dash-border-revised.folded > dash-border-revised.svg
+注：工具路径 ( https://github.com/brendangregg/FlameGraph/tree/v1.0 ) ，下载即可（依赖 perl 脚本工具）
+
+生成的火焰图 svg 图片，使用浏览器打开即可，就可以查看各调用栈的比例等。
+```
 
 ## 4、实战
 perf top可以实时查看当前系统进程函数占用率情况（分析出来CPU时间主要花费在哪里）

@@ -166,10 +166,13 @@ book.json 存放配置信息
 
 </details>
 
-
-
 程序员变量命名网站：https://unbug.github.io/codelf/
 
+
+# 20220124
+发现一个不错的网站，免费下载各种学习的pdf资料：https://www.bookstack.cn/
+
+linux命令搜索大全：https://wangchujiang.com/linux-command/
 
 
 

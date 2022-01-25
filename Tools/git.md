@@ -1189,4 +1189,37 @@ git status . | grep "\.c\|\.cpp\|\.h"
 
 另外，不卡的时候，git bash也会进行Process Profiling操作，只是不会刷的这么快。
 
+## filename too long
+pull代码的时候，可能会报出：filename too long
+
+原因：
+git有可以创建4096长度的文件名，然而在windows最多是260，因为git用了旧版本的windows api
+
+解决：
+git config --global core.longpaths true
+
+## autocrlf
+痛点
+windows系统git拉取代码或者打包仓库，一般都设置了autocrlf = true.
+这样设置的效果是：
+Git可以在你提交时自动地把行结束符CRLF转换成LF，而在签出代码时把LF转换成CRLF
+结果打包仓库里sh脚本文件是windows的行尾符，打包成功后，升级ssu包必定会失败。
+如果设置成false呢，那代码又是lf格式，编译报错，对比代码又有各种问题。
+
+解决办法1：
+将打包仓库里sh脚本、apppre、appsh1转换成unix行尾符LF。
+主要用dos2unix批量转换：
+
+find . -name "*.sh" | xargs dos2unix
+find . -name "apppre" | xargs dos2unix
+find . -name "appsh1" | xargs dos2unix
+解决办法2：
+好像可以设置过滤sh脚本文件，这个我也没研究过。
+
+
+
+
+
+
+
 
