@@ -104,3 +104,19 @@ ScreenSaveTimeOut、ScreenSaverIsSecure、ScreenSaveActive
 
 ## 12、虚拟内存
 计算机-》右键属性-》高级系统设置-》高级-》性能设置-》高级-》虚拟内存
+
+## 13、#pragma alloc_text 与 ALLOC_PRAGMA
+https://blog.csdn.net/youyou519/article/details/90904498
+
+
+
+
+
+
+
+
+
+
+
+
+

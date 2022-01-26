@@ -163,12 +163,23 @@ lrwxrwxrwx  1 root root         8 9月  21  2020 mkfs.vfat -> mkfs.fat*
 例如
 mount /dev/sdb1 -o sync /mnt
 
+### 9-1、mkfs.ext4 命令 – 创建ext4文件系统
+mkfs.ext4命令可以磁盘分区创建ext4文件系统。该命令是mke2fs命令的符号链接，使用方法和mke2fs命令一样。
 
+-c	格式化前检查分区是否有坏块
+-q	执行时不显示任何信息
+-b block-size	指定block size大小，默认配置文件在/etc/mke2fs.conf，blocksize = 4096
+-F	强制格式化
 
+格式化前检查分区是否有坏块：
 
+[root@linuxcool ~]# mkfs.ext4 -c /dev/sdb
+将/dev/sdb分区格式化成ext4文件系统：
 
+[root@linuxcool ~]# mkfs.ext4 /dev/sdb
+将硬盘格式化为ext4文件系统，并添加卷标‘root’，块大小为2048，文件系统预留5%给管理员：
 
-
+[root@linuxcool ~]# mkfs.ext4 -L 'root' -b 2048 /dev/sdb -m 5
 
 
 

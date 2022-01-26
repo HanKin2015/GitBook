@@ -31,4 +31,11 @@ modprobe和insmod类似，都是用来动态加载驱动模块的，区别在于
 rmmod lsmod显示的模块名称，而不是对应的ko文件名
 lsmod
 
+## 2、例如抓取usbvideo驱动数据包
+```
+insmod /system/lib/modules/usbmon.ko
+modprobe usbmon
 
+lsusb
+cat /sys/kernel/debug/usb/usbmon/2u | grep "003:"
+```

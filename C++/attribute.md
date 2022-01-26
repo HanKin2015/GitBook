@@ -58,8 +58,8 @@ used： This attribute, attached to a function, means that code must be emitted 
 ## 3、alias
 __attribute__((alias)): 为一个symbol声明一个别名
 
-
-
+https://www.cnblogs.com/moonflow/archive/2012/08/14/2637874.html
+https://www.cnblogs.com/yuxiaoyiyou/p/13518968.html
 
 
 
