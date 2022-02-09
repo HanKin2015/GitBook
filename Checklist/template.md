@@ -92,23 +92,23 @@ int main(int argc, char *argv[])
 文 件 名: brute_ftp_by_dict.py
 文件描述: 使用字典暴力破解登陆ftp
 作    者: HanKin
-创建日期: 2021.08.12
-修改日期：2021.08.12
+创建日期: 2022.02.12
+修改日期：2022.02.12
 
-Copyright (c) 2021 HanKin. All rights reserved.
+Copyright (c) 2022 HanKin. All rights reserved.
 """
 ```
 
 ### batch脚本
 ```
 ::
-:: 文 件 名: 删除SVN信息.bat
-:: 文件描述: 解决桌面图标左下角问号图标问题
+:: 文 件 名: mem_cpu_io.bat
+:: 文件描述: 吃掉系统内存cpuio
 :: 作    者: HanKin
-:: 创建日期: 2021.08.11
-:: 修改日期：2021.08.11
+:: 创建日期: 2022.02.09
+:: 修改日期：2022.02.09
 :: 
-:: Copyright (c) 2021 HanKin. All rights reserved.
+:: Copyright (c) 2022 HanKin. All rights reserved.
 ::
 ```
 

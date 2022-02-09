@@ -61,6 +61,13 @@ Hardware ID：VID和PID
 
 
 ## 1-4、usbmon
+https://blog.csdn.net/u013550000/article/details/105263603
+前面一顿操作猛如虎，一看结果就modprobe usbmon才是王道。
+
+监听全部bus上的USB数据包，cat /sys/kernel/debug/usb/usbmon/0u
+监听Bus=2上的USB数据包，cat /sys/kernel/debug/usb/usbmon/2u
+
+------
 
 抓包工具通过命令行，没有找到软件。估计只有Linux软件。
 
@@ -85,6 +92,10 @@ VID:PID=046d:081b
 抓普通usb数据包：总线号，设备ID
 
 抓设备枚举包：不需要grep管道
+
+### 部分linux系统无usbmon
+https://www.kernel.org/doc/html/latest/usb/usbmon.html
+需要安装
 
 ## 1-5、USBTrace
 

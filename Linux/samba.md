@@ -139,10 +139,12 @@ Windows运行\\1.1.2.3
 删除linux中某个用户所有信息：userdel   -r  用户名
 
 ## 6、密码忘记了怎么办
+查看samba服务器中已拥有哪些用户：pdbedit -L
 smbpasswd -a sambauser 可以修改密码
-smbstatus 可以查看用户
+smbstatus 可以查看当前连接的用户信息（无连接则空）
 vim /etc/samba/smb.conf 可以修改配置
 /etc/init.d/samba restart 重启服务
 \\10.22.33.44重新连接
+连接后：ps aux | grep smb有一个该用户的父进程
 
 

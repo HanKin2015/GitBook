@@ -1216,9 +1216,18 @@ find . -name "appsh1" | xargs dos2unix
 解决办法2：
 好像可以设置过滤sh脚本文件，这个我也没研究过。
 
+## 漂亮的显示git上库日志
+要做到这样，命令行如下：
+git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
+这样有点长了，我们可以这样：
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
+然后，我们就可以使用这样的短命令了：
+git lg
 
+## 常用的高级git总结命令
+git log -p	相当于增加git show
 
 
 
