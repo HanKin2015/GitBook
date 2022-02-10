@@ -91,11 +91,11 @@ VID:PID=046d:081b
 
 抓普通usb数据包：总线号，设备ID
 
-抓设备枚举包：不需要grep管道
+抓设备枚举包：不需要grep管道。
 
 ### 部分linux系统无usbmon
 https://www.kernel.org/doc/html/latest/usb/usbmon.html
-需要安装
+需要安装内核包。
 
 ## 1-5、USBTrace
 

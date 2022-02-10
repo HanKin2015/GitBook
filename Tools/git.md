@@ -1227,7 +1227,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 git lg
 
 ## 常用的高级git总结命令
-git log -p	相当于增加git show
+git log -p	相当于增加git show [commit_id]
 
 
 

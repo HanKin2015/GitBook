@@ -18,5 +18,16 @@ https://blog.csdn.net/sanqima/article/details/100625578
 但是会自动还原，好像评估时间会重置，暂时先这样解决。
 
 
+但是还是会过期，报错：你的30天评估期已结束。软件根本打不开。
 
+## 4、Beyond Compare 30天评估期结束解决办法
+打开Beyond Compare 4，提示已经超出30天试用期限制
 
+解决方法：
+
+1.修改文件
+　　修改C:\Program Files\Beyond Compare 4\BCUnrar.dll ,这个文件重命名或者直接删除，则会新增30天试用期，再次打开提示还有28天试用期。
+2.修改注册表
+　　①在搜索栏中输入 regedit,打开注册表
+　　②删除项目：计算机\HKEY_CURRENT_USER\Software\Scooter Software\Beyond Compare 4\CacheId
+ 

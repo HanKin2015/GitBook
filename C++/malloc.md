@@ -1,8 +1,6 @@
 # 动态分配内存
 
-内存泄露、踩内存很糟糕
-
-
+内存泄露、踩内存很糟糕。
 
 ## 1、realloc、calloc、malloc
 realloc：调用形式为(类型*)realloc(*ptr，size)：将ptr内存大小增大到size。(也可以缩小，缩小的内容消失)。
@@ -60,3 +58,145 @@ int main()
 }
 ```
 
+## 3、tcmalloc
+
+### 3-1、记一次 TCMalloc Debug 经历
+https://zhuanlan.zhihu.com/p/37696341
+在版本2.9.1没有复现该任何例子，仅仅能看看。
+
+最后决定使用对应版本试试看：
+```
+[ubuntu@hj_arm_debain10:~/hj/gperftools-2.6.1/.libs] $ cp libtcmalloc_debug.so.4.4.5 /usr/lib/libtcmalloc_debug.so.4
+cp: cannot create regular file '/usr/lib/libtcmalloc_debug.so.4': Permission denied
+[ubuntu@hj_arm_debain10:~/hj/gperftools-2.6.1/.libs] $ sudo cp libtcmalloc_debug.so.4.4.5 /usr/lib/libtcmalloc_debug.so.4
+[ubuntu@hj_arm_debain10:~/hj/gperftools-2.6.1/.libs] $ sudo cp libtcmalloc.so.4.4.5 /usr/lib/libtcmalloc.so.4
+[ubuntu@hj_arm_debain10:~/hj/gperftools-2.6.1/.libs] $ cd ../..
+[ubuntu@hj_arm_debain10:~/hj] $ ./a.out
+src/tcmalloc.cc:284] Attempt to free invalid pointer 0x5555e0508040
+Aborted (core dumped)
+```
+最后的demo能复现，其余两个无法实现。
+
+
+https://zhuanlan.zhihu.com/p/51432385
+
+### 3-2、起因
+修改代码测试的过程中偶现core在tcmalloc free，core出现的地方五花八门，有core在智能指针生命周期结束的时候，有的直接core在右值临时变量析构的时候。
+排查过程
+查看gperftools的issue，发现有很多人core在相同的地方，谷歌官方回复说这种错误的根因是因为程序的内存管理出了问题，比如访问已经被free的地址，double free等等。
+顺着这个思路，一开始先入为主的认为是多线程竞态问题，改了好多代码，也用valgrind等方式查看内存错误。但是问题一直得不到解决。
+最后把之前的改动bisect，找了好久，终于找到是某个字符串被double free了。
+
+## 4、gperftools检查内存泄露/越界等问题的简易说明
+https://www.shangmayuan.com/a/5e114526e02a4e7e9ee215e3.html
+
+
+大名鼎鼎的Google的内存检查工具
+
+在实际工程的Makefile中添加LIB库依赖.
+通常来讲 -ltcmalloc就能够了
+若是须要使用Profiler的功能，那么用 -ltcmalloc_and_profiler
+若是须要检查数组越界等，那么须要用 -ltcmalloc_debug（会大大下降处理速度）
+
+## 5、内存池
+(Memory Pool)是一种内存分配方式，又被称为固定大小区块规划（fixed-size-blocks allocation）。通常我们习惯直接使用new、malloc等API申请分配内存，这样做的缺点在于：由于所申请内存块的大小不定，当频繁使用时会造成大量的内存碎片并进而降低性能。
+
+```
+内存池的实现有很多，性能和适用性也不相同，以下是一种较简单的C++实现 -- GenericMP模板类。（本例取材于《Online game server programming》一书）
+在这个例子中，使用了模板以适应不同对象的内存需求，内存池中的内存块则是以基于链表的结构进行组织。
+GenericMP模板类定义
+
+template <class T, int BLOCK_NUM= 50>
+class GenericMP
+{
+public:
+static VOID *operator new(size_t allocLen)
+{
+assert(sizeof(T) == allocLen);
+if(!m_NewPointer)
+MyAlloc();
+UCHAR *rp = m_NewPointer;
+m_NewPointer = *reinterpret_cast<UCHAR**>(rp); //由于头4个字节被“强行”解释为指向下一内存块的指针，这里m_NewPointer就指向了下一个内存块，以备下次分配使用。
+return rp;
+}
+static VOID operator delete(VOID *dp)
+{
+*reinterpret_cast<UCHAR**>(dp) = m_NewPointer;
+m_NewPointer = static_cast<UCHAR*>(dp);
+}
+private:
+static VOID MyAlloc()
+{
+m_NewPointer = new UCHAR[sizeof(T) * BLOCK_NUM];
+UCHAR **cur = reinterpret_cast<UCHAR**>(m_NewPointer); //强制转型为双指针，这将改变每个内存块头4个字节的含义。
+UCHAR *next = m_NewPointer;
+for(INT i = 0; i < BLOCK_NUM-1; i++)
+{
+next += sizeof(T);
+*cur = next;
+cur = reinterpret_cast<UCHAR**>(next); //这样，所分配的每个内存块的头4个字节就被“强行“解释为指向下一个内存块的指针， 即形成了内存块的链表结构。
+}
+*cur = 0;
+}
+static UCHAR *m_NewPointer;
+protected:
+~GenericMP()
+{
+}
+};
+template<class T, int BLOCK_NUM >
+UCHAR *GenericMP<T, BLOCK_NUM >::m_NewPointer;
+GenericMP模板类应用
+class ExpMP : public GenericMP<ExpMP>
+{
+BYTE a[1024];
+};
+int _tmain(int argc, _TCHAR* argv[])
+{
+ExpMP *aMP = new ExpMP();
+delete aMP;
+}
+```
+
+## 6、pk
+```
+这样的一个测试程序，如果用jemalloc/tcmalloc链接运行，cpu的消耗在36%左右，而用glibc的malloc实现链接运行，cpu的消耗只有5.7%左右。
+这个程序每10ms分配8M数据，写入数据后，再释放。
+
+#include <stdio.h>
+#include <stdint.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+uint8_t src_buf[1920*1080*4];
+
+
+int main()
+{
+    int i = 0;
+    uint8_t * dst_buf;
+    int count;
+    time_t record = 0;
+    time_t new = 0;
+
+
+    for(i = 0;i<10000;i++){
+        dst_buf = malloc(sizeof(src_buf));
+        memcpy(dst_buf,src_buf,sizeof(src_buf));
+        free(dst_buf);
+        usleep(10000);
+        count++;
+        new = time(NULL);
+        if(new != record){
+            printf("count %d per second\n",count);
+            count = 0;
+            record = new;
+        }
+    }
+
+
+    return 0;
+}
+```

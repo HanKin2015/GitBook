@@ -247,15 +247,18 @@ REGEDIT4
 "Type"=dword:00000001
 
 ```
+
+#### 划重点划重点划重点
 将驱动拷贝到system32\\drivers\\目录下，重启电脑。可能出现无法捕捉KdPrint函数，使用另一个注册脚本。
 https://bbs.pediy.com/thread-246454.htm
 ```
 Windows Registry Editor Version 5.00
  
-[HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/Session Manager/Debug Print Filter] 
-DEFAULT=dword:ffffffff
-
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Debug Print Filter]
+@=dword:ffffffff
 ```
+似乎还是不行。
+
 这是就需要一个工具来观察驱动运行的结果，工具叫：Dbgview.exe
 首先打开Dbgview.exe，然后运行cmd进入命令行，运行 net start hello，这时在Dbgview.exe中可以看到helloWorld。(注意管理员运行)
 
@@ -264,6 +267,10 @@ https://blog.csdn.net/qq_40353000/article/details/106434758
 
 C:\Windows\System32\drivers\dbgv.sys
 重命名即可。
+
+
+could not extract debugview driver to C:\Windows\System32\drivers\dbgv.sys: 另一个程序正在使用此文件，进程无法访问。
+kernel debug output capture will be unavailable.
 
 ## 6、用于调试 WDF 驱动程序的注册表值
 https://docs.microsoft.com/zh-cn/windows-hardware/drivers/wdf/registry-values-for-debugging-kmdf-drivers

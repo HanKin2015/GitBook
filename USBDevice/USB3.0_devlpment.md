@@ -277,7 +277,7 @@ struct libusb_ss_endpoint_companion_descriptor {
 };
 ```
 
-## USB3.0额外的描述符信息
+## 3、USB3.0额外的描述符信息
 USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR structure (usbspec.h)
 
 https://blog.csdn.net/nwpu053883/article/details/101456089
@@ -291,14 +291,31 @@ BOS描述符信息：
 可以添加设备级的一些能力描述, 即device-level capability extensions。
 如usb2/3的LPM能力啥的, 即Link Power Management, 链路电路管理。具体又有相应的协议。
 
-## 使用URB获取配置描述符
+## 4、使用URB获取配置描述符
 https://docs.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/usb-configuration-descriptors
 
 但是还是需要高版本才行。
 
-## 驱动版本很重要
+## 5、驱动版本很重要
 感觉说了又没说一样：
 https://blog.csdn.net/weixin_30485799/article/details/99163518
+
+## 6、
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

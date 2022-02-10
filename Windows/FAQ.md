@@ -108,7 +108,12 @@ ScreenSaveTimeOut、ScreenSaverIsSecure、ScreenSaveActive
 ## 13、#pragma alloc_text 与 ALLOC_PRAGMA
 https://blog.csdn.net/youyou519/article/details/90904498
 
-
+## 14、Dell电脑开机显示Alert!The AC power adapter wattage and type cannot be determined.
+The AC power adapter wattage以及下面的英文意思是
+电源适配器不能被正确识别，电池可能无法充电，电池电量低。系统无法启动。是电源适配器问题导致的。
+解决方法：
+一，检查电源适配置器有没插好，重新拔插一下。更换电源插座
+二、问题依旧，更换电池适配器
 
 
 
