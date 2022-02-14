@@ -260,7 +260,7 @@ Windows Registry Editor Version 5.00
 似乎还是不行。
 
 这是就需要一个工具来观察驱动运行的结果，工具叫：Dbgview.exe
-首先打开Dbgview.exe，然后运行cmd进入命令行，运行 net start hello，这时在Dbgview.exe中可以看到helloWorld。(注意管理员运行)
+首先打开Dbgview.exe，然后运行cmd进入命令行，运行 net start hejian（DisplayName值），这时在Dbgview.exe中可以看到helloWorld。(注意管理员运行)
 
 ### 4-7、点击Capture中的Log Boot出现could not install debugview driver
 https://blog.csdn.net/qq_40353000/article/details/106434758
@@ -514,5 +514,51 @@ For more information, type: devcon.exe help install
 https://blog.csdn.net/zj510/article/details/16987349
 
 有待开发，但言归正传，还是需要去写高拍仪驱动了。
+
+## 14、过了一个年假后，驱动居然无法调试了
+更换了机器，win10和win7物理机都试过，无法调试。
+重命名为高拍仪驱动无法走到相应的逻辑，还是使用先前的demo进行测试。
+
+测试发现无法测试，猜测到可能是win10系统需要签微软名，但是win7也不行啊。
+进行测试模式调试再看看：不行
+
+很奇怪，排除了LowerFilters和UpperFilters其他选项，还是不行。
+
+Capture菜单下的Log Boot选择已经勾选。所有都已经勾选。
+
+后面实在没有办法，使用手动启动服务，net start testKMDFUSBDriver，发现报错此驱动程序被阻止加载。
+忽然之间才明白，我这个是64位系统，怎么能加载x86驱动呢。。。。。，关键是没有蓝屏，真是奇怪到家了。
+
+为啥还犯这样的错，主要还是没有蓝屏，足足花了接近两个多小时。
+
+教训：凡事需要考虑周全，就算亲自测试了，也是会有一些意外，不要抱侥幸心理。
+
+使用x64进行编译后，debugview能正常显示日志了。
+
+## 15、KdPrint和DbgPrint区别
+```
+KdPrint(("hejian [%s:%s:%d]\n", __FILE__, __FUNCTION__, __LINE__));
+DbgPrint("hejian [%s:%s:%d]\n", __FILE__, __FUNCTION__, __LINE__);
+DbgPrint(("hejian [%s:%s:%d]\n", __FILE__, __FUNCTION__, __LINE__));
+KdPrint(("hejian\n"));
+DbgPrint(("hejian\n"));
+DbgPrint("hejian\n");
+```
+第三行未打印出来，其余都在debugview中显示出来。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

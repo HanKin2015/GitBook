@@ -149,7 +149,9 @@ https://www.cnpython.com/qa/113726
 发现是由于把tkinter.ttk.Style()弄成全局变量了，改成局部变量后解决。
 
 # 18、_tkinter.TclError: couldn't recognize data in image file "D:\images\1 (10).jpg"
-不清楚原因，主要是不要使用tk.PhotoImage调用图片，
+不清楚原因，主要是不要使用tk.PhotoImage调用图片，https://blog.csdn.net/username666/article/details/113615073
+Tkinter仅支持3种文件格式，即GIF、PGM和PPM。
+可以安装PIL模块，通过导入PIL模块，使用里面的函数实现。Python PIL支持GIF、JPEG、PCD、PNG、PPM、PSD等30多种图像文件格式。
 ```
 import tkinter as tk
  
@@ -201,6 +203,38 @@ f = open(r'E:\0 paper\shiyan\pjdata.txt',encoding='utf-8')
 
 ## 23、NameError: name 'unicode' is not defined
 简单来说就是： Python2 的unicode 函数在 Python3 中被命名为 str。在 Python3 中使用 ·str 来代替 Python2 中的 unicode.
+
+## 24、NameError: name 'ImageTK' is not defined
+```
+from tkinter import *
+from PIL import Image, ImageTk
+
+win = Tk()      # 创建窗口对象
+win.title("我的窗口")   # 设置窗口标题
+lab1 = Label(win, text = '你好', anchor = 'nw') # 创建Label组件
+lab1.pack()     # 显示Label组件
+
+# 显示内置的位图
+lab2 = Label(win, bitmap = 'question')  # 创建显示疑问图标的Label组件
+lab2.pack()     # 显示Label组件
+
+# 显示自选的图片
+bm = ImageTK.PhotoImage(file = r'turtle.jpeg')
+lab3 = Label(win, image = bm)
+lab3.bm = bm
+lab3.pack()     # 显示Label组件
+win.mainloop()
+```
+网上的代码，https://blog.csdn.net/username666/article/details/113615073，是真的坑。
+
+直接拷贝运行，然后报错：NameError: name 'ImageTK' is not defined。
+
+百度了一半天才找到原因：https://www.5axxw.com/questions/content/arxnni
+原来是字母的大小写问题，这个需要着重注意一下。
+
+
+
+
 
 
 

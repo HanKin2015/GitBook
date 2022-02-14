@@ -3,15 +3,22 @@
 ## 1、运行调试
 - 加载
 
+查找关键字：STACK_COMMAND:  .ecxr ; kb ; ** Pseudo Context ** ; kb
+或者使用kb命令查看堆栈信息。
+
+ctrl+break中断下载操作，只发现右上角有个pause break键。
+正确方式是ctrl+c。
 
 
 
+### 使用windbg捕获程序崩溃
+https://blog.csdn.net/dyzhen/article/details/6402226
 
+注意是：windbg -I（是i不是l）
 
+有可能需要添加注册表：http://www.codeproject.com/KB/debug/automemorydump.aspx
 
-
-
-
+注意：x86编译的程序只能使用x86版本的windbg捕获。
 
 ## 2、WinDbg调试内存泄露
 

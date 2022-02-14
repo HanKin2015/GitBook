@@ -301,11 +301,115 @@ https://docs.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/usb-configurati
 https://blog.csdn.net/weixin_30485799/article/details/99163518
 
 ## 6、
+```
+ 567 /* read the bConfigurationValue for a device */
+ 568 static int sysfs_get_active_config(struct libusb_device *dev, uint8_t *config)
+ 569 {
+ 570     struct linux_device_priv *priv = usbi_get_device_priv(dev);
+ 571     int ret, tmp;
+ 572
+ 573     ret = read_sysfs_attr(DEVICE_CTX(dev), priv->sysfs_dir, "bConfigurationValue",
+ 574                   UINT8_MAX, &tmp);
+ 575     if (ret < 0)
+ 576         return ret;
+ 577
+ 578     if (tmp == -1)
+ 579         tmp = 0;    /* unconfigured */
+ 580
+ 581     *config = (uint8_t)tmp;
+ 582
+ 583     return 0;
+ 584 }
+ 585
+:ls
+  1 %a   "os/linux_usbfs.c"             第 519 行
+```
+从这里可以看出，如果usbi_backend存在，则直接会从系统的文件中读取配置信息，而不是通过控制包获取。
+
+```
+1544 int API_EXPORTED libusb_get_configuration(libusb_device_handle *dev_handle,
+1545     int *config)
+1546 {
+1547     int r = LIBUSB_ERROR_NOT_SUPPORTED;
+1548     uint8_t tmp = 0;
+1549
+1550     usbi_dbg(" ");
+1551     if (usbi_backend.get_configuration)
+1552         r = usbi_backend.get_configuration(dev_handle, &tmp);
+1553
+1554     if (r == LIBUSB_ERROR_NOT_SUPPORTED) {
+1555         usbi_dbg("falling back to control message");
+1556         r = libusb_control_transfer(dev_handle, LIBUSB_ENDPOINT_IN,
+1557             LIBUSB_REQUEST_GET_CONFIGURATION, 0, 0, &tmp, 1, 1000);
+1558         if (r == 1) {
+1559             r = 0;
+1560         } else if (r == 0) {
+1561             usbi_err(HANDLE_CTX(dev_handle), "zero bytes returned in ctrl transfer?");
+1562             r = LIBUSB_ERROR_IO;
+1563         } else {
+1564             usbi_dbg("control failed, error %d", r);
+1565         }
+1566     }
+1567
+1568     if (r == 0) {
+1569         usbi_dbg("active config %u", tmp);
+1570         *config = (int)tmp;
+1571     }
+1572
+1573     return r;
+1574 }
 
 
+ 345 /** \ingroup libusb_misc
+ 346  * Standard requests, as defined in table 9-5 of the USB 3.0 specifications */
+ 347 enum libusb_standard_request {
+ 348     /** Request status of the specific recipient */
+ 349     LIBUSB_REQUEST_GET_STATUS = 0x00,
+ 350
+ 351     /** Clear or disable a specific feature */
+ 352     LIBUSB_REQUEST_CLEAR_FEATURE = 0x01,
+ 353
+ 354     /* 0x02 is reserved */
+ 355
+ 356     /** Set or enable a specific feature */
+ 357     LIBUSB_REQUEST_SET_FEATURE = 0x03,
+ 358
+ 359     /* 0x04 is reserved */
+ 360
+ 361     /** Set device address for all future accesses */
+ 362     LIBUSB_REQUEST_SET_ADDRESS = 0x05,
+ 363
+ 364     /** Get the specified descriptor */
+ 365     LIBUSB_REQUEST_GET_DESCRIPTOR = 0x06,
+ 366
+ 367     /** Used to update existing descriptors or add new descriptors */
+ 368     LIBUSB_REQUEST_SET_DESCRIPTOR = 0x07,
+ 369
+ 370     /** Get the current device configuration value */
+ 371     LIBUSB_REQUEST_GET_CONFIGURATION = 0x08,
+ 372
+ 373     /** Set device configuration */
+ 374     LIBUSB_REQUEST_SET_CONFIGURATION = 0x09,
+ 375
+ 376     /** Return the selected alternate setting for the specified interface */
+ 377     LIBUSB_REQUEST_GET_INTERFACE = 0x0a,
+ 378
+ 379     /** Select an alternate interface for the specified interface */
+ 380     LIBUSB_REQUEST_SET_INTERFACE = 0x0b,
+ 381
+ 382     /** Set then report an endpoint's synchronization frame */
+ 383     LIBUSB_REQUEST_SYNCH_FRAME = 0x0c,
+ 384
+ 385     /** Sets both the U1 and U2 Exit Latency */
+ 386     LIBUSB_REQUEST_SET_SEL = 0x30,
+ 387
+ 388     /** Delay from the time a host transmits a packet to the time it is
+ 389       * received by the device. */
+ 390     LIBUSB_SET_ISOCH_DELAY = 0x31
+ 391 };
+```
 
-
-
+可以看出LIBUSB_REQUEST_GET_CONFIGURATION这个是获取当前配置的索引值，而不是配置描述符。
 
 
 

@@ -143,10 +143,23 @@ https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/wdfusb/nf-wdfusb-w
 
 先看看配置描述符具体是多少。
 
+## 12、计划写一个获取插入的USB设备信息
+https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/usbdlib/nf-usbdlib-usbd_assignurbtoiostacklocation?redirectedfrom=MSDN
 
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/ddi/usbdlib/nf-usbdlib-usbd_createhandle
+```
+DRIVER_ADD_DEVICE MyAddDevice;
 
+NTSTATUS MyAddDevice( __in PDRIVER_OBJECT  DriverObject,
+                     __in PDEVICE_OBJECT  PhysicalDeviceObject)
+{
 
-
+    NTSTATUS            ntStatus;
+    PDEVICE_OBJECT      deviceObject;
+    PDEVICE_EXTENSION   deviceExtension;
+    PDEVICE_OBJECT      stackDeviceObject;
+    USBD_HANDLE         usbdHandle;
+```
 
 
 
