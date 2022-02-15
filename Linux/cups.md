@@ -23,3 +23,34 @@ CUPS给Unix/Linux用户提供了一种可靠有效的方法来管理打印。它
 作为网络服务器建议关闭CUPS，关闭CUPS的命令如下：
 service cups stop
 chkconfig cups off
+
+```
+[root@ubuntu0006:/media] #ps aux | grep cups
+root     20184  0.0  0.0  17088   964 pts/3    S+   09:15   0:00 grep --color=auto cups
+[root@ubuntu0006:/media] #service cups start
+[root@ubuntu0006:/media] #ps aux | grep cups
+root     20631  0.0  0.0  96060  7344 ?        Ss   09:15   0:00 /usr/sbin/cupsd -l
+root     21030  0.0  0.0  17088  1084 pts/3    S+   09:15   0:00 grep --color=auto cups
+[root@ubuntu0006:/media] #service cups status
+● cups.service - CUPS Scheduler
+   Loaded: loaded (/lib/systemd/system/cups.service; enabled; vendor preset: enabled)
+   Active: active (running) since 二 2022-02-15 09:15:24 CST; 17s ago
+     Docs: man:cupsd(8)
+ Main PID: 20631 (cupsd)
+   CGroup: /system.slice/cups.service
+           └─20631 /usr/sbin/cupsd -l
+
+2月 15 09:15:24 ubuntu0006 systemd[1]: Started CUPS Scheduler.
+[root@ubuntu0006:/media] #service cups stop
+[root@ubuntu0006:/media] #service cups status
+● cups.service - CUPS Scheduler
+   Loaded: loaded (/lib/systemd/system/cups.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since 二 2022-02-15 09:15:49 CST; 1s ago
+     Docs: man:cupsd(8)
+  Process: 20631 ExecStart=/usr/sbin/cupsd -l (code=exited, status=0/SUCCESS)
+ Main PID: 20631 (code=exited, status=0/SUCCESS)
+
+2月 15 09:15:24 ubuntu0006 systemd[1]: Started CUPS Scheduler.
+2月 15 09:15:49 ubuntu0006 systemd[1]: Stopping CUPS Scheduler...
+2月 15 09:15:49 ubuntu0006 systemd[1]: Stopped CUPS Scheduler.
+```

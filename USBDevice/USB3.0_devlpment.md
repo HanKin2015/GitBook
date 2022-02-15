@@ -300,7 +300,24 @@ https://docs.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/usb-configurati
 感觉说了又没说一样：
 https://blog.csdn.net/weixin_30485799/article/details/99163518
 
-## 6、
+## 6、尝试使用control方式获取配置描述符
+查看linux内核获取配置描述符发现，
+```
+文件：linux-5.13.7/drivers/usb/core/hub.c
+4652 static int
+4653 hub_port_init(struct usb_hub *hub, struct usb_device *udev, int port1,
+4654         int retry_counter)
+
+4979     if (udev->wusb == 0 && le16_to_cpu(udev->descriptor.bcdUSB) >= 0x0201) {
+4980         retval = usb_get_bos_descriptor(udev);
+4981         if (!retval) {
+4982             udev->lpm_capable = usb_device_supports_lpm(udev);
+4983             usb_set_lpm_parameters(udev);
+4984         }
+4985     }
+```
+
+
 ```
  567 /* read the bConfigurationValue for a device */
  568 static int sysfs_get_active_config(struct libusb_device *dev, uint8_t *config)
@@ -411,7 +428,22 @@ https://blog.csdn.net/weixin_30485799/article/details/99163518
 
 可以看出LIBUSB_REQUEST_GET_CONFIGURATION这个是获取当前配置的索引值，而不是配置描述符。
 
+## 7、在微软官网查询不到相应的接口
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/usb-faq--introductory-level#-----------------usb-3-0----
+是否必须重写客户端驱动程序以支持 USB 3.0 设备？
+当低、满或高速设备连接到 USB 3.0 端口时，所有现有客户端驱动程序都应继续工作。 在Windows 8中，我们确保与现有客户端驱动程序兼容。
 
+USB 3.0 驱动程序堆栈维护 IRQL 级别、调用方上下文和错误状态;与设备交互时重试频率和计时，等等，以确保现有驱动程序继续工作。 测试仍然非常重要。
+
+发生常见故障的原因是：
+
+驱动程序的终结点描述符分析因存在 SuperSpeed 终结点助理描述符而中断。
+由于速度增加，你可能会在应用程序协议级别遇到计时问题。
+终结点支持的最大数据包大小可能不同。
+由于函数电源管理，选择性挂起操作的时间可能不同。
+在 Windows 7 及更早版本的操作系统中，USB 3.0 驱动程序堆栈由第三方提供。 因此，我们强烈建议测试驱动程序，以使用第三方 USB 驱动程序堆栈。
+
+适用于高速和Windows 8 USB 设备的新客户端驱动程序应选择新功能。
 
 
 
