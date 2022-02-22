@@ -128,3 +128,25 @@ pyinstaller -F -w copy_tool.py D:\Github\Storage\python\libary\entrywithplacehol
 
 -F, --onefile         Create a one-file bundled executable.
 ```
+
+## 12、python中tkinter时出现两个弹窗的解决方案
+今天在做tkinter弹窗时一直出现两个窗口，其中一个是正常的tkinter窗口，而另一个是以tk开头的弹窗，经过网上查阅资料得到了以下解决方案，亲测有效。
+
+解决办法
+在程序中加入以下代码即可：
+```
+root = tkinter.Tk()
+root.withdraw()
+```
+
+正确代码
+```
+import tkinter
+import tkinter.messagebox#弹窗库
+
+#此处为解决问题的代码，其中tkinter为上方import的tkinter
+root = tkinter.Tk()
+root.withdraw()
+
+tkinter.messagebox.showinfo('提示','你的输入有误')
+```

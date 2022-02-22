@@ -586,6 +586,16 @@ git apply --check xxx.patch 检查当前patch是否可以成功打入
 git apply xxx.patch
 git apply *.patch 同时打入所有patch
 
+
+手动版：
+git diff commitHash1 commitHash2 > 123.patch
+git apply --reject 123.patch
+
+git如何生成单个文件的补丁
+背景：有时候碰到一个commit包含了好几个文件的修改，但是我只需要其中一个文件的修改内容，那么这时候就需要以下方法来生成这一个文件对应修改内容的补丁
+
+答:git format-patch "参照的commit-id" filename1 filename2
+
 ### 自定义别名（更高级的git log）
 ```
 alias lg="git log --graph --pretty=format:’'Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
@@ -706,12 +716,6 @@ $ git cherry-pick <A> <B>	将A和B提交应用过来
 $ git cherry-pick A..B		将A之后到B应用过来
 $ git cherry-pick A^..B 	将包括A到B应用过来
 ```
-
-
-手动版：
-git diff commitHash1 commitHash2 > 123.patch
-git apply --reject 123.patch
-
 
 # LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master' 
 remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a manual "git lfs push --all".
@@ -844,13 +848,6 @@ usbredirproto.h:             C source, Non-ISO extended-ASCII text
 函数地方少写了分号。
 
 git diff的颜色显示开关：git config color.ui true
-
-
-
-git如何生成单个文件的补丁
-背景：有时候碰到一个commit包含了好几个文件的修改，但是我只需要其中一个文件的修改内容，那么这时候就需要以下方法来生成这一个文件对应修改内容的补丁
-
-答:git format-patch "参照的commit-id" filename1 filename2
 
 ### 20210429
 GitHub的fork、start、watch使用
@@ -1229,6 +1226,33 @@ git lg
 ## 常用的高级git总结命令
 git log -p	相当于增加git show [commit_id]
 
-
+## error: src refspec master does not match any.解决办法
+我这个原因是master分支没有权限，当前分支在master上，却想上库到另外一个分支上面。
+解决方法：本地创建新分支，然后再提交。
+```
+[root@chroot <hankin> /part1/VMP5.5.1/home/hankin/packages/spice ]#git push -u origin TD123456
+error: src refspec TD123456 does not match any.
+error: failed to push some refs to 'http://58778:KHdfszrxLE3EqkvGptpk@github.org/spice.git'
+[root@chroot <hankin> /part1/home/hankin/packages/spice ]#git branch
+* master
+[root@chroot <hankin> /part1/home/hankin/packages/spice ]#git checkout -b TD123456
+Switched to a new branch 'TD123456'
+[root@chroot <hankin> /part1/home/hankin/packages/spice ]#git branch
+* TD123456
+  master
+[root@chroot <hankin> /part1/home/hankin/packages/spice ]#git push -u origin TD123456
+Counting objects: 9, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.13 KiB, done.
+Total 5 (delta 4), reused 0 (delta 0)
+remote:
+remote: To create a merge request for TD123456, visit:
+remote:   http://github.org/spice/merge_requests/new?merge_request%5Bsource_branch%5D=TD123456
+remote:
+To http://58778:KHdfszrxLE3EqkvGptpk@github.org/spice.git
+ * [new branch]      TD123456 -> TD123456
+Branch TD123456 set up to track remote branch TD123456 from origin.
+```
 
 

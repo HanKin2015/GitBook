@@ -12,3 +12,7 @@ Google Chrome是一款由Google公司开发的网页浏览器，该浏览器基�
 
 - simple allow copy：任何网站实现自由复制
 - onetab：标签管理
+
+## 4、谷歌安装包下载地址
+https://www.iplaysoft.com/tools/chrome/
+
