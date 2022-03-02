@@ -181,6 +181,12 @@ mkfs.ext4命令可以磁盘分区创建ext4文件系统。该命令是mke2fs命�
 
 [root@linuxcool ~]# mkfs.ext4 -L 'root' -b 2048 /dev/sdb -m 5
 
+## 10、NTFS不是linux独有的吗
+centos报错：Error mounting /dev/sdd1 at /run/media/hankin/大白菜U盘: Filesystem type ntfs not configured in kernel.
+
+安装NTFS相关的包。
+
+
 
 
 

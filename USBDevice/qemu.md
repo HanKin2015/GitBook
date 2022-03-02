@@ -250,7 +250,8 @@ Proceed anyway? (y,N) y
 
 然鹅并没有复现问题。
 
-
+## os-posix:273 kvm: -device nec-usb-xhci,id=xhci,bus=pci.0,addr=0x1b.0x0: 'nec-usb-xhci' is not a valid device model name
+发现是qemu文件被重定向了，即qemu文件中没有放开xhci主控端口数量。
 
 
 
