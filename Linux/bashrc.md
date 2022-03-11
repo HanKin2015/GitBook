@@ -215,7 +215,12 @@ set backup
 endif
 ```
 
-
+### 代码对齐将tab键转换为空格
+```
+set ts=4
+set expandtab
+set autoindent
+```
 
 
 

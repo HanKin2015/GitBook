@@ -19,4 +19,14 @@
 ## 6、忍者必须死3
 ## 7、穿越火线
 
+## 8、每日十次机会猜四字词语
+汉兜：
+https://handle.antfu.me
+
+在线成语词典：
+http://chengyu.t086.com
+
+## 9、PC端有趣的小游戏
+小游戏合集：
+http://www.flashbynight.com
 

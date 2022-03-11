@@ -33,7 +33,7 @@ ulimit -c 0          关闭生成core文件
 ulimit -c unlimited  文件无限制大小
 ulimit -a            查看选项是否打开
 
-特别注意：unlimit运行之后显示unlimited，但是unlimit -c显示0
+特别注意：unlimit运行之后显示unlimited，但是unlimit -c显示0，这时候是没有开启生成core文件。
 只能说很误导人，以ulimit -c为主，会输出0和unlimited情况。
 ```
 
@@ -205,9 +205,117 @@ coredumpctl info $MYPID
 Linux对信号SIGQUIT(3)，SIGABRT(6), SIGFPE(8)和SIGSEGV(11)的默认处理，都可以强制让进程产生coredump文件。
 如果进程代码对这些信号做了其它处理，就不会产生了。
 
+附：在linux平台下，设置core dump文件生成的方法：
+
+1) 在终端中输入ulimit -c 如果结果为0，说明当程序崩溃时，系统并不能生成core dump。
+2) 使用ulimit -c unlimited命令，开启core dump功能，并且不限制生成core dump文件的大小。如果需要限制，加数字限制即可。ulimit - c 1024
+3) 默认情况下，core dump生成的文件名为core，而且就在程序当前目录下。新的core会覆盖已存在的core。通过修改/proc/sys/kernel/core_uses_pid文件，可以将进程的pid作为作为扩展名，生成的core文件格式为core.xxx，其中xxx即为pid
+4) 通过修改/proc/sys/kernel/core_pattern可以控制core文件保存位置和文件格式。例如：将所有的core文件生成到/corefile目录下，文件名的格式为core-命令名-pid-时间戳. echo "/corefile/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
+
+### 12-1、程序
+```
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+int main()
+{
+    int index = 0;
+    while(1) {
+        index++;
+        sleep(1);
+    }
+    return 0;
+}
+```
+
+### 12-2、操作
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #g++ study_coredump.cpp
+[root@ubuntu0006:/media/hankin/vdb/study] #./a.out &
+[1] 9632
+[root@ubuntu0006:/media/hankin/vdb/study] #cat /proc/sys/kernel/core_pattern
+/tmp/coredump/123
+[root@ubuntu0006:/media/hankin/vdb/study] #ll /tmp/coredump/
+ls: 无法访问'/tmp/coredump/': 没有那个文件或目录
+[root@ubuntu0006:/media/hankin/vdb/study] #kill -6 9632
+[1]+  已放弃               ./a.out
+[root@ubuntu0006:/media/hankin/vdb/study] #ll /tmp/coredump/
+ls: 无法访问'/tmp/coredump/': 没有那个文件或目录
+[root@ubuntu0006:/media/hankin/vdb/study] #ulimit -c
+0
+[root@ubuntu0006:/media/hankin/vdb/study] #ulimit -c unlimited
+[root@ubuntu0006:/media/hankin/vdb/study] #ulimit -c
+unlimited
+[root@ubuntu0006:/media/hankin/vdb/study] #./a.out &
+[1] 17140
+[root@ubuntu0006:/media/hankin/vdb/study] #kill -6 17140
+[1]+  已放弃               ./a.out
+[root@ubuntu0006:/media/hankin/vdb/study] #ll /tmp/coredump/
+ls: 无法访问'/tmp/coredump/': 没有那个文件或目录
+```
+
+万万没有想到，无法生成core文件，这是为啥呢？
+
+### 12-3、彻底明白了（么有创建文件夹）
+```
+#include <iostream>
+#include <unistd.h>
+#include <cstdio>
+#include <inttypes.h>
+
+using namespace std;
+
+int main()
+{
+    int index = 0;
+    printf("%s\n", index);
+
+    char str[12] = { 0 };
+    printf("%d\n", str);
+
+    char *p = NULL;
+    p = "hello";
+
+    uint64_t i = 1;
+    printf("%lu\n", i);
+    printf("%u\n", i);
+
+    char *q = NULL;
+    q[2] = 'd';
+    return 0;
+}
 
 
+[root@ubuntu0006:/media/hankin/vdb/study] #g++ study_coredump1.cpp
+[root@ubuntu0006:/media/hankin/vdb/study] #cat /proc/sys/kernel/core_pattern
+/tmp/coredump/123
+[root@ubuntu0006:/media/hankin/vdb/study] #mkdir -p /tmp/coredump
+[root@ubuntu0006:/media/hankin/vdb/study] #ll !$
+ll /tmp/coredump
+总用量 8
+drwxr-xr-x  2 root root 4096 3月  10 21:06 ./
+drwxrwxrwt 11 root root 4096 3月  10 21:06 ../
+[root@ubuntu0006:/media/hankin/vdb/study] #./a.out
+(null)
+-805439200
+1
+1
+段错误 (核心已转储)
+[root@ubuntu0006:/media/hankin/vdb/study] #ll /tmp/coredump
+总用量 232
+drwxr-xr-x  2 root root   4096 3月  10 21:06 ./
+drwxrwxrwt 11 root root   4096 3月  10 21:06 ../
+-rw-------  1 root root 557056 3月  10 21:06 123
+[root@ubuntu0006:/media/hankin/vdb/study] #g++ study_coredump2.cpp
+[root@ubuntu0006:/media/hankin/vdb/study] #./a.out &
+[1] 4192
+[root@ubuntu0006:/media/hankin/vdb/study] #kill -6 4192
+[1]+  已放弃               (核心已转储) ./a.out
+```
 
+使用kill命令可以生成coredump，但是太暴力，如果失败就呵呵了。
 
 
 

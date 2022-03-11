@@ -16,6 +16,28 @@ $ tee file							#在一个文件中复制内容
 
 目前并没有发现其太大的用处。
 
-
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #echo "ds"
+ds
+[root@ubuntu0006:/media/hankin/vdb/study] #echo -n "ds"
+ds[root@ubuntu0006:/media/hankin/vdb/study] #tee hj
+dsadl
+dsadl
+dsalkdk
+dsalkdk
+dsad
+dsad
+sdasda
+sdasda
+^C
+[root@ubuntu0006:/media/hankin/vdb/study] #cat hj
+dsadl
+dsalkdk
+dsad
+sdasda
+[root@ubuntu0006:/media/hankin/vdb/study] #echo -n "this is word" | tee hj
+this is word[root@ubuntu0006:/media/hankin/vdb/study] #cat hj
+this is word[root@ubuntu0006:/media/hankin/vdb/study] #
+```
 
 

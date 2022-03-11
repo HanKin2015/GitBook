@@ -94,23 +94,6 @@ int main()
 
 ```
 #include<stdio.h>
-typedef struct {
-    int len;
-    int array[];
-}SoftArray;
-
-int main() {
-    int len = 10;
-    printf("The struct's size is %d\n",sizeof(SoftArray));
-    return 0;
-}
-
-[root@VM-0-7-centos mydoc]# ./a.out 
-The struct's size is 4
-```
-
-```
-#include<stdio.h>
 #include<malloc.h>
 
 typedef struct {
@@ -118,22 +101,84 @@ typedef struct {
     int array[];
 }SoftArray;
 
-int main() {
+void test1()
+{
+    int len = 10;
+    printf("The struct's size is %lu\n",sizeof(SoftArray));
+	return;
+}
+
+void test2()
+{
     int len = 10;
     SoftArray *p=(SoftArray*)malloc(sizeof(SoftArray) + sizeof(int)*len);
-    printf("SoftArray size is %d\n", sizeof(SoftArray));
+    printf("SoftArray size is %lu\n", sizeof(SoftArray));
     free(p);
+	return;
+}
 
+void test3()
+{
+    int len = 10, i = 0;
+    SoftArray *p = (SoftArray*)malloc(sizeof(SoftArray)+sizeof(int)*len);
+    p->len = len;
+    for(i = 0;i < p->len; i++) {
+        p->array[i] = i+1;
+    }
+    for(i = 0;i < p->len; i++) {
+        printf("%d\n", p->array[i]);
+    }
+    free(p);
+    return;
+}
+
+int main()
+{
+	printf("sizeof(int): %lu\n", sizeof(int));
+	test1();
+	test2();
+	test3();
     return 0;
 }
 
-[root@VM-0-7-centos mydoc]# ./a.out 
+运行结果：
+sizeof(int): 4
+The struct's size is 4
 SoftArray size is 4
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 ```
 
-array明确来说不算是结构体成员，只是挂羊头卖狗肉而已。
+可以看出结构体的大小在创建时已经确定了，array明确来说不算是结构体成员，只是挂羊头卖狗肉而已。
 
+## 3、什么是变长数组？
 
+变长数组既数组大小待定的数组， C语言中结构体的最后一个元素可以是大小未知的数组，也就是所谓的0长度，所以我们可以用结构体来创建变长数组。
+
+## 4、变长数组有什么用途 ？
+
+它的主要用途是为了满足需要变长度的结构体，为了解决使用数组时内存的冗余和数组的越界问题。
+
+## 5、用法
+在一个结构体的最后 ，申明一个长度为空的数组，就可以使得这个结构体是可变长的。对于编译器来说，此时长度为0的数组并不占用空间，因为数组名
+
+本身不占空间，它只是一个偏移量， 数组名这个符号本身代 表了一个不可修改的地址常量 （注意：数组名永远都不会是指针！ ），但对于这个数组的大小，我们
+
+可以进行动态分配,对于编译器而言，数组名仅仅是一个符号，它不会占用任何空间，它在结构体中，只是代表了一个偏移量，代表一个不可修改的地址常量！
+
+对于变长数组的这个特点，很容易构造出变长结构体，如缓冲区，数据包等等
+
+这样的变长数组常用于网络通信中构造不定长数据包，不会浪费空间浪费网络流量，比如我要发送1024字节的数据，如果用定长包，假设定长包的长度为2048，就会浪费1024个字节的空间，也会造成不必要的流量浪费。
+
+## 6、
 
 
 

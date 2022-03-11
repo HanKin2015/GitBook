@@ -250,7 +250,7 @@ cout << "abc" "123" << endl;
 ```
 
 
-## 需要理解
+## 16、需要理解
 博客：https://www.cnblogs.com/zhangyabin---acm/p/3188076.html
 
 ```
@@ -262,18 +262,18 @@ cout << "abc" "123" << endl;
 ```
 但并非总是如此，也有些系统不将0地址作为NULL，而是用其他的地址，所以说，千万别将NULL和0等价起来，特别是在一些跨平台的代码中，这更是将给你带来灾难。
 
-## MTU
+## 17、MTU
 https://yq.aliyun.com/articles/222535
 
 
 
 
-## c语言报错-- no previous prototype for function
+## 18、c语言报错-- no previous prototype for function
 当我们使用了一个函数，但是没有在头文件中声明时，就会出这个错误。
 有时是因为去掉了static。static的函数使用和普通函数还是有区别的。static函数不需要声明。
 解决办法，头文件中添加声明即可。
 
-## !! 两次取反
+## 19、!! 两次取反
 两次取反是将对应的类型转换为boolean。第一次取反将变量转换为了bool值，但结果是相反的，所以第二次取反获得正确的结果。
 
 ```
@@ -320,7 +320,7 @@ struct k
 从以上分析可以看出，位域在本质上就是一种结构类型， 不过其成员是按二进位分配的。
 ```
 
-## C程序中的raise和kill两个函数有何不同？
+## 20、C程序中的raise和kill两个函数有何不同？
  
 在Linux上执行“man raise”，即可看到两者的区别：
 LIBC库函数，raise基于系统调用kill或tgkill（如果内核支持）实现
@@ -330,9 +330,13 @@ kill是系统调用，不是LIBC库函数
 
 在多线程程序中，进程给自己发SIGTERM信号退出，应当调用“kill(getpid(), SIGTERM)”，而不是“raise(SIGTERM)”
 
+## 21、bool类型
+头文件：stdbool.h
 
+bool是C++的关键字，一种数据类型，长度是4！！！
+_Bool是C99新增加的关键字，长度是1，
+在C++中，又把bool重定义为_Bool ,typedef bool _Bool;
 
-
-
+怎么写程序都是1个字节，并不是4个字节。
 
 
