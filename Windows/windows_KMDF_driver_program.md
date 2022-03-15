@@ -546,7 +546,9 @@ DbgPrint("hejian\n");
 ```
 第三行未打印出来，其余都在debugview中显示出来。
 
+在驱动编程学习中，往往需要通过DbgPrint或者KdPrint来输出调试信息，对于Check版本，KdPrint只是DbgPrint的一个宏定义，而对于Free版本，KdPrint将被优化掉。这些输出信息可以通过DebugView对内核的监控来看到。
 
+KdPrint is identical to the DbgPrint routine in code that is compiled in a checked build environment. This routine has no effect if compiled in a free build environment. Only kernel-mode drivers can call theKdPrint routine.
 
 
 

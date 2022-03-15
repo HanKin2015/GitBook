@@ -317,6 +317,7 @@ drwxrwxrwt 11 root root   4096 3月  10 21:06 ../
 
 使用kill命令可以生成coredump，但是太暴力，如果失败就呵呵了。
 
-
+## 13、使用gdb生成core文件
+使用gdb命令挂载到进程，然后执行generate-core-file命令即可，方便快捷，然后快速退出就不会破坏环境了。
 
 

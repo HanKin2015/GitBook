@@ -172,6 +172,8 @@ qxl-2 disconnected
 qxl-3 disconnected
 ```
 
+## 8、在mobaxterm中执行firefox未拉起浏览器
+查看DISPLAY值为11，发现0和1都没有，发现10有。但是修改过来修改过去后又正常了。
 
 
 

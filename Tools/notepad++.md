@@ -2,6 +2,8 @@
 
 # 工具之notepad++
 
+我平时办公配置：Obsidian主题、Consolas字体、10大小、使用全局字体及大小
+
 # 1、markdown主题包
 
 网址：https://github.com/Edditoria/markdown-plus-plus

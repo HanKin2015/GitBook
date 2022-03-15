@@ -1255,4 +1255,52 @@ To http://58778:KHdfszrxLE3EqkvGptpk@github.org/spice.git
 Branch TD123456 set up to track remote branch TD123456 from origin.
 ```
 
+## 只查看提交记录
+git log --oneline
+git log --stat
+git log -p
+
+## .git文件夹太大问题及解决方法
+https://blog.csdn.net/lai1170137052/article/details/107009414/
+
+- 桌面打开gitbash，并切换到项目目录
+- 查找大文件，命令如下：
+git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
+python/U盘自动拷贝/1.txt1645063482
+longago/gluon_tutorials_zh.pdf
+
+- 删除指定的大文件,例如"youle0131.zip"
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch 'youle0203.zip'" --prune-empty --tag-name-filter cat -- --all
+
+git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+
+- 重新标记过期的缓存文件
+git reflog expire --expire=now --all
+
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch 'longago/gluon_tutorials_zh.pdf'" --prune-empty --tag-name-filter cat -- --all
+
+- 回收过期的缓存
+git gc --prune=now
+
+- 重新用命令统计下，看下大小
+git count-objects -v
+
+- 重新提交
+git push --all --force origin
+du -sh .git
+
+重复几次上面的命令一直找到前5的最大文件.进行删除操作. 就可以把大小降下来。
+
+- 清理回收远程库缓存，这一步很重要，否则无法push
+
+
+
+
+
+
+
+
+
+
+
 
