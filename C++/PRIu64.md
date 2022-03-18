@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         uint64_t u64 = 100;
         printf("uint64: %"PRIu64"\n", u64);
         printf("uint64: %"PRIu64, u64);
-        // printf("uint64: %lu\n", u64);   x86_84
+        // printf("uint64: %lu\n", u64);   x86_64
         // printf("uint64: %llu\n", u64);  x86
         return 0;
 }
@@ -45,7 +45,30 @@ https://baike.baidu.com/item/printf%28%29/402521?fr=aladdin
 
 主要是注意%u和%lu的区别。
 
+## 3、PRIu64和llu的区别
+ 其中以 int32_ t 为例其代表一个有符号的整数，在标准库stdint.h中，宏PRId32和PRIu64在inttypes.h中，其内部包括与整数有关的宏，详情请查看下方连接
+
+intyypes.h: https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html
+
+  当编译为64位程序时，宏 PRId32 展示形成字符串 “d” 宏PRIu64展示形成字符串 “lu”。
+
+  因此示例中printf的调用就转化为
+
+printf("x = %d, y = %lu\n", x, y);
+  因此使用宏能保证：无论代码是如何被编译的，都能生成正确的格式字符串。
 
 
-
-
+```
+#include <inttypes.h>  
+printf("%" PRId64 "\n", value);  
+```
+这是一种跨平台的书写方式，主要是为了同时支持32位和64位操作系统。PRId64表示64位整数，在32位系统中表示long long int，在64位系统中表示long int。相当于：
+```
+printf("%" "ld" "\n", value);  //64bit OS
+printf("%" "lld" "\n", value);  //32bit OS
+```
+或者
+```
+printf("%ld", value); // 64bit OS  
+printf("%lld", value); // 32bit OS
+```
