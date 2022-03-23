@@ -73,8 +73,24 @@ luvcview -d /dev/video0 -L
 ./yavta -f help可以查看所有格式
 raw可以修改为jpeg，是直接查看的。
 
-## 4、
-
+## 4、内核中高拍仪位置
 https://hceng.cn/
+
+```
+[root@ubuntu0006:/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media] #pwd
+/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media
+[root@ubuntu0006:/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media] #find ./* -name *o.ko
+./i2c/tvaudio.ko
+./mmc/siano/smssdio.ko
+./radio/radio-raremono.ko
+./radio/radio-maxiradio.ko
+./rc/keymaps/rc-tivo.ko
+./rc/keymaps/rc-reddo.ko
+./rc/keymaps/rc-flyvideo.ko
+./rc/keymaps/rc-dntv-live-dvbt-pro.ko
+./usb/gspca/gspca_topro.ko
+./usb/dvb-usb/dvb-usb-friio.ko
+./usb/uvc/uvcvideo.ko
+```
 
 

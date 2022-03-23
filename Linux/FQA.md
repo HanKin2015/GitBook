@@ -205,9 +205,37 @@ rsync -av --progress t01/demo.zip t02/
 
 原因: 不能创建临时文件文档,设备上没有剩余空间(告诉我们磁盘空间满了)
 
+## 19、XXXX is not in the sudoers file. This incident will be reported解决方法
+https://blog.csdn.net/qq_37964379/article/details/104193627
 
+解决方法:编辑sudoers文件有两种办法，一种是以root帐号执行visudo，另一种是root帐号执行vi /etc/sudoers.其实两者都是修改/etc/sudoers。
 
+注意：在修改 /etc/sudoers时，一定注意该文件是否有写权限，如果没有写权限，则使用 chmod u+w /etc/sudoers使其拥有写权限
+。写完后注意将写权限去掉，以防止误操作。
 
+假设你的用户名是“minghai”，属于“minghai”用户组。
+
+为了让用户minghai能够执行sudo命，你可以在sudoers文件中加上一下四行的任意一行。
+```
+minghai            ALL=（ALL）             ALL 
+
+%minghai          ALL=（ALL）             ALL
+
+minghai            ALL=（ALL）             NOPASSWD：ALL(出于方便，推荐使用此设置) 
+
+%minghai          ALL=（ALL）             NOPASSWD：ALL
+```
+
+解释说明：
+
+第一行：允许用户minghai执行sudo命令（需要输入密码）。
+第二行：允许用户组minghai里面的用户执行sudo命令（需要输入密码）。
+第三行：允许用户minghai执行sudo命令，并且在执行的时候不输入密码。
+第四行：允许用户组minghai里面的用户执行sudo命令，并且在执行的时候不输入密码。
+当然如果你理解上面的原理后，可以直接输入如下命令解决此问题
+
+su -
+echo 'xxx ALL=(ALL) ALL' >> /etc/sudoers  (其中xxx代表用户名) 
 
 
 

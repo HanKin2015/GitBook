@@ -42,14 +42,14 @@ chgrp
 上面的-可以进行选择，首先会查找是否存在前面的变量，有就赋值，否则就赋值后面的字符串值。
 如：
 ```
-[root@ubuntu0006:/media/sangfor/vdb] #HJ="abcde"
-[root@ubuntu0006:/media/sangfor/vdb] #echo $HJ
+[root@ubuntu0006:/media/hankin/vdb] #HJ="abcde"
+[root@ubuntu0006:/media/hankin/vdb] #echo $HJ
 abcde
-[root@ubuntu0006:/media/sangfor/vdb] #CHHJ=${HJ-ok}
-[root@ubuntu0006:/media/sangfor/vdb] #echo $CHHJ
+[root@ubuntu0006:/media/hankin/vdb] #CHHJ=${HJ-ok}
+[root@ubuntu0006:/media/hankin/vdb] #echo $CHHJ
 abcde
-[root@ubuntu0006:/media/sangfor/vdb] #CHHJ=${WHL-ok}
-[root@ubuntu0006:/media/sangfor/vdb] #echo $CHHJ
+[root@ubuntu0006:/media/hankin/vdb] #CHHJ=${WHL-ok}
+[root@ubuntu0006:/media/hankin/vdb] #echo $CHHJ
 ok
 ```
 

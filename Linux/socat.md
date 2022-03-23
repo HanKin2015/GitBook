@@ -59,7 +59,7 @@ https://blog.csdn.net/wuheshi/article/details/107364998
 
 
 ```
-[root@ubuntu0006:/media/sangfor/vdb/study] #ll copied/null/
+[root@ubuntu0006:/media/hankin/vdb/study] #ll copied/null/
 总用量 48
 drwxr-xr-x  4 root root  4096 10月 26 16:23 ./
 drwxr-xr-x 29 root root  4096 10月 26 16:28 ../

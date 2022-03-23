@@ -167,13 +167,13 @@ dag dbg dcg ddg
 $ echo {11..15}
 11 12 13 14 15
 
-[root@ubuntu0006:/media/sangfor/vdb/study] #echo {11..15}
+[root@ubuntu0006:/media/hankin/vdb/study] #echo {11..15}
 11 12 13 14 15
-[root@ubuntu0006:/media/sangfor/vdb/study] #echo {11.15}
+[root@ubuntu0006:/media/hankin/vdb/study] #echo {11.15}
 {11.15}
-[root@ubuntu0006:/media/sangfor/vdb/study] #echo {11...15}
+[root@ubuntu0006:/media/hankin/vdb/study] #echo {11...15}
 {11...15}
-[root@ubuntu0006:/media/sangfor/vdb/study] #echo {11....15}
+[root@ubuntu0006:/media/hankin/vdb/study] #echo {11....15}
 {11....15}
 ```
 注意一定是两个句号。

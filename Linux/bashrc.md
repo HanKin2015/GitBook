@@ -248,7 +248,7 @@ Kconfig
 # /.profile : env for login
 
 . /.PATH
-PS1="\[\033[01;31m\]Sangfor:aSV/\h \[\033[01;32m\]\w \[\033[01;31m\]# \[\033[00m\]"
+PS1="\[\033[01;31m\]hankin:aSV/\h \[\033[01;32m\]\w \[\033[01;31m\]# \[\033[00m\]"
 alias ls="ls -F --color=auto"
 alias l="ls"
 alias ll="ls -l"
