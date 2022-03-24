@@ -379,10 +379,42 @@ itoa是广泛使用的非标准C语言和C++语言扩展功能。但因为它是
 ## 34、error C2653: “xxxxxxx”: 不是类或命名空间名称
 一开始以为是类没有设置friend，后来才发现是没有导入类所在的头文件。
 
+## 35、error: expected expression before ‘uint64_t’
+```
+uint64_t get_monolithic_time()
+{
+#ifdef HAVE_CLOCK_GETTIME
+    struct timespec time_space;
+    clock_gettime(CLOCK_MONOTONIC, &time_space);
+    return uint64_t(time_space.tv_sec) * 1000 * 1000 * 1000 + uint64_t(time_space.tv_nsec);
+#else
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return uint64_t(tv.tv_sec) * 1000 * 1000 * 1000 + uint64_t(tv.tv_usec) * 1000;
+#endif
+}
 
+[root@ubuntu0006:/media/hankin/vdb/study] #g++ study_time1.c
+[root@ubuntu0006:/media/hankin/vdb/study] #./a.out
+mm_time: 3493622625308375
+[root@ubuntu0006:/media/hankin/vdb/study] #gcc study_time1.c
+study_time1.c: In function ‘get_monolithic_time’:
+study_time1.c:22:12: error: expected expression before ‘uint64_t’
+     return uint64_t(time_space.tv_sec) * 1000 * 1000 * 1000 + uint64_t(time_space.tv_nsec);
+            ^
+```
+是不是很惊喜很意外？？？
 
+修改成这样也是同样报错：
+```
+uint64_t ret = uint64_t(time_space.tv_sec);
 
-
+[root@ubuntu0006:/media/hankin/vdb/study] #gcc study_time1.c
+study_time1.c: In function ‘get_monolithic_time’:
+study_time1.c:22:20: error: expected expression before ‘uint64_t’
+     uint64_t ret = uint64_t(time_space.tv_sec);
+                    ^
+```
 
 
 

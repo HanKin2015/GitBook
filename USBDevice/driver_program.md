@@ -39,3 +39,15 @@ modprobe usbmon
 lsusb
 cat /sys/kernel/debug/usb/usbmon/2u | grep "003:"
 ```
+
+## 3、depmod命令
+在linux桌面系统中，当你编译了新的驱动，为了能够用modprobe ***加载模块, 你需要先将模块拷贝到/lib/modules /2.6.31-20-generic目录下，然后运行sudo depmod -a将模块信息写入modules.dep、modules.dep.bin、modules.alias.bin、modules.alias和modules.pcimap文件中。
+
+如，我编译了一个新的wifi驱动r8192se_pci.ko，将其拷贝到/lib/modules/2.6.31-20-generic/wireless下，然后到/lib/modules/2.6.31-20-generic运行depmod -a，之后可以在任意目录运行modprobe r8192se_pci。
+
+https://ywnz.com/linux/depmod/
+
+
+
+
+

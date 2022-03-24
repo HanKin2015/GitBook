@@ -30,7 +30,7 @@ cheese /dev/video0
 #不支持ssh远程显示
 ```
 
-### 使用应用程序camorama
+### 3-1、使用应用程序camorama
 ```
 sudo apt-get install camorama
 camorama
@@ -40,14 +40,14 @@ Xmanager是一个运行于MS Windows平台上的高性能的X window服务器。
 
 Xmanager可以将PC变成X Windows工作站，它可以无缝拼接到UNIX 应用程序中。在UNIX/Linux和Windows网络环境中，Xmanager 是最好的连通解决方案。
 
-### 其他
+### 3-2、其他
 xawtv可以只使用apt install xawtv安装
 webcam使用apt安装后打开摄像头一闪一闪的，无法正常使用
 wxcam不错，推荐使用，详情见v4l2.md文件
 看到一个kamoso的安装包，安装后各种qt错误，无果
 （Qt: Session management error: None of the authentication protocols specified are supported这个问题的根源是当前是以root身份进行登录的，而运行程序需要更换一种角色。退出root 运行应用程序就OK了)
 
-### luvcview
+### 3-3、luvcview
 好像非常不错，安装包地址：https://launchpad.net/ubuntu/precise/amd64/luvcview/1:0.2.6-5
 直接make，报错SDL/SDL.h，安装libsdl1.2-dev，安装libsdl2-dev不行
 uvcvideo.h:5:10: fatal error: linux/videodev.h: No such file or directory
@@ -60,7 +60,7 @@ luvcview -d /dev/video1 -f yuv -s 640x480
 luvcview -d /dev/video1 -f mjpg -s 640x480
 luvcview -d /dev/video0 -L
 
-### yavtv
+### 3-4、yavtv
 基于 Linux V4L2 子系统进行图像采集，需要遵循一定的流程规范，操作起来也不算简单。如果只是作为测试、调试使用，yavta 工具就很好使了。它支持很多常规的操作选项，可以按需配置使用。
 
 其源代码也是挺简洁紧凑的，以后再找时间好好阅读学习下。这里主要是讲解这个工具基于创龙 TL570x-EVM 的编译与使用。
@@ -72,6 +72,11 @@ luvcview -d /dev/video0 -L
 ./yavta /dev/video1 -c1 -n4 -s1920x1080 -fSRGGB10 -Fvideo.raw
 ./yavta -f help可以查看所有格式
 raw可以修改为jpeg，是直接查看的。
+
+### 3-5、教程
+哎，我发现linux找不到一款可以切换分辨率和格式的软件。
+todo，有时间可以自己写一个linux版本的摄像头软件，可以切换分辨率和格式。
+https://www.jianshu.com/p/20d4b81f8d14
 
 ## 4、内核中高拍仪位置
 https://hceng.cn/
@@ -92,5 +97,64 @@ https://hceng.cn/
 ./usb/dvb-usb/dvb-usb-friio.ko
 ./usb/uvc/uvcvideo.ko
 ```
+
+在linux中查找：find / -name uvcvideo.ko
+一般来说在内核位置：
+/lib/modules/5.4.0-104-generic/kernel/drivers/media/usb/uvc/uvcvideo.ko
+/lib/modules/5.4.0-100-generic/kernel/drivers/media/usb/uvc/uvcvideo.ko
+
+加载：
+rmmod uvcvideo
+insmod uvcvideo.ko
+
+## 5、编译内核
+### 5-1、内核打包
+```
+/usr/src/linux-source-4.2.tar.xz //内核源码
+debian8代码中内核路径：D:\Demo\debians\three-part-deb-depends\kernel\linux-source-4.2_4.2.5-1~bpo8+1_all.deb
+debian9代码中内核路径：D:\Demo\debians\deb9-xserver\linux-source-4.9_4.9.168-1+deb9u4_all.deb
+
+- 将文件拷贝到编译环境48.17
+- 解压缩：dpkg -X linux-source-4.2_4.2.5-1~bpo8+1_all.deb extract
+- 进入文件夹：cd extract/usr/src/
+- 再次解压缩：tar xJf linux-source-4.2.tar.xz
+- 拷贝文件出来：cp ./linux-config-4.2/config.amd64_none_amd64.xz ./
+- 解压：xz -d config.amd64_none_amd64.xz  得到config.amd64_none_amd64
+
+$ cd linux-source-4.2
+cp ../config.amd64_none_amd64 ./.config
+
+非常重要的一步，因为解压的内核文件是开源，没有任何我们的修改，因此需要先将修改的文件拷贝进去：
+D:\Demo\debians\adesk-kernel\src\linux-source-4.9
+
+修改内核代码，如：
+linux-source-4.2/drivers/usb/host/ehci-sched.c
+linux-source-4.9/drivers/media/usb/uvc/uvc_video.c
+
+当前目录：linux-source-4.2
+不要这一步$ make menuconfig
+$ scripts/config --disable DEBUG_INFO
+$ make clean
+修改最后4个数字：$ fakeroot make deb-pkg LOCALVERSION=-amd64 KDEB_PKGVERSION=4.2.5-1~bpo8+1+adesk5.4.5.2020 // 基础版本与linux-source-4.2的保持一致，并添加adesk的版本
+
+inux-source-4.9：fakeroot make deb-pkg LOCALVERSION=-amd64 KDEB_PKGVERSION=4.9.168-1~bpo8+1+adesk5.4.10.0
+```
+
+### 5-2、单独编译
+https://blog.csdn.net/bingyu9875/article/details/95972059
+
+
+实测通过：
+```
+make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9 M=/media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9/drivers/media/usb/uvc  modules
+
+或者
+
+cd /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9/drivers/media/usb/uvc
+make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9 M=`pwd`  modules
+```
+
+
+
 
 
