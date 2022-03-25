@@ -47,8 +47,21 @@ wxcam不错，推荐使用，详情见v4l2.md文件
 看到一个kamoso的安装包，安装后各种qt错误，无果
 （Qt: Session management error: None of the authentication protocols specified are supported这个问题的根源是当前是以root身份进行登录的，而运行程序需要更换一种角色。退出root 运行应用程序就OK了)
 
-### 3-3、luvcview
+### 3-3、luvcview（目前发现的能切换分辨率的摄像头软件）
 好像非常不错，安装包地址：https://launchpad.net/ubuntu/precise/amd64/luvcview/1:0.2.6-5
+
+```
+参考：https://www.freesion.com/article/664167059/
+apt install make
+apt install libv4l-dev(make: sdl-config: Command not found)
+ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h(fatal error: linux/videodev.h: 没有那个文件或目录)
+
+搞定：
+./luvcview -d /dev/video0 -f yuv -s 640x480
+./luvcview -d /dev/video0 -f mjpg -s 640x480
+```
+
+
 直接make，报错SDL/SDL.h，安装libsdl1.2-dev，安装libsdl2-dev不行
 uvcvideo.h:5:10: fatal error: linux/videodev.h: No such file or directory
 #include <linux/videodev.h>
@@ -73,7 +86,11 @@ luvcview -d /dev/video0 -L
 ./yavta -f help可以查看所有格式
 raw可以修改为jpeg，是直接查看的。
 
-### 3-5、教程
+### 3-5、VLC
+apt install vlc
+VLC多媒体播放器是一款多媒体播放器。VLC播放器支持数十种音频、视频格式的解码，让用户不用再辛苦转码才能观看罕见格式。并且VLC播放器使用简单的命令行功能。
+
+### 3-6、教程
 哎，我发现linux找不到一款可以切换分辨率和格式的软件。
 todo，有时间可以自己写一个linux版本的摄像头软件，可以切换分辨率和格式。
 https://www.jianshu.com/p/20d4b81f8d14
@@ -151,7 +168,10 @@ make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/
 或者
 
 cd /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9/drivers/media/usb/uvc
-make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9 M=`pwd`  modules
+make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9 M=`pwd` modules
+
+
+make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/sangfor/vdb/Rockchip/kernel M=`pwd` modules
 ```
 
 

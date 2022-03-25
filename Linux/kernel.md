@@ -6,6 +6,8 @@
 HTTP	https://www.kernel.org/pub/
 GIT	https://git.kernel.org/
 
+查看上库记录及源码：https://www.kernel.org/  点击browse即可。
+
 官网下载经常速度太慢，无法下载，提供另一个链接：
 http://ftp.sjtu.edu.cn/sites/ftp.kernel.org/pub/linux/kernel/
 

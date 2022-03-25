@@ -10,8 +10,12 @@ GPS 系统中有两种时间区分，一为UTC，另一为LT（地方时）两�
 
 ## 2、time_t结构体
 time_t 这种类型就是用来存储从1970年到现在经过了多少秒，要想更精确一点，可以用结构struct timeval，它精确到微妙。
+在/usr/include/time.h查找即可。
 ```
-
+x86_64-linux-gnu/bits/typesizes.h:# define __SYSCALL_SLONG_TYPE __SQUAD_TYPE
+x86_64-linux-gnu/bits/typesizes.h:#define __TIME_T_TYPE         __SYSCALL_SLONG_TYPE
+x86_64-linux-gnu/bits/types.h:__STD_TYPE __TIME_T_TYPE __time_t;        /* Seconds since the Epoch.  */
+time.h:typedef __time_t time_t;
 ```
 
 ## 3、tm结构体
@@ -33,13 +37,36 @@ struct tm {
 };
 #define _TM_DEFINED
 #endif
+
+__BEGIN_NAMESPACE_STD
+/* Used by other time functions.  */
+struct tm
+{
+  int tm_sec;           /* Seconds. [0-60] (1 leap second) */
+  int tm_min;           /* Minutes. [0-59] */
+  int tm_hour;          /* Hours.   [0-23] */
+  int tm_mday;          /* Day.     [1-31] */
+  int tm_mon;           /* Month.   [0-11] */
+  int tm_year;          /* Year - 1900.  */
+  int tm_wday;          /* Day of week. [0-6] */
+  int tm_yday;          /* Days in year.[0-365] */
+  int tm_isdst;         /* DST.     [-1/0/1]*/
+
+# ifdef __USE_MISC
+  long int tm_gmtoff;       /* Seconds east of UTC.  */
+  const char *tm_zone;      /* Timezone abbreviation.  */
+# else
+  long int __tm_gmtoff;     /* Seconds east of UTC.  */
+  const char *__tm_zone;    /* Timezone abbreviation.  */
+# endif
+};
 ```
 
 ## 4、timeval结构体
 ```
 struct timeval
 {
-    long tv_sec; /*秒*/
+    long tv_sec;  /*秒*/
     long tv_usec; /*微秒*/
 };
 ```
@@ -47,7 +74,13 @@ struct timeval
 
 ## 5、timespec结构体
 ```
-
+/* POSIX.1b structure for a time value.  This is like a `struct timeval' but
+   has nanoseconds instead of microseconds.  */
+struct timespec
+{
+	__time_t 		  tv_sec;	/* Seconds.  */
+	__syscall_slong_t tv_nsec;  /* Nanoseconds.  */
+};
 ```
 
 ## 6、下面介绍一下我们常用的时间函数
@@ -82,10 +115,10 @@ time_t time(time_t *t);
 ## 7、linux时间间隔计算
 
 ## 8、time()
-
-   #include <time.h>
-   time_t time(time_t *t);
-
+```
+#include <time.h>
+time_t time(time_t *t);
+```
 主要的用法是两种
 time_t begin = time(NULL)
 或者
