@@ -9,11 +9,11 @@
 ## 3、方法2失败
 dos窗口输入diskpart
 ```
-lisk disk
+lisk disk（显示所有磁盘）
 select disk 1（数字表示选择你要操作的盘，如1表示为我的移动硬盘;）
-diskpart
-att disk clear readonly
-attribute disk
+diskpart（显示帮助信息）
+att disk clear readonly（清楚只读属性）
+attribute disk（显示磁盘属性）
 ```
 结果显示已成功清除磁盘属性。
 
@@ -38,6 +38,14 @@ pause
 ## 6、没有试过
 建议 进入 PE 格式下 格式化 U 盘 或者 在 安全格式 下 进行格式化 U 盘 里面有错误数据 在运行 就算 你提取 出来的文件 信息 也是 不完整的 数据 时间长 还是一样
 
+## 7、未尝试，已把U盘弄坏
+https://segmentfault.com/q/1010000007503021
+查到可以使用dosfsck -v -a U盘所在位置
 
+umount /media/（U盘被挂在后的名字）
+sudo dosfsck -v -a /dev/sde1
 
+## 8、金士顿u盘写保护修复工具绿色版(restore)v3.7 中文版
+发现真的也只有金士顿有这个问题？？？
 
+http://www.downyi.com/downinfo/145100.html

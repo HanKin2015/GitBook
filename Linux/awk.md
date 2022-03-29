@@ -92,16 +92,133 @@ hj=`ps aux | grep kill`
 echo 'lalalala:' ${hj}
 ```
 
+## 5、awk: not found
+```
+rk3288:/ # cd /system/
+rk3288:/system # find . -name awk
+rk3288:/system # find . -name ls
+./bin/ls
+rk3288:/system # find . -name awk
+rk3288:/system # find . -name pwd
+./bin/pwd
+rk3288:/system # echo $PATH
+/sbin:/system/sbin:/system/bin:/system/xbin:/vendor/bin:/vendor/xbin
+rk3288:/system # cd /vendor/
+rk3288:/vendor # find . -name pwd
+./bin/pwd
+rk3288:/vendor # find . -name awk
+rk3288:/vendor #
+rk3288:/vendor # cd /sdcard/test/
+rk3288:/sdcard/test # ./et.sh
+/system/bin/sh: ./et.sh: No such file or directory
+1|rk3288:/sdcard/test # /system/bin/sh et.sh
+et.sh[3]: awk: not found
 
+rk3288:/sdcard/test # /sdcard/test/et.sh
+/system/bin/sh: /sdcard/test/et.sh: No such file or directory
+1|rk3288:/sdcard/test #
+```
+特别神奇，仔细查看了一遍，果然没有awk这个命令。
 
+https://www.cnblogs.com/ITyannic/p/3973489.html
 
+但是，测试发现确实能进行awk命令执行，一定要找到原因：
+```
+rk3288:/sdcard/test # alias  | grep awk
+awk='busybox awk'
+rk3288:/sdcard/test # whence awk
+'busybox awk'
+rk3288:/sdcard/test # which awk
+1|rk3288:/sdcard/test #
+```
 
+然后就在脚本中增加busybox字样，脚本执行成功。
+注释：环境是Android后台。
 
+## 6、常用参数
+AWK 是一种处理文本文件的语言，是一个强大的文本分析工具。
 
+之所以叫 AWK 是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的 Family Name 的首字符。
 
+-F：指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式
 
+## 7、实战
+```log.txt
+2 this is a test
+3 Are you like awk
+This's a test
+10 There are orange,apple,mongo
+```
 
+用法一：awk '{[pattern] action}' {filenames}   # 行匹配语句 awk '' 只能用单引号
 
+```
+# 每行按空格或TAB分割，输出文本中的1、4项
+[root@ubuntu0006:/media/hankin/vdb/study] #awk '{print $1,$4}' log.txt
+2 a
+3 like
+This's
+10 orange,apple,mongo
+
+# 格式化输出
+[root@ubuntu0006:/media/hankin/vdb/study] #awk '{printf "%-8s %-10s\n",$1,$4}' log.txt
+2        a
+3        like
+This's
+10       orange,apple,mongo
+```
+
+用法二：awk -F  #-F相当于内置变量FS, 指定分割字符
+```
+# 使用","分割
+[root@ubuntu0006:/media/hankin/vdb/study] #awk -F, '{print $1,$2}'   log.txt
+2 this is a test
+3 Are you like awk
+This's a test
+10 There are orange apple
+ 
+# 或者使用内建变量
+[root@ubuntu0006:/media/hankin/vdb/study] #awk 'BEGIN{FS=","} {print $1,$2}'     log.txt
+2 this is a test
+3 Are you like awk
+This's a test
+10 There are orange apple
+
+# 使用多个分隔符.先使用空格分割，然后对分割结果再使用","分割
+[root@ubuntu0006:/media/hankin/vdb/study] #awk -F '[ ,]'  '{print $1,$2,$5}'   log.txt
+2 this test
+3 Are awk
+This's a
+10 There apple
+```
+
+用法三：awk -v  # 设置变量
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #awk -va=1 '{print $1,$1+a}' log.txt
+2 3
+3 4
+This's 1
+10 11
+[root@ubuntu0006:/media/hankin/vdb/study] #awk -va=1 -vb=s '{print $1,$1+a,$1b}' log.txt
+2 3 2s
+3 4 3s
+This's 1 This'ss
+10 11 10s
+```
+
+用法四：awk -f {awk脚本} {文件名}
+
+## 8、内建变量
+```
+# 过滤第一列大于2并且第二列等于'Are'的行
+[root@ubuntu0006:/media/hankin/vdb/study] #awk '$1>2 && $2=="Are" {print $1,$2,$3}' log.txt
+3 Are you
+```
+ERRNO	最后一个系统错误的描述
+FILENAME	当前文件名
+FNR	各文件分别计数的行号
+NF	一条记录的字段的数目
+NR	已经读出的记录数，就是行号，从1开始
 
 
 

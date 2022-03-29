@@ -171,7 +171,7 @@ cd /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9/dri
 make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/extract/usr/src/linux-source-4.9 M=`pwd` modules
 
 
-make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/sangfor/vdb/Rockchip/kernel M=`pwd` modules
+make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian8/extract/usr/src/linux-4.2 M=`pwd` modules
 ```
 
 

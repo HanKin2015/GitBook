@@ -249,27 +249,16 @@ chown runoob:runoobgroup file1.txt
 chown -R runoob:runoobgroup *
 ```
 
-# 14、alias
+# 14、suspend命令
+Linux suspend命令用于暂停执行shell。
+suspend为shell内建指令，可暂停目前正在执行的shell。若要恢复，则必须使用SIGCONT信息。
 
-命令别名
-
+若目前执行的shell为登入的shell，则suspend预设无法暂停此shell。若要强迫暂停登入的shell，则必须使用-f参数。
 ```
-alias显示当前别名列表
-unalias取消命令别名
-
-eg:
-alias ll='ls -l --color=auto'
-unalias ll
+# suspend 
+-bash: suspend: 无法挂起一个登录 shell
+# suspend -f
 ```
-
-使用shell脚本执行alias命令未生效：
-```add_alias.sh
-#!/bin/bash
-
-alias cl='cd /home/hankin/log/'
-```
-
-执行add_alias.sh脚本后未生效，正确方式是source add_alias.sh这样就可以了。
 
 # 15、999用户组
 usermod -g 999 abc
@@ -326,16 +315,7 @@ xset dpms 0 0 0
 
 但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
 
-# 19、suspend命令
-Linux suspend命令用于暂停执行shell。
-suspend为shell内建指令，可暂停目前正在执行的shell。若要恢复，则必须使用SIGCONT信息。
 
-若目前执行的shell为登入的shell，则suspend预设无法暂停此shell。若要强迫暂停登入的shell，则必须使用-f参数。
-```
-# suspend 
--bash: suspend: 无法挂起一个登录 shell
-# suspend -f
-```
 
 
 

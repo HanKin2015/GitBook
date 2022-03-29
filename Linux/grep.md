@@ -194,6 +194,8 @@ data.txt has not word 'world'
 yes
 ```
 
+## 8、ps grep 不包括grep本身
+ps aux | grep defunct| grep -v "grep"
 
 
 

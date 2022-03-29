@@ -416,10 +416,23 @@ study_time1.c:22:20: error: expected expression before ‘uint64_t’
                     ^
 ```
 
+## 36、C++对象构建与使用，error: taking address of temporary [-fpermissive]
+error: taking address of temporary [-fpermissive]
 
+获取临时对象的地址，编译器是不允许的.
+这里要理解什么是临时对象，
+临时对象就是无名对象，在语句行上直接用类生成一个对象，
+它的生命周期是在该行创建，又在该行销毁.
+对于一个已经销毁或行将销毁的对象，你拿到它的地址是没有意义的，所以编译器这个婆婆就武断的告诉你，别拿这个地址，你拿它没有用，不许拿，它是临时对象地址.
 
+临时对象在该行还是有意义的，例如qt就用qDebug()临时对象向屏幕输出打印信息.
 
+下面给个简单的例子来理解对象的构建释放过程及临时对象的构建释放过程：D:\Github\Storage\c++\study\temporary_address.c
 
+## 37、warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+这时候我们只需要将相应定义变量的语句放到函数的开头即可。
+
+在内核代码中，尽可能的将变量的定义放到函数的开头。
 
 
 

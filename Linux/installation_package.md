@@ -77,10 +77,41 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 https://blog.51cto.com/lovexx/1975545
 跟着教程走解决。
 
+## 5、rpm命令
+centos系统使用。
 
+1）查询系统中已经安装的软件
 
+rpm -qa
 
+2）查询一个已经安装的文件属于哪个软件包；
 
+rpm -qf 文件名的绝对路径
 
+3）查询已安装软件包都安装到何处；
+
+rpm -ql 软件名
+
+4）查询一个已安装软件包的信息
+
+rpm -qi 软件名
+
+5）查看一下已安装软件的配置文件；
+
+rpm -qc 软件名
+
+6）查看一个已经安装软件的文档安装位置：
+
+rpm -qd 软件名
+
+7）查看一下已安装软件所依赖的软件包及文件；
+
+rpm -qR 软件名
+
+### 5-1、安装软件
+rpm -Uvh *.rpm --nodeps --force
+
+### 5-2、rpm离线包下载地址
+http://www.rpmfind.net/linux/rpm2html/search.php?query=vim&submit=Search+...&system=&arch=
 
 
