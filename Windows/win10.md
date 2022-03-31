@@ -80,7 +80,8 @@ Windows Vista较上一个版本Windows XP增加了上百种新功能，其中包
 ## 7、wmic查看运行进程的参数
 https://www.cnblogs.com/DiZhang/p/12544793.html
 
-
+## 8、windows10文件资源管理器 显示 上周 很久以前导致无法排序
+右键->分类依据->（无）
 
 
 

@@ -24,7 +24,9 @@ apt 和 apt-get区别
 
 apt search 和 apt-cache search区别
 
-## 4、apt命令安装安装包时报其他错误
+## 4、apt命令
+
+### 4-1、安装安装包时报其他错误
 ```
 [root@ubuntu0006:/media/hankin/vdb/null] #apt upgrade
 正在读取软件包列表... 完成
@@ -77,6 +79,19 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 https://blog.51cto.com/lovexx/1975545
 跟着教程走解决。
 
+### 4-2、使用apt install安装失败
+```
+root@hejian-H81M-S1:/home/hejian# apt install vim
+E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+root@hejian-H81M-S1:/home/hejian# rm /var/lib/dpkg/lock-frontend
+root@hejian-H81M-S1:/home/hejian# apt install ssh
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+root@hejian-H81M-S1:/home/hejian# rm /var/lib/dpkg/lock
+搞定
+```
+
 ## 5、rpm命令
 centos系统使用。
 
@@ -113,5 +128,17 @@ rpm -Uvh *.rpm --nodeps --force
 
 ### 5-2、rpm离线包下载地址
 http://www.rpmfind.net/linux/rpm2html/search.php?query=vim&submit=Search+...&system=&arch=
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -3,6 +3,8 @@
 ## 1、tweak工具
 ubuntu左侧叫做dock，一般有个优化工具叫做tweak。也可以在桌面背景设置-》行为。
 
+topicons plus
+
 ## 2、截图
 
 scrot命令
@@ -228,6 +230,7 @@ Kodi：触手可及的多媒体中心
 /sys/bus/usb/
 
 
+apt install gnome-tweaks  安装完后需要重启物理机
 
 
 

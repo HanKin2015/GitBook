@@ -214,12 +214,45 @@ This's 1 This'ss
 [root@ubuntu0006:/media/hankin/vdb/study] #awk '$1>2 && $2=="Are" {print $1,$2,$3}' log.txt
 3 Are you
 ```
+ARGC	命令行参数的数目
 ERRNO	最后一个系统错误的描述
 FILENAME	当前文件名
 FNR	各文件分别计数的行号
+FS	字段分隔符(默认是任何空格)
 NF	一条记录的字段的数目
 NR	已经读出的记录数，就是行号，从1开始
+OFS	输出字段分隔符，默认值与输入字段分隔符一致。
+ORS	输出记录分隔符(默认值是一个换行符)
+RS	记录分隔符(默认是一个换行符)
+
+```
+[root@ubuntu0006:/media/sangfor/vdb/study] #awk -F\' 'BEGIN{printf "%4s %4s %4s %4s %4s %4s %4s %4s %4s\n","FILENAME","ARGC","FNR","FS","NF","NR","OFS","ORS","RS";printf "---------------------------------------------\n"} {printf "%4s %4s %4s %4s %4s %4s %4s %4s %4s\n",FILENAME,ARGC,FNR,FS,NF,NR,OFS,ORS,RS}'  log.txt
+FILENAME ARGC  FNR   FS   NF   NR  OFS  ORS   RS
+---------------------------------------------
+log.txt    2    1    '    1    1
 
 
+log.txt    2    2    '    1    2
 
 
+log.txt    2    3    '    2    3
+
+
+log.txt    2    4    '    1    4
+
+
+# 输出顺序号 NR, 匹配文本行号
+[root@ubuntu0006:/media/sangfor/vdb/study] #awk '{print NR,FNR,$1,$2,$3}' log.txt
+1 1 2 this is
+2 2 3 Are you
+3 3 This's a test
+4 4 10 There are
+
+# 指定输出分割符
+[root@ubuntu0006:/media/sangfor/vdb/study] #awk '{print $1,$2,$5}' OFS=" $ "  log.txt
+2 $ this $ test
+3 $ Are $ awk
+This's $ a $
+10 $ There $
+
+```

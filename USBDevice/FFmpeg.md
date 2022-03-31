@@ -178,12 +178,24 @@ install:
 ```
 原来是没有添加source加载环境变量，source中一般来说会增加一些全局变量。
 
+## 5、FFmpeg av_hwdevice_ctx_create returns ENOMEM
+https://stackoverflow.com/questions/66462326/ffmpeg-av-hwdevice-ctx-create-returns-enomem
 
+https://blog.csdn.net/qq_23282479/article/details/107228634
 
+启发到我可能是库连接不对，链接的是不同的库导致这个问题，的确是指定lib路径。
 
+使用apt install ffmpeg安装后，重命名指定lib路径下的ffmpeg库。
+```
+-rw-r--r-- 1 root root 58488936 10月 25 16:43 libavcodec.so
+-rw-r--r-- 1 root root 16943032 10月 25 16:43 libavformat.so
+-rw-r--r-- 1 root root  1423672 10月 25 16:43 libavutil.so
+-rw-r--r-- 1 root root   347240 10月 25 16:43 libswresample.so
+-rw-r--r-- 1 root root  2615992 10月 25 16:43 libswscale.so
+```
+然后程序就使用安装的默认路径。
 
-
-
+这时候就成功了。
 
 
 

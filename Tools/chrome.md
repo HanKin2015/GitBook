@@ -16,3 +16,22 @@ Google Chrome是一款由Google公司开发的网页浏览器，该浏览器基�
 ## 4、谷歌安装包下载地址
 https://www.iplaysoft.com/tools/chrome/
 
+## 5、谷歌浏览器切换强制黑色模式方法
+地址栏输入：chrome://flags/#enable-force-dark
+
+然后选择enable
+
+然后Relunch，OK，成功
+
+
+
+
+
+
+
+
+
+
+
+
+

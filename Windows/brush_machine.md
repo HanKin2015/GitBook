@@ -128,3 +128,27 @@ Boot failed: please change disks and press a key to continue.
 对于这个问题，百度上也有好几个答案，比如我这个U盘启动盘是用ultraiso做的，建议使用其他制作工具，比如rufus。
 
 其实对这个问题，有一个更简单的办法，只需要在ultraiso做U盘启动盘，写入方式USB-HDD改为RAW即可。
+
+## 7、GRUB Minimal BASH-like line editing is supported 
+
+问题很奇怪，安装完ubuntu后重启出现这个，百度了一下，说：
+- 直接在BASH-like 窗口中输入exit, 会跳转到boot 选项窗口，直接选择windows 启动就行了。
+- 下载EasyUEFI，将Windows启动项优先级高于ubuntu,即可。但是此时，ubuntu的引导文件依然存在于SSD内的系统盘中，如果EasyUEFI可以直接删除Ubuntu引导文件，就可以直接删除掉；否则，参考一下步骤
+- win10下删除ubuntu及其引导项
+输入exit后不断地按上下键，会看到界面闪了一下，然后界面停留在下面的界面。如果不成功再重来一次。进入到下面的界面后就可以选择进入win10系统了！应该是引导页出了问题。之后再在win10系统修改引导页就行，自行百度“电脑双系统改为一个系统后,怎么删除多余的引导信息”。
+
+没有解决。
+
+后面直接重装了一遍解决。
+
+
+
+
+
+
+
+
+
+
+
+

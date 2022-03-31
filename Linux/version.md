@@ -31,6 +31,14 @@ Distributor ID: Debian
 Description:    Debian GNU/Linux 8.11 (jessie)
 Release:        8.11
 Codename:       jessie
+root@hankin:~/Downloads# lsb_release
+No LSB modules are available.
+root@hankin:~/Downloads# lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 16.04 LTS
+Release:        16.04
+Codename:       xenial
 ```
 
 ## 4、查看Linux系统版本
