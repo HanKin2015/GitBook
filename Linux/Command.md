@@ -315,7 +315,55 @@ xset dpms 0 0 0
 
 但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
 
+# 19、unam命令
+```
+[root@ubuntu0006:/media/hankin/vdb] #uname -a
+Linux ubuntu0006 4.4.0-210-generic #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname -s
+Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname -n
+ubuntu0006
+[root@ubuntu0006:/media/hankin/vdb] #uname -r
+4.4.0-210-generic
+[root@ubuntu0006:/media/hankin/vdb] #uname -v
+#242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021
+[root@ubuntu0006:/media/hankin/vdb] #uname -m
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -p
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -i
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -o
+GNU/Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname --version
+uname (GNU coreutils) 8.25
+Copyright (C) 2016 Free Software Foundation, Inc.
+许可证：GPLv3+：GNU 通用公共许可证第3 版或更新版本<http://gnu.org/licenses/gpl.html>。
+本软件是自由软件：您可以自由修改和重新发布它。
+在法律范围内没有其他保证。
 
+由David MacKenzie 编写。
+[root@ubuntu0006:/media/hankin/vdb] #uname --help
+用法：uname [选项]...
+输出一组系统信息。如果不跟随选项，则视为只附加-s 选项。
 
+  -a, --all                     以如下次序输出所有信息。其中若-p 和
+                                -i 的探测结果不可知则被省略：
+  -s, --kernel-name             输出内核名称
+  -n, --nodename                输出网络节点上的主机名
+  -r, --kernel-release          输出内核发行号
+  -v, --kernel-version     print the kernel version
+  -m, --machine            print the machine hardware name
+  -p, --processor          print the processor type (non-portable)
+  -i, --hardware-platform  print the hardware platform (non-portable)
+  -o, --operating-system   print the operating system
+      --help            显示此帮助信息并退出
+      --version         显示版本信息并退出
+
+GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
+请向<http://translationproject.org/team/zh_CN.html> 报告uname 的翻译错误
+Full documentation at: <http://www.gnu.org/software/coreutils/uname>
+or available locally via: info '(coreutils) uname invocation'
+```
 
 

@@ -206,8 +206,19 @@ rsync -av --progress t01/demo.zip t02/
 原因: 不能创建临时文件文档,设备上没有剩余空间(告诉我们磁盘空间满了)
 
 ## 19、XXXX is not in the sudoers file. This incident will be reported解决方法
-https://blog.csdn.net/qq_37964379/article/details/104193627
+### 19-1、解决Linux系统下，出现“不在sudoers文件中，此事将被报告”的问题
+https://blog.csdn.net/sinat_39589027/article/details/85323996
 
+1.切换到root用户权限，输入命令："su root"，回车后输入密码再回车
+
+
+
+
+
+
+
+
+### 19-2、方法二，推荐方法一
 解决方法:编辑sudoers文件有两种办法，一种是以root帐号执行visudo，另一种是root帐号执行vi /etc/sudoers.其实两者都是修改/etc/sudoers。
 
 注意：在修改 /etc/sudoers时，一定注意该文件是否有写权限，如果没有写权限，则使用 chmod u+w /etc/sudoers使其拥有写权限
