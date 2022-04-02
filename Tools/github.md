@@ -40,7 +40,12 @@ https://api.github.com/repos/HanKin2015/MagicTool
 根本打不开：https://github.dev/
 在github仓库界面，然后按一下键盘的句号键即可。
 
+## 4、special repository
+HanKin2015/HanKin2015 is a ✨special ✨ repository that you can use to add a README.md to your GitHub profile. Make sure it’s public and initialize it with a README to get started.
 
+建立一个与账户同名的仓库，可以在首页显示。
+
+建立一个github.io后缀的仓库可以建立网站。
 
 
 

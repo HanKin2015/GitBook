@@ -256,3 +256,12 @@ This's $ a $
 10 $ There $
 
 ```
+
+## 9、shell脚本抓取特定行
+没接触Linux的shell脚本之前处理文本数据大多是采用python，包括批处理、对文本的操作等等。但是在接触了shell脚本后发现shell处理文本数据简直不要太快。
+
+今天在数据处理时遇到了一个问题，就是把文件中某些特定的行抓出来。然后在输出到另一个文件中。代码如下图所示。
+
+awk '{if($2==n) print $1,$2,$3} ' inputFileName > outputFileName 
+1
+awk是shell脚本中非常有用的命令。上面这个命令中判断第二列是否等于n，如果等于n，就把这一行的第一列、第二列、第三列从inputFile中输出到OutputFile。就完成了抓取。

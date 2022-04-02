@@ -36,3 +36,16 @@ fffff802`4b1a8960 : 00000000`00001001 00000000`00000f00 ffff970c`00000000 000000
 ```
 增加源代码能告诉代码行数，即@后面的数字，并且包含文件名。
 增加符号表可以告知函数名。
+
+## 4、其他dump文件
+例如自己写驱动或者是程序，可以将自己的dump文件放在C:\Users\User\AppData\Local\Temp目录下，即%tmp%。
+
+```
+1.管理员打开WinDbg
+2.加载符号表：
+srv*c:\Symbols*http://310.370.348.340/symbols;srv*c:\Symbols*http://310.370.347.347/symbols;D:\tmp
+4.下载符号表加载：.reload /f
+5.分析堆栈：!analyze -v
+```
+
+
