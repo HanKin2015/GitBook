@@ -22,18 +22,10 @@ if __name__ == "__main__":
 # 2、线程
 Windows下没有fork函数。
 
-# 3、将py文件打包成exe文件
-转icon图标网址：http://www.bitbug.net/
-安装打包软件：pip install pyinstaller
-示例：pyinstaller -F -w -i F:\code\image.ico demo.py
-注意：icon可能需要是绝对路径
-icon是指定点击的图标，并不是demo中的title。
-
--F（注意大写）是所有库文件打包成一个exe，-w是不出黑色控制台窗口。
-不加-F参数生成一堆文件，但运行快。压缩后比单个exe文件还小一点点。
-加-F参数生成一个exe文件，运行起来慢。
-
-如果生成脚本，建议去掉w参数，即pyinstaller -F demo.py
+# 3、两个list列表拼接
+- 使用"+"号：运算符的重载
+- 使用extend方法：会覆盖原始list
+- 使用切片：可以将一个列表插入另一个列表的任意位置
 
 # 4、程序：枚举Windows下运行的程序
 
@@ -108,10 +100,6 @@ print(str.startswith('this', 2, 4))
 - 使用加号
 - 使用format
 
-# 18、两个list列表拼接
-- 使用"+"号：运算符的重载
-- 使用extend方法：会覆盖原始list
-- 使用切片：可以将一个列表插入另一个列表的任意位置
 
 
 
