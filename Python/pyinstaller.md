@@ -170,14 +170,22 @@ PYTHONHOME这个变量有毒，不能进行设置，设置后会有各种各样�
 
 2，PYTHONPATH，默认的Python模块搜索路径，它的格式和系统PATH是一样的，需要开发者自己设置
 用sys.path可以查出PYTHONHOME和PYTHONPATH，可以看到里面有当前路径、PYTHONPATH，当前用户路径(user)，PYTHONHOME。
+
+3，PYTHONHASHSEED，如果该环境变量被设定为 random ，相当于 -R 命令行参数。 Python 会用一个随机的种子来生成 str/bytes/datetime 对象的 hash 值。 如果该环境变量被设定为一个数字，它就被当作一个固定的种子来生成 str/bytes/datetime 对象的 hash 值。在深度学习模型训练中，为了在同样的数据集上获得可复现的训练结果，通常把该值设定为一个固定值。
+
 ```
 python3
 import sys
 sys.path
+
+可以通过设置和不设置进行对比，发现值真的有所变化。
 ```
 
+官方文档解释：https://askingthelot.com/what-is-pythonhome/
 
-
+## 4、能不能直接在windows下打包成linux下可执行文件
+需要到linux下用pyinstaller打包。
+windows 10（1607以上）安装bash支持，windows 10以下，安装虚拟机跑linux。
 
 
 

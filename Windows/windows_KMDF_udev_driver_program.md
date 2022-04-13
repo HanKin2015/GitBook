@@ -1,5 +1,9 @@
 # Windows KWDF USB设备驱动编程
 
+驱动安装日志目录：‪C:\Windows\INF\setupapi.offline.log
+指定USB设备过滤：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_325D&PID_6410\90001C23D0551834
+所有USB设备过滤：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}
+
 ## 1、《WDF_USB驱动开发指南》下载
 http://www.elecfans.com/soft/interface/2010/2010103093779.html
 

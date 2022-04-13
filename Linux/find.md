@@ -75,7 +75,8 @@ find: 路径必须在表达式之前: zlib_decoder.h
 
 https://www.runoob.com/linux/linux-comm-find.html
 
-
+## 3、找到指定格式文件然后删除
+find . -name *.pyc | xargs rm -rf
 
 
 

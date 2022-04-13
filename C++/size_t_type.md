@@ -36,7 +36,12 @@ size_t是全局的，而size_type是跟容器相关的。
 ## 4、linux中size_t和ssize_t的区别
 ssize_t是有符号整型，在32位机器上等同与int，在64位机器上等同与long int，有没有注意到，它和long数据类型有啥区别？其实就是一样的。size_t 就是无符号型的ssize_t，也就是unsigned long/ unsigned int (在32位下），不同的编译器或系统可能会有区别，主要是因为在32位机器上int和long是一样的。在64位没有测试，但是参见百度百科，size_t 在64位下是64位，那么size_t的正确定义应该是typedef unsigned long size_t。
 
-
+## 5、格式化输出
+```
+error: format '%d' expects argument of type 'int', but argument 7 has type 'size_t' [-Werror=format]
+cc1: all warnings being treated as errors
+```
+%zu用来输出size_t 类型。
 
 
 

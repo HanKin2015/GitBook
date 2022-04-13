@@ -76,22 +76,8 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 3. sudo cp xorg.conf.failsafe xorg.conf
 4. sudo reboot
 
-## 8、获取系统位数
-命令1：getconf LONG_BIT
-结果：64
 
-命令2：uname -a
-结果：Linux Test004MUJUP 2.6.32-431.23.3.el6.x86_64 #1 SMP Wed Jul 16 06:12:23 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux
-
-命令3：uname -r
-结果：2.6.32-431.23.3.el6.x86_64
-
-命令4：cat /proc/version
-结果：Linux version 2.6.32-431.23.3.el6.x86_64 (mockbuild@x86-027.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Wed Jul 16 06:12:23 EDT 2014
-
-
-
-## 9、chroot: failed to run command `/bin/bash': No such file or directory
+## 8、chroot: failed to run command `/bin/bash': No such file or directory
 
 缺少依赖，lib和lib64、sbin虽然是软链接，但是chroot后路径会变化
 
@@ -99,9 +85,9 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 
 
 
-## 10、linux 上删除所有的无效文件链接
+## 9、linux 上删除所有的无效文件链接
 
-### linux删除文件夹软链接
+### 9-1、linux删除文件夹软链接
 
  (2018-09-02 00:00:29)
 
@@ -111,10 +97,10 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 
 
 
-## 11、[shell之列表的定义与循环](https://www.cnblogs.com/zyy98877/p/10234527.html)
+## 10、[shell之列表的定义与循环](https://www.cnblogs.com/zyy98877/p/10234527.html)
 https://cloud.tencent.com/developer/ask/92780 
  
-## 12、Linux 文件不能删除，没有权限问题
+## 11、Linux 文件不能删除，没有权限问题
 
 shirandata 2020-07-01 23:21:20  1207  收藏
 分类专栏： Linux
@@ -132,7 +118,7 @@ chattr -a xxx 或者 chattr -i xxx
 第三步：删除文件
 rm -rf xxx
 
-## 13、Cannot set LC_CTYPE to default locale: No such file or directory解决方法
+## 12、Cannot set LC_CTYPE to default locale: No such file or directory解决方法
 执行程序时报错：UnicodeEncodeError: 'ascii' codec can't encode charrcters in position
 怀疑可能是编码问题，扫描前执行一下这个试试：export LC_ALL=en_US.UTF-8
 然后报错bash: waring: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
@@ -142,22 +128,12 @@ locale -a查看系统内安装的locale
 发现没有en_US.UTF-8，进行手动安装locale-gen en_US.UTF-8
 搞定。
 
-## 14、输出echo的帮助信息
+## 13、输出echo的帮助信息
 help echo
 /bin/echo --help
 `which echo` --help
 
-## 15、获取开机时间
-who -b 查看最后一次系统启动的时间。
-who -r 查看当前系统运行时间
-last reboot可以看到Linux系统历史启动的时间
-top命令显示up后表示系统到目前运行了多久时间。反过来推算系统重启时间。
-w命令显示up后表示系统到目前运行了多久时间。反过来推算系统重启时间。
-cat /proc/uptime
-date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
-cat /proc/driver/rtc
-
-## 16、浮点数计算
+## 14、浮点数计算
 ```
 echo "4 * 0.2" | bc 
 #显示两位小数
@@ -187,7 +163,7 @@ let i--
 let no+=6 等同于 let no = no + 6
 ```
 
-## 17、使用cp复制文件时如何显示传输进度和速度？
+## 15、使用cp复制文件时如何显示传输进度和速度？
 https://qastack.cn/ubuntu/17275/how-to-show-the-transfer-progress-and-speed-when-copying-files-with-cp
 
 最终我选择：
@@ -198,27 +174,20 @@ date +%s; cp a b; date +%s
 
 rsync -av --progress t01/demo.zip t02/
 
-## 18、-bash: cannot create temp file for here-document: No space left on device
+## 16、-bash: cannot create temp file for here-document: No space left on device
 登陆Linux系统后, cd 到某个指定目录时使用tab键的时候报以下错误:
 
 -bash: cannot create temp file for here-document: No space left on device
 
 原因: 不能创建临时文件文档,设备上没有剩余空间(告诉我们磁盘空间满了)
 
-## 19、XXXX is not in the sudoers file. This incident will be reported解决方法
-### 19-1、解决Linux系统下，出现“不在sudoers文件中，此事将被报告”的问题
+## 17、XXXX is not in the sudoers file. This incident will be reported解决方法
+### 17-1、解决Linux系统下，出现“不在sudoers文件中，此事将被报告”的问题
 https://blog.csdn.net/sinat_39589027/article/details/85323996
 
 1.切换到root用户权限，输入命令："su root"，回车后输入密码再回车
 
-
-
-
-
-
-
-
-### 19-2、方法二，推荐方法一
+### 17-2、方法二，推荐方法一
 解决方法:编辑sudoers文件有两种办法，一种是以root帐号执行visudo，另一种是root帐号执行vi /etc/sudoers.其实两者都是修改/etc/sudoers。
 
 注意：在修改 /etc/sudoers时，一定注意该文件是否有写权限，如果没有写权限，则使用 chmod u+w /etc/sudoers使其拥有写权限

@@ -59,8 +59,54 @@ add_argument中有一个default参数。有的时候需要对某个参数设置�
 ### 必需参数
 add_argument有一个required参数可以设置该参数是否必需。
 
+## 3、参数中有空格
+```
+hejian@hejian-C31M:~/test$ python3 solve_space_arg.py -u 'h j'
+Namespace(data_path='./data/', upan_path='h j')
+cmd: cd h j
+sh: 1: cd: can't cd to h
+失败
+hejian@hejian-C31M:~/test$ python3 solve_space_arg.py -u "h j"
+Namespace(data_path='./data/', upan_path='h j')
+cmd: cd h j
+sh: 1: cd: can't cd to h
+失败
+hejian@hejian-C31M:~/test$ python3 solve_space_arg.py -u h\ j/
+Namespace(data_path='./data/', upan_path='h j/')
+cmd: cd h j/
+sh: 1: cd: can't cd to h
+失败
+hejian@hejian-C31M:~/test$ python3 solve_space_arg.py -u h\ j
+Namespace(data_path='./data/', upan_path='h j')
+cmd: cd h j
+sh: 1: cd: can't cd to h
+失败
 
+windows只能是双引号才能失败，并且能成功进入。
+(base) D:\Github\Storage\python\U盘自动拷贝>python solve_space_arg.py -u "h j"
+Namespace(data_path='./data/', upan_path='h j')
+cmd: cd h j
+成功
 
+(base) D:\Github\Storage\python\U盘自动拷贝>python solve_space_arg.py -u 'h j'
+usage: solve_space_arg.py [-h] [-u UPAN_PATH] [-d DATA_PATH]
+solve_space_arg.py: error: unrecognized arguments: j'
+
+(base) D:\Github\Storage\python\U盘自动拷贝>python solve_space_arg.py -u h j
+usage: solve_space_arg.py [-h] [-u UPAN_PATH] [-d DATA_PATH]
+solve_space_arg.py: error: unrecognized arguments: j
+
+(base) D:\Github\Storage\python\U盘自动拷贝>python solve_space_arg.py -u h\ j
+usage: solve_space_arg.py [-h] [-u UPAN_PATH] [-d DATA_PATH]
+solve_space_arg.py: error: unrecognized arguments: j
+
+(base) D:\Github\Storage\python\U盘自动拷贝>python solve_space_arg.py -u h\\ j
+usage: solve_space_arg.py [-h] [-u UPAN_PATH] [-d DATA_PATH]
+solve_space_arg.py: error: unrecognized arguments: j
+```
+
+暂时没有想到解决办法，后续有时间研究研究。。。
+文件路径：D:\Github\Storage\python\U盘自动拷贝\solve_space_arg.py
 
 
 

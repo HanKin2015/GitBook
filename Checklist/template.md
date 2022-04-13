@@ -48,15 +48,14 @@ clean:
 ### c/c++文件
 ```
 /**
-* 文 件 名: study_open.cpp
-* 文件描述: 学习open函数
+* 文 件 名: read_write.cpp
+* 文件描述: 探究读写文件速度效率
 * 作    者: HanKin
-* 创建日期: 2021.11.12
-* 修改日期：2021.11.12
+* 创建日期: 2022.04.09
+* 修改日期：2022.04.09
 *
-* Copyright (c) 2021 HanKin. All rights reserved.
+* Copyright (c) 2022 HanKin. All rights reserved.
 */
- 
  
 int main(int argc, char *argv[])
 
