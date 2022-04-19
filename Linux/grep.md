@@ -206,6 +206,23 @@ yes
 ## 8、ps grep 不包括grep本身
 ps aux | grep defunct| grep -v "grep"
 
+## 9、grep的-r和-R参数区别
+```
+[root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #grep -r ping
+a:ping
+README.md:grep -R ping
+README.md:grep -r ping
+[root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #grep -R ping
+a:ping
+README.md:grep -R ping
+README.md:grep -r ping
+b:ping
+[root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #grep -r ping b
+ping
+```
+-r，--recursive
+阅读每个目录下的所有文件，递归，下列符号 链接，只有当他们是在命令行上。这相当于 -d递归选项。
 
-
+-R，--dereference递归
+阅读所有文件的每个目录下，递归。 遵循所有 符号链接，不像-r。
 

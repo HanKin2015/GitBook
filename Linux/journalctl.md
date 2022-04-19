@@ -26,9 +26,7 @@ $ journal -F PRIORITY
 ```
 
 ## 2、查看某次启动后的日志
-
 默认情况下 systemd-journald 服务只保存本次启动后的日志(重新启动后丢掉以前的日志)。此时 -b 选项是没啥用的。当我们把 systemd-journald 服务收集到的日志保存到文件中之后，就可以通过下面的命令查看系统的重启记录：
-
 ```
 $ journalctl --list-boots 
 ```
@@ -136,29 +134,19 @@ $ journalctl -u cron.service -n 3
 ```
 
 ## 6、journalctl 使用方法
-
- 
-
 .查看所有日志
-
 默认情况下，只保存本次启动的日志
-
 journalctl
 
 .查看内核日志（不显示应用日志）
-
 journalctl -k
 
 .查看系统本次启动的日志
-
 journalctl   -b
-
 journalctl  -b  -0
 
 .查看上一次启动的日志
-
 需更改设置,如上次系统崩溃，需要查看日志时，就要看上一次的启动日志。
-
 journalctl  -b -1
 
 .查看指定时间的日志
@@ -285,5 +273,63 @@ journalctl   --vacuum-time=1years
 last -x shutdown
 last -x 
 
+## 8、出现一个尴尬的场景
+https://qastack.cn/ubuntu/864722/where-is-journalctl-data-stored
+man systemd-journald
+
+journalctl -f无法滚动日志，无日志出现
+
+发现最后一条日志是明天的时间，导致今天的日志无法出现在末尾，这个应该是按照时间进行了排序。
+
+解决方法：使用date命令修改时间，如date -s "20220418 17:58"
+
+了解journalctl -f的日志存储地址：
+Ubuntu默认不使用持久日志日志文件。仅易失性/run/log/journal/<machine-id>/*.journal[~]会保留到下一次引导。每次重新启动时，所有内容都会丢失。
+
+您可能会在日志中看到带有以下内容的引导列表：
+
+journalctl --list-boot
+/var/log除非您通过创建/var/log/journal目录激活了使用持久日志日志的日志，否则日志仍将保存在文本文件下。
+
+通常，存储目录为/var/log/journal或/run/log/journal，但它不一定必须存在于系统中。
+如果只想检查日志当前在磁盘上所占用的空间量，只需键入：
+$ journalctl --disk-usage
 
 
+除了Muru关于数据存储位置的答案外，还有其他相关答案。
+
+如何增加journalctl查找以前的启动日志
+$ sudo mkdir -p /var/log/journal
+$ sudo systemd-tmpfiles --create --prefix /var/log/journal
+如何journalctl减小文件大小
+$ journalctl --vacuum-size=200M
+Deleted archived journal /var/log/journal/d7b25a27fe064cadb75a2f2f6ca7764e/system@00056515dbdd9a4e-a6fe2ec77e516045.journal~ (56.0M).
+Deleted archived journal /var/log/journal/d7b25a27fe064cadb75a2f2f6ca7764e/user-65534@00056515dbfe731d-b7bab56cb4efcbf6.journal~ (8.0M).
+Deleted archived journal /var/log/journal/d7b25a27fe064cadb75a2f2f6ca7764e/user-1000@1bbb77599cf14c65a18af51646751696-000000000000064f-00056444d58433e1.journal (112.0M).
+Vacuuming done, freed 176.0M of archived journals on disk.
+
+```
+root@hankin:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# ls -lt
+total 106652
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 21 12:01 system.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 20 17:32 system@0005dcf19bc7accf-66cd06ffe699963d.journal~
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 20 17:28 system@c0a785b5e3a9419e994757a215e6598f-0000000000001187-0005dcea223c3555.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 19 09:14 system@31aaa31501694608816a1a4ba2c91064-000000000000048f-0005dcea55664cea.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 19 01:25 system@0005dcf10a3c89ae-9aa2cf89422ade90.journal~
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 19 01:16 system@0005dcf0ea957619-1fc691d9abf4f7b3.journal~
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 23:55 system@0005dcefcb660dc8-163f73a5b4bc2e15.journal~
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 17:24 system@31aaa31501694608816a1a4ba2c91064-0000000000000001-0005dcf19bbd82ee.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 17:10 system@c0a785b5e3a9419e994757a215e6598f-000000000000058b-0005dce9cc632b8f.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:46 system@c0a785b5e3a9419e994757a215e6598f-0000000000000486-0005dce9c3cc46d9.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:44 system@c0a785b5e3a9419e994757a215e6598f-0000000000000001-0005dcf10a30c7be.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:42 system@647658ebab6b43d48e1065290739b1d2-0000000000000001-0005dcf0ea8a1967.journal
+-rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:35 system@647658ebab6b43d48e1065290739b1d2-0000000000000487-0005dce9bdd7aa57.journal
+root@hankin:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --list-boot
+-3 c2aa7b49f73f44f7a431af6bcb13a2b3 Mon 2022-04-18 16:15:24 CST—Mon 2022-04-18 16:18:04 CST
+-2 f507c47d34954e2192493e86bc412d96 Mon 2022-04-18 16:44:13 CST—Mon 2022-04-18 17:10:09 CST
+-1 2aa8b1d01c354d82a5992728d36d5cc4 Tue 2022-04-19 01:51:25 CST—Wed 2022-04-20 17:32:39 CST
+ 0 658ad685a1ee43a9a34e65f8bf5c2d56 Thu 2022-04-21 12:01:51 CST—Thu 2022-04-21 12:02:03 CST
+root@adesk:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --disk-usage
+Archived and active journals take up 104.1M in the file system.
+
+```

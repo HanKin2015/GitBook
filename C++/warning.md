@@ -434,6 +434,46 @@ error: taking address of temporary [-fpermissive]
 
 在内核代码中，尽可能的将变量的定义放到函数的开头。
 
+## 38、C语言编程调试：illegal use of this type as an expression错误解决办法
+C语言的书写格式要求：在函数体内，变量统一放在前端，在声明了全部变量之后才开始其他的表达式语句或者函数调用，不能随处声明变量。比如在声明一个变量之前，如果已经有表达式语句或者函数调用语句，则声明的变量就被误认为是一个表达式expression，因此会发生错误。
+c++没有这种格式要求。
+
+## 39、error: invalid new-expression of abstract class type ‘UserdataActionI’
+
+原因：
+
+出现这个错误原因是new 了一个抽象类出错，说明父类（接口）中有纯虚函数没有实现。接口里的纯虚函数全部需要实现，这样才能new 子类。
+
+例如：
+纯虚函数例如  void fun() = 0; 是纯虚函数，不是纯虚函数不作要求。
+
+另外，void fun()  {  }  空函数体也是实现。
+
+纯虚函数相当于C#中abstract抽象类。
+
+=0 说明函数是抽象的方法，谁继承它就必须实现它
+否则不能new。
+
+## 40、## 4、由“warning: no newline at end of file”引申而来
+https://blog.csdn.net/alexmayer/article/details/7498120
+
+告警“warning: no newline at end of file ”，其实是想提示开发者，注意啦，有可能你这个文件被其他文件#include，会有错误：包含文件的第一行有可能直接拼接在被包含文件的最后一行行尾，如果恰好被包含文件的行尾是“//”会怎么样？！
+不过新的C++11标准，忽略了这个问题，强制编译器在文件尾加入newline字符。
+如：
+```
+#ifndef HEAD_H
+#define HEAD_H
+#endif //end HEAD_H
+
+#ifndef HEAD_H
+#define HEAD_H
+#endif //end HEAD_H#include <iostream>	(这里就有可能被注释掉了，因此需要在每个文件末尾空一行)
+```
+
+
+
+
+
 
 
 

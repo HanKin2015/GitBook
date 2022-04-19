@@ -310,9 +310,29 @@ Extension commands need clr.dll in order to have something to do.
 
 https://www.cnblogs.com/lanxiaoke/p/12997032.html
 
+## 5、可视化界面调式
+View->call stack
+locals
+processes and threads
 
 
+有些dump文件可能不是在最后的地方崩溃，可以在之前已经出现内存访问错误，从而后面是随机地方出现崩溃。
 
+```
+线程命令是以~开始，后面跟线程id（一个windbg从0开始的一个编号），或者.,#,*等，可和其他命令混合使用。
 
+~                简洁地显示当前进程的所有线程，
+~.                表示当前线程
+~#                表示异常或者产生调试事件的线程
+~*                表示所有线程
+~1                表示一号线程
+~2 s            表示选择2号线程作为当前线程
+~3 f            冻结三号线程
+~3 u            解冻三号线程
+~2 n            挂起二号线程
+~2 m            恢复二线程
+~*e    !clrstack   遍历每个线程, 依次输出它们的托管调用栈.
+!threads        查看所有的托管线程
+```
 
 

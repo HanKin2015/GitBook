@@ -47,7 +47,8 @@ HanKin2015/HanKin2015 is a ✨special ✨ repository that you can use to add a R
 
 建立一个github.io后缀的仓库可以建立网站。
 
-
+## 5、美化技巧之访问者统计数量
+https://github.com/antonkomarev/github-profile-views-counter
 
 
 
