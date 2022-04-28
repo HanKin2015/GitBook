@@ -1,4 +1,4 @@
-# linux环境下利用tc限制两台服务器间的网速
+# linux环境下利用tc限制两台服务器间的网速延时
 
 ## 1、简介
 http://www.iplocation.net/tools/traffic-control.php
@@ -140,6 +140,8 @@ exit 0
 （2）查看网卡eth0的流量配置
 tc qdisc show dev eth0
 ```
+执行：tc qdisc show dev eth0
+
 qdisc netem 8001: root refcnt 9 limit 1000 delay 100.0ms  10.0ms
 ```
 直接找到原因。
@@ -148,6 +150,8 @@ qdisc netem 8001: root refcnt 9 limit 1000 delay 100.0ms  10.0ms
 tc qdisc del dev eth4 root
 执行之后再次查看流量配置
 ```
+执行：tc qdisc show dev eth0
+
 qdisc mq 0: root
 qdisc pfifo_fast 0: parent :8 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 qdisc pfifo_fast 0: parent :7 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
@@ -159,7 +163,7 @@ qdisc pfifo_fast 0: parent :2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 ```
 （4）然鹅又被人增加上了
-tc qdisc add dev eth0 root netem  delay 100ms 10ms
+tc qdisc add dev eth0 root netem delay 100ms 10ms
 想使用过滤器进行过滤，居然会失败。
 
 

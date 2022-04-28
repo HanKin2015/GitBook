@@ -1,4 +1,4 @@
-# 
+# 学习usb相关知识
 compound: 复合
 composite: 组合
 hcd: Host Controller Driver

@@ -363,9 +363,6 @@ Ctrl + L：刷新窗口
 
 7、cgdb强大工具
 cgdb主要功能是在调试时进行代码的同步显示，这无疑增加了调试的方便性，提高了调试效率。界面类似vi，符合unix/linux下开发人员习惯;如果熟悉gdb和vi，几乎可以立即使用cgdb。
-————————————————
-版权声明：本文为CSDN博主「花开蝶自来-liu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/niyaozuozuihao/article/details/91802994
 
 ## 9、调试输出指针值
 ```
@@ -403,7 +400,7 @@ display *a@5
 取消显示就用undisplay，不过这时候要写显示的号码。
 ```
 
-## 11、c-在GDB中达到某个断点时如何执行特定操作？
+## 11、在GDB中达到某个断点时如何执行特定操作？
 https://www.itranslater.com/qa/details/2582482268707095552
 
 例如，这是当x为正数时，可以使用断点命令在foo的入口处打印x的值的方法。
@@ -426,25 +423,25 @@ cont
 end
 
 ## 12、高级用法调试
-可以对函数进行下断点
+### 12-1、可以对函数进行下断点
 b tc_new
 b tc_delete
 
-对文件行数下断点
+### 12-2、对文件行数下断点
 b test.c:45
 
-踩内存会在gdb挂载时最上面显示出对应的地址
+### 12-3、踩内存会在gdb挂载时最上面显示出对应的地址
 如0x23781673
 直接print是打印不出具体的值，需要转换成对应的数据类型才行，如
 p *(my_class *)0x23781673
 
-下断点后执行程序
+### 12-4、下断点后执行程序
 r
 
-删除断点
+### 12-5、删除断点
 d 2
 
-查看断点
+### 12-6、查看断点
 i break
 
 s命令很重要，可以进入断点
@@ -454,7 +451,27 @@ disassemble
 
 在gdb里，用handle SIGPIPE nostop去掉SIGPIPE信号。
 
+### 12-7、查看全局和静态变量
+info variables
 
+查看当前stack frame局部变量
+info locals
+
+查看当前stack frame参数
+info args
+
+在windbg下，kb会显示返回地址和参数列表。
+
+## 13、实操
+gunzip camera0.core.6.19897.gz
+gdb /usr/local/bin/xxx camera0.core.6.19897
+bt
+f 17
+info locals
+p var
+
+注意一点：
+堆栈中如果出现data=0x7eca70f000 <error: Cannot access memory at address 0x7eca70f000这种无法访问内存的情况，可能不是一个问题。
 
 
 

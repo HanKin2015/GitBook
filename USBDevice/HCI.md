@@ -59,3 +59,24 @@ echo -n "0000:00:14.0" | tee /sys/bus/pci/drivers/xhci_hcd/bind
 ```
 这个文件unbind和bind，并且其中所有的文件看出只有写入权限，无读取权限。
 将pci地址写入unbind就是卸载，写入bind就是挂载。
+
+pci地址可以：lspci
+还可以：/sys/bus/pci/devices
+还可以：/sys/devices/pci0000:00
+还可以：/sys/bus/usb/devices/
+```
+[root@ubuntu0006:/sys/bus/pci/drivers/ehci-pci] #ll
+总用量 0
+drwxr-xr-x  2 root root    0 4月  28 15:53 ./
+drwxr-xr-x 24 root root    0 4月  28 15:53 ../
+lrwxrwxrwx  1 root root    0 4月  28 17:28 0000:00:19.7 -> ../../../../devices/pci0000:00/0000:00:19.7/
+lrwxrwxrwx  1 root root    0 4月  28 17:28 0000:00:1a.7 -> ../../../../devices/pci0000:00/0000:00:1a.7/
+--w-------  1 root root 4096 4月  28 17:28 bind
+--w-------  1 root root 4096 4月  28 17:28 new_id
+--w-------  1 root root 4096 4月  28 17:28 remove_id
+--w-------  1 root root 4096 4月   9 09:05 uevent
+--w-------  1 root root 4096 4月  28 17:28 unbind
+```
+可以看见上面文件夹中是有pci地址对应的文件夹，这种方法靠谱。
+
+有些硬件不是pci，而是Platform，相对应地址是/sys/bus/pci/drivers/ehci-pci

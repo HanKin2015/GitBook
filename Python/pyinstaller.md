@@ -187,8 +187,21 @@ sys.path
 需要到linux下用pyinstaller打包。
 windows 10（1607以上）安装bash支持，windows 10以下，安装虚拟机跑linux。
 
+## 5、pyinstaller打包exe加入版本和版权信息
+1.先取得一个标准的windows 电脑软件的版本信息文件
+```
+pyi-grab_version.exe upan_auto_copy.exe file_version_info.txt
+```
+pyi-grab_version.exe是pyinstaller自带的一个工具，用于获得其他.exe程序的版本信息文件，版本信息文件里面包括公司名，程序内部名称版本号之类，然后再把这个信息里面的相关信息更改成你想要的信息，再使用pyinstaller --version-file=ver_file 参数的把版本信息注射到.exe中去。
 
+其中注意因为这个版本信息是严格的数据结构，所以最好不要随意修改，有可能导致版本信息文件失效，推荐使用是notepad++更改。
 
+2.修改产生的版本信息文件(file_version_info.txt)就在程序的当前目录下，生成单个exe或整包工程文件都可以用(by navy)，更改好版本信息文件之后就可以开始使用了
+
+3.选取一个喜欢.ico文件，作为自己软件的图标，打包进exe中，实际操作时发现有bug，需要把exe复制到其他目录才能正常显示图标。
+```
+pyinstaller.exe --version-file=doc/file_version_info.txt -i doc/dog.ico -F upan_auto_copy.py
+```
 
 
 
