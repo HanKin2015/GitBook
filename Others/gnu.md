@@ -1,5 +1,3 @@
-
-
 # GNU
 
 **GNU**是一个[自由](https://baike.baidu.com/item/自由)的[操作系统](https://baike.baidu.com/item/操作系统)，其内容软件完全以[GPL](https://baike.baidu.com/item/GPL)方式发布。这个操作系统是[GNU计划](https://baike.baidu.com/item/GNU计划)的主要目标，名称来自GNU's Not Unix!的[递归缩写](https://baike.baidu.com/item/递归缩写)，因为GNU的设计类似Unix，但它不包含具著作权的Unix代码。GNU的创始人，[理查德·马修·斯托曼](https://baike.baidu.com/item/理查德·马修·斯托曼)，将GNU视为“达成社会目的技术方法”。

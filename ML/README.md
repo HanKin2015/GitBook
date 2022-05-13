@@ -21,14 +21,10 @@ OCR （Optical Character Recognition，光学字符识别）是指电子设备�
 阿里巴巴天池：[首页](https://tianchi.aliyun.com/home)/[天池实验室](https://tianchi.aliyun.com/notebook-ai)/【机器学习入门】拥抱人工智能，从机器学习开始
 
 
-
-
-
-
-
 Linux的设计艺术
 
-
+# 
+https://easyai.tech/ai-knowledge-hub/
 
 
 

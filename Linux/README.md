@@ -217,6 +217,14 @@ echo “/usr/local/lib” >>/etc/ld.so.conf
 apt install gnome-tweaks  安装完后需要重启物理机才能出现额外的选项。
 
 
+输入法框架： 小企鹅输入法框架内（fcitx)
+root@hankin:~# apt show fcitx
 
+软键盘可选项：florence
+安装 apt install florence
+root@hankin:~# apt show florence
 
-
+命令行启动florence: florence &
+命令行调出软键盘： florence show
+命令行隐藏软键盘： florence hide
+软键盘与实体键盘在一个层级，中英文输入由输入框架控制

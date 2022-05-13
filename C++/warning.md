@@ -52,6 +52,8 @@ int main()
 ```
 
 ## 6、implicit declaration of function 警告解决方法 （函数的隐式说明）
+warning: implicit declaration of function ‘getpid’ [-Wimplicit-function-declaration]
+
 是因为函数没有在头文件（.h）定义，这就导致编译的时候没法正确生成.o文件
 常常是由于该函数没有定义
 
@@ -470,8 +472,7 @@ https://blog.csdn.net/alexmayer/article/details/7498120
 #endif //end HEAD_H#include <iostream>	(这里就有可能被注释掉了，因此需要在每个文件末尾空一行)
 ```
 
-
-
+## 41、
 
 
 
