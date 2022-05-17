@@ -87,25 +87,46 @@ ifconfig查看网络ip正常
 
 ### 6-2、设置固定ip
 sudo gedit /etc/network/interfaces
-将里边的内容改为
+
+将里边的内容
+```
 auto lo
 iface lo inet loopback
+```
+改为
+```
+auto lo
+iface lo inet loopback
+
 auto eth0
 iface eth0 inet static
-address 192.168.1.188
-netmask 255.255.255.0
-network 192.168.1.0
-broadcast 192.168.1.255
-gateway 192.168.1.1
-
+address 192.168.1.188	(ip地址)
+netmask 255.255.255.0	(子网掩码)
+network 192.168.1.0		()
+broadcast 192.168.1.255	(广播地址)
+gateway 192.168.1.1		(默认网关)
+```
 
 ## 7、查看本机网关地址
 1. ip route show
 2.route -n or netstat -rn
 3.traceroute
 
+## 8、聊聊ip冲突那些事儿
+这次我们一次看个够。
 
+构造ip冲突场景：
+windows：169.22.64.246
+ubuntu18:169.22.64.246
+xubuntu执行命令验证：
+```
+arping -a 169.22.64.246
+这时候会有两个mac地址，说明是ip冲突了。
+如果在其中一个主机上面运行则是没有任何结果就是唯一，有mac地址就是冲突。
+```
 
-
+## 9、Windows防火墙能组织被其他人ping
+很奇怪，不能ping通ip，但是能通过mstsc远程连接。
+关闭防火墙之后就能ping通。
 
 

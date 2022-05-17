@@ -1,12 +1,11 @@
 # Linux expr和exec命令
 
 ## 1、expr命令
-
 expr命令是一个手工命令行计数器，用于在UNIX/LINUX下求表达式变量的值，一般用于整数值，也可用于字符串。
 
 1、计算字串长度
 > expr length “this is a test”
- 14
+14
  
 2、抓取字串
 > expr substr “this is a test” 3 5
@@ -14,35 +13,44 @@ is is
 
 3、抓取第一个字符数字串出现的位置
 > expr index "sarasara"  a
- 2
+2
  
-4、整数运算
- > expr 14 % 9
- 5
- > expr 10 + 10
- 20
- > expr 1000 + 900
- 1900
- > expr 30 / 3 / 2
- 5
- > expr 30 \* 3 (使用乘号时，必须用反斜线屏蔽其特定含义。因为shell可能会误解显示星号的意义)
- 90
- > expr 30 * 3
- expr: Syntax error
+4、整数运算(运算符前后需要增加空格)
+> expr 14 % 9
+5
+> expr 10 + 10
+20
+> expr 1000 + 900
+1900
+> expr 30 / 3 / 2
+5
+> expr 30 \* 3 (使用乘号时，必须用反斜线屏蔽其特定含义。因为shell可能会误解显示星号的意义)
+90
+> expr 30 * 3
+expr: Syntax error
 
 ### 1-1、shell计算中使用除法，基本默认上都是整除。
 比如：
+```
 num1=2
 num2=3
 num3=`expr $num1 / $num2`
-这个时候num3=0 ,是因为是因为expr不支持浮点除法
+```
+这个时候num3=0 ,是因为是因为expr不支持浮点除法。
+
 解决的方法：
+```
 num3=`echo "scale=2; $num1/$num2" | bc`
-使用bc工具，scale控制小数点后保留几位
-还有一种方法
+```
+使用bc工具，scale控制小数点后保留几位。
+还有一种方法:
+```
 awk 'BEGIN{printf "%.2f\n",’$num1‘/’$num2‘}'
-如果用百分比表示
+```
+如果用百分比表示:
+```
 awk 'BEGIN{printf "%.2f%\n",(’$num1‘/’$num2‘)*100}'
+```
 
 ## 2、Linux exec命令
 https://blog.csdn.net/qq_31186123/article/details/82190776

@@ -6,24 +6,24 @@
 参考：https://wenku.baidu.com/view/cc573f05a6c30c2259019e54.html
 
 
-### usbwriter
+### 1-1、usbwriter
 https://sourceforge.net/projects/usbwriter/
 
-### rufus
+### 1-2、rufus
 http://rufus.ie/
 
-## Ventoy
+### 1-3、Ventoy
 https://ventoy.net/en/download.html
 
 ## 2、刷Windows系统
 软碟通UltraISO必备
 
-### 用U盘装系统，进去时只有一个光标
+### 2-1、用U盘装系统，进去时只有一个光标
 可能是系统文件太大，读取数据慢的表现，多等待一会儿，我等了差不多5分钟成功了。
 
 注：将写入方式选择为“USB-HDD+”，如果不是这个模式，可能导致电脑无法通过U盘正常启动。
 
-### 用软碟通UltraISO刻录Win 10 1909 到U盘，只有1个G左右，安装不了系统
+### 2-2、用软碟通UltraISO刻录Win 10 1909 到U盘，只有1个G左右，安装不了系统
 FAT32格式最大支持单个4G的文件文件、但对于文件夹则没有限制（用windows分区FAT32最大只能分32G的分区，使用第三方软件则可以超过32G）。
 FAT32是Windows系统硬盘分区格式的一种。这种格式采用32位的文件分配表，由于FAT32分区内无法存放大于4GB的单个文件，且性能不佳，易产生磁盘碎片。目前已被性能更优异的NTFS分区格式所取代。
 
@@ -31,10 +31,15 @@ FAT32是Windows系统硬盘分区格式的一种。这种格式采用32位的文
 1、要使用UltraISO9.5.1以上版本。
 2、UltraISO界面有格式化选项，先选定NTFS进行格式化（用另外方式格式化成NTFS也可），然后依次选择“启动”--“写入硬盘映像”--“便捷启动”--“便捷写入”，这样可以保持U盘NTFS。
 
-### 装系统新方式
-直接解压ISO文件就好，然后再拷贝到U盘。
+### 2-3、装系统新方式
+前提条件：需要解压ISO文件到非C盘，可以是D盘，或者U盘。
 
-物理机直接打开ISO文件，双击exe文件安装。
+DiskGenius4.62_x86.zip
+上次的傲梅分区助手愣是没有分区成功，读本机的内存还不准确。
+分区后记得要分配空间，不能空闲。
+
+Windows10物理机可以直接双击打开ISO文件，双击setup.exe文件安装。
+Windows7物理机可以先使用7z软件ISO文件，双击setup.exe文件安装。
 
 ## 3、win7 系统安装界面，键盘鼠标失灵
 已经试过的方法：
