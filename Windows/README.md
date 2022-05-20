@@ -40,3 +40,4 @@ C:\Users\User\AppData\Local\IconCache.db
 ## 6、查看系统恢复分区
 reagentc /info
 
+errlook.exe这个vs自带的错误查找程序不错。

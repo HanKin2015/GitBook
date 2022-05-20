@@ -1,21 +1,4 @@
-# 关键词：intel、arm、amd、x86
-Intel, AMD 的 CPU，大多为 CISC 结构的 CPU。
-ARM 的只有 RISC CPU。
-CISC 是复杂指令集CPU，指令较长，分成几个微指令去执行，开发程序比较容易（指令多的缘故）。通常一个指令需要好几个 Machine Cycle 才能执行。
-RISC 是精简指令集CPU，指令较短，如果内部的 pipe line 做得好，可以使得指令的译码与数据的处理较快，使得执行效率高。通常一个指令只要一个 Machine Cycle 就能够执行。
-近年来某些 CISC CPU，如 Intel 的 Pentium-Pro、AMD 的K5、K6 实际上是改进了的CISC，也可以做到一个 Machine Cycle 能执行一个指令。
-ARM 本身不做CPU，只授权给其他厂商做CPU，其中最大的一家，就是 Intel。
-由於 ARM 的结构一开始就以省电为主，所以一般来说，执行速度没有 Intel 或是 AMD 的 CPU 快。但是在手持式装置的世界，ARM 的省电加上以授权而非自制的联合军团方式，打败了所有的人，成为王者，现在进而慢慢的进入其他的领域。
-
-
-CPU主要有2个生产商Intel、稳定，老牌。AMD超频、性价比高。
-
-
-Intel和AMD都是公司名
-x86是架构名
-ARM也是一种架构，一般用于嵌入式设备，也是一个公司。
-mips也是一家公司，也是一种cpu架构。
-
+# CPU那些事儿
 
 ## 1、CISC & RISC
 要了解X86和ARM，就得先了解复杂指令集(CISC,complex instruction set computer)和精简指令集(RISC,Reduced Instruction-Set Computer)。从CPU发明到现在，有非常多种架构，从我们熟悉的X86，ARM，到不太熟悉的MIPS，IA64，它们之间的差距都非常大。但是如果从最基本的逻辑角度来分类的话，它们可以被分为两大类，即所谓的“复杂指令集”与“精简指令集”系统，也就是经常看到的“CISC”与“RISC”。
@@ -42,5 +25,60 @@ Alpha是目前已知的内存模型最弱的架构。
 但这是以软件复杂性的提升为代价的。由于其上的系统编程较难，现在已淡出工业界。
 它的学术价值却不容小觑。
 https://www.zhihu.com/question/23685068?sort=created
+
+## 4、关键词：intel、arm、amd、x86
+Intel, AMD 的 CPU，大多为 CISC 结构的 CPU。
+ARM 的只有 RISC CPU。
+CISC 是复杂指令集CPU，指令较长，分成几个微指令去执行，开发程序比较容易（指令多的缘故）。通常一个指令需要好几个 Machine Cycle 才能执行。
+RISC 是精简指令集CPU，指令较短，如果内部的 pipe line 做得好，可以使得指令的译码与数据的处理较快，使得执行效率高。通常一个指令只要一个 Machine Cycle 就能够执行。
+近年来某些 CISC CPU，如 Intel 的 Pentium-Pro、AMD 的K5、K6 实际上是改进了的CISC，也可以做到一个 Machine Cycle 能执行一个指令。
+ARM 本身不做CPU，只授权给其他厂商做CPU，其中最大的一家，就是 Intel。
+由於 ARM 的结构一开始就以省电为主，所以一般来说，执行速度没有 Intel 或是 AMD 的 CPU 快。但是在手持式装置的世界，ARM 的省电加上以授权而非自制的联合军团方式，打败了所有的人，成为王者，现在进而慢慢的进入其他的领域。
+
+
+CPU主要有2个生产商Intel、稳定，老牌。AMD超频、性价比高。
+
+
+Intel和AMD都是公司名
+x86是架构名
+ARM也是一种架构，一般用于嵌入式设备，也是一个公司。
+mips也是一家公司，也是一种cpu架构。
+
+## 5、物理cpu个数、核数、逻辑cpu数的理解
+物理cpu数：主板上实际插入的cpu数量，可以数不重复的 physical id 有几个（physical id）
+cpu核数：单块CPU上面能处理数据的芯片组的数量，如双核、四核等 （cpu cores）
+逻辑cpu数：一般情况下，逻辑cpu=物理CPU个数×每颗核数
+
+```
+[root@hlyy ~]# grep 'physical id' /proc/cpuinfo|sort|uniq|wc -l             # 物理cpu数
+8
+[root@hlyy ~]# grep 'cpu cores' /proc/cpuinfo|uniq|awk -F ':' '{print $2}'  # cpu核数
+ 2
+[root@hlyy ~]# cat /proc/cpuinfo| grep 'processor'|wc -l					# 逻辑cpu数
+16
+
+自身实践：
+[root@ubuntu0006:/media] ((e16c5d9...)) #grep 'physical id' /proc/cpuinfo|sort|uniq|wc -l
+1
+[root@ubuntu0006:/media] ((e16c5d9...)) #grep 'cpu cores' /proc/cpuinfo|uniq|awk -F ':' '{print $2}'
+ 2
+[root@ubuntu0006:/media] ((e16c5d9...)) #cat /proc/cpuinfo| grep 'processor'|wc -l
+2
+root@HanKin2015:~# grep 'physical id' /proc/cpuinfo|sort|uniq|wc -l
+1
+root@HanKin2015:~# grep 'cpu cores' /proc/cpuinfo|uniq|awk -F ':' '{print $2}'
+ 4
+root@HanKin2015:~# cat /proc/cpuinfo| grep 'processor'|wc -l
+4
+```
+
+
+
+
+
+
+
+
+
 
 

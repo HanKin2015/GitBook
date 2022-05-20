@@ -110,3 +110,43 @@ i686 在 pentun II 以后的 Intel 系列 CPU ，及 K7 以后等级的 CPU 都�
 x86_64的解释：
 
 而x86_64就是64位的x(代表不确定。可以是3、4、5、6、）86，是个统称，如果是i686_64也是属于x86_64的。
+
+## 9、Linux 查看服务器几核几G
+查看物理CPU的个数
+cat /proc/cpuinfo |grep "physical id"|sort |uniq|wc -l
+查看逻辑CPU的个数
+cat /proc/cpuinfo |grep "processor"|wc -l
+查看CPU是几核
+cat /proc/cpuinfo |grep "cores"|uniq
+查看当前操作系统内核信息
+uname -a
+查看当前操作系统发行版信息
+cat /etc/issue
+查看逻辑CPU个数, 同时查看CPU型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+cat /proc/cpuinfo | grep physical | uniq -c
+cpu运行的位数
+getconf LONG_BIT
+cat /proc/cpuinfo | grep flags | grep ' lm ' | wc -l
+查看内存信息命令
+cat /proc/meminfo
+查看硬盘信息命令
+fdisk -l
+
+总结：
+```
+[root@ubuntu0006:/] #cat /proc/cpuinfo |grep "cores"|uniq
+cpu cores       : 2
+[root@ubuntu0006:/] #cat /proc/meminfo | grep "MemTotal"
+MemTotal:        8175056 kB
+
+即2核8G
+```
+
+
+
+
+
+
+
+

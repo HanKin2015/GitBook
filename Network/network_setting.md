@@ -125,6 +125,8 @@ arping -a 169.22.64.246
 如果在其中一个主机上面运行则是没有任何结果就是唯一，有mac地址就是冲突。
 ```
 
+https://zhuanlan.zhihu.com/p/422812398
+
 ## 9、Windows防火墙能组织被其他人ping
 很奇怪，不能ping通ip，但是能通过mstsc远程连接。
 关闭防火墙之后就能ping通。
