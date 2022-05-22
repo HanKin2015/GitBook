@@ -50,6 +50,7 @@ addrs = socket.getaddrinfo(domain, None)
 
 ![image](https://user-images.githubusercontent.com/38210128/127502984-7ef25b7c-1901-4164-ab29-e5dbc487e63d.png)
 
+## 5、使用qt5进行翻墙
 
 
 

@@ -39,8 +39,22 @@ OCR （Optical Character Recognition，光学字符识别）是指电子设备�
 
 Linux的设计艺术
 
-# 
+# 学习网站
 https://easyai.tech/ai-knowledge-hub/
+
+www.lintcode.com
+
+# 时隔四年重新走上机器学习道路
+20220522翻开曾经的资料，这才想起当初的仓库：
+https://github.com/HanKin2015/Machine_to_DeepingLearning
+
+ipynb文件是可以在线浏览：https://hankin2015.github.io/2018/10/03/20181003GuoQin/
+
+
+
+
+
+
 
 
 
