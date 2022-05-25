@@ -22,7 +22,7 @@ gz
 
 　　解压1：gunzip FileName.gz
 　　解压2：gzip -d FileName.gz
-　　压缩：gzip FileName
+　　压缩： gzip FileName
 
 .tar.gz 和 .tgz
 
@@ -80,7 +80,9 @@ tar -cvzf  a.tar.gz a --remove-files
 gunzip file#识别后缀，必须把后缀改为.gz //解压后的文件名，去掉.gz
 错误原因：错把zip的压缩包使用gunzip命令解压，正确是unzip命令。
 
-
+## 5、发现在linux下面tar是万能的
+gunzip解压gz文件后，得到一个没有后缀的文件，一脸懵逼。
+后面不管三七二十一，就是tar再进行解压。
 
 
 

@@ -11,7 +11,8 @@ F12-》左上角箭头-》选择红色下载按钮-》在a herf中就是下载�
 动态获取：
 F12-》选择Network-》右上角三点可以控制一个Name框-》选择ajaxm.php-》右边就是下载链接
 
-
+## 2、传文件找文叔叔
+https://www.wenshushu.cn/
 
 
 

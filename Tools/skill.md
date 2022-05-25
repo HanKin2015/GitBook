@@ -9,11 +9,6 @@
 # 2、谷歌插件下载的好地方
 (极简插件)[https://chrome.zzzmh.cn/index]
 
-# 3、科学上网
-- 谷歌访问助手2.3.0
-- 集装箱
-- iGG谷歌访问助手（好像用不了）
-
 # 下载外国软件的好地方
 https://sourceforge.net/
 https://www.fosshub.com/

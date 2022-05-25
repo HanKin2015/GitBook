@@ -48,6 +48,8 @@ https://www.jiaxu.net/archives/2590.html
 那也就是说发布到公网上面的可能不是ftp服务器，但是不能排除，因为是使用http进行访问。
 
 ## 9、网上邻居共享文件和文件夹
+https://www.pc-daily.com/xitong/77994.html
+
 - 创建文件共享目录
 - 右键属性-》共享-》共享-》下拉框添加用户
 - 注意需要给账户增加用户名和密码

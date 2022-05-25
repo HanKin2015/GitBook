@@ -41,3 +41,21 @@ C:\Users\User\AppData\Local\IconCache.db
 reagentc /info
 
 errlook.exe这个vs自带的错误查找程序不错。
+PoolMonXv2.exe不错的内存泄露工具
+spy++.exe接收并打印windows窗口消息
+
+devmgmt.msc设备管理器
+sc命令可以查看驱动，如sc query usbccgp
+
+
+
+
+
+
+
+
+
+
+
+
+

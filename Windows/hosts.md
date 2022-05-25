@@ -50,11 +50,13 @@ addrs = socket.getaddrinfo(domain, None)
 
 ![image](https://user-images.githubusercontent.com/38210128/127502984-7ef25b7c-1901-4164-ab29-e5dbc487e63d.png)
 
-## 5、使用qt5进行翻墙
+## 5、使用trojan-qt5.exe进行科学上网
+- 谷歌访问助手2.3.0
+- 集装箱
+- iGG谷歌访问助手（好像用不了）
 
+Trojan-Qt5-Windows.7z
 
-
-
-
+配置文件已上传：D:\Github\Storage\others\gui-config.zip
 
 

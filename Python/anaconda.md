@@ -1,4 +1,6 @@
-# 利用conda升级Anaconda及其包
+# anaconda
+
+## 1、利用conda升级Anaconda及其包
 
 以管理员身份启动Anaconda Prompt： 
 
@@ -11,8 +13,7 @@
 
 查询某个conda指令使用-h后缀，如conda update -h
 
-
-## 有时候conda没有搜索到包
+## 2、有时候conda没有搜索到包
 更新pip命令
 python -m ensurepip
 python -m pip install --upgrade pip

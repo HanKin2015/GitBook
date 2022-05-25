@@ -1260,24 +1260,26 @@ git log --oneline
 git log --stat
 git log -p
 
-## .git文件夹太大问题及解决方法
+## .git文件夹太大问题及解决方法（该方法过程有些繁琐，不清楚有没有批量删除文件的方法）
 https://blog.csdn.net/lai1170137052/article/details/107009414/
+https://blog.csdn.net/qq_39798423/article/details/118055127
 
 - 桌面打开gitbash，并切换到项目目录
 - 查找大文件，命令如下：
+```
 git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
+
 python/U盘自动拷贝/1.txt1645063482
 longago/gluon_tutorials_zh.pdf
+```
 
-- 删除指定的大文件,例如"youle0131.zip"
-git filter-branch --force --index-filter "git rm --cached --ignore-unmatch 'youle0203.zip'" --prune-empty --tag-name-filter cat -- --all
+- 删除指定的大文件，将 bigfile 换成上面找出的文件名，例如"1.txt1645063482"
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch '1.txt1645063482'" --prune-empty --tag-name-filter cat -- --all
 
 git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
 
 - 重新标记过期的缓存文件
 git reflog expire --expire=now --all
-
-git filter-branch --force --index-filter "git rm --cached --ignore-unmatch 'longago/gluon_tutorials_zh.pdf'" --prune-empty --tag-name-filter cat -- --all
 
 - 回收过期的缓存
 git gc --prune=now
