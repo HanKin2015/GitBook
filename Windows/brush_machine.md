@@ -126,10 +126,10 @@ CPU和内存初始化成功后，驱动执行环境（DXE）载入，当DXE载�
 
 ## 6、U盘启动盘，启动时报错Failed to load ldlinux.c32的解决办法（RAW方式转盘）
 最近使用U盘为一台服务器安装linux操作系统，启动时报错，报错信息如下：
-
+```
 Failed to load ldlinux.c32
 Boot failed: please change disks and press a key to continue.
-
+```
 对于这个问题，百度上也有好几个答案，比如我这个U盘启动盘是用ultraiso做的，建议使用其他制作工具，比如rufus。
 
 其实对这个问题，有一个更简单的办法，只需要在ultraiso做U盘启动盘，写入方式USB-HDD改为RAW即可。

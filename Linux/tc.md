@@ -166,7 +166,17 @@ qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 tc qdisc add dev eth0 root netem delay 100ms 10ms
 想使用过滤器进行过滤，居然会失败。
 
-
-
+## 3、一次给指定ip增加延时
+把ip修改成指定物理机ip即可，中间可能出现当前主机网口不是eth0。支持多个ip指定。
+```
+tc qdisc show dev eth0
+tc qdisc add dev eth0 root handle 1: prio
+tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 123.2.3.6 flowid 1:1
+tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 223.22.23.26 flowid 1:1
+tc qdisc add dev eth0 parent 1:1 handle 10: netem delay 50ms loss 1%
+tc qdisc change dev eth0 parent 1:1 handle 10: netem delay 150ms loss 5%
+tc qdisc del dev eth4 root
+```
+5%丢包已经很严重了，1%一般即可。
 
 

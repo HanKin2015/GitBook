@@ -228,3 +228,13 @@ root@hankin:~# apt show florence
 命令行调出软键盘： florence show
 命令行隐藏软键盘： florence hide
 软键盘与实体键盘在一个层级，中英文输入由输入框架控制
+
+
+windows的ico图标转换为linux的png图标的小工具印象中似乎有不少，我觉得有icotool这个就够用了。
+
+安装：
+sudo apt-get install icoutils
+
+用法：
+#将当前文件夹下所有ico文件中的48x48图像，一下子全部提取出来放到48文件夹中
+icotool -x -o 48 -w 48 *.ico 

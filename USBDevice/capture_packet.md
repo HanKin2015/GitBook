@@ -214,17 +214,17 @@ MIDI(Musical Instrument Digital Interface)乐器数字接口
 它能把计算机的数字信号翻译成可沿普通电话线传送的脉冲信号，而这些脉冲信号又可被线路另一端的另一个调制解调器接收，并译成计算机可懂的语言。
 计算机内的信息是由“0”和“1”组成数字信号，而在电话线上传递的却只能是模拟电信号。于是，当两台计算机要通过电话线进行数据传输时，就需要一个设备负责数模的转换。
 
-# Bus Hound
+# 3、Bus Hound
 phase：阶段、时期
 人体学输入设备可以理解为HID设备吗？？？但可以肯定的是HID设备属于人体学输入设备。
 
 一个比较轻量级纯软件工具，软件界面看着就像上一个世纪的风格。官网为http://perisoft.net/index.htm。使用上也不是很麻烦，但是在实际使用中发现，对于某些USB报文无法抓取，这是个硬伤。而且，其也不具备USB协议分析功能。拿到报文后需要自行进行分析。安装后需要重启计算机才可用！
   这是一个收费工具，目前不怎么更新了，最新版为 6.01。但是网上放出去了其最新版的注册码。还有个简单的中文使用说明。
 
-# udevadm monitor
+# 4、udevadm monitor
 Linux下实时监控usb设备的拔插情况。
 
-# tcpdump抓包工具+wireshark
+# 5、tcpdump抓包工具+wireshark
 查看端口：tcpdump -D
 tcpdump -i usbmon2 > xxxx.pcap
 
@@ -240,7 +240,7 @@ https://www.cnblogs.com/bangerlee/archive/2012/02/20/2356818.html
 创建块设备或者字符设备文件。此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、SUSE、openSUSE、Fedora。
 
 
-# USBLzyer2.2
+# 6、USBLzyer2.2
 软件功能
 1、USB协议分析仪的窗口，提供了一个完整而简单的理解分析USB主机控制器、USB集线器和USB设备活动器
 2、可以查看所有USB设备和子组件的详细信息
@@ -255,9 +255,12 @@ https://www.cnblogs.com/bangerlee/archive/2012/02/20/2356818.html
 4、可以对USB Host Controllers的活动进行全面周详的分析
 5、一个完整的软件解决方案，所以你不需要安装任何额外的软件或硬件
 
+# 7、使用tcpdump抓取网络数据包
+tcpdump -i eth0 host 10.70.55.130 -s 0 -w hj.pcap
 
+抓取的文件可以使用wireshark软件打开分析。
 
-
+iftop -nNpP
 
 
 

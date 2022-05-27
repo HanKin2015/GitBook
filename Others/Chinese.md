@@ -6,7 +6,7 @@
 https://baike.baidu.com/item/%E6%B6%82/34272#viewPageContent):涂意为道路时。也作“途”
 
 
-
+茯苓[fú líng]释义： 中药名。为多孔菌科真菌茯苓Poria cocos(Schw.)Wolf的干燥菌核。
 
 
 
