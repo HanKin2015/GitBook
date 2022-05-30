@@ -62,6 +62,16 @@ TN: 将负类预测为负类数 30
 模型效果上限高
 专家知识依赖少
 
+## 5、ModuleNotFoundError: No module named 'sklearn.cross_validation'
+```
+from sklearn.cross_validation import KFold
+from sklearn.cross_validation import train_test_split
+```
+修改为：
+```
+from sklearn.model_selection import KFold
+from sklearn.model_selection import train_test_split
+````
 
 
 

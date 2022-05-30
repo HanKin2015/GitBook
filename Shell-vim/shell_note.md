@@ -1,8 +1,139 @@
 [TOC]
 # shell学习笔记
 
-# 1、"$OPTARG"
+# shell笔记之20201216
 
+## 1、shell 没有split函数，但是有split命令。
+
+## 2、awk: line 2: function strtonum never defined
+解决办法如下：
+>sudo apt-get install gawk
+
+```
+#!/bin/bash
+
+echo $0
+mac_addr=`cat /sys/class/net/eth0/address`
+echo $mac_addr
+#mac_addr='fe:fc:fe:ff:ae:34'
+
+awk 'BEGIN {print split('\"$mac_addr\"', a, ":")}'   #注意必须要双引号引起来
+awk 'BEGIN {print split("1&2&3&4&5", arr, "&")}'
+echo $a
+echo ${arr[0]}
+
+awk 'BEGIN {
+    n=split('\"$mac_addr\"', a, ":");
+    printf("%d\n", n);	#有点不同，不需要地址符&
+    for (i = 1; i <= n; i++) {
+        num = strtonum("0x"a[i]);
+        printf("%s--->%d\n", a[i], num);   #必须要使用换行符\n才能输出值
+    }
+}'
+
+
+echo [ 10**2 ]
+echo `expr 10**2`
+
+((a=5**3))	#目前只能想到这样求数值
+echo $a
+```
+
+## 3、shell 中 [-eq] [-ne] [-gt] [-lt] [ge] [le]
+这些运算符只适用于整数表达式，字符串表达式使用[ ${str} == "ds" ]。
+```
+-eq           //等于
+-ne           //不等于
+-gt            //大于 （greater ）
+-lt            //小于  （less）
+-ge            //大于等于
+-le            //小于等于
+
+命令的逻辑关系：
+在linux 中 命令执行状态：0 为真，其他为假
+```
+
+## 4、判断文件中是否存在指定字符串
+```
+cat /proc/version | grep -o "3.2.4"
+if [ $? -ne 0 ];then
+	echo "not found"
+else
+	echo "found"
+fi
+```
+
+## 5、readlink命令
+读取一个软链接的值
+
+## 6、使用awk
+
+## 7、ll按时间排序
+ll -rt
+ll -
+
+## 8、ubuntu下修改tab键为4个空格
+ubuntu用vi编写python代码，按下tab键，默认的是八个空格，极不舒服
+索性就修改一下，改成4个空格，方法很简单，在终端输入命令：
+
+ vim /etc/vim/vimrc
+
+再打开的文件末尾添加如下内容：
+```
+set filetype=python
+au BufNewFile,BufRead *.py,*.pyw setf python
+set autoindent " same level indent
+set smartindent " next level indent
+set ts=4
+set expandtab
+set autoindent
+set number
+
+set tabstop=4表示Tab表示4个空格的宽带 
+set expandtab 表示Tab自动转换成空格 
+set autoindent表示换行后自动缩进 
+set number 显示行号
+```
+
+## 9、条件判断之字符串判断（建议变量要加双引号）
+${str1} == ${str2} #字符串是否相等
+${str1} != ${str2} #字符串是否不相等
+-z "${str}" #字符串长度是否为0 zero
+-n "${str}" #字符串长度是否不为0   not zero
+```
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #./test.sh
+my name is jack in
+my name is not jack in
+./test.sh: 第 20 行: [: 参数太多
+my name is not jack in
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #cat test.sh
+#!/bin/bash
+
+myname="jack in"
+
+# 变量加双引号
+if [ "$myname" == "jack in" ];then
+    echo "my name is jack in"
+else
+    echo "my name is not jack in"
+fi
+
+# 变量加单引号
+if [ '$myname' == "jack in" ];then
+    echo "my name is jack in"
+else
+    echo "my name is not jack in"
+fi
+
+# 变量不加双引号
+if [ $myname == "jack in" ];then
+    echo "my name is jack in"
+else
+    echo "my name is not jack in"
+fi
+```
+
+## 10、shell脚本参数解析之"$OPTARG"
 [linux shell命令行选项与参数用法详解](https://www.jb51.net/article/48691.htm)
 
 问题描述：在linux shell中如何处理tail -n 10 access.log这样的命令行选项？
@@ -44,14 +175,14 @@ while getopts ":a:bc" opt  #第一个冒号表示忽略错误；字符后面的�
 echo $*
 while getopts ":a:bc" opt
 do
-        case $opt in
-                a ) echo $optarg
-                    echo $optind;;
-                b ) echo "b $optind";;
-                c ) echo "c $optind";;
-                ? ) echo "error"
-                    exit 1;;
-        esac
+	case $opt in
+		a ) echo $optarg
+			echo $optind;;
+		b ) echo "b $optind";;
+		c ) echo "c $optind";;
+		? ) echo "error"
+			exit 1;;
+	esac
 done
 echo $optind
 shift $(($optind - 1))
@@ -347,55 +478,31 @@ EOF
 
 
 3.
-
-
-
 复制代码代码如下:
-
-
 :<<'EOF
 注释的代码...
 EOF'
 
 
 4.
-
-
-
 复制代码代码如下:
-
-
 :<<EOF'
 注释的代码...
 'EOF
 
-
-
 5.
-
-
-
 复制代码代码如下:
-
-
 :<<'
 注释的代码...
 '
 
 
 # 7、其他
-
 set -x与set +x指令用于脚本调试
-
 set是把它下面的命令打印到屏幕
-
 set -x 开启 
-
 set +x关闭
-
 set -o 查看
-
-
 
 set命令的-e参数，linux自带的说明如下：
 "Exit immediately if a simple command exits with a non-zero status."
@@ -403,6 +510,7 @@ set命令的-e参数，linux自带的说明如下：
 
 真实案例：
 脚本a.sh开头使用了"set -e"，且能正常运行。在几个月或更久以后，因需求升级，在脚本中增加了3行hadoop操作：
+```
 #!/bin/bash
 set -e
 ...
@@ -410,6 +518,7 @@ set -e
 /home/work/.../hadoop dfs -mkdir /app/.../dir
 /home/work/.../hadoop dfs -put file_1 /app/.../dir/
 ...
+```
 这几行hadoop命令逻辑很简单：在hdfs上清除并新建一个目录，并将一份本地文件推送至这个目录，供后续使用。将这几行单拎出来，在命令行下执行，除了提示待删除的目录不存在，并没有什么问题，文件还是会被推送到指定的地方。
 
 但第一次执行这个脚本的时候，却失败退出了，且导致调用该脚本的程序整体退出，造成了严重的后果。原因是hdfs上还没有这个目录，rmr这一行会返回255，这个值被脚本前方的"set -e"捕捉到，直接导致了脚本退出。
