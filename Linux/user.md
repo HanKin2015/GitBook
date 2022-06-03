@@ -1,25 +1,37 @@
 # 用户管理
 
-帐号建好之后，可以用passwd设定帐号的密码。
-修改root账户亦可。
+## 1、修改用户密码
+```
+sudo -i		切换root用户
+passwd hj	修改hj用户密码
+passwd		修改root用户密码
+su命令需要给root用户增加密码后使用，即需要执行passwd
+```
 
-可用userdel删除此命令建立的帐号。
+## 2、删除用户
+```
+userdel hj
+```
+
+## 3、增加用户
 使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。
-
 ```
-useradd userA——创建用户userA
-useradd –e 12/30/2017 userB——创建userB,指定有效期2017-12-30到期
-useradd –u 600 userC——创建userC指定用户id为600
+useradd userA					创建用户userA
+useradd –e 12/30/2017 userB		创建userB,指定有效期2017-12-30到期
+useradd –u 600 userC			创建userC指定用户id为600
 ```
 
-id 用户名	查看用户UID和GID信息
+## 4、其他相关操作
+id 用户名			查看用户UID和GID信息
 cat -n /etc/passwd	查看用户详细信息,参数-n显示行号
 cat -n /etc/group	查看组详细信息
-who	查看当前所有登录的用户列表
-whoami	查看当前登录用户的账户名
+who					查看当前所有登录的用户列表
+whoami				查看当前登录用户的账户名
+getent passwd		类似于cat /etc/passwd
+compgen -u			
+compgen 是 bash 的内置命令，它将显示所有可用的命令，别名和函数。
 
-
-
+## 5、用户信息文件
 * `/etc/passwd`： 用户账户的详细信息在此文件中更新。
 * `/etc/shadow`： 用户账户密码在此文件中更新。
 * `/etc/group`： 新用户群组的详细信息在此文件中更新。
@@ -35,12 +47,6 @@ whoami	查看当前登录用户的账户名
 **家目录（/home/mageshm）：代表用户的家目录。
 **Shell（/bin/bash）：代表用户使用的 shell 类型。
 
-## 查看所有用户
-```
-cat /etc/passwd
-getent passwd
-compgen -u
-compgen 是 bash 的内置命令，它将显示所有可用的命令，别名和函数。
-```
+
 
 

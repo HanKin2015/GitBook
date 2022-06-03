@@ -217,8 +217,23 @@ glad
 good
 ```
 
-### 6-1、
-
+### 6-1、正则的魅力
+```
+root@hankin:/usr/local/bin# cat /etc/os-release
+PRETTY_NAME="UnionTech OS Smart 20 TC"
+NAME="uos"
+VERSION_ID="20"
+VERSION="20"
+ID=uos
+HOME_URL="https://www.chinauos.com/"
+BUG_REPORT_URL="http://bbs.chinauos.com"
+VERSION_CODENAME=""
+root@hankin:/usr/local/bin# grep -q "^ID=uos$" /etc/os-release
+root@hankin:/usr/local/bin# echo $?
+0
+root@hankin:/usr/local/bin# grep "^ID=uos$" /etc/os-release
+ID=uos
+```
 
 
 

@@ -217,7 +217,26 @@ minghai            ALL=（ALL）             NOPASSWD：ALL(出于方便，推�
 su -
 echo 'xxx ALL=(ALL) ALL' >> /etc/sudoers  (其中xxx代表用户名) 
 
+## 18、error: /lib64/libpthread.so.0: symbol h_errno
+是真的烦，不要轻易升级glibc，导致整个环境坏了。然后安装gcc后出现这种情况。
 
+未尝试：https://blog.51cto.com/lwm666/2773648
+ssh已坏，重启物理机启动不起来，centos7系统。重刷。
+```
+[root@localhost hj]# ll
+ls: relocation error: /lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference
+[root@localhost hj]# pwd
+/home/hd/桌面/glibc-2.25/build/hj
+[root@localhost hj]# uname -a
+Linux localhost.localdomain 3.10.0-862.el7.x86_64 #1 SMP Fri Apr 20 16:44:24 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+[root@localhost hj]# uname -r
+3.10.0-862.el7.x86_64
+[root@localhost hj]# export LD_PRELOAD=/lib64/libpthread.so.0 
+-bash: export LD_PRELOAD=/lib64/libpthread.so.0 : 没有那个文件或目录
+[root@localhost hj]# cd /lib64
+[root@localhost lib64]# realpath libpthread.so
+libpthread.so    libpthread.so.0
+```
 
 
 

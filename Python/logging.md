@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.INFO,
 var = 'hello'
 logging.info('{}'.format(var))
 logging.error('{}'.format(var))
-logging.warn('{}'.format(var))
+logging.warning('{}'.format(var))
 ```
 
 ## 3、文件和控制台都打印

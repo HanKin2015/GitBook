@@ -169,7 +169,22 @@ fi
 
 realpath abspath 都能跨过软链接，获取文件的真实路径。
 
-
+## 12、二进制文件删除后重新编译会是同一个文件，即md5值不变
+```
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #gcc helloworld.c
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #md5sum a.out
+e9d9cec2d13a5df0fe30cbe3802b1021  a.out
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #rm a.out
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #gcc helloworld.c
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #md5sum a.out
+e9d9cec2d13a5df0fe30cbe3802b1021  a.out
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #g++ helloworld.c
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #md5sum a.out
+e9d9cec2d13a5df0fe30cbe3802b1021  a.out
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #g++ helloworld.c -std=c++17
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #md5sum a.out
+e9d9cec2d13a5df0fe30cbe3802b1021  a.out
+```
 
 
 

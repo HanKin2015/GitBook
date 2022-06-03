@@ -26,6 +26,8 @@ with open('./notebook.json', encoding = 'utf-8') as fd:
 ## 3、Python报错：'dict' object has no attribute 'iteritems'（机器学习实战kNN代码）解决方案
 原因在于：python3中已经没有 “iteritems” 这个属性了，现在属性是：“ items ” 。
 
+## 4、UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80 in position 0: inva
+问题出在函数入参上，因为在前面的函数里把fw = open(filename,'w')改成了fw = open(filename,'wb')，所以在这个函数中也把fr = open(filename)改为fr = open(filename,'rb')，问题解决，事实证明确实是函数入参不同导致的。
 
 
 

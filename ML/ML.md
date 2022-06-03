@@ -63,6 +63,9 @@ TN: 将负类预测为负类数 30
 专家知识依赖少
 
 ## 5、ModuleNotFoundError: No module named 'sklearn.cross_validation'
+后面几个错误完美对应：https://www.cnblogs.com/broccoli919/p/14031935.html
+
+sklearn已经将cross_validation合并到model_selection
 ```
 from sklearn.cross_validation import KFold
 from sklearn.cross_validation import train_test_split
@@ -73,14 +76,29 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 ````
 
+## 6、TypeError: shuffle must be True or False; got 2
+删掉第一个参数位的值
+```
+for train, test in KFold(len(X),2,shuffle=True):
+```
+修改为：
+```
+for train, test in KFold(2,shuffle=True):
+```
 
+## 7、TypeError: 'KFold' object is not iterable
+```
+for k, (train, test) in enumerate(KFold(10,shuffle=True, random_state=1).split(y), start=1):
+```
 
+## 8、Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+解决思路
+没有设置NUMEXPR_MAX_THREADS而出现的警告，最后会NumExpr defaulting to 8 threads
 
-
-
-
-
-
+解决方法
+import os
+os.environ[‘NUMEXPR_MAX_THREADS’] = ‘16’
+注意：'16’是str格式的
 
 
 

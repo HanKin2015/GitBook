@@ -191,22 +191,18 @@ echo $0
 echo $*
 ```
 
-# 2、linux c解析命令行选项getopt、optarg、optind、opterr、optopt
-
-## getopts/getopt
+## 11、linux c解析命令行选项getopt、optarg、optind、opterr、optopt
+### getopts/getopt
 
  处理命令行参数是一个相似而又复杂的事情，为此，c提供了getopt/getopt_long等函数，
 c++的boost提供了options库，在shell中，处理此事的是getopts和getopt.
 getopts和getopt功能相似但又不完全相同，其中getopt是独立的可执行文件，而getopts是由bash内置的。 
 
-
-
 - getopts它不支持长选项。 
-
 - 短选项参数-，长短项参数--。
 
-# 3、Shell脚本中$X的含义
-
+## 12、Shell脚本中$X的含义
+```
 $$
 Shell本身的PID（ProcessID）
 $!
@@ -225,15 +221,11 @@ $0
 Shell本身的文件名
 $1～$n
 添加到Shell的各参数值。$1是第1参数、$2是第2参数…。
+```
 
-
-
-- lsusb
-- 
-
-# 4、大小写转换
-
- m="abc"
+## 13、大小写转换
+```
+m="abc"
 echo $m # 输出为abc
 declare -u m
 echo $m # 输出为abc,
@@ -242,22 +234,14 @@ echo $m # 输出为CDE
 declare -l m="HELL"
 echo $m # 输出为hell 
 
-
-
 echo 'hello' | tr 'a-z' 'A-Z'
-
 echo 'HELLO' | tr 'A-Z' 'a-z'
+```
 
-
-
-# 5、写脚本时的错误
-
+## 14、写脚本时的错误
 - 中括号的前后需要有空格
 
-
-
-# 6、在shell中如何判断一个变量是否为空
-
+## 15、在shell中如何判断一个变量是否为空
 ```
 注意将变量用引号引起来。
 
@@ -269,8 +253,6 @@ else
   echo "NOT NULL"  
 fi 
 ```
-
-
 
 # 7、local
 
