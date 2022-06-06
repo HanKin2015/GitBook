@@ -100,7 +100,7 @@ import os
 os.environ[‘NUMEXPR_MAX_THREADS’] = ‘16’
 注意：'16’是str格式的
 
-
+## 9、训练集、验证集、测试集（附：分割方法+交叉验证）
 
 
 

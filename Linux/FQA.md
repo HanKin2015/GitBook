@@ -101,20 +101,15 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 https://cloud.tencent.com/developer/ask/92780 
  
 ## 11、Linux 文件不能删除，没有权限问题
-
-shirandata 2020-07-01 23:21:20  1207  收藏
-分类专栏： Linux
-版权
 第一步：查看文件属性
 lsattr xxx  查看文件属性(xxx为文件名)
-1
-看到的情况
 
+看到的情况
 -----a-------或者-----i-------
-1
+
 第二步：去除属性
 chattr -a xxx 或者 chattr -i xxx
-1
+
 第三步：删除文件
 rm -rf xxx
 

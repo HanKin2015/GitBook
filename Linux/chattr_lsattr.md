@@ -2,8 +2,14 @@
 
 ## 1、chattr和chmod的区别
 利用chattr锁定文件，防止更改，与chmod这个命令相比，chmod只是改变文件的读写、执行权限，更底层的属性控制是由chattr来改变的。
-chattr +i file，可以防止系统中某个(关键)文件被修改，有需要的话，不妨试试。
 
+实战可以使用：
+chattr +i file，可以防止系统中某个(关键)文件被修改。
+chmod 444 file, 设置为只读文件
+
+但是chmod的文件可以通过vim命令，然后使用q!强制修改。但是chattr的文件强制修改保存后实际上文件内容不改变。
+
+## 2、文件只读属性
 chattr -i /etc/resolv.conf
 加锁：chattr +i /etc/passwd 文件不能删除，不能更改，不能移动
 查看加锁： lsattr /etc/passwd 文件加了一个参数 i 表示锁定
@@ -14,7 +20,7 @@ chattr -i /etc/resolv.conf
 2.与chmod这个命令相比，chmod只是改变文件的读写、执行权限，更底层的属性控制是由chattr来改变的
 3.只有拥有root权限，才拥有设置chattr的权限
 
-## 2、简介
+## 3、简介
 
 Linux lsattr命令用于显示文件属性。
 用chattr执行改变文件或目录的属性，可执行lsattr指令查询其属性。
@@ -30,7 +36,8 @@ s：保密性删除文件或目录。
 S：即时更新文件或目录。
 u：预防意外删除。
 
-
+## 4、文件的隐藏属性
+linux下没有隐藏文件属性这个概念，凡是以 . 开头的文件或目录，比如 .bashrc ，都是隐藏的，用 ls看不到，必须用 ls -a l或ll才能看到。
 
 
 

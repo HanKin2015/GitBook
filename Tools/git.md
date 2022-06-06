@@ -5,7 +5,7 @@
 # 0、前言
 ## 配置一个完整的环境简单步骤
 ```
-git config --global user.name "张三"
+d "张三"
 git config --global user.email "49660@zhangsan.com"
 ssh-keygen -t rsa -C "邮件地址"
 拷贝生成的公钥到git的ssh钥匙中：/root/.ssh/id_rsa.pub
@@ -209,13 +209,16 @@ git pull
 
 # 5、git冲突
 
-当上传的时候产生冲突时：
+## 5-1、产生冲突的场景
+- git merage, git push后在远端建立合并请求
+- git pull
+- git stash pop
 
-## 5-1、在线git解决
+## 5-2、在线git解决，git界面
 
 方便快捷操作简单。
 
-## 5-2、检出，在本地审查和合并
+## 5-3、检出，在本地审查和合并
 
 - git pull origin 分支（生产冲突文件）
 - 在冲突文件里修改：删除和保留（git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容（数量为7））
@@ -225,22 +228,22 @@ git pull
 
 
 Step 1. 获取并检出此合并请求的分支
-
 git fetch origin
 git checkout -b [bName] origin/冲突分支
 
 Step 2. 本地审查变更（忽略）
 
 Step 3. 合并分支并修复出现的任何冲突
-
 git checkout master
 git merge --no-ff [bName]（本地就有冲突文件了，注意看产生冲突的文件）
 
 Step 4. 推送合并的结果到 GitLab
-
 git checkout -b [newBName]
-
 git push origin [newBName]
+
+## 5-4、撤销合并冲突
+git reset        (保留修改文件，即撤销合并操作)
+git reset --hard (不保留文件，恢复到上一个commit状态)
 
 # 6、git commit
 

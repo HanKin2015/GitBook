@@ -1,7 +1,8 @@
-[TOC]
+# Linux双屏之xrandr命令
+
+## 1、简介
 官网：https://wiki.archlinux.org/index.php/Xrandr_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
-# Linux双屏之xrandr
 ```
 [root@ubuntu0006:/media/hankin/vdb/app] #xrandr
 Screen 0: minimum 0 x 0, current 2048 x 1152, maximum 32768 x 32768
@@ -31,10 +32,11 @@ qxl-3 disconnected
 
 xrandr
 
-# 修改分辨率
+## 2、修改分辨率
 xrandr -s 1600x900
+双屏修改指定屏幕分辨率：
 
-# 显示器刷新率
+## 3、显示器刷新率
 指令用法举例：xrandr -s 1024x768 -r 75
 
 xrandr -q
@@ -45,7 +47,7 @@ xrandr --output DFP1 --auto --left-of CRT1
 常见的显示屏名称有VGA, DVI, HDMI and LVDS等等
 
 
-# 调整亮度
+## 4、调整亮度
 xrandr --output LVDS --brightness 0.5
 
 
@@ -100,9 +102,32 @@ xrandr --output HDMI1 --auto --primary
 
 # 使用xinput+xrandr命令矫正触摸屏光标焦点
 
+## 竖屏
+最近得到一块可以旋转的屏幕，竖屏写代码YYDS。
+xrandr --output VGA-0 --rotate left
+xrandr --output VGA-0 --rotate normal
 
+有个问题，虚拟机无法自动适应，分辨率变化了，但是屏幕下半截无法使用。
 
+xrandr --output eDP-1 --mode 1920x1080
 
+两个屏幕都会进行旋转
+xrandr -o left
+xrandr -o right
+xrandr -o inverted
+xrandr -o normal
 
-
+看了这篇文章，感觉可以，实际上会有报错：https://zhuanlan.zhihu.com/p/429253586
+```
+root@hankin:~# xrandr --output HDMI-1 --auto --scale 1x1 --panning 1920x1080+0+0 --output VGA-0 --auto --scale 1x1 --panning 1080x1920+1920+0 --rotate left --right-of HDMI-1
+warning: output HDMI-1 not found; ignoring
+warning: output VGA-0 not found; ignoring
+root@hankin:~# export DISPLAY=:0
+root@hankin:~# xrandr --output HDMI-1 --auto --scale 1x1 --panning 1920x1080+0+0 --output VGA-0 --auto --scale 1x1 --panning 1080x1920+1920+0 --rotate left --right-of HDMI-1
+X Error of failed request:  BadMatch (invalid parameter attributes)
+  Major opcode of failed request:  140 (RANDR)
+  Minor opcode of failed request:  29 (RRSetPanning)
+  Serial number of failed request:  37
+  Current serial number in output stream:  37
+```
 

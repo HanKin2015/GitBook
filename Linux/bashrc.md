@@ -35,6 +35,11 @@ function git_branch {
 export PS1="\[\033[1m\]\[\033[31m\][\[\033[0m\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[36m\]\h\[\033[0m\]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[1m\]\[\033[31m\]]\[\033[0m\]\[\033[1m\]$(git_branch) \[\033[33m\]\\$\[\033[0m\]"
 ```
 
+或者：
+```
+export PS1='\[\033[1m\]\[\033[31m\][\[\033[0m\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[36m\]\h\[\033[0m\]\[\033[00m\]:\[\033[01;34m\]\w    \[\033[00m\]\[\033[1m\]\[\033[31m\]]\[\033[0m\]\[\033[1m\]$(__git_ps1) \[\033[33m\]\$\[\033[0m\]'
+```
+
 我们可以通过设置PS1变量使提示符成为彩色。在PS1中设置字符序列颜色的格式为：
 \e[F;Bm
 
@@ -53,7 +58,12 @@ export PS1="\[\033[1m\]\[\033[31m\][\[\033[0m\]${debian_chroot:+($debian_chroot)
 /etc/bash_complication.d/git_promt
 ```
 这样就可以了：
-export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
+export PS1='[\u@\h:$PWD]\033[01;36m$(__git_ps1)\[\033[00m\] \$ '
+可能会遇到报错：bash: __git_ps1: command not found...
+解决方法：
+find / -name git-prompt.sh
+curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
+source xxxx/git-prompt.sh
 ```
 
 完全可以使用__git_ps1自带函数代替git_branch函数

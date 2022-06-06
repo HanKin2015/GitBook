@@ -29,7 +29,16 @@ with open('./notebook.json', encoding = 'utf-8') as fd:
 ## 4、UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80 in position 0: inva
 问题出在函数入参上，因为在前面的函数里把fw = open(filename,'w')改成了fw = open(filename,'wb')，所以在这个函数中也把fr = open(filename)改为fr = open(filename,'rb')，问题解决，事实证明确实是函数入参不同导致的。
 
-
+mode参数	|可做操作	|若文件不存在	|如何处理原内容
+|:---:|:---:|:---:|:---:|
+r	|只可读		|报错	|-
+r+	|可读可写	|报错	|是
+w	|只可写		|创建	|是
+w+	|可读可写	|创建	|是
+a	|只可写		|创建	|否，追加
+a+	|可读可写	|创建	|否，追加
+x	|只可写		|创建	|-
+x+	|可读可写	|创建	|-
 
 
 

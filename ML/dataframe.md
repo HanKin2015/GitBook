@@ -1,4 +1,7 @@
 # DataFrame
+```
+df1 = pd.DataFrame({'key':['s','s','w','x','x','n','f','c'], 'data1':range(8)})
+```
 
 ## 1、不保留索引和列名
 index表示设置是否保存索引（就是行号）,header表示设置是否保存表头（就是列名）
@@ -112,8 +115,65 @@ print(b2)
 ```
 
 ## 9、删除指定列值的行
+https://www.zhihu.com/question/503436262
+### 1.用 .drop 方法删除 Pandas Dataframe 中列值的行
+.drop方法接受一个或一列列名，并删除行或列。对于行，我们设置参数axis=0，对于列，我们设置参数axis=1（默认情况下，axis为0）。
+```
+import pandas as pd
+fruit_list = [ ('Orange', 34, 'Yes' ) ,
+             ('Mango', 24, 'No' ) ,
+             ('banana', 14, 'No' ) ,
+             ('Apple', 44, 'Yes' ) ,
+             ('Pineapple', 64, 'No') ,
+             ('Kiwi', 84, 'Yes')  ]
+  
+#Create a DataFrame object
+df = pd.DataFrame(fruit_list, columns = 
+                  ['Name' , 'Price', 'Stock']) 
+# Get names of indexes for which column Stock has value No
+indexNames = df[ df['Stock'] == 'No' ].index
 
+# 基于多个列值删除行
+indexNames = df[ (df['Price'] >= 30)
+                & (df['Price'] <= 70) ].index
 
+# Delete these row indexes from dataFrame
+df.drop(indexNames , inplace=True)
 
+# 一行简写
+df.drop(df.loc[df['Stock']=='Yes'].index, inplace=True)
+print(df)
+```
+### 2.布尔屏蔽方法删除 Pandas DataFrame 中的行
+```
+print(df[df.Price > 40])
+print('............................')
+print(df[(df.Price > 40) & (df.Stock== 'Yes')])
+```
+
+### 10、删除行列
+https://blog.csdn.net/m0_52829559/article/details/119063896
+```
+# 删除索引为1的行
+dftest = df.drop(1, axis=0)
+# 或者使用index
+dftest = df.drop(index = 1)  # axis = 0可以不写，drop函数默认是0
+# 删除多个索引，1和2的行
+dftest = df.drop([1,2],axis = 0)
+# 使用index删除多个索引1和2的行
+dftest = df.drop(index = [1,2])  
+# 通过columns指定列名删除多个列'id'和'Color'
+dftest = df.drop(columns=['id','Color'])
+# 删除Color列
+dftest = df.drop('Color',axis = 1)  # axis = 1表示删除列，不可省略
+
+# 将要删除的id好弄成一个list
+droplist = ['001','004','005']
+# 选出df中id不在droplist中的行
+# id在droplist中的，然后取负，表示不在里面的
+dftest = df.loc[~df.id.isin(droplist)]
+
+dftest = df.query('@droplist not in id') # 查找droplist不在id中的
+```
 
 
