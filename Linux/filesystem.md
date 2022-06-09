@@ -6,7 +6,7 @@ stat 以文字的格式来显示 inode 的内容。
 
 stat [文件或目录]
 
-### inode 的内容
+### 1-1、inode 的内容
 inode 包含文件的元信息，具体来说有以下内容：
 
 - 文件的字节数
@@ -41,6 +41,113 @@ root@ubuntu180001:~# stat test
 最近改动：2022-01-13 19:44:33.504000000 +0800
 创建时间：-
 ```
+
+### 1-2、文件大小和空间大小
+从上面可以看出，该文件大小为1110字节，即bytes，磁盘占用空间大小为8*4096=32768比特，即bit，转换为4096字节。
+实验看出，某个东西概念以8块组成，不足以8块计算。
+```
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #stat usbredirhost.c -f
+  文件："usbredirhost.c"
+    ID：25b5b8e9a2105070 文件名长度：255     类型：ext2/ext3
+块大小：4096       基本块大小：4096
+    块：总计：25770312   空闲：3774267    可用：2459451
+Inodes: 总计：6553600    空闲：5469854
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #stat usbredirhost.c
+  文件：'usbredirhost.c'
+  大小：135269          块：272        IO 块：4096   普通文件
+设备：fd10h/64784d      Inode：6441883     硬链接：1
+权限：(0644/-rw-r--r--)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2022-06-06 19:15:11.548000000 +0800
+最近更改：2022-06-07 09:56:09.288000000 +0800
+最近改动：2022-06-07 09:56:09.288000000 +0800
+创建时间：-
+```
+
+1、文件大小指的是该文件实际的文件体积，例如一个文件其本身的大小为6字节，则这6字节称之为该文件的文件大小。
+2、占用空间指的是这个文件占用磁盘空间的大小，如下图所示，该文件的大小为“6字节”，但是占用的磁盘空间却为“4096字节”，占用空间比文件体积要大。
+
+同一个文件在不同磁盘分区上所占的空间不一样大小，这是由于不同磁盘簇的大小不一样导致的。 簇的大小主要由磁盘的分区格式和容量大小来决定。
+操作系统中的一个簇中只能放置一个文件的内容，因此文件所占用的空间，只能是簇的整数倍，只有在少数情况下，即文件的实际大小恰好是簇的整数倍时，文件的实际大小才会与所占空间完全一致。
+
+文件大小是文件实际大小
+而占用空间是文件所占用的硬盘空间...
+因为硬盘存储空间是以簇来存储文件的...
+簇的大小从2k到128k不等，
+可以比喻为一个个箱子，文件放到一个个簇里，并不是都能装满的...
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+脉脉孤独说的，预分配空间...
+那是下载东西的时候才有的概念...
+不要混淆概念...
+至于数据库之类的东西，更是胡邹...
+找你那么说还留地方扩充数据，那么就不会有磁盘碎片生成了...
+“一个实际大小不到1M的文件，占用空间可以超过10M ”鬼信...
+一个实际大小不到1M的文件夹，占用空间可以超过10M ，我才行...
+是文件夹！
+当然如果你一个簇设为10M，那没话说...
+
+## 1-3、查看操作系统块大小
+```
+[root@ubuntu0006:/media] #tune2fs -l /dev/vda1 |grep 'Block size'
+Block size:               4096
+[root@ubuntu0006:/media] #stat -f
+root/    hankin/
+[root@ubuntu0006:/media] #stat -f root
+  文件："root"
+    ID：5daf1520f1d5f8d 文件名长度：255     类型：ext2/ext3
+块大小：4096       基本块大小：4096
+    块：总计：20093394   空闲：6324893    可用：5298449
+Inodes: 总计：5111808    空闲：3841189
+```
+
+查看os系统页的大小
+```
+[root@ubuntu0006:/media] #getconf PAGESIZE
+4096
+```
+
+查看某分区的block和inode的数量和大小，通常block比inode多
+```
+[root@ubuntu0006:/media] #tune2fs -l /dev/vda1 | grep 'Block count'
+Block count:              20446976
+[root@ubuntu0006:/media] #tune2fs -l /dev/vda1 | grep 'Inode count'
+Inode count:              5111808
+[root@ubuntu0006:/media] #tune2fs -l /dev/vda1 | grep 'Block size'
+Block size:               4096
+[root@ubuntu0006:/media] #tune2fs -l /dev/vda1 | grep 'Inode size'
+Inode size:               256
+```
+
+### 1-4、Linux系统中磁盘block和windos中的簇一个意思
+微软操作系统（DOS、WINDOWS等）中磁盘文件存储管理的最小单位叫做“簇”
+
+inode:文件数据都存储在‘块’中，我们还必须找到一个地方存储文件的元信息，比如文件的创建，文件的创建时间，文件的大小等等，这种存储文件元信息的区域就叫做inode,中文译名为‘索引节点’.
+inode大小：inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域，一个数据区，存放文件数据，另一个是inode区(inode table),存放inode所包含的信息.
+
+总结：每个文件最少有一个inode号，系统用inode号来识别不同的文件。
+
+实例：web服务器中小文件多，导致磁盘有空间，但是无法创建文件。
+inode 数被用光了
+查看inode是否被用光：df -i
+block 设置大：效率高，利用率低。
+block 设置小：效率低，利用率高。
+一般系统默认就行.
+```
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #df -i usbredirhost.c
+文件系统         Inode 已用(I) 可用(I) 已用(I)% 挂载点
+/dev/vdb       6553600 1083746 5469854      17% /media/hankin/vdb
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #df usbredirhost.c
+文件系统           1K-块     已用    可用 已用% 挂载点
+/dev/vdb       103081248 87984180 9837804   90% /media/hankin/vdb
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #stat -f usbredirhost.c
+  文件："usbredirhost.c"
+    ID：25b5b8e9a2105070 文件名长度：255     类型：ext2/ext3
+块大小：4096       基本块大小：4096
+    块：总计：25770312   空闲：3774267    可用：2459451
+Inodes: 总计：6553600    空闲：5469854
+[root@ubuntu0006:/media/hankin/vdb/study/udev] #ls -i usbredirhost.c
+6441883 usbredirhost.c
+```
+
 
 ## 2、ext2升级到ext4
 ext系列的文件系统是我们在linux中最常用的文件系统。当我们有使用老的ext2文件系统的磁盘，希望升级到ext4。应该怎么做呢。

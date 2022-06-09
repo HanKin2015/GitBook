@@ -151,7 +151,7 @@ print('............................')
 print(df[(df.Price > 40) & (df.Stock== 'Yes')])
 ```
 
-### 10、删除行列
+## 10、删除行列
 https://blog.csdn.net/m0_52829559/article/details/119063896
 ```
 # 删除索引为1的行
@@ -175,5 +175,30 @@ dftest = df.loc[~df.id.isin(droplist)]
 
 dftest = df.query('@droplist not in id') # 查找droplist不在id中的
 ```
+
+## 11、读取数据无列名
+获取数据内容。pandas.read_csv(“data.csv”)默认情况下，会把数据内容的第一行默认为字段名标题。所以我们要给它加列名或者让它以为没有列索引。
+```
+df =  pd.read_csv("../data/data.csv", header=None)
+
+# 设置表头
+names = ["US0","US1","US2","US3","US4","Class"]
+# 读入数据 (没有属性行：header=None)
+df =  pd.read_csv("../data/data.csv", names=names)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

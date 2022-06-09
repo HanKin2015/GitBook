@@ -40,6 +40,39 @@ a+	|可读可写	|创建	|否，追加
 x	|只可写		|创建	|-
 x+	|可读可写	|创建	|-
 
+## 5、Module ctypes has no attribute 'windll'
+It seems like you're trying to use a Windows module on a non Windows enviroment, if you check the ctype module it has some conditional classes:
+```
+if _os.name == "nt":
+
+    class WinDLL(CDLL):
+        """This class represents a dll exporting functions using the
+        Windows stdcall calling convention.
+   [...]
+```
+https://docs.python.org/3/library/ctypes.html
+
+linux的ctypes库没有win32api就是这么简单。
+
+想使用这个获取文件占用空间大小，目前探索只能通过stat命令，然后通过块数量乘以块大小计算所得，没有相应的命令查询。
+
+## 6、Python错误：TypeError: 'int' object is not callable解决办法
+看到这个错误我先是一愣，心想：“int对象不可调用？我没有调用Int型数据啊，我调用的是一个函数方法！”。调来调去都没有解决。Google后才发现，这个错误之所以发生，是因为我变量名和函数名写重复了！
+
+我的错误使用是：
+print(stat.S_IEXEC(mode))
+
+正确使用方法是：
+print(mode & stat.S_IEXEC)
+
+
+
+
+
+
+
+
+
 
 
 

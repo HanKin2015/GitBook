@@ -40,4 +40,51 @@ u：预防意外删除。
 linux下没有隐藏文件属性这个概念，凡是以 . 开头的文件或目录，比如 .bashrc ，都是隐藏的，用 ls看不到，必须用 ls -a l或ll才能看到。
 
 
+```
+https://www.cnpython.com/qa/353342
 
+import subprocess
+
+def is_immutable(fname):
+    p = subprocess.Popen(['lsattr', fname], bufsize=1, stdout=subprocess.PIPE)
+    data, _ = p.communicate()
+    #print(data)
+    return 'i' in data
+
+def is_immutable_safe(file_path):
+    """Check if the immutable flag is set on a Linux file path
+
+    Uses the lsattr command, and assumes that the immutable flag
+    appears in the first 16 characters of its output.
+    """
+    return 'i' in subprocess.check_output(['lsattr', file_path])[:16]
+
+# These assertions will pass if the immutable bit is not set on
+# /etc/inittab on your system
+assert is_immutable('/etc/inittab') is True
+assert is_immutable_safe('/etc/inittab') is False
+```
+
+
+## 5、lsattr: Inappropriate ioctl for device While reading flags
+https://serverfault.com/questions/324975/lsattr-inappropriate-ioctl-for-device-while-reading-flags
+```
+(base) hankin@aifirst-196fa-0:~$ cat /proc/version 
+Linux version 3.10.0-1160.42.2.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Tue Sep 7 14:49:57 UTC 2021
+(base) hankin@aifirst-196fa-0:~$ lsattr result.csv 
+lsattr: Inappropriate ioctl for device While reading flags on result.csv
+(base) hankin@aifirst-196fa-0:~$ mount | grep home
+10.72.1.27:/matrix/data/nfs/aifirst33-aifirst-pvc-85e5b443-3e21-4666-bb74-981db97463ff on /home/hankin type nfs4 (rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=10.72.1.34,local_lock=none,addr=10.72.1.27)
+(base) hankin@aifirst-196fa-0:~$ stat -f AIFirst_data/train/black/0045bf6cb027267bcf719858de6757af 
+  File: "AIFirst_data/train/black/0045bf6cb027267bcf719858de6757af"
+    ID: 0        Namelen: 255     Type: nfs
+Block size: 1048576    Fundamental block size: 1048576
+Blocks: Total: 5240838    Free: 3340328    Available: 3340328
+Inodes: Total: 536870464  Free: 534506921
+```
+果然是nfs格式的文件系统，把文件拷贝到其他格式的文件系统，然后使用lsattr命令就成功了。
+
+Note that for ext4 both user_xattr and acl are enabled by default. This varies for other filesystems.
+
+重新为根目录挂载文件系统属性：
+mount -o remount,user_xattr /
