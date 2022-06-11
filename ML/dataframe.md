@@ -19,7 +19,7 @@ for i in range(result.shape[0]):
 result.isna().any()
 ```
 
-## 3、Python判断Nan值的五种方法
+## 3、Python判断Nan值的五种方法(缺失值)
 ```
 # 1、numpy判断
 import numpy as np
@@ -187,9 +187,23 @@ names = ["US0","US1","US2","US3","US4","Class"]
 df =  pd.read_csv("../data/data.csv", names=names)
 ```
 
+## 12、AttributeError: ‘Timestamp‘ object has no attribute ‘weekday_name‘/pandas.errors.InvalidIndexError
+是因为weekday_name已经被day_name函数替换了。
 
+## 13、显示完整的数据
+pd.set_option('display.max_columns', None)
+train_dataset.take([1, 6])
 
+## 14、pandas DataFrame 缺失值处理（数据预处理）
 
+### 
+print(df.isna().any())
+print("------------")
+print(df.isnull().any())
+print("------------")
+print(np.isnan(df).any())
+#用info()方法查看非空值情况  （推荐）
+df.info()
 
 
 

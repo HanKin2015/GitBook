@@ -63,4 +63,12 @@ vim模式下set encoding一直是utf-8，但是set fileencoding却是lantin1，�
 
 总结：当一个文件没有中文时，是无法
 
+## vi中文乱码
+:set encoding显示utf-8
+:set fileencoding显示utf-8 
+:e ++enc=gbk还是乱码，没有一个中文
+:e ++enc=cp936还是乱码，没有一个中文
+
+
+
 

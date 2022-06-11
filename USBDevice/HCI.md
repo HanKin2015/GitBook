@@ -80,3 +80,25 @@ lrwxrwxrwx  1 root root    0 4月  28 17:28 0000:00:1a.7 -> ../../../../devices/
 可以看见上面文件夹中是有pci地址对应的文件夹，这种方法靠谱。
 
 有些硬件不是pci，而是Platform，相对应地址是/sys/bus/pci/drivers/ehci-pci
+
+## 4、一次查询USB设备无法使用的经历
+dmesg命令查看日志基本上为空，都是一些无用的日志
+vi /var/log/dmesg能看见正常的日志，但是确实没有USB的映射日志
+cat /sys/kernel/debug/usb/devices | grep Vendor但是能看见USB设备，很奇怪
+ll /sys/bus/pci/devices/看USB设备路径
+ll /sys/bus/usb/devices/看USB设备路径
+关键一点是lsusb不能使用
+journalctl终于看见完整的日志内容，刚刚dmesg的内容就是journalctl命令尾部内容。看见USB加载的内核日志。
+基本确认有USB设备，由于是U盘，就可以看容量大小，是否挂载。
+mount
+fdisk -l
+果然看见U盘，但是没有挂载，手动挂载一下搞定。mount /dev/loop /media/xx。
+
+
+
+
+
+
+
+
+

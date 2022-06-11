@@ -232,11 +232,13 @@ win.mainloop()
 百度了一半天才找到原因：https://www.5axxw.com/questions/content/arxnni
 原来是字母的大小写问题，这个需要着重注意一下。
 
+## 25、Python 有三元运算符吗
+Python 中没有 ?: 运算符，但是从版本 2.5 开始，加入了对三目运算符的语法支持，语法格式为：表达式1 if 布尔表达式 else 表达式2。
 
+## 26、python没有提供求平均数的函数，建议先求和然后除以个数求得。
+import numpy as np
 
-
-
-
+np.mean([1, 2, 3])
 
 
 

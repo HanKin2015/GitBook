@@ -38,7 +38,12 @@ Linux保存的文件在windows上用记事本看的话会出现黑点。
 
 ## 6、wb和w的区别
 
+## 7、为啥存在一半windows换行符一半unix换行符
 
+```
+[root@ubuntu0006:/media/sangfor/vdb/study/udev] #file find_not_pefile.sh
+find_not_pefile.sh: Bourne-Again shell script, UTF-8 Unicode text executable, with CRLF, LF line terminators
+```
 
 
 
