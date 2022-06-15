@@ -47,7 +47,7 @@ demoFun() { echo "这是我的第一个 shell 函数!"; }; demoFun
 
 注意多了一个分号。
 
-
+## 6、
 
 
 

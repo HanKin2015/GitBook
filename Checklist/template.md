@@ -77,10 +77,10 @@ int main(int argc, char *argv[])
 # 文 件 名: video_tool.sh
 # 文件描述: 操作摄像头工具合集
 # 作    者: HanKin
-# 创建日期: 2021.08.05
-# 修改日期：2021.08.05
+# 创建日期: 2022.08.05
+# 修改日期：2022.08.05
 # 
-# Copyright (c) 2021 HanKin. All rights reserved.
+# Copyright (c) 2022 HanKin. All rights reserved.
 #
 ```
 
@@ -123,9 +123,9 @@ Copyright (c) 2022 HanKin. All rights reserved.
 #   2. 放置在/data/local/hj/目录下
 #
 # author: hejian
-# date  : 2021.05.07
+# date  : 2022.05.07
 #
-# Copyright (c) 2020 hejian. All rights reserved.
+# Copyright (c) 2022 hejian. All rights reserved.
 #
 ```
 
@@ -135,10 +135,10 @@ Copyright (c) 2022 HanKin. All rights reserved.
 * 文 件 名: study_golang.go
 * 文件描述: 学习golang语言
 * 作    者: HanKin
-* 创建日期: 2021.09.09
-* 修改日期：2021.09.09
+* 创建日期: 2022.09.09
+* 修改日期：2022.09.09
 *
-* Copyright (c) 2021 HanKin. All rights reserved.
+* Copyright (c) 2022 HanKin. All rights reserved.
 */
 ```
 

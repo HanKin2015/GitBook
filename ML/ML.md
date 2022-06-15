@@ -76,6 +76,19 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 ````
 
+KFold用于分层采样，k折交叉切分。
+cross_validation的库被取消后，KFold的函数被放在了model_selection的库函数中。
+而库更新后，不能按照原本的传入三个参数，
+```
+KFold(list，n_splits =kflod, shuffle=True)
+```
+上述代码将会报“init() got multiple values for argument ‘n_splits’”。
+现在的版本要改成
+```
+f = KFold(n_splits =kflod, shuffle=True)  
+f.get_n_splits(list)
+```
+
 ## 6、TypeError: shuffle must be True or False; got 2
 删掉第一个参数位的值
 ```
@@ -102,10 +115,13 @@ os.environ[‘NUMEXPR_MAX_THREADS’] = ‘16’
 
 ## 9、训练集、验证集、测试集（附：分割方法+交叉验证）
 
+## 10、AttributeError: 'StackingClassifier' object has no attribute 'final_estimato
+Did you call fit()?
 
+试了一下fit，结果还是报这个错误。
 
-
-
+## 11、python3 报错： AttributeError: 'dict' object has no attribute 'iteritems'--解决方法
+Python3.x中不再支持iteritems()，所以将iteritems()改成items()，即dict.items()
 
 
 

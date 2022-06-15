@@ -1,5 +1,5 @@
 [TOC]
-# shell脚本模板
+# shell脚本模板大全
 
 # 1、目标
 - 帮助参数说明
@@ -11,9 +11,7 @@
 - 输入输出
 - 调用其他shell脚本
 
-
 # 2、容易犯的错
-
 - 等号左右两边不能有空格
 - 中括号左右两边要有空格
 - 字符串中使用变量值时必须使用双引号
@@ -26,8 +24,7 @@
 帮助参数说明：usage()
 输入参数：是否从文件读取ip还是手动输入ip（-f ip_addr_filename）
 
-
-## 文件
+## 脚本框架
 - ip_addr.txt
 - result.txt
 - ping_ip.sh
@@ -52,8 +49,8 @@ usage()
 	cat << EOF
 		Usage: $0 [options] [directroy]
 		Options:
-			-h, 	显示帮助信息
-			-V,	显示当前脚本版本信息
+			-h, 		显示帮助信息
+			-V,			显示当前脚本版本信息
 			-f file,	从文件读取ip地址
 		Examples:
 			$0 -f ip_addr.txt
@@ -61,38 +58,23 @@ usage()
 }
 ```
 
+## 4、读写文件
+### 按行读取文件
+```test.txt
+1 2 3 4 5
+I'm OK
+interesting
+8578587
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 读取文件
-```
 #!/bin/bash
 
+# 方法一：while循环中执行效率最高，最常用的方法。
 while read line
 do
     echo $line
 done < test.txt
 
+# 方法2 ： 重定向法；管道法: cat $FILENAME | while read LINE 
 cat test.txt | while read line
 do
     echo $line

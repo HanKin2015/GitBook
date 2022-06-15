@@ -65,10 +65,12 @@ print(stat.S_IEXEC(mode))
 正确使用方法是：
 print(mode & stat.S_IEXEC)
 
-
-
-
-
+## 7、ValueError: invalid literal for int() with base 10:解决方法
+原因：由于python不能直接将包含小数点的字符串转化为整数，而原始数据的格式经常是不一致的，故类型转化时造成ValueError异常。
+解决方法：先将字符串转换为浮点数float，在将浮点数转化为整数int。
+```
+a=int(float('123.456'))
+```
 
 
 
