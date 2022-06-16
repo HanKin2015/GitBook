@@ -238,3 +238,25 @@ sudo apt-get install icoutils
 用法：
 #将当前文件夹下所有ico文件中的48x48图像，一下子全部提取出来放到48文件夹中
 icotool -x -o 48 -w 48 *.ico 
+
+## 20、需求将样本数据从文件夹分成两半
+- 使用shell中的cp命令拷贝成两半
+- 还有一种方法是python的os.walk时只遍历指定头部的文件
+- 还有一种方法是计数，但是每次os.walk的时候是否一致（反正肯定会存储两个csv文件中，然后分析一下是否存在重复，个人感觉没有重复）
+
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #ll test/ | wc
+     12     101     788
+[root@ubuntu0006:/media/hankin/vdb/study] #ls test/ | wc
+      9       9     145
+[root@ubuntu0006:/media/hankin/vdb/study/test] #ll ['i','m']*
+-rwxr-xr-x 1 root root    859 7月   7  2021 if_for_while.sh*
+-rw-r--r-- 1 root root 838731 6月  30  2021 mpc-1.2.1.tar.gz
+[root@ubuntu0006:/media/hankin/vdb/study/test] #ll [a-m]*
+-rwxr-xr-x 1 root root     43 6月  29  2021 echo_HOME_value.sh*
+-rwxr-xr-x 1 root root    859 7月   7  2021 if_for_while.sh*
+-rw-r--r-- 1 root root 838731 6月  30  2021 mpc-1.2.1.tar.gz
+```
+
+
+

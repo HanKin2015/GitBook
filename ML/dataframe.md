@@ -1,6 +1,6 @@
 # DataFrame
 ```
-df1 = pd.DataFrame({'key':['s','s','w','x','x','n','f','c'], 'data1':range(8)})
+df1 = pd.DataFrame({'key':['s','s','w','x','x','n','f','c'], 'data':range(8)})
 ```
 
 ## 1、不保留索引和列名
@@ -192,6 +192,7 @@ df =  pd.read_csv("../data/data.csv", names=names)
 
 ## 13、显示完整的数据
 pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 train_dataset.take([1, 6])
 
 ## 14、pandas DataFrame 缺失值处理（数据预处理）

@@ -276,6 +276,13 @@ Enter file in which to save the key (/root/.ssh/id_rsa): ^C
 [root@chroot <vtcompile> / ]#
 ```
 
+## 11、奇怪的现象无法root用户连接登录
+已修改可以使用root用户连接登录：/etc/ssh/sshd_config中PermitRootLogin yes
+然后重启服务：/etc/init.d/ssh restart
+然鹅密码输入正确还是报错：Permission denied (publickey,password).
+
+然后我使用普通用户登录，使用su命令切换都是正常，然后退出后使用root用户登录也正常
+猜测可能是ssh服务重启时间长？？？还是由于我先连接的原因？？？
 
 
 

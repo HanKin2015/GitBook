@@ -8,7 +8,10 @@ ELF （文件格式）在计算机科学中，是一种用于二进制文件、�
 是UNIX系统实验室（USL）作为应用程序二进制接口（Application Binary Interface，ABI）而开发和发布的，也是Linux的主要可执行文件格式。
 1999年，被86open项目选为x86架构上的类Unix操作系统的二进制文件标准格式，用来取代COFF。因其可扩展性与灵活性，也可应用在其它处理器、计算机系统架构的操作系统上。
 
-## 3、语法(不全，常用)
+## 3、PE格式文件
+PE文件的全称是Portable Executable，意为可移植的可执行的文件，常见的EXE、DLL、OCX、SYS、COM都是PE文件，PE文件是微软Windows操作系统上的程序文件（可能是间接被执行，如DLL）。
+
+## 4、语法(不全，常用)
 语法：readelf (选项)(参数:文件),除了-v和-H之外，其它的选项必须有一个被指定参数
 
 1、选项 -h(elf header)，显示elf文件开始的文件头信息。
@@ -21,7 +24,8 @@ ELF （文件格式）在计算机科学中，是一种用于二进制文件、�
 8、选项 -n,notes 显示note段（内核注释）的信息 。
 9、选项 -r,relocs 显示可重定位段的信息。
 
-## 4、实战
+## 5、实战
+可以查看二进制执行文件的系统架构。
 ```
 [root@ubuntu0006:/media/hankin/vdb/study] #g++ -c study_c++filt.cpp -o study_c++filt.o
 [root@ubuntu0006:/media/hankin/vdb/study] #readelf -h study_c++filt.o
@@ -65,13 +69,15 @@ Symbol table '.symtab' contains 33 entries:
     13: 000000000
 ```
 
-## 5、ldd 执行结果：不是动态可执行文件
+## 6、ldd 执行结果：不是动态可执行文件
 https://blog.csdn.net/lyndon_li/article/details/111397974
 
 readelf 也可以看到依赖的动态库
 -d --dynamic           Display the dynamic section (if present)
 
 ```
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #ldd client
+        不是动态可执行文件
 [root@ubuntu0006:/media/hankin/vdb/study/read_write] #ldd a.out
         linux-vdso.so.1 =>  (0x00007ffce8d9c000)
         libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fbb05bda000)
@@ -114,5 +120,5 @@ Dynamic section at offset 0x1e18 contains 25 entries:
 ```
 
 原因可能是二进制文件是为32位系统构建的，但是您正在64位系统上进行检查。
-
+原因也可能是二进制文件是AArch64系统架构的，但是您正在x86结构上进行检查。
 
