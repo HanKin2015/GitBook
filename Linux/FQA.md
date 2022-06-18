@@ -233,7 +233,7 @@ Linux localhost.localdomain 3.10.0-862.el7.x86_64 #1 SMP Fri Apr 20 16:44:24 UTC
 libpthread.so    libpthread.so.0
 ```
 
-
+## 19、
 
 
 

@@ -35,7 +35,7 @@ https://baike.baidu.com/item/FAT16/5136658?fr=aladdin
 
 注意：Microsoft Windows NT 也支持 FAT 驱动器。Windows NT 3.51支持最大 4 GB 大小的 FAT 驱动器。MS-DOS 或 Windows 不支持 2 GB 至 4 GB 大小的 FAT 驱动器。换句话说，如果希望从 MS-DOS 或 Windows 95/98 以及 Windows NT 都能访问 FAT 驱动器，那么 FAT 驱动器不能够大于 2 GB。如果只从 Windows NT 上访问 FAT 驱动器，则驱动器大小可以在 2 GB 到 4 GB 之间。
 
-
+## 4、
 
 
 

@@ -123,8 +123,11 @@ Did you call fit()?
 ## 11、python3 报错： AttributeError: 'dict' object has no attribute 'iteritems'--解决方法
 Python3.x中不再支持iteritems()，所以将iteritems()改成items()，即dict.items()
 
+## 12、ImportError: cannot import name 'StackingClassifier' from 'sklearn.ensemble' 
+只需在Anaconda或cmd中运行以下命令，因为在以前的版本中没有该命令。
 
-
+pip install --upgrade scikit-learn
+pip install --upgrade scikit-learn --user
 
 
 

@@ -146,10 +146,63 @@ C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
 - 点击打开窗口会显示Setting up SSH Host my_linux_vm: ([details](command:opensshremotes.showDetails "Show details")) Initializing VS Code Server
 - 由于未连接外网，所以肯定是无法正常连接的。
 
+## 11、visual studio code 重置所有设置（还原默认设置）
+a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换pcName为自己电脑设置的名称）
+b.用记事本打开目录下的settings.json，修改里面的对应配置可以解决对应的问题，重置的话全部删除就好了
 
-
-
-
+## 12、关于个性化配置
+```
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.iconTheme": "vscode-icons",
+    "breadcrumbs.enabled": false,
+    "editor.multiCursorModifier": "alt",
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.autoSave": "afterDelay",
+    "editor.tabSize": 2,
+    "files.associations": {
+        "*.vue": "vue"
+    },
+    "eslint.autoFixOnSave": true,
+    "eslint.options": {
+        "extensions": [
+            ".js",
+            ".vue"
+        ]
+    },
+    "eslint.validate": [
+        "javascript", {
+            "language": "vue",
+            "autoFix": true
+        }, "html", "vue"
+    ],
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/dist": true
+    },
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+        "vue": "html",
+        "vue-html": "html"
+    },
+    "git.confirmSync": false,
+    "window.zoomLevel": 0,
+    "editor.cursorBlinking": "smooth",
+    "editor.minimap.enabled": true,
+    "editor.minimap.renderCharacters": false,
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+    "editor.codeLens": true,
+    "editor.snippetSuggestions": "top",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "liveServer.settings.donotShowInfoMsg": true
+}
+```
 
 
 

@@ -203,8 +203,69 @@ print("------------")
 print(df.isnull().any())
 print("------------")
 print(np.isnan(df).any())
-#用info()方法查看非空值情况  （推荐）
+### 用info()方法查看非空值情况  （推荐）
 df.info()
+
+## 15、pandas多表合并的方法
+```
+横向合并
+from functools import reduce
+dfs = [df0, df1, df2, dfN]
+df_final = reduce(lambda left,right: pd.merge(left,right,on=‘name’), dfs)
+
+纵向连接
+pd.concat([s1,s2,s3])
+```
+
+## 16、解决Windows下UnicodeDecodeError: ‘gbk‘ codec can‘t decode byte 0xff in position 0错误的方法
+```
+# coding=utf-8
+def check_charset(file_path):
+    import chardet
+    with open(file_path, "rb") as f:
+        data = f.read(4)
+        charset = chardet.detect(data)['encoding']
+    return charset
+ 
+your_path = 你的文件路径
+with open(your_path, encoding=check_charset(your_path)) as f:
+    data = f.read()
+    print(data)
+```
+
+结果引入新的错误：
+Python 编码问题，UnicodeDecodeError: 'ascii' codec can't decode byte/encode characters
+
+未解决，使用捕获异常过滤处理。
+
+## 17、查看数据类型以及类型转换
+print(df.dtypes)
+print('-----')
+print(df['id'].dtypes)#如果一列中含有多个类型,则该列的类型会是object,同样字符串类型的列也会被当成object类型.
+
+### 对于创建DataFrame的情形
+如果要创建一个DataFrame，可以直接通过dtype参数指定类型：
+```
+df = pd.DataFrame(a, dtype='float')  #示例1
+df = pd.DataFrame(data=d, dtype=np.int8) #示例2
+df = pd.read_csv("somefile.csv", dtype = {'column_name' : str})
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

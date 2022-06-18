@@ -472,10 +472,12 @@ https://blog.csdn.net/alexmayer/article/details/7498120
 #endif //end HEAD_H#include <iostream>	(这里就有可能被注释掉了，因此需要在每个文件末尾空一行)
 ```
 
-## 41、
+## 41、C中遇到错误error: jump to label [-fpermissive]的解决办法
+原因很简单，goto 之后，又出现了新定义的变量。
 
+提前定义即可解决。
 
-
+但是我发现struct结构体不会报错。
 
 
 
