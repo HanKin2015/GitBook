@@ -35,8 +35,21 @@ https://baike.baidu.com/item/FAT16/5136658?fr=aladdin
 
 注意：Microsoft Windows NT 也支持 FAT 驱动器。Windows NT 3.51支持最大 4 GB 大小的 FAT 驱动器。MS-DOS 或 Windows 不支持 2 GB 至 4 GB 大小的 FAT 驱动器。换句话说，如果希望从 MS-DOS 或 Windows 95/98 以及 Windows NT 都能访问 FAT 驱动器，那么 FAT 驱动器不能够大于 2 GB。如果只从 Windows NT 上访问 FAT 驱动器，则驱动器大小可以在 2 GB 到 4 GB 之间。
 
-## 4、
+## 4、Centos 安装后没有图形化操作界面 解决方案
+```
+在命令行执行以下命令;（注意配置yum源）
 
+1.yum groupinstall "X Window System" -y
+2.yum groupinstall "Desktop" -y
+3.启动图形化程序startx
+```
 
+这个的前提是需要安装图形化界面：
+输入“vi /etc/inittab”编辑此文件
+输入“systemctl get-default”可查看当前启动界面，本例中显示“graphical.target”（图形界面）
+输入“systemctl set-default multi-user.target”并按回车键即可设置为默认以文本界面启动
+
+最终的原因是：在安装过程中未安装图形化界面。
+在一个叫做SOFTWARE选项中。
 
 

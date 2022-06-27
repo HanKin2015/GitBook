@@ -106,34 +106,7 @@ polkit.addRule(function(action, subject) {
 
 
 
-# 9、查看桌面
-
- 查了好久，有如下几种：
-1、cat /etc/sysconfig/desktop ubuntu下不可用；
-2、echo $DESKTOP_SESSION 貌似没有版本信息，而且不知道其他环境下效果怎样；
-3、GNOME特性的查看版本命令：
-gnome3版本以下使用下面可查：
-gnome-panel --versionSample output:
-GNOME gnome-panel 2.24.1Or type the following on modern gnome desktop systems:
-$ gnome-about --gnome-version
-Sample outputs:
-Version: 2.30.2
-Distributor: Debian
-Build Date: Friday 12 November 2010
-gnome3以上用以下命令Gnome 3.x user need to use the following command:
-$ gnome-session --version
-或者
-gnome-shell --version
-输出：
-$ gnome-shell --version
-GNOME Shell 3.4.1
-但是这种无法查看其他的桌面版本。 
-
-
-
- $DESKTOP_SESSION 
-
-
+ 
 
 # 10、中英文系统切换
 

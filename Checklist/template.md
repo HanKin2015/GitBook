@@ -68,6 +68,9 @@ int main(int argc, char *argv[])
 * @param outputLen [in] 运行结果字符串长度
 * @return 无
 */
+
+system("PAUSE");
+return EXIT_SUCCESS;
 ```
 
 ### shell脚本

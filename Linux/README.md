@@ -93,6 +93,7 @@ cat -A 要查看的文件路径
 使用cat -A可以清楚看见换行符是Windows格式还是unix格式，然后就可以使用unix2dos或者dos2unix进行转换。
 
 ## 13、查看Linux用的桌面是GNOME、KDE或者其他
+ps aux | grep session
 推荐使用ll /usr/bin/*session*命令
 
 ```
@@ -128,6 +129,28 @@ Xorg是图形界面的基础，任何桌面都需要Xorg的。
 
 gdm是Linux的[图形界面](https://www.baidu.com/s?wd=图形界面&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)
 GDM (The GNOME Display Manager)是GNOME显示环境的管理器，并被用来替代原来的X Display Manager。与其竞争者(X3DM,KDM,WDM)不同，GDM是完全重写的，并不包含任何XDM的代码。GDM可以运行并管理本地和[远程登录](https://www.baidu.com/s?wd=远程登录&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)的X服务器(通过XDMCP)。gdm仅仅是一个脚本，实际上是通过他来运行GDM二进制可执行文件。gdm-stop是用来迅速终止当前正在运行的gdm守护进程的一个脚本。gdm-restart脚本将迅速重启当前守护进程。然而gdm-safe-restart会当所有人都注销后再重启。gdmsetup是一种可以很简单的修改多数常用选项的图形化界面工具。GNOM的帮助里有更完整的文档，在“应用程序”/“系统工具”这一章节。 
+
+
+ 查了好久，有如下几种：
+1、cat /etc/sysconfig/desktop ubuntu下不可用；
+2、echo $DESKTOP_SESSION 貌似没有版本信息，而且不知道其他环境下效果怎样；
+3、GNOME特性的查看版本命令：
+gnome3版本以下使用下面可查：
+gnome-panel --versionSample output:
+GNOME gnome-panel 2.24.1Or type the following on modern gnome desktop systems:
+$ gnome-about --gnome-version
+Sample outputs:
+Version: 2.30.2
+Distributor: Debian
+Build Date: Friday 12 November 2010
+gnome3以上用以下命令Gnome 3.x user need to use the following command:
+$ gnome-session --version
+或者
+gnome-shell --version
+输出：
+$ gnome-shell --version
+GNOME Shell 3.4.1
+但是这种无法查看其他的桌面版本。
 
 ## 14、后台运行
 后台运行符号&

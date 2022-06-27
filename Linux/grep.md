@@ -119,7 +119,7 @@ grep get_default_error_string /* -rFn --binary-files=without-match
 ## 7、使用grep搜索多个字符串
 三种方法：
 - 转义字符\
-- grep -E
+- grep -E   (-E, --extended-regexp     PATTERN 是一个可扩展的正则表达式(缩写为 ERE))
 - egrep
 
 ```
@@ -208,6 +208,15 @@ ps aux | grep defunct| grep -v "grep"
 
 ## 9、grep的-r和-R参数区别
 ```
+[root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #ll
+总用量 16
+drwxr-xr-x  2 root root 4096 12月 24 10:08 ./
+drwxr-xr-x 44 root root 4096 5月  11 15:32 ../
+-rw-r--r--  1 root root    5 12月 24 10:06 a
+lrwxrwxrwx  1 root root    1 12月 24 10:07 b -> a
+-rw-r--r--  1 root root   57 12月 24 10:08 README.md
+[root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #grep ping    (会卡住)
+^C
 [root@ubuntu0006:/media/hankin/vdb/study/grep_rR] #grep -r ping
 a:ping
 README.md:grep -R ping
@@ -221,8 +230,54 @@ b:ping
 ping
 ```
 -r，--recursive
-阅读每个目录下的所有文件，递归，下列符号 链接，只有当他们是在命令行上。这相当于 -d递归选项。
+遍历每个目录下的所有文件，递归，不包含符号链接，只有当他们是在命令行上。这相当于 -d递归选项。
 
 -R，--dereference递归
-阅读所有文件的每个目录下，递归。 遵循所有 符号链接，不像-r。
+遍历所有文件的每个目录下，递归。 包含所有符号链接，不像-r。
 
+## 10、grep的规则表达式
+```
+\ 反义字符：如"\"\""表示匹配""
+[ - ] 匹配一个范围，[0-9a-zA-Z]匹配所有数字和字母
+* 所有字符，长度可为0
++ 前面的字符出现了一次或者多次
+^ #匹配行的开始 如：'^grep'匹配所有以grep开头的行。
+$ #匹配行的结束 如：'grep$'匹配所有以grep结尾的行。
+. #匹配一个非换行符的字符 如：'gr.p'匹配gr后接一个任意字符，然后是p。
+* #匹配零个或多个先前字符 如：'*grep'匹配所有一个或多个空格后紧跟grep的行。
+.* #一起用代表任意字符。
+[] #匹配一个指定范围内的字符，如'[Gg]rep'匹配Grep和grep。
+[^] #匹配一个不在指定范围内的字符，如：'[^A-FH-Z]rep'匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。
+\(..\) #标记匹配字符，如'\(love\)'，love被标记为1。
+\< #到匹配正则表达式的行开始，如:'\<grep'匹配包含以grep开头的单词的行。
+\> #到匹配正则表达式的行结束，如'grep\>'匹配包含以grep结尾的单词的行。
+x\{m\} #重复字符x，m次，如：'0\{5\}'匹配包含5个o的行。
+x\{m,\} #重复字符x,至少m次，如：'o\{5,\}'匹配至少有5个o的行。
+x\{m,n\} #重复字符x，至少m次，不多于n次，如：'o\{5,10\}'匹配5--10个o的行。
+\w #匹配文字和数字字符，也就是[A-Za-z0-9]，如：'G\w*p'匹配以G后跟零个或多个文字或数字字符，然后是p。
+\W #\w的反置形式，匹配一个或多个非单词字符，如点号句号等。
+\b #单词锁定符，如: '\bgrep\b'只匹配grep。
+
+[root@ubuntu0006:/home] #cat test.txt
+a g r e
+u c j alike
+i x k like
+a f g liker
+a f h g liker
+s g e g
+[root@ubuntu0006:/home] #grep "^a" test.txt             (查找以a开头的行)
+a g r e
+a f g liker
+a f h g liker
+[root@ubuntu0006:/home] #grep "^a.*r$" test.txt         (同时查找以a开头同时以r结尾的行)
+a f g liker
+a f h g liker
+[root@ubuntu0006:/home] #grep "^a.*h.*r$" test.txt      (同时查找以a开头，包含字符h，并以r结尾的行)
+a f h g liker
+[root@ubuntu0006:/home] #grep "^a\|e$" test.txt         (提取以a开头，或者以e结尾的行)
+a g r e
+u c j alike
+i x k like
+a f g liker
+a f h g liker
+```

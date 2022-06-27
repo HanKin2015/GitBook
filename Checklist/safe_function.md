@@ -99,3 +99,20 @@ static bool desc_to_string(uint8_t *desc_data, uint16_t desc_len, char *desc_str
 ### 不安全函数
 itoa，推荐使用atoi，
 
+## 3、
+```
+#define safestrcpy(to, from)	strncpy(to, from, sizeof(to)-1)
+#define safestrcat(to, from)	strncat(to, from, sizeof(to) - strlen(to)-1)
+
+#define safestrcpymax(to, from, max) \
+do { \
+	to[max-1] = '\0'; \
+	strncpy(to, from, max-1); \
+} while (0)
+
+#define safestrcatmax(to, from, max) \
+do { \
+	to[max-1] = '\0'; \
+	strncat(to, from, max - strlen(to)-1); \
+} while (0)
+```

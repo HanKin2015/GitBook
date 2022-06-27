@@ -2,13 +2,18 @@
 
 # 进程知识
 
-# 1、僵尸进程 
+## 1、僵尸进程 
 僵尸进程是当子进程比父进程先结束，而父进程又没有回收子进程，释放子进程占用的资源，此时子进程将成为一个僵尸进程。如果父进程先退出 ，子进程被init接管，子进程退出后init会回收其占用的相关资源
 我们都知道进程的工作原理。我们启动一个程序，开始我们的任务，然后等任务结束了，我们就停止这个进程。 进程停止后， 该进程就会从进程表中移除。
 你可以通过 System-Monitor 查看当前进程。
 In UNIX System terminology, a process that has terminated,but whose parent has not yet waited for it, is called a zombie. 在UNIX 系统中，一个进程结束了，但是他的父进程没有等待(调用wait / waitpid)他， 那么他将变成一个僵尸进程。 但是如果该进程的父进程已经先结束了，那么该进程就不会变成僵尸进程， 因为每个进程结束的时候，系统都会扫描当前系统中所运行的所有进程， 看有没有哪个进程是刚刚结束的这个进程的子进程，如果是的话，就由Init 来接管他，成为他的父进程。
 
-# 2、LINUX下PS -EF和PS AUX的区别
+### 1-1、杀死僵尸进程
+top命令会查看到僵尸进程，不占用内存cpu
+ps aux | grep python 找到僵尸进程的父进程
+kill -9 父进程ID
+
+## 2、LINUX下PS -EF和PS AUX的区别
 Linux下显示系统进程的命令ps，最常用的有ps -ef 和ps aux。这两个到底有什么区别呢？两者没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。
 
 ps -ef 是用标准的格式显示进程的。

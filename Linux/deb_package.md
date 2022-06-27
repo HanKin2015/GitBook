@@ -2,10 +2,152 @@
 
 ## 1、dpkg-deb和dpkg命令区别
 dpkg命令的英文全称是“Debian package”，故名意思是Debian Linux系统用来安装、创建和管理软件包的实用工具。
-
-pkg-deb命令是Debian linux下的软件包管理工具，它可以对软件包执行打包和解包操作以及提供软件包信息。
-
+dpkg-deb命令是Debian linux下的软件包管理工具，它可以对软件包执行打包和解包操作以及提供软件包信息。
 可以通过dpkg命令调用dpkg-deb命令的功能，dpkg命令的任何选项将被传递给dpkg-deb命令去执行。
+
+```
+[root@ubuntu0006:/home] #dpkg --version
+Debian dpkg 软件包管理程序 1.18.4 (amd64) 版。
+本软件是自由软件；要获知复制该软件的条件，请参阅 GNU 公共许可证
+第二版或其更新的版本。本软件【不】提供任何担保。
+[root@ubuntu0006:/home] #dpkg-deb --version
+Debian dpkg-deb 软件包后端打包程序 1.18.4 (amd64) 版。
+本软件是自由软件；要获知复制该软件的条件，请参阅 GNU 公共许可证
+第二版或其更新的版本。本软件【不】提供任何担保。
+[root@ubuntu0006:/home] #dpkg -l dpkg
+期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
+| 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
+|/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
+||/ 名称                              版本                  体系结构：            描述
++++-=================================-=====================-=====================-========================================================================
+ii  dpkg                              1.18.4ubuntu1.7       amd64                 Debian package management system
+[root@ubuntu0006:/home] #dpkg -l dpkg-deb
+dpkg-query: 没有找到与 dpkg-deb 相匹配的软件包
+[root@ubuntu0006:/home] #dpkg-query -l dpkg-deb
+dpkg-query: 没有找到与 dpkg-deb 相匹配的软件包
+[root@ubuntu0006:/home] #dpkg-query -l dpkg
+期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
+| 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
+|/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
+||/ 名称                              版本                  体系结构：            描述
++++-=================================-=====================-=====================-========================================================================
+ii  dpkg                              1.18.4ubuntu1.7       amd64                 Debian package management system
+[root@ubuntu0006:/home] #which dpkg
+/usr/bin/dpkg
+[root@ubuntu0006:/home] #which dpkg-deb
+/usr/bin/dpkg-deb
+[root@ubuntu0006:/home] #ll /usr/bin/dpkg
+-rwxr-xr-x 1 root root 278264 4月  21  2021 /usr/bin/dpkg*
+[root@ubuntu0006:/home] #ll /usr/bin/dpkg-deb
+-rwxr-xr-x 1 root root 134584 4月  21  2021 /usr/bin/dpkg-deb*
+[root@ubuntu0006:/home] #dpkg -l dpkg-query
+dpkg-query: 没有找到与 dpkg-query 相匹配的软件包
+```
+
+个人感觉是dpkg-deb和dpkg命令是同一个命令。
+
+### 1-1、dpkg和dpkg-query命令的区别
+```
+[root@ubuntu0006:/home] #dpkg-query --version
+Debian dpkg-query 软件包管理程序查询工具 1.18.4 (amd64) 版。
+本软件是自由软件；要获知复制该软件的条件，请参阅 GNU 公共许可证
+第二版或其更新的版本。本软件【不】提供任何担保。
+[root@ubuntu0006:/home] #ll /usr/bin/dpkg-query
+-rwxr-xr-x 1 root root 146872 4月  21  2021 /usr/bin/dpkg-query*
+```
+不能说是一样的，只能说明是一模一样的。
+
+```
+[root@ubuntu0006:/home] #apt-file search /usr/bin/dpkg
+devscripts: /usr/bin/dpkg-depcheck
+devscripts: /usr/bin/dpkg-genbuilddeps
+dpkg: /usr/bin/dpkg
+dpkg: /usr/bin/dpkg-deb
+dpkg: /usr/bin/dpkg-divert
+dpkg: /usr/bin/dpkg-maintscript-helper
+dpkg: /usr/bin/dpkg-query
+dpkg: /usr/bin/dpkg-split
+dpkg: /usr/bin/dpkg-statoverride
+dpkg: /usr/bin/dpkg-trigger
+dpkg-awk: /usr/bin/dpkg-awk
+dpkg-cross: /usr/bin/dpkg-cross
+dpkg-dev: /usr/bin/dpkg-architecture
+dpkg-dev: /usr/bin/dpkg-buildflags
+dpkg-dev: /usr/bin/dpkg-buildpackage
+dpkg-dev: /usr/bin/dpkg-checkbuilddeps
+dpkg-dev: /usr/bin/dpkg-distaddfile
+dpkg-dev: /usr/bin/dpkg-genchanges
+dpkg-dev: /usr/bin/dpkg-gencontrol
+dpkg-dev: /usr/bin/dpkg-gensymbols
+dpkg-dev: /usr/bin/dpkg-mergechangelogs
+dpkg-dev: /usr/bin/dpkg-name
+dpkg-dev: /usr/bin/dpkg-parsechangelog
+dpkg-dev: /usr/bin/dpkg-scanpackages
+dpkg-dev: /usr/bin/dpkg-scansources
+dpkg-dev: /usr/bin/dpkg-shlibdeps
+dpkg-dev: /usr/bin/dpkg-source
+dpkg-dev: /usr/bin/dpkg-vendor
+dpkg-repack: /usr/bin/dpkg-repack
+dpkg-sig: /usr/bin/dpkg-sig
+dpkg-www: /usr/bin/dpkg-www
+pkgbinarymangler: /usr/bin/dpkg-deb
+ruby-debian: /usr/bin/dpkg-checkdeps
+ruby-debian: /usr/bin/dpkg-ruby
+xdiagnose: /usr/bin/dpkg-log-summary
+[root@ubuntu0006:/home] #apt-file search /usr/bin/dpkg-deb
+dpkg: /usr/bin/dpkg-deb
+pkgbinarymangler: /usr/bin/dpkg-deb
+[root@ubuntu0006:/home] #apt-file search /usr/bin/dpkg-query
+dpkg: /usr/bin/dpkg-query
+```
+发现三者其实来源同一个安装包。
+
+### 1-2、查询Linux某命令来自哪个包
+
+dpkg能看命令的版本，但是无法查看来自哪个安装包。
+
+#### Debian：（Ubuntu等）
+先安装apt-file(update有必要，下载了很多东西)
+```
+sudo apt-get install -y apt-file
+apt-file update
+```
+
+查询命令：(以查询ifconfig为例)
+一定要指定命令的具体路径，否则会查找出很多结果。查询时间大概在20秒左右。
+指定/usr/bin/dpkg也会找到所有以这个为前缀的命令结果。
+apt-file search -x(--regexp) 后可接正则表达式。
+```
+[root@ubuntu0006:/home] #which ifconfig
+/sbin/ifconfig
+[root@ubuntu0006:/home] #ll /usr/share/man/zh_CN/man8/ifconfig.8.gz
+ls: 无法访问'/usr/share/man/zh_CN/man8/ifconfig.8.gz': 没有那个文件或目录
+[root@ubuntu0006:/home] #apt-file search `which ifconfig`
+net-tools: /sbin/ifconfig
+[root@ubuntu0006:/home] #apt-file search -x '/usr/bin/rz$'
+lrzsz: /usr/bin/rz
+[root@ubuntu0006:/home] #apt-file search --regexp '/usr/bin/rz$'
+lrzsz: /usr/bin/rz
+```
+
+#### CentOS：
+```
+root@CentOS7 ~ # yum provides *bin/ifconfig
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.shuosc.org
+ * extras: mirrors.shuosc.org
+ * updates: mirrors.163.com
+net-tools-2.0-0.22.20131004git.el7.x86_64 : Basic networking tools
+Repo        : base
+Matched from:
+Filename    : /sbin/ifconfig
+
+net-tools-2.0-0.22.20131004git.el7.x86_64 : Basic networking tools
+Repo        : @base
+Matched from:
+Filename    : /sbin/ifconfig
+```
 
 ## 2、deb包下载地址
 http://ftp.acc.umu.se/debian/pool/main/v/vim/

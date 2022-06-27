@@ -129,6 +129,55 @@ Python3.x中不再支持iteritems()，所以将iteritems()改成items()，即dic
 pip install --upgrade scikit-learn
 pip install --upgrade scikit-learn --user
 
+## 13、文件属性选择库
+pip install --user pywin32
+pip install pypiwin32
+Python调用一些win32接口，如剪贴板什么的，还能否在Linux下跑
+Pywin32能在所有windows 32,64位上运行,除了windows其他都不行.
+不要胡思乱想了，只有能WIN下面用
+老铁都说了Win32~怎么能在LINUX上跑呢~
+linux不支持pywin32，可以安装vine或者虚拟机，再使用pywin32
+
+## 14、local variable referenced before assignment 原因及解决办法
+一句话，在函数内部更改全局变量就会出现此错误。
+
+```
+a= 3
+def temp():
+    global a #声明我们在函数内部使用的是在函数外部定义的全局变量a
+    print(a)
+    a+=1
+temp() #调用temp函数，不会再报错了
+a #此时就会发现a的值确实变成4
+```
+
+```
+a= 3 #全局变量
+def temp():
+	a= 4 #局部变量
+	print(a)
+temp() #返回4，因为在函数内部a=4
+print(a)#返回3，因为在函数外部a被赋值为3
+```
+
+%%time
+
+## 15、_pickle.UnpicklingError: invalid load key, '8'.
+```
+with open(cached_path, "rb") as reader:
+   features = pickle.load(reader)
+```
+修改为：
+```
+with open(cached_path, "rb") as reader:
+    features = pickle.loads(reader)
+```
+.load和loads的区别：
+load将序列化字符串从文件读取并反序列化
+loads将序列化字符串反序列化
+
+
+
 
 
 

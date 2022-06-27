@@ -54,4 +54,34 @@ Codename:       xenial
 关于lsb_release -a和/etc/issue显示的发行版本号不同，原因只有一个：系统内核手动升级了。 
 
 4. 
+```
+root@admin-CE3000F:/home# lsb_release -a
+No LSB modules are available.
+Distributor ID: Kylin
+Description:    Kylin V10 SP1
+Release:        v10
+Codename:       kylin
+root@admin-CE3000F:/home# cat /etc/os-release
+NAME="Kylin"
+VERSION="银河麒麟桌面操作系统V10 (SP1)"
+VERSION_US="Kylin Linux Desktop V10 (SP1)"
+ID=kylin
+ID_LIKE=debian
+PRETTY_NAME="Kylin V10 SP1"
+VERSION_ID="v10"
+HOME_URL="http://www.kylinos.cn/"
+SUPPORT_URL="http://www.kylinos.cn/support/technology.html"
+BUG_REPORT_URL="http://www.kylinos.cn/"
+PRIVACY_POLICY_URL="http://www.kylinos.cn"
+VERSION_CODENAME=kylin
+UBUNTU_CODENAME=kylin
+PROJECT_CODENAME=v10sp1
+root@admin-CE3000F:/home# cat /etc/issue
+Kylin V10 SP1 \n \l
+
+root@admin-CE3000F:/home# uname -a
+Linux admin-CE3000F 5.4.18-35-generic #21-KYLINOS SMP Tue Jul 20 13:31:32 UTC 2021 aarch64 aarch64 aarch64 GNU/Linux
+root@admin-CE3000F:/home# cat /proc/version
+Linux version 5.4.18-35-generic (buildd@localhost) (gcc version 9.3.0 (Ubuntu 9.3.0-10kylin2)) #21-KYLINOS SMP Tue Jul 20 13:31:32 UTC 2021
+```
 

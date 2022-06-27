@@ -129,7 +129,7 @@ rpm -Uvh *.rpm --nodeps --force
 ### 5-2、rpm离线包下载地址
 http://www.rpmfind.net/linux/rpm2html/search.php?query=vim&submit=Search+...&system=&arch=
 
-
+## 6、Ubuntu的软件源格式详解
 
 
 

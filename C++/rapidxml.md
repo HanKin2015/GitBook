@@ -9,7 +9,22 @@ RapidXml 为采用C++语言操作XML提供了机遇，同时结合XMPP协议也�
 ## 2、安装
 官网：http://rapidxml.sourceforge.net/index.htm
 
+## 3、疑问
+https://blog.csdn.net/ljd680/article/details/104059667
 
+doc.parse<0>();
+
+//! Parses zero-terminated XML string according to given flags.
+//! Passed string will be modified by the parser, unless rapidxml::parse_non_destructive flag is used.
+//! The string must persist for the lifetime of the document.
+//! In case of error, rapidxml::parse_error exception will be thrown.
+//! <br><br>
+//! If you want to parse contents of a file, you must first load the file into the memory, and pass pointer to its beginning.
+//! Make sure that data is zero-terminated.
+//! <br><br>
+//! Document can be parsed into multiple times. 
+//! Each new call to parse removes previous nodes and attributes (if any), but does not clear memory pool.
+//! \param text XML data to parse; pointer is non-const to denote fact that this data may be modified by the parser.
 
 
 

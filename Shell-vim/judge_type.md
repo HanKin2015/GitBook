@@ -1,4 +1,6 @@
-# 判断一个变量类型
+# linux中的一些判断操作
+
+## 1、判断一个变量类型
 
 无非就是判断一个变量是字符串还是数字。
 
@@ -8,53 +10,15 @@ shell没有封装的函数进行判断。
 如果是判断一个数字变量是否为空，可以用个加双引号将它转换为字符串后再判断即可。
 如：
 ```
-#!/bin/bash
-#
-# 功能：管理USB外设运营记录文件大小
-# 时间: 2021/3/10
-#
-
-folder_path="/sf/log/usb_record_info/"
-if [ ! -d ${folder_path} ]; then
-    exit 1
+# 将文件夹日期转换为秒数
+date_second=$(date -d ${folder_name} +%s)
+if [ ! -z "${date_second}" ] && [ ${date_second} -lt ${curren_date_second} ]
+then
+    tar -zcf ${folder_name}.tar.gz ${folder_name} --remove-files
 fi
-cd ${folder_path}
-
-# 自UTC时间，当前所经过的秒数
-curren_date_second=$(date -d `date +%Y%m%d` +%s)
-
-# 压缩文件夹
-folders_name=`ls -l ${folder_path} | awk '/^d/ {print $NF}'`
-for folder_name in ${folders_name}
-do
-    # 将文件夹日期转换为秒数
-    date_second=$(date -d ${folder_name} +%s)
-    if [ ! -z "${date_second}" ] && [ ${date_second} -lt ${curren_date_second} ]
-    then
-        tar -zcf ${folder_name}.tar.gz ${folder_name} --remove-files
-    fi
-done
-
-# 判断文件夹大小是否超过200M
-current_size=`du -s ${folder_path} | awk '{print $1}'`
-max_size=$((200*1024))
-while [ ${current_size} -gt ${max_size} ]
-do
-    oldest_file_name=`ls -rt | awk 'NR==1'`
-
-    if [ ! -z ${oldest_file_name} ]; then
-        rm -rf ${folder_path}${oldest_file_name}
-    fi
-    current_size=`du -s ${folder_path} | awk '{print $1}'`
-done
-
-exit 0
 ```
 
-
-方法一
-
-脚本如下
+### 方法一
 ```
 #!/usr/bin/env bash
 
@@ -115,7 +79,7 @@ a is char
 +003 integer
 +003.3 number
 ```
-方法二
+### 方法二
 ```
 #!/bin/bash
 #
@@ -127,7 +91,7 @@ else
 echo "data"
 fi
 ```
-方法三
+### 方法三
 ```
 #!/bin/bash
 #
@@ -139,3 +103,18 @@ else
 echo $a is string
 fi
 ```
+
+## 2、Shell判断字符串（变量）是否为空
+您可以将 -z 选项传递给 if 命令或条件表达式。如果STRING的长度为0,variable ($var)为空。test命令用于检查文件类型并比较值。
+
+
+
+
+
+
+
+
+
+
+
+

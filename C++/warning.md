@@ -479,5 +479,20 @@ https://blog.csdn.net/alexmayer/article/details/7498120
 
 但是我发现struct结构体不会报错。
 
+## 42、warning: declaration of ‘where’ shadows a member of ‘rapidxml::parse_error’ [-Wshadow]
+当局部变量遮蔽(shadow)了参数、全局变量或者是其他局部变量时，该警告选项会给我们以警告信息。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -197,14 +197,32 @@ train_dataset.take([1, 6])
 
 ## 14、pandas DataFrame 缺失值处理（数据预处理）
 
-### 
+### 查看df中各字段是否存在缺失值
+```
 print(df.isna().any())
 print("------------")
 print(df.isnull().any())
 print("------------")
 print(np.isnan(df).any())
+```
+
 ### 用info()方法查看非空值情况  （推荐）
 df.info()
+
+### 用dropna() 方法直接丢弃含有缺失值的数据
+test = df.dropna()
+
+### 填充法
+可以用某些数值来填充缺失值，如指定用数值0填充，或者是更常用的用前后值填充、均值填充、众数填充等。
+```
+print(df.fillna(method='ffill'))#用前一个值填充
+print(df.fillna(method='backfill'))#用后一个值填充
+
+d = pd.DataFrame(np.arange(9).reshape(3,3),index = [0,1,3])
+d = d.reindex(index = range(5))
+print(d)
+print(d.fillna(d.mean()))#每列的均值填充
+```
 
 ## 15、pandas多表合并的方法
 ```
@@ -251,12 +269,37 @@ df = pd.DataFrame(data=d, dtype=np.int8) #示例2
 df = pd.read_csv("somefile.csv", dtype = {'column_name' : str})
 ```
 
+## 18、DataFrame筛选出指定列值的行
+### 18-1、布尔索引
+df[df['code'] == '000002.SZ'] # 判断等式是否成立
+df.loc[df['code']=='000002.SZ']
 
+### 18-2、位置索引
+```
+mask = df['code'] == '000002.SZ'
+pos = np.flatnonzero(mask)
+df.iloc[pos]
 
+# 直接根据索引取值
+df.iloc[1:2]
+```
 
+### 18-3、标签索引
+适用于DataFrame的行列都是有标签的情形。
+```
+# 把要操作的列作为索引
+df.index=df['code'] # 将code列作为DataFrame的行索引
+df.loc['000002.SZ', :] # 注意，这种根据索引iloc得到的结果不是DataFrame类型，而是Series
+```
 
+### 18-4、使用API
+适用于数据量比较大的情形，方法为：pd.DataFrame.query。
+```
+df.query('code=="000002.SZ"')
 
-
+# 多条件
+df.query('code=="000002.SZ" | code=="000006.SZ"')
+```
 
 
 

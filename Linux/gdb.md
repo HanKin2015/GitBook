@@ -473,7 +473,12 @@ p var
 注意一点：
 堆栈中如果出现data=0x7eca70f000 <error: Cannot access memory at address 0x7eca70f000这种无法访问内存的情况，可能不是一个问题。
 
+## 14、Python Exception exceptions.NameError Installation error: gdb.execute_unwinders function is missing:
+使用的gdb 版本：gdb-7.10.1
 
+使用gdb的时候遇到如标题所示的错误提示信息，其实不影响正常的使用，但是一直输出这个也很烦人。网上看了下，发现有可能是当前gdb版本的bug，或者当前gdb版本安装的问题。
+
+于是换了一个gdb-9.2 版本的gdb来使用，问题消失。
 
 
 
