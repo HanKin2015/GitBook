@@ -11,7 +11,7 @@ http://www.windbg.org/
 ‪C:\Windows\MEMORY.DMP
 
 ## 3、管理员运行windbg工具（调试）
-加载符号表：File->Symbol File Path(D:\Users\User\My Document\Visual Studio 2015\Projects\KMDFUSBDriver\x64\Debug)
+加载符号表：File->Symbol File Path (D:\Users\User\My Document\Visual Studio 2015\Projects\KMDFUSBDriver\x64\Debug)
 加载源代码（注意是到cpp文件目录）：File->Source File Path(D:\Users\User\My Document\Visual Studio 2015\Projects\KMDFUSBDriver\KMDFUSBDriver)
 使用Windbg打开dump分析，File->OpenCrashDump打开指定的dump文件
 

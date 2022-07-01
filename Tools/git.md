@@ -1298,8 +1298,11 @@ du -sh .git
 
 - 清理回收远程库缓存，这一步很重要，否则无法push
 
-
-
+## git怎样批量删除分支
+git 批量删除本地分支
+```
+git branch | grep TD* | xargs git branch -D
+```
 
 
 

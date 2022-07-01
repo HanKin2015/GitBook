@@ -1,4 +1,4 @@
-# Template
+# 模板
 
 ## 1、makefile通用模板
 ```
@@ -51,13 +51,16 @@ clean:
 * 文 件 名: read_write.cpp
 * 文件描述: 探究读写文件速度效率
 * 作    者: HanKin
-* 创建日期: 2022.04.09
-* 修改日期：2022.04.09
+* 创建日期: 2022.06.30
+* 修改日期：2022.06.30
 *
 * Copyright (c) 2022 HanKin. All rights reserved.
 */
  
 int main(int argc, char *argv[])
+{
+	return 0;
+}
 
 
 /**
@@ -71,6 +74,11 @@ int main(int argc, char *argv[])
 
 system("PAUSE");
 return EXIT_SUCCESS;
+
+typedef struct _NODE {
+	int x;
+	int y;
+} NODE;
 ```
 
 ### shell脚本

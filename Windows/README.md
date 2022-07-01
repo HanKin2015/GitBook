@@ -47,8 +47,8 @@ spy++.exe接收并打印windows窗口消息
 devmgmt.msc设备管理器
 sc命令可以查看驱动，如sc query usbccgp
 
-
-
+## 7、win32 getMessage 和 peekMessage的区别
+按照微软文档的解释，getmessage在没有消息时，会被阻塞。如果peekmessage没有消息时，就返回。
 
 
 

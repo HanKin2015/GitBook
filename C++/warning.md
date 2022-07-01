@@ -11,6 +11,8 @@
 
 注意：Werror需要在Wall参数下才能生效，默认是关闭所有警告的。
 
+其他人的总结：https://blog.csdn.net/weixin_41093846/article/details/82284989
+
 ## 1、warning: function declaration isn't a prototype [-Wstrict-prototypes]
 
 即使函数括号内没有任何参数，也要加一个void类型，来避免这种warning。
@@ -482,11 +484,34 @@ https://blog.csdn.net/alexmayer/article/details/7498120
 ## 42、warning: declaration of ‘where’ shadows a member of ‘rapidxml::parse_error’ [-Wshadow]
 当局部变量遮蔽(shadow)了参数、全局变量或者是其他局部变量时，该警告选项会给我们以警告信息。
 
+## 43、warning: pointer targets in initialization differ in signedness [-Wpointer-sign]
+不要认为是签名啥的问题，这是符号问题。
+问题原因是无符号和有符号之间的转换导致。
 
+unsigned char *p = "1234";
+char *q = (char *)p;
+p = static_cast<unsigned char *>(q);
 
+## 44、warning: no return statement in function returning non-void [-Wreturn-type]
+void函数指针是需要返回NULL，不返回就会报这个错误。
+如pthread_create函数第三个参数，回调函数需要返回NULL。
+```
+pthread_create(&tid, NULL, tfn, (void *)(long)i);
+```
 
+## 45、error: no macro name given in #ifndef directive
+哭笑不得。
+```
+#ifndef
+	#define MAXN 2005
+#endif
 
+修改为
 
+#ifndef MAXN
+	#define MAXN 2005
+#endif
+```
 
 
 

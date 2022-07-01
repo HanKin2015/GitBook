@@ -152,6 +152,7 @@ Filename    : /sbin/ifconfig
 ## 2、deb包下载地址
 http://ftp.acc.umu.se/debian/pool/main/v/vim/
 http://ftp.de.debian.org/debian/pool/main/v/vim/
+https://pkgs.org/download/python2.7-minimal
 
 各种镜像地址：https://packages.debian.org/sid/ppc64el/vim/download
 
@@ -183,14 +184,14 @@ dpkg也能使用-x或-X参数解压deb文件。
 
 
 ```
-[root@ubuntu0006:/media/sangfor/vdb/deb] #dpkg -e vim_7.4.488-7+deb8u3_amd64.deb
-[root@ubuntu0006:/media/sangfor/vdb/deb] #ll
+[root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -e vim_7.4.488-7+deb8u3_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/deb] #ll
 总用量 944
 drwxr-xr-x  3 root root   4096 3月  31 17:40 ./
 drwxrwxrwx 19 root root   4096 3月  31 17:28 ../
 drwxr-xr-x  2 root root   4096 3月  10  2017 DEBIAN/
 -rw-r--r--  1 root root 952520 3月  31 14:16 vim_7.4.488-7+deb8u3_amd64.deb
-[root@ubuntu0006:/media/sangfor/vdb/deb] #ll DEBIAN/
+[root@ubuntu0006:/media/hankin/vdb/deb] #ll DEBIAN/
 总用量 24
 drwxr-xr-x 2 root root 4096 3月  10  2017 ./
 drwxr-xr-x 3 root root 4096 3月  31 17:40 ../

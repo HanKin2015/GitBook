@@ -480,12 +480,67 @@ p var
 
 于是换了一个gdb-9.2 版本的gdb来使用，问题消失。
 
+```
+[root@ubuntu0006:/media/hankin/vdb/TranhankinerStation] #gdb -version
+Python Exception <class 'ImportError'> cannot import name '_remove_dead_weakref':
+gdb: warning:
+Could not load the Python gdb module from `/usr/share/gdb/python'.
+Limited Python support is available from the _gdb module.
+Suggest passing --data-directory=/path/to/gdb/data-directory.
+
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+```
+
+最终解决方案是重装gdb。
+官网下载源码编译：https://ftp.gnu.org/gnu/gdb/
+
+## 15、gdb命令运行失败
+```
+hankin:hankin/host-083a88c60e6e(HOST-OS) /hankin/data/local/hj # gdb
+Could not find platform independent libraries <prefix>
+Could not find platform dependent libraries <exec_prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+ImportError: No module named site
+hankin:hankin/host-083a88c60e6e(HOST-OS) /hankin/data/local/hj # which gdb
+/usr/bin/gdb
+hankin:hankin/host-083a88c60e6e(HOST-OS) /hankin/data/local/hj # ldd /usr/bin/gdb
+        linux-vdso.so.1 =>  (0x00007ffca4b50000)
+        /hankin/lib/libvt_hook_libc.so (0x00007fe2311f7000)
+        /hankin/lib/libvt_hook_kill.so (0x00007fe230ff4000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fe230df0000)
+        libncurses.so.5 => /lib/x86_64-linux-gnu/libncurses.so.5 (0x00007fe230bce000)
+        libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fe2309a5000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fe230788000)
+        libutil.so.1 => /lib/x86_64-linux-gnu/libutil.so.1 (0x00007fe230585000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fe23027c000)
+        libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fe230052000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe22fc88000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fe2313fa000)
+```
+没有python依赖，但是执行却报错有关python。
 
 
-
-
-
-
+## 16、Could not find platform independent libraries Could not find platform dependent librarie
+是因为gdb命令依赖python环境，需要安装python。
+```
+Could not find platform independent libraries <prefix>
+Could not find platform dependent libraries <exec_prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+ImportError: No module named site
+```
 
 
 

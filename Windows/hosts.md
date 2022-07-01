@@ -1,6 +1,7 @@
 # hosts
 
 ## 1、hosts本仓库在线同步地址
+参考：https://github.com/JohyC/Hosts
 
 1. Github https://github.com/JohyC/Hosts/blob/main/hosts.txt
 2. Gitee    https://gitee.com/yuchi-shentang/GithubHosts/blob/main/hosts.txt

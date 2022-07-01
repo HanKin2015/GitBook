@@ -1,9 +1,10 @@
-# -Wl,-export-dynamic参数
+# 动态调用链接
+
+## 1、-Wl,-export-dynamic参数
 https://blog.csdn.net/zhensansan/article/details/104590688
 
-
-
-## 示例实战
+## 2、示例实战
+代码地址：D:\Github\Storage\c++\dynamic
 ```
 [root@ubuntu0006:/media/hankin/vdb/study/dynamic] #make
 gcc -fPIC -c main.c -o main.o

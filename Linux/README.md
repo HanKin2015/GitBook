@@ -281,5 +281,35 @@ icotool -x -o 48 -w 48 *.ico
 -rw-r--r-- 1 root root 838731 6月  30  2021 mpc-1.2.1.tar.gz
 ```
 
+## 21、通过源码安装完命令后却报错找不到
+原因是默认安装到/usr/local/bin目录，命令查找目录为/usr/bin/。
+可以通过修改PATH值来解决。
+注意：PATH值是从左到右进行覆盖，取最右的值。
+```
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #echo $PATH
+/usr/local/sbin/:/usr/local/bin/:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #rm /usr/bin/gdb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #gdb
+-bash: /usr/bin/gdb: 没有那个文件或目录
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #export PATH=$PATH:/usr/local/bin/
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #gdb
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) q
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #echo $PATH
+/usr/local/sbin/:/usr/local/bin/:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin/
+```
 

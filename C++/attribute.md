@@ -335,7 +335,15 @@ struct exam5 {
 被这个关键字修饰的函数，其参数都是从右向左通过堆栈传递的(__fastcall 的前面部分由ecx,edx传)， 函数调用在返回前要由被调用者清理堆栈。
 这个关键字主要见于Microsoft Visual C、C++。GNU的C、C++是另外一种修饰方式：__attribute__((stdcall))。
 
-
+__stdcall是函数调用约定的一种，函数调用约定主要约束了两件事：
+1.参数传递顺序
+2.调用堆栈由谁（调用函数或被调用函数）清理
+常见的函数调用约定：stdcall cdecl fastcall thiscall naked call
+__stdcall表示
+1.参数从右向左压入堆栈
+2.函数被调用者修改堆栈
+3.函数名(在编译器这个层次)自动加前导的下划线，后面紧跟一个@符号，其后紧跟着参数的尺寸
+在win32应用程序里,宏APIENTRY，WINAPI，都表示_stdcall，非常常见。
 
 
 

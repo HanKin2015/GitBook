@@ -8,12 +8,12 @@ http://c.biancheng.net/view/2343.html
 
 为了使潜在风险更加细化，使问题追溯更加方便，使书写格式更加规范，C++ 对类型转换进行了分类，并新增了四个关键字来予以支持，它们分别是：
 
-关键字|说明
-:-----|:----
-static_cast	|用于良性转换，一般不会导致意外发生，风险很低。
-const_cast	|用于 const 与非 const、volatile 与非 volatile 之间的转换。
+关键字				|说明
+:-------------------|:---------------------------------------------------------
+static_cast			|用于良性转换，一般不会导致意外发生，风险很低。
+const_cast			|用于 const 与非 const、volatile 与非 volatile 之间的转换。
 reinterpret_cast	|高度危险的转换，这种转换仅仅是对二进制位的重新解释，不会借助已有的转换规则对数据进行调整，但是可以实现最灵活的 C++ 类型转换。
-dynamic_cast	|借助 RTTI，用于类型安全的向下转型（Downcasting）。
+dynamic_cast		|借助RTTI，用于类型安全的向下转型（Downcasting）。
 
 ## 2、用法格式
 ```
@@ -75,20 +75,20 @@ reinterpret_cast 可以认为是 static_cast 的一种补充，一些 static_cas
 ## 7、dynamic_cast 关键字
 dynamic_cast 用于在类的继承层次之间进行类型转换，它既允许向上转型（Upcasting），也允许向下转型（Downcasting）。向上转型是无条件的，不会进行任何检测，所以都能成功；向下转型的前提必须是安全的，要借助 RTTI 进行检测，所有只有一部分能成功。
 
-dynamic_cast 与 static_cast 是相对的，dynamic_cast 是“动态转换”的意思，static_cast 是“静态转换”的意思。dynamic_cast 会在程序运行期间借助 RTTI 进行类型转换，这就要求基类必须包含虚函数；static_cast 在编译期间完成类型转换，能够更加及时地发现错误。
+dynamic_cast 与 static_cast 是相对的，dynamic_cast 是“动态转换”的意思，static_cast 是“静态转换”的意思。dynamic_cast会在程序运行期间借助 RTTI 进行类型转换，这就要求基类必须包含虚函数；static_cast在编译期间完成类型转换，能够更加及时地发现错误。
 
 dynamic_cast 的语法格式为：
 dynamic_cast <newType> (expression)
 
 newType 和 expression 必须同时是指针类型或者引用类型。换句话说，dynamic_cast 只能转换指针类型和引用类型，其它类型（int、double、数组、类、结构体等）都不行。
 
-对于指针，如果转换失败将返回 NULL；对于引用，如果转换失败将抛出std::bad_cast异常。
+对于指针，如果转换失败将返回NULL；对于引用，如果转换失败将抛出std::bad_cast异常。
 
 1) 向上转型（Upcasting）
 向上转型时，只要待转换的两个类型之间存在继承关系，并且基类包含了虚函数（这些信息在编译期间就能确定），就一定能转换成功。因为向上转型始终是安全的，所以 dynamic_cast 不会进行任何运行期间的检查，这个时候的 dynamic_cast 和 static_cast 就没有什么区别了。
 
 2) 向下转型（Downcasting）
-向下转型是有风险的，dynamic_cast 会借助 RTTI 信息进行检测，确定安全的才能转换成功，否则就转换失败。
+向下转型是有风险的，dynamic_cast会借助 RTTI 信息进行检测，确定安全的才能转换成功，否则就转换失败。
 
 
 

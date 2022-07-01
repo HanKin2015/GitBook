@@ -2,6 +2,8 @@
 
 # 安装包命令
 
+第三方包下载地址：https://pkgs.org/download/libsysfs.so.2
+
 ## 1、deb
 dbkg -i **.deb
 
@@ -21,10 +23,12 @@ apt
 yum
 
 apt 和 apt-get区别
-
 apt search 和 apt-cache search区别
 
 ## 4、apt命令
+sudo apt-get clean
+sudo apt-get update
+apt autoremove
 
 ### 4-1、安装安装包时报其他错误
 ```
@@ -96,31 +100,24 @@ root@hejian-H81M-S1:/home/hejian# rm /var/lib/dpkg/lock
 centos系统使用。
 
 1）查询系统中已经安装的软件
-
 rpm -qa
 
 2）查询一个已经安装的文件属于哪个软件包；
-
 rpm -qf 文件名的绝对路径
 
 3）查询已安装软件包都安装到何处；
-
 rpm -ql 软件名
 
 4）查询一个已安装软件包的信息
-
 rpm -qi 软件名
 
 5）查看一下已安装软件的配置文件；
-
 rpm -qc 软件名
 
 6）查看一个已经安装软件的文档安装位置：
-
 rpm -qd 软件名
 
 7）查看一下已安装软件所依赖的软件包及文件；
-
 rpm -qR 软件名
 
 ### 5-1、安装软件
@@ -131,10 +128,21 @@ http://www.rpmfind.net/linux/rpm2html/search.php?query=vim&submit=Search+...&sys
 
 ## 6、Ubuntu的软件源格式详解
 
+## 7、linux中make install指定安装目录
+### 7-1、修改configure文件中prefix的值：
+用vi/vim打开configure文件，然后找到prefix值，修改未prefix=你的安装目录，然后保存退出，再执行./configure & make & sudo make install就可以，不过该方法比较麻烦，会容易改动到configure文件的其他的参数，不建议使用。
 
+### 7-2、执行configure文件时指定安装目录：
+```
+./configure --prefix=/home/user/zws/build
+```
 
-
-
+### 7-3、在make install指定DESTDIR参数：
+```
+./configure
+make 
+make install DESTDIR= /home/user/zws/build
+```
 
 
 

@@ -1,8 +1,4 @@
-# pandas之dataframe篇
-
-# 1、读取和保存文件
-
-# 2、插入一行数据
+# list
 
 # 3、list插入数据
 insert：指定位置插入
@@ -20,11 +16,3 @@ lis.sort(reverse=True)
 ```
 lis.sort(key=(lambda x:x[0]))
 ```
-
-## numpy数组
-```
-numpy.sort(arr)
-```
-
-
-
