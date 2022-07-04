@@ -203,7 +203,52 @@ pyi-grab_version.exe是pyinstaller自带的一个工具，用于获得其他.exe
 pyinstaller.exe --version-file=doc/file_version_info.txt -i doc/dog.ico -F upan_auto_copy.py
 ```
 
+## 6、pyinstaller中的spec文件
+1.可以在官网了解一下
+简单介绍：
+通过pyi-makespec name.py命令来生成一个自定义的spec文件
+```
+# -*- mode: python -*-
+block_cipher = None
+a = Analysis(['name.py'],
+             pathex=['D:\\ME'],
+             binaries=[],
+             datas=[],
+             hiddenimports=[],
+             hookspath=[],
+             runtime_hooks=[],
+             excludes=[],
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
+             cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data,
+             cipher=block_cipher)
+exe = EXE(pyz,
+          a.scripts,
+          exclude_binaries=True,
+          name='name',
+          debug=False,
+          strip=False,
+          upx=True,
+          console=True )
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='name')
+```
+spec文件分为Analysis, pyz, exe, coll四个部分
+①Analysis:首先是需要打包的py文件，通过一个字符串列表储存；然后是py文件的路径；datas是需要引用的文件（图片等）
+②exe：要生成exe文件时，name是exe文件的名字， console是是否在打开exe文件时打开命令框
+③coll：收集前三个部分的内容进行整合
+pyinstaller通过最开始生成的spec文件进行打包，也可以自定义spec文件后，使用pyinstaller -F name.spec命令来打包
 
+2.打包后的spec文件
+如果使用了--add-data命令后， 在Analysis中的datas中出现引用的图片的名称;使用-i 命令后，在exe在最后会出现icon = 图标名。
+注意：使用--add-data命令时，使用方式如：--add-data 图片名；位置（同一目录下可以用.）
+该命令可以打包使用绝对路径引用的图片，但一旦通过该路径找不到图片时即会报错（如在其他电脑上打开exe文件，原路径上图片删除或转移）
 
 
 

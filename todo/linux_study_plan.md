@@ -33,6 +33,7 @@ GNU计划，有译为“革奴计划”，是由理查德·斯托曼在1983年9�
 [Linux和gnu的联系](http://www.gnu.org/gnu/linux-and-gnu.html)
 
 
-
+## 未来项目的样子
+https://github.com/HanKin2015/Storage/tree/master/python/udev/upan_auto_copy
 
 

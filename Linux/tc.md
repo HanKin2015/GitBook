@@ -179,4 +179,33 @@ tc qdisc del dev eth4 root
 ```
 5%丢包已经很严重了，1%一般即可。
 
+## 4、tc命令包装器tcconfig
+使其更容易设置到network-interface/Docker-container(veth)的网络带宽/延迟/数据包丢失/数据包损坏等的流量控制。
+
+tcconfig是一个tc命令包装器。轻松设置网络bandwidth/latency/packet-loss/packet-corruption/etc的流量控制。给network-interface/Docker-container(veth）。
+
+Set traffic control（tcset命令）
+Delete traffic control（tcdel命令）
+显示流量控制配置（tcshow命令）以获取更多信息
+
+- 网络带宽速率[G/M/K bps]
+- 网络延迟[microseconds/milliseconds/seconds/minutes]
+- 丢包率[%]
+- 数据包损坏率[%]
+- 数据包重复率[%]
+- 数据包重排序率[%]
+
+https://www.5axxw.com/wiki/content/ztvxjf
+
+tc自 linux2.2内核以后逐渐被加在了内核里，成为linux服务器本身就能提供的一种服务。
+个人觉得还是学好使用tc吧。
+
+
+
+
+
+
+
+
+
 

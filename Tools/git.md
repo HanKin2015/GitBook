@@ -2,10 +2,10 @@
 
 # git入门知识汇总
 
-# 0、前言
-## 配置一个完整的环境简单步骤
+## 0、前言
+
+### 0-1、配置一个完整的环境简单步骤
 ```
-d "张三"
 git config --global user.email "49660@zhangsan.com"
 ssh-keygen -t rsa -C "邮件地址"
 拷贝生成的公钥到git的ssh钥匙中：/root/.ssh/id_rsa.pub
@@ -13,8 +13,7 @@ ssh-keygen -t rsa -C "邮件地址"
 访问令牌啥的应该不需要，添加完ssh秘钥之后需要稍微等待一段时间才能生效
 ```
 
-## 0-1、安装git
-
+## 0-2、安装git
 使用镜像网站不错。
 [下载Windows下的Git命令行客户端](https://repo.huaweicloud.com/git-for-windows/)
 [下载Windows下的Git小海龟客户端](https://repo.huaweicloud.com/tortoisegit/)
@@ -22,8 +21,6 @@ ssh-keygen -t rsa -C "邮件地址"
 1、 先安装Git.exe
 2、 再安装TortoiseGit.msi
 3、 根据自己喜欢安装中文翻译补丁包LanguagePack
-
-
 
 git update-git-for-windows   更新git客户端
 
@@ -589,7 +586,6 @@ git apply --check xxx.patch 检查当前patch是否可以成功打入
 git apply xxx.patch
 git apply *.patch 同时打入所有patch
 
-
 手动版：
 git diff commitHash1 commitHash2 > 123.patch
 git apply --reject 123.patch
@@ -868,16 +864,11 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
 查看设置的命令:
-
 git config --list    
 
 然后通过以下命令既可以修改设置的全局用户名和邮箱:
-
 git config --global --replace-all user.name "yourNewName"
-
 git config --global --replace-all user.email "yourNewEmail"
-
-
 
 # 分支基础
 命令 | 说明
@@ -1304,7 +1295,63 @@ git 批量删除本地分支
 git branch | grep TD* | xargs git branch -D
 ```
 
+## 全局配置和局部配置
 
+
+```
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #git config -l
+user.name=吴彦祖110
+user.email=110@police.com
+core.autocrlf=false
+core.quotepath=false
+gui.encoding=utf-8
+i18n.commit.encoding=utf-8
+i18n.logoutputencoding=utf-8
+alias.lg=log --oneline --color --decorate --graph
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #cat ~/.gitconfig
+[user]
+        name = 吴彦祖110
+        email = 110@police.com
+[core]
+        autocrlf = false
+        quotepath = false
+[gui]
+        encoding = utf-8
+[i18n "commit"]
+        encoding = utf-8
+[i18n]
+        logoutputencoding = utf-8
+[alias]
+        lg = log --oneline --color --decorate --graph
+[root@ubuntu0006:/media/hankin/vdb/client] (libevent_2.1.12) #git config -l
+user.name=吴彦祖110
+user.email=110@police.com
+core.autocrlf=false
+core.quotepath=false
+gui.encoding=utf-8
+i18n.commit.encoding=utf-8
+i18n.logoutputencoding=utf-8
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=git@devops.hankin.org:VD/client.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+[root@ubuntu0006:/media/hankin/vdb/client] (libevent_2.1.12) #cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url = git@devops.hankin.org:VD/client.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
 
 
 
