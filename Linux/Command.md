@@ -2,54 +2,37 @@
 
 # Linux中常见的命令大全
 
-# 1、du
-
+## 1、du
 显示当前目录下每个文件和目录的磁盘使用空间。
 
 命令参数：
-
 -a   #显示目录中文件的大小  单位 KB 。
-
 -b  #显示目录中文件的大小，以字节byte为单位。
-
 -c  #显示目录中文件的大小，同时也显示总和；单位KB。
-
 -k 、 -m  、#显示目录中文件的大小，-k 单位KB，-m 单位MB.
-
 -s  #仅显示目录的总值，单位KB。
-
 -H或--si                 #与-h参数相同，但是K，M，G是以1000为换算单位。   
-
 -h  #以K  M  G为单位显示，提高可读性~~~（最常用的一个~也可能只用这一个就满足需求了）
 
 推荐：du -h[a]
-
-
-
 注意：
-
 - du -h是查看当前文件夹的大小，及当前目录大小
 - du -h 指定文件夹或文件
 
-
-# 2、df
+## 2、df
 显示磁盘分区上可以使用的磁盘空间
-
 -a    #查看全部文件系统，单位默认KB
-
 -h   #使用-h选项以KB、MB、GB的单位来显示，可读性高~~~（最常用）
 
 推荐：df -h
 
 # 3、free
 可以显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer。
-
 个人理解：cpu或者内存条内存
 
 推荐： free -h
 
 # 4、tracepath
-
 tracepath指令可以追踪数据到达目标主机的路由信息，同时还能够发现MTU值。它跟踪路径到目的地，沿着这条路径发现MTU。它使用UDP端口或一些随机端口。它类似于Traceroute，只是不需要超级用户特权，并且没有花哨的选项。tracepath 6很好地替代了tracerout 6和Linux错误队列应用程序的典型示例。tracepath的情况更糟，因为商用IP路由器在ICMP错误消息中没有返回足够的信息。
 
 # 5、mount使用u盘
@@ -126,54 +109,72 @@ Linux编译安装中的--prefix。
 
 
 
-# 9、运行脚本时nohub和&的区别
+# 9、uname命令
+```
+[root@ubuntu0006:/media/hankin/vdb] #uname -a
+Linux ubuntu0006 4.4.0-210-generic #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname -s
+Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname -n
+ubuntu0006
+[root@ubuntu0006:/media/hankin/vdb] #uname -r
+4.4.0-210-generic
+[root@ubuntu0006:/media/hankin/vdb] #uname -v
+#242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021
+[root@ubuntu0006:/media/hankin/vdb] #uname -m
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -p
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -i
+x86_64
+[root@ubuntu0006:/media/hankin/vdb] #uname -o
+GNU/Linux
+[root@ubuntu0006:/media/hankin/vdb] #uname --version
+uname (GNU coreutils) 8.25
+Copyright (C) 2016 Free Software Foundation, Inc.
+许可证：GPLv3+：GNU 通用公共许可证第3 版或更新版本<http://gnu.org/licenses/gpl.html>。
+本软件是自由软件：您可以自由修改和重新发布它。
+在法律范围内没有其他保证。
 
- https://www.jianshu.com/p/93a45927f013 
+由David MacKenzie 编写。
+[root@ubuntu0006:/media/hankin/vdb] #uname --help
+用法：uname [选项]...
+输出一组系统信息。如果不跟随选项，则视为只附加-s 选项。
 
- https://www.cnblogs.com/laoyeye/p/9346330.html 
+  -a, --all                     以如下次序输出所有信息。其中若-p 和
+                                -i 的探测结果不可知则被省略：
+  -s, --kernel-name             输出内核名称
+  -n, --nodename                输出网络节点上的主机名
+  -r, --kernel-release          输出内核发行号
+  -v, --kernel-version     print the kernel version
+  -m, --machine            print the machine hardware name
+  -p, --processor          print the processor type (non-portable)
+  -i, --hardware-platform  print the hardware platform (non-portable)
+  -o, --operating-system   print the operating system
+      --help            显示此帮助信息并退出
+      --version         显示版本信息并退出
 
-在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 & 在程序结尾来让程序自动运行。
-
-比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &
-
-可是有很多程序并不像mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。
-
-nohup ./start.sh &
-
-&的意思是在后台运行， 什么意思呢？ 意思是说， 当你在执行 ./start.sh & 的时候， 即使你用ctrl C, 那么start.sh照样运行（因为对SIGINT信号免疫）。 但是要注意， 如果你直接关掉shell后， 那么，start.sh进程同样消失。 可见， &的后台并不硬（因为对SIGHUP信号不免疫）。
-
-nohup的意思是忽略SIGHUP信号， 所以当运行nohup ./start.sh的时候， 关闭shell, 那么start.sh进程还是存在的（对SIGHUP信号免疫）。 但是， 要注意， 如果你直接在shell中用Ctrl C, 那么start.sh进程也是会消失的（因为对SIGINT信号不免疫）
-
-
-
-所以， &和nohup没有半毛钱的关系， 要让进程真正不受shell中Ctrl C和shell关闭的影响， 那该怎么办呢？ 那就用nohup ./start.sh &吧， 两全其美。
-
-
+GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
+请向<http://translationproject.org/team/zh_CN.html> 报告uname 的翻译错误
+Full documentation at: <http://www.gnu.org/software/coreutils/uname>
+or available locally via: info '(coreutils) uname invocation'
+```
 
 # 10、 **blkid命令**
 
 **blkid命令**对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。 
 
-
-
 # 11、[Linux 下查看字体](https://www.cnblogs.com/yangzp/p/10791694.html)
-
 1.查看所有字体
-
 命令：fc-list
 
 2.查看中文字体
-
 命令：fc-list :lang=zh
 
 3.查看更多字体
-
 命令：fc-match -v "AR PL UKai CN"
 
-
-
 windows系统下字体：C://Windows/Fonts/微软雅黑（似乎里面没有ttf字体，格式为ttc）
-
 /usr/share/fonts/chinese/TrueType
 
 ```
@@ -298,72 +299,5 @@ https://blog.csdn.net/chuangjinweilai/article/details/51850803
 alias soff='sleep 5 && xset dpms force off'
 
 
-# 18、xset
-用xset q 可以查看当前屏保的设置情况，黑屏方式的屏保有两种状态：
-1.    xset 的s参数后面可接两个数字参数，前一个即是进入屏保的秒数，如果想立刻进入屏保：
-    xset s 2 600  这样，两秒种后进入屏保。
-    如果想恢复默认值，即比较长的时间进入屏保：xset s 0 600
-    取消屏保：xset s off
-2.    dpms 是屏保的另一种状态，将其断电，与关机后的显示器同样的效果：
-    开启：xset dpms 1 1 2
-    取消：xset -dpms
-
-正因为X的屏幕保护由两部分控制, 单纯的关闭DPMS或者BlankTime都不行, 必须都关掉. 所以我在.xinitrc中加入了下面的命令, 具体解释和其它xset命令参数见Manual.
-
-xset s off
-xset dpms 0 0 0
-
-但是这样暴力关闭显得不大环保, 尤其是整宿不关机下载的情况, 可以选择把DPMS和BlankTime的超时时间设置得久一点, 或者加一条alias用来手动关闭显示器电源(笔记本没显示器开关).
-
-# 19、unam命令
-```
-[root@ubuntu0006:/media/hankin/vdb] #uname -a
-Linux ubuntu0006 4.4.0-210-generic #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
-[root@ubuntu0006:/media/hankin/vdb] #uname -s
-Linux
-[root@ubuntu0006:/media/hankin/vdb] #uname -n
-ubuntu0006
-[root@ubuntu0006:/media/hankin/vdb] #uname -r
-4.4.0-210-generic
-[root@ubuntu0006:/media/hankin/vdb] #uname -v
-#242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021
-[root@ubuntu0006:/media/hankin/vdb] #uname -m
-x86_64
-[root@ubuntu0006:/media/hankin/vdb] #uname -p
-x86_64
-[root@ubuntu0006:/media/hankin/vdb] #uname -i
-x86_64
-[root@ubuntu0006:/media/hankin/vdb] #uname -o
-GNU/Linux
-[root@ubuntu0006:/media/hankin/vdb] #uname --version
-uname (GNU coreutils) 8.25
-Copyright (C) 2016 Free Software Foundation, Inc.
-许可证：GPLv3+：GNU 通用公共许可证第3 版或更新版本<http://gnu.org/licenses/gpl.html>。
-本软件是自由软件：您可以自由修改和重新发布它。
-在法律范围内没有其他保证。
-
-由David MacKenzie 编写。
-[root@ubuntu0006:/media/hankin/vdb] #uname --help
-用法：uname [选项]...
-输出一组系统信息。如果不跟随选项，则视为只附加-s 选项。
-
-  -a, --all                     以如下次序输出所有信息。其中若-p 和
-                                -i 的探测结果不可知则被省略：
-  -s, --kernel-name             输出内核名称
-  -n, --nodename                输出网络节点上的主机名
-  -r, --kernel-release          输出内核发行号
-  -v, --kernel-version     print the kernel version
-  -m, --machine            print the machine hardware name
-  -p, --processor          print the processor type (non-portable)
-  -i, --hardware-platform  print the hardware platform (non-portable)
-  -o, --operating-system   print the operating system
-      --help            显示此帮助信息并退出
-      --version         显示版本信息并退出
-
-GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
-请向<http://translationproject.org/team/zh_CN.html> 报告uname 的翻译错误
-Full documentation at: <http://www.gnu.org/software/coreutils/uname>
-or available locally via: info '(coreutils) uname invocation'
-```
 
 

@@ -27,6 +27,12 @@ MobaTextEditor
 Settings-》Terminal-》找到Paste using right-click,选择打钩，然后点ok。
 只有新打开的窗口才能生效。
 
+### 1-5、打开服务器情况
+mobaxterm标签页最下方默认有个服务器内存硬盘情况信息的状态栏。
+
+关闭与显示方法：
+左边的工具栏 Sftp, 点击Remote monitoring，就出来了。这个功能应该是在11.0版本以上的才有，10.0版本的没有。
+
 ## 2、xshell
 研究生的时候使用过，好像还不错。现在想想文件还挺大的，并且上下传文件还需要安装搭配的xshell ftp软件，整体下来整个安装包就很大。
 
