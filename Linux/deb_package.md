@@ -181,8 +181,6 @@ dpkg-deb -e xxx.deb
 -b	创建Debian软件包
 
 dpkg也能使用-x或-X参数解压deb文件。
-
-
 ```
 [root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -e vim_7.4.488-7+deb8u3_amd64.deb
 [root@ubuntu0006:/media/hankin/vdb/deb] #ll

@@ -4,8 +4,9 @@
 
 第三方包下载地址：https://pkgs.org/download/libsysfs.so.2
 
-## 1、deb
+## 1、deb包进行安装
 dbkg -i **.deb
+更多信息见D:\Github\GitBook\gitbook\Linux\deb_package.md
 
 ## 2、扩展屏关于使用xinput支持x86盒子鼠标校准的问题
 目前只有xinput_1.6.1-1_amd64.deb这个版本的xinput在x86盒子上面正常使用，新版本的如xinput_1.6.2-1+b1_amd64.deb可能会有问题。

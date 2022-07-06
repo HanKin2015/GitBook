@@ -34,7 +34,6 @@ $ journalctl --list-boots
 ![img](https://images2018.cnblogs.com/blog/952033/201804/952033-20180411131112897-554008128.png)
 
 此时我们就可以通过 -b 选项来选择查看某次运行过程中的日志：
-
 ```
 $ sudo journalctl -b -1
 或
@@ -42,47 +41,39 @@ $ sudo journalctl -b 9eaabbc25fe343999ef1024e6a16fb58
 ```
 
 下面的命令都会输出最后一次启动后的日志信息：
-
 ```
 $ sudo journalctl -b
 $ sudo journalctl -b  0
 ```
 
 ## 2、查看指定时间段的日志
-
 利用 --since 与 --until 选项设定时间段，二者分别负责指定给定时间之前与之后的日志记录。时间值可以使用多种格式，比如下面的格式：
-
 ```
 YYYY-MM-DD HH:MM:SS
 ```
 
 如果我们要查询 2018 年 3 月 26 日下午 8:20 之后的日志：
-
 ```
 $ journalctl --since "2018-03-26 20:20:00"
 ```
 
 如果以上格式中的某些组成部分未进行填写，系统会直接进行默认填充。例如，如果日期部分未填写，则会直接显示当前日期。如果时间部分未填写，则缺省使用 "00:00:00"(午夜)。秒字段亦可留空，默认值为 "00"，比如下面的命令：
-
 ```
 $ journalctl --since "2018-03-26" --until "2018-03-26 03:00"
 ```
 
 另外，journalctl 还能够理解部分相对值及命名简写。例如，大家可以使用 "yesterday"、"today"、"tomorrow" 或者 "now" 等。
 比如获取昨天的日志数据可以使用下面的命令：
-
 ```
 $ journalctl --since yesterday
 ```
 
 要获得早上 9:00 到一小时前这段时间内的日志，可以使用下面的命令：
-
 ```
 $ journalctl --since 09:00 --until "1 hour ago"
 ```
 
 ## 3、通过日志级别进行过滤
-
 除了通过 PRIORITY= 的方式，还可以通过 -p 选项来过滤日志的级别。 可以指定的优先级如下：
 \# 0: emerg
 \# 1: alert
@@ -100,29 +91,24 @@ $ sudo journalctl -p err
 注意，这里指定的是优先级的名称。
 
 ## 4、实时更新日志
-
 与 tail -f 类似，journalctl 支持 -f 选项来显示实时的日志：
-
 ```
 $ sudo journalctl -f
 ```
 
 如果要查看某个 unit 的实时日志，再加上 -u 选项就可以了：
-
 ```
 $ sudo journalctl -f -u prometheus.service
+$ sudo journalctl -fu prometheus.service
 ```
 
 ## 5、只显示最新的 n 行
-
 命令行选项 -n 用来控制只显示最新的 n 行日志，默认是显示尾部的最新 10 行日志：
-
 ```
 $ sudo journalctl -n
 ```
 
 也可以显示尾部指定行数的日志：
-
 ```
 $ sudo journalctl -n 20
 ```
@@ -210,21 +196,13 @@ journalctl  -u nginx.service  -u php-fpm.service  --since today
 ​查看指定优先级（及其以上级别）的日志
 
 日志优先级共有8级
-
 0: emerg
-
 1: alert
-
 2: crit
-
 3: err
-
 4: warning
-
 5: notice
-
 6: info
-
 7: debug
 
 journalctl  -p err  -b
@@ -248,57 +226,86 @@ JSON建构于两种结构：
 这些都是常见的数据结构。事实上大部分现代计算机语言都以某种形式支持它们。这使得一种数据格式在同样基于这些结构的编程语言之间交换成为可能。
 
 例子
-
 以JSON格式（单行）输出
-
 journalctl  -b -u httpd.service  -o json
 
 .以JSON格式（多行）输出，可读性更好，建议选择多行输出
-
 journalctl  -b -u httpd.service  -o json-pretty
 
 .显示日志占据的硬盘空间
-
 journalctl  --disk-usage
 
 .指定日志文件占据的最大空间
-
 journalctl   --vacuum-size=1G
 
 .指定日志文件保存多久
-
 journalctl   --vacuum-time=1years
 
 ## 7、分析linux关机记录
 last -x shutdown
 last -x 
 
-## 8、出现一个尴尬的场景
+## 8、出现一个尴尬的场景（journalctl -f 无法滚动日志，无日志出现）
 https://qastack.cn/ubuntu/864722/where-is-journalctl-data-stored
 man systemd-journald
 
-journalctl -f无法滚动日志，无日志出现
-
+最后发现原因：
 发现最后一条日志是明天的时间，导致今天的日志无法出现在末尾，这个应该是按照时间进行了排序。
-
 解决方法：使用date命令修改时间，如date -s "20220418 17:58"
 
+## 9、journalctl日志存储位置
 了解journalctl -f的日志存储地址：
 Ubuntu默认不使用持久日志日志文件。仅易失性/run/log/journal/<machine-id>/*.journal[~]会保留到下一次引导。每次重新启动时，所有内容都会丢失。
 
 您可能会在日志中看到带有以下内容的引导列表：
+```
+[root@ubuntu0006:/run/log/journal/54396d7ed3f740ee8deaced3f66377e9] #ll
+总用量 8192
+drwxr-s---+ 2 root systemd-journal      60 7月   6 13:36 ./
+drwxr-sr-x  3 root systemd-journal      60 7月   4 15:25 ../
+-rwxr-x---+ 1 root systemd-journal 8388608 7月   6 14:23 system.journal*
+hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ ll
+总用量 458868
+drwxr-sr-x+ 2 root systemd-journal     4096 7月   6 14:18  ./
+drwxr-sr-x+ 3 root systemd-journal     4096 3月  30 09:52  ../
+-rw-r-----+ 1 root systemd-journal 16777216 7月   3 15:23 'system@0005e2e17e4707d0-47db0b1efbc0bd52.journal~'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   4 10:24 'system@0005e2f16fb48ef0-23c30508037cc608.journal~'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   5 14:23 'system@0005e308e2ba2c5d-90220add0bd0cead.journal~'
+-rw-r-----+ 1 root systemd-journal 58720256 5月   5 09:56 'system@2e26ff4404574d58a2e5da7978e7f2c9-0000000000000001-0005db65cc7194e2.journal'
+-rw-r-----+ 1 root systemd-journal 67108864 6月   4 20:17 'system@2e26ff4404574d58a2e5da7978e7f2c9-0000000000015911-0005de3a0cfbbaa8.journal'
+-rw-r-----+ 1 root systemd-journal 83886080 7月   6 13:23 'system@8b6d7916f3444678aebc2d287b13022b-0000000000000001-0005e308e2b7f85d.journal'
+-rw-r-----+ 1 root systemd-journal 83886080 7月   6 14:18 'system@8b6d7916f3444678aebc2d287b13022b-000000000001247d-0005e31c2b745b19.journal'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   6 14:19  system.journal
+-rw-r-----+ 1 root systemd-journal 16777216 7月   3 15:23 'user-1000@0005e2e1800db464-0a8f4862732e19cc.journal~'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   4 10:25 'user-1000@0005e2f173b21d41-a03941d4e45dde71.journal~'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   5 14:23 'user-1000@0005e308e43b0e7b-c328c878bbc94a12.journal~'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   6 13:23 'user-1000@77b76c299ae34860bce8bcbe8d28eee9-0000000000000734-0005e308e43afb61.journal'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   6 14:18 'user-1000@77b76c299ae34860bce8bcbe8d28eee9-0000000000012e71-0005e31c33887211.journal'
+-rw-r-----+ 1 root systemd-journal 33554432 6月   4 20:29 'user-1000@8e102face7074f0aaea0e7bbc8a4fe24-0000000000015b61-0005de3a10a3ce6d.journal'
+-rw-r-----+ 1 root systemd-journal 41943040 5月   5 09:56 'user-1000@fd270e0d577b41b090f7aab51e3db7e8-0000000000000683-0005db65de38a5dc.journal'
+-rw-r-----+ 1 root systemd-journal  8388608 7月   6 14:18  user-1000.journal
+hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ journalctl --list-boot
+-49 48966d5cf47e48bf9116f2b5054413e4 Wed 2022-03-30 09:52:31 CST—Wed 2022-03-30 09:58:40 CST
+-48 fe373aa3746446958cad836a573411f5 Wed 2022-03-30 10:14:05 CST—Wed 2022-03-30 11:41:56 CST
+-47 e0a6642acf1649c881f7d7e0bde94802 Wed 2022-03-30 11:42:27 CST—Wed 2022-03-30 14:51:14 CST
+-46 5a3325d7270e4e2d9e374bd0e5182bea Thu 2022-03-31 11:17:51 CST—Thu 2022-03-31 11:35:22 CST
+-45 99aa645eeed147f995459fc16ac6ff22 Thu 2022-03-31 18:55:39 CST—Fri 2022-04-01 10:40:13 CST
+........
+hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ grep -R fe373aa3746446958cad836a573411f5
+匹配到二进制文件 user-1000@fd270e0d577b41b090f7aab51e3db7e8-0000000000000683-0005db65de38a5dc.journal
+匹配到二进制文件 system@2e26ff4404574d58a2e5da7978e7f2c9-0000000000000001-0005db65cc7194e2.journal
+```
 
-journalctl --list-boot
-/var/log除非您通过创建/var/log/journal目录激活了使用持久日志日志的日志，否则日志仍将保存在文本文件下。
+除非您通过创建/var/log/journal目录激活了使用持久日志日志的日志，否则日志仍将保存在文本文件下。
 
 通常，存储目录为/var/log/journal或/run/log/journal，但它不一定必须存在于系统中。
 如果只想检查日志当前在磁盘上所占用的空间量，只需键入：
-$ journalctl --disk-usage
+```
+root@adesk:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --disk-usage
+Archived and active journals take up 104.1M in the file system.
+```
 
-
-除了Muru关于数据存储位置的答案外，还有其他相关答案。
-
-如何增加journalctl查找以前的启动日志
+如何查找journalctl查找以前的启动日志
 $ sudo mkdir -p /var/log/journal
 $ sudo systemd-tmpfiles --create --prefix /var/log/journal
 如何journalctl减小文件大小
@@ -308,28 +315,27 @@ Deleted archived journal /var/log/journal/d7b25a27fe064cadb75a2f2f6ca7764e/user-
 Deleted archived journal /var/log/journal/d7b25a27fe064cadb75a2f2f6ca7764e/user-1000@1bbb77599cf14c65a18af51646751696-000000000000064f-00056444d58433e1.journal (112.0M).
 Vacuuming done, freed 176.0M of archived journals on disk.
 
+## 10、查看journal二进制文件内容
 ```
-root@hankin:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# ls -lt
-total 106652
--rw-r-----+ 1 root systemd-journal 8388608 Apr 21 12:01 system.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 20 17:32 system@0005dcf19bc7accf-66cd06ffe699963d.journal~
--rw-r-----+ 1 root systemd-journal 8388608 Apr 20 17:28 system@c0a785b5e3a9419e994757a215e6598f-0000000000001187-0005dcea223c3555.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 19 09:14 system@31aaa31501694608816a1a4ba2c91064-000000000000048f-0005dcea55664cea.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 19 01:25 system@0005dcf10a3c89ae-9aa2cf89422ade90.journal~
--rw-r-----+ 1 root systemd-journal 8388608 Apr 19 01:16 system@0005dcf0ea957619-1fc691d9abf4f7b3.journal~
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 23:55 system@0005dcefcb660dc8-163f73a5b4bc2e15.journal~
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 17:24 system@31aaa31501694608816a1a4ba2c91064-0000000000000001-0005dcf19bbd82ee.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 17:10 system@c0a785b5e3a9419e994757a215e6598f-000000000000058b-0005dce9cc632b8f.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:46 system@c0a785b5e3a9419e994757a215e6598f-0000000000000486-0005dce9c3cc46d9.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:44 system@c0a785b5e3a9419e994757a215e6598f-0000000000000001-0005dcf10a30c7be.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:42 system@647658ebab6b43d48e1065290739b1d2-0000000000000001-0005dcf0ea8a1967.journal
--rw-r-----+ 1 root systemd-journal 8388608 Apr 18 16:35 system@647658ebab6b43d48e1065290739b1d2-0000000000000487-0005dce9bdd7aa57.journal
-root@hankin:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --list-boot
--3 c2aa7b49f73f44f7a431af6bcb13a2b3 Mon 2022-04-18 16:15:24 CST—Mon 2022-04-18 16:18:04 CST
--2 f507c47d34954e2192493e86bc412d96 Mon 2022-04-18 16:44:13 CST—Mon 2022-04-18 17:10:09 CST
--1 2aa8b1d01c354d82a5992728d36d5cc4 Tue 2022-04-19 01:51:25 CST—Wed 2022-04-20 17:32:39 CST
- 0 658ad685a1ee43a9a34e65f8bf5c2d56 Thu 2022-04-21 12:01:51 CST—Thu 2022-04-21 12:02:03 CST
-root@adesk:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --disk-usage
-Archived and active journals take up 104.1M in the file system.
+hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ journalctl --file=user-1000.journal
+-- Logs begin at Wed 2022-07-06 14:21:41 CST, end at Wed 2022-07-06 14:21:41 CST. --
+7月 06 14:21:41 hankin-KaiTianM630Z systemd[1604]: Started Kylin Cloud Service.
+7月 06 14:21:41 hankin-KaiTianM630Z systemd[1604]: kylincloud.service: Succeeded.
+hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ journalctl --file=system.journal
+-- Logs begin at Wed 2022-07-06 14:18:47 CST, end at Wed 2022-07-06 14:25:17 CST. --
+7月 06 14:18:47 hankin-KaiTianM630Z smbd[44167]: pam_unix(samba:session): session closed for user nobody
+7月 06 14:18:47 hankin-KaiTianM630Z audit[44167]: USER_END pid=44167 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:session_close grantors=pam_permit,pam_>
+7月 06 14:18:47 hankin-KaiTianM630Z audit[498]: KYSEC_MODIFY { modify /498/task/498/attr/display } for pid=498 comm='systemd-journal' ssid=0x01 osid=0x00 lo>
+7月 06 14:18:47 hankin-KaiTianM630Z audit[44217]: CRED_DISP pid=44217 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_kysec,pam_permit>
+7月 06 14:18:47 hankin-KaiTianM630Z smbd[44217]: pam_unix(samba:session): session closed for user nobody
+```
 
-```
+
+
+
+
+
+
+
+
+
