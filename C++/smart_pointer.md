@@ -176,7 +176,8 @@ weak_ptr 对象引用资源时不会增加引用计数，但是它能够通过 l
 （5）在局部作用域（例如函数内部或类内部），且不需要将指针作为参数或返回值进行传递的情况下，如果对性能要求严格，使用 scoped_ptr 的开销较 shared_ptr 会小一些。
 
 
-
+## 5、error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = log4cplus::Layout; _Dp = std::default_delete<log4cplus::Layout>]’
+https://zhuanlan.zhihu.com/p/359964081
 
 
 

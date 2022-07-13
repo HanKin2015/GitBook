@@ -39,9 +39,22 @@ D:\Users\User\Desktop\xml>mingw32-make.exe
 ```
 
 ## 3、linux环境使用
+apt install cmake
 
+### 3-1、CMake指定C++版本
+由C++升级、是致很多代码需要用C++11的规范进行缩译a方案
+修改Makefile手动修改在Makefile中，指定编译C++版本为增加编译开关-std=c++11。如下例：
+CFLAGS+=-std-c++11使用CMake指定
+使用CMake指定C++版本有两种方法。
+修改CMakeLists.txt
 
-
+在CmakeLists.txt中增加对C++版本的定义。方法如下：
+#Enable C++11
+set（CMAKE_CXX_STANDARD 11）
+生成Makefile的时候指定
+使用cmake的命令行时候指定。方法如下：
+cmake-DCMAKE_CXX_STANDARD=11.
+个人推荐使用方法一，即修改CMakeLists.txt文件。
 
 
 

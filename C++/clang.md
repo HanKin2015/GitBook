@@ -12,8 +12,10 @@ Clang相对gcc的前端来说设：计清晰简单，容易理解，易于扩展
 
 
 
+## 2、gcc: error: unrecognized command line option ‘-mlvz’; did you mean ‘-mlra’?
+make编译出现以上问题，可以通过根据建议修改，编译可能会成功，可能会出现其他大量的问题。
 
-
+这时候可以考虑的是，gcc版本低了，不支持这个参数，还有一个可能是需要通过clang编译环境进行辅助编译，安装clang即可。
 
 
 

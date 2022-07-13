@@ -63,28 +63,9 @@ devscripts: /usr/bin/dpkg-depcheck
 devscripts: /usr/bin/dpkg-genbuilddeps
 dpkg: /usr/bin/dpkg
 dpkg: /usr/bin/dpkg-deb
-dpkg: /usr/bin/dpkg-divert
-dpkg: /usr/bin/dpkg-maintscript-helper
 dpkg: /usr/bin/dpkg-query
-dpkg: /usr/bin/dpkg-split
-dpkg: /usr/bin/dpkg-statoverride
-dpkg: /usr/bin/dpkg-trigger
 dpkg-awk: /usr/bin/dpkg-awk
 dpkg-cross: /usr/bin/dpkg-cross
-dpkg-dev: /usr/bin/dpkg-architecture
-dpkg-dev: /usr/bin/dpkg-buildflags
-dpkg-dev: /usr/bin/dpkg-buildpackage
-dpkg-dev: /usr/bin/dpkg-checkbuilddeps
-dpkg-dev: /usr/bin/dpkg-distaddfile
-dpkg-dev: /usr/bin/dpkg-genchanges
-dpkg-dev: /usr/bin/dpkg-gencontrol
-dpkg-dev: /usr/bin/dpkg-gensymbols
-dpkg-dev: /usr/bin/dpkg-mergechangelogs
-dpkg-dev: /usr/bin/dpkg-name
-dpkg-dev: /usr/bin/dpkg-parsechangelog
-dpkg-dev: /usr/bin/dpkg-scanpackages
-dpkg-dev: /usr/bin/dpkg-scansources
-dpkg-dev: /usr/bin/dpkg-shlibdeps
 dpkg-dev: /usr/bin/dpkg-source
 dpkg-dev: /usr/bin/dpkg-vendor
 dpkg-repack: /usr/bin/dpkg-repack
@@ -103,7 +84,6 @@ dpkg: /usr/bin/dpkg-query
 发现三者其实来源同一个安装包。
 
 ### 1-2、查询Linux某命令来自哪个包
-
 dpkg能看命令的版本，但是无法查看来自哪个安装包。
 
 #### Debian：（Ubuntu等）
@@ -130,7 +110,7 @@ lrzsz: /usr/bin/rz
 lrzsz: /usr/bin/rz
 ```
 
-#### CentOS：
+#### CentOS
 ```
 root@CentOS7 ~ # yum provides *bin/ifconfig
 Loaded plugins: fastestmirror
@@ -355,26 +335,105 @@ dpkg: 处理软件包 vim (--configure)时出错：
 ```
 
 ## 3、认识deb包
+参考：https://www.cnblogs.com/davis12/p/14365981.html
+
+deb 是 Unix 系统(其实主要是 Linux)下的安装包，基于 tar 包，因此本身会记录文件的权限(读/写/可执行)以及所有者/用户组。
+
+deb 包本身有三部分组成：数据包，包含实际安装的程序数据，文件名为 data.tar.XXX；安装信息及控制脚本包，包含 deb 的安装说明，标识，脚本等，文件名为 control.tar.gz；最后一个是 deb 文件的一些二进制数据，包括文件头等信息，一般看不到，在某些软件中打开可以看到。
+
+deb 本身可以使用不同的压缩方式。tar 格式并不是一种压缩格式，而是直接把分散的文件和目录集合在一起，并记录其权限等数据信息。之前提到过的 data.tar.XXX，这里 XXX 就是经过压缩后的后缀名。
+
+deb 默认使用的压缩格式为 gzip 格式，所以最常见的就是 data.tar.gz。常有的压缩格式还有 bzip2 和 lzma，其中 lzma 压缩率最高，但压缩需要的 CPU 资源和时间都比较长。
+
+data.tar.gz包含的是实际安装的程序数据，而在安装过程中，该包里的数据会被直接解压到根目录(即 / )，因此在打包之前需要根据文件所在位置设置好相应的文件/目录树。
+
+而 control.tar.gz 则包含了一个 deb 安装的时候所需要的控制信息。一般有 5 个文件：
+- control，用了记录软件标识，版本号，平台，依赖信息等数据，这是最主要的文件配置，必不可少；dpkg通过这些变量来管理软件包；
+- preinst，在解包data.tar.gz 前运行的脚本；
+- postinst，在解包数据后运行的脚本；
+- prerm，卸载时，在删除文件之前运行的脚本；
+- postrm，在删除文件之后运行的脚本；在 Cydia 系统中，Cydia 的作者 Saurik 另外添加了一个脚本，extrainst_，作用与 postinst 类似；
+- rules，这实际上是另外一个Makefile脚本，用来给dpkg-buildpackage用的；
+- copyright文件: 不用说，版权信息，相当重要；
+- ompat文件: 这个文件留着是有用的；
+- irs文件：这个文件指出我们需要的但是在缺省情况下不会自动创建的目录；
+- changelog文件: 这是一个必需文件，包含软件版本号，修订号，发行版和优先级。
+
+## 4、
+
+```
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp/hello] #ls -R
+.:
+DEBIAN  opt
+
+./DEBIAN:
 control
-postinst
-postrm
-preinst
-prerm
 
-
-pidof compton 输出进程id
-
-## 4、原理
-1) deb包通常包含两部分：控制信息(DEBIAN目录)、安装内容(模拟"/"目录)
-
-2) 通过解开已有的deb包看其中内容
-
-i. 释放安装内容到dirname目录中
-
-$ dpkg -X xxx.deb dirname
-ii. 释放控制信息到当前目录下的DEBIAN子目录中
-
-$ dpkg -e xxx.deb
+./opt:
+hello.py
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
+dpkg-deb：错误：正在解析文件 'hello/DEBIAN/control' 第 5 行附近，软件包 'hello' :
+ 字段名 # 后必须跟冒号
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #vim hello/DEBIAN/control
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
+dpkg-deb：正在新建软件包 hello，包文件为 hello_1.0_linux_amd64.deb。
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -c hello_1.0_linux_amd64.deb
+drwxr-xr-x root/root         0 2022-07-07 22:38 ./
+drwxr-xr-x root/root         0 2022-07-07 22:38 ./opt/
+-rwxr-xr-x root/root        34 2022-07-07 22:38 ./opt/hello.py
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -C hello_1.0_linux_amd64.deb
+dpkg: 软件包 hello_1.0_linux_amd64.deb 没有被安装
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #rm -rf DEBIAN/
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -e hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #ll
+总用量 32
+drwxr-xr-x 7 root root 4096 7月   7 22:47 ./
+drwxr-xr-x 5 root root 4096 7月   7 14:58 ../
+drwxr-xr-x 2 root root 4096 7月   7 22:45 DEBIAN/
+drwxr-xr-x 4 root root 4096 7月   7 22:38 hello/
+-rw-r--r-- 1 root root  718 7月   7 22:45 hello_1.0_linux_amd64.deb
+drwxr-xr-x 5 root root 4096 7月   7 11:25 lib/
+drwxr-xr-x 6 root root 4096 7月   7 17:47 usb/
+drwxr-xr-x 6 root root 4096 7月   7 22:38 usc/
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #ll DEBIAN/
+总用量 12
+drwxr-xr-x 2 root root 4096 7月   7 22:45 ./
+drwxr-xr-x 7 root root 4096 7月   7 22:47 ../
+-rw-r--r-- 1 root root  194 7月   7 22:45 control
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -I hello_1.0_linux_amd64.deb
+ 新格式的 debian 软件包，格式版本 2.0。
+ 大小 718 字节：主控包=290 字节。
+     194 字节，    9 行      control
+ Package: hello
+ Version: 1.0
+ Section: BioInfoServ
+ Priority: optional
+ Architecture: amd64
+ Installed-Size: 4096
+ Maintainer: gatieme
+ Provides: bioinfoserv-arb
+ Description: A test for using dpkg cmd
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #cat DEBIAN/control
+Package: hello
+Version: 1.0
+Section: BioInfoServ
+Priority: optional
+Architecture: amd64
+Installed-Size: 4096
+Maintainer: gatieme
+Provides: bioinfoserv-arb
+Description: A test for using dpkg cmd
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #tree .
+.
+├── DEBIAN
+│   └── control
+├── hello
+│   ├── DEBIAN
+│   │   └── control
+│   └── opt
+│       └── hello.py
+├── hello_1.0_linux_amd64.deb
+```
 
 ## 5、源码转deb包
 以linux网卡驱动为例：
@@ -422,3 +481,47 @@ dpkg-buildpackage: 错误: failed to sign .dsc and .changes file
 ```
 但是其实已经成功了，你去上一级目录看看，deb包应该已经生成在上一级目录。
 
+## 6、deb包的目录树
+```
+|——mydeb
+     |————usr
+           |————lib
+                 |——可执行文件（安装后，就在你的/usr/lib生成相应的可执行文件）
+           |————share
+                 |————icons 
+                         |——deb.png(图标文件生成到/usr/share/icons/)
+                 |————applications                           
+                         |——deb.desktop（桌面文件生成到/usr/share/applications/）
+     |————DEBIAN(大写、用来制作打包文件)
+            |————control(描述deb包的信息必须的文件)
+```
+
+## 7、conrol文件
+```
+//包名
+Package: Internet-of-things
+//版本
+Version: 1.0.0-2017.05.03
+//包分类
+Section: tuils 
+//优先级
+Priority: optional
+//依赖软件包
+Depends:
+//建议
+Suggests: 
+//目标机架构
+Architecture: i386 | amd64
+//安装后大小
+Installed-Size: 
+//维护者
+Maintainer: papa
+//原维护者
+Original-Maintainer: papa
+//提供
+Provides:  
+//包描述
+Description: 欢迎来到万物智联
+//软件主页
+Homepage: http://blog.csdn.net/qq_27818541/
+```

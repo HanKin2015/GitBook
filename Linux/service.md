@@ -59,8 +59,8 @@ Type=dbus：若以此方式启动，当指定的 BusName 出现在DBus系统总�
 Type=idle: systemd会等待所有任务(Jobs)处理完成后，才开始执行idle类型的单元。除此之外，其他行为和Type=simple 类似。
 PIDFile：pid文件路径
 
-ExecStart：指定启动单元的命令或者脚本，ExecStartPre和ExecStartPost节指定在ExecStart之前或者之后用户自定义执行的脚本。ExecReload：指定单元停止时执行的命令或者脚本。
-
+ExecStart：指定启动单元的命令或者脚本，ExecStartPre和ExecStartPost节指定在ExecStart之前或者之后用户自定义执行的脚本。
+ExecReload：指定单元停止时执行的命令或者脚本。
 ExecStop：指定单元停止时执行的命令或者脚本。
 PrivateTmp：True表示给服务分配独立的临时空间
 Restart：这个选项如果被允许，服务重启的时候进程会退出，会通过systemctl命令执行清除并重启的操作。

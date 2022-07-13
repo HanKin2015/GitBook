@@ -5,15 +5,9 @@
 
 1. Github https://github.com/JohyC/Hosts/blob/main/hosts.txt
 2. Gitee    https://gitee.com/yuchi-shentang/GithubHosts/blob/main/hosts.txt
-3. 私人服务器 
-   - hosts:        		 https://www.suni.cf:8880/Hosts/hosts.txt 
-   - GithubHosts:        https://www.suni.cf:8880/Hosts/GithubHosts.txt
-   - EpicHosts:          https://www.suni.cf:8880/Hosts/EpicHosts.txt
-   - SteamDomains:       https://www.suni.cf:8880/Hosts/SteamDomains.txt
+3. Gitea https://www.foul.trade:3000/Johy/Hosts/raw/branch/main/hosts.txt
 
 使用 SwitchHosts （https://swh.app/zh/）工具（推荐）自动同步
-
-由于私人服务器经常出现崩溃无法访问问题，而Gitee非常稳定，因此填写：https://gitee.com/yuchi-shentang/GithubHosts/raw/main/hosts.txt
 
 ## 2、手动查询需要翻墙的域名实际ip并配置
 打开https://www.ipaddress.com/网站，查询下面3个网址对应的IP地址
@@ -59,5 +53,22 @@ addrs = socket.getaddrinfo(domain, None)
 Trojan-Qt5-Windows.7z
 
 配置文件已上传：D:\Github\Storage\others\gui-config.zip
+
+trojan 是较新的代理软件，trojan官网是 https://trojan-gfw.github.io/trojan/。与强调加密流量的SS/SSR等工具不同，trojan重点在将流量伪装成互联网最常见的https流量，从而规避防火墙的探测和干扰，相当于配置了流量伪装的精简版V2ray。在敏感时期，基本上只有 trojan 和 V2ray流量伪装 能提供稳如狗的服务。
+
+trojan的缺点在于关注度不够，除了ios平台，官方客户端都比较简陋。trojan安装和使用请参考：[trojan教程](https://shop.mac163.com/17157/)，服务端一键部署请参考：[trojan一键脚本](https://shop.mac163.com/14326/)。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

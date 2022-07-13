@@ -27,9 +27,36 @@ modprobe和insmod类似，都是用来动态加载驱动模块的，区别在于
 
 也就是说，如果你确定你要加载的驱动模块不依赖其他驱动模块的话，既可以insmod也可以modprobe，当然insmod可以在任何目录下执行，更方便一些。而如果你要加载的驱动模块还依赖其他ko驱动模块的话，就只能将模块拷贝到上述的特定目录，depmod后再modprobe。
 
-### 卸载驱动模块
+### 1-1、卸载驱动模块
 rmmod 模块名称
 lsmod显示的模块名称，而不是对应的ko文件名
+
+发现rmmod usbip_core和rmmod usbip-core都能卸载成功，好神奇。
+
+### 1-2、加载驱动失败：insmod error: disagrees about version of symbol module_layout
+```
+[root@ubuntu0006:/media] #modinfo psmouse
+filename:       /lib/modules/4.4.0-210-generic/kernel/drivers/input/mouse/psmouse.ko
+license:        GPL
+description:    PS/2 mouse driver
+author:         Vojtech Pavlik <vojtech@suse.cz>
+srcversion:     4A9614D16F58BF8FB9A8468
+alias:          serio:ty05pr*id*ex*
+alias:          serio:ty01pr*id*ex*
+depends:
+retpoline:      Y
+intree:         Y
+vermagic:       4.4.0-210-generic SMP mod_unload modversions
+parm:           proto:Highest protocol extension to probe (bare, imps, exps, any). Useful for KVM switches. (proto_abbrev)
+parm:           resolution:Resolution, in dpi. (uint)
+parm:           rate:Report rate, in reports per second. (uint)
+parm:           smartscroll:Logitech Smartscroll autorepeat, 1 = enabled (default), 0 = disabled. (bool)
+parm:           resetafter:Reset device after so many bad packets (0 = never). (uint)
+parm:           resync_time:How long can mouse stay idle before forcing resync (in seconds, 0 = never). (uint)
+```
+原来是驱动编译环境与当前系统内核不匹配导致。
+
+网上怀疑是GCC的版本不同导致，可能性不大。
 
 ## 2、例如抓取usbvideo驱动数据包
 ```

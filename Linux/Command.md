@@ -250,6 +250,65 @@ chown runoob:runoobgroup file1.txt
 chown -R runoob:runoobgroup *
 ```
 
+chown和chmod改变目录下所有文件属性
+-R : 处理指定目录以及其子目录下的所有文件
+```
+chown -R 属主：属组 file
+chmod -R 777  file
+```
+
+## 13-1、使用chmod 777后普通用户是否可以读写root用户创建的文件
+实战结论：
+- 只需要给文件读写权限，普通用户就可以写入。
+- 给文件赋予拥有者权限，普通用户就可以写入。
+
+```
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #cat hj
+hello
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #su hejian
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ ls -l
+总用量 4
+-rw-r--r-- 1 root root 6 7月  11 19:23 hj
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ chmod 777 hj
+chmod: 更改'hj' 的权限: 不允许的操作
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ echo "8" > hj
+bash: hj: 权限不够
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ su
+密码：
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #chmod 777 hj
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #ll
+总用量 12
+drwxr-xr-x 2 root root 4096 7月  11 19:23 ./
+drwxr-xr-x 5 root root 4096 7月  11 19:23 ../
+-rwxrwxrwx 1 root root    6 7月  11 19:23 hj*
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #su hejian
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ echo "8" > hj
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ cat hj
+8
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ ls -l
+总用量 4
+-rwxrwxrwx 1 root root 2 7月  11 19:25 hj
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #cat jh
+world
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #ls -l
+总用量 8
+-rwxrwxrwx 1 root root 2 7月  11 19:25 hj
+-rw-r--r-- 1 root root 6 7月  11 19:27 jh
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #chown hejian:hejian jh
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #ls -l
+总用量 8
+-rwxrwxrwx 1 root   root   2 7月  11 19:25 hj
+-rw-r--r-- 1 hejian hejian 6 7月  11 19:27 jh
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj] #su hejian
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ echo "9999" > jh
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ cat jh
+9999
+hejian@ubuntu0006:/media/hankin/vdb/study/log4cplus/hj$ ls -l
+总用量 8
+-rwxrwxrwx 1 root   root   2 7月  11 19:25 hj
+-rw-r--r-- 1 hejian hejian 5 7月  11 19:28 jh
+```
+
 # 14、suspend命令
 Linux suspend命令用于暂停执行shell。
 suspend为shell内建指令，可暂停目前正在执行的shell。若要恢复，则必须使用SIGCONT信息。

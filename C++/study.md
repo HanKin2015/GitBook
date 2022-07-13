@@ -37,17 +37,13 @@ sys/time.h 中虽然包含了 #include <time.h>，但是通过 #define __need_ti
 
 到底是包含 time.h 还是 sys/time.h，还是应该依据代码中使用的数据结构和函数来决定。
 
-
 # 4、error: unterminated #ifndef
 检查发现是因为文件开头使用了#ifndef而后面缺少了#endif
 注意：每个if语句都需要一个endif。
 
-# 5、strerror was not declared in this scope
-#include "string.h"
-#include “errno.h”
-
-strerror
-这个库必须要添加string.h头文件，少了.h都不行
+# 5、function declaration isn't a prototype解决办法
+在网上查到解决办法是：即使函数括号内没有任何参数，也要加一个void类型，来避免这种warning。
+如：int func(); ==> int func(void);
 
 # 6、注意new int(100)和new int[100]
 相当于int a=100或int *b=new int(100);
@@ -119,9 +115,6 @@ if( (int)ptr==-1 )  //出错地方
 
 （long）ptr == -1 就好了
 
-# 12、function declaration isn't a prototype解决办法
-在网上查到解决办法是：即使函数括号内没有任何参数，也要加一个void类型，来避免这种warning。
-如：int func(); ==> int func(void);
 
 
 

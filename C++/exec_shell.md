@@ -1,6 +1,8 @@
 # 执行shell命令
 
-## 1、c++执行shell命令（没有处理返回结果）
+代码见：D:\Github\Storage\c++\exec_shell
+
+## 1、c++执行shell命令（没有完全处理返回结果）
 ```
 /*
  * @brief 运行shell命令
@@ -52,12 +54,12 @@ void ExecShellCmd(const char *cmd, char *output, int outputLen)
     }
 }
 
-//隐藏输入法工具栏
+// 隐藏输入法工具栏
 void hideInputTool()
 {
-    //隐藏ibus框架输入法工具栏
+    // 隐藏ibus框架输入法工具栏
     ExecShellCmd("ibus engine xkb:us::eng", NULL, 0);
-    //隐藏fcitx框架输入法工具栏
+    // 隐藏fcitx框架输入法工具栏
     ExecShellCmd("fcitx-remote -c", NULL, 0);
 }
 ```
