@@ -2,18 +2,15 @@
 
 # 工具之notepad++
 
-我平时办公配置：Obsidian主题、Consolas字体、10大小、使用全局字体及大小
+我平时办公配置：Obsidian主题、Consolas字体/微软雅黑、10大小、使用全局字体及大小
+可能左边行号字体小，也可以调整(语言格式设置-》line number margin)。
+markdown主题：markdown.material.udl.xml（注意不要勾选使用全局前景色）
 
 ## 1、markdown主题包
-
 网址：https://github.com/Edditoria/markdown-plus-plus
 
 没有获得满意的主题，还是使用typora写md满意。
 真相了，原来是我配置错了。有些markdown主题需要配套其notepad++主题。真香~
-
-目前：tomorrow_night_blue  微软雅黑  18
-可能左边行号字体小，也可以调整。
-
 typora软件使用占用cpu偏高，通过修改主题还是能接受。
 
 在线更新：
@@ -37,13 +34,26 @@ npx markdown-plus-plus --help
 推荐使用：Obsidian主题
 
 ## 2、个性设置标签栏
-
 设置==》首选项==》常用==》标签栏：多行显示，不缩小
-
 设置==》首选项==》语言==》替换为空格
 
 ## 3、notepad++三步配置markdown环境
+### 3-1、下载预览插件（可以不进行这一步）
+https://github.com/nea/MarkdownViewerPlusPlus/releases
+也可以在notepad++软件插件栏搜索下载
 
+安装完毕后在工具栏末尾有个M↓按钮。
+
+### 3-2、下载高亮语法
+https://github.com/Edditoria/markdown-plus-plus
+可以在GitHub中看看各个主题的预览。
+解压后，在C:\迅雷下载\markdown-plus-plus-3.3.0\markdown-plus-plus-3.3.0\udl中有主题包。
+
+打开notepad++，语言 -> 自定义格式 -> 导入，选择文件解压得到的markdown.material.udl.xml文件。
+
+### 3-3、实时预览（结合3-1步骤）
+关于实时预览，默认是不开启的，需要我们手动勾上。
+插件-》markdownviewer++-》synchronize
 
 ## 4、显示空格和tab键字符
 python对缩进要求高，需要统一全部使用4个空格或者tab键。
