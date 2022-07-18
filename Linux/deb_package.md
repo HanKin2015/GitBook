@@ -186,15 +186,6 @@ drwxr-xr-x 3 root root 4096 3月  31 17:40 ../
 -L	显示于软件包关联的文件(跟-c效果差不多)
 -c	显示软件包内文件列表(跟-L效果差不多)
 ```
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -l
-期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
-| 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
-|/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
-||/ 名称                              版本                  体系结构：            描述
-+++-=================================-=====================-=====================-=======================================================================
-ii  accountsservice                   0.6.40-2ubuntu11.6    amd64                 query and manipulate user account information
-ii  acl                               2.2.52-3              amd64                 Access control list utilities
-.......
 [root@ubuntu0006:/media/hankin/vdb] #dpkg -l vim
 期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
 | 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
@@ -202,6 +193,7 @@ ii  acl                               2.2.52-3              amd64               
 ||/ 名称                              版本                  体系结构：            描述
 +++-=================================-=====================-=====================-=======================================================================
 ii  vim                               2:7.4.1689-3ubuntu1.5 amd64                 Vi IMproved - enhanced vi editor
+
 [root@ubuntu0006:/media/hankin/vdb] #dpkg -L vim
 /.
 /usr
@@ -217,6 +209,7 @@ ii  vim                               2:7.4.1689-3ubuntu1.5 amd64               
 /usr/bin
 /usr/bin/vim.basic
 /usr/share/doc/vim
+
 [root@ubuntu0006:/media/hankin/vdb] #dpkg -r vim
 (正在读取数据库 ... 系统当前共安装有 251610 个文件和目录。)
 正在卸载 vim (2:7.4.1689-3ubuntu1.5) ...
@@ -231,87 +224,7 @@ update-alternatives: 使用 /usr/bin/vim.tiny 来在自动模式中提供 /usr/b
 ||/ 名称                              版本                  体系结构：            描述
 +++-=================================-=====================-=====================-=======================================================================
 un  vim                               <无>                  <无>                  (无可用描述)
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -i vim_8.2.3995-1+b3_amd64.deb
-正在选中未选择的软件包 vim。
-(正在读取数据库 ... 系统当前共安装有 251605 个文件和目录。)
-正准备解包 vim_8.2.3995-1+b3_amd64.deb  ...
-正在解包 vim (2:8.2.3995-1+b3) ...
-dpkg: 依赖关系问题使得 vim 的配置工作不能继续：
- vim 依赖于 vim-common (= 2:8.2.3995-1)；然而：
-系统中 vim-common 的版本为 2:7.4.1689-3ubuntu1.5。
- vim 依赖于 vim-runtime (= 2:8.2.3995-1)；然而：
-系统中 vim-runtime 的版本为 2:7.4.1689-3ubuntu1.5。
- vim 依赖于 libc6 (>= 2.33)；然而：
-系统中 libc6:amd64 的版本为 2.23-0ubuntu11.3。
- vim 依赖于 libgpm2 (>= 1.20.7)；然而：
-系统中 libgpm2:amd64 的版本为 1.20.4-6.1。
- vim 依赖于 libselinux1 (>= 3.1~)；然而：
-系统中 libselinux1:amd64 的版本为 2.4-3build2。
- vim 依赖于 libsodium23 (>= 1.0.14)；然而：
-  未安装软件包 libsodium23。
- vim 依赖于 libtinfo6 (>= 6)；然而：
-  未安装软件包 libtinfo6。
 
-dpkg: 处理软件包 vim (--install)时出错：
- 依赖关系问题 - 仍未被配置
-在处理时有错误发生：
- vim
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -i vim_7.4.488-7+deb8u3_amd64.deb
-dpkg：警告：即将把 vim 从 2:8.2.3995-1+b3 降级到 2:7.4.488-7+deb8u3
-(正在读取数据库 ... 系统当前共安装有 251616 个文件和目录。)
-正准备解包 vim_7.4.488-7+deb8u3_amd64.deb  ...
-正在将 vim (2:7.4.488-7+deb8u3) 解包到 (2:8.2.3995-1+b3) 上 ...
-dpkg: 依赖关系问题使得 vim 的配置工作不能继续：
- vim 依赖于 vim-common (= 2:7.4.488-7+deb8u3)；然而：
-系统中 vim-common 的版本为 2:7.4.1689-3ubuntu1.5。
- vim 依赖于 vim-runtime (= 2:7.4.488-7+deb8u3)；然而：
-系统中 vim-runtime 的版本为 2:7.4.1689-3ubuntu1.5。
-
-dpkg: 处理软件包 vim (--install)时出错：
- 依赖关系问题 - 仍未被配置
-在处理时有错误发生：
- vim
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -i vim-common_7.4.488-7+deb8u3_amd64.deb
-dpkg：警告：即将把 vim-common 从 2:7.4.1689-3ubuntu1.5 降级到 2:7.4.488-7+deb8u3
-(正在读取数据库 ... 系统当前共安装有 251611 个文件和目录。)
-正准备解包 vim-common_7.4.488-7+deb8u3_amd64.deb  ...
-正在将 vim-common (2:7.4.488-7+deb8u3) 解包到 (2:7.4.1689-3ubuntu1.5) 上 ...
-正在设置 vim-common (2:7.4.488-7+deb8u3) ...
-
-配置文件 '/etc/vim/vimrc'
- ==> 在安装后曾被修改(您或者某个脚本修改了它)。
- ==> 软件包的提交者同时提供了一个更新了的版本。
-   您现在希望如何处理呢？ 您有以下几个选择：
-    Y 或 I  ：安装软件包维护者所提供的版本
-    N 或 O  ：保留您原来安装的版本
-      D     ：显示两者的区别
-      Z     ：把当前进程切换到后台，然后查看现在的具体情况
- 默认的处理方法是保留您当前使用的版本。
-*** vimrc (Y/I/N/O/D/Z) [默认选项=N] ?
-正在处理用于 mime-support (3.59ubuntu1) 的触发器 ...
-正在处理用于 gnome-menus (3.13.3-6ubuntu3.1) 的触发器 ...
-正在处理用于 desktop-file-utils (0.22-1ubuntu5.2) 的触发器 ...
-正在处理用于 man-db (2.7.5-1) 的触发器 ...
-正在处理用于 hicolor-icon-theme (0.15-0ubuntu1.1) 的触发器 ...
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -i vim-runtime_7.4.488-7+deb8u3_all.deb
-dpkg：警告：即将把 vim-runtime 从 2:7.4.1689-3ubuntu1.5 降级到 2:7.4.488-7+deb8u3
-(正在读取数据库 ... 系统当前共安装有 251610 个文件和目录。)
-正准备解包 vim-runtime_7.4.488-7+deb8u3_all.deb  ...
-正在将 vim-runtime (2:7.4.488-7+deb8u3) 解包到 (2:7.4.1689-3ubuntu1.5) 上 ...
-正在设置 vim-runtime (2:7.4.488-7+deb8u3) ...
-Processing /usr/share/vim/addons/doc
-正在处理用于 man-db (2.7.5-1) 的触发器 ...
-[root@ubuntu0006:/media/hankin/vdb] #dpkg -i vim_7.4.488-7+deb8u3_amd64.deb
-(正在读取数据库 ... 系统当前共安装有 251566 个文件和目录。)
-正准备解包 vim_7.4.488-7+deb8u3_amd64.deb  ...
-正在将 vim (2:7.4.488-7+deb8u3) 解包到 (2:7.4.488-7+deb8u3) 上 ...
-正在设置 vim (2:7.4.488-7+deb8u3) ...
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vim (vim)
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vimdiff (vimdiff)
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/rvim (rvim)
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/rview (rview)
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vi (vi)
-update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/view
 [root@ubuntu0006:/media/hankin/vdb] #dpkg -c vim_7.4.488-7+deb8u3_amd64.deb
 drwxr-xr-x root/root         0 2017-03-10 08:56 ./
 drwxr-xr-x root/root         0 2017-03-10 08:55 ./usr/
@@ -359,8 +272,8 @@ data.tar.gz包含的是实际安装的程序数据，而在安装过程中，该
 - irs文件：这个文件指出我们需要的但是在缺省情况下不会自动创建的目录；
 - changelog文件: 这是一个必需文件，包含软件版本号，修订号，发行版和优先级。
 
-## 4、
-
+## 4、创建deb包
+参考：https://www.cnblogs.com/davis12/p/14365981.html
 ```
 [root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp/hello] #ls -R
 .:
@@ -525,3 +438,7 @@ Description: 欢迎来到万物智联
 //软件主页
 Homepage: http://blog.csdn.net/qq_27818541/
 ```
+
+## 8、查看控制信息
+dpkg -I xxx.deb
+

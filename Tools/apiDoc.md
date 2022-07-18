@@ -4,6 +4,14 @@ https://zhuanlan.zhihu.com/p/83487114
 
 大家所熟知的API文档有swagger等, 今天给大家推荐一个写注释就能生成文档的工具, 真的很简单! http://apidocjs.com/。
 
+生成一个 REST 风格的 Web API 文档。
+
+支持的编程语言：
+C#, Go, Dart, Java, JavaScript, PHP(all DocStyle capable languages)
+CoffeeScript
+Erlang
+Ruby
+
 ## 1、快速开始
 >npm install apidoc -g
 

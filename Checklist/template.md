@@ -107,6 +107,14 @@ typedef struct _NODE {
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
+
+if __name__ == '__main__':
+    start_time = time.time()
+
+    main()
+
+    end_time = time.time()
+    logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))
 ```
 
 ### batch脚本

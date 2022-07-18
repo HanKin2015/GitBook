@@ -52,26 +52,11 @@ Linux的的版本众多，包括服务器版本、桌面版本等，在下载安
 
 总结来说：i386对应的是32位系统、而i686是i386的一个子集,i686仅对应P6及以上级别的CPU，i386则广泛适用于80386以上的各种CPU；x86_64主要是64位系统。
 
-## 10、linux命令之ll按时间和大小排序显示
-注意一下S是大写。
-```
-ll -Sh
-ll -Sh | tac
-ll -rt
-ll -rt | tac
-```
-参数的解释如下:
-
--r, --reverse              reverse order while sorting
--t                         sort by modification time
--S                         sort by file size
--h, --human-readable       with -l, print sizes in human readable format
-                               (e.g., 1K 234M 2G)
-
+## 10、pactl 命令
+https://www.linux-man.cn/command/pactl/
 
 pactl命令可以修改伺服器的设置以及配置，但pactl命令仅限于局限的范围
-若要完整的功能，就必須要回归到最基本的指令pacmd,通过pacmd指令
-才可以完全的控制PulseAudio的服务核心。
+若要完整的功能，就必須要回归到最基本的指令pacmd,通过pacmd指令才可以完全的控制PulseAudio的服务核心。
 fedora24提供下列指令
 pulseaudio - The PulseAudio Sound System
 pactl - Control a running PulseAudio sound server
@@ -160,22 +145,10 @@ GNOME Shell 3.4.1
 ```
 [root@ubuntu0006:/media/hankin/vdb] #./run_background.sh  &
 [1] 13067
-[root@ubuntu0006:/media/hankin/vdb] #
-[root@ubuntu0006:/media/hankin/vdb] #
 [root@ubuntu0006:/media/hankin/vdb] #ps aux| grep 13067
 root     13067  0.0  0.0  15368  2976 pts/2    S    11:37   0:00 /bin/bash ./run_background.sh
 root     14780  0.0  0.0  17088   964 pts/2    S+   11:38   0:00 grep --color=auto 13067
 [root@ubuntu0006:/media/hankin/vdb] #tailf background
-2021年 06月 23日 星期三 11:38:16 CST
-2021年 06月 23日 星期三 11:38:17 CST
-2021年 06月 23日 星期三 11:38:18 CST
-2021年 06月 23日 星期三 11:38:19 CST
-2021年 06月 23日 星期三 11:38:20 CST
-2021年 06月 23日 星期三 11:38:21 CST
-2021年 06月 23日 星期三 11:38:22 CST
-2021年 06月 23日 星期三 11:38:23 CST
-2021年 06月 23日 星期三 11:38:24 CST
-2021年 06月 23日 星期三 11:38:25 CST
 2021年 06月 23日 星期三 11:38:26 CST
 2021年 06月 23日 星期三 11:38:27 CST
 2021年 06月 23日 星期三 11:38:28 CST
@@ -187,12 +160,6 @@ run_background：没有发现操作
 [root@ubuntu0006:/media/hankin/vdb] #killall run_background.sh
 [1]+  已终止               ./run_background.sh
 [root@ubuntu0006:/media/hankin/vdb] #tailf background
-2021年 06月 23日 星期三 11:38:40 CST
-2021年 06月 23日 星期三 11:38:41 CST
-2021年 06月 23日 星期三 11:38:42 CST
-2021年 06月 23日 星期三 11:38:43 CST
-2021年 06月 23日 星期三 11:38:44 CST
-2021年 06月 23日 星期三 11:38:45 CST
 2021年 06月 23日 星期三 11:38:46 CST
 2021年 06月 23日 星期三 11:38:47 CST
 2021年 06月 23日 星期三 11:38:48 CST
@@ -337,3 +304,9 @@ Type "apropos word" to search for commands related to "word".
  /           q,            \
 /                           \
 ```
+
+
+
+
+
+

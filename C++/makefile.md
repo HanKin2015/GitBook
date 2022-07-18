@@ -133,8 +133,6 @@ extern "C" {
 实际上cc和gcc等价，都是指向同一个命令。
 使用realpath可以解开真面目。
 
-
-
 ## 9、编译优化选项
 -O0: 无优化。
 
@@ -185,27 +183,3 @@ e9d9cec2d13a5df0fe30cbe3802b1021  a.out
 [root@ubuntu0006:/media/hankin/vdb/study/udev] #md5sum a.out
 e9d9cec2d13a5df0fe30cbe3802b1021  a.out
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

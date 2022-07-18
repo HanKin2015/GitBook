@@ -27,6 +27,11 @@ log4cplus具有线程安全、灵活、以及多粒度控制的特点，通过�
 https://github.com/log4cplus/log4cplus
 sourceforge.net/projects/log4cplus/
 
+### 2-5、log4cxx
+官网：http://logging.apache.org/log4cxx/index.html
+
+Log4cxx是开放源代码项目ApacheLoggingService的子项目之一，是Java社区著名的log4j的c++移植版，用于为C++程序提供日志功能，以便开发者对目标程序进行调试和审计。
+
 ## 3、Log4cplus使用详解
 
 ### 3-1、安装
@@ -128,17 +133,41 @@ hejian@ubuntu0006:~/log$ stat log
 最近改动：2022-07-12 09:56:41.700000000 +0800
 创建时间：-
 ```
+最终没有找到答案，使用系统调用函数chmod改变文件属性。
 
-## 4、log4cpp和log4cplus区别
+## 5、log4cpp和log4cplus，以及log4cxx区别
+用了一下log4cxx和log4cplus，感觉log4cxx性能更好，同样是配置FileAppender写相同格式的100w行日志，单线程，linux
+目前最新版的log4cxx只需要10-11秒，而最新版的log4cplus需要15-16秒，直接获取时间写日志文件，只需要1-2秒，如果每行都fflush的话，会达到4-5秒。
 
+有人说 EzLogger 比上边三个好用
+http://axter.com/ezlogger
 
+Google 的 Glog很差劲吗？
 
+折腾了log4cplus,log4cxx,log4cpp，最终选择log4cplus。
+log4cplus: 简洁, 下载的包编译顺利, 测试例子也能顺利运行。
+log4cxx: 臃肿, 需要引用apr(Apache Portable Runtime), 最痛苦的是老是编译不了。
+log4cpp: 落后, 最后更新于2007年,而且下载的包不完整。
 
+## 6、日志文件配置
+https://zcteo.top/blog/CXX/007_log4cplusPropertyConfigurator
 
+没有太多时间去深究。
 
+详细教程见：https://blog.csdn.net/kakiebu/article/details/105469965
+https://blog.csdn.net/weixin_44498318/article/details/115544863
 
+## 7、多进程log4cxx区分日志
+https://blog.csdn.net/jq0123/article/details/22430565
 
+```
+#include <log4cplus/mdc.h>
 
+log4cplus::getMDC().put(LOG4CPLUS_TEXT("tag"), LOG4CPLUS_TEXT("hejian"));
+LOG4CPLUS_TRACE(g_logger_root, LOG4CPLUS_TEXT("Hello, log4cplus!"));
+
+log4cplus.appender.APPNDER_FILE.layout.ConversionPattern=[%D] %p %t [%l] [%X{tag}]%m%n
+```
 
 
 

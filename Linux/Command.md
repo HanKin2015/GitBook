@@ -2,27 +2,14 @@
 
 # Linux中常见的命令大全
 
-## 1、du
-显示当前目录下每个文件和目录的磁盘使用空间。
-
-命令参数：
--a   #显示目录中文件的大小  单位 KB 。
--b  #显示目录中文件的大小，以字节byte为单位。
--c  #显示目录中文件的大小，同时也显示总和；单位KB。
--k 、 -m  、#显示目录中文件的大小，-k 单位KB，-m 单位MB.
--s  #仅显示目录的总值，单位KB。
--H或--si                 #与-h参数相同，但是K，M，G是以1000为换算单位。   
--h  #以K  M  G为单位显示，提高可读性~~~（最常用的一个~也可能只用这一个就满足需求了）
-
-推荐：du -h[a]
-注意：
-- du -h是查看当前文件夹的大小，及当前目录大小
-- du -h 指定文件夹或文件
+# 1、alias
+https://blog.csdn.net/chuangjinweilai/article/details/51850803
+alias soff='sleep 5 && xset dpms force off'
 
 ## 2、df
 显示磁盘分区上可以使用的磁盘空间
 -a    #查看全部文件系统，单位默认KB
--h   #使用-h选项以KB、MB、GB的单位来显示，可读性高~~~（最常用）
+-h   #使用-h选项以KB、MB、GB的单位来显示，可读（最常用）
 
 推荐：df -h
 
@@ -353,9 +340,6 @@ udev处理的所有设备信息都存储在udev数据库中， 并且会发送�
 
 http://www.jinbuguo.com/systemd/udev.html
 
-# 17、alias
-https://blog.csdn.net/chuangjinweilai/article/details/51850803
-alias soff='sleep 5 && xset dpms force off'
 
 
 

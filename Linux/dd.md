@@ -4,7 +4,7 @@
 dd命令是一个非常强大的命令，对于一些比较底层的问题，使用dd命令往往可以得到出人意料的效果。我们可以用它来测试磁盘的读写性能。
 https://blog.csdn.net/menogen/article/details/38059671
 
-dd如何绕开cache
+### 1-1、dd如何绕开cache
 如果要规避掉文件系统cache,直接读写,不使用buffer cache，需做这样的设置
 iflag=direct,nonblock
 oflag=direct,nonblock
@@ -13,13 +13,11 @@ oflag=cio
 direct 模式就是把写入请求直接封装成io 指令发到磁盘
 非direct 模式，就把数据写入系统缓存，然后就认为io 成功，并由操作系统决定缓存中的数据什么时候被写入磁盘
 
-
 1) time有计时作用，dd用于复制，从if读出，写到of；
 2) if=/dev/zero（产生字符）不产生IO，因此可以用来测试纯写速度；
 3) 同理of=/dev/null（回收站、无底洞）不产生IO，可以用来测试纯读速度；
 4) 将/tmp/test拷贝到/var则同时测试了读写速度；
 5) bs是每次读或写的大小，即一个块的大小，count是读写块的数量。
-
 
 命令结尾添加oflag=direct将跳过内存缓存，添加oflag=sync将跳过hdd缓存。
 
@@ -60,18 +58,7 @@ cp命令有缓存功能，即使U盘拔插了也无法准确测试。
 发现硬盘使用sync，U盘使用direct比较准确。
 告知只有测试写能力时才需要oflag参数（未验证）
 
+## 4、创建指定大小的文件
+dd if=/dev/zero of=8M bs=8M count=1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+注意：一定需要count参数，否则会创造一个无限大的文件。
