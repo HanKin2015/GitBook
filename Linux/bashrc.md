@@ -1,24 +1,10 @@
 # linux终端terminal个性化配置
 
-## 0、多个配置文件路径
+## 1、多个配置文件路径
 ~/.profile
 ~/.bashrc
 ~/.viminfo
-
-
-
-linux打开终端快捷键：
-ctrl + alt + t  新窗口中打开
-ctrl + shift +t 新标签页中打开
-
-Bash还有一个特殊的“召回”模式，您可以使用它来搜索先前运行的命令，而不是逐个滚动。
-Ctrl + R：调用与您提供的字符匹配的最后一个命令。按此快捷方式，然后开始输入以搜索您的bash历史记录以获取命令。
-Ctrl + O：运行您使用Ctrl + R找到的命令。
-Ctrl + G：保留历史搜索模式，不运行命令。
-
-## 1、别名的设置
-alias
-unalias
+修改完毕后记得使用source命令是文件生效。
 
 ## 2、个性化的显示PS1
 在/root/.bashrc文件末尾添加下面：
@@ -68,6 +54,10 @@ source xxxx/git-prompt.sh
 
 完全可以使用__git_ps1自带函数代替git_branch函数
 
+```/root/.bashrc
+export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
+```
+
 ## 3、配置文件介绍
 /etc/profile:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从/etc/profile.d目录的配置文件中搜集shell的设置.此文件默认调用/etc/bash.bashrc文件。
 
@@ -85,7 +75,16 @@ source xxxx/git-prompt.sh
 编辑~/.inputrc（没有的话，就新建一个），在最后加一行： 
 set completion-ignore-case on
 
-## 5、alias
+linux打开终端快捷键：
+ctrl + alt + t  新窗口中打开
+ctrl + shift +t 新标签页中打开
+
+Bash还有一个特殊的“召回”模式，您可以使用它来搜索先前运行的命令，而不是逐个滚动。
+Ctrl + R：调用与您提供的字符匹配的最后一个命令。按此快捷方式，然后开始输入以搜索您的bash历史记录以获取命令。
+Ctrl + O：运行您使用Ctrl + R找到的命令。
+Ctrl + G：保留历史搜索模式，不运行命令。
+
+## 5、alias个性化设置
 ```
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias branchclear='git branch -r -d $(git branch -r | grep -v HEAD) -q'
@@ -194,8 +193,6 @@ set showmatch
 " 匹配括号高亮的时间（单位是十分之一秒）
 set matchtime=1
 
-
-
 set nocompatible			"去掉有关vi一致性模式，避免以前版本的bug和局限    
 set nu!						"显示行号
 set guifont=Luxi/ Mono/ 9	"设置字体，字体名称和字号
@@ -223,37 +220,14 @@ set nobackup
 else
 set backup
 endif
-```
 
-### 代码对齐将tab键转换为空格
-```
+" 代码对齐将tab键转换为空格
 set ts=4
 set expandtab
 set autoindent
 ```
 
-
-
-
-
-
-
-
-## 8、bashrc
-```/root/.bashrc
-export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
-```
-
-## Kconfig
-https://zhuanlan.zhihu.com/p/78254770
-自从 Linux 内核代码迁移到 Git 以来，Linux 内核配置/构建系统（也称为 Kconfig/kbuild）已存在很长时间了。然而，作为支持基础设施，它很少成为人们关注的焦点；甚至在日常工作中使用它的内核开发人员也从未真正思考过它。
-
-为了探索如何编译 Linux 内核，本文将深入介绍 Kconfig/kbuild 内部的过程，解释如何生成 .config 文件和 vmlinux/bzImage 文件，并介绍一个巧妙的依赖性跟踪技巧。
-
-Kconfig
-构建内核的第一步始终是配置。Kconfig 有助于使 Linux 内核高度模块化和可定制。
-
-## 9、不错的ssh配置
+## 8、不错的ssh配置
 ```
 # /.profile : env for login
 
@@ -292,4 +266,5 @@ cd $LROOT
 test -n "${TMOUT}" || export TMOUT=600
 ```
 
+## 9、
 

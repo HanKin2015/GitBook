@@ -275,7 +275,7 @@ data.tar.gz包含的是实际安装的程序数据，而在安装过程中，该
 ## 4、创建deb包
 参考：https://www.cnblogs.com/davis12/p/14365981.html
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp/hello] #ls -R
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp/hello] #ls -R
 .:
 DEBIAN  opt
 
@@ -284,21 +284,21 @@ control
 
 ./opt:
 hello.py
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
 dpkg-deb：错误：正在解析文件 'hello/DEBIAN/control' 第 5 行附近，软件包 'hello' :
  字段名 # 后必须跟冒号
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #vim hello/DEBIAN/control
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #vim hello/DEBIAN/control
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg-deb -b hello hello_1.0_linux_amd64.deb
 dpkg-deb：正在新建软件包 hello，包文件为 hello_1.0_linux_amd64.deb。
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -c hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg -c hello_1.0_linux_amd64.deb
 drwxr-xr-x root/root         0 2022-07-07 22:38 ./
 drwxr-xr-x root/root         0 2022-07-07 22:38 ./opt/
 -rwxr-xr-x root/root        34 2022-07-07 22:38 ./opt/hello.py
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -C hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg -C hello_1.0_linux_amd64.deb
 dpkg: 软件包 hello_1.0_linux_amd64.deb 没有被安装
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #rm -rf DEBIAN/
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -e hello_1.0_linux_amd64.deb
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #ll
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #rm -rf DEBIAN/
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg -e hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #ll
 总用量 32
 drwxr-xr-x 7 root root 4096 7月   7 22:47 ./
 drwxr-xr-x 5 root root 4096 7月   7 14:58 ../
@@ -308,12 +308,12 @@ drwxr-xr-x 4 root root 4096 7月   7 22:38 hello/
 drwxr-xr-x 5 root root 4096 7月   7 11:25 lib/
 drwxr-xr-x 6 root root 4096 7月   7 17:47 usb/
 drwxr-xr-x 6 root root 4096 7月   7 22:38 usc/
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #ll DEBIAN/
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #ll DEBIAN/
 总用量 12
 drwxr-xr-x 2 root root 4096 7月   7 22:45 ./
 drwxr-xr-x 7 root root 4096 7月   7 22:47 ../
 -rw-r--r-- 1 root root  194 7月   7 22:45 control
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #dpkg -I hello_1.0_linux_amd64.deb
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #dpkg -I hello_1.0_linux_amd64.deb
  新格式的 debian 软件包，格式版本 2.0。
  大小 718 字节：主控包=290 字节。
      194 字节，    9 行      control
@@ -326,7 +326,7 @@ drwxr-xr-x 7 root root 4096 7月   7 22:47 ../
  Maintainer: gatieme
  Provides: bioinfoserv-arb
  Description: A test for using dpkg cmd
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #cat DEBIAN/control
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #cat DEBIAN/control
 Package: hello
 Version: 1.0
 Section: BioInfoServ
@@ -336,7 +336,7 @@ Installed-Size: 4096
 Maintainer: gatieme
 Provides: bioinfoserv-arb
 Description: A test for using dpkg cmd
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation/cp] #tree .
+[root@ubuntu0006:/media/hankin/vdb/TransferStation/cp] #tree .
 .
 ├── DEBIAN
 │   └── control

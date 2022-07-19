@@ -220,6 +220,13 @@ development tool, and should not be needed in normal usage.
 xinput is a utility to list available input devices, query information about a device and
 change input device settings.
 
+## 9、Kconfig
+https://zhuanlan.zhihu.com/p/78254770
+自从 Linux 内核代码迁移到 Git 以来，Linux 内核配置/构建系统（也称为 Kconfig/kbuild）已存在很长时间了。然而，作为支持基础设施，它很少成为人们关注的焦点；甚至在日常工作中使用它的内核开发人员也从未真正思考过它。
 
+为了探索如何编译 Linux 内核，本文将深入介绍 Kconfig/kbuild 内部的过程，解释如何生成 .config 文件和 vmlinux/bzImage 文件，并介绍一个巧妙的依赖性跟踪技巧。
+
+Kconfig
+构建内核的第一步始终是配置。Kconfig 有助于使 Linux 内核高度模块化和可定制。
 
 

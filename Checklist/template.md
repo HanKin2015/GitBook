@@ -102,11 +102,16 @@ typedef struct _NODE {
 文 件 名: brute_ftp_by_dict.py
 文件描述: 使用字典暴力破解登陆ftp
 作    者: HanKin
-创建日期: 2022.02.12
-修改日期：2022.02.12
+创建日期: 2022.07.18
+修改日期：2022.07.18
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
+
+import time
+
+def main():
+    
 
 if __name__ == '__main__':
     start_time = time.time()
@@ -114,7 +119,7 @@ if __name__ == '__main__':
     main()
 
     end_time = time.time()
-    logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))
+    print('process spend {} s.'.format(round(end_time - start_time, 3)))
 ```
 
 ### batch脚本

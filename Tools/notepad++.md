@@ -132,4 +132,5 @@ Zerburn+Consolas感觉不错
 插件-》插件管理-》搜索hex，安装HEX-Editor即可。
 然后C:\Program Files (x86)\Notepad++\plugins目录下面有个HexEditor文件夹，拷贝到其他电脑中重启notepad++就可以使用了。
 
-
+## 11、工具栏显示和隐藏
+设置-》首选项-》常用-》工具栏

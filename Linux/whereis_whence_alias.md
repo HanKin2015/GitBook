@@ -1,7 +1,6 @@
 # whereis和whence以及alias命令
 
-# 14、alias
-
+## 1、alias命令
 命令别名
 
 ```
@@ -22,7 +21,7 @@ alias cl='cd /home/hankin/log/'
 
 执行add_alias.sh脚本后未生效，正确方式是source add_alias.sh这样就可以了。
 
-
+## 2、whereis命令
 
 
 

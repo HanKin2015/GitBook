@@ -7,8 +7,15 @@ https://www.python.org/ftp/python/
 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
 华中理工大学：http://pypi.hustunique.com/
 山东理工大学：http://pypi.sdutlinux.org/
+豆瓣：http://pypi.douban.com/simple/
 
 python第三方库包下载：https://pypi.org/project/pyinstaller/#files
+
+配置镜像源：
+pip install 下载的模块名 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+Writing to C:\Users\Administrator\AppData\Roaming\pip\pip.ini
+把这个路径添加到系统环境变量就好了（不添加好像也行，可能以前添加了）
 
 ## 2、安装whl文件
 直接使用pip install xxx.whl
@@ -75,7 +82,6 @@ Linux都有个问题，首先需要做的事情是更新安装脚本命令
 更新pip命令
 python -m ensurepip
 python -m pip install --upgrade pip
-
 
 pip检测更新
 命令：pip list –outdated
