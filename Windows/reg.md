@@ -73,7 +73,6 @@ REG_EXPAND_SZ：hex(2):3,2
 REG_MULTI_SZ：hex(7):2,3,3
 
 ## 4、规则
-
 字符串值S表示："字符串"=""
 二进制值B表示："二进制"=hex:
 DWORD（32-位）值D表示："DWORD（32-位）"=dword:00000000
@@ -88,7 +87,6 @@ HKEY_CURRENT_USER        存储当前用户设置的信息
 HKEY_LOCAL_MACHINE       包括安装在计算机上的硬件和软件的信息
 HKEY_USERS                         包含使用计算机的用户的信息
 HKEY_CURRENT_CONFIG    这个分支包含计算机当前的硬件配置信息
-
 
 类型介绍
 二进制值 REG_BINARY原始二进制数据。大多数硬件组件信息作为二进制数据存储，以十六进制的格式显示在注册表编辑器中。

@@ -114,6 +114,7 @@ def main():
     
 
 if __name__ == '__main__':
+    #os.system('chcp 936 & cls')
     start_time = time.time()
 
     main()

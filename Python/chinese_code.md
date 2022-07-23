@@ -38,6 +38,7 @@ set encoding=prc
 方法一：修改注册表
 ```
 Windows Registry Editor Version 5.00
+
 [HKEY_CURRENT_USER\Console\%SystemRoot%_system32_cmd.exe]
 "CodePage"=dword:000003a8
 ```
@@ -94,5 +95,28 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt="%a, %d %b %Y %H:%M:%S"
                     )
 ```
+
+### 2-3、还会遗留一个问题
+直接双击exe文件运行，dos还是显示中文乱码。
+发现把字体修改成NSimSun后，dos窗口的字体就显示正常了。
+
+```
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Command Processor]
+"autorun"="chcp 936"
+```
+治标不治本的方法，如果中间调用了dos命令，就会执行上面的命令，就会把整个页面变成中文了。
+
+个人觉得比较完美解决的方案，直接在代码中解决，不破坏宿主机的环境变量，在代码运行前添加：
+```
+os.system('chcp 936 & cls')
+```
+
+
+
+
+
+
 
 
