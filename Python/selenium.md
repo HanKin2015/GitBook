@@ -3,9 +3,11 @@
 ## 1、环境准备
 使用selenium，安装conda install selenium
 
-下载chrome驱动文件：http://npm.taobao.org/mirrors/chromedriver
+下载chrome驱动文件：
+https://registry.npmmirror.com/binary.html?path=chromedriver/
+http://chromedriver.storage.googleapis.com/index.html
 
-如果打开Ie或Chrome浏览器，需要先将驱动文件放到python根目录下，或者在代码中指定位置。
+如果打开Ie或Chrome浏览器，需要先将驱动文件放到python根目录下(C:\Users\Administrator\Anaconda3\Scripts)，或者在代码中指定位置。
 - chromedriver.exe
 - IEDriverServer.exe
 
