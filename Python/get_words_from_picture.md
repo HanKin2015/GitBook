@@ -52,16 +52,16 @@ Empty page!!
 5.demo调用效果确实不错
 https://console.bce.baidu.com/ai/?_=1658836473184&fromai=1#/ai/ocr/overview/index
 
-## 3、准备工作
+## 4、准备工作
 
-### 3-1、安装pillow或者PIL，主要用来打开本地图片
+### 4-1、安装pillow或者PIL，主要用来打开本地图片
 pip install PIL
 pip install pillow
 
-### 3-2、安装pytesseract，主要用来将图片里面文字转化字符串或者pdf
+### 4-2、安装pytesseract，主要用来将图片里面文字转化字符串或者pdf
 pip install pytesseract
 
-### 3-3、安装Tesseract-OCR应用程序
+### 4-3、安装Tesseract-OCR应用程序
 进入 ​ ​https://pan.baidu.com/s/1qXumxdltxOnb0geaE_1U-Q​​下载安装
 
 

@@ -115,6 +115,7 @@ def main():
 
 if __name__ == '__main__':
     #os.system('chcp 936 & cls')
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()

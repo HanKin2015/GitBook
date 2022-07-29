@@ -12,9 +12,10 @@ DPI (Dots Per Inch): 即每一英寸上有多少个点；
 1、安装wmi模块: pip install wmi
 2、wmi依赖win32com模块: pip install pywin32
 
+## 3、wmi库
+具体请看微软官网对[WMI的介绍](https://docs.microsoft.com/zh-cn/windows/win32/wmisdk/wmi-start-page?redirectedfrom=MSDN)。这里简单说明下，WMI的全称是Windows Management Instrumentation，即Windows管理规范。它是Windows操作系统上管理数据和操作的基础设施。我们可以使用WMI脚本或者应用自动化管理任务等。
 
+很遗憾，WMI并不原生支持Python。不过没有关系，它支持VB，而Python中的两个第三方库wmi和win32com，均能以类似VB的用法来使用。
 
-
-
-
-
+## 4、使用WMI
+https://blog.csdn.net/AlanGuoo/article/details/87984540

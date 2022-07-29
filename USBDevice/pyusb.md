@@ -6,6 +6,8 @@
 https://blog.csdn.net/yuanli_best/article/details/85321631
 
 pyusb需要libusb。
+已下载：D:\Github\Storage\python\udev\U盘自动拷贝\libusb
+示例：D:\Github\Storage\python\udev\U盘自动拷贝\get_udev_info.py
 
 ### 1-2、AttributeError: module 'usb' has no attribute 'backend'
 ```
@@ -72,10 +74,18 @@ usb.core.find(find_all=True, backend=backend)
 
 python执行成功了，但是编译出来的exe运行失败。
 
+## 2、windows上面使用pyusb有坑
+当年踩过坑的路过，反正我是不在windows下用pyusb玩了，我是搞不定了。 我现在的解决方案： 1、在windows下：使用pywinusb库，不过貌似只支持HID设备 2、在Linux（只在ubuntu和raspberry pi 的wheezy）上测试过，使用pyusb。（记得用root）。 其中的USB部分供参考： http://git.oschina.net/jakey.chen/SlaveDebugTool
 
+https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z/download
+https://sourceforge.net/projects/libusb.mirror/files/v1.0.26/v1.0.26_%20libusb%201.0.26.zip/download
 
+我正在尝试从USB设备读取数据。为此，我使用的是PyUSB，它引发了多个问题。
+### 2-1、错误
+使用libusb-win32，找不到设备。在发现它的支持有限之后，我切换到了libusb1
+使用libusb1，可以找到一些设备，但是会引发错误 NotImplementedError: Operation not supported or unimplemented on this platform
 
-
+### 2-2、建立
 
 
 
