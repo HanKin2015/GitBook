@@ -1,6 +1,6 @@
 # 学习python容器操作
 
-## 保存数组
+## 1、保存数组
 ```
 >>> import numpy as np
 >>> arr=np.arange(10)
@@ -9,7 +9,7 @@
 array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 ```
 
-## 整数转十六进制
+## 2、整数转十六进制
 ```
 data1 = 125
 data2 = 2
@@ -19,9 +19,19 @@ print(str1, str2)
 print(hex(data1), hex(data2))
 ```
 
-## 列表保存为文件
+## 3、列表保存为文件
 ```
 file = open('file_name.txt','w');
 file.write(str(list_variable));
 file.close();
 ```
+
+## 4、迭代器
+
+
+
+
+
+
+
+

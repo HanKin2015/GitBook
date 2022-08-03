@@ -1296,8 +1296,7 @@ git branch | grep TD* | xargs git branch -D
 ```
 
 ## 全局配置和局部配置
-
-
+https://blog.csdn.net/A_bad_horse/article/details/117649966
 ```
 [root@ubuntu0006:/media/hankin/vdb/TransferStation] #git config -l
 user.name=吴彦祖110
@@ -1353,9 +1352,14 @@ branch.master.merge=refs/heads/master
         merge = refs/heads/master
 ```
 
+## 应该仓库的分支提交到另一个仓库上面
+1.git remote -v查看当前git仓库地址标题
+2.git remote rm origin清空对应的git仓库地址。（注意：我是之前的仓库地址不用了，迁移出去了，所以才选择的清空）
+3.git remote add origin http://***.git（origin是自己命令的仓库地址的名字，后边的连接是新仓库（要上传代码的仓库）的连接地址）
+4.git remote -v查看是否新增成功，如果显示新增仓库地址，则意味着成功。把在当前分支已经stash的代码unstash一下，即可做提交操作。
+5.git push custom branch_name
 
-
-
-
+注意一点：当前分支名和提交上去的分支名要一致，否则会提交失败。
+如当前分支名为A，远程无B，提交git push custom B会失败。
 
 

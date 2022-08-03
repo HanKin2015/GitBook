@@ -1,10 +1,10 @@
 # C++中I/O重定向
 
-## freopen函数
+## 1、freopen函数
 将现有文件指针重定向到另一个流。
 FILE * freopen ( const char * filename, const char * mode, FILE * stream );
 
-## 流
+## 2、流
 C++中的流对象主要有三种类型:
 istream : 此类型的流对象只能从流执行输入操作
 ostream : 这些对象只能用于输出操作。
@@ -17,4 +17,21 @@ iostream : 可以同时用于输入和输出操作
 1) stream_object.rdbuf(): 返回流对象buffer
 2) stream_object.rdbuf(streambuf * p): 绑定流对象buffer
 
+## 3、BUFSIZ定义
+Linux平台
 
+   stdio.h:# define BUFSIZ _IO_BUFSIZ
+   libio.h:#define _IO_BUFSIZ _G_BUFSIZ
+   _G_config.h:#define _G_BUFSIZ 8192
+
+二、BUFSIZ作用
+
+   程序输出时，为减轻系统负担，可以先将需要输出的字符保存起来，即放入内存缓冲。当达到输出条件时：行缓
+
+冲遇到换行符，块缓冲遇到写满缓存，或用户强制fflush；才进行写文件动作。BUFSIZ为系统默认的缓冲区大小。
+
+三、BUFSIZ使用
+
+   #include <stdio.h> (引入头文件即可)
+
+   setbuf(stdout, buf); (修改默认缓冲大小)

@@ -2,11 +2,11 @@
 
 # 类型转换小结
 
-# 1、string转int
+## 1、string转int
 
 atoi
 
-# 2、int转char*
+## 2、int转char*
 
 sprintf()
 

@@ -2,28 +2,21 @@
 https://www.runoob.com/w3cnote/python-yield-used-analysis.html
 
 ## 1、英文意思
-v.
-出产(作物);产生(收益、效益等);提供;屈服;让步;放弃;缴出
-n.
-产量;产出;利润
+v.出产(作物);产生(收益、效益等);提供;屈服;让步;放弃;缴出
+n.产量;产出;利润
 
 ## 2、理解yield
 带有 yield 的函数在 Python 中被称之为 generator（生成器）。
+如果要控制内存占用，最好不要用List来保存中间结果，而是通过 iterable 对象来迭代。
 
-如果要控制内存占用，最好不要用 List来保存中间结果，而是通过 iterable 对象来迭代。
-
-for i in range(1000): pass
-会导致生成一个 1000 个元素的 List，而代码：
-
-for i in xrange(1000): pass
-则不会生成一个 1000 个元素的 List，而是在每次迭代中返回下一个数值，内存空间占用很小。因为 xrange 不返回 List，而是返回一个 iterable 对象。
+for i in range(1000): pass会导致生成一个 1000 个元素的List，而代码：for i in xrange(1000): pass
+则不会生成一个 1000 个元素的List，而是在每次迭代中返回下一个数值，内存空间占用很小。因为 xrange 不返回 List，而是返回一个 iterable 对象。
 
 ```
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
  
 class Fab(object): 
- 
     def __init__(self, max): 
         self.max = max 
         self.n, self.a, self.b = 0, 0, 1 
@@ -40,7 +33,7 @@ class Fab(object):
         raise StopIteration()
  
 for n in Fab(5): 
-    print n
+    print(n)
 ```
 上面的类可以理解为yield的实现。
 ```
