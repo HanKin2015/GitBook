@@ -10,6 +10,11 @@ CommMonitor的最新版v12.0才支持Modbus RTU/ASCII协议分析功能，同Mod
 
 虚拟串口软件，用于虚拟出互通的两个串口，可以模拟通信，以便Modbus Slave/Poll软件调试串口Modbus RTU数据。
 
+```
+未注册版，无法保存或复制，请支持正版，谢谢!
+```
+可以看出，连续的三个IRP_MJ_READ，第一个是成功状态，第二个末尾字节是下一个数据长度-2。
+
 
 ## 3、usb转串口驱动下载
 PL2303 Windows Driver Download   USB to UART RS232 Serial
@@ -38,7 +43,9 @@ D4：小型的高速开关二极管，开关比较迅速。
 CH340模块的RXD引脚是对于CH340自身而言的接收引脚，单片机的TXD发出数据后，CH340模块使用自己的RXD引脚接收数据。
 CH340模块的TXD引脚是对于CH340自身而言的发送引脚，CH340模块使用自己的TXD引脚发送数据后，由单片机的TXD接收数据。
 CH340芯片内置了USB上拉电阻，UD＋和UD－引脚直接连到USB总线上。
-NC是 NOT　CONNECTED缩写，即空脚，NC引脚无用途，只是限于封装形式，该引脚必须存在。
+NC是 NOT CONNECTED缩写，即空脚，NC引脚无用途，只是限于封装形式，该引脚必须存在。
+
+官方网站：https://www.wch.cn/
 
 ### 4-4、区别
 原理：单片机的TXD、RXD是TTL电平，所以你得万变不离其宗的将其它信号转成TTL电平，只有这样给单片机下载程序才有可能成功！其中CH340、PL2303等芯片是直接将USB信号转换为TTL电平或者TTL电平转换为USB信号，而MAX232等芯片是将TTL转换为RS232信号或者将RS232信号转换为TTL.

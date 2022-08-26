@@ -134,3 +134,6 @@ Zerburn+Consolas感觉不错
 
 ## 11、工具栏显示和隐藏
 设置-》首选项-》常用-》工具栏
+
+## 12、Notepad++插件JSON viewer
+如何让notepad++ 能够用于格式化json的功能，我们可以安装JSON-view插件。

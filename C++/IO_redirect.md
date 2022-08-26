@@ -19,19 +19,16 @@ iostream : 可以同时用于输入和输出操作
 
 ## 3、BUFSIZ定义
 Linux平台
-
-   stdio.h:# define BUFSIZ _IO_BUFSIZ
-   libio.h:#define _IO_BUFSIZ _G_BUFSIZ
-   _G_config.h:#define _G_BUFSIZ 8192
+```
+stdio.h:# define BUFSIZ _IO_BUFSIZ
+libio.h:#define _IO_BUFSIZ _G_BUFSIZ
+_G_config.h:#define _G_BUFSIZ 8192
+```
 
 二、BUFSIZ作用
-
-   程序输出时，为减轻系统负担，可以先将需要输出的字符保存起来，即放入内存缓冲。当达到输出条件时：行缓
-
+程序输出时，为减轻系统负担，可以先将需要输出的字符保存起来，即放入内存缓冲。当达到输出条件时：行缓
 冲遇到换行符，块缓冲遇到写满缓存，或用户强制fflush；才进行写文件动作。BUFSIZ为系统默认的缓冲区大小。
 
 三、BUFSIZ使用
-
    #include <stdio.h> (引入头文件即可)
-
    setbuf(stdout, buf); (修改默认缓冲大小)

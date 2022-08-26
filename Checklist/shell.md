@@ -81,23 +81,23 @@ None.
 ### 6-6、实战
 没有做任何修改或者只使用:-。(会有大问题)
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #bash cp_usbip_driver.sh
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #bash cp_usbip_driver.sh
 /bin /boot /cdrom /dev /etc /home /initrd.img /initrd.img.old /lib /lib64 /log /lost+found /media /mnt /opt /proc /qxl_drv.so /root /run /sbin /snap /srv /sys /tmp /usr /var /vmlinuz /vmlinuz.old
 end
 ```
 
 使用:?会抛出异常，不会进行下一步
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #bash cp_usbip_driver.sh
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #bash cp_usbip_driver.sh
 cp_usbip_driver.sh: 行 14: STEAMROOT: 参数为空或未设置
 ```
 
 使用:-tt
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #bash cp_usbip_driver.sh
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #bash cp_usbip_driver.sh
 tt/*
 end
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #bash cp_usbip_driver.sh
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #bash cp_usbip_driver.sh
 A/*
 end
 ```

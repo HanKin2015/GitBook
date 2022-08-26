@@ -114,7 +114,7 @@ CMakeFiles/appender_test.dir/main.o：在函数‘main’中：
 使用root程序执行会创建644，使用普通用户创建664，最终想法是创建666。
 这该如何去解决呢？？？
 ```
-[root@ubuntu0006:/media/sangfor/vdb/study/log4cplus] #stat log/log
+[root@ubuntu0006:/media/hankin/vdb/study/log4cplus] #stat log/log
   文件：'log/log'
   大小：330             块：8          IO 块：4096   普通文件
 设备：fd10h/64784d      Inode：6443740     硬链接：1

@@ -244,7 +244,7 @@ TimeoutStartSec=5min
 After=network-online.target
 Wants=network-online.target
 
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #systemctl status network-online.target
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #systemctl status network-online.target
 ● network-online.target - Network is Online
    Loaded: loaded (/lib/systemd/system/network-online.target; static; vendor preset: enabled)
    Active: inactive (dead) since 三 2022-07-06 14:29:16 CST; 15s ago
@@ -253,8 +253,8 @@ Wants=network-online.target
 
 7月 06 14:27:55 ubuntu0006 systemd[1]: Reached target Network is Online.
 7月 06 14:29:16 ubuntu0006 systemd[1]: Stopped target Network is Online.
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #systemctl start study_service
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #systemctl status network-online.target
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #systemctl start study_service
+[root@ubuntu0006:/media/hankin/vdb/TransferStation] #systemctl status network-online.target
 ● network-online.target - Network is Online
    Loaded: loaded (/lib/systemd/system/network-online.target; static; vendor preset: enabled)
    Active: active since 三 2022-07-06 14:29:39 CST; 2s ago

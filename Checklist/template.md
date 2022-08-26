@@ -64,11 +64,11 @@ int main(int argc, char *argv[])
 
 
 /**
-* @brief 运行shell命令
-* @note 运行结果输出长度不超过outputLen且只输出第一行，超过会截断
-* @param cmd [in] shell命令
-* @param output [out] 运行结果输出
-* @param outputLen [in] 运行结果字符串长度
+* @brief  运行shell命令
+* @note   运行结果输出长度不超过outputLen且只输出第一行，超过会截断
+* @param  cmd [in] shell命令
+* @param  output [out] 运行结果输出
+* @param  outputLen [in] 运行结果字符串长度
 * @return 无
 */
 
@@ -90,6 +90,44 @@ typedef struct _NODE {
 # 作    者: HanKin
 # 创建日期: 2022.08.05
 # 修改日期：2022.08.05
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
+
+
+echo '
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   _   _       ___   __   _   _   __  _   __   _  
+#  | | | |     /   | |  \ | | | | / / | | |  \ | | 
+#  | |_| |    / /| | |   \| | | |/ /  | | |   \| | 
+#  |  _  |   / /_| | | |\   | |   \   | | | |\   | 
+#  | | | |  / /  | | | | \  | | |\ \  | | | | \  | 
+#  |_| |_| /_/   |_| |_|  \_| |_| \_\ |_| |_|  \_| 
+#                                                 __in Chaina
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # #
+#   _____     ____   _____   _____   _____      #
+#  |  _  \  /  ___/ /  ___| |  ___| /  _  \     #
+#  | |_| |  | |___  | |     | |__   | | | |     #
+#  |  _  /  \___  \ | | __  |  __|  | | | |     #
+#  | | \ \   __ | | | |\_ | | |     | |_| |     #
+#  |_|  \_\ /_____/ \_____/ |_|     \_____/     #
+#                                               #
+# # # # # # # # # # # # # # # # # # # # # # # # #
+```
+
+### awk脚本
+```
+#!/usr/bin/awk -f
+#
+# 文 件 名: test.awk
+# 文件描述: awk脚本练习
+# 作    者: HanKin
+# 创建日期: 2022.08.26
+# 修改日期：2022.08.26
 # 
 # Copyright (c) 2022 HanKin. All rights reserved.
 #
@@ -115,7 +153,7 @@ def main():
 
 if __name__ == '__main__':
     #os.system('chcp 936 & cls')
-    logger.info('******** starting ********')
+    print('******** starting ********')
     start_time = time.time()
 
     main()

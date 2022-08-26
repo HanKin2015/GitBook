@@ -93,6 +93,8 @@ echo 8 > /proc/sys/kernel/printk		开启调试即所有日志
 dmesg
 cat /proc/kmsg
 
+dmesg --follow 《===》dmesg -w
+
 ```
 [ 3000.689529] evbug: Event. Dev: input6, Type: 3, Code: 0, Value: 988
 [ 3000.689533] evbug: Event. Dev: input6, Type: 3, Code: 1, Value: 500

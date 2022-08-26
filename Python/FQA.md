@@ -240,5 +240,46 @@ import numpy as np
 
 np.mean([1, 2, 3])
 
+## 27、TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+函数中报错出现NoneType,可以查看函数体中是否有返回None的情况, 一般是忘写return所致。
+
+参考：https://blog.csdn.net/qq_45816346/article/details/122718132
+
+## 28、ValueError: not enough values to unpack (expected 2, got 0)
+开始发现linux能正常运行，原来是由于python2的缘故。
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #python3 amazing_zip_error.py
+******** starting ********
+[103, 107, 113, 121]
+process spend 0.0 s.
+[root@ubuntu0006:/media/hankin/vdb/study] #
+[root@ubuntu0006:/media/hankin/vdb/study] #python amazing_zip_error.py
+******** starting ********
+Traceback (most recent call last):
+  File "amazing_zip_error.py", line 73, in <module>
+    main()
+  File "amazing_zip_error.py", line 66, in main
+    amazing_map_error()
+  File "amazing_zip_error.py", line 59, in amazing_map_error
+    list_result = map(lambda x,y,z : x**2 + y + z, listx, listy, listz)
+  File "amazing_zip_error.py", line 59, in <lambda>
+    list_result = map(lambda x,y,z : x**2 + y + z, listx, listy, listz)
+TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+```
+
+
+
+
+## 29、SyntaxError: Non-ASCII character '\xe8' in file amazing_zip_error.py on line 8, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+根据错误提示，尝试首行添加：
+```
+# -*- coding: utf-8 -*-
+```
+解决。
+
+
+
+
+
 
 

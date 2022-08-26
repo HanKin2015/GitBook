@@ -148,3 +148,8 @@ pyinstaller -F -w copy_tool.py D:\Github\Storage\python\libary\entrywithplacehol
 -F, --onefile         Create a one-file bundled executable.
 ```
 
+还有一个原因是代码调用出错，我这边发现是ftp库的函数调用出错，exe文件没有显示出错误，最终将整个代码拷贝的执行环境，然后python运行才发现具体的错误信息。
+这告诉我们：代码拥有详细的debug信息很重要，不然就会像我这样出问题的时候需要一点一点的添加调试日志。
+
+最终发现ftp.mkd不能创建多层目录，利用ftp.pwd()和ftp.dir()函数显示当前目录路径。
+一定要增加捕获异常。

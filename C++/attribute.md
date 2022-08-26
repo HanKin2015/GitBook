@@ -345,9 +345,70 @@ __stdcall表示
 3.函数名(在编译器这个层次)自动加前导的下划线，后面紧跟一个@符号，其后紧跟着参数的尺寸
 在win32应用程序里,宏APIENTRY，WINAPI，都表示_stdcall，非常常见。
 
+## 6、WINAPI宏
+https://blog.csdn.net/qq_32320399/article/details/53735635
+https://blog.csdn.net/slj_win/article/details/33732087
+
+```
+#define WINAPI _stdcall;
+#define CALLBACK _stdcall;
+```
+https://blog.csdn.net/lisfaf/article/details/98990043
+
+而_stdcall是新标准c/c++函数的调用方法，它是采用自动清栈的方式，而标准c调用（_cdecl方法，cdecl是C declare的缩写）采用的是手工清栈的方式。
+
+那么就引出了一个新的问题，什么是自动清栈？什么是手动清栈？查阅baidu.com，整理如下：
+
+自动清栈，就是指，由调用者来处理，被调用者不需要处理。
+手工清栈，就是指，调用者不会管被调用的函数使用的栈，需要由被调用者自己处理。就是我原来说的__cdecl要手工清栈，所以不用担心压进去几个参数无所谓。所以像printf这种就是参数不限的调用，都是用__cdecl的，如果是自动清栈的话，他必定有长度要求，清理几个字节的堆栈，所以其他调用方式是不能实现参数个数不限的要求的。
+调用约定种类：一共有5种函数调用约定(calling convention)，它决定一下内容：
+- 函数参数的压栈顺序
+- 由调用者还是被调用者把参数弹出栈
+- 产生函数修饰名的方法(C者C++在编译和链接的时候会重新给函数起一个名字，而这个名字的起法是根据std_call,cdecl这些来指定的)。
+
+## 7、补充
+[__attribute__ ((format (printf, 2, 3))); 介绍](https://blog.csdn.net/zzhongcy/article/details/90057284)
+
+https://blog.csdn.net/tongdh/article/details/20530415
+
+```
+#ifdef __GNUC__
+__attribute__((unused))
+#endif
+
+#if (defined(__GNU__) && defined(_MSC_VER))
+   // ...
+#endif
+
+#if defined __GNUC__
+__attribute__((format(printf, 3, 4)))
+#endif
+```
 
 
 
+```
+static void
+#if defined __GNUC__
+__attribute__((format(printf, 2, 3)))
+#endif
+va_log(struct MyStruct *node, const char *fmt, ...)
+{
+    char buf[BUFSIZ];
+    va_list ap;
+    int n;
+
+    n = sprintf(buf, "hello:");
+    va_start(ap, fmt);
+    vsnprintf(buf + n, sizeof(buf) - n, fmt, ap);
+    va_end(ap);
+}
+```
+va_开头可能是varargs缩写
+变量ap就不知所措了？？？
+自定义日志，静态无返回值函数
+__attribute__告诉要像printf那样检查入参，第2个参数是格式化参数，从第3个参数开始应用这个规则检测。
+vsnprintf函数:int vsnprintf (char * s, size_t n, const char * format, va_list arg );
 
 
 

@@ -109,8 +109,25 @@ Bus error (core dumped)
 结论：损坏的ELF库文件，程序链接到损坏的so文件后，自身也会发生莫名其妙的化学反应。
 https://blog.csdn.net/epubit17/article/details/121138474
 
-## 2、
+## 2、微软程序匹配很迷糊
+```
+D:\Github\Storage\batch>devcon find "USB*4*"
+USB\ROOT_HUB\4&F9F7C6&0                                     : USB Root Hub
+USB\ROOT_HUB\4&2002FA77&0                                   : USB Root Hub
+2 matching device(s) found.
 
+D:\Github\Storage\batch>devcon find "USB*"
+USB\ROOT_HUB\4&32218256&0                                   : USB Root Hub
+USB\ROOT_HUB\4&36880E1&0                                    : USB Root Hub
+USB\ROOT_HUB\4&F9F7C6&0                                     : USB Root Hub
+USB\ROOT_HUB20\4&2ACC3A04&0                                 : USB Root Hub
+USB\ROOT_HUB20\4&326BD9DE&0                                 : USB Root Hub
+USB\ROOT_HUB\4&17BD5F01&0                                   : USB Root Hub
+USB\ROOT_HUB\4&192D568&0                                    : USB Root Hub
+USB\ROOT_HUB\4&1CB239E3&0                                   : USB Root Hub
+USB\ROOT_HUB\4&2002FA77&0                                   : USB Root Hub
+9 matching device(s) found.
+```
 
 
 

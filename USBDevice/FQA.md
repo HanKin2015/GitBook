@@ -30,6 +30,20 @@ cmd窗口跑脚本程序，然后跑死掉无法关闭，使用任务管理器�
 https://ask.zol.com.cn/x/5104928.html
 https://blog.csdn.net/weixin_33843409/article/details/92609266
 
+## 5、内核错误日志Process did not claim interface 0 before use
+I would expect a directory called /usbfs and a file within it called usbfs.ko
+
+You can look in /lib/modules/2.6.32-122/modules.dep
+Search for usbfs and you should find what calls it, or is dependent on it if it is present
+
+You could try moving the whole /usbfs sub dir somewhere else, cd ing to /lib/modules/2.6.32-122/ and running depmod -a to reset modules.dep
+and then reboot and see if there is a complaint from the touch screen driver and whether it works.
+
+Regards logrotate, this seems a pretty good guide
+articles.slicehost.com/2010/6/30/underst...ate-on-ubuntu-part-1
+
+You should be able to set the size not to exceed and a default hourly rotate with only 1 older copy being retained, which will cut down things a lot.
+It is not ideal solution however, hopefully the driver removal and re-installation may do something
 
 
 

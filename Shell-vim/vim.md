@@ -96,7 +96,9 @@ u		   返回上次修改
 - 连续按两次esc
 
 ### 6-2、vim中的高亮全部同样单词的方法
-可能默认不是高亮，需要设置，set hlsearch
+可能默认不是高亮，需要设置，set hlsearch 或者 set hls
+一般来说，关闭在第二个单词加上no即可
+如：set nohlsearch
 
 用vim时，想高亮显示一个单词并查找的方发。将光标移动到所找单词.
 1: shift + "*"  向下查找并高亮显示
@@ -105,6 +107,9 @@ u		   返回上次修改
 取消高亮：输入:noh
 gd命令： Goto local Declaration
 语法高亮：syntax on
+
+set cul
+e ++enc=cp936
 
 ### 6-3、设置高亮行和列有两种方式进行设置
 ```

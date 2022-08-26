@@ -45,7 +45,9 @@ reagentc /info
 
 errlook.exe这个vs自带的错误查找程序不错。
 PoolMonXv2.exe不错的内存泄露工具
+
 spy++.exe接收并打印windows窗口消息
+Spy++官方版是一款简单实用的Windows操作系统的窗口句柄获取工具。Microsoft Spy++最新版支持查看窗口、消息、进程、线程信息等内容，具有简单易用、功能多样的特点。通过Microsoft Spy++软件用户还可以保存和还原自己的首选项，绿色安全，无需安装即可使用。
 
 devmgmt.msc设备管理器
 sc命令可以查看驱动，如sc query usbccgp

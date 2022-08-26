@@ -67,15 +67,26 @@ Windows的sys驱动并不是一定要签名的？？？很奇怪，如usbvideo.s
 
 不签名替换居然无法生效，签了名的驱动替换才能生效。很奇怪，原先使用的本身就没有签名。
 
-## 6、Windows Vista
+### 6-1、Win10关闭驱动程序强制签名的方法一
+cmd命令管理员运行：
+使用bcdedit /set testsigning on命令进入测试模式
+恢复原样：bcdedit /set testsigning off
+但是可能会遇到保护，无法进行修改，显示操作成功完成才算成功。
+Win10 设置元素数据时出错。该值受安全引导策略保护，无法进行修改或删除。
 
-一句话：XP系统的下一个版本，转折版本。
+bcdedit查看默认是没有testsigning选项的。
+bcdedit /enum {current}
 
-Windows Vista是微软公司所研发的具有重大创新意义的一个版本，其内核版本号为Windows NT 6.0。
-2005年7月22日，微软宣布 Windows Vista 为这款新操作系统的名字。微软于2006年11月2日完成GA版本，向OEM 和企业用户发布。2007年1月30日，正式向普通用户出售，这是Windows 历史上间隔时间最久的一次发布。
-Windows Vista较上一个版本Windows XP增加了上百种新功能，其中包括被称为“Aero”的全新图形用户界面、关机特效、加强后的搜索功能（Windows Indexing Service）、新的媒体创作工具（例如Windows DVD Maker）以及重新设计的网络、音频、输出、打印和显示子系统。Vista也使用点对点技术（Peer-to-peer,P2P）提升了计算机系统在家庭网络中的显示通信能力，将让在不同计算机或装置之间分享文件与多媒体内容变得更简单。针对开发者的方面，Windows Vista使用.NET Framework 3.0版本，比起传统的Windows API更能让开发者能简单写出高品质的程序。微软也在Vista的安全性方面进行改良，Windows Vista较Windows XP增加了用户管理机制（User Account Control,UAC）以及内置的恶意软件查杀工具（Windows Defender）等。
-2011年7月12日，微软已终止Service Pack 1的支持。2012年4月10日，微软已终止Windows Vista的主流技术支持；
-微软于2017年4月11日正式终止对Windows Vista的一切支持。至此，Windows Vista寿终正寝。
+### 6-2、Win10关闭驱动程序强制签名的方法二
+按住shift+重启，然后选择疑难解答--高级选项--启动设置，在启动设置中重启，等待重启完成后选择禁用驱动程序强制签名。
+
+### 6-3、进行了6-2的操作，但是驱动加载还是存在问题
+Win10 设置元素数据时出错。该值受安全引导策略保护，无法进行修改或删除。
+
+1.重启电脑，按ESC（F2/F10/DELETE可能）进入BIOS
+2.在Security选项中找到Secure Boot 这个选项，然后回车，Enabled是开启的意思，Disabled关闭的意思
+
+这样就可以使用6-1的方法了。
 
 ## 7、wmic查看运行进程的参数
 https://www.cnblogs.com/DiZhang/p/12544793.html
@@ -83,7 +94,14 @@ https://www.cnblogs.com/DiZhang/p/12544793.html
 ## 8、windows10文件资源管理器 显示 上周 很久以前导致无法排序
 右键->分类依据->（无）
 
+## 9、Windows Vista
+一句话：XP系统的下一个版本，转折版本。
 
+Windows Vista是微软公司所研发的具有重大创新意义的一个版本，其内核版本号为Windows NT 6.0。
+2005年7月22日，微软宣布 Windows Vista 为这款新操作系统的名字。微软于2006年11月2日完成GA版本，向OEM 和企业用户发布。2007年1月30日，正式向普通用户出售，这是Windows 历史上间隔时间最久的一次发布。
+Windows Vista较上一个版本Windows XP增加了上百种新功能，其中包括被称为“Aero”的全新图形用户界面、关机特效、加强后的搜索功能（Windows Indexing Service）、新的媒体创作工具（例如Windows DVD Maker）以及重新设计的网络、音频、输出、打印和显示子系统。Vista也使用点对点技术（Peer-to-peer,P2P）提升了计算机系统在家庭网络中的显示通信能力，将让在不同计算机或装置之间分享文件与多媒体内容变得更简单。针对开发者的方面，Windows Vista使用.NET Framework 3.0版本，比起传统的Windows API更能让开发者能简单写出高品质的程序。微软也在Vista的安全性方面进行改良，Windows Vista较Windows XP增加了用户管理机制（User Account Control,UAC）以及内置的恶意软件查杀工具（Windows Defender）等。
+2011年7月12日，微软已终止Service Pack 1的支持。2012年4月10日，微软已终止Windows Vista的主流技术支持；
+微软于2017年4月11日正式终止对Windows Vista的一切支持。至此，Windows Vista寿终正寝。
 
 
 

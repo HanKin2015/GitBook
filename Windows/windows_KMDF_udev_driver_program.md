@@ -170,25 +170,3 @@ NTSTATUS MyAddDevice( __in PDRIVER_OBJECT  DriverObject,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -99,6 +99,9 @@ d891c280 2116974580 C Ci:3:006:0 0 289 = 06a8ff09 00a10115 0026ff00 75088501 950
 ```
 前面的S和C代表状态，Send和Complete，Ci代表是Control In，即控制In包（设备到虚拟机），Co代表是Control Out，即控制Out包（虚拟机到设备）。
 
+S 是向设备请求数据长度（IN包）或者是发送数据（OUT包）
+C 是设备响应 发送数据（IN包）或者接收数据状态（OUT包）
+
 ### 部分linux系统无usbmon
 https://www.kernel.org/doc/html/latest/usb/usbmon.html
 需要安装内核包。
