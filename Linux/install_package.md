@@ -84,6 +84,22 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 https://blog.51cto.com/lovexx/1975545
 跟着教程走解决。
 
+uname -a
+dpkg --get-selections| grep linux-image
+带install的是已经安装的，除了正在使用的可以全面删掉；
+带deinstall的是没有安装的，但是卸载有残留；
+先处理deinstall：sudo dpkg -P linux-image-4.10.0-28-generic
+然后再处理install：sudo apt purge linux-image-4.13.0-36-generic
+最后保留:
+```
+linux-image-4.4.0-210-generic                   install
+linux-image-generic                             install
+```
+rm /var/lib/dpkg/info -rf
+mkdir /var/lib/dpkg/info -p
+apt install hollywood
+搞定。
+
 ### 4-2、使用apt install安装失败
 ```
 root@hejian-H81M-S1:/home/hejian# apt install vim

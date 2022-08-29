@@ -1,12 +1,14 @@
 # 让您爱上Ubuntu的14条有趣命令
 
+带你装逼带你飞，带你冲进垃圾堆。
+
 ## 1、安装软件
 apt-get install sl cmatrix hollywood oneko libaa-bin linuxlogo screenfetch banner toilet figlet fortune fortune-zh lolcat cowsay
 
 ## 2、命令
 sl
 sl-h
-cmatrix
+黑客帝国（流星雨）：cmatrix
 hollywood
 oneko
 aafire
