@@ -237,12 +237,24 @@ This's 1 This'ss
 （见第11节）awk脚本
 awk -f cal.awk log.txt
 
-## 9、awk的内建变量
+## 9、运算符
 ```
+# 过滤第一列大于2的行（会发现字符串是大于2）
+[root@ubuntu0006:/media] #awk '$1>2' log.txt
+3 Are you like awk
+This's a test
+10 There are orange,apple,mongo
+
+# 过滤第一列等于2的行
+[root@ubuntu0006:/media] #awk '$1==2 {print $1,$3}' log.txt
+2 is
+
 # 过滤第一列大于2并且第二列等于'Are'的行
 [root@ubuntu0006:/media/hankin/vdb/study] #awk '$1>2 && $2=="Are" {print $1,$2,$3}' log.txt
 3 Are you
 ```
+
+## 10、awk的内建变量
 ARGC	命令行参数的数目
 ERRNO	最后一个系统错误的描述
 FILENAME	当前文件名
@@ -279,7 +291,43 @@ This's $ a $
 
 ```
 
-## 10、shell脚本抓取特定行
+## 11、使用正则，字符串匹配
+```
+# 输出第二列包含 "er"，并打印第二列与第四列
+[root@ubuntu0006:/media] #awk '$2 ~ /er/ {print $2,$4}' log.txt
+There orange,apple,mongo
+```
+~ 表示模式开始。// 中是模式。
+
+```
+# 输出包含 "re" 的行
+[root@ubuntu0006:/media] #awk '/re/' log.txt
+3 Are you like awk
+10 There are orange,apple,mongo
+```
+
+## 12、忽略大小写
+```
+[root@ubuntu0006:/media] #awk 'BEGIN{IGNORECASE=1} /this/' log.txt
+2 this is a test
+This's a test
+[root@ubuntu0006:/media] #awk '/this/' log.txt
+2 this is a test
+```
+
+## 13、模式取反
+```
+[root@ubuntu0006:/media] #awk '$2 !~ /th/ {print $2,$4}' log.txt
+Are like
+a
+There orange,apple,mongo
+[root@ubuntu0006:/media] #awk '!/th/ {print $2,$4}' log.txt
+Are like
+a
+There orange,apple,mongo
+```
+
+## 14、shell脚本抓取特定行
 没接触Linux的shell脚本之前处理文本数据大多是采用python，包括批处理、对文本的操作等等。但是在接触了shell脚本后发现shell处理文本数据简直不要太快。
 
 今天在数据处理时遇到了一个问题，就是把文件中某些特定的行抓出来。然后在输出到另一个文件中。代码如下图所示。
@@ -288,9 +336,9 @@ awk '{if($2==n) print $1,$2,$3} ' inputFileName > outputFileName
 1
 awk是shell脚本中非常有用的命令。上面这个命令中判断第二列是否等于n，如果等于n，就把这一行的第一列、第二列、第三列从inputFile中输出到OutputFile。就完成了抓取。
 
-## 11、awk脚本
+## 15、awk脚本
 
-### 11-1、awk脚本定义格式
+### 15-1、awk脚本定义格式
 ```
 格式1：
 BEGIN{} pattern{} END{}
@@ -338,3 +386,64 @@ systemd-timesync 100
 systemd-network 101
 systemd-resolve 102
 ```
+
+## 13、另外一些实例
+AWK 的 hello world 程序为：
+```
+BEGIN { print "Hello, world!" }
+```
+
+```
+# 计算文件大小
+[root@ubuntu0006:/media] #ls -l *.txt | awk '{sum+=$5} END {print sum}'
+195
+
+# 从文件中找出长度大于 15 的行
+[root@ubuntu0006:/media] #awk 'length>15' log.txt
+2 this is a test
+3 Are you like awk
+10 There are orange,apple,mongo
+
+# 打印九九乘法表
+[root@ubuntu0006:/media] #seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'
+1x1=1
+1x2=2   2x2=4
+1x3=3   2x3=6   3x3=9
+1x4=4   2x4=8   3x4=12  4x4=16
+1x5=5   2x5=10  3x5=15  4x5=20  5x5=25
+1x6=6   2x6=12  3x6=18  4x6=24  5x6=30  6x6=36
+1x7=7   2x7=14  3x7=21  4x7=28  5x7=35  6x7=42  7x7=49
+1x8=8   2x8=16  3x8=24  4x8=32  5x8=40  6x8=48  7x8=56  8x8=64
+1x9=9   2x9=18  3x9=27  4x9=36  5x9=45  6x9=54  7x9=63  8x9=72  9x9=81
+```
+
+## 14、awk、sed、grep更适合的方向
+grep 更适合单纯的查找或匹配文本
+sed 更适合编辑匹配到的文本
+awk 更适合格式化文本，对文本进行较复杂格式处理
+ 
+关于awk内建变量个人见解，简单易懂
+解释一下变量：
+变量：分为内置变量和自定义变量;输入分隔符FS和输出分隔符OFS都属于内置变量。
+
+内置变量就是awk预定义好的、内置在awk内部的变量，而自定义变量就是用户定义的变量。
+ FS(Field Separator)：输入字段分隔符， 默认为空白字符
+ OFS(Out of Field Separator)：输出字段分隔符， 默认为空白字符
+ RS(Record Separator)：输入记录分隔符(输入换行符)， 指定输入时的换行符
+ ORS(Output Record Separate)：输出记录分隔符（输出换行符），输出时用指定符号代替换行符
+ NF(Number for Field)：当前行的字段的个数(即当前行被分割成了几列)
+ NR(Number of Record)：行号，当前处理的文本行的行号。
+ FNR：各文件分别计数的行号
+ ARGC：命令行参数的个数
+ ARGV：数组，保存的是命令行所给定的各参数
+ 
+自定义变量的方法
+ 方法一：-v varname=value ，变量名区分字符大小写。
+ 方法二：在program中直接定义。
+
+
+
+
+
+
+

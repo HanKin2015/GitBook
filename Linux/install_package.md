@@ -113,6 +113,20 @@ root@hejian-H81M-S1:/home/hejian# rm /var/lib/dpkg/lock
 搞定
 ```
 
+### 4-3、aptitude命令
+aptitude命令与apt-get命令一样，都是Debian Linux及其衍生系统中功能极其强大的包管理工具。
+
+与apt-get不同的是，aptitude在处理依赖问题上更佳一些。举例来说，aptitude 在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。它通过文本操作菜单和命令两种方式管理软件包。
+
+相对来说，更加推荐使用aptitude命令来代替apt-get，特别是在下载或者删除依赖包的时候，aptitude都要比apt-get更好。
+
+更新可用的包列表：aptitude update 
+执行一次安全的升级：aptitude safe-upgrade
+安装包：aptitude install pkgname 
+删除包及其配置文件：aptitude purge pkgname
+删除下载的包文件：aptitude clean 
+搜索包：aptitude search pkgname 
+
 ## 5、rpm命令
 centos系统使用。
 
@@ -161,8 +175,17 @@ make
 make install DESTDIR= /home/user/zws/build
 ```
 
+## 8、dpkg：警告：无法找到软件包 libconfuse-common 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里
+猜测可能是因为我删除了/var/lib/dpkg/info文件夹导致。
 
+参考：https://mkaliez.com/all/3076.html
 
+因为在apt-get install 安装一个新包时 先回去检查/var/lib/dpkg/info/目录下的已安装包的配置文件信息；如果发现有已经安装的应用 的配置文件信息不在info目录下 就会提示这个错误。所以这个时候我们可以通过：sudo dpkg --configure -a
+然后通过：dpkg -l | grep ^ii | awk '{print $2}' | grep -v XXX | xargs sudo aptitude reinstall 
+重新获取包内容配置信息 ，这样一步步重新安装下去 很快就可以解决这个问题了
+
+二.当然也还有第二种方法，那就是通过：sudo apt-get --reinstall install dpkg --get-selections | grep '[[:space:]]install' | cut -f1
+来重新安装全部软件，会全部刷新info目录 不过这个方法就要多花点时间去等了
 
 
 

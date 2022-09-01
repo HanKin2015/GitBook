@@ -1,35 +1,57 @@
 # sed命令
 
-
-写在前面：
-详细教程：https://www.runoob.com/linux/linux-comm-sed.html
-
-```
-sed -i 's/匹配字符/变成字符/g' test.txt
-
--i ：直接修改读取的文件内容，而不是输出到终端。
-s：或许是swap替换
-g：global全局
-
-
-sed -i "/匹配字符/,+2d/" test.txt
-删除匹配字符行以及后面两行的内容
-
-
-sed -i '/匹配字符/a\添加内容' test.txt
-在匹配字符行后面添加一行内容
-a代表after
-i代表in front
-```
-
-[使用sed删除匹配行及上下几行](http://www.linuxdown.net/install/faq/20160603_how_linux_5774.html)
-
-
-
-# 1、sed介绍
-
-
+## 1、简介
 sed 全名为 stream editor，流编辑器，用程序的方式来编辑文本，功能相当的强大。是贝尔实验室的 Lee E.McMahon 在 1973 年到 1974 年之间开发完成，目前可以在大多数操作系统中使用，sed 的出现作为 grep 的继任者。与vim等编辑器不同，sed 是一种非交互式编辑器(即用户不必参与编辑过程)，它使用预先设定好的编辑指令对输入的文本进行编辑，完成之后再输出编辑结构。sed 基本上就是在玩正则模式匹配，所以，玩sed的人，正则表达式一般都比较强。
+
+sed是面向流的行编辑器，所谓面向流，是指接受标准输入的输入，输出内容到标准输出上。
+
+## 2、sed如何处理数据？
+sed在正常情况下，将处理的行读入模式空间（pattern space），脚本中的“sed-command（sed命令）”就一条接着一条进行处理，直到脚本执行完毕。然后该行被输出，模式（pattern space）被清空；接着，在重复执行刚才的动作，文件中的新的一行被读入，直到文件处理完毕。
+
+## 3、什么是Pattern Space，什么是Hold Space？
+pattern space相当于车间sed把流内容在这里处理。
+hold space相当于仓库，加工的半成品在这里临时储存。
+PS：你可以将pattern space看成是一个流水线，所有的动作都是在“流水线”上执行的；而hold space是一个“仓库”，“流水线”上的东东都可以放到这里。
+
+## 4、为什么要使用sed高级命令（G、H、g、h、n、N、x）？
+由于各种各样的原因，比如用户希望在某个条件下脚本中的某个命令被执行，或者希望模式空间得到保留以便下一次的处理，都有可能使得sed在处理文件的时候不按照正常的流程来进行。这个时候，sed设置了一些高级命令来满足用户的要求。
+
+sed命令：
+g：[address[,address]]g 将hold space中的内容拷贝到pattern space中，原来pattern space里的内容清除
+G：[address[,address]]G 将hold space中的内容append到pattern space\n后
+h：[address[,address]]h 将pattern space中的内容拷贝到hold space中，原来的hold space里的内容被清除
+H：[address[,address]]H 将pattern space中的内容append到hold space\n后
+d：[address[,address]]d 删除pattern中的所有行，并读入下一新行到pattern中
+D：[address[,address]]D 删除multiline pattern中的第一行，不读入下一行
+
+PS：不论是使用G、g还是H、h，它们都是将hold space里面的内容“copy”到pattern space中或者将pattern space中的内容“copy”到hold space中。
+
+附上英文的解释：
+The “h” command copies the pattern buffer into the hold buffer. The pattern buffer is unchanged.
+Instead of exchanging the hold space with the pattern space, you can copy the hold space to the pattern space with the “g” command. This deletes the pattern space. If you want to append to the pattern space, use the “G” command. This adds a new line to the pattern space, and copies the hold space after the new line.
+
+### 4-1、示例：用sed模拟出tac的功能（倒序输出）
+```
+[root@ubuntu0006:/media] #cat mm
+
+1
+2
+3
+[root@ubuntu0006:/media] #tac mm
+3
+2
+1
+
+[root@ubuntu0006:/media] #sed '1!G;h;$!d' mm
+3
+2
+1
+
+```
+ps：1!G第1行不 执行“G”命令（保持空间拷贝到模式空间），从第2行开始执行G命令。
+$!d，文件读取最后一行不删除模式空间（保留模式空间），注意执行d命令还会读取新行到模式空间中。
+注意显示pattern space中的内容。
+
 
 
 
@@ -53,6 +75,32 @@ i ：插入， i 的后面可以接字串，而这些字串会在新的一行出
 p ：列印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～
 s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！
 ```
+
+
+
+详细教程：https://www.runoob.com/linux/linux-comm-sed.html
+```
+sed -i 's/匹配字符/变成字符/g' test.txt
+
+-i ：直接修改读取的文件内容，而不是输出到终端。
+s：或许是swap替换
+g：global全局
+
+
+sed -i "/匹配字符/,+2d/" test.txt
+删除匹配字符行以及后面两行的内容
+
+
+sed -i '/匹配字符/a\添加内容' test.txt
+在匹配字符行后面添加一行内容
+a代表after
+i代表in front
+```
+
+[使用sed删除匹配行及上下几行](http://www.linuxdown.net/install/faq/20160603_how_linux_5774.html)
+
+# 1、sed介绍
+
 
 基本正则表达式
     关于正则表达式的内容挺多的，掌握好下文中提及的内容就能满足正常工作中的需要，如果是专门做正则编程的，可以去买本正则表达式的书籍来看好了^_^。只有多动手多练习，才是学开发编程的最好姿势。

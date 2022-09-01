@@ -55,6 +55,11 @@ sc命令可以查看驱动，如sc query usbccgp
 ## 7、win32 getMessage 和 peekMessage的区别
 按照微软文档的解释，getmessage在没有消息时，会被阻塞。如果peekmessage没有消息时，就返回。
 
+## 8、查看系统信息
+我的电脑-》属性
+systeminfo命令
+运行-》dxdiag
+第三方工具，如鲁大师、360驱动大师
 
 
 

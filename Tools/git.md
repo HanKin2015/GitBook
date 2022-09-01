@@ -1207,6 +1207,12 @@ find . -name "appsh1" | xargs dos2unix
 解决办法2：
 好像可以设置过滤sh脚本文件，这个我也没研究过。
 
+建议各位小伙伴检查自己本地git的换行符自动转换设置（将换行符自动转换设置为开启）
+git config --global --list
+检查core.autocrlf的值，
+core.autocrlf=false => 换行符自动转换为关闭状态
+core.autocrlf=true => 换行符自动转换为开启状态
+
 ## 漂亮的显示git上库日志
 要做到这样，命令行如下：
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
