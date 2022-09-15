@@ -61,3 +61,4 @@ blend那个是设计UI的。vs在XAML的高级UI设计上功能有缺失，blend
 十一月：November
 十二月：December
 
+[Qt和Flutter哪个开发app更好？](https://www.zhihu.com/question/315473049/answer/1224659723?ivk_sa=1024320u)

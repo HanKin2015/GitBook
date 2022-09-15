@@ -13,6 +13,8 @@ https://sourceforge.net/projects/usbwriter/
 http://rufus.ie/
 Rufus 是一个开源免费的快速制作 U 盘系统启动盘和格式化 USB 的实用小工具，它可以快速把 ISO 格式的系统镜像文件快速制作成可引导的 USB 启动安装盘，支持 Windows 或 Linux 启动。Rufus 小巧玲珑，软件体积仅 7 百多 KB，然而麻雀虽小，它却五脏俱全。
 
+似乎不能单独作为格式化工具。
+
 ### 1-3、Ventoy
 https://ventoy.net/en/download.html
 

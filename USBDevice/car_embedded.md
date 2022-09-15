@@ -8,7 +8,7 @@ kvaser公司创立于80年代早期,主要研究分布的嵌入式控制系统,�
 
 相关升级工具：https://www.cnlaunch.com/download/
 
-
+产品介绍：http://www.triv.cn/product/kvaser/USBcan/p-Kvaser-USBcan-Light-2xHS/00714-7/
 
 
 

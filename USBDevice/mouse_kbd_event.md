@@ -82,10 +82,35 @@ Type为EV_KEY那行， KEY_S， 代表S健，
  value为1代表被按下
  value为2代表按键一直按着没有释放。
 
+## 3、HID用法
+https://docs.microsoft.com/zh-cn/windows-hardware/drivers/hid/hid-usages
 
+键鼠一定是：0x01	通用桌面控件	HID_USAGE_PAGE_GENERIC
 
+0x02	鼠标	HID_USAGE_GENERIC_MOUSE
+0x07	键盘	HID_USAGE_GENERIC_KEYPAD
 
-
-
-
-
+虽然大部分鼠标是单个Usage，但是部分鼠标会有多个Usage，因此不能增加判断限制。
+```
+HIDP_DEVICE_DESC hidp;
+for (i = 0; i < hidp.CollectionDescLength; i++) {
+    pCollection = hidp.CollectionDesc + i;
+    if (NULL != pCollection){
+        LINFO("[usbc]collection usagePage:0x%04x usage:0x%04x.",pCollection->UsagePage,pCollection->Usage);
+        if (pCollection->UsagePage == HID_USAGE_PAGE_GENERIC){
+            //单Usage鼠标，即视为本地设备
+            if (pCollection->Usage == HID_USAGE_GENERIC_MOUSE && hidp.CollectionDescLength == 1){
+                LINFO("[usbc]device vid:0x%04x pid:0x%04x is local mouse.",pDeviceInfo->idVendor,pDeviceInfo->idProduct);
+                pDeviceInfo->IsLocal = TRUE;
+                break;
+            }
+            //Usage含有键盘功能，即视为本地设备
+            else if (pCollection->Usage == HID_USAGE_GENERIC_KEYBOARD){
+                LINFO("[usbc]device vid:0x%04x pid:0x%04x is local keyboard.",pDeviceInfo->idVendor,pDeviceInfo->idProduct);
+                pDeviceInfo->IsLocal = TRUE;
+                break;
+            }
+        }
+    }
+}
+```

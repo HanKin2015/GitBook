@@ -568,7 +568,6 @@ git reset HEAD 文件或文件夹
 git checkout 文件或文件夹
 ```
 
-
 ## 14、进阶
 ### .gitignore
 一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。我们可以创建一个名为 .gitignore 的文件，列出要忽略的文件模式。来看一个实际的例子：
@@ -1153,7 +1152,7 @@ git branch --unset-upstream
 默认情况下，如果我把文件名从小写全部更改为大写，git无法识别，但是界面上有红色标志，很别扭。
 
 使用git config core.ignorecase命令查看大小写敏感。
-git config core.ignorecase false
+git config core.ignorecase false（推荐）
 git config core.ignorecase true
 
 推荐方法
@@ -1367,5 +1366,31 @@ branch.master.merge=refs/heads/master
 
 注意一点：当前分支名和提交上去的分支名要一致，否则会提交失败。
 如当前分支名为A，远程无B，提交git push custom B会失败。
+
+## 最后一次提交的用户名不对
+git commit --amend --author="NewAuthor NewEmail@address.com"
+git commit --amend --reset-author
+
+## git文件已提交，但还是显示文件夹红色感叹号(windows系统)
+参考：https://www.jianshu.com/p/420d38913578?tdsourcetag=s_pctim_aiomsg
+
+原因是：存在相同名字但大小写不同的文件
+
+设置本地git环境识别大小写
+git config core.ignorecase false
+
+查看相同名字大小写不同的文件
+git ls-files .
+
+删除文件
+git rm --cached readme.md
+git rm --cached readme_en.md
+git status
+git add .
+git commit -m"rm files"
+git push
+
+
+
 
 

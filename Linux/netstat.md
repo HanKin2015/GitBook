@@ -50,5 +50,12 @@ netstat 将每隔一秒输出网络信息 netstat -c
 # netsat -a --numeric-users
 ```
 
-
+## 4、关闭某个端口
+```
+root@kali:~# netstat -anp | grep 3000
+tcp        0      0 0.0.0.0:3000            0.0.0.0:*               LISTEN      5632/ruby       
+root@kali:~# kill 5632
+root@kali:~# netstat -anp | grep 3000
+root@kali:~#
+```
 

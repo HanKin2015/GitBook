@@ -167,6 +167,8 @@ if __name__ == '__main__':
 
     end_time = time.time()
     print('process spend {} s.'.format(round(end_time - start_time, 3)))
+    
+print('-------- {}[{}] --------'.format(sys._getframe().f_code.co_name, sys._getframe().f_lineno))
 ```
 
 ### batch脚本

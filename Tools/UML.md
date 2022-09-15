@@ -4,6 +4,8 @@ https://www.zhihu.com/question/385479323
 
 draw.io，Visio，ProcessOn，Gliffy，EDrawMax等，哪个流程图工具好用？
 
+程序员还是该多了解plantuml。
+
 个人强烈推荐draw.io，比ProcessOn好用，而且完全免费、提供客户端支持离线使用，同时还支持在Dropbox、One Drive、Google Drive及本地存储。
 Visio绝对是windows系统上不可或缺的一款流程图软件，功能强大，用它制作出来的流程图会透着四个字：专业、逼格，所以它自然成为大部分科研大佬们的首选。但是它不够轻量级，而且需要付费才能使用。
 Gliffy不仅可以在线创建流程图，免费用户有30天无限制试用期，试用期过后，部分组件会被锁定（主要是UML和线框图的部分），不能保存私有图表，并且只能保存5张图表。

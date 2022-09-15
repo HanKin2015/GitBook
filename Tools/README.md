@@ -79,8 +79,9 @@ tudo需要下载一下。
 [阿里云盘]()
 [蓝奏云]()
 
+## 9、PotPlayer
+PotPlayer 是 KMPlayer 的原制作者姜龙喜进入 Daum 公司后的新一代网络播放器。PotPlayer 的优势在于强大的内置解码器；而 KMPlayer 的优势在于强大的定制能力和个性化功能。PotPlayer 使用 VC++ 编写， KMPlayer 为 Delphi 编写。PotPlayer 是 Daum 公司的一款网络播放器，有自己的独立著作权，并非原创，由 KMPlayer 的原始作者进行后续开发。(1428以后版本)的 KMPlayer 由 PandoraTV 团队负责集体开发。应 PandoraTV 的要求，PotPlayer 不会加入在 KMPlayer 中一些受欢迎功能，但作者答应加入一些近似的功能。
 
+解码器：https://github.com/Nevcairiel/LAVFilters/releases
 
-
-
-
+https://notepad-plus-plus.org/

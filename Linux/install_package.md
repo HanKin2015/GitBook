@@ -82,7 +82,8 @@ dpkg: 处理软件包 update-notifier (--configure)时出错：
 E: Sub-process /usr/bin/dpkg returned an error code (1)
 ```
 https://blog.51cto.com/lovexx/1975545
-跟着教程走解决。
+跟着教程走解决。可能会出现问题未解决的问题，但是如果再走一遍发现问题解决了。很神奇。
+脚本见：D:\Github\Storage\shell\solve_dpkg_install_error.sh
 
 uname -a
 dpkg --get-selections| grep linux-image

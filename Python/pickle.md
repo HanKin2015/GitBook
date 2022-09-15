@@ -119,6 +119,7 @@ with open(your_path, encoding=check_charset(your_path)) as f:
     print(data)
 ```
 
+解决了其中一个文件问题，另外一个文件出现新的错误：UnicodeDecodeError: 'ascii' codec can't decode byte 0xa9 in position 22: ordinal not in range(128)。
 
 
 

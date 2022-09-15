@@ -8,6 +8,7 @@
 3. Gitea https://www.foul.trade:3000/Johy/Hosts/raw/branch/main/hosts.txt
 
 使用 SwitchHosts （https://swh.app/zh/）工具（推荐）自动同步
+https://raw.githubusercontent.com/JohyC/Hosts/main/hosts.txt
 
 ## 2、手动查询需要翻墙的域名实际ip并配置
 打开https://www.ipaddress.com/网站，查询下面3个网址对应的IP地址
@@ -58,12 +59,24 @@ trojan 是较新的代理软件，trojan官网是 https://trojan-gfw.github.io/t
 
 trojan的缺点在于关注度不够，除了ios平台，官方客户端都比较简陋。trojan安装和使用请参考：[trojan教程](https://shop.mac163.com/17157/)，服务端一键部署请参考：[trojan一键脚本](https://shop.mac163.com/14326/)。
 
+## 6、发现新大陆
+以notepad++软件升级为例，无法打开地址：https://notepad-plus-plus.org/
 
+百度一下DNS检测工具，发现：
+https://tool.chinaz.com/dns/    （不好用，好多地址是污染的，无法区分）
+https://www.boce.com/dns/notepad-plus-plus.org      （每天只能免费5次，可以排除被污染的ip地址，这个地址无法ping通）
 
+然后修改hosts文件，添加：
+172.67.213.166 notepad-plus-plus.org  
 
+cmd窗口：ipconfig /flushdns
 
+有了这次体验，那岂不是自己也能手动修改hosts翻墙了：
+试一下谷歌：http://www.google.com.hk/
+这个搜索出来的ip地址是无法直接打开的，需要添加到hosts文件中才行：
+64.233.187.199 www.google.com.hk
 
-
+果然结果不能保证百分百正确，发现这次就翻车了，没有解决翻墙问题。
 
 
 

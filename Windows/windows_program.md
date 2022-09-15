@@ -49,6 +49,23 @@ linux下c语言编程：
 Windows编程：
 
 
+```
+PSFUSB_PDO_LIST hj = NULL;
+LONG cnt = 0;
+
+KeAcquireSpinLock(&s_hookEntry.Lock, &oldIrql);
+hj = (PSFUSB_PDO_LIST)s_hookEntry.PdoList.Flink;
+cnt = 0;
+while (hj != &s_hookEntry.PdoList)
+{
+    cnt++;
+    LDBG("test before index: %d ===>>> %04x:%04x, status: %d, IsParseDescSuccess: %d", cnt, hj->idVendor, hj->idProduct, hj->nStatus, hj->IsParseDescSuccess);
+    hj = hj->ListEntry.Flink;
+}
+LDBG("test dd s_hookEntry.lDriverCount: %d, calc count: %d", s_hookEntry.lDriverCount, cnt);
+KeReleaseSpinLock(&s_hookEntry.Lock, oldIrql);
+```
+驱动中，我把cnt弄成int类型输出，虚拟机启动不起来，后面改成LONG后正常。只能解释cnt输出超了，LONG的范围更大，因为我在其他地方输出int类型了。
 
 
 

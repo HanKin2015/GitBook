@@ -33,6 +33,6 @@ https://baike.baidu.com/item/%E6%B6%82/34272#viewPageContent):涂意为道路时
 
 寂然无声	寂静没有声音。
 
-
+意广才疏	意：意愿，志向。志向远大，但才能浅薄。指志大才疏。
 
 
