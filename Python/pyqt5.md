@@ -191,12 +191,34 @@ update()函数只是在Qt下一次处理事件时才调用一次绘制事件
 
 所以建议在需要重绘的时候尽量使用update，在必须实时显示绘制的时候使用repaint。
 
+## 14、中英文翻译
+参考：
+https://www.jianshu.com/p/f21167a3a573
+https://www.cnblogs.com/pythonsnowhiwte/p/13434853.html
 
+PyQt 有一个可以快捷改变程序语言的方案，分三个步骤：
+- hehe.ui → hehe.py (用pyuic)
+- hehe.py → hehe.ts (用pylupdate)
+- hehe.ts → hehe.qm (用Qt Linguist)
+然后在程序中导入 hehe.qm 即可。
 
+代码见：D:\Github\Storage\qt\python\中英文翻译
+注意执行pylupdate5命令时，py文件不能放在中文路径下面。
 
+pylupdate的目录：Python\Scripts\pylupdate5.exe（直接在anaconda prompt中直接使用命令）
+Qt Linguist的目录：C:\Users\Administrator\Anaconda3\Library\bin\linguist.exe
 
+修改py文件后，再加上一个参数 noobsolete 重新打开english.ts显示不变，但是重新打开linguist.exe程序就可以了。
+pylupdate5 test.py -ts english.ts
+pylupdate5 -noobsolete test.py -ts english.ts
 
-
+使用linguist.exe程序打开ts文件，然后弹出设置界面，一般来说源语言是中文，目标语言是英文。
+```
+dialog.setTitle(_translate("Form", "标题栏"))
+括号中的 'Form' 是自己指定的一个上下文（Context）。
+```
+需要每项每项的在linguist.exe程序中进行手动翻译，py文件中的英文是上下文，可以理解为是变量名。
+将每一个进行翻译，翻译完成后，点击File-Release,就会在当前目录生成english.qm文件。
 
 
 

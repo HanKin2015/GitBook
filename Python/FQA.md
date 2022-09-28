@@ -277,8 +277,28 @@ TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
 ```
 解决。
 
+## 30、UnicodeEncodeError: 'latin-1' codec can't encode characters in position 28-32: ordinal not in range(256)
+百度了一下，都是让我转编码格式，但是我的场景是使用pylupdate5进行中英文翻译，这让我咋转。
 
+后面我直接删掉所有中文，结果运行还是报这个错，我才发现不是当前文件中的问题。
 
+最终报错的地方，打开pylupdate_main.py文件发现：
+```
+(base) D:\Github\Storage\qt\python\中英文翻译>pylupdate5 test.py  -ts english.ts
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Anaconda3\lib\runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "C:\Users\Administrator\Anaconda3\lib\runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\Administrator\Anaconda3\lib\site-packages\PyQt5\pylupdate_main.py", line 239, in <module>
+    main()
+  File "C:\Users\Administrator\Anaconda3\lib\site-packages\PyQt5\pylupdate_main.py", line 225, in main
+    translate_func)
+UnicodeEncodeError: 'latin-1' codec can't encode characters in position 28-32: ordinal not in range(256)
+
+fetchtr_py(fi.absoluteFilePath(), fetchedTor, defaultContext, True, codecForSource, tr_func, translate_func)
+```
+文件的绝对路径，我才恍然大悟，是我的中文路径问题。
 
 
 

@@ -45,8 +45,10 @@ articles.slicehost.com/2010/6/30/underst...ate-on-ubuntu-part-1
 You should be able to set the size not to exceed and a default hourly rotate with only 1 older copy being retained, which will cut down things a lot.
 It is not ideal solution however, hopefully the driver removal and re-installation may do something
 
-
-
+## 6、PDO是什么
+供电数据对象（Power Data Object, PDO）
+也可能是属性数据对象（Property Data Object, PDO）
+最有可能是属性设备对象（Property Device Object, PDO）
 
 
 

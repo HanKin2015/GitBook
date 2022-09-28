@@ -159,3 +159,44 @@ pdbedit -L
 技巧：建议设置密码和账户相同，这样只需要查看账户是多少就能防止忘记密码。
 服务基本上是一直都在的，不需要启动。
 
+## 9、长时间没有使用连接不上远程服务器
+运行窗口输入\\1.2.3.4没有反应
+
+```
+[root@ubuntu0006:/media] #service samba status
+● samba.service
+   Loaded: masked (/dev/null; bad)
+   Active: inactive (dead)
+[root@ubuntu0006:/media] #systemctl status samba
+● samba.service
+   Loaded: masked (/dev/null; bad)
+   Active: inactive (dead)
+[root@ubuntu0006:/media] #service samba start
+Failed to start samba.service: Unit samba.service is masked.
+[root@ubuntu0006:/media] #service samba restart
+Failed to restart samba.service: Unit samba.service is masked.
+[root@ubuntu0006:/media] #/etc/init.d/samba restart
+[ ok ] Restarting nmbd (via systemctl): nmbd.service.
+[ ok ] Restarting smbd (via systemctl): smbd.service.
+[ ok ] Restarting samba-ad-dc (via systemctl): samba-ad-dc.service.
+[root@ubuntu0006:/media] #service smbd status
+● smbd.service - LSB: start Samba SMB/CIFS daemon (smbd)
+   Loaded: loaded (/etc/init.d/smbd; bad; vendor preset: enabled)
+   Active: active (running) since 一 2022-09-26 10:53:15 CST; 14s ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 8380 ExecStop=/etc/init.d/smbd stop (code=exited, status=0/SUCCESS)
+  Process: 8417 ExecStart=/etc/init.d/smbd start (code=exited, status=0/SUCCESS)
+   CGroup: /system.slice/smbd.service
+           ├─8446 /usr/sbin/smbd -D
+           ├─8449 /usr/sbin/smbd -D
+           └─8463 /usr/sbin/smbd -D
+
+9月 26 10:53:15 ubuntu0006 systemd[1]: Starting LSB: start Samba SMB/CIFS daemon (smbd)...
+9月 26 10:53:15 ubuntu0006 smbd[8417]:  * Starting SMB/CIFS daemon smbd
+9月 26 10:53:15 ubuntu0006 smbd[8417]:    ...done.
+9月 26 10:53:15 ubuntu0006 systemd[1]: Started LSB: start Samba SMB/CIFS daemon (smbd).
+```
+正常了。
+
+
+

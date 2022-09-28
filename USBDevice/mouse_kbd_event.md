@@ -114,3 +114,25 @@ for (i = 0; i < hidp.CollectionDescLength; i++) {
     }
 }
 ```
+
+## 4、键鼠失灵2
+```
+dmesg -wT           有拔插日志
+xev -display :0     有键盘消息
+
+内核发现：
+[1647182.798795] xhci_hcd 0000:00:14.0: WARN Event TRB for slot 24 ep 8 with no TDs queued?
+[1647182.800870] xhci_hcd 0000:00:14.0: WARN Event TRB for slot 24 ep 8 with no TDs queued?
+[1647182.802104] xhci_hcd 0000:00:14.0: WARN Event TRB for slot 24 ep 8 with no TDs queued?
+[1647182.803005] xhci_hcd 0000:00:14.0: WARN Event TRB for slot 24 ep 8 with no TDs queued?
+[1647182.803998] xhci_hcd 0000:00:14.0: WARN Event TRB for slot 24 ep 8 with no TDs queued?
+
+tail -f /var/log/Xorg.0.log -n 1000             原来是wacom设备导致的，手写笔能操作鼠标，但是鼠标无法操作
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+(EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
+```

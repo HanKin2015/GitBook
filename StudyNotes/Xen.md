@@ -104,12 +104,19 @@ Bus Driver的是用来识别U盘的，它主要工作在我们的笔记本那个
 ## 15、paravirtualization
 [PV驱动程序](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/WindowsGuide/xen-drivers-overview.html)
 
+## 16、在KVM上的Windows中安装Virtio驱动程序
+参考：https://blog.csdn.net/weixin_42892543/article/details/122854919
+
+Virtio驱动程序是KVM虚拟机的半虚拟化设备驱动程序。
+半虚拟化驱动程序可提高机器性能，减少I / O延迟并将吞吐量提高到接近裸机水平。
+对于完全虚拟化的计算机，建议使用半虚拟化驱动程序。
+大多数Linux发行版都包含virtio驱动程序作为标准配置。本指南说明了如何在Windows中安装它们。
+本指南是为Zetastack用户编写的，但适用于在KVM主机上运行的任何Windows guest虚拟机。
+其中包括Nutanix，红帽虚拟化（RHEV），Proxmox VE，oVirt和OpenStack。
+
+下载ISO：
+https://dl.fedoraproject.org/pub/alt/virtio-win/
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
 
-
-
-
-
-
-
-
+https://zhuanlan.zhihu.com/p/544929021

@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+printf("********* %s[%d] *********\n", __FUNCTION__, __LINE__);
+std::cout << "********* " << __FUNCTION__ << '[' << __LINE__ << "] *********" << std::endl;
 
 /**
 * @brief  运行shell命令
@@ -200,6 +202,25 @@ print('-------- {}[{}] --------'.format(sys._getframe().f_code.co_name, sys._get
 #
 # Copyright (c) 2022 hejian. All rights reserved.
 #
+```
+
+### puml文件
+```
+/''
+' 文 件 名: template.puml
+' 文件描述: 模板（Alt+D运行预览）
+' 作    者: HanKin
+' 创建日期: 2022.09.19
+' 修改日期：2022.09.19
+' 
+' Copyright (c) 2022 HanKin. All rights reserved.
+'/
+
+@startuml
+rectangle 开始和结束
+start
+stop
+@enduml
 ```
 
 ### golang语言

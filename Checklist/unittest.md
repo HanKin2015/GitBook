@@ -4,6 +4,8 @@
 http://www.uml.org.cn/Test/201905061.asp
 gtest是google开源的C++测试库，用于执行Unit Test或者是Mock Test都十分方便。虽然很多时候，开发写的代码最终功能会有测试来测试，但是，基本单元测试是每个开发者必须的，至少保证你写的东西符合你的预期。很多测试框架，而gtest至少不用说测试编写之后，还需要去列出调用所有的测试方法，只需要RUN_ALL_TESTS宏即可。
 
+gtest是Google的一个开源框架，它主要用于写单元测试，检查自己的程序是否符合预期行为。可在多个平台上使用（包括Linux, Mac OS X, Windows, Cygwin和Symbian）。它提供了丰富的断言、致命和非致命失败判断，能进行值参数化测试、类型参数化测试、“死亡测试”。
+
 gmock是gtest的一部分，也可以说是gtest中比较advanced的topic。
 
 ### 1-1、简介
@@ -86,7 +88,6 @@ Update版本比正式版居然能多出4个G，多出正式版还多，搞不懂
 ### 1-3、本地测试
 
 #### linux
-
 注意：所有附加的编译参数都是需要的。
 gtest_main和gmock_main可以让测试者无需在为每次测试用例写入main函数。
 
@@ -220,13 +221,23 @@ int test_study_gtest(int argc, char** argv)
 ```
 
 ### 1-4、断言
-1、ASSERT_系列：如果当前点检测失败则退出当前函数
-2、EXPECT_系列：如果当前点检测失败则继续往下执行
+参考：https://blog.csdn.net/yyz_1987/article/details/124101531
+Gtest中，断言的宏可以理解为分为两类，一类是ASSERT系列，一类是EXPECT系列。
+ASSERT_系列的断言（Fatal assertion）：
+当检查点失败时，退出当前函数（注意：并非退出当前案例）。
+EXPECT_系列的断言(Nonfatal assertion)：
+当检查点失败时，继续执行下一个检查点（每一个断言表示一个测试点）。
+通常情况应该首选使用EXPECT_，因为ASSERT_*在报告完错误后不会进行清理工作，有可能导致内存泄露问题。
 
-ASSERT_系列：
+1、ASSERT_系列：如果当前点检测失败则退出当前函数(fatal assertion)
+2、EXPECT_系列：如果当前点检测失败则继续往下执行(nonfatal assertion)
 
-bool值检查
-1、 ASSERT_TRUE(参数)，期待结果是true
+断言中提供以下几种检查方法：
+
+只需要替换ASSERT为EXCEPT即可。
+
+布尔类型检查
+1、ASSERT_TRUE(参数)，期待结果是true
 2、ASSERT_FALSE(参数)，期待结果是false
 
 数值型数据检查
@@ -238,16 +249,85 @@ bool值检查
 8、ASSERT_GE(参数1，参数2)，greater equal，大于等于才返回true
 
 字符串检查
-9、ASSERT_STREQ(expected_str, actual_str)，两个C风格的字符串相等才正确返回
+9、 ASSERT_STREQ(expected_str, actual_str)，两个C风格的字符串相等才正确返回
 10、ASSERT_STRNE(str1, str2)，两个C风格的字符串不相等时才正确返回
-11、ASSERT_STRCASEEQ(expected_str, actual_str)
-12、ASSERT_STRCASENE(str1, str2)
-13、EXPECT_系列，也是具有类似的宏结构的
+11、ASSERT_STRCASEEQ(expected_str, actual_str)，忽略大小写
+12、ASSERT_STRCASENE(str1, str2)，忽略大小写
 
-### 1-5、TEST宏
+异常检查
+13、ASSERT_THROW(statement, exception_type)，指定异常类型
+14、ASSERT_ANY_THROW(statement)
+15、ASSERT_NO_THROW(statement)
+
+浮点检查
+16、ASSERT_FLOAT_EQ(excpted, actual)，差不多相等
+17、ASSERT_DOUBLE_EQ(excpted, actual)
+
+相近值检查
+18、ASSERT_NEAR(val1, val2, abs_error)，两个值相差不超过
+
+### 1-5、宏测试之TEST宏
 TEST宏的作用是创建一个简单测试，它定义了一个测试函数，在这个函数里可以使用任何C++代码并使用提供的断言来进行检查。
+TEST宏的第一个参数是test_suite_name（测试套件名），第二个参数是test_name（测试特例名）。
+测试套件（Test Case）是为某个特殊目标而编制的一组测试输入、执行条件以及预期结果，以便测试某个程序路径或核实是否满足某个特定需求。
+测试特例是测试套件下的一个（组）测试。
+对于测试套件名和测试特例名，不能有下划线（_）。因为GTest源码中需要使用下划线把它们连接成一个独立的类名。不能有相同的“测试套件名和特例名”的组合——否则类名重合。
+测试套件名和测试特例名的分开，使得我们编写的测试代码有着更加清晰的结构。
 
-### 1-6、
+### 1-6、TEST_F宏
+使用TEST_F前需要创建一个固件类，继承esting::Test类。
+
+在类内部使用public或者protected描述其成员，为了保证实际执行的测试子类可以使用其成员变量。在构造函数或者继承于::testing::Test类中的SetUp方法中可以实现我们需要构造的数据。在析构函数或者继承于::testing::Test类中的TearDown方法中可以实现一些资源释放的代码。
+
+第一个参数为测试套件名（必须与创建的固件类名一致），第二个为测试名，可任意取。
+
+TEST_F宏和TEST宏的实现接近，只是TEST_F宏的封装更加开放一些，对TEST宏的功能多了一些扩展。
+
+TEST_F与TEST的区别，TEST_F提供了一个初始化函数（SetUp）和一个清理函数(TearDown)。在TEST_F中使用的变量可以在初始化函数SetUp中初始化，在TearDown中销毁。所有的TEST_F是互相独立的，都是在初始化以后的状态开始运行。一个TEST_F不会影响另一个TEST_F所使用的数据，多个测试场景需要相同数据配置的情况用 TEST_F。
+
+### 1-7、TEST_P宏
+在设计测试案例时，经常需要考虑给被测函数传入不同的值的情况。我们之前的做法通常是写一个通用方法然后编写在测试案例调用它。即使使用了通用方法，这样的工作也是有很多重复性的。
+
+用TEST这个宏，需要编写如下的测试案例，每输入一个值就需要写一个测试点，这还只是在一个测试中，如果把每个测试点单独创建一个测试，工作量就更大。使用TEST_P这个宏，对输入进行参数化，就简单很多。
+
+见：D:\Github\Storage\c++\unittest\gtest_example.cpp
+```
+INSTANTIATE_TEST_SUITE_P(PARAM,MyClassTest,testing::Values(3,5,7,9));
+```
+
+### 1-8、预处理事件机制
+gtest 提供了多种预处理事件机制，方便我们在测试之前或之后做一些操作。
+1. 全局的，所有测试执行前后。
+2. TestSuite级别的，在某测试套件中第一个测试前，最后一个测试执行后。
+3. TestCase级别的，每个测试前后。
+
+1.全局事件
+要实现全局事件，必须写一个类继承testing::Environment类，实现里面的SetUp和TearDown方法。
+1. SetUp()方法在所有案例执行前执行。
+2. TearDown()方法在所有案例执行后执行。
+
+还需要在main函数中通过调用testing::AddGlobalTestEnvironment这个函数将事件挂进来，也就是说，我们可以写很多个这样的类，然后将他们的事件都挂上去，AddGlobalTestEnvironment这个函数要放在RUN_ALL_TEST之前。 
+
+2.TestSuites事件
+需要写一个类，继承testing::Test，然后实现两个静态方法
+1. SetUpTestCase() 方法在第一个TestCase之前执行。
+2. TearDownTestCase() 方法在最后一个TestCase之后执行。
+
+3.TestCase事件
+TestCase事件是挂在每个案例执行前后的，实现方式和Test'Suites的几乎一样，不过需要实现的是SetUp方法和TearDown方法：
+1. SetUp()方法在每个TestCase之前执行。
+2. TearDown()方法在每个TestCase之后执行。
+
+
+
+
+
+
+
+
+
+
+
 
 ## 2、驱动代码、桩代码、Mock代码
 驱动代码（Driver）指调用被测函数的代码，在单元测试过程中，驱动模块通常包括调用被测函数前的数据准备、调用被测函数以及验证相关结果三个步骤。驱动代码的结构，通常由单元测试的框架决定。

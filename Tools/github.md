@@ -1,7 +1,6 @@
 # 学习github
 
 ## 1、github page
-
 总所周知，在github上面搭建网站。
 
 对一个仓库开启github page功能前提工作：

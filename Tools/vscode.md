@@ -124,27 +124,48 @@ https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#
 解决方式：打开设置 -> 搜索“Auto Guess Encoding” -> 勾选。User,Remote,Workspace 都勾选上该选项。
 
 ## 10、使用vscode搭建你的远程linux开发环境
-### 远程linux服务器的版本要求
+### 10-1、远程linux服务器的版本要求
 kernel >= 3.10        uname -r
 glibc >= 2.17         strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBC
 libstdc++ >= 3.4.18   dpkg -l | grep libstdc++
 
 通过VS Code官方支持的SSH Remote插件，我们可以直接进行远程开发，不需要进行各种麻烦的代码同步。
 
-### 安装最最最最重要的一个插件：Remote-SSH
+### 10-2、安装最最最最重要的一个插件：Remote-SSH
 插件搜索安装：Remote-SSH
+在线安装：打开VSCode，按快捷键 Ctrl+Shift+X进入扩展商店，搜索Remote - SSH， 点击install
 离线安装：
 C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
-拷贝到另外一个环境中即可。
+拷贝到另外一个环境C:\Users\User\.vscode\extensions中即可。
 
 注意版本的一致性，只要相差不大就行，如果一个是user版本一个是system版本就可能有问题，会出现安装成功，但是无法使用问题。
 
+### 10-3、配置远程连接
 - 左侧导航栏电脑图标
 - 放在SSH TARGETS上面，点击齿轮设置
-- 选择C:\Users\Administrator\.ssh\config配置
+- 选择‪C:\Users\User\.ssh\config配置
 - 第一行显示名称、第二行服务器ip地址、第三行登录账户，可以填写多个服务器
 - 点击打开窗口会显示Setting up SSH Host my_linux_vm: ([details](command:opensshremotes.showDetails "Show details")) Initializing VS Code Server
 - 由于未连接外网，所以肯定是无法正常连接的。
+```‪C:\Users\User\.ssh\config
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+Host my_linux_vm
+    HostName 172.22.65.15
+    User root
+
+# 我的编译环境，使用root账户登录
+Host linux_x86_compile
+    HostName 172.22.48.65
+    User root
+```
+保存之后，左侧的远程资源管理面板中会显示刚刚添加的远程服务器。同样鼠标悬停在上面，右侧会显示一个文件夹图标，我们点击文件夹，会新开一个窗口并尝试连接该远程服务器。然后输入密码，会提示出错，因为我们的编译环境同样也无法连接外网，因此，vscode无法安装必须的远程代理。
+
+### 10-4、离线安装远程vs-server代理
+- 进入远程服务器， 执行 ps aux | grep vscode，结果没有找到commit字符串，然后直接在windows的vscode的帮助-》关于中获取
+- 目录/root/.vscode-server/bin/下面有个文件夹名是commit，即~/.vscode-server/bin/
+- 稳定版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/stable
+- insider版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/insider
+
 
 ## 11、visual studio code 重置所有设置（还原默认设置）
 a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换pcName为自己电脑设置的名称）
