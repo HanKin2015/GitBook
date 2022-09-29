@@ -188,6 +188,14 @@ make install DESTDIR= /home/user/zws/build
 二.当然也还有第二种方法，那就是通过：sudo apt-get --reinstall install dpkg --get-selections | grep '[[:space:]]install' | cut -f1
 来重新安装全部软件，会全部刷新info目录 不过这个方法就要多花点时间去等了
 
-
-
+## 9、E: 软件包 ufw 需要重新安装，但是我无法找到相应的安装文件。
+```
+rm -rf /var/lib/dpkg/info/ufw.*
+dpkg -r --force-remove-reinstreq ufw
+[root@ubuntu0006:/media] #apt install xar
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树
+正在读取状态信息... 完成
+E: 无法定位软件包 xar
+```
 

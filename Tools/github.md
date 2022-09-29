@@ -49,6 +49,10 @@ HanKin2015/HanKin2015 is a ✨special ✨ repository that you can use to add a R
 ## 5、美化技巧之访问者统计数量
 https://github.com/antonkomarev/github-profile-views-counter
 
+## 6、进行开源项目开发
+参考1：https://github.com/mackyle/xar
+支持文件下载、网页规范
+
 
 
 
