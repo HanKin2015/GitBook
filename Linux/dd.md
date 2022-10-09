@@ -62,3 +62,12 @@ cp命令有缓存功能，即使U盘拔插了也无法准确测试。
 dd if=/dev/zero of=8M bs=8M count=1
 
 注意：一定需要count参数，否则会创造一个无限大的文件。
+
+## 5、dd命令有时候不适用
+```
+dd if=/dev/zero of=test bs=1024M count=1 oflag=direct
+dd if=test of=/dev/null bs=1024M count=1 iflag=direct
+```
+发现uos系统在处理这种空字符时确实拷贝速度过于迅速（直接复制粘贴拷贝），但是拷贝真实文件是正常的，因此不能使用这种命令来进行测试速度。
+
+

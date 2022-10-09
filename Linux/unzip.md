@@ -84,7 +84,29 @@ gunzip file#识别后缀，必须把后缀改为.gz //解压后的文件名，�
 gunzip解压gz文件后，得到一个没有后缀的文件，一脸懵逼。
 后面不管三七二十一，就是tar再进行解压。
 
-## 6、pkg文件
+## 6、pkg文件的解压和压缩
+``
+xar -xf ../Foo.pkg
+xar -cf ../Foo-new.pkg *
+```
+
+xar是一种扩展的归档格式(eXtensible ARchive format)，是一种开源的文件格式。xar文件在Mac OS X 10.5里是用于软件安装程序。
+```
+apt-get install autoconf automake libtool
+apt-get install libxml2-dev
+apt-get install libssl-dev
+
+https://github.com/mackyle/xar
+git clone https://github.com/mackyle/xar
+cd xar/xar
+./autogen.sh --noconfigure
+./configure
+make
+make install
+```
+
+
+
 
 
 

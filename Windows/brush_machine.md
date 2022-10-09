@@ -211,5 +211,23 @@ stat有4根，硬盘需要插2根线。
 目前发现的一个方法是看boottmgr.efi文件的创建日期来推断系统。
 如直接查看U盘里的安装文件日期，每个版本的日期明显不同，1903版的我这里文件修改日期为2019年6月12日。
 
+## 12、iso文件刻盘
+### 12-1、使用 ImageWriter.7z 刻盘, 仅支持UEFI启动
+据说ImageWriter是流式往U盘里刷数据，不是按照文件来的。
 
+这个名字有误导，该工具名为Win32 Disk Imager,  是一个免费的开源工具，用于将原始磁盘映像文件写入可移动设备（例如 USB 或闪存驱动器）。当您想要创建游戏或存储在某些 CD 或 DVD（以图像格式）上的其他数据的副本或备份时，它可以派上用场，以便您以后可以在需要时使用该备份。您还可以使用它将可移动设备备份到原始磁盘映像文件。
+
+该工具仅支持IMG文件进行读写，但效果很好。此外，该工具有点旧，旨在适用于 Windows 10 及更低版本，但它也适用于 Windows 11 操作系统。但我发现ISO文件也可以写入。
+
+Win32 Disk Imager是一款用来将原始磁盘映像(img、raw等文件)写入U盘或将U盘备份成img、raw映像文件的免费软件。你可以直接把它理解成是一款磁盘映像U盘烧写工具，帮您轻松写入img、raw磁盘映像进U盘，备份U盘为img、raw等映像文件。
+
+### 12-2、使用rufus.zip刻盘,支持bios, uefi启动
+### 12-3、BIOS设置(需要与刻盘方式匹配)
+uefi 启动方式
+设置csm(在advance 或者boot下) 为disable
+设置boot Mode(在boot下) 为UEFI only
+
+bios启动方式
+设置csm(在advance 或者boot下) 为enable,  若启动时找不到U盘, 尝试将此页设备的启动方式设置为legency
+设置boot Mode(在boot下) 为UEFI and Legency 或者 Legency
 

@@ -277,6 +277,11 @@ ListenAddress 127.0.0.1
 ListenAddress 0.0.0.0
 ```
 
+有时候发现还是连接不上，修改之后报错依然是这样。或者是ssh: connect to host 172.22.16.73 port 22: Connection timed out。
+ping的通，但是22端口不通，其他一台主机能22端口通。主要区别在于网段不同。
+
+想不通，实在是想不通。
+
 ### 12-1、扩展：22端口是否能ping通
 Ping命令使用的是ICMP协议，不是端口号。ICMP不像http、https、FTP……等有对应的端口，ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判断网络故障，ping只有在安装了TCP/IP协议以后才可以使用，往往系统安装好就已经集成了。
 
@@ -370,6 +375,8 @@ C:\Users\User\Downloads>telnet 172.22.16.73 22
 正在连接172.22.16.73...无法打开到主机的连接。 在端口 22: 连接失败
 ```
 查看ssh服务是否启动: systemctl status sshd
+其中一种场景居然是服务没有启动，启动之后就能通22端口了，并且能ssh了。
+
 查看端口是否打开: netstat -lnput |grep :22
 ```
 [root@ubuntu0006:~] #netstat -lnput |grep :22
