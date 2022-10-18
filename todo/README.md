@@ -2,6 +2,9 @@
 
 枚举一些代办的事情
 
+吾爱破解网值得一逛：https://www.52pojie.cn/forum.php?mod=guide&view=digest
+
+
 # qq消息汇总
 [如何一个周末搞定一篇论文](https://mp.weixin.qq.com/s/IS8IgwYqIlAocbNL9r1M8A)
 [这篇最近图深度学习的汇总](https://mp.weixin.qq.com/s/4K-RCRIrfAxinGgDJbIxcw)

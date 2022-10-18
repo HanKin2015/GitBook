@@ -229,77 +229,45 @@ list<first>, <last>
 显示从first行到last行之间的源代码。
 
 list ,<last>
-
 显示从当前行到last行之间的源代码。
 
 list +
-
 往后显示源代码。
-
 一般来说在list后面可以跟以下这些参数：
-
 <linenum>   行号。
-
 <+offset>   当前行号的正偏移量。
-
 <-offset>   当前行号的负偏移量。
-
 <filename:linenum>  哪个文件的哪一行。
-
 <function>  函数名。
-
 <filename:function>哪个文件中的哪个函数。
-
 <*address>  程序运行时的语句在内存中的地址。
 
 ### 7-2、一些常用signal的含义
-
 SIGABRT：调用abort函数时产生此信号。进程异常终止。
-
 SIGBUS：指示一个实现定义的硬件故障。
-
 SIGEMT：指示一个实现定义的硬件故障。EMT这一名字来自PDP-11的emulator trap 指令。
-
 SIGFPE：此信号表示一个算术运算异常，例如除以0，浮点溢出等。
-
 SIGILL：此信号指示进程已执行一条非法硬件指令。4.3BSD由abort函数产生此信号。SIGABRT现在被用于此。
-
 SIGIOT：这指示一个实现定义的硬件故障。IOT这个名字来自于PDP-11对于输入／输出TRAP(input/outputTRAP)指令的缩写。系统V的早期版本，由abort函数产生此信号。SIGABRT现在被用于此。
-
 SIGQUIT：当用户在终端上按退出键（一般采用Ctrl-/）时，产生此信号，并送至前台进
 
 程组中的所有进程。此信号不仅终止前台进程组（如SIGINT所做的那样），同时产生一个core文件。
-
 SIGSEGV：指示进程进行了一次无效的存储访问。名字SEGV表示“段违例（segmentationviolation）”。
-
 SIGSYS：指示一个无效的系统调用。由于某种未知原因，进程执行了一条系统调用指令，但其指示系统调用类型的参数却是无效的。
-
 SIGTRAP：指示一个实现定义的硬件故障。此信号名来自于PDP-11的TRAP指令。
-
 SIGXCPUSVR4和4.3+BSD支持资源限制的概念。如果进程超过了其软C P U时间限制，则产生此信号。
-
 SIGXFSZ：如果进程超过了其软文件长度限制，则SVR4和4.3+BSD产生此信号。
 
 ### 7-3、Core_pattern的格式
-
 可以在core_pattern模板中使用变量还很多，见下面的列表：
-
 %% 单个%字符
-
 %p 所dump进程的进程ID
-
 %u 所dump进程的实际用户ID
-
 %g 所dump进程的实际组ID
-
 %s 导致本次core dump的信号
-
 %t core dump的时间 (由1970年1月1日计起的秒数)
-
 %h 主机名
-
 %e 程序文件名
-
 
 ## 8、附录二
 gdb基本使用命令
@@ -532,7 +500,6 @@ hankin:hankin/host-083a88c60e6e(HOST-OS) /hankin/data/local/hj # ldd /usr/bin/gd
 ```
 没有python依赖，但是执行却报错有关python。
 
-
 ## 16、Could not find platform independent libraries Could not find platform dependent librarie
 是因为gdb命令依赖python环境，需要安装python。
 ```
@@ -542,9 +509,29 @@ Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
 ImportError: No module named site
 ```
 
+## 17、gdb调试秒崩溃的程序
+没有core文件生成，在/proc/sys/kernel/core_pattern发现生成在/tmp/目录下，但是是0大小的文件。
+然后使用ulimit -c发现结果就是0，但是此时是超级管理员执行，在非管理员执行时发现是unlimited，这是一个大坑啊。
+```
+#!/bin/bash
+#
+# 文 件 名: solve_dpkg_install_error.sh
+# 文件描述: 解决E: Sub-process /usr/bin/dpkg returned an error code (1)错误
+# 作    者: HanKin
+# 创建日期: 2022.09.13
+# 修改日期：2022.09.13
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
 
-
-
+sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old
+sudo mkdir /var/lib/dpkg/info
+sudo apt-get update
+apt-get -f install
+mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old
+rm -rf /var/lib/dpkg/info
+mv /var/lib/dpkg/info_old /var/lib/dpkg/info
+```
 
 
 

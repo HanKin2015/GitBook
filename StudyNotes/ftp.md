@@ -64,14 +64,124 @@ https://www.pc-daily.com/xitong/77994.html
 
 这种方法：不稳定，可能由于什么原因
 
+## 10、什么是SFTP
+SFTP是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的网络的加密方法。SFTP与FTP有着几乎一样的语法和功能。SFTP为SSH的其中一部分，是一种传输档案至Blogger伺服器的安全方式。其实在SSH软件包中，已经包含了一个叫作SFTP(Secure File Transfer Protocol)的安全文件信息传输子系统，SFTP本身没有单独的守护进程，它必须使用sshd守护进程（端口号默认是22）来完成相应的连接和答复操作，所以从某种意义上来说，SFTP并不像一个服务器程序，而更像是一个客户端程序。SFTP同样是使用加密传输认证信息和传输的数据，所以，使用SFTP是非常安全的。但是，由于这种传输方式使用了加密/解密技术，所以传输效率比普通的FTP要低得多，如果您对网络安全性要求更高时，可以使用SFTP代替FTP。
 
+SFTP协议是在FTP的基础上，对数据采取了加密/解密技术，使数据传输更安全。SFTP的传输效率比FTP的低很多。
 
+SFTP要求客户端用户必须由服务器进行身份验证，并且数据传输必须通过安全通道（SSH）进行，即不传输明文密码或文件数据。
+它允许对远程文件执行各种操作，有点像远程文件系统协议。SFTP允许从暂停传输，目录列表和远程文件删除等操作中恢复。
 
+### 10-1、SFTP和FTP之间的区别
+SFTP 和 FTP非常相似，都支持批量传输（一次传输多个文件），文件夹/目录导航，文件移动，文件夹/目录创建，文件删除等。
 
+1、安全通道
+FTP 不提供任何安全通道来在主机之间传输文件；
+而，SFTP协议提供了一个安全通道，用于在网络上的主机之间传输文件。
 
+2、使用的协议
+FTP使用 TCP/IP协议。
+而，SFTP是SSH协议的一部分，它是一种远程登录信息。
 
+3、链接方式
+FTP使用TCP端口21上的控制连接建立连接。
+而，SFTP是在客户端和服务器之间通过SSH协议（TCP端口22）建立的安全连接来传输文件。
 
+4、安全性
+FTP密码和数据以纯文本格式发送，大多数情况下是不加密的，安全性不高。
+而，SFTP会在发送之前加密数据，二进制的形式传递，是无法 "按原样" 阅读的，安全性较高。
 
+### 10-2、用法
+安装SSH软件包就包含了sftp命令。
+```
+[root@ubuntu0006:~] #sftp
+usage: sftp [-1246aCfpqrv] [-B buffer_size] [-b batchfile] [-c cipher]
+          [-D sftp_server_path] [-F ssh_config] [-i identity_file] [-l limit]
+          [-o ssh_option] [-P port] [-R num_requests] [-S program]
+          [-s subsystem | sftp_server] host
+       sftp [user@]host[:file ...]
+       sftp [user@]host[:dir[/]]
+       sftp -b batchfile [user@]host
+[root@ubuntu0006:~] #apt-file search sftp   # 错误，这样搜索太多太多结果了
+[root@ubuntu0006:~] #whereis sftp
+sftp: /usr/bin/sftp /usr/share/man/man1/sftp.1.gz
+[root@ubuntu0006:~] #apt-file search /usr/bin/sftp
+mysecureshell: /usr/bin/sftp-admin
+mysecureshell: /usr/bin/sftp-kill
+mysecureshell: /usr/bin/sftp-state
+mysecureshell: /usr/bin/sftp-user
+mysecureshell: /usr/bin/sftp-verif
+mysecureshell: /usr/bin/sftp-who
+openssh-client: /usr/bin/sftp
+sftpcloudfs: /usr/bin/sftpcloudfs
+```
+
+lpwd：显示本地路径，pwd：显示远程路径。
+lcd：进入本地路径，cd：进入远程路径。
+```
+[root@ubuntu0006:~] #sftp root@172.22.65.15
+Warning: Permanently added '172.22.65.15' (RSA) to the list of known hosts.
+Connected to 172.22.65.15.
+sftp> pwd
+Remote working directory: /root
+sftp> lpwd
+Local working directory: /home/mobaxterm
+
+sftp> put D:\Tools\upan_auto_copy\upan_auto_copy.exe /media/
+Invalid command.
+sftp> lcd D:/Tools/upan_auto_copy
+sftp> lpwd
+Local working directory: /drives/d/Tools/upan_auto_copy
+sftp> put upan_auto_copy.exe
+Uploading upan_auto_copy.exe to /root/upan_auto_copy.exe
+upan_auto_copy.exe                                                                            100% 6770KB  16.9MB/s   00:00
+sftp> lpwd
+Invalid command.
+sftp> lpwd
+Local working directory: /drives/d/Tools/upan_auto_copy
+sftp> put upan_auto_copy.exe /media/r
+Uploading upan_auto_copy.exe to /media/r
+upan_auto_copy.exe                                                                            100% 6770KB  17.6MB/s   00:00
+```
+不是很懂，为啥put命令有时候使用失败了。
+上传：put 本地路径/文件名 远程路径
+下载：get 远程路径/文件名 本地路径
+      get -r  远程路径/文件夹名 本地路径
+
+### 10-3、常用命令
+get --下载
+put --上传
+clear --清屏
+exit、quit --断开连接
+help --帮助
+
+远程端服务器的操作指令：
+ls --显示目录
+rm --删除
+cd --切换路径
+mkdir --创建目录
+pwd --显示当前路径
+
+本地端服务器的操作指令（在远程指令前加l(local)即可）： 
+lls --显示目录
+lrm --删除
+lcd --切换路径
+lmkdir --创建目录
+lpwd --显示当前路径
+
+### 10-4、注意说明
+Windows环境路径和Linux环境路径的写法要注意区分，不然可能get和put时无法获取正常路径导致失败；还有登录服务器的用户权限也有要求，无正常读写权限的文件及文件目录，可能无法操作（需要通过命令开通相应权限）从来导致失败。
+
+### 10-5、如何在命令行方式运行sftp时携带密码
+sftp不同于ftp，没有提供选项如 -i 可以将密码直接编码进程序。使用sftp指令，会自动请求用户输入密码。
+
+LFTP是一款非常著名的字符界面的文件传输工具。支持FTP、HTTP、FISH、SFTP、HTTPS和FTPS协议。
+
+https://www.bbsmax.com/A/MAzAoZqo59/
+https://wenku.baidu.com/view/0ce565f1cd2f0066f5335a8102d276a201296041.html
+
+### 10-6、使用freessh在dwindows 上搭建 sftp 服务器
+https://blog.csdn.net/m0_43584016/article/details/104985031
 
 
 

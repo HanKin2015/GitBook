@@ -5,7 +5,6 @@
 /etc/profile.d/
 /etc/bash.bashrc
 
-
 ## 2、个性化设置
 在/etc/profile文件中找到配置项HISTSIZE，默认值为1000
 
@@ -20,7 +19,7 @@ export HISTORY_FILE=$(date +%Y%m%d%H%M)_${IP}.log
 export PROMPT_COMMAND='HISTTIMEFORMAT="[%F %T] " history 1 >> $HISTORY_FILE'
 ```
 
-export HISTSIZE=1 立竿见影
+export HISTSIZE=1 立竿见影，临时生效
 
 ```
 #export HISTSIZE=

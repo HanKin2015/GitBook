@@ -105,6 +105,51 @@ C 是设备响应 发送数据（IN包）或者接收数据状态（OUT包）
 ### 部分linux系统无usbmon
 https://www.kernel.org/doc/html/latest/usb/usbmon.html
 需要安装内核包。
+```
+root@user-W515-PGUV-WBY0:/home/user# modprobe usbmon
+modprobe: FATAL: Module usbmon not found in directory /lib/modules/4.19.71+
+```
+usbmon 即 usb monitor，是 linux 内置的 usb 抓包工具。
+当前使用的是ubuntu18.04，驱动模块的位置：/lib/modules/5.3.0-40-generic/kernel/drivers/usb/mon/usbmon.ko
+如果不确定当前内核的版本，可以先输入uname -r命令查看。
+https://cloud.tencent.com/developer/article/1935522
+
+我找了一个正常的环境，在/lib/modules/4.4.0-210-generic/kernel/drivers/usb/mon/usbmon.ko。
+```
+[root@ubuntu0006:/lib/modules/4.4.0-210-generic] #apt-file search /lib/modules/4.4.0-210-generic/kernel/drivers/usb/mon/usbmon.ko
+linux-modules-extra-4.4.0-210-generic: /lib/modules/4.4.0-210-generic/kernel/drivers/usb/mon/usbmon.ko
+
+root@user-W515-PGUV-WBY0:/home/user# uname -r
+4.19.71+
+root@user-W515-PGUV-WBY0:/home/user# apt search linux-modules
+正在排序... 完成
+全文搜索... 完成
+linux-modules-5.4.0-1001-raspi2/10.1 5.4.0-1001.1 arm64
+  Linux kernel extra modules for version 5.4.0 on ARMv8 SMP
+
+linux-modules-5.4.0-26-generic/10.1 5.4.0-26.30 arm64
+  Linux kernel extra modules for version 5.4.0 on ARMv8 SMP
+
+linux-modules-5.4.18-17-biv/10.1 5.4.18-17.3b1 arm64
+  Linux kernel extra modules for version 5.4.18 on ARMv8 SMP
+
+linux-modules-5.4.18-17-generic/10.1 5.4.18-17.3b1 arm64
+  Linux kernel extra modules for version 5.4.18 on ARMv8 SMP
+```
+猜测应该在linux-modules-x.x.x-xxx-generic，搜索只有高版本内核的，先安装再说。安装失败了。
+不要猜测，可以通过apt-file命令来找到ko文件来源。
+我安装了linux-modules-extra-5.4.18-17-generic后发现有usbmon.ko文件了，哈哈，虽然总体安装失败了。
+```
+root@user-W515-PGUV-WBY0:/lib/modules/5.4.18-17-generic/kernel/drivers/usb/mon# ll
+总用量 76
+drwxr-xr-x  2 root root  4096 10月 11 17:15 ./
+drwxr-xr-x 23 root root  4096 10月 11 17:15 ../
+-rw-r--r--  1 root root 66865 1月  17  2021 usbmon.ko
+root@user-W515-PGUV-WBY0:/lib/modules/5.4.18-17-generic/kernel/drivers/usb/mon# insmod usbmon.ko
+insmod: ERROR: could not insert module usbmon.ko: Required key not available
+```
+https://blog.csdn.net/m0_38066161/article/details/81812816
+根据上面的教程可能很复杂，意思是说内核不准安装其他文件，权限问题。
 
 ## 1-5、USBTrace
 crack：破裂 、裂缝、优秀的
@@ -134,17 +179,13 @@ adb shell screencap path	#截屏
 具备分析功能，需重启计算机
 不再更新：最新版2.2
 
-
-
 ## 1-8、DebugView
 https://blog.csdn.net/baidu_37503452/article/details/87599038
 https://blog.csdn.net/baidu_37503452/article/details/87598982
 
 
 # 2、usb协议学习
-
 《圈圈教你USB》
-
 《cypress_USB2.0简介》
 
 ## ACPI

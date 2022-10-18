@@ -85,3 +85,6 @@ PotPlayer 是 KMPlayer 的原制作者姜龙喜进入 Daum 公司后的新一代
 解码器：https://github.com/Nevcairiel/LAVFilters/releases
 
 https://notepad-plus-plus.org/
+
+## 10、中国制霸生成器
+https://github.com/itorr/china-ex

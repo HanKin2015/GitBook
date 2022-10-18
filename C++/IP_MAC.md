@@ -1,9 +1,7 @@
 [TOC]
 
 # IP和MAC地址
-
 进入公司第一次敲代码，仅仅是一个简单练手的，就是向服务端发送客户端版本号、ip地址、mac地址。
-
 请求配置csp文件时，链接也需要发送版本号字段（js代码-猝）。
 
 https://zhuanlan.zhihu.com/p/93630586?from_voters_page=true
@@ -302,7 +300,73 @@ FAIL:
 
 
 
+## 7、IP地址
 
+### 7-1、IP地址的表示法
+1、ASCII表示法：
+210.25.132.181，也就是字符串形式，英语叫做IPv4 numbers-and-dots notation。
+
+2、整型表示法：
+3524887733，整数形式的IP地址，。英语叫做binary data。
+
+### 7-2、IP地址的转换
+IPv4:
+1、inet_addr函数
+
+#include <arpa/inet.h>
+
+in_addr_t inet_addr(const char* strptr);
+
+将字符串转换为32位二进制网络字节序的IPV4地址，即将一个点间隔地址转换成一个in_addr。
+
+2、inet_ntoa函数
+
+ #include <arpa/inet.h>
+
+char* inet_ntoa(struct in_addr in);
+
+将一个十进制网络字节序转换为点分十进制IP格式的字符串。
+
+3、 inet_ntoa函数
+#include <arpa/inet.h>
+
+int inet_aton(const char *string, struct in_addr *addr);
+
+是一个改进的方法来将一个字符串IP地址转换为一个32位的网络序列IP地址。
+
+IPv6 :
+1、inet_pton函数
+
+2、inet_ntop函数
+
+程序示例：
+
+#Include <sys/types.h>
+
+#include <sys/socket.h>
+
+#include <arpa/inet.h>
+
+strcut sockaddr_in   src;
+
+src.sin_addr.s_addr   =  inet_addr("*.*.*.*");                 //构建网络地址。
+
+printf("%s\n",inet_ntoa(src.sin_addr));                 //将网络地址转换成字符串。
+
+
+
+in_addr_in   inet_addr(const char *strptr);
+
+inet_addr的参数是一个：点分十进制字符串，返回的值为一个32位的二进制网络字节序的IPv4地址，不然的话就是：INADDR_NONE
+
+而返回值为：in_addr_t:IPv4,一般为uint32_t
+
+所以也可以定义为：unsigned long
+
+
+char * inet_ntoa(struct in_addr inaddr);
+
+参数是一个结构体，所以要调用必须先定义一个结构体。
 
 
 

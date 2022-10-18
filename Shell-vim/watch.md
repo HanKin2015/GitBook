@@ -1,4 +1,5 @@
 # shell脚本每隔几秒执行一次命令
+
 ```
 #!/bin/bash
 while :           #冒号表述死循环 同while (true)

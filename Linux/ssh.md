@@ -125,7 +125,7 @@ scp -P 34543 root@1.2.3.4:/home/admin/xx ./
 2、ssh指定端口登录：
 ssh -p 34543 root@1.2.3.4
 
-## 10、无法使用scp命令发送文件
+## 10、chroot环境无法使用scp命令发送文件，报错PRNG is not seeded
 ```
 [root@chroot <vtcompile> ]#ssh-keygen -t rsa
 PRNG is not seeded
@@ -214,6 +214,7 @@ mount: unknown filesystem type 'dev'
 [root@chroot <vtcompile> / ]#
 ```
 无奈，百度也没有找到合适的方法，然后我从其他环境的dev目录拷贝到当前环境，然后就成功可用了。
+另外一种方法是退出chroot环境，可能是这个chroot环境没有拷贝/dev/目录下面的文件导致的。
 
 ```
 [root@chroot <vtcompile> / ]#fdisk -l
