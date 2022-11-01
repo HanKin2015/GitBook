@@ -81,6 +81,7 @@ dhclient
 ## 6、无法ping通网关
 arping 1.2.255.254 正常（后面是网关地址）
 ifconfig查看网络ip正常
+查看网络冲突：arping -I ens18 1.2.3.4
 
 ### 6-1、ip冲突
 关闭网卡连接，看是否能ping通ip，ifconfig eth0 down
@@ -120,10 +121,11 @@ windows：169.22.64.246
 ubuntu18:169.22.64.246
 xubuntu执行命令验证：
 ```
-arping -a 169.22.64.246
+arping 169.22.64.246
 这时候会有两个mac地址，说明是ip冲突了。
 如果在其中一个主机上面运行则是没有任何结果就是唯一，有mac地址就是冲突。
 ```
+很奇怪，有时候会出现能ping通，但是无法使用arping进行ping通，你说奇怪不奇怪。
 
 https://zhuanlan.zhihu.com/p/422812398
 

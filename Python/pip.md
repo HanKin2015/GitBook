@@ -14,6 +14,10 @@ python第三方库包下载：https://pypi.org/project/pyinstaller/#files
 配置镜像源：
 pip install 下载的模块名 -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```/root/.config/pip/pip.conf
+[global]
+    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
 Writing to C:\Users\Administrator\AppData\Roaming\pip\pip.ini
 把这个路径添加到系统环境变量就好了（不添加好像也行，可能以前添加了）
 

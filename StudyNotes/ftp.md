@@ -31,7 +31,7 @@ FTP---文件传输协议（File Transfer Protocol，FTP）是用于在网络上�
 https://baijiahao.baidu.com/s?id=1722099433545935770&wfr=spider&for=pc
 
 控制面板-》程序-》打开或关闭Windows功能-》Internet 信息服务-》FTP服务器和Web 管理工具下面全选 后确定进行安装
-创建一个ftp用户账号：计算机管理-》本地用户和组-》右键用户文件夹-》新用户-》ftpuser/stpuser 去掉下次更改密码
+创建一个ftp用户账号：计算机管理-》本地用户和组-》右键用户文件夹-》新用户-》ftpuser/ftpuser 去掉下次更改密码
 配置ftp服务器：计算机管理-》服务和应用程序-》Internet 信息服务 （IIS）管理器-》中间连接-》右键电脑名-》添加FTP站点
 
 这个好像跟网上邻居是同样的东西，网上邻居共享一个文件夹。跟这个有啥区别？？？？
@@ -183,6 +183,8 @@ https://wenku.baidu.com/view/0ce565f1cd2f0066f5335a8102d276a201296041.html
 ### 10-6、使用freessh在dwindows 上搭建 sftp 服务器
 https://blog.csdn.net/m0_43584016/article/details/104985031
 
-
+## 11、windows开启远程桌面连接
+打开计算机属性-》远程控制设置-》允许远程协助-》允许任意版本
+注意该电脑需要有账号和密码才能连接。
 
 

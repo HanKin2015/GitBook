@@ -9,6 +9,7 @@
 git config --global user.email "49660@zhangsan.com"
 ssh-keygen -t rsa -C "邮件地址"
 拷贝生成的公钥到git的ssh钥匙中：/root/.ssh/id_rsa.pub
+本地需要同时具有id_rsa.pub和id_rsa文件，缺一不可。
 
 访问令牌啥的应该不需要，添加完ssh秘钥之后需要稍微等待一段时间才能生效
 ```
@@ -667,6 +668,7 @@ global参数，用了这个参数，表示你这台机器上所有的Git仓库�
 ```
 ssh -T git@github.com    查看是否配置好
 ssh-keygen -t rsa -C "邮件地址"
+秘钥配置见本文章第5行。
 ```
 
 代码参数含义：
@@ -1374,7 +1376,7 @@ git commit --amend --reset-author
 ## git文件已提交，但还是显示文件夹红色感叹号(windows系统)
 参考：https://www.jianshu.com/p/420d38913578?tdsourcetag=s_pctim_aiomsg
 
-原因是：存在相同名字但大小写不同的文件
+原因是：远端存在相同名字但大小写不同的文件，本地windows大小写不区分
 
 设置本地git环境识别大小写
 git config core.ignorecase false
@@ -1383,14 +1385,21 @@ git config core.ignorecase false
 git ls-files .
 
 删除文件
-git rm --cached readme.md
+git rm --cached readme.md jack.md
 git rm --cached readme_en.md
 git status
 git add .
 git commit -m"rm files"
 git push
 
+git ls-files命令会一直递归显示全部文件，没有找到只显示当前文件夹的选项。
+git ls-tree -l HEAD可以试试。
 
-
-
-
+## docker环境配置git无法输入中文
+可以使用shell脚本执行
+```
+git config --global user.name "张三12345"
+git config --global user.email "12345@zhangsan.com"
+```
+发现依然无法下载代码，决定使用git clone http://xxx.git。
+还是失败告终，最终通过拷贝别人docker环境的id_rsa文件搞定，注意这个文件的权限，需要chmod 0600 /root/.ssh/id_rsa。

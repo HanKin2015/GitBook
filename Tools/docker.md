@@ -10,9 +10,12 @@ Docker 使用客户端-服务器 (C/S) 架构模式。Docker 客户端会与 Doc
 
 Docker 是一个[开源](https://baike.baidu.com/item/开源/246339)的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 [Linux](https://baike.baidu.com/item/Linux)或Windows 机器上，也可以实现[虚拟化](https://baike.baidu.com/item/虚拟化/547949)。容器是完全使用[沙箱](https://baike.baidu.com/item/沙箱/393318)机制，相互之间不会有任何接口。
 
-
-
-
+## 2、常用命令
+查看docker环境：docker ps -a
+进入docker环境1(CONTAINER ID)：docker exec -it 86d66188df09 bash
+进入docker环境2(NAMES)：docker exec -it compile-x86_64 bash
+拷贝文件进入docker：docker cp 86d66188df09:/root/compile/qemu/qemu-5.0.0/x86_64-softmmu/qemu-system-x86_64 .
+拷贝文件导出docker：docker cp uvc_qemu.c 86d66188df09:/home/
 
 
 

@@ -9,6 +9,12 @@
 
 ## 2、查看系统信息
 ```
+root@hankin-PC:~# lsb_release -a
+No LSB modules are available.
+Distributor ID: Uos
+Description:    UnionTech OS Desktop 20 Pro
+Release:        20
+Codename:       eagle
 root@hankin-PC:~# cat /etc/os-release
 PRETTY_NAME="UnionTech OS Desktop 20 Pro"
 NAME="uos"

@@ -42,7 +42,6 @@ Codename:       xenial
 ```
 
 ## 4、查看Linux系统版本
-
 居然有Linux系统查看不到详细的版本。。。。。目前找到以下五种查看方式。
 
 1. /etc/issue 和 /etc/redhat-release都是系统安装时默认的发行版本信息，通常安装好系统后文件内容不会发生变化。lsb_release -a   ===  cat /etc/redhat_release。

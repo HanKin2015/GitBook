@@ -30,6 +30,10 @@ apt search 和 apt-cache search区别
 sudo apt-get clean
 sudo apt-get update
 apt autoremove
+修改源：vim /etc/apt/source.list，然后需要apt update
+升级软件包：sudo apt upgrade
+列出可更新的软件包及版本信息：apt list --upgradeable
+升级软件包，升级前先删除需要更新软件包：sudo apt full-upgrade
 
 ### 4-1、安装安装包时报其他错误
 ```

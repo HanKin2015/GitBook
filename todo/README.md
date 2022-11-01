@@ -3,7 +3,7 @@
 枚举一些代办的事情
 
 吾爱破解网值得一逛：https://www.52pojie.cn/forum.php?mod=guide&view=digest
-
+黑客街：https://www.hackjie.com/
 
 # qq消息汇总
 [如何一个周末搞定一篇论文](https://mp.weixin.qq.com/s/IS8IgwYqIlAocbNL9r1M8A)

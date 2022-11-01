@@ -30,7 +30,7 @@ default connected primary 640x480+0+0 0mm x 0mm
 cw@Ubuntu18:~$ echo $DISPLAY
 ```
 
-通过上面发现该ubuntu没有使用qxl驱动，使用X -version查看版本。
+通过上面发现该ubuntu没有使用qxl驱动（需要在分辨率前面显示qxl-0字段），使用X -version查看版本。
 文件夹/usr/lib/xorg/modules/drivers/缺乏驱动文件。
 
 正常情况：/usr/lib/xorg/modules/drivers/qxl_drv.so

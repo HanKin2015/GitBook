@@ -1,14 +1,9 @@
 [TOC]
 
 #　圈圈教你玩USB
-
 http://computer00.21ic.org/
-
 http://blog.ednchina.com/computer00
-
 年份：2009
-
-
 
 # 0、短暂任务
 1.先根据这这些文档，把usb协议、外设重定向整个流程过一遍
@@ -16,16 +11,10 @@ http://blog.ednchina.com/computer00
 3.带着实际的问题，深入学习各个外设模块。
 
 # 1、USB概述及协议基础
-
 You SB、USA的弟弟。
-
 通用串行总线Universal Serial Bus
-
 即插即用PnP（Plug and Play）
-
 USB OTG（On The Go）：同一个设备，在不同的场合下可以在主机与从机之间切换。
-
-
 
 网站资料：[USB开发者论坛](http://www.usb.org)
 

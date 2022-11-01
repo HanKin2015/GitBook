@@ -32,3 +32,9 @@ yes
 substring not found
 -1
 ```
+
+## 2、Python字母大小写的转换
+upper()：所有字母大写
+lower()：所有字母小写
+capitalize()：首字母大写，其他字母小写
+title()：每个单词首字母大写，其他小写

@@ -5,13 +5,15 @@
 
 银河麒麟（KylinOS）原是在“863计划”和国家核高基科技重大专项支持下，国防科技大学研发的操作系统，后由国防科技大学将品牌授权给天津麒麟，后者在2019年与中标软件合并为麒麟软件有限公司，继续研制的Linux操作系统。银河麒麟是优麒麟（Ubuntu Kylin）的商业发行版。使用UKUI桌面。
 
+查看系统版本信息：
+cat /etc/.kylin.info
+
 ## 2、银河麒麟烦人的提示
 [Note] System unauthorized, Please contact the system supplier
 
 ssh进入的时候明显能看见当前版本是试用版的缘故：
 ```
 Welcome to Kylin 4.0.2 (GNU/Linux 4.4.58-20170818.kylin.5.desktop-generic aarch64)
-
 
 银河麒麟操作系统（试用版）免责声明
 

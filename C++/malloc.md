@@ -119,51 +119,57 @@ template <class T, int BLOCK_NUM= 50>
 class GenericMP
 {
 public:
-static VOID *operator new(size_t allocLen)
-{
-assert(sizeof(T) == allocLen);
-if(!m_NewPointer)
-MyAlloc();
-UCHAR *rp = m_NewPointer;
-m_NewPointer = *reinterpret_cast<UCHAR**>(rp); //由于头4个字节被“强行”解释为指向下一内存块的指针，这里m_NewPointer就指向了下一个内存块，以备下次分配使用。
-return rp;
-}
-static VOID operator delete(VOID *dp)
-{
-*reinterpret_cast<UCHAR**>(dp) = m_NewPointer;
-m_NewPointer = static_cast<UCHAR*>(dp);
-}
+    static VOID *operator new(size_t allocLen)
+    {
+        assert(sizeof(T) == allocLen);
+        if(!m_NewPointer)
+            MyAlloc();
+        UCHAR *rp = m_NewPointer;
+        m_NewPointer = *reinterpret_cast<UCHAR**>(rp); //由于头4个字节被“强行”解释为指向下一内存块的指针，这里m_NewPointer就指向了下一个内存块，以备下次分配使用。
+        return rp;
+    }
+    
+    static VOID operator delete(VOID *dp)
+    {
+        *reinterpret_cast<UCHAR**>(dp) = m_NewPointer;
+        m_NewPointer = static_cast<UCHAR*>(dp);
+    }
+    
 private:
-static VOID MyAlloc()
-{
-m_NewPointer = new UCHAR[sizeof(T) * BLOCK_NUM];
-UCHAR **cur = reinterpret_cast<UCHAR**>(m_NewPointer); //强制转型为双指针，这将改变每个内存块头4个字节的含义。
-UCHAR *next = m_NewPointer;
-for(INT i = 0; i < BLOCK_NUM-1; i++)
-{
-next += sizeof(T);
-*cur = next;
-cur = reinterpret_cast<UCHAR**>(next); //这样，所分配的每个内存块的头4个字节就被“强行“解释为指向下一个内存块的指针， 即形成了内存块的链表结构。
-}
-*cur = 0;
-}
-static UCHAR *m_NewPointer;
+    static VOID MyAlloc()
+    {
+        m_NewPointer = new UCHAR[sizeof(T) * BLOCK_NUM];
+        UCHAR **cur = reinterpret_cast<UCHAR**>(m_NewPointer); //强制转型为双指针，这将改变每个内存块头4个字节的含义。
+        UCHAR *next = m_NewPointer;
+        for(INT i = 0; i < BLOCK_NUM-1; i++)
+        {
+            next += sizeof(T);
+            *cur = next;
+            cur = reinterpret_cast<UCHAR**>(next); //这样，所分配的每个内存块的头4个字节就被“强行“解释为指向下一个内存块的指针， 即形成了内存块的链表结构。
+        }
+        *cur = 0;
+    }
+    
+    static UCHAR *m_NewPointer;
+
 protected:
-~GenericMP()
-{
-}
+    ~GenericMP()
+    {
+    }
 };
+
 template<class T, int BLOCK_NUM >
 UCHAR *GenericMP<T, BLOCK_NUM >::m_NewPointer;
 GenericMP模板类应用
 class ExpMP : public GenericMP<ExpMP>
 {
-BYTE a[1024];
+    BYTE a[1024];
 };
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-ExpMP *aMP = new ExpMP();
-delete aMP;
+    ExpMP *aMP = new ExpMP();
+    delete aMP;
 }
 ```
 

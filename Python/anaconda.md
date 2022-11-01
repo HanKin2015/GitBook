@@ -1,7 +1,6 @@
 # anaconda
 
 ## 1、利用conda升级Anaconda及其包
-
 以管理员身份启动Anaconda Prompt： 
 
 升级conda(升级Anaconda前需要先升级conda)：conda update conda 
@@ -33,5 +32,19 @@ pip -v list：显示所有已安装的python包的详细信息（安装地址）
 pip uninstall 包名：卸载python包
 pip uninstall 包名 -y：卸载python包时不用再输入参数y表示确定要卸载
 pip show 包名：显示安装的python包的详细信息，包括安装路径
+
+## 3、安装
+官网：https://www.anaconda.com/
+个人版才是免费的，发现新版本下载只有收费版本。
+
+distribution，没有individuation版本。
+后面发现地址：https://repo.anaconda.com/archive/
+
+
+
+
+
+
+
 
 

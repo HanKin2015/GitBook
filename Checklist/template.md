@@ -59,7 +59,7 @@ clean:
  
 int main(int argc, char *argv[])
 {
-	return 0;
+    return 0;
 }
 
 printf("********* %s[%d] *********\n", __FUNCTION__, __LINE__);
@@ -168,7 +168,7 @@ if __name__ == '__main__':
     main()
 
     end_time = time.time()
-    print('process spend {} s.'.format(round(end_time - start_time, 3)))
+    print('process spend {} s.\n'.format(round(end_time - start_time, 3)))
     
 print('-------- {}[{}] --------'.format(sys._getframe().f_code.co_name, sys._getframe().f_lineno))
 ```
