@@ -21,7 +21,6 @@ chattr -i /etc/resolv.conf
 3.只有拥有root权限，才拥有设置chattr的权限
 
 ## 3、简介
-
 Linux lsattr命令用于显示文件属性。
 用chattr执行改变文件或目录的属性，可执行lsattr指令查询其属性。
 
@@ -69,7 +68,6 @@ assert is_immutable('/etc/inittab') is True
 assert is_immutable_safe('/etc/inittab') is False
 ```
 
-
 ## 5、lsattr: Inappropriate ioctl for device While reading flags
 https://serverfault.com/questions/324975/lsattr-inappropriate-ioctl-for-device-while-reading-flags
 ```
@@ -92,3 +90,24 @@ Note that for ext4 both user_xattr and acl are enabled by default. This varies f
 
 重新为根目录挂载文件系统属性：
 mount -o remount,user_xattr /
+
+## 6、linux下无法删除文件的原因，提示：不允许的操作
+当使用rm删除文件和文件夹的时候提示：rm: 无法删除"bash": 不允许的操作
+
+解决方法：
+
+1、查看文件属性
+```
+lsattr filetodel<br>----ia-------e- filetodel
+```
+可以看到此文件有-i 和-a属性，此时我们只要将此属性删除掉即可
+
+通过命令 chattr,可以设置文件/文件夹的隐藏属性,来保证文件/文件夹的安全.其中比较重要的参数为i和a.这两个属性只有root用户才可以设置或清除.而通过命令 lsattr 可以查看这些属性.
+
+2、删除属性：
+```
+chattr -i authorized_keys2
+chattr -a authorized_keys2
+chattr -u authorized_keys2
+```
+再次删除该文件，即可正常删除了

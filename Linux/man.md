@@ -1,5 +1,6 @@
 # man命令
 
+## 1、简介
 大家都知道在Unix/Linux中有个man命令，可以查询常用的命令，函数。可是对于我们这样只知道用"man 函数名"来查询的人来说，会遇到很多问题，比如：
 man read，我想看的是ANSI C中stdio的read函数原型和说明，没想到出来的确是BASH命令的说明，这是怎么回事呢？
 
@@ -25,7 +26,13 @@ l 本地文档， 与本特定系统有关的。
  
 要查属于哪一部分的，就用哪一部分的编号在命令之前。
 
-
+## 2、在线手册
+https://www.shouce.ren/api/view/a/8862
+http://linux.51yip.com/
+https://www.linuxcool.com/ls
+https://www.debian.org/doc/manuals/debian-reference/index.zh-cn.html
+https://manpages.ubuntu.com/manpages/impish/zh_CN/
+https://man7.org/linux/man-pages/man3/shm_open.3.html
 
 
 
