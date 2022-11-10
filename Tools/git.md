@@ -1403,3 +1403,61 @@ git config --global user.email "12345@zhangsan.com"
 ```
 发现依然无法下载代码，决定使用git clone http://xxx.git。
 还是失败告终，最终通过拷贝别人docker环境的id_rsa文件搞定，注意这个文件的权限，需要chmod 0600 /root/.ssh/id_rsa。
+
+## 尬了一个尴尬
+代码本地明明似乎有修改，但是还是能下载代码下来。
+然后windows本地看还是有修改，如下：
+```
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git status .
+HEAD detached at origin/Develop_ready_oldarch
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   xt_DSCP.h
+        modified:   xt_MARK.h
+        modified:   xt_TCPMSS.h
+        modified:   xt_connmark.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git checkout xt_connmark.h
+Updated 1 path from the index
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git status .
+HEAD detached at origin/Develop_ready_oldarch
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   xt_CONNMARK.h
+        modified:   xt_DSCP.h
+        modified:   xt_MARK.h
+        modified:   xt_TCPMSS.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git checkout .
+Updated 8 paths from the index
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git checkout .
+Updated 8 paths from the index
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git config -l | grep case
+core.ignorecase=true
+core.ignorecase=true
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git config core.ignorecase false
+
+User@new-win10x60050 MINGW64 /d/Demo/sysroot/usr/include/linux/netfilter ((TAG/AI5B1))
+$ git config -l | grep case
+core.ignorecase=true
+core.ignorecase=false
+```
+使用git checkout可以无限重置，使用git clean -fd也不行，后来发现原来是远端仓库拥有同名的文件，只是大小写不同，但是windows系统是不区分大小写的。修改忽略大小写是行不通的。
+只能在linux环境下载代码看，要不忽略这些同名文件，一般来说正常环境是不会去修改这些莫名其妙的文件的。

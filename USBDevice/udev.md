@@ -113,25 +113,238 @@ udevadm info -a  --name=vda
  
 ### 5-2、udevadm规则（固定设备节点名字）
 对于可热拔插的设备，比如说U盘，SD卡，最开始插入的设备设备节点名是sda,接着是sdb,也就是说只从dev下面的设备节点名是不能区分我们插入的是那个设备，这时我们可以通过udev 将设备节点与设备绑定，方法就是通过内核名字建立连接，连接到设备节点上。
+```
+root@kylin03260002:/etc/udev/rules.d# udevadm monitor | grep sd
+KERNEL[404959.937713] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda (block)
+KERNEL[404959.937750] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda/sda1 (block)
+UDEV  [404960.094914] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda (block)
+UDEV  [404960.206351] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda/sda1 (block)
 
 
+KERNEL[404982.354244] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb (block)
+UDEV  [404982.501710] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb (block)
+root@kylin03260002:/etc/udev/rules.d# ll /dev/sd*
+brw-rw---- 1 root disk 8,  0 11月  7 08:08 /dev/sda
+brw-rw---- 1 root disk 8,  1 11月  7 08:08 /dev/sda1
+brw-rw---- 1 root disk 8, 16 11月  7 08:09 /dev/sdb
 
+交换插入顺序，不改变插入接口
+root@kylin03260002:/etc/udev/rules.d# udevadm monitor | grep sd
+KERNEL[405116.367111] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda (block)
+UDEV  [405116.525532] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-1/12-1:1.0/host0/target0:0:0/0:0:0:0/block/sda (block)
 
+KERNEL[405120.777992] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb (block)
+KERNEL[405120.778029] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb/sdb1 (block)
+UDEV  [405120.923414] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb (block)
+UDEV  [405121.023382] add      /devices/pci0000:00/0000:00:02.0/0000:01:19.0/usb12/12-2/12-2:1.0/host1/target1:0:0/1:0:0:0/block/sdb/sdb1 (block)
+root@kylin03260002:/etc/udev/rules.d# ll /dev/sd*
+brw-rw---- 1 root disk 8,  0 11月  7 08:11 /dev/sda
+brw-rw---- 1 root disk 8, 16 11月  7 08:11 /dev/sdb
+brw-rw---- 1 root disk 8, 17 11月  7 08:11 /dev/sdb1
+```
+可以看见一个U盘是sda和sda1，一个U盘是sdb。如果交换插入顺序，则设备节点名进行了替换。
 
+修改配置：
+```/etc/udev/udev.conf
+root@kylinos0001:/etc/udev# cat udev.conf
+# see udev.conf(5) for details
+#
+# udevd is started in the initramfs, so when this file is modified the
+# initramfs should be rebuilt.
 
+udev_log="info"
+udev_root="/dev/"
+udev_rules="/etc/udev/rules.d"
+```
 
+这个居然真的没有成功：
+```/etc/udev/rules.d/01-rename.rules
+KERNEL=="sd*",KERNELS=="*:0:0:0",ATTRS{scsi_level}=="7" ,ATTRS{product}=="DataTraveler 3.0",ATTRS{idVendor}=="0951",ATTRS{idProduct}=="1666",SYMLINK+="usbsda%n",OPTIONS="ignore_remove"
+```
 
+这个算是半成功了，参考https://blog.csdn.net/li_wen01/article/details/89435306，但不知道为啥是这样：
+```
+KERNEL=="sd*",KERNELS=="*:0:0:0",ATTRS{scsi_level}=="7" GOTO="hisi_end"
+ATTRS{product}=="DataTraveler 3.0",ATTRS{idVendor}=="0951",ATTRS{idProduct}=="1666",SYMLINK+="usbsda%n",OPTIONS="ignore_remove"
+LABEL="hisi_end"
 
+root@kylinos0001:/etc/udev/rules.d# ll /dev/usb*
+总用量 0
+drwxr-xr-x  2 root root     60 11月  7 15:14 ./
+drwxr-xr-x 18 root root   3940 11月  7 15:30 ../
+crw-------  1 root root 180, 0 11月  7 15:14 hiddev0
+root@kylinos0001:/etc/udev/rules.d# ll /dev/usb*
+lrwxrwxrwx 1 root root 11 11月  7 15:30 /dev/usbsda0 -> bsg/9:0:0:0
+lrwxrwxrwx 1 root root 15 11月  7 15:30 /dev/usbsda1 -> bus/usb/012/009
 
+/dev/usb:
+总用量 0
+drwxr-xr-x  2 root root     60 11月  7 15:14 ./
+drwxr-xr-x 19 root root   4040 11月  7 15:30 ../
+crw-------  1 root root 180, 0 11月  7 15:14 hiddev0
+```
 
+说明一下参数是怎么设置的：
+```
+KERNEL=="sd*"      来源目录路径名
+KERNELS=="*:0:0:0" 来源目录路径名
+ATTRS{scsi_level}=="7" 来源目录下scsi_level文件内容
+product、idVendor、idProduct 来源dmesg -wT中内容
 
+root@kylinos0001:/sys/bus/scsi/drivers/sd/9:0:0:0# pwd
+/sys/bus/scsi/drivers/sd/9:0:0:0
+root@kylinos0001:/sys/bus/scsi/drivers/sd/9:0:0:0# cat max_sectors
+2048
+root@kylinos0001:/sys/bus/scsi/drivers/sd/9:0:0:0# cat scsi_level
+7
 
+[一 11月  7 15:30:56 2022] usb 12-1: new SuperSpeed USB device number 9 using xhci_hcd
+[一 11月  7 15:30:56 2022] usb 12-1: New USB device found, idVendor=0951, idProduct=1666
+[一 11月  7 15:30:56 2022] usb 12-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[一 11月  7 15:30:56 2022] usb 12-1: Product: DataTraveler 3.0
+[一 11月  7 15:30:56 2022] usb 12-1: Manufacturer: Kingston
+[一 11月  7 15:30:56 2022] usb 12-1: SerialNumber: 1C1B0D6A8ADF21B16954P637
+[一 11月  7 15:30:56 2022] usb-storage 12-1:1.0: USB Mass Storage device detected
+[一 11月  7 15:30:56 2022] scsi host9: usb-storage 12-1:1.0
+[一 11月  7 15:30:57 2022] scsi 9:0:0:0: Direct-Access     Kingston DataTraveler 3.0 1100 PQ: 0 ANSI: 6
+[一 11月  7 15:30:57 2022] sd 9:0:0:0: Attached scsi generic sg0 type 0
+[一 11月  7 15:30:57 2022] sd 9:0:0:0: [sda] 60463659 512-byte logical blocks: (31.0 GB/28.8 GiB)
+[一 11月  7 15:30:57 2022] sd 9:0:0:0: [sda] Write Protect is off
+[一 11月  7 15:30:57 2022] sd 9:0:0:0: [sda] Mode Sense: 43 00 00 00
+[一 11月  7 15:30:57 2022] sd 9:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[一 11月  7 15:30:58 2022]  sda:
+[一 11月  7 15:30:58 2022] sd 9:0:0:0: [sda] Attached SCSI removable disk
+[一 11月  7 15:30:58 2022] FAT-fs (sda): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+```
 
+### 5-3、U盘拔插的时候执行脚本
+U盘插入的时候执行创建文件脚本
+U盘拔出的时候执行删除文件脚本
+```/etc/udev/rules.d/79-exec_shell.rules
+失败
+ACTION=="add",KERNELS=="*:0:0:0",ATTRS{idVendor}=="0dd8",ATTRS{idProduct}=="2300",RUN+="/home/admin/create_file.sh"
+ACTION=="remove",KERNELS=="*:0:0:0",ATTRS{idVendor}=="0dd8",ATTRS{idProduct}=="2300",RUN+="/home/admin/delete_file.sh"
 
+失败
+ACTION=="add",SUBSYSTEM=="usb",ENV{ID_VENDOR_ID}=="0dd8",ENV{ID_MODEL_ID}=="2300",RUN+="/home/admin/create_file.sh"
+ACTION=="remove",SUBSYSTEM=="usb",ENV{ID_VENDOR_ID}=="0dd8",ENV{ID_MODEL_ID}=="2300",RUN+="/home/admin/delete_file.sh"
 
+成功
+ACTION=="add",SUBSYSTEM=="usb",ENV{PRODUCT}=="dd8/2300/100",RUN+="/home/admin/create_file.sh"
+ACTION=="remove",SUBSYSTEM=="usb",ENV{PRODUCT}=="dd8/2300/100",RUN+="/home/admin/delete_file.sh"
+```
 
+```/root/create_file.sh
+#!/bin/bash
+#
+# 文 件 名: create_file.sh
+# 文件描述: 创建一个文件
+# 作    者: HanKin
+# 创建日期: 2022.11.09
+# 修改日期：2022.11.09
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
 
+touch /home/admin/test.txt
+```
 
+```/root/delete_file.sh
+#!/bin/bash
+#
+# 文 件 名: delete_file.sh
+# 文件描述: 删除一个文件
+# 作    者: HanKin
+# 创建日期: 2022.11.09
+# 修改日期：2022.11.09
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
 
+rm -rf /home/admin/test.txt
+```
 
+## 6、获取插入设备的VPID
+```
+成功
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="08", RUN+="/home/admin/create_file.sh"
+
+失败
+ACTION=="remove", SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="08", RUN+="/home/admin/delete_file.sh"
+```
+
+使用命令udevadm monitor --property分析：
+```
+UDEV  [74953.640940] remove   /devices/pci0000:00/0000:00:18.7/usb1/1-4/1-4:1.0 (usb)
+ACTION=remove
+DEVPATH=/devices/pci0000:00/0000:00:18.7/usb1/1-4/1-4:1.0
+SUBSYSTEM=usb
+DEVTYPE=usb_interface
+PRODUCT=dd8/2300/100
+TYPE=0/0/0
+INTERFACE=8/6/80
+MODALIAS=usb:v0DD8p2300d0100dc00dsc00dp00ic08isc06ip50in00
+SEQNUM=21697
+USEC_INITIALIZED=74921486460
+ID_PATH=pci-0000:00:18.7-usb-0:4:1.0
+ID_PATH_TAG=pci-0000_00_18_7-usb-0_4_1_0
+
+UDEV  [74980.348190] add      /devices/pci0000:00/0000:00:18.7/usb1/1-4/1-4:1.0 (usb)
+ACTION=add
+DEVPATH=/devices/pci0000:00/0000:00:18.7/usb1/1-4/1-4:1.0
+SUBSYSTEM=usb
+DEVTYPE=usb_interface
+PRODUCT=dd8/2300/100
+TYPE=0/0/0
+INTERFACE=8/6/80
+MODALIAS=usb:v0DD8p2300d0100dc00dsc00dp00ic08isc06ip50in00
+SEQNUM=21731
+USEC_INITIALIZED=74980333853
+ID_VENDOR_FROM_DATABASE=Netac Technology Co., Ltd
+ID_PATH=pci-0000:00:18.7-usb-0:4:1.0
+ID_PATH_TAG=pci-0000_00_18_7-usb-0_4_1_0
+DRIVER=usb-storage
+```
+
+则获取VPID可以尝试使用脚本：
+```/etc/udev/rules/03-get_udev_vpid.rules
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="08", RUN+="/home/admin/get_udev_vpid.sh $product"
+```
+
+```/home/admin/get_udev_vpid.sh
+#!/bin/bash
+#
+# 文 件 名: get_udev_vpid.sh
+# 文件描述: 获取插入设备的VPID
+# 作    者: HanKin
+# 创建日期: 2022.11.09
+# 修改日期：2022.11.09
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
+
+product=$1
+echo ${product} > /home/admin/vpid.txt
+```
+
+找了很久才发现，udevadm info -ap /devices/pci0000:00/0000:00:18.7/usb1/1-4/1-4:1.0/host2/target2:0:0/2:0:0:0/block/sda。
+可以使用bInterfaceClass属性，原来是我在前面把属性限制死了，导致查找的块没有idProduct属性值，修改之后就可以了。
+```
+#!/bin/bash
+#
+# 文 件 名: get_udev_vpid.sh
+# 文件描述: 获取插入设备的VPID
+# 作    者: HanKin
+# 创建日期: 2022.11.09
+# 修改日期：2022.11.09
+# 
+# Copyright (c) 2022 HanKin. All rights reserved.
+#
+
+idVendor=$1
+idProduct=$2
+echo -e "idVendor = ${idVendor} \nidProduct = ${idProduct}" > /home/admin/vpid.txt
+
+ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", RUN+="/home/admin/get_udev_vpid.sh %s{idVendor} $sysfs{idProduct}"
+```
 

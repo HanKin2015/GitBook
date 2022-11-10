@@ -72,11 +72,110 @@ print(mode & stat.S_IEXEC)
 a=int(float('123.456'))
 ```
 
+## 8、it/s是什么单位？
+iterator：迭代器，迭代程序
+it/s 每秒迭代次数，如果迭代一次为一行，则表示平均每秒读取的行数
+iterator/s， 比如下图如果运行比较快显示 it/s ，如果设置每秒迭代一次则显示1.00s/it
+```
+from common import *
 
+for i in tqdm(range(1000000)):
+    pass
 
+for i in tqdm(range(10)):
+    time.sleep(1)
 
+(base) C:\Users\test\Desktop\fastflux_detect_preliminary>python study.py
+100%|████████████████████████████████████████████████████████████████████| 1000000/1000000 [00:00<00:00, 4318913.29it/s]
+100%|████████████████████████████████████████████████████████████████████| 10/10 [00:10<00:00,  1.01s/it]
+```
 
+## 9、发现使用exec来缩减优化代码会带来运行效率降低很多倍
+```
+%%time
+# 初始化列表
+for col_dict in col_dicts:
+    exec('{}_li = []'.format(col_dict))
 
+for items in tqdm(agg_df['rdatalist'].values):
+    # 置空临时列表
+    for col_dict in col_dicts:
+        exec('{}_tmp = []'.format(col_dict))
+    
+    for ip in items:
+        try:
+            for col_dict in col_dicts:
+                exec('{}_tmp.append({}_dict[ip])'.format(col_dict, col_dict))
+        except:
+            logger.error('failed, ip {}'.format(ip))
+            pass
+    
+    # 将临时列表添加到主列表
+    for col_dict in col_dicts:
+        exec('{}_li.append({}_tmp)'.format(col_dict, col_dict))
+
+这个实测在接近3个小时吧
+26%|████████████████                                               | 53922/208211 [31:15<32:14:10, 2.46it/s]
+```
+多年的大佬写的代码还是展开，说明展开写还是有它的道理。
+
+```
+judgement_li = []
+networkTags_li = []
+threatTags_li = []
+expired_li = []
+continent_li = []
+country_li = []
+province_li = []
+city_li = []
+district_li = []
+timeZone_li = []
+organization_li = []
+operator_li = []
+for items in tqdm(agg_df['rdatalist'].values):
+    judgement_tmp = []
+    networkTags_tmp = []
+    threatTags_tmp = []
+    expired_tmp = []
+    continent_tmp = []
+    country_tmp = []
+    province_tmp = []
+    city_tmp = []
+    district_tmp = []
+    timeZone_tmp = []
+    organization_tmp = []
+    operator_tmp = []
+    for ip in items:
+        try:
+            judgement_tmp.append(judgement_dict[ip])
+            networkTags_tmp.append(networkTags_dict[ip])
+            threatTags_tmp.append(threatTags_dict[ip])
+            expired_tmp.append(expired_dict[ip])
+            continent_tmp.append(continent_dict[ip])
+            country_tmp.append(country_dict[ip])
+            province_tmp.append(province_dict[ip])
+            city_tmp.append(city_dict[ip])
+            district_tmp.append(district_dict[ip])
+            timeZone_tmp.append(timeZone_dict[ip])
+            organization_tmp.append(organization_dict[ip])
+            operator_tmp.append(operator_dict[ip])
+        except:
+            pass
+    judgement_li.append(judgement_tmp)
+    networkTags_li.append(networkTags_tmp)
+    threatTags_li.append(threatTags_tmp)
+    expired_li.append(expired_tmp)
+    continent_li.append(continent_tmp)
+    country_li.append(country_tmp)
+    province_li.append(province_tmp)
+    city_li.append(city_tmp)
+    district_li.append(district_tmp)
+    timeZone_li.append(timeZone_tmp)
+    organization_li.append(organization_tmp)
+    operator_li.append(operator_tmp)
+
+100%|████████████████████████████████████████████████████████████████████| 208211/208211 [05:47<00:00, 598.44it/s]
+```
 
 
 

@@ -78,7 +78,6 @@ tmpfs           5.0M  4.0K  5.0M    1% /run/lock
 tmpfs           3.9G     0  3.9G    0% /sys/fs/cgroup
 tmpfs           799M  4.0K  799M    1% /run/user/108
 tmpfs           799M   36K  799M    1% /run/user/0
-/dev/vdb         99G   89G  4.4G   96% /media/sangfor/vdb
 [root@ubuntu0006:/media] #cat /sys/block/vd
 vda/ vdb/
 [root@ubuntu0006:/media] #cat /sys/block/vda/
