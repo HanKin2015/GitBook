@@ -1,5 +1,6 @@
 # USB Mass Storage大容量存储的基本知识
 参考：http://t.zoukankan.com/shangdawei-p-3133526.html
+其他：D:\Github\Storage\udev\bulk_only
 
 ## 1、LBA(logical block address)
 存储类设备可以看做一个个固定大小逻辑块，我们可以对其每一个逻辑块进行编号方便进行寻址定位。
@@ -83,6 +84,27 @@ BOT加速模式虽然可以有效的增加传输速度，不过还是没有在�
 当Host和Device都实现了此UAS协议的话，那么Host将通过Host端的SCSI Software Stack去访问Device，而USB的Interface也将从功能上看，变成Host Stack中的另外一个SCSI Host Adapter。Device需要实现SAM4的架构模型，这样Host也就可以查询（Queue）Device中的命令了，以及对应性能的提升。
 
 为了克服旧的BOT协议的总线利用率不高的缺点，所以定义了新的UAS协议，即UASP，来提升USB的传输效率，提升USB速度。
+
+## 12、USB MSC的各个协议之间关系总结
+全称USB Mass Storage Class。
+
+- 最需要关心的是BOT，即Host和Device间数据通讯的协议
+★★★ ②USB Mass Storage Class Bulk-Only (BBB) Transport
+
+- 其次，需要关心USB Device内部和数据存储介质之间通信的协议
+★★ SCSI - Small Computer System Interface
+
+- 最后，对于，如果要实现更好的性能，那么需要关心BOT的升级版
+★⑦USB Mass Storage Class USB Attached SCSI Protocol (UASP)
+
+## 13、U盘与USB中的Class，Subclass和Protocol的对应关系
+bInterfaceClass=0x08=Mass Storage Class就是USB Mass Storage Class
+bInterfaceSubClass=0x06=SCSI Transparent Subclass
+bInterfaceProtocol=0x50=Bulk Only Transport Protocol
+
+
+
+
 
 
 df -h | awk '{print $1}'

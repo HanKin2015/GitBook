@@ -410,3 +410,19 @@ vim在粘贴内容的时候，如果遇到以#开始的注释行，会自动将�
 set paste
 保存即可。
 
+## 11、vim中关于不可见字符tab/空格的设置
+参考：https://www.cnblogs.com/Alfred-HOO/articles/15621909.html
+TAB键显示为^I，而行尾则标识为$。
+```
+:set list //显示不可见字符
+:set nolist //隐藏不可见字符
+:set list! //切换显示或隐藏不可见字符
+```
+
+
+
+
+
+
+
+

@@ -300,6 +300,26 @@ fetchtr_py(fi.absoluteFilePath(), fetchedTor, defaultContext, True, codecForSour
 ```
 文件的绝对路径，我才恍然大悟，是我的中文路径问题。
 
+## 31、成功解决TypeError: ‘float‘ object cannot be interpreted as an integer
+在使用Python的for w in range(0.0, 4.1, 0.1):时遇到报错：TypeError: 'float' object cannot be interpreted as an integer
+
+为什么会出现这种错误呢？因为Python的函数range(start, stop[, step])中start，stop，step都是整数，当使用了小数就会报错。
+```
+import numpy
+for i in numpy.arange(0.0, 4.1, 0.8):
+    print(i)
+
+#输出结果：
+0.0
+0.8
+1.6
+2.4000000000000004
+3.2
+4.0
+```
+会出现精度丢失问题，计算机中所有的数据最终都是以二进制的形式存储的，小数在转换为二进制表示的时候会出现位数无限循环的情况，所以只能存储有限位数，超过这个长度的位数会被舍去（会采用 0舍1入 的方式），这样就造成了精度丢失的问题。
+
+
 
 
 

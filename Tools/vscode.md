@@ -67,10 +67,7 @@ run code插件直接运行
 - 扩展是extension，插件是plugin，VSC用的是前者这种称呼。大部分文章都是混用两者的，不严谨但是能理解就行，要学会抓主要矛盾。当然本文用的都是正确的
 - 可选阅读：[[科普\][FAQ]MinGW vs MinGW-W64及其它](https://link.zhihu.com/?target=https%3A//github.com/FrankHB/pl-docs/blob/master/zh-CN/mingw-vs-mingw-v64.md)
 
-
-
 ### **快捷键**
-
 这里主要介绍下最主要的快捷键：
 
 - **`Ctrl+鼠标左键`**，是文件、函数等跳转。
@@ -80,7 +77,6 @@ run code插件直接运行
 - **`Ctrl + Tab`**, 可以列出最近打开的文件，在开发时，两个文件间切换时效率很高。
 
 上述是最常用的功能。其他功能请参考[VSCode 官网快捷键](https://link.zhihu.com/?target=https%3A//code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
-
 
 
 ## 6、插件离线安装
@@ -225,17 +221,6 @@ b.用记事本打开目录下的settings.json，修改里面的对应配置可�
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 ```setting.json
 
 {
@@ -288,6 +273,29 @@ b.用记事本打开目录下的settings.json，修改里面的对应配置可�
 }
 ```
 
+## 13、将Vscode添加右键打开文件夹功能
+参考：https://blog.csdn.net/Trees__/article/details/123390459
 
+计算机\HKEY_CLASSES_ROOT\Directory\Background\shell\VisualCode\command
+"C:\Program Files\Microsoft VS Code\Code.exe" "%V"
 
+## 14、显示git上库记录
+Vscode-gitlens 隐藏每行代码的git历史记录
 
+默认情况下，gitlens插件会显示每行代码的blame历史记录，如果为了保持界面的简洁，可以修改以下配置进行隐藏
+```
+"gitlens.currentLine.enabled": false
+```
+
+下载安装gitlens插件：https://marketplace.visualstudio.com/vscode
+- 搜索gitlens
+- 选择评价高的
+- 右边Resources-》点击Download Extension
+- 点击VSCode中的插件管理-》右上角Install from VSIX即可
+- 安装失败，不兼容，需要下载一个老版本
+- https://marketplace.visualstudio.com/items/eamodio.gitlens/changelog
+- 找到github项目主页，右边Release即可https://github.com/gitkraken/vscode-gitlens
+- 找到老版本即可，结果github打不开，无奈使用文件夹安装方式
+- 安装成功之后，vscode 左侧边栏便会出现 gitlens 小图标。如果没有出现，则使用快捷键 ctrl + shift + p，输入命令 GitLens set，点击 GitLens: Set Views Layout 即可
+
+## 15、
