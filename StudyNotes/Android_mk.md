@@ -48,4 +48,7 @@ LOCAL_MODULE_TAGS := optional
 include $(BUILD_EXECUTABLE)
 ```
 
-
+## 3、查看Android版本命令
+```
+getprop "ro.build.version.release"
+```

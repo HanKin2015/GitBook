@@ -9,9 +9,14 @@
 In UNIX System terminology, a process that has terminated,but whose parent has not yet waited for it, is called a zombie. 在UNIX 系统中，一个进程结束了，但是他的父进程没有等待(调用wait / waitpid)他， 那么他将变成一个僵尸进程。 但是如果该进程的父进程已经先结束了，那么该进程就不会变成僵尸进程， 因为每个进程结束的时候，系统都会扫描当前系统中所运行的所有进程， 看有没有哪个进程是刚刚结束的这个进程的子进程，如果是的话，就由Init 来接管他，成为他的父进程。
 
 ### 1-1、杀死僵尸进程
-top命令会查看到僵尸进程，不占用内存cpu
+top命令会查看到僵尸进程，不占用内存cpu，zombie就是僵尸进程
 ps aux | grep python 找到僵尸进程的父进程
 kill -9 父进程ID
+
+### 1-2、
+确定杀不掉进程的原因有两种：
+- 这个进程是僵尸进程
+- 此进程是"核心态"进程。
 
 ## 2、LINUX下PS -EF和PS AUX的区别
 Linux下显示系统进程的命令ps，最常用的有ps -ef 和ps aux。这两个到底有什么区别呢？两者没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。

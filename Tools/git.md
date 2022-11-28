@@ -55,16 +55,11 @@ rm -rf $SC_FILE
 git config core.sparsecheckout false
 ```
 
-
-
-
-
 参考：https://www.cnblogs.com/zhoudaxiaa/p/8670481.html
 
 方法一：http://zhoudaxiaa.gitee.io/downgit/#/home
 
 方法二：
-
 在Git1.7.0以前，这无法实现，但是幸运的是在Git1.7.0以后加入了Sparse Checkout模式，这使得Check Out指定文件或者文件夹成为可能。
 
 **举个例子：**
@@ -87,7 +82,6 @@ git pull origin master    //下载
  https://blog.csdn.net/qq_35860352/article/details/80313078 不行
 
 ## 下载指定分支
-
 git clone -b branch git@github.com:github/test.git 
 
 ## 20210813更新
@@ -95,28 +89,19 @@ git clone --single-branch -b master url .
 git clone --depth=commit_num URL：可以只克隆最近几次提交的代码
 如：git clone --depth=2 --single-branch -b master git@yyds.hankin.org:OUR/YYDS.git .
 
-
 # 2、git add命令参数说明
-
 git add -u：将文件的修改、文件的删除，添加到暂存区。
 git add .：将文件的修改，文件的新建，添加到暂存区。
 git add -A：将文件的修改，文件的删除，文件的新建，添加到暂存区。
 
 -u就是update的意思，只会标记本地有改动（包括删除和修改）的已经追踪的文件
-
 \1.  git add -A   保存所有的修改
-
 \2.  git add .     保存新的添加和修改，但是不包括删除
-
 \3.  git add -u   保存修改和删除，但是不包括新建文件。
-
-
 
 # 3、git push 的 -u 参数具体适合含义？
 
 一般只有同时存在多个远程仓库时才会用到--set-upstream。每个git branch可以有个对应的upstream。假设你有两个upstream，分别叫server1和server2，本地master branch的upstream是server1上的master，那么当你不带参数直接输入git pull或者git push时，默认是对server1进行pull/push。如果你成功运行"git push -u server2 master"，那么除了本地branch会被push到server2之外，还会把server2设置成upstream。
-
-
 
 ```
 -u, --set-upstream
@@ -137,10 +122,7 @@ upstream不是针对远程仓库的，而是针对branch的，这一点应了那
 
 这两种方式都可以达到目的。但是1方法更通用，因为你的远程库有可能并没有mybranch1分支，这种情况下你用2方法就不可行，连目标分支都不存在，怎么进行关联呢？所以可以总结一下：git push -u origin mybranch1 相当于 git push origin mybranch1 + git branch --set-upstream-to=origin/mybranch1 mybranch1
 
-
-
 # 4、分支管理
-
 ```
 git branch 查看本地分支
 git branch -r 查看远程分支
@@ -154,7 +136,6 @@ git branch -m oldBranchName newBranchName 重命名
 ```
 
 ## 4-1、删除分支
-
 ```
 git branch -d [本地分支名]
 git branch -D [本地分支名]
@@ -172,13 +153,9 @@ git branch -D 是git branch --delete --force的简写，它会直接删除。
 -D 嘛，比如分支已在远端处理过了，已在远端合并了，那我本地就没必要保留可以删除了。还有就是你临时创建的几个分支，测试完保留一个然后把其它的就不保留删除了。
 
 ## 4-2、合并分支
-
 1. git pull (git checkout -b newBname Bname)
 
-
-
 一、开发分支（dev）上的代码达到上线的标准后，要合并到 master 分支
-
 ```
 git checkout dev
 git pull
@@ -250,24 +227,19 @@ git reset --hard (不保留文件，恢复到上一个commit状态)
 
 如果有新的文件修改，需要合并到最近一次提交的commit里面，也可以使用上面命令直接修改即可。
 
-
 > git commit --amend -no-edit
-
 git status
 git log
 git show
 
 ### 6-1、删除commit
-
 > git reset HEAD^    删除最新commit记录
 
 ### 6-2、误删除commit
-
 - git reflog
 - git reset commitId
 
 # 7、多个commit合并(git rebase)  
-
 实战中终于理解这条命令的作用。当我们在合并请求时又双叒叕发现一个小错误，又不得不commit一次，真想删除分支全部重新提交。但是commit是可以合并的。
 [git 几个commit点合并成一个commit点](https://blog.csdn.net/u013276277/article/details/82470177)
 
@@ -285,7 +257,6 @@ You are currently editing a commit while rebasing branch 'hejian' on 'ddd330e'.
   (use "git rebase --continue" once you are satisfied with your changes)
 
 # 8、如何切换分支并且改变其修改的不同的内容
-
 就是本地像远程分支管理一样，不同分支不同的内容。但是实践看到都是一样的，后来发现姿势不对。
 
 ### 实验
@@ -319,7 +290,6 @@ git log
 总结：远程和本地一样，这就为啥有个叫本地仓库的概念了，本地修改了内容尽量commit到本地，只有commit了才会切换分支看到效果。
 
 # 9、stash的作用
-
 [stash —— 一个极度实用的Git操作](https://www.jianshu.com/p/fcf69e2d3e6b)
 git stash   藏好代码
 git stash list  
@@ -328,25 +298,15 @@ git stash list
 - git stash apply （不删除stash记录）
 
 好习惯：master作为备份更新，第一步是创建新分支。当有新问题的时候，stash后去master分支创建新分支。
-
 上面的commit一定是最新的。
 
-
-
 超级好用：
-
 git stash
-
 git stash pop
-
 git stash list
-
 git stash -h
 
-
-
 # 10、Git 全局设置（必须）
-
 ```
 git config --global user.name "张三"
 git config --global user.email "49660@zhangsan.com"
@@ -358,7 +318,6 @@ git config --global user.email "49660@zhangsan.com"
 - git config --global -l
 
 # 11、回退命令（放弃所有本地修改）
-
 ```
 git reflog
 git reset --hard 7edb984	放弃修改
@@ -374,15 +333,10 @@ git push origin HEAD --force
 ```
 
 可引用git checkout或者用git clean -df至修改前的状态。就可以放弃所有修改。
-
 1、git checkout功能是本地所有修改的。没有的提交的，都返回到原来的状态
-
 2、git stash功能是把所有没有提交的修改暂存到stash里面。可用git stash [pop](https://www.baidu.com/s?wd=pop&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)回复。
-
 3、git reset --hard HASH功能是返回到某个节点，不保留修改。
-
 4、git reset --soft HASH功能是返回到某个节点。保留修改。
-
 5、git clean -df功能是保留修改，返回到某个节点。
 
 **拓展资料**：
@@ -393,23 +347,13 @@ git push origin HEAD --force
 
 2、Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper，后者之前一直是 Linux 内核开发人员在全球使用的主要源代码工具。开放源码社区中的有些人觉得BitKeeper 的许可证并不适合开放源码社区的工作，因此 Torvalds 决定着手研究许可证更为灵活的版本控制系统。尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是我们已经发现在很多其他自由软件项目中也使用了 Git。例如 很多 Freedesktop 的项目迁移到了 Git 上。
 
-
-
 # # 12、Updates were rejected because the tip of your current branch is behind
-
 1.使用强制push的方法：
-
 $ git push -u origin master -f 
-
 这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。
-
 2.push前先将远程repository修改pull下来
-
 $ git pull origin master
-
 $ git push -u origin master   （后续就是解决冲突）
-
-
 
 # 13、git clean的用法（如何使用Git删除新增的文件？）
 
@@ -493,10 +437,6 @@ git clean -df
 
 总结：我也是在git commit时闪退产生了这个文件。试了几次同样的commit内容一直闪退，原因可能是中文时输入英文字母按回车键后闪退，然后在输入英文时shift切换没有闪退情况。我的问题不大，不能解决闪退网上有很多解决方法。
 
-
-
-
-
 # 哭笑不得：git branch -a看不见一个分支
 
 如果是下载项目就不要使用`git init test && cd test`初始化。
@@ -504,18 +444,6 @@ git clean -df
 使用`git clone git@git.com master`下载项目后，会在当前目录下新建文件夹master并将项目下载这个目录下。
 
 由于先前init初始化后，导致没有进入项目的文件夹中，使用git branch -a看不见任何分支。
-
-
-
-
-
-
-
-
-
-
-
-
 
 更新服务端的分支到本地仓库
 git fetch --all
@@ -531,10 +459,6 @@ git push origin <您的分支名>
 git branch -D <您的分支名>
 删除服务端的一个分支
 git push origin :<您的分支名>
-
-
-
-
 
 应该右上角会有ssh和https转换，然而并没有。但是两者使用是一样的。
 git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
@@ -552,8 +476,6 @@ git push origin newName
 d.把修改后的本地分支与远程分支关联
 
 git branch --set-upstream-to origin/newName
-
-
 
 http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
 
@@ -623,8 +545,6 @@ git log -p
 
 查看文件最后的修改人
 git blame -L 起始行号,结束行号
-
-
 
 # git学习笔记
 
@@ -1461,3 +1381,33 @@ core.ignorecase=false
 ```
 使用git checkout可以无限重置，使用git clean -fd也不行，后来发现原来是远端仓库拥有同名的文件，只是大小写不同，但是windows系统是不区分大小写的。修改忽略大小写是行不通的。
 只能在linux环境下载代码看，要不忽略这些同名文件，一般来说正常环境是不会去修改这些莫名其妙的文件的。
+
+## git创建新项目
+命令行指令
+
+Git 全局设置
+git config --global user.name "张三12345"
+git config --global user.email "12345@zhangsan.com"
+
+创建新版本库
+git clone git@cs.zhangsan.org:12345/AI.git
+cd AI
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+已存在的文件夹
+cd existing_folder
+git init
+git remote add origin git@cs.zhangsan.org:12345/AI.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+已存在的 Git 版本库
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@cs.zhangsan.org:12345/AI.git
+git push -u origin --all
+git push -u origin --tags

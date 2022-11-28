@@ -306,26 +306,43 @@ df.query('code=="000002.SZ" | code=="000006.SZ"')
 
 找了一大圈，根本没有找到可靠的方法。现在想起来，如果去掉换行符后，不就是一行的数据吗？干嘛在存储之前要转换成多维数组呢？改成一维数组不就行了。
 
+## 20、Python pandas 按行、按列遍历DataFrame
+https://blog.csdn.net/weixin_43115411/article/details/126030711
 
+### 20-1、按行遍历
+```
+data = {'a': {'x': [1, 1], 'y': [2, 1], 'z': [3, 1]},
+        'b': {'x': [1, 2], 'y': [2, 2], 'z': [3, 2]},
+        'c': {'x': [1, 3], 'y': [2, 3], 'z': [3, 3]}}
+data_pd = pd.DataFrame(data)
 
+print(data_pd)
 
+for row in data_pd.index:
+    print(data_pd.loc[row]['a'])
 
+for row_id in range(data_pd.shape[0]):
+    print(data_pd.iloc[row_id]['a'])
 
+for index, row in data_pd.iterrows():
+    print(row['a'])
+```
 
+### 20-2、按列遍历
+```
+data = {'a': {'x': [1, 1], 'y': [2, 1], 'z': [3, 1]},
+        'b': {'x': [1, 2], 'y': [2, 2], 'z': [3, 2]},
+        'c': {'x': [1, 3], 'y': [2, 3], 'z': [3, 3]}}
+data_pd = pd.DataFrame(data)
 
+print(data_pd)
 
+for col in data_pd.columns:
+    print(data_pd[col].iloc[0])
 
-
-
-# 1、读取和保存文件
-
-# 2、插入一行数据
-
-
-
-
-
-
+for index, col in data_pd.iteritems():
+    print(col.iloc[0])
+```
 
 
 

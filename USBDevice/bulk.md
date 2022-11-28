@@ -102,21 +102,50 @@ bInterfaceClass=0x08=Mass Storage Class就是USB Mass Storage Class
 bInterfaceSubClass=0x06=SCSI Transparent Subclass
 bInterfaceProtocol=0x50=Bulk Only Transport Protocol
 
+Mass Storage设备所使用的SCSI命令集
+0x00    TestUnitReady
+0x03    RequestSense
+0x12    Inquiry
+0x1A    ModeSense6
+0x1B    StartStop
+0x1E    MediumRemoval
+0x23    ReadFormatCapacity
+0x25    ReadCapacity
+0x28    Read(10)
+0x2A    Write(10)
+0x2F    Verify
+0x5A    ModeSense10
 
+## 14、USB bulk streams
+https://www.kernel.org/doc/html/latest/driver-api/usb/bulk-streams.html
 
+USB 3.0 则增加了一种 Bulk Streams 传输模式，USB 2.0 的 Bulk 模式只支持 1 个数据流，而 Bulk Streams 传输模式则可以支持多个数据流，每个数据流被分配一个 Stream ID（SID），每个 SID 与一个主机缓冲区对应。
 
+该协议是针对USB Attached SCSI Protocol Device Class而定的。
+bulk streaming协议太复杂，而USB Attached SCSI Protocol相对于USB Mass Storage Device Class也复杂了很多。
+造成的结果就是，类似USB-IF提出的USB 2.5 Wireless USB, USB Audio/Video Class一样，USB Attached SCSI Protocol是一个失败的协议，没有人陪你玩，没有市场，没有产品，或者说有几个试水的产品，赚不到钱之后，就默默地消失在历史的尘埃当中了！
 
+复杂是一个方面
+USB Attached SCSI Protocol是针对于机械硬盘应用而产生的，减少磁头在轨道间的移动次数。
+另外，USB Attached SCSI Protocol是针对数量众多的分散在机械硬盘上不同轨道上的小文件而产生的。
+目前，SSD已经渐渐地取代了HDD，所以，USB Attached SCSI Protocol的失败也是历史的必然了。
 
-df -h | awk '{print $1}'
+usbredir库：https://www.spice-space.org/usbredir.html
+在系统中完全禁用掉uas：
+```
+vim  /etc/modprobe.d/blacklist.conf
+blacklist uas
 
+为这些设备直接指定使用更基础的 usb-storage 模块作为驱动，同时禁用掉uas 
+vim /etc/modprobe.d/disable-uas.conf
+options usb-storage quirks=05e3:0610:u,05e3:0626:u,152d:0578:u,1d6b:0001:u,1d6b:0002:u,1d6b:0003:u
+sudo update-initramfs -u
+sudo reboot
 
-
-
-
-
-
-
-
+其他机器：
+vim /boot/cmdline.txt
+usb-storage quirks=05e3:0610:u,05e3:0626:u,152d:0578:u,152d:9561:u,1d6b:0001:u,1d6b:0002:u,1d6b:0003:u
+```
 
 
 

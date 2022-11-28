@@ -198,6 +198,12 @@ TruncatedSVD 也称为潜在语义索引 (LSI)，它试图找到字数矩阵的�
 
 有关其他文档，请参阅 scikitlearn’s TruncatedSVD docs 。
 
+## 6、CountVectorizer和TfidfVectorizer区别
+参考两篇文章即可：
+https://blog.csdn.net/bitcarmanlee/article/details/121211295
+https://blog.csdn.net/weixin_46425692/article/details/108531027
 
+CountVectorizer返回的是词频，TfidfVectorizer返回的是tfidf值。
+csc_matrix与csr_matrix唯一的区别在于，csr的indptr是针对行，而csc的indptr是针对列。
 
 

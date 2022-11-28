@@ -116,6 +116,35 @@ a, _ = f()
 a, __ = f()
 ```
 
+## 19、统计字符串中指定字符的个数
+```
+string = input()
+char = input()
+ 
+string = string.lower()
+char = char.lower()
+ 
+if len(string) == 0:
+    exit()
+ 
+if len(char) == 0:
+    exit()
+ 
+if len(char) > 1:
+    char = char[0]
+ 
+print(string.count(char))
+```
+
+## 20、Python如何将字符串的时间转换为时间戳
+导入模块time，先将字符串的代码转为数组，然后将字符转换为时间戳。
+```
+import time
+
+str_time = '2022-11-18T18:08:09'
+time_array = time.strptime(str_time, '%Y-%m-%dT%H:%M:%S')
+time_stamp = int(time.mktime(time_array))
+```
 
 
 
