@@ -344,9 +344,19 @@ for index, col in data_pd.iteritems():
     print(col.iloc[0])
 ```
 
+## 21、使用DataFrame.query根据其字符串长度过滤字符串数据
+```
+df.query('A.str.len() != "3"')
+如果要将np.nan删除为3个字符的字符串（NaN）：
+df.query('A.astype("str").str.len() != "3"')
+```
 
-
-
+## 22、使用dataframe.query从pd.DataFrame中包含的列表中选择值
+列名User Color，其值需要包含有my_list则留下。
+```
+my_list = ['red', 'blue', 'green', 'yellow']
+df.query("`User Color`.str.contains('|'.join(@my_list))")
+```
 
 
 

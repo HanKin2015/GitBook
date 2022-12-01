@@ -126,6 +126,13 @@ BIOS EHCI Hand-Off Hand-Off是接手的意思，是否让BIOS接管EHCI控制。
 
 BIOS是英文"Basic Input Output System"的缩略词，直译过来后中文名称就是"基本输入输出系统"。在IBM PC兼容系统上，是一种业界标准的固件接口。计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。
 
+# USB官网
+https://www.usb.org/documents
 
+https://www.intel.cn/content/www/cn/zh/products/docs/io/universal-serial-bus/ehci-v1-1-addendum.html?wapkw=ehci
+
+https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/ehci-specification-for-usb.pdf
+
+居然是intel的资料。
 
 

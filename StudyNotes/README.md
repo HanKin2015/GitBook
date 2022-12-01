@@ -94,7 +94,7 @@ CFR的实施对于OKR的评估和文化的建造起到非常有价值的作用�
 
 
 
-
+(CampusShame-校招污点与非污点公司名单)[https://github.com/forthespada/CampusShame]
 
 
 

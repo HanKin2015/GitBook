@@ -47,10 +47,37 @@ ntoskenl 是 Windows 的内核进程，负责 Windows 核心部分的操作，�
 - 将桌面快捷方式剪切到C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 - cmd输入msconfig就可以在启动项中看见
 
+## 8、Fsutil 
+命令行工具，windows自带。
 
+Fsutil 是可用于执行多种与 FAT 和 NTFS 文件系统相关的任务（例如管理重解析点、管理稀疏文件、卸载卷或扩展卷）的命令行实用程序。由于 Fsutil 功能非常强大，因而只有完全掌握 Windows XP 的高级用户才能使用它。此外，必须作为管理员或管理员组的成员登录才能使用 Fsutil。
+```
+C:\WINDOWS\system32>fsutil volume diskfree D:
+可用字节总数        :  87,696,003,072 ( 81.7 GB)
+总字节数             : 343,596,265,472 (320.0 GB)
+配额可用字节总数  :  87,696,003,072 ( 81.7 GB)
 
+C:\WINDOWS\system32>fsutil fsinfo drives
 
+驱动器: C:\ D:\ E:\
 
+C:\WINDOWS\system32>fsutil fsinfo drivetype C:
+C: - 固定驱动器
+
+C:\WINDOWS\system32>fsutil fsinfo drivetype E:
+E: - CD-ROM 驱动器
+
+fsutil file createnew 4GB.txt 4294967296‬
+```
+
+## 9、sc命令
+SC命令是XP系统中功能强大的DOS命令,SC命令能与“服务控制器”和已安装设备进行通讯。SC是用于与服务控制管理器和服务进行通信的命令行程序。
+```
+sc query jk
+sc del jk
+```
+
+## 10、
 
 
 

@@ -67,5 +67,3 @@ systeminfo命令
 
 
 
-
-

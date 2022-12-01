@@ -137,7 +137,11 @@ lpr 可以用来将料资送给本地或是远端的主机来处理。
 使用一条打印命令可打印多个文件，下面的命令行在名为laser1的打印机上打印3个文件：
 $ lpr -P laser1 05.txt 108.txt 12.txt 
 
-
+## 12、awk命令找出某个字段（关键字）在文件中某一行的第几列
+用awk命令找出"duration" 这个关键字在文件第一行的第几列:
+```
+head -1 common_fraud_samples_bad_merged_cp.txt | awk -F ',' '{for (i=1;i<=NF;i++) {if ($i=="duration") {print i}}}'
+```
 
 
 

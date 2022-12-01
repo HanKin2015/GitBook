@@ -35,11 +35,10 @@ array([[ 1,  2, 10, 20],
        [ 5,  6, 50, 60]])
 ```
 
+## 3、numpy中数组的拼接
 
 
-
-
-## array、narray和ndarray
+## 3、array、narray和ndarray
 
 ### ndarray的基本用法
 
@@ -106,7 +105,7 @@ print(np.linalg.det(a)) #行列式
 print(np.linalg.inv(a)) #逆矩阵
 ```
 
-
+###
 
 
 

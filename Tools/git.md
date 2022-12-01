@@ -1048,21 +1048,27 @@ export LESSCHARSET=utf-8
 329  git diff | iconv -f gbk -t utf-8
 330  iconv --help
 
-## 删除多个分支
+## 批量删除多个分支
 1、强制删除所有本地分支
 git branch |xargs git branch -D
+
 2、删除本地所有与远程仓库同步分支(本地修改过未提交的分支不删除）
 git branch |xargs git branch -d
-3、删除本地带有-new字符的分支
-git branch| grep ‘-new’|xargs git branch -D
-3、删除本地的分支（不包含带有-new字符的本地分支）
-git branch| grep -v ‘-new’|xargs git branch -D
+
+3、删除本地带有-new字符的分支和不包含带有-new字符的本地分支
+git branch| grep '-new' |xargs git branch -D
+git branch| grep -v '-new' |xargs git branch -D
+git branch | grep hj_* | xargs git branch -D
+
 4、删除本地存在，远程已经被删除的分支
 git remote prune origin
+
 5、查看远程库信息
 git remote show origin
+
 6、查看那些分支需要被清理
 git remote prune origin --dry-run
+
 7、推送本地当前分支到远程$branch分支并建立和origin $branch的对应关系
 git push -u origin $branch
 

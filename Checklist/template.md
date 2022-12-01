@@ -56,7 +56,14 @@ clean:
 *
 * Copyright (c) 2022 HanKin. All rights reserved.
 */
- 
+
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+#include <string.h>
+#inlcude <cstdlib>
+using namespace std;
+
 int main(int argc, char *argv[])
 {
     return 0;

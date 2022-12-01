@@ -24,6 +24,25 @@ xHCI	USB 3.0=Super Speed	Intel	定义了USB 3.0主控中所要实现何种功能
 
 这里可以看出最大的一个数据包只有20Kb，实际测试中确实是20Kb，XHCI则比这个大。
 
+Queue Element Transfer Descriptor
+
+## 3、同步(高速)传输描述符（iTD）
+Isochronous(High-Speed) Transfer Descriptor(iTD)
+
+https://blog.csdn.net/weixin_44031074/article/details/116277774
+https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/ehci-specification-for-usb.pdf
+
+## 4、分割事务同步传输描述符（siTD）
+Split Transaction Isochronous Transfer Descriptor(siTD)
+
+https://blog.csdn.net/weixin_44031074/article/details/116278958
+
+## 5、Queue Head(QH)
+
+## 6、EHCI主控异常，报错non queue head request in async schedule
+形成环，在函数ehci_state_fetchentry中可以看出有三种传输QH、ITD、STITD，分别对应ehci_state_fetchqh、ehci_state_fetchitd、ehci_state_fetchsitd。
+
+打开EHCI_DEBUG日志，看是否会进入异常q->qhaddr != q->qh.next。
 
 
 

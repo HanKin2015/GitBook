@@ -1,16 +1,4 @@
 # 日期date命令
-```
-day_tomorrow=$(expr $(date --date="+1 day" +"%d") + 0);
-day_yestoday=$(expr $(date --date="-1 day" +"%d") + 0);
-day_today=$(expr $(date +"%d") + 0);
-current_date=$(date +%F);
-my_date=$(date
-
-14
-12
-13
-2021-03-13
-```
 
 ## 1、基本操作
 ```
@@ -104,5 +92,34 @@ date 071218302014(月日时分年)
 date -s "20140712 18:30:50"
 ```
 
+## 4、显示昨天今天明天的日数
+```
+day_tomorrow=$(expr $(date --date="+1 day" +"%d") + 0);
+day_yestoday=$(expr $(date --date="-1 day" +"%d") + 0);
+day_today=$(expr $(date +"%d") + 0);
+current_date=$(date +%F);
 
+14
+12
+13
+2021-03-13
+```
 
+## 5、显示毫秒级
+```
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$((10#$(date +%N)/1000000))"
+15:35:19.619
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+15:35:43.744
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+-bash: 090192046: 数值太大不可为算数进制的基 (错误符号是 "090192046")
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+15:35:50.983
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+15:35:52.291
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+15:35:53.186
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+-bash: 030685820: 数值太大不可为算数进制的基 (错误符号是 "030685820")
+```
+如果不加以10进制显示```10#```就会在达到999毫秒后失败。

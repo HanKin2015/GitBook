@@ -50,7 +50,8 @@ https://github.com/HanKin2015/Machine_to_DeepingLearning
 
 ipynb文件是可以在线浏览：https://hankin2015.github.io/2018/10/03/20181003GuoQin/
 
-
+# 一个不错的学习demo
+https://github.com/xiaodongxiexie/python-widget
 
 
 
