@@ -177,10 +177,12 @@ rsync -av --progress t01/demo.zip t02/
 原因: 不能创建临时文件文档,设备上没有剩余空间(告诉我们磁盘空间满了)
 
 ## 17、XXXX is not in the sudoers file. This incident will be reported解决方法
+
 ### 17-1、解决Linux系统下，出现“不在sudoers文件中，此事将被报告”的问题
 https://blog.csdn.net/sinat_39589027/article/details/85323996
 
 1.切换到root用户权限，输入命令："su root"，回车后输入密码再回车
+过了一段时间再来写解决方案，结果没有环境让我尝试了，之前问题也未解决。
 
 ### 17-2、方法二，推荐方法一
 解决方法:编辑sudoers文件有两种办法，一种是以root帐号执行visudo，另一种是root帐号执行vi /etc/sudoers.其实两者都是修改/etc/sudoers。
@@ -193,16 +195,11 @@ https://blog.csdn.net/sinat_39589027/article/details/85323996
 为了让用户minghai能够执行sudo命，你可以在sudoers文件中加上一下四行的任意一行。
 ```
 minghai            ALL=（ALL）             ALL 
-
 %minghai          ALL=（ALL）             ALL
-
 minghai            ALL=（ALL）             NOPASSWD：ALL(出于方便，推荐使用此设置) 
-
 %minghai          ALL=（ALL）             NOPASSWD：ALL
 ```
-
 解释说明：
-
 第一行：允许用户minghai执行sudo命令（需要输入密码）。
 第二行：允许用户组minghai里面的用户执行sudo命令（需要输入密码）。
 第三行：允许用户minghai执行sudo命令，并且在执行的时候不输入密码。

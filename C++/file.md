@@ -3,6 +3,9 @@
 ## 1、字符串拼接
 
 ## 2、判断文件是否存在
+https://blog.csdn.net/duiwangxiaomi/article/details/118615006
+
+demo见：D:\Github\Storage\c++\standard_library\file\文件操作\判断文件是否存在\judge_file_or_dir_isexists.cpp
 access函数用来判断指定的文件或目录是否存在(F_OK)，已存在的文件或目录是否有可读(R_OK)、可写(W_OK)、可执行(X_OK)权限。F_OK、R_OK、W_OK、X_OK这四种方式通过access函数中的第二个参数mode指定。如果指定的方式有效，则此函数返回0，否则返回-1。
 
 在Windows下没有access函数，但在<io.h>文件中有_access函数，声明如下：

@@ -114,3 +114,7 @@ Zen架构将以四个核心为一个群组，AMD将其称为“CPU Complex”(CC
 详细参数：https://www.xincanshu.com/gpu/NVIDIA_Tesla_M10/index.html
 参考价：https://detail.zol.com.cn/1264/1263784/param.shtml
 
+## 11、似乎HUAWEI Kirin 9006C套壳cortex-A55
+我在一台华为笔记本上面使用lscpu命令显示cortex-A55，但是cat /proc/cpuinfo显示硬件为HUAWEI Kirin 9006C，另外一款同型号笔记本lscpu显示HUAWEI Kirin 9006C。
+两者装的系统不同，可能是系统识别错误导致。曾经我在一个盒子上面刷机时发现cpu为FT-2000，结果我刷到其他系统后变成FT-D2000，后面我没有刷回去进一步验证。
+

@@ -143,5 +143,41 @@ $ lpr -P laser1 05.txt 108.txt 12.txt
 head -1 common_fraud_samples_bad_merged_cp.txt | awk -F ',' '{for (i=1;i<=NF;i++) {if ($i=="duration") {print i}}}'
 ```
 
+## 13、如何从Shell脚本中的字符串中删除或获取尾数
+需求：我需要分别获得usbmon和0、1、2、12等等。
+```
+[root@ubuntu0006:/] #ll /dev/usbmon*
+crw------- 1 root root 245,  0 10月 11 16:54 /dev/usbmon0
+crw------- 1 root root 245,  1 10月 11 16:54 /dev/usbmon1
+crw------- 1 root root 245, 10 10月 11 16:54 /dev/usbmon10
+crw------- 1 root root 245, 11 10月 11 16:54 /dev/usbmon11
+crw------- 1 root root 245, 12 10月 11 16:54 /dev/usbmon12
+crw------- 1 root root 245,  2 10月 11 16:54 /dev/usbmon2
+crw------- 1 root root 245,  3 10月 11 16:54 /dev/usbmon3
+crw------- 1 root root 245,  4 10月 11 16:54 /dev/usbmon4
+crw------- 1 root root 245,  5 10月 11 16:54 /dev/usbmon5
+crw------- 1 root root 245,  6 10月 11 16:54 /dev/usbmon6
+crw------- 1 root root 245,  7 10月 11 16:54 /dev/usbmon7
+crw------- 1 root root 245,  8 10月 11 16:54 /dev/usbmon8
+crw------- 1 root root 245,  9 10月 11 16:54 /dev/usbmon9
+```
+
+可以通过如下使用sed来实现，删除尾号后获得字符串，我们可以使用sed将尾号替换为空字符串。
+```
+[root@ubuntu0006:/] #str="usbmon12"
+[root@ubuntu0006:/] #strhead=$(echo $str | sed 's/[0-9]*$//')
+[root@ubuntu0006:/] #echo $strhead
+usbmon
+[root@ubuntu0006:/] #strtail=${str:${#strhead}}
+[root@ubuntu0006:/] #echo $strtail
+12
+```
+要通过使用strhead来获取strtail ，是从strhead之后的位置从原始字符串中获取子字符串。
+
+
+
+
+
+
 
 

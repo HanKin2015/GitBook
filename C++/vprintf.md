@@ -1,6 +1,5 @@
 # vprintf函数
 
-
 ## 1、输出函数
 printf：写入标准输出
 fprintf：写入指定的流

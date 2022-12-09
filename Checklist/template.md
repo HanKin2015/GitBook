@@ -61,7 +61,7 @@ clean:
 #include <iostream>
 #include <cstring>
 #include <string.h>
-#inlcude <cstdlib>
+#include <cstdlib>
 using namespace std;
 
 int main(int argc, char *argv[])

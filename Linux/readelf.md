@@ -69,7 +69,7 @@ Symbol table '.symtab' contains 33 entries:
     13: 000000000
 ```
 
-## 6、ldd 执行结果：不是动态可执行文件
+## 6、ldd执行结果：不是动态可执行文件
 https://blog.csdn.net/lyndon_li/article/details/111397974
 
 readelf 也可以看到依赖的动态库
@@ -119,6 +119,7 @@ Dynamic section at offset 0x1e18 contains 25 entries:
  0x0000000000000001 (NEEDED)             共享库：[libc.so.6]
 ```
 
+## 7、二进制文件无法执行
 原因可能是二进制文件是为32位系统构建的，但是您正在64位系统上进行检查。
 原因也可能是二进制文件是AArch64系统架构的，但是您正在x86结构上进行检查。
-
+还有一种可能就是两个系统内核版本不同导致，如在UOS1032版本编译，然后二进制文件在UOS1050版本运行。。

@@ -15,7 +15,6 @@ p(print)x: x是变量名，表示打印变量x的值
 s: set设置变量值
 wh: 查看代码位置
 n(next): 表示执行下一步
-
 ```
 bt			查看堆栈
 info thread 查看线程
@@ -25,7 +24,6 @@ p val		输出变量val值
 ```
 
 启动gdb,注意该程序编译需要-g选项进行。
-
 ```
 r + 程序输入参数
 whatis + 变量   //获取变量类型
@@ -36,7 +34,6 @@ s + 变量
 
 查看时是可以倒着看，最后是程序最开始出现的地方。
 关键词：abort
-
 ```
 gdb 二进制文件 core文件
 ```
@@ -151,16 +148,54 @@ bt                        查看第2个线程的堆栈，即可可以看到线�
 注意：这种方式需要正确指定test执行文件的路径位置，否则会出现无法找到符号表错误。
 
 ## 5、获取程序中的变量值并对其修改重新运行
-print
-set
+调试demo程序在：D:\Github\Storage\c++\gdb\modify_variable.cpp
+```
+(gdb) bt
+#0  0x00007f323f86f370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007f323f86f2da in sleep () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x0000000000400ca8 in main (argc=1, argv=0x7ffeb6184098) at test.cpp:71
+(gdb) frame 2
+#2  0x0000000000400ca8 in main (argc=1, argv=0x7ffeb6184098) at test.cpp:71
+71                                                                                                                                                      sleep(2);
+(gdb) info locals
+log_file_path = 0x400d9a "./hj.log"
+__PRETTY_FUNCTION__ = "int main(int, char**)"
+index = 0
+(gdb) print g_log_fp
+$1 = (FILE *) 0x0
+(gdb) print LOG_TIGGER
+No symbol "LOG_TIGGER" in current context.
+(gdb) set g_log_fp=stderr
+'stderr' has unknown type; cast it to its declared type
+(gdb) print stderr
+$2 = (_IO_FILE *) 0x7fb8bcceb540 <_IO_2_1_stderr_>
+(gdb) set g_log_fp=0x7fb8bcceb540
+(gdb) continue
+Continuing.
 
+^C
+Program received signal SIGINT, Interrupt.
+0x00007ff13328a370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+(gdb) q
 
+[root@ubuntu0006:/media] #./a.out
+stdin 0x7ff1335828e0, stdout 0x7ff133583620, stderr 0x7fb8bcceb540
+LOG_TIGGER file is not exist!
+g_log_fp is NULL, index = 0
+g_log_fp is NULL, index = 0
+g_log_fp is NULL, index = 0
+2022-12-07 10:51:06 index = 0
+2022-12-07 10:51:08 index = 1
+2022-12-07 10:51:10 index = 2
+2022-12-07 10:51:12 index = 3
+2022-12-07 10:51:14 index = 4
+...
+```
+gdb调试修改变量后退出，程序依然以修改后的变量值继续执行。
 
 ## 6、总结
 gdb调试只是找到程序出现异常的位置，具体问题原因还是需要结合代码查看问题关键所在。
 https://developer.aliyun.com/mirror/
-
-
 ```
 #include <iostream>
 #include <cassert>
@@ -190,49 +225,24 @@ int main(int argc, char *argv[])
 
 ## 7、附录一
 
-### 7-1、gdb的查看源码
-
-显示源代码
-
+### 7-1、gdb查看源代码
 GDB 可以打印出所调试程序的源代码，当然，在程序编译时一定要加上-g的参数，把源程序信息编译到执行文件中。不然就看不到源程序了。当程序停下来以后，GDB会报告程序停在了那个文件的第几行上。你可以用list命令来打印程序的源代码。还是来看一看查看源代码的GDB命令吧。
 
-list<linenum>
-
-显示程序第linenum行的周围的源程序。
-
-list<function>
-
-显示函数名为function的函数的源程序。
-
-list
-
-显示当前行后面的源程序。
-
-list -
-
-显示当前行前面的源程序。
+list<linenum>   显示程序第linenum行的周围的源程序。
+list<function>  显示函数名为function的函数的源程序。
+list    显示当前行后面的源程序。
+list -  显示当前行前面的源程序。
 
 一般是打印当前行的上5行和下5行，如果显示函数是是上2行下8行，默认是10行，当然，你也可以定制显示的范围，使用下面命令可以设置一次显示源程序的行数。
 
-setlistsize <count>
-
-设置一次显示源代码的行数。
-
-showlistsize
-
-查看当前listsize的设置。
+setlistsize <count> 设置一次显示源代码的行数。
+showlistsize        查看当前listsize的设置。
 
 list命令还有下面的用法：
+list<first>, <last> 显示从first行到last行之间的源代码。
+list ,<last>        显示从当前行到last行之间的源代码。
+list +              往后显示源代码。
 
-list<first>, <last>
-
-显示从first行到last行之间的源代码。
-
-list ,<last>
-显示从当前行到last行之间的源代码。
-
-list +
-往后显示源代码。
 一般来说在list后面可以跟以下这些参数：
 <linenum>   行号。
 <+offset>   当前行号的正偏移量。
@@ -372,23 +382,25 @@ display *a@5
 https://www.itranslater.com/qa/details/2582482268707095552
 
 例如，这是当x为正数时，可以使用断点命令在foo的入口处打印x的值的方法。
-
+```
 break foo if x>0
 commands
 silent
 printf "x is %d\n",x
 cont
 end
+```
 如果您在命令列表中指定的第一个命令是silent，则不会打印有关在断点处停止的常规消息。 对于要打印特定消息然后继续的断点，这可能是理想的。 如果其余命令均未打印任何内容，则看不到已达到断点的迹象。 只有在断点命令列表的开头，silent才有意义。
 
 一个断点命令应用程序是为了补偿一个错误，因此您可以测试另一个错误。 在错误的代码行之后放置一个断点，为它提供一个条件，以检测出发生了错误的情况，并为它提供命令以将正确的值分配给需要它们的任何变量。 以continue命令结束，以便您的程序不会停止，并以silent命令开始，以便不产生任何输出。 这是一个例子：
-
+```
 break 403
 commands
 silent
 set x = y + 4
 cont
 end
+```
 
 ## 12、高级用法调试
 ### 12-1、可以对函数进行下断点
@@ -431,13 +443,14 @@ info args
 在windbg下，kb会显示返回地址和参数列表。
 
 ## 13、实操
+```
 gunzip camera0.core.6.19897.gz
 gdb /usr/local/bin/xxx camera0.core.6.19897
 bt
 f 17
 info locals
 p var
-
+```
 注意一点：
 堆栈中如果出现data=0x7eca70f000 <error: Cannot access memory at address 0x7eca70f000这种无法访问内存的情况，可能不是一个问题。
 

@@ -53,7 +53,7 @@ ipynb文件是可以在线浏览：https://hankin2015.github.io/2018/10/03/20181
 # 一个不错的学习demo
 https://github.com/xiaodongxiexie/python-widget
 
-
+https://mp.weixin.qq.com/s/UGFtM1Toue9B4NMdCss-OA
 
 
 

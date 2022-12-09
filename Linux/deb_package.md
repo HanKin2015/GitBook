@@ -160,7 +160,7 @@ dpkg-deb -e xxx.deb
 -R	提取控制信息和存档的清单文件
 -b	创建Debian软件包
 
-dpkg也能使用-x或-X参数解压deb文件。
+dpkg也能使用-x或-X参数解压deb文件（一个显示过程一个不显示-x, --extract, -X, --vextract）。
 ```
 [root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -e vim_7.4.488-7+deb8u3_amd64.deb
 [root@ubuntu0006:/media/hankin/vdb/deb] #ll
@@ -177,6 +177,23 @@ drwxr-xr-x 3 root root 4096 3月  31 17:40 ../
 -rw-r--r-- 1 root root  237 3月  10  2017 md5sums
 -rwxr-xr-x 1 root root 2471 3月  10  2017 postinst*
 -rwxr-xr-x 1 root root 1218 3月  10  2017 prerm*
+[root@ubuntu0006:/media/hankin/vdb/deb] #mkdir t
+[root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -X checkinstall_e1000e-3.8.4.deb t/
+./
+./lib/
+./lib/modules/
+./lib/modules/4.4.0-210-generic/modules.softdep
+./usr/
+./usr/share/
+./usr/share/man/man7/e1000e.7.gz
+./media/
+./media/sangfor/vdb/study/network/e1000e-3.8.4/src/e1000e.7.gz
+[root@ubuntu0006:/media/hankin/vdb/deb] #mkdir y
+[root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -x checkinstall_e1000e-3.8.4.deb y/
+[root@ubuntu0006:/media/hankin/vdb/deb] #ls y
+lib  media  usr
+[root@ubuntu0006:/media/hankin/vdb/deb] #ls t
+lib  media  usr
 ```
 
 ## 3-2、dpkg参数

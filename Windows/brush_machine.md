@@ -231,3 +231,30 @@ bios启动方式
 设置csm(在advance 或者boot下) 为enable,  若启动时找不到U盘, 尝试将此页设备的启动方式设置为legency
 设置boot Mode(在boot下) 为UEFI and Legency 或者 Legency
 
+## 13、其实安装跟上面的第6项是相同的问题
+选择UEFI启动：
+```
+BusyBox V1.30.1 (Debian 1:1.30.1.2-1+dde) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+(initramfs)_
+```
+
+选择普通启动：
+```
+Failed to load ldlinux.c32
+```
+
+根据第6项解决后，还是不要选择UEFI启动，可能会出现在命令行中卡住的问题，还是选择普通模式即可。
+
+## 14、安装Kylin系统时，出现双屏情况，开始以为U盘启动盘制作有问题
+进去显示只有一张壁纸，需要右键进入分辨率设置，设置成主屏即可。
+
+## 15、安装UOS系统时出现显示器无视频输入
+目前插的是HDMI接口，是不是更换成VGA就好了。
+直接在异常的场景更换VGA线，依然是这种情况，需要重新进入刷机界面即可，更换VGA线解决。
+
+基本上所有主机都能直接进入启动选项界面。
+F2一般是BIOS界面
+F7、F11、F12、Delete都有可能是启动选项界面。
+
+

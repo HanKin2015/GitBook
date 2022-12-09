@@ -59,7 +59,7 @@ trojan 是较新的代理软件，trojan官网是 https://trojan-gfw.github.io/t
 
 trojan的缺点在于关注度不够，除了ios平台，官方客户端都比较简陋。trojan安装和使用请参考：[trojan教程](https://shop.mac163.com/17157/)，服务端一键部署请参考：[trojan一键脚本](https://shop.mac163.com/14326/)。
 
-## 6、发现新大陆
+## 6、发现新大陆（有bug）
 以notepad++软件升级为例，无法打开地址：https://notepad-plus-plus.org/
 
 百度一下DNS检测工具，发现：
@@ -78,7 +78,7 @@ cmd窗口：ipconfig /flushdns
 
 果然结果不能保证百分百正确，发现这次就翻车了，没有解决翻墙问题。
 
-
+## 7、
 
 
 

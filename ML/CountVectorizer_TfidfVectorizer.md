@@ -207,3 +207,4 @@ CountVectorizer返回的是词频，TfidfVectorizer返回的是tfidf值。
 csc_matrix与csr_matrix唯一的区别在于，csr的indptr是针对行，而csc的indptr是针对列。
 
 
+TSVD与一般SVD不同的是它可以产生一个指定维度的分解矩阵，可以实现降维。

@@ -58,7 +58,7 @@ make
 结果是一些列的报错，编译失败。
 先进行自己编写demo测试一下，回头再来看看这个问题。
 
-demo程序没有问题，需要c++11，还是没有编译成功，可能是没有添加-llog4cplus选项。
+demo程序没有问题，需要c++11，还是没有编译成功，可能是没有添加-llog4cplus选项（编译成功）。
 ```
 cmake -DCMAKE_CXX_STANDARD=11 ..
 [root@ubuntu0006:/media/hankin/vdb/study/log4cplus/log4cplus-2.0.7/tests/build] #make
@@ -81,6 +81,7 @@ CMakeFiles/appender_test.dir/main.o：在函数‘main’中：
 - 设置logger的优先级，如省略此步骤，各种有限级的日志都将被输出。
 
 ### 3-4、标准使用
+demo见：D:\Github\Storage\c++\log\log4cplus
 ```
 [root@ubuntu0006:/media/hankin/vdb/study/log4cplus] #g++ standard.cpp -llog4cplus -std=c++11
 [root@ubuntu0006:/media/hankin/vdb/study/log4cplus] #./a.out

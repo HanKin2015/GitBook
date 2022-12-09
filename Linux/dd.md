@@ -58,16 +58,44 @@ cp命令有缓存功能，即使U盘拔插了也无法准确测试。
 发现硬盘使用sync，U盘使用direct比较准确。
 告知只有测试写能力时才需要oflag参数（未验证）
 
-## 4、创建指定大小的文件
-dd if=/dev/zero of=8M bs=8M count=1
-
-注意：一定需要count参数，否则会创造一个无限大的文件。
-
-## 5、dd命令有时候不适用
+## 4、dd命令有时候不适用
 ```
 dd if=/dev/zero of=test bs=1024M count=1 oflag=direct
 dd if=test of=/dev/null bs=1024M count=1 iflag=direct
 ```
 发现uos系统在处理这种空字符时确实拷贝速度过于迅速（直接复制粘贴拷贝），但是拷贝真实文件是正常的，因此不能使用这种命令来进行测试速度。
+
+## 4、生成文件大小和实际占空间大小一样的文件
+```
+dd if=/dev/zero of=8M.txt bs=8M count=1
+dd if=/dev/zero of=20G.txt bs=1G count=20
+```
+注意：一定需要count参数，否则会创造一个无限大的文件。
+bs=1G表示每一次读写1G数据，count=20表示读写20次，这样就指定了生成文件的大小为20G。bs参数还可以进一步细分为ibs和obs两种，为读操作与写操作分别指定不同的Buffer大小。
+
+## 6、生成文件大小固定，但实际不占空间命令
+```
+dd if=/dev/zero of=1G.txt bs=1M seek=1000 count=0
+
+[root@ubuntu0006:/] #dd if=/dev/zero of=1G.txt bs=1M seek=1000 count=0
+记录了0+0 的读入
+记录了0+0 的写出
+0 bytes copied, 0.00012465 s, 0.0 kB/s
+[root@ubuntu0006:/] #ll -h 1G.txt
+-rw-r--r-- 1 root root 1000M 12月  5 20:57 1G.txt
+[root@ubuntu0006:/] #du -h 1G.txt
+0       1G.txt
+[root@ubuntu0006:/] #dd if=/dev/zero of=2G.txt bs=1G count=2
+记录了2+0 的读入
+记录了2+0 的写出
+2147483648 bytes (2.1 GB, 2.0 GiB) copied, 10.0483 s, 214 MB/s
+[root@ubuntu0006:/] #ll -h 2G.txt
+-rw-r--r-- 1 root root 2.0G 12月  5 20:57 2G.txt
+[root@ubuntu0006:/] #du -h 2G.txt
+2.1G    2G.txt
+```
+这里用了一个新的命令seek，表示略过1000个Block不写（这里Block按照bs的定义是1M），count=0表示写入0个Block。用ls(查看文件大小)命令看新生成的文件，大小可以看出是1000M。但是再用du（查看文件占用空间）一看，实际占用硬盘大小只有0M。
+
+
 
 
