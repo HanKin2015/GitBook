@@ -88,3 +88,18 @@ https://notepad-plus-plus.org/
 
 ## 10、中国制霸生成器
 https://github.com/itorr/china-ex
+
+## 11、dwg文件格式
+dwg，即DWG，是电脑辅助设计软件AutoCAD以及基于AutoCAD的软件保存设计数据所用的一种专有文件格式。
+
+DWG是电脑辅助设计软件AutoCAD以及基于AutoCAD的软件保存设计数据所用的一种专有文件格式，始于1970年代的一套Interact CAD软件。之后欧特克公司（Autodesk）于1982年取得版权开始使用这种文件格式。欧特克公司拥有、开发并且更新DWG文件格式，通常每隔几年DWG就会随着该公司在AutoCAD中添加新的特性从而进行更新。
+DWG格式以及它的ASCII格式变体DXF，已经成为CAD制图数据交换中的事实文件标准，据估计全世界有超过十亿个DWG文件。有几家公司正在对DWG文件格式进行逆向工程以试图为其它的设计软件提供读写DWG文件的能力。欧特克公司也提供了一套需要授权的DWG读写技术开发包“RealDWG”。
+新版的AutoCAD可以打开许多旧版的DWG文件，AutoCAD 2007可以打开2.0版的DWG文件并且可以保存为r14版的格式。另外欧特克公司提供一个免费的DWG查看工具“DWG TrueView”用于查看所有版本的DWG文件。另外一方面，该公司是vendor lock-in策略的强力支持者，尽力保护DWG文件格式并且禁止开发支持DWG格式的开放源代码库。
+2006年11月22日，欧特克公司对Open Design Alliance一款支持DWG格式的自由库OpenDWG提出了诉讼。
+
+从上面的话中可以看见，DWG TrueView这款软件可以免费查看。
+个人推荐：https://activity.gstarcad.com/activity/promotionNewBaiduDwg?bd_vid=11620778029514412338
+浩辰CAD看图王。
+
+
+

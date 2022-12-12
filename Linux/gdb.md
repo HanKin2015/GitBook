@@ -403,6 +403,7 @@ end
 ```
 
 ## 12、高级用法调试
+
 ### 12-1、可以对函数进行下断点
 b tc_new
 b tc_delete
@@ -545,6 +546,86 @@ mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old
 rm -rf /var/lib/dpkg/info
 mv /var/lib/dpkg/info_old /var/lib/dpkg/info
 ```
+
+## 18、下断点实战
+示例demo见：D:\Github\Storage\c++\gdb\breakpoint.cpp
+
+```
+# 取消中断信号
+handle SIGPIPE nostop
+handle SIGUSR1 nostop
+dir /var/kvm_debug
+b hcd-ehci.c:1659
+```
+
+注意一点：使用run命令的话是调试未执行的二进制文件，即通过run执行，如果是正在执行的程序你执行run的话会告诉你：
+```
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+```
+
+一般我们的实际场景是程序在运行，然后动态调整，即没有dump文件，以及不是一个独立程序。
+```
+[root@ubuntu0006:/media] #g++ test.cpp -g
+[root@ubuntu0006:/media] #./a.out
+2022-12-09 11:42:39: index = 0
+2022-12-09 11:42:41: index = 1
+2022-12-09 11:42:43: index = 2
+2022-12-09 11:42:45: index = 3
+2022-12-09 11:42:47: index = 4
+2022-12-09 11:42:49: index = 5
+2022-12-09 11:42:51: index = 6
+已杀死
+
+[root@ubuntu0006:/media] #ps aux | grep a.out
+root      4883  0.0  0.0  13264  1532 pts/8    S+   11:42   0:00 ./a.out
+root      5054  0.0  0.0  17088   984 pts/4    S+   11:42   0:00 grep --color=auto a.out
+[root@ubuntu0006:/media] #gdb a.out -p 4883
+GNU gdb (GDB) 8.2.1
+.....
+(gdb) bt
+#0  0x00007f06769d4370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007f06769d42da in sleep () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00000000004008df in main (argc=1, argv=0x7ffd9af00158) at test.cpp:32
+(gdb) break test.cpp:33
+Breakpoint 1 at 0x4008df: file test.cpp, line 33.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004008df in main(int, char**) at test.cpp:33
+(gdb) run   错误的演示，导致进程被杀死，应该是continue
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /media/sangfor/vdb/TransferStation/a.out
+2022-12-09 11:45:25: index = 0
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe3f8) at test.cpp:33
+33                                                                              if (index == 20) {
+```
+
+## 19、高级用法之x命令
+examine：检查;审查;考察;考查;调查;(仔细地)检验;测验(某人);（尤指在法庭上）审问，查问
+
+可以使用examine命令（简写是x）来查看内存地址中的值。x命令的语法如下所示：
+```
+x /<n/f/u> <addr>
+
+x /32xw 0xf5dd1550
+```
+n、f、u是可选的参数。
+n 是一个正整数，表示显示内存的长度，也就是说从当前地址向后显示几个地址的内容。
+f 表示显示的格式，参见上面。如果地址所指的是字符串，那么格式可以是s，如果是指令地址，那么格式可以是：
+x 按十六进制格式显示变量。
+d 按十进制格式显示变量。
+u 按十六进制格式显示无符号整型。
+o 按八进制格式显示变量。
+t 按二进制格式显示变量。
+a 按十六进制格式显示变量。
+c 按字符格式显示变量。
+f 按浮点数格式显示变量。
+u表示从当前地址往后请求的字节数，如果不指定的话，GDB默认是4个bytes。u参数可以用下面的字符来代替，b表示单字节，h表示双字节，w表示四字节，g表示八字节。当我们指定了字节长度后，GDB会从指内存定的内存地址开始，读写指定字节，并把其当作一个值取出来。
+
+
+
 
 
 

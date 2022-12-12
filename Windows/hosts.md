@@ -78,7 +78,8 @@ cmd窗口：ipconfig /flushdns
 
 果然结果不能保证百分百正确，发现这次就翻车了，没有解决翻墙问题。
 
-## 7、
+## 7、Shadowsocks工具
+官网：https://github.com/shadowsocks/shadowsocks-windows
 
 
 

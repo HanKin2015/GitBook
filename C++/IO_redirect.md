@@ -30,5 +30,5 @@ _G_config.h:#define _G_BUFSIZ 8192
 冲遇到换行符，块缓冲遇到写满缓存，或用户强制fflush；才进行写文件动作。BUFSIZ为系统默认的缓冲区大小。
 
 三、BUFSIZ使用
-   #include <stdio.h> (引入头文件即可)
-   setbuf(stdout, buf); (修改默认缓冲大小)
+#include <stdio.h> (引入头文件即可)
+setbuf(stdout, buf); (修改默认缓冲大小)
