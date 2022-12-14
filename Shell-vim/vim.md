@@ -1,7 +1,10 @@
 [TOC]
 
 # VIM操作笔记
-还可以见：Linux/bashrc.md
+更多vim配置还可以见：D:\Github\GitBook\gitbook\Linux\bashrc.md
+
+配置文件还可能是/etc/vim/vimrc
+修改完后不需要使用source生效，直接生效，猜测可能是使用vim命令打开文件的时候生效。
 
 配置文件：.vimrc
 ps://blog.csdn.net/qq_41113081/article/details/1001
@@ -419,10 +422,22 @@ TAB键显示为^I，而行尾则标识为$。
 :set list! //切换显示或隐藏不可见字符
 ```
 
+## 12、autoindent和smartindent的区别
+set autoindent	自动缩进，即为新行自动添加与当前行同等的缩进。
+set smartindent	基于autoindent的一些改进
 
+set autoindent  使 Vim 在创建新行的时候使用与上一行同样的缩进
+set smartindent 创建新行时使用智能缩进，主要用于 C 语言一类的程序。通常，打开 smartindent 时也应该打开 autoindent
 
+## 13、Vim复制粘帖格式错乱问题
+参考：http://t.zoukankan.com/Dev0ps-p-9813621.html
 
+方法一：
+:set noai nosi
+取消了自动缩进和智能缩进，这样粘贴就不会错行了。但在有的vim中不行，还是排版错乱。
 
-
+方法二：（推荐）
+:set paste
+进入paste模式以后，可以在插入模式下粘贴内容，不会有任何变形
 
 

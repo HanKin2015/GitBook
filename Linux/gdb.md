@@ -624,7 +624,34 @@ c 按字符格式显示变量。
 f 按浮点数格式显示变量。
 u表示从当前地址往后请求的字节数，如果不指定的话，GDB默认是4个bytes。u参数可以用下面的字符来代替，b表示单字节，h表示双字节，w表示四字节，g表示八字节。当我们指定了字节长度后，GDB会从指内存定的内存地址开始，读写指定字节，并把其当作一个值取出来。
 
+## 20、dir命令
+dir命令用来指定源文件目录。
 
+比如file.c，cache.c和inode.c是三个源文件，已经编译为库lib
+
+(gdb) dir /home/xxx/linux-2.6.30/fs/fat/file.c
+这样在调试时就能链接到源文件
+
+注意：
+（1）目录分割符要用 / 或 \，不能用
+（2）gdb只会在你指定的目录下找源代码，不会搜索子目录，
+
+以上只是添加一个源文件，如果源文件较多，可以将目录列表写成一个文件srcdir.cmd，在GDB里面一次指定：
+srcdir.cmd //这是只是文件名
+dir /home/xxx/linux-2.6.30/fs/fat/file.c
+dir /home/xxx/linux-2.6.30/fs/fat/cache.c
+dir /home/xxx/linux-2.6.30/fs/fat/inode.c
+…
+
+然后在GDB里面使用source命令
+Source srcdir.cmd
+
+小技巧：
+使用脚本生成srcdir.cmd
+```
+#!/bin/sh
+find /home/xxx/linux-2.6.30/fs/fat/ -name "*" > srcdir.cmd
+```
 
 
 

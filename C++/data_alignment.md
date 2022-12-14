@@ -70,7 +70,54 @@ n 字节的对齐方式 VC 对结构的存储的特殊处理确实提高 CPU 存
 ```
 详细例子见：D:\Github\Storage\windows\StudySTL\study_program_pack.h
 
+## 8、字节对齐
+硬件结构体中常常会定义各种各样的宏。如：
+```
+typedef struct EHCIqtd {
+    uint32_t next;                    /* Standard next link pointer */
+    uint32_t altnext;                 /* Standard next link pointer */
+    uint32_t token;
+#define QTD_TOKEN_DTOGGLE             (1 << 31)
+#define QTD_TOKEN_TBYTES_MASK         0x7fff0000
+#define QTD_TOKEN_TBYTES_SH           16
+#define QTD_TOKEN_IOC                 (1 << 15)
+#define QTD_TOKEN_CPAGE_MASK          0x00007000
+#define QTD_TOKEN_CPAGE_SH            12
+#define QTD_TOKEN_CERR_MASK           0x00000c00
+#define QTD_TOKEN_CERR_SH             10
+#define QTD_TOKEN_PID_MASK            0x00000300
+#define QTD_TOKEN_PID_SH              8
+#define QTD_TOKEN_ACTIVE              (1 << 7)
+#define QTD_TOKEN_HALT                (1 << 6)
+#define QTD_TOKEN_DBERR               (1 << 5)
+#define QTD_TOKEN_BABBLE              (1 << 4)
+#define QTD_TOKEN_XACTERR             (1 << 3)
+#define QTD_TOKEN_MISSEDUF            (1 << 2)
+#define QTD_TOKEN_SPLITXSTATE         (1 << 1)
+#define QTD_TOKEN_PING                (1 << 0)
 
+    uint32_t bufptr[5];               /* Standard buffer pointer */
+#define QTD_BUFPTR_MASK               0xfffff000
+#define QTD_BUFPTR_SH                 12
+} EHCIqtd;
+```
+
+这时候地址如何计算，即：
+```
+addr = NLPTR_GET(q->qtdaddr);
+if (get_dwords(q->ehci, addr +  8, &qtd.token,   1) < 0) {
+    return 0;
+}
+barrier();
+if (get_dwords(q->ehci, addr +  0, &qtd.next,    1) < 0 ||
+    get_dwords(q->ehci, addr +  4, &qtd.altnext, 1) < 0 ||
+    get_dwords(q->ehci, addr + 12, qtd.bufptr,
+               ARRAY_SIZE(qtd.bufptr)) < 0) {
+    return 0;
+}
+```
+
+获取结构体地址，获取成员地址，内容拷贝，测试demo见：
 
 
 

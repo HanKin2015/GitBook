@@ -1,4 +1,5 @@
 # linux终端terminal个性化配置
+本文涵盖bashrc文件、alias个性化设置、vimrc配置、ssh配置等等。
 
 ## 1、多个配置文件路径
 ~/.profile
@@ -145,7 +146,7 @@ set cursorcolumn
 highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 
-" 自动缩进和对齐
+" 自动缩进和智能缩进
 set autoindent
 set smartindent
 
