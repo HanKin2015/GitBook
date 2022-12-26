@@ -31,7 +31,6 @@ memcpy会访问越界，破坏了dest后面的数据，并且可能我们还不�
 
 
 ## 3、memcpy 
-
 原型：extern void *memcpy(void *dest, void *src, unsigned int count);
 用法：#include <string.h>
 功能：由src所指内存区域复制count个字节到dest所指内存区域。
@@ -39,15 +38,10 @@ memcpy会访问越界，破坏了dest后面的数据，并且可能我们还不�
 
 总结：strncpy遇到NULL会停止拷贝后面的内容，而用NULL来填充。而memcpy只是单纯的内存拷贝，不关心是否是NULL。
 
-
-
 ## 注意点
-
 - strncpy是char型，而memcpy是void型，无视字符串类型。
 - strncpy遇到'\0'就不拷贝了。
 - '0'和'\0'是一回事吗？学到了学到了，还真是
-
-
 
 strncpy() 最初被设计为用来处理一种现在已经废弃的数据结构——定长， 不必 ’\0’ 结束的 “字符串”。strncpy 的另一个怪癖是它会用多个 ’\0’ 填充短串， 直到达到指定的长度。在其它环境中使用 strncpy() 有些麻烦， 因为必须经常在目的串末尾手工加 ’\0’。
 可以用 strncat 代替 strncpy 来绕开这个问题: 如果目的串开始时为空 (就是说， 如果先用 *dest = ’\0’)，strncat() 就可以完成希望 strncpy() 完成的事情。另外一个方法是用 sprintf(dest， "%.*s"， n， source)。

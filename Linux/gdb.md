@@ -653,8 +653,98 @@ Source srcdir.cmd
 find /home/xxx/linux-2.6.30/fs/fat/ -name "*" > srcdir.cmd
 ```
 
+## 21、奇怪的现象
+gdb打印出来的long占的字节长度和gcc或者g++编译处理的程序打印出来的不同。
+更神奇的是：
+```
+[root@ubuntu0006:/media] #gdb
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) print sizeof(long)
+$1 = 4
+(gdb) q
+[root@ubuntu0006:/media] #gdb a.out
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) print sizeof(long)
+$1 = 8
+```
+不抛弃不放弃，同事帮忙的google下查到gdb的一个bug讨论：
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=80777
+https://bugzilla.redhat.com/show_bug.cgi?id=518712
 
+Fedora GDB is built in biarch mode to properly support both 32-bit and 64-bit programs.  For some reason the default is 32-bit.  I do not find such choice to be important enough to need a fix, please provide more reasons if you think so.
+
+```
+(gdb) print sizeof(long)
+$1 = 4
+(gdb) show architecture
+The target architecture is set automatically (currently i386)
+(gdb) set architecture i386:x86-64
+The target architecture is assumed to be i386:x86-64
+(gdb) print sizeof(long)
+$2 = 8
+(gdb) show architecture
+The target architecture is assumed to be i386:x86-64
+```
+
+https://en.wikipedia.org/wiki/C_data_types
+维基百科说数据类型只有最低位数要求，并没有确定的范围。
+
+## 22、gdb调试中打印宏
+其实这个问题有点愚蠢，宏需要打印出来检查吗。。。值又无法改变，但还是有方法打印的。
+
+编译时添加添加-g3 -gdwarf-2参数即可。
+
+demo见：D:\Github\Storage\c++\gdb\print_define.cpp
+PS:闹了一个乌龙，一开始我gdb进去直接打印宏，能打出来就神奇了，需要挂载到程序中，运行起来，就需要用到下断点了。
+```
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #g++ -g -g3 -gdwarf-2 test.cpp
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #gdb a.out
+(gdb) print LOG_TIGGER
+No symbol "LOG_TIGGER" in current context.
+(gdb) break main
+Breakpoint 1 at 0x400715: file test.cpp, line 18.
+(gdb) r
+Starting program: /media/sangfor/vdb/TransferStation/a.out
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe3f8) at test.cpp:18
+18          int x = LOG_TIGGER;
+(gdb) print x
+$1 = 0
+(gdb) print LOG_TIGGER
+$2 = 111
+
+没有添加参数是这样：
+(gdb) print LOG_TIGGER
+No symbol "LOG_TIGGER" in current context.
+```
 
 

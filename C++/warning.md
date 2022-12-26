@@ -513,6 +513,9 @@ pthread_create(&tid, NULL, tfn, (void *)(long)i);
 #endif
 ```
 
+## 46、编绎警告[Warning] left shift count ＞= width of type
+进行左移操作时，超出了当前数据类型的最大范围。
+将数字末尾添加LL即可。
 
 
 

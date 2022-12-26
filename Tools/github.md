@@ -53,7 +53,12 @@ https://github.com/antonkomarev/github-profile-views-counter
 参考1：https://github.com/mackyle/xar
 支持文件下载、网页规范
 
+## 7、上库会收到大量github发的邮件
+[HanKin2015/Storage] Bump nltk from 3.4.5 to 3.6.6 in /python (PR #25)
+Updates to manifest files in HanKin2015/Storage introduced 5 vulnerable dependencies
 
+以前就放其任意处置，今天仔细看，发现可能是我的一个python/requirements.txt文件导致，限制了我使用的python环境，我删除了该文件。
+后面是我的python/requirements.txt文件中的库版本过低，需要提升到新版本，遇到障碍失败了。
 
 
 

@@ -1417,3 +1417,6 @@ git remote rename origin old-origin
 git remote add origin git@cs.zhangsan.org:12345/AI.git
 git push -u origin --all
 git push -u origin --tags
+
+## git上库完成后本地还是有红色感叹号
+查了一会儿，发现有文件冲突，但这个文件是绿色的勾。但是过了一会儿，红色感叹号都消失了，很奇怪，莫非是反应不及时吗？

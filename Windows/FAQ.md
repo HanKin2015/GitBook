@@ -215,3 +215,13 @@ http://www.nndssk.com/xtwt/98813whreub.html
 Win+R，敲入service.msc，找到Windows Time，把启动类型修改为自动，点击确定退出，提示：这里一定要重启电脑才能够生效哦。
 
 又不想重启电脑，好纠结无法验证，为了验证，只能狠心重启电脑。可以先手动修改时间，下次验证时再修改时间重启，我真是机灵鬼。
+
+## 27、解决 Windows 照片查看器无法显示此图片，因为计算机上的可用内存可能不足
+参考：https://blog.csdn.net/WannaHaha/article/details/107160492
+
+更换软件查看。
+
+
+
+
+

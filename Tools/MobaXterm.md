@@ -1,11 +1,16 @@
 # ssh工具
 
 ## 1、MobaXterm
+mobaxterm 的功能非常全面，几乎提供了所有重要的远程网络工具（比如 SSH、X11、RDP、VNC、FTP、MOSH 等），以及 Windows 桌面上的 Unix 命令（bash、ls、cat、sed、grep、awk、rsync 等），登录之后默认开启 sftp 模式。
+mobaxterm.mobatek.net
+大多企业运维都喜欢用它。
 
 ### 1-1、安装包
 zip安装包大约在27M，免安装使用方便大约在14M。
 
 MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 数、SSH tunnels 数和其他一些定制化配置外限制外，免费版在终端底部还多了一个 “UNREGISTERED VERSION” 提示。
+
+现在专业版需要先付款再下载。。。
 
 破解MobaXterm20.2软件方法步骤：https://www.jianshu.com/p/fa5a2fac4148
 
@@ -38,26 +43,39 @@ mobaxterm标签页最下方默认有个服务器内存硬盘情况信息的状�
 - 可以尝试重新打开一个选项卡
 - 可以在Session中点击SFTP连接服务器
 
-可能上面的方法行不通，终极办法是：打开Session-》SSH，在里面进行连接。
+可能上面的方法行不通，终极办法是：打开Session-》SSH，在里面进行连接。（这个方法果然行的通）
+
+还有一个方法是更换软件，WInSCP你指得选择。
 
 ## 2、xshell
 研究生的时候使用过，好像还不错。现在想想文件还挺大的，并且上下传文件还需要安装搭配的xshell ftp软件，整体下来整个安装包就很大。
 
+xshell 是一个非常强大的安全终端模拟软件，它支持 SSH1, SSH2, 以及 Windows 平台的 TELNET 协议。Xshell 可以在 Windows 界面下用来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。
+https://www.netsarang.com/zh/xshell/
+
 ## 3、finalshell
+FinalShell 是一体化的服务器网络管理软件 (java 语言编写)，不仅是 ssh 客户端，FinalShell 还是功能强大的开发、运维工具，充分满足用户的开发运维需求。
+可以直观的看出远程服务器的硬件运行情况。
+http://www.hostbuf.com/
+
 据说是一个非常强大的终端工具。
 安装包80M，没有免安装包。
 
 感觉还行，但是背景有点花，跟mobaxterm没太大区别，多了一些花里胡哨。
 相比之下还是更加推荐mobaxterm。
 
-## 
+## 4、secureCRT
+SecureCRT 支持 SSH，同时支持 Telnet 和 rlogin 协议。SecureCRT 是一款用于连接运行包括 Windows、UNIX 和 VMS 的理想工具。通过使用内含的 VCP 命令行程序可以进行加密文件的传输，网工应该很熟这个软件，经常使用它连接设备。
+https://www.vandyke.com
 
+## 5、WinSCP
+WinSCP 是一个 Windows 环境下使用 SSH 的开源图形化 SFTP 工具客户端。同时支持 SCP 协议。它的主要功能就是在本地与远程计算机间安全的复制传输文件。
+https://winscp.net/
 
-
-
-
-
-
+## 6、PuTTY
+PuTTY 是 SSH 和 telnet 客户端，最初由 Simon Tatham 为 Windows 平台开发。用 MIT 许可证授权。包含的组件有：PuTTY, PuTTYgen,PSFTP, PuTTYtel, Plink, PSCP, Pageant, 默认登录协议是 SSH，默认的端口为 22。
+Putty 主要是用来远程连接服务器，它支持 SSH、Telnet、Serial 等协议的连接。
+putty.org
 
 
 
