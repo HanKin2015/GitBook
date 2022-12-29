@@ -5,24 +5,24 @@
 
 FAQ 即 Frequently Asked Questions 的缩写，表示常见问题，官方列了 27 个常见问题，完整清单在此：https://mp.weixin.qq.com/s/zabIvt4dfu_rf7SmGZXqXg
 
-# 1、IndentationError: unindent does not match any outer indentation level
+## 1、IndentationError: unindent does not match any outer indentation level
 占位问题，存在两种可能性：1.代码没有对齐 2.存在非法字符与其他格式的不可见的内容（输入法的问题）
 
-# 2、AttributeError: module 'socketserver' has no attribute 'ForkingMixIn'
+## 2、AttributeError: module 'socketserver' has no attribute 'ForkingMixIn'
 解决办法：将
 SocketServer.ForkingMixIn 替换为 SocketServer.ThreadingMixIn
 
-# 3、为啥不使用switch语句
+## 3、为啥不使用switch语句
 该文档给出了几个建议，告诉了我们几个 switch/case 的替代方案：
 
 使用 if-elif-else 条件判断语句
 使用字典，将 case 值与调用的函数映射起来
 使用内置 getattr() 检索特定的对象调用方法
 
-# 4、靶场测试
+## 4、靶场测试
 靶场测试，即 range test，指的是对武器弹药的技术性能作各种测试验证，与药物的临床试验一样，都是在最终产品交付前的一项关键性测试。
 
-# 5、dataframe插入空行
+## 5、dataframe插入空行
 ```
     analysis_result = pd.DataFrame(columns=['对应栋号', '出售状态', '总共数量', '100平方', '124平方', '142平方'])
     for sheet_name in sheet_names:
@@ -41,7 +41,7 @@ SocketServer.ForkingMixIn 替换为 SocketServer.ThreadingMixIn
         print(analysis_result)
 ```
 
-# 6、将小数转换为半分数字符串
+## 6、将小数转换为半分数字符串
 ```
 sold_cnt = data.shape[0]
 unsold_cnt = unsold_data.shape[0]
@@ -50,7 +50,7 @@ rate = format(rate, '.2%')	# 保留两位小数
 print(rate)
 ```
 
-# 7、python调用python文件使用
+## 7、python调用python文件使用
 ```main.py
 from slave import var
 from slave import func
@@ -71,9 +71,9 @@ var = 12345
 10 + 20 = 30
 ```
 
-# 8、python的import并不能将其py文件中的库文件import进来
+## 8、python的import并不能将其py文件中的库文件import进来
 
-# 9、class类的继承和重写函数
+## 9、class类的继承和重写函数
 ```
 #父类
 class Animal(object):
@@ -87,15 +87,15 @@ class Cat(Animal):
         print("cat running-----")
 ```
 
-# 10、数组转list
+## 10、数组转list
 ndarray.tolist()
 
-# 11、Python中有没有类似c语言中#define的功能？
+## 11、Python中有没有类似c语言中#define的功能？
 首先python是动态语言，不用声明变量的类型所以  #define uchar unsigned char  这个没有。#define a x-y在python 中，简单粗暴的 a = x-y
 >>> total = lambda x, y: x+y
 >>> total(3, 5)8
 
-# 12、tkinter鼠标点击事件
+## 12、tkinter鼠标点击事件
 各种点击事件
 事件一览表
 事件	代码	备注
@@ -115,17 +115,17 @@ ndarray.tolist()
 回车键	Return	 
 控件尺寸变	Configure
 
-# 13、浮点数比较相等
+## 13、浮点数比较相等
 https://blog.csdn.net/xfxf996/article/details/107789006
 
-# 14、python中import其他文件夹下的模块
+## 14、python中import其他文件夹下的模块
 将该文件夹加入系统路径下面：
 ```
 # 增加libary库的搜索路径
 sys.path.append('../../libary/')
 ```
 
-# 15、_tkinter.TclError: image "pyimage1" doesn't exist
+## 15、_tkinter.TclError: image "pyimage1" doesn't exist
 因為在一個程式中只能存在一個根視窗，也就是說只能存在一個Tk()，其他的視窗只能以頂層視窗（Toplevel()）的形式存在。
 
 如果是作为一个库文件调用的话，可以这样写：
@@ -138,17 +138,17 @@ def picture_browser(master=None):
 	root.title('测试')
 ```
 
-# 16、解决treeview的颜色样式个性化
+## 16、解决treeview的颜色样式个性化
 找了好久都没有解决，几乎到了快放弃的阶段，最终在两个网站中找到了灵感。
 https://www.it1352.com/1887538.html
 https://www.cnpython.com/qa/113726
 改变一行数据的颜色，即一个选定的项目，不能改变一个单元格。如果需要改变，则需要使用到Canvas。
 [python3使用tkinter做界面之颜色](https://blog.csdn.net/chl0000/article/details/7657887)
 
-# 17、添加tkinter.ttk.Style()变量后打开窗口会多出一个tk窗口
+## 17、添加tkinter.ttk.Style()变量后打开窗口会多出一个tk窗口
 发现是由于把tkinter.ttk.Style()弄成全局变量了，改成局部变量后解决。
 
-# 18、_tkinter.TclError: couldn't recognize data in image file "D:\images\1 (10).jpg"
+## 18、_tkinter.TclError: couldn't recognize data in image file "D:\images\1 (10).jpg"
 不清楚原因，主要是不要使用tk.PhotoImage调用图片，https://blog.csdn.net/username666/article/details/113615073
 Tkinter仅支持3种文件格式，即GIF、PGM和PPM。
 可以安装PIL模块，通过导入PIL模块，使用里面的函数实现。Python PIL支持GIF、JPEG、PCD、PNG、PPM、PSD等30多种图像文件格式。
@@ -174,10 +174,10 @@ if img_pil.size[0] > self.img_max_width or img_pil.size[1] > self.img_max_height
 self.img = ImageTk.PhotoImage(img_pil)
 ```
 
-# 19、AttributeError: module 'tkinter' has no attribute 'ttk'
+## 19、AttributeError: module 'tkinter' has no attribute 'ttk'
 很奇怪，添加from tkinter.ttk import Scrollbar, Checkbutton, Label, Button即可
 
-# 20、RuntimeError: main thread is not in main loop
+## 20、RuntimeError: main thread is not in main loop
 https://www.maixj.net/ict/runtimeerror-main-thread-is-not-in-main-loop-21037
 
 网络上几乎找不到对这个问题的简单有效解决方案，后来自己看python官方文档，发现在线程start之前，设置一个daemon属性为True，这个问题就解决了。代码大概是这样的：
@@ -267,9 +267,6 @@ Traceback (most recent call last):
 TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
 ```
 
-
-
-
 ## 29、SyntaxError: Non-ASCII character '\xe8' in file amazing_zip_error.py on line 8, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
 根据错误提示，尝试首行添加：
 ```
@@ -318,6 +315,39 @@ for i in numpy.arange(0.0, 4.1, 0.8):
 4.0
 ```
 会出现精度丢失问题，计算机中所有的数据最终都是以二进制的形式存储的，小数在转换为二进制表示的时候会出现位数无限循环的情况，所以只能存储有限位数，超过这个长度的位数会被舍去（会采用 0舍1入 的方式），这样就造成了精度丢失的问题。
+
+## 32、解决RecursionError: maximum recursion depth exceeded while calling a Python object
+Python默认递归调用深度为1000（即最多递归调用1000次），而程序在运行过程中超过最大的递归深度。
+
+```
+import sys  # 导入sys模块
+sys.setrecursionlimit(3000)  # 将默认的递归深度修改为3000
+
+def infinite_lock_windows():
+    """无限锁屏
+    """
+    
+    while True:
+        user = ctypes.windll.LoadLibrary("user32.dll")
+        user.LockWorkStation()
+        infinite_lock_windows()
+        time.sleep(30)  # 应该把这行放在上面一行
+```
+
+## 33、python 报错 SyntaxError: EOL while scanning string literal 问题原因 解决方案 EOL解释
+EOL = End Of Line error(翻译：行尾误差)
+问题原因：通常是字符串两端的引号未正确匹配、成对造成的。
+
+```
+def set_wallpaper():
+    path = os.listdir(r'C:\Users\Administrator\Downloads\picture')
+    for i in path:
+        print(i)
+        # 原因在于这一行少写一个\，这个是个转义字符
+        img_path = r'C:\Users\Administrator\Downloads\picture' + '\\' + i
+        print(img_path)
+```
+
 
 
 

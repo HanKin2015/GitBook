@@ -152,8 +152,6 @@ bU1DevExitLat:                     0x0A -> less than 10 micro-seconds
 wU2DevExitLat:                     0x07FF -> less than 2047 micro-seconds
 ```
 
-
-
 ```
 /** \ingroup libusb_desc
  * Descriptor types as defined by the USB specification. */

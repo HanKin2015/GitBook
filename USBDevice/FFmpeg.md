@@ -91,6 +91,7 @@ https://blog.csdn.net/tttyd/article/details/8825181
 **错误3**：libavdevice/fbdev_common.c:57:35: error: comparison between signed and unsigned integer expressions [-Werror=sign-compare]
 
 发现ffbuild/config.mak文件里面有-Wsign-compare字样，修改为-Wno-error=sign-compare或者删除。
+可以，后面又遇到了，修改Makefile文件为-Wno-error=sign-compare或者删除。
 
 **错误4**：libavdevice/lavfi.c:406:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow]
 同理，ffbuild/config.mak文件里删除即可。
@@ -103,9 +104,6 @@ https://blog.csdn.net/tttyd/article/details/8825181
 /usr/include/aarch64-linux-gnu/bits/socket.h:166:8: note: originally defined here
 
 在config.h文件中将值修改为1.
-
-
-
 
 还有各种各样的结构体重复定义。。。。。。。。。都是在config.h中修改值为1.
 

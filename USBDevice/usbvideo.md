@@ -174,7 +174,15 @@ make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian9/
 make CONFIG_BRIDGE_IGMP_SNOOPING=m -C  /media/hankin/vdb/debians-kernel/debian8/extract/usr/src/linux-4.2 M=`pwd` modules
 ```
 
+## 6、FPS
+FPS是图像领域中的定义，是指画面每秒传输帧数，通俗来讲就是指动画或视频的画面数。FPS是测量用于保存、显示动态视频的信息数量。每秒钟帧数越多，所显示的动作就会越流畅。通常，要避免动作不流畅的最低是30。某些计算机视频格式，每秒只能提供15帧。
+FPS也可以理解为我们常说的“刷新率（单位为Hz）”，例如我们常在游戏里说的“FPS值”。我们在装机选购显卡和显示器的时候，都会注意到“刷新率”。一般我们设置缺省刷新率都在75Hz（即75帧/秒）以上。例如：75Hz的刷新率刷也就是指屏幕一秒内只扫描75次，即75帧/秒。而当刷新率太低时我们肉眼都能感觉到屏幕的闪烁，不连贯，对图像显示效果和视觉感观产生不好的影响。
+电影以每秒24张画面的速度播放，也就是一秒钟内在屏幕上连续投射出24张静止画面。有关动画播放速度的单位是fps，其中的f就是英文单词Frame（画面、帧），p就是Per（每），s就是Second（秒）。用中文表达就是多少帧每秒，或每秒多少帧。电影是24fps，通常简称为24帧。
 
+在协商分辨率时，提交（commit）了0x0a2c2a的帧间隔，转化为十进制为666666，计算成fps为15帧。那就意味着虚拟机想要设备以15帧每秒的速度进行图像传输。
+
+工业级相机，机器视觉：https://blog.csdn.net/cugyzy/article/details/120974745
+https://www.irayple.com/cn/productDetail/122
 
 
 
