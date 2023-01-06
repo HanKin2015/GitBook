@@ -65,7 +65,6 @@ Enb： 当前断点是否有效 y：有效 n：无效
 Address：内存地址
 What：位置
 
-
 ## 3、gdb调试带参数的程序
 gdb --args ./a.out 4
 也可以在里面运行加参数：r 5
@@ -279,9 +278,8 @@ SIGXFSZ：如果进程超过了其软文件长度限制，则SVR4和4.3+BSD产�
 %h 主机名
 %e 程序文件名
 
-## 8、附录二
-gdb基本使用命令
-1、运行命令
+## 8、gdb基本使用命令
+### 8-1、运行命令
 run：简记为 r ，其作用是运行程序，当遇到断点后，程序会在断点处停止运行，等待用户输入下一步的命令。
 continue （简写c ）：继续执行，到下一个断点处（或运行结束）
 next：（简写 n），单步跟踪程序，当遇到函数调用时，也不进入此函数体；此命令同 step 的主要区别是，step 遇到用户自定义的函数，将步进到函数中去运行，而 next 则直接调用函数，不会进入到函数体内。
@@ -292,7 +290,7 @@ finish： 运行程序，直到当前函数完成返回，并打印函数返回�
 call 函数(参数)：调用程序中可见的函数，并传递“参数”，如：call gdb_test(55)
 quit：简记为 q ，退出gdb
 
-2、设置断点
+### 8-2、设置断点
 break n （简写b n）:在第n行处设置断点
 （可以带上代码路径和代码名称： b OAGUPDATE.cpp:578）
 b fn1 if a＞b：条件断点设置
@@ -304,13 +302,13 @@ clear 行号n：清除第n行的断点
 info b （info breakpoints） ：显示当前程序的断点设置情况
 delete breakpoints：清除所有断点：
 
-3、查看源码
+### 8-3、查看源码
 list ：简记为 l ，其作用就是列出程序的源代码，默认每次显示10行。
 list 行号：将显示当前文件以“行号”为中心的前后10行代码，如：list 12
 list 函数名：将显示“函数名”所在函数的源代码，如：list main
 list ：不带参数，将接着上一次 list 命令的，输出下边的内容。
 
-4、打印表达式
+### 8-4、打印表达式
 print 表达式：简记为 p ，其中“表达式”可以是任何当前正在被测试程序的有效表达式，比如当前正在调试C语言的程序，那么“表达式”可以是任何C语言的有效表达式，包括数字，变量甚至是函数调用。
 print a：将显示整数 a 的值
 print ++a：将把 a 中的值加1,并显示出来
@@ -323,7 +321,7 @@ whatis ：查询变量或函数
 info function： 查询函数
 扩展info locals： 显示当前堆栈页的所有变量
 
-5、查看运行信息
+### 8-5、查看运行信息
 where/bt ：当前运行的堆栈列表；
 bt backtrace 显示当前调用堆栈
 up/down 改变堆栈显示的深度
@@ -331,7 +329,7 @@ set args 参数:指定运行时的参数
 show args：查看设置好的参数
 info program： 来查看程序的是否在运行，进程号，被暂停的原因。
 
-6、分割窗口
+### 8-6、分割窗口
 layout：用于分割窗口，可以一边查看代码，一边测试：
 layout src：显示源代码窗口
 layout asm：显示反汇编窗口
@@ -339,7 +337,7 @@ layout regs：显示源代码/反汇编和CPU寄存器窗口
 layout split：显示源代码和反汇编窗口
 Ctrl + L：刷新窗口
 
-7、cgdb强大工具
+### 8-7、cgdb强大工具
 cgdb主要功能是在调试时进行代码的同步显示，这无疑增加了调试的方便性，提高了调试效率。界面类似vi，符合unix/linux下开发人员习惯;如果熟悉gdb和vi，几乎可以立即使用cgdb。
 
 ## 9、调试输出指针值
@@ -595,7 +593,7 @@ Num     Type           Disp Enb Address            What
 (gdb) run   错误的演示，导致进程被杀死，应该是continue
 The program being debugged has been started already.
 Start it from the beginning? (y or n) y
-Starting program: /media/sangfor/vdb/TransferStation/a.out
+Starting program: /media/Hankin/vdb/TransferStation/a.out
 2022-12-09 11:45:25: index = 0
 
 Breakpoint 1, main (argc=1, argv=0x7fffffffe3f8) at test.cpp:33
@@ -726,14 +724,14 @@ https://en.wikipedia.org/wiki/C_data_types
 demo见：D:\Github\Storage\c++\gdb\print_define.cpp
 PS:闹了一个乌龙，一开始我gdb进去直接打印宏，能打出来就神奇了，需要挂载到程序中，运行起来，就需要用到下断点了。
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #g++ -g -g3 -gdwarf-2 test.cpp
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #gdb a.out
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #g++ -g -g3 -gdwarf-2 test.cpp
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #gdb a.out
 (gdb) print LOG_TIGGER
 No symbol "LOG_TIGGER" in current context.
 (gdb) break main
 Breakpoint 1 at 0x400715: file test.cpp, line 18.
 (gdb) r
-Starting program: /media/sangfor/vdb/TransferStation/a.out
+Starting program: /media/Hankin/vdb/TransferStation/a.out
 
 Breakpoint 1, main (argc=1, argv=0x7fffffffe3f8) at test.cpp:18
 18          int x = LOG_TIGGER;
@@ -746,5 +744,91 @@ $2 = 111
 (gdb) print LOG_TIGGER
 No symbol "LOG_TIGGER" in current context.
 ```
+
+## 23、内存竟被”无意“破坏，真相究竟如何？
+内存是C/C++程序员的好帮手，我们通常说C/C++程序性能更高其原因之一就在于可以自己来管理内存，然而计算机科学中没有任何一项技术可以包治百病，内存问题也给C/C++程序员带来无尽的烦恼。
+
+野指针、数组越界、错误的内存分配或者释放、多线程读写导致内存被破坏等等，这些都会导致某段内存中的数据被”无意“的破坏掉，这类bug通常很难定位，因为当程序开始表现异常时通常已经距离真正出问题的地方很远了，常用的程序调试方法往往很难排查此类问题。
+
+既然这类问题通常是由于内存的读写造成，那么如果要是某一段内存被修改或者读取时我们能观察到此事件就好了，幸运的是这类技术已经实现了。
+
+在GDB中你可以通过添加watchpoint来观察一段内存，这段内存被修改时程序将会停止，此时我们就能知道到底是哪行代码对该内存进行了修改，这功能是不是很强大。
+
+感觉此翻操作落地不了实际场景中。。。。。。
+
+demo见：D:\Github\Storage\c++\gdb\watchpoint_example.cpp
+```
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #g++ watchpoint_example.cpp -g -lpthread -std=c++11
+[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #gdb a.out
+(gdb) break watchpoint_example.cpp:31
+Breakpoint 1 at 0x400f82: file watchpoint_example.cpp, line 31.
+(gdb) run
+Starting program: /media/sangfor/vdb/TransferStation/a.out
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at watchpoint_example.cpp:31
+31          cout << a << endl;
+(gdb) print &a
+$1 = (int *) 0x7fffffffe2d8
+(gdb) watch *(int*)0x7fffffffe2d8
+Hardware watchpoint 2: *(int*)0x7fffffffe2d8
+(gdb) continue
+Continuing.
+4960
+[New Thread 0x7ffff6f4e700 (LWP 28301)]
+[Switching to Thread 0x7ffff6f4e700 (LWP 28301)]
+
+Thread 2 "a.out" hit Hardware watchpoint 2: *(int*)0x7fffffffe2d8
+
+Old value = 4960
+New value = 1
+memory_write (value=0x7fffffffe2d8) at watchpoint_example.cpp:19
+19      }
+(gdb) show can-use-hw-watchpoints
+Debugger's willingness to use watchpoint hardware is 1.
+(gdb) set can-use-hw-watchpoints 0
+(gdb) show can-use-hw-watchpoints
+Debugger's willingness to use watchpoint hardware is 0.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000400f82 in main() at watchpoint_example.cpp:31
+        breakpoint already hit 1 time
+2       hw watchpoint  keep y                      *(int*)0x7fffffffe2d8
+        breakpoint already hit 1 time
+(gdb) delete 2
+(gdb) watch *(int*)0x7fffffffe2d8
+Watchpoint 4: *(int*)0x7fffffffe2d8
+(gdb) continue
+Continuing.
+4960
+[New Thread 0x7ffff6f4e700 (LWP 2984)]
+[Thread 0x7ffff6f4e700 (LWP 2984) exited]
+
+Thread 1 "a.out" hit Watchpoint 4: *(int*)0x7fffffffe2d8
+
+Old value = 4960
+New value = 1
+0x0000000000401269 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count (this=0x7fffffffe278,
+    __in_chrg=<optimized out>) at /usr/include/c++/5/bits/shared_ptr_base.h:658
+658             if (_M_pi != nullptr)
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000400f82 in main() at watchpoint_example.cpp:31
+        breakpoint already hit 1 time
+3       watchpoint     keep y                      *(int*)0x7fffffffe2d8
+        breakpoint already hit 1 time
+```
+通过上面操作可以发现show can-use-hw-watchpoints可以查看当前是硬件监测还是软件检测。通过set命令可以进行修改。
+
+这一切都是CPU的功劳。
+现代处理器中具有特殊的debug寄存器，x86处理器中是DR0到DR7寄存器，利用这些寄存器硬件可以持续检测处理器发出的用于读写内存的地址，更强大的是，不但硬件watchpoint可以检查内存地址，而且还是可以监测到底是在读内存还是在写内存。
+利用gdb中的rwatch命令你可以来监测是否有代码读取了某段内存；利用gdb中的awatch命令你可以来检查是否有代码修改了某段内存；利用gdb中的watch命令你可以检查对某段内存是否有读或者写这两种情况。
+一旦硬件监测到相应事件，就会暂停程序的运行并把控制权交给debugger，也就是这里的gdb，此时我们就可以对程序的状态进行详细的查看了，这种硬件本身支持的调试能力就是刚才提到的Hardware watchpoint。
+有hardware watchpoint就会有software watchpoint，当硬件不支持hardware watchpoint时gdb会自动切换到software watchpoint，此时你的程序每被执行一条机器指令gdb就会查看相应的事件是否发生，因此software watchpoint要远比hardware watchpoint慢，你可以利用gdb中的”set can-use-hw-watchpoints“命令来控制gdb该使用哪类watchpoint。
+值得注意的是，在多线程程序中software watchpoint作用有限，因为如果被检测的一段内存被其它线程修改(就像本文中的示例)那么gdb可能捕捉不到该事件。
+
+
+
 
 

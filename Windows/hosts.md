@@ -81,8 +81,9 @@ cmd窗口：ipconfig /flushdns
 ## 7、Shadowsocks工具
 官网：https://github.com/shadowsocks/shadowsocks-windows
 
-
-
-
+## 8、其他人使用的工具
+我也来个AFF，全专线，全流媒体解锁，千兆网速，延迟低，高峰期网速快https://flower.yt/aff.php?aff=1166
+3元一个月20G   https://cv2.work/auth/register?code=lwBC
+5月一个月18G   fengchi.buzz
 
 

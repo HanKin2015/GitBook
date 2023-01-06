@@ -305,15 +305,83 @@ SELECT ID, NAME, AGE, ADDRESS, SALARY FROM COMPANY WHERE SALARY IS NOT NULL;
 SELECT  ID, NAME, AGE, ADDRESS, SALARY FROM COMPANY WHERE SALARY IS NULL;
 ```
 
+## 28、SQLite 别名
+您可以暂时把表或列重命名为另一个名字，这被称为别名。使用表别名是指在一个特定的 SQLite 语句中重命名表。重命名是临时的改变，在数据库中实际的表的名称不会改变。
 
+列别名用来为某个特定的 SQLite 语句重命名表中的列。
+```
+SELECT C.ID, C.NAME, C.AGE, D.DEPT FROM COMPANY AS C, DEPARTMENT AS D WHERE C.ID = D.EMP_ID;
+SELECT C.ID AS COMPANY_ID, C.NAME AS COMPANY_NAME, C.AGE, D.DEPT FROM COMPANY AS C, DEPARTMENT AS D WHERE  C.ID = D.EMP_ID;
+```
 
+和其他数据库类似，别名的关键字 as 可以被省略，结果是完全一样的。
+```
+SELECT id AS identification, name AS nickname FROM company;
+SELECT id identification, name nickname FROM company;
+```
 
+## 29、SQLite 触发器（Trigger）
+SQLite 触发器（Trigger）是数据库的回调函数，它会在指定的数据库事件发生时自动执行/调用。以下是关于 SQLite 的触发器（Trigger）的要点：
 
+SQLite 的触发器（Trigger）可以指定在特定的数据库表发生 DELETE、INSERT 或 UPDATE 时触发，或在一个或多个指定表的列发生更新时触发。
+SQLite 只支持 FOR EACH ROW 触发器（Trigger），没有 FOR EACH STATEMENT 触发器（Trigger）。因此，明确指定 FOR EACH ROW 是可选的。
+WHEN 子句和触发器（Trigger）动作可能访问使用表单 NEW.column-name 和 OLD.column-name 的引用插入、删除或更新的行元素，其中 column-name 是从与触发器关联的表的列的名称。
+如果提供 WHEN 子句，则只针对 WHEN 子句为真的指定行执行 SQL 语句。如果没有提供 WHEN 子句，则针对所有行执行 SQL 语句。
+BEFORE 或 AFTER 关键字决定何时执行触发器动作，决定是在关联行的插入、修改或删除之前或者之后执行触发器动作。
+当触发器相关联的表删除时，自动删除触发器（Trigger）。
+要修改的表必须存在于同一数据库中，作为触发器被附加的表或视图，且必须只使用 tablename，而不是 database.tablename。
+一个特殊的 SQL 函数 RAISE() 可用于触发器程序内抛出异常。
 
+### 29-1、举栗子
+让我们假设一个情况，我们要为被插入到新创建的 COMPANY 表（如果已经存在，则删除重新创建）中的每一个记录保持审计试验。如果我使用老表呢，即不删除重建，并不影响。
+```
+-- 创建日志表，每当 COMPANY 表中有一个新的记录项时，日志消息将被插入其中：
+CREATE TABLE AUDIT(
+    EMP_ID INT NOT NULL,
+    ENTRY_DATE TEXT NOT NULL
+);
 
+-- 创建触发器
+CREATE TRIGGER audit_log AFTER INSERT 
+ON COMPANY
+BEGIN
+   INSERT INTO AUDIT(EMP_ID, ENTRY_DATE) VALUES (new.ID, datetime('now'));
+END;
 
+-- 插入新纪录并查看审计表
+SELECT * FROM AUDIT;
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (11, 'Paul', 32, 'California', 20000.00 );
+SELECT * FROM AUDIT;
 
+-- 列出所有触发器
+SELECT name FROM sqlite_master WHERE type = 'trigger';
 
+-- 列出特定表上的触发器，则使用 AND 子句连接表名
+SELECT name FROM sqlite_master WHERE type = 'trigger' AND tbl_name = 'COMPANY';
+
+-- 删除触发器
+DROP TRIGGER trigger_name;
+```
+
+### 29-2、关于 for each row 和 when 的实例
+for each row 是操作语句每影响到一行的时候就触发一次，也就是删了 10 行就触发 10 次，而 for each state 一条操作语句就触发一次，有时没有被影响的行也执行。sqlite 只实现了 for each row 的触发。when 和 for each row 用法是这样的：
+```
+CREATE TRIGGER trigger_name 
+AFTER UPDATE OF id ON table_1 
+FOR EACH ROW 
+WHEN new.id>30 
+BEGIN 
+UPDATE table_2 SET id=new.id WHERE table_2.id=old.id;
+END;
+```
+上面的触发器在 table_1 改 id 的时候如果新的 id>30 就把 表table_2 中和表table_1 id 相等的行一起改为新的 id
+
+## 30、SQLite 索引（Index）
+索引（Index）是一种特殊的查找表，数据库搜索引擎用来加快数据检索。简单地说，索引是一个指向表中数据的指针。一个数据库中的索引与一本书的索引目录是非常相似的。
+拿汉语字典的目录页（索引）打比方，我们可以按拼音、笔画、偏旁部首等排序的目录（索引）快速查找到需要的字。
+索引有助于加快 SELECT 查询和 WHERE 子句，但它会减慢使用 UPDATE 和 INSERT 语句时的数据输入。索引可以创建或删除，但不会影响数据。
+使用 CREATE INDEX 语句创建索引，它允许命名索引，指定表及要索引的一列或多列，并指示索引是升序排列还是降序排列。
+索引也可以是唯一的，与 UNIQUE 约束类似，在列上或列组合上防止重复条目。（到底是不是一定要是唯一的呢？？？）
 
 
 

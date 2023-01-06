@@ -107,19 +107,19 @@ current_date=$(date +%F);
 
 ## 5、显示毫秒级
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$((10#$(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$((10#$(date +%N)/1000000))"
 15:35:19.619
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 15:35:43.744
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 -bash: 090192046: 数值太大不可为算数进制的基 (错误符号是 "090192046")
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 15:35:50.983
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 15:35:52.291
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 15:35:53.186
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #echo -e "$(date +%T).$(($(date +%N)/1000000))"
 -bash: 030685820: 数值太大不可为算数进制的基 (错误符号是 "030685820")
 ```
 如果不加以10进制显示```10#```就会在达到999毫秒后失败。

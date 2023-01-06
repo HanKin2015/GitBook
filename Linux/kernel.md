@@ -76,17 +76,17 @@ int console_printk[4] = {
 };
 
 首先，printk有8个loglevel,定义在<linux/kernel.h>中，其中数值范围从0到7，数值越小，优先级越高。
-#define    KERN_EMERG      "<0>"      系统崩溃
-#define    KERN_ALERT       "<1>"必须紧急处理
-#define    KERN_CRIT "<2>"      临界条件，严重的硬软件错误
-#define    KERN_ERR    "<3>"      报告错误
-#define    KERN_WARNING "<4>"      警告
-#define    KERN_NOTICE     "<5>"      普通但还是须注意
-#define    KERN_INFO "<6>"      信息
-#define    KERN_DEBUG      "<7>"      调试信息
+#define    KERN_EMERG       "<0>"      系统崩溃
+#define    KERN_ALERT       "<1>"      必须紧急处理
+#define    KERN_CRIT        "<2>"      临界条件，严重的硬软件错误
+#define    KERN_ERR         "<3>"      报告错误
+#define    KERN_WARNING     "<4>"      警告
+#define    KERN_NOTICE      "<5>"      普通但还是须注意
+#define    KERN_INFO        "<6>"      信息
+#define    KERN_DEBUG       "<7>"      调试信息
 从这里也可以看出他们的优先级是数值越小，其紧急和严重程度就越高。
 
-echo 0 4 0 7 > /proc/sys/kernel/printk	关闭所有内核打印
+echo "0 4 0 7" > /proc/sys/kernel/printk	关闭所有内核打印
 echo 8 > /proc/sys/kernel/printk		开启调试即所有日志
 
 ## 3-3、查看调试日志

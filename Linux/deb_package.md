@@ -187,7 +187,7 @@ drwxr-xr-x 3 root root 4096 3月  31 17:40 ../
 ./usr/share/
 ./usr/share/man/man7/e1000e.7.gz
 ./media/
-./media/sangfor/vdb/study/network/e1000e-3.8.4/src/e1000e.7.gz
+./media/hankin/vdb/study/network/e1000e-3.8.4/src/e1000e.7.gz
 [root@ubuntu0006:/media/hankin/vdb/deb] #mkdir y
 [root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -x checkinstall_e1000e-3.8.4.deb y/
 [root@ubuntu0006:/media/hankin/vdb/deb] #ls y

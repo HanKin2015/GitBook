@@ -241,7 +241,7 @@ echo 'HELLO' | tr 'A-Z' 'a-z'
 ## 14、写脚本时的错误
 - 中括号的前后需要有空格
 
-## 15、在shell中如何判断一个变量是否为空
+## 15、在shell中如何判断一个变量是否为空，字符串是否为空
 ```
 注意将变量用引号引起来。
 
@@ -251,7 +251,13 @@ if [ ! -n "$para1" ]; then
   echo "IS NULL"  
 else  
   echo "NOT NULL"  
-fi 
+fi
+
+if [ -z "$para1" ]; then  
+  echo "IS NULL"  
+else  
+  echo "NOT NULL"  
+fi
 ```
 
 # 7、local

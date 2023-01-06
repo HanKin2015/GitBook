@@ -95,12 +95,12 @@ typedef struct _NODE {
 #!/bin/bash
 #
 # 文 件 名: video_tool.sh
-# 文件描述: 操作摄像头工具合集
+# 文件描述: 限制文件大小，备份一个100MB大小的文件，如果当前文件超过100MB则删除备份
 # 作    者: HanKin
-# 创建日期: 2022.08.05
-# 修改日期：2022.08.05
+# 创建日期: 2023.01.07
+# 修改日期：2023.01.07
 # 
-# Copyright (c) 2022 HanKin. All rights reserved.
+# Copyright (c) 2023 HanKin. All rights reserved.
 #
 
 
@@ -153,21 +153,25 @@ echo '
 ```
 # -*- coding: utf-8 -*-
 """
-文 件 名: brute_ftp_by_dict.py
-文件描述: 使用字典暴力破解登陆ftp
+文 件 名: remove_eference_dimension.py
+文件描述: 移除引用标注
 作    者: HanKin
-创建日期: 2022.07.18
-修改日期：2022.07.18
+创建日期: 2023.01.04
+修改日期：2023.01.04
 
-Copyright (c) 2022 HanKin. All rights reserved.
+Copyright (c) 2023 HanKin. All rights reserved.
 """
 
 import time
 
 def main():
-    
+    """主函数
+    """
 
 if __name__ == '__main__':
+    """程序入口
+    """
+    
     #os.system('chcp 936 & cls')
     print('******** starting ********')
     start_time = time.time()
