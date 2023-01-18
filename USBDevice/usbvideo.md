@@ -184,5 +184,15 @@ FPS也可以理解为我们常说的“刷新率（单位为Hz）”，例如我
 工业级相机，机器视觉：https://blog.csdn.net/cugyzy/article/details/120974745
 https://www.irayple.com/cn/productDetail/122
 
+## 7、设备管理器显示摄像头驱动异常
+报错如下：
+Windows 无法初始化这个硬件的设备驱动程序。 (代码 37)
+对象名已存在。
+
+尝试重启电脑试试，结果重启之后真的解决了。
+
+
+
+
 
 

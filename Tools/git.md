@@ -1420,3 +1420,17 @@ git push -u origin --tags
 
 ## git上库完成后本地还是有红色感叹号
 查了一会儿，发现有文件冲突，但这个文件是绿色的勾。但是过了一会儿，红色感叹号都消失了，很奇怪，莫非是反应不及时吗？
+
+## error: src refspec master does not match any. 错误处理办法
+error: failed to push some refs to 'git@github.com:hankin/test.git
+
+原因：本地仓库为空
+当前分支为 TD1，但是我做了一些修改commit，然后提交到分支TD2，就报了上面的错误。
+原因在于本地并没有TD2分支，因此应该上传的分支还是TD1。
+
+## 高级命令git restore
+git restore命令是撤销的意思，也就是把文件从缓存区撤销，回到未被追踪的状态。
+https://baijiahao.baidu.com/s?id=1683763863529120088&wfr=spider&for=pc
+
+
+

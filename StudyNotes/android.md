@@ -1,6 +1,6 @@
-# Android.mk
+# android浅认识
 
-## 1、概览
+## 1、Android.mk概览
 Android.mk 文件位于项目 jni/ 目录的子目录中，用于向编译系统描述源文件和共享库。它实际上是编译系统解析一次或多次的微小 GNU makefile 片段。Android.mk 文件用于定义 Application.mk、编译系统和环境变量所未定义的项目范围设置。它还可替换特定模块的项目范围设置。
 
 Android.mk 的语法支持将源文件分组为模块。模块是静态库、共享库或独立的可执行文件。您可在每个 Android.mk 文件中定义一个或多个模块，也可在多个模块中使用同一个源文件。编译系统只将共享库放入您的应用软件包。此外，静态库可生成共享库。
@@ -51,11 +51,10 @@ include $(BUILD_EXECUTABLE)
 ## 3、查看Android版本命令
 ```
 getprop "ro.build.version.release"
+adb shell "getprop | grep version"
 ```
 
-# android浅认识
-
-## 1、Android实用技巧之adb命令：getprop，setprop，watchprops命令的使用
+## 4、Android实用技巧之adb命令：getprop，setprop，watchprops命令的使用
 getprop命令的作用就是从系统的各种配置文件中读取一些设备的信息。这些文件在我们的安卓设备中是可以找到的：
 
 ```
@@ -67,12 +66,12 @@ getprop命令的作用就是从系统的各种配置文件中读取一些设备�
 
 因此getprop显示的属性值是可以清除的，通过删除文件或者删除文件里面的内容，但是都是需要安卓设备重启生效。
 
-## 2、Kconfig文件
+## 5、Kconfig文件
 当执行#make menuconfig时会出现内核的配置界面，所有配置工具都是通过读取"arch/$(ARCH)Kconfig"文件来生成配置界面，这个文件就是所有配置的总入口，它会包含其他目录的Kconfig
 
 Kconfig的作用：Kconfig用来配置内核，它就是各种配置界面的源文件，内核的配置工具读取各个Kconfig文件，生成配置界面供开发人员配置内核，最后生成配置文件.config
 
-## 3、错误日志
+## 6、错误日志
 untracked pid XXX exited
 
 无法像linux那样查询进程：

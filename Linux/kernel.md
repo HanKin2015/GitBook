@@ -231,4 +231,30 @@ https://zhuanlan.zhihu.com/p/78254770
 Kconfig
 构建内核的第一步始终是配置。Kconfig 有助于使 Linux 内核高度模块化和可定制。
 
+## 10、Linux Kernel Source Code查看版本
+```
+[root@ubuntu0006:/media/hankin/vdb/kernel/linux-5.15.4] #cat Makefile | head
+# SPDX-License-Identifier: GPL-2.0
+VERSION = 5
+PATCHLEVEL = 15
+SUBLEVEL = 4
+EXTRAVERSION =
+NAME = Trick or Treat
+
+# *DOCUMENTATION*
+# To see a list of typical targets execute "make help"
+# More info can be located in ./README
+```
+
+## 11、Linux系统版本
+```
+[root@ubuntu0006:/media/Hankin/vdb/kernel/linux-5.15.4] #cat /proc/sys/kernel/version
+#242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021
+[root@ubuntu0006:/media/Hankin/vdb/kernel/linux-5.15.4] #uname -r
+4.4.0-210-generic
+[root@ubuntu0006:/media/Hankin/vdb/kernel/linux-5.15.4] #cat /proc/version
+Linux version 4.4.0-210-generic (buildd@lgw01-amd64-009) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12) ) #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021
+[root@ubuntu0006:/media/Hankin/vdb/kernel/linux-5.15.4] #cat /proc/sys/kernel/osrelease
+4.4.0-210-generic
+```
 
