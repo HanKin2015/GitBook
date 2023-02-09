@@ -758,12 +758,12 @@ No symbol "LOG_TIGGER" in current context.
 
 demo见：D:\Github\Storage\c++\gdb\watchpoint_example.cpp
 ```
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #g++ watchpoint_example.cpp -g -lpthread -std=c++11
-[root@ubuntu0006:/media/sangfor/vdb/TransferStation] #gdb a.out
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #g++ watchpoint_example.cpp -g -lpthread -std=c++11
+[root@ubuntu0006:/media/Hankin/vdb/TransferStation] #gdb a.out
 (gdb) break watchpoint_example.cpp:31
 Breakpoint 1 at 0x400f82: file watchpoint_example.cpp, line 31.
 (gdb) run
-Starting program: /media/sangfor/vdb/TransferStation/a.out
+Starting program: /media/Hankin/vdb/TransferStation/a.out
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
 

@@ -59,5 +59,22 @@ l      //多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）
 +      //位于后台的进程组；
 ```
 
-
+注意一点，ps -l和ps l两者使用起来的结果是不同的，类似的有很多。
+```
+[root@ubuntu0006:~] #ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0 12399 12006  0  80   0 -  6468 wait   pts/4    00:00:00 bash
+0 S     0 16599 12399  0  80   0 -  3853 wait   pts/4    00:00:00 bash
+0 S     0 16670 16599  0  80   0 -  2533 hrtime pts/4    00:00:00 sleep
+0 R     0 17098 12399  0  80   0 -  7940 -      pts/4    00:00:00 ps
+[root@ubuntu0006:~] #ps l
+F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
+4     0  1226  1086  20   0 553504 61192 poll_s Ssl+ tty7       2:43 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7
+4     0  2695     1  20   0  18780  1776 poll_s Ss+  tty1       0:00 /sbin/agetty --noclear tty1 linux
+4     0 12399 12006  20   0  25872  5668 wait   Ss   pts/4      0:00 -bash
+0     0 16599 12399  20   0  15412  3048 wait   S    pts/4      0:00 bash test.sh
+0     0 17150 16599  20   0  10132   696 hrtime S    pts/4      0:00 sleep 2
+0     0 17162 12399  20   0  31760  1452 -      R+   pts/4      0:00 ps l
+4     0 31812     1  20   0  25792  5376 wait_w Ss+  tty2       0:00 /bin/bash
+```
 

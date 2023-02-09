@@ -41,3 +41,7 @@ a.out   13077 root txt    REG 253,16     8824 6443719 a.out
 lsof: WARNING: can't stat() fuse.gvfsd-fuse file system /run/user/108/gvfs
       Output information may be incomplete.
 ```
+
+## 5、该命令的使用场景
+现在发现这个命令存在的意义了，比如我使用程序在写一个文件usb_data.txt，便可以使用lsof来找到这个进程id。
+还有就是在当前环境下，我有一个正式版本文件qemu，还有一个调试文件debugqemu，但是另外一个进程vm在执行过程中我想知道加载的是哪个qemu文件，便可以通过lsof命令在查看进程id是否是ps | grep vm的进程id。

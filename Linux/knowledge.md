@@ -124,19 +124,16 @@ LANG="en_US.UTF-8"
 
 
 # 11、网络配置
-
  **/etc/sysconfig/network-scripts/ifcfg-eth0** 
 
  sudo /etc/init.d/networking  
 
 [Linux中DNS配置及用命令方式修改网络]( https://blog.csdn.net/weixin_43314056/article/details/83347296 )
 
- 本地DNS解析
+本地DNS解析
 修改配置文件`vim /etc/hosts` 
 
-
-
- 指定DNS作域名解析
+指定DNS作域名解析
 修改配置文件 `vim /etc/resolv.conf` 
 
  nmcli device ###显示设备 
@@ -144,11 +141,9 @@ LANG="en_US.UTF-8"
  nmcli device show	###显示全部设备信息 
 
 # 12、304状态码
-
 如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。简单的表达就是：服务端已经执行了GET，但文件未变化。
 
 # 13、热键（快捷键）
-
 可以把任何命令或命令的组合指定给键盘上的某个键，可以是Alt+［A-Z］，
 
 Ctrl-［A-Z］， Alt+Shift+［A-Z］， F1-F12， Ctrl-F［1-12］， Alt-F［1-12］， Alt+Shift+F［1-12］，还有更不可思议的是甚至还可以为功能键加上“参数”，这样你按下那个键的时候，它会等待你输入相应的参数，并根据不同的参数运行不同的命令。
