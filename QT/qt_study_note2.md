@@ -1,15 +1,36 @@
-
 [TOC]
-# QT学习笔记3
+# QT学习笔记2
 
-# 1、QStandardItemModel 
+接qt_study_note1.md文件内容
+
+## 1、QString和string之间的转换
+```
+string str;
+QString qstr;
+
+qstr = QString::fromStdString(str);
+str = qstr.toStdString();
+```
+
+## 2、size_t和int之间的转换
+```
+vector<int> vec;
+size_t cnt = vec.size();
+int i = static_cast<int>(cnt);
+```
+## 3、中文乱码
+qt中使用的是unicode编码或者utf8编码。注意转换。
+return QString::fromLocal8Bit(str.c_str());
+并且可以使用base64编码进行转码保存，然后再解码读取。安全可靠。
+
+## 4、QStandardItemModel 
 
 QStandardItemModel 是标准的以项数据（item data）为基础的标准数据模型类，通常与 QTableView 组合成 Model/View 结构，实现通用的二维数据的管理功能。 
 
-# 2、Qt中通过ui怎么引用不了pushbutton呢？ 原来是这样…
+## 5、Qt中通过ui怎么引用不了pushbutton呢？ 原来是这样…
 可能是博主在创建ui时，使用可视化设计，用拖拽的方式进行布置按钮的。
 
-# 3、qt的相对路径
+## 6、qt的相对路径
 https://blog.csdn.net/love_gaohz/article/details/12085905
 https://tieba.baidu.com/p/3150302863
 
@@ -44,6 +65,30 @@ qDebug() << "currentPath = " << currentPath;
 currentPath = QDir::tempPath();
 qDebug() << "currentPath = " << currentPath;
 ```
+
+## 7、Qt休眠函数
+可以使用Qt自带的Sleep()方法，但使用这个方法会导致主线程休眠，UI卡顿，所以采用以下函数进行休眠。
+```
+// 调用此函数时，传入所需休眠的毫秒数
+bool MainWindow::sleep(unsigned int msec)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(msec);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    return true;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 

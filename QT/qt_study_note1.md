@@ -2,7 +2,6 @@
 # QT学习笔记1
 
 # 1、头文件
-
 ```
 #include <QMainWindow>
 #include <QLabel>
@@ -41,10 +40,7 @@
 #include <QSettings>
 ```
 
-
-
 # 2、中英文国际版
-
 ```
 #define QM_FILE_PATH "./"           //目录路径
 #define QMAIN_ZH_QM "qmain_ZH.qm"   //翻译文件
@@ -52,8 +48,6 @@
 //#pragma comment(lib,"Qt5WebKitWidgets.lib")
 //#pragma execution_character_set("utf-8")
 ```
-
-
 
 ```
 - 在pro文件里添加
@@ -88,10 +82,6 @@ for(int i = 0; i < argc; i++){
         title = arglists[i+1];
 ```
 
-
-
-
-
 # 3、点击事件实现（按钮）
 
 ```
@@ -106,7 +96,6 @@ public slots:  //注意slots声明需要修饰符private或其他
 ```
 
 对于添加参数
-
 
 # 4、字体大小加粗
 
@@ -145,8 +134,6 @@ a.setFont(font);
 
 # [QT字体的设置](https://www.cnblogs.com/findumars/p/4966027.html)
 
-
-
 # 5、判断指针是否实例化
 
 首先声明的时候需要初始化为空指针。
@@ -164,8 +151,6 @@ else {
 	QMessageBox::information(NULL,NULL,"2",NULL);
 }
 ```
-
-
 
 # 6、void QTimer::timeout()’ is protected
 
@@ -185,8 +170,6 @@ selfSeriveLoop.exec();  //启动事件循环
 connect(selfSeriveTimer, SIGNAL(timeout()), selfSeriveLoop, SLOT(quit()));
 connect(selfServiceReply, SIGNAL(finished()), selfSeriveLoop, SLOT(quit()))
 ```
-
-
 
 # 7、qwebview清理缓存
 
@@ -216,7 +199,6 @@ ui->webView->page()->settings()->setMaximumPagesInCache(10);
 ```
 
 # 8、按钮的三种状态
-
 ```
 reloadButton->setStyleSheet("QPushButton{background-color:#17C1C5;border-radius:2px;color:#FFFFFF;}"
 		"QPushButton:hover{background-color:#17C1C5;border-radius:2px;color:#FFFFFF;}"
@@ -233,10 +215,8 @@ border-radius:2px  圆角
 注意：共有属性只在第一个框里设置即可，并不需要所有都进行设置。
 
 
-
 # 9、QLatin1String类的说明
-
- https://blog.csdn.net/qq_33266987/article/details/72843578 
+https://blog.csdn.net/qq_33266987/article/details/72843578 
 
  QLatin1String类对US-ASCII/Latin-1编码的字符串进行了简单封装，可理解为关于const char*的一个浅封装。 
 
@@ -246,14 +226,11 @@ QLatin1String("")比QString("")转换更快。
 
 只要在 .pro文件里面
 
-
-
 ```cpp
 DEFINES += \    QT_NO_CAST_FROM_ASCII
 ```
 
 char*就不能转换成QString，这时候就可以用 QLatin1String来代替在所有需要QString的地方。
-
 
 # 10、qwebview访问https网页
 
@@ -293,8 +270,6 @@ void AdeskPopDialog::ignoreNetworkReplySslErrors(QNetworkReply* reply, const QLi
 		if (!sslErrors.at(i).certificate().isNull()) {
 			newSslCertific
 ```
-
-
 
 # 11、QT给QWebView设置自定义cookie
 
@@ -403,8 +378,6 @@ w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint|Qt::WindowMaxmizeB
 在ubuntu16上，最大化按钮始终没有被隐藏，无从考证。
 ```
 
-
-
 # 17、关闭webview滚动条
 
 关闭了有问题，无法进行鼠标滚轮滚动。
@@ -441,10 +414,6 @@ html.append(" ::-webkit-scrollbar-thumb{background:rgb(188,188,188);}");
 html.append("</style>");
 ```
 
-
-
-
-
 # 18、注销登录按钮样式非常棒
 
 圆角、颜色透明、内间距、字体
@@ -466,10 +435,6 @@ void MyPopDialog::initLogoutPushButton(){
 }
 ```
 
-
-
-
-
 # 19、给窗体加边框
 
 父窗口加边框后子窗口也会有。
@@ -480,15 +445,8 @@ border: none;
 border-radius:5px;
 ```
 
-
-
-
-
 # 20、禁止右键
-
 setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
-
-
 
 # 21、QT判断鼠标是否在某子窗口控件上方
 
@@ -497,8 +455,6 @@ setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
 ```
 if(ui->groupBox->geometry().contains(this->mapFromGlobal(QCursor::pos())))
 ```
-
-
 
 # 22、QPoint和SpicePoint类相像，都包含x和y值
 
@@ -552,47 +508,7 @@ setWindowModality(Qt::WindowModal);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 **Noto Sans CJK SC DemiLight Regular**字体：免费商用。
 
 字体分为：Regular、Blod、
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

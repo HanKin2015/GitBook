@@ -321,7 +321,8 @@ git config --global user.email "49660@zhangsan.com"
 ```
 git reflog
 git reset --hard 7edb984	放弃修改
-git reset --soft 7edb984 	回到commit之前
+
+git reset --soft 7edb984 	回到commit之前（等价于git reset 7edb984）
 git checkout -- filename	撤销文件的修改
 HEAD
 HEAD~3
@@ -329,7 +330,6 @@ commit_id
 
 强推到远程
 git push origin HEAD --force
-
 ```
 
 可引用git checkout或者用git clean -df至修改前的状态。就可以放弃所有修改。

@@ -259,8 +259,9 @@ virtio 10Gb/s
 
 virtio-net-pci
 
-
-
+## 7、在ubuntu下使用虚拟机
+https://zhuanlan.zhihu.com/p/32125940
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/sect-graphic_user_interface_tools_for_guest_virtual_machine_management-remote_viewer
 
 
 

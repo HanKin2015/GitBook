@@ -1,10 +1,11 @@
 # 时间相关函数
 
+timeval: n.微秒（百万分之一秒秒）精度
+
 ## 1、Unix时间戳
 Unix时间戳(Unix timestamp)，或称Unix时间(Unix time)、POSIX时间(POSIX time)，是一种时间表示方式，定义为从格林威治时间1970年01月01日00时00分00秒起至现在的总秒数。Unix时间戳不仅被使用在Unix 系统、类Unix系统中，也在许多其他操作系统中被广告采用。
 
 目前相当一部分操作系统使用32位二进制数字表示时间。此类系统的Unix时间戳最多可以使用到格林威治时间2038年01月19日03时14分07秒（二进制：01111111 11111111 11111111 11111111）。其后一秒，二进制数字会变为10000000 00000000 00000000 00000000，发生溢出错误，造成系统将时间误解为1901年12月13日20时45分52秒。这很可能会引起软件故障，甚至是系统瘫痪。使用64位二进制数字表示时间的系统（最多可以使用到格林威治时间292,277,026,596年12月04日15时30分08秒）则基本不会遇到这类溢出问题。
-
 
 GPS 系统中有两种时间区分，一为UTC，另一为LT（地方时）两者的区别为时区不同，UTC就是0时区的时间，地方时为本地时间，如北京为早上八点（东八区），UTC时间就为零点，时间比北京时晚八小时，以此计算即可通过上面的了解，我们可以认为格林威治时间就是时间协调时间（GMT=UTC），格林威治时间和UTC时间均用秒数来计算的。
 
@@ -61,6 +62,7 @@ struct tm
 # endif
 };
 ```
+代码见：D:\Github\Storage\c++\standard_library\time\struct_tm_example.cpp
 
 ## 4、timeval结构体
 ```
@@ -70,7 +72,6 @@ struct timeval
     long tv_usec; /*微秒*/
 };
 ```
-
 
 ## 5、timespec结构体
 ```
@@ -111,37 +112,31 @@ time_t time(time_t *t);
 取得从1970年1月1日至今的秒数。
 ```
 
-
 ## 7、linux时间间隔计算
+https://blog.csdn.net/u013427969/article/details/81350322
 
-## 8、time()
+### 7-1、time()
 ```
 #include <time.h>
 time_t time(time_t *t);
 ```
-主要的用法是两种
-time_t begin = time(NULL)
-或者
-time_t end;
-time(&end)
-返回当前时间到 Epoch, 1970-01-01 00:00:00 +0000 (UTC)的秒数
 错误时返回-1
 精度：秒级
+代码见：D:\Github\Storage\c++\standard_library\time\time_interval.cpp
 
-## 9、clock()
+### 7-2、clock()
 ```
 #include <time.h>
 clock_t clock(void);
 
 clock_t begin = clock()
-usleep(10000);
+不能使用sleep和usleep函数
 clock_t end = clock();
 ```
- 真正的时间间隔是它除以CLOCKS_PER_SEC来得出时间秒级
-但是从图可知 在linux系统中其受cpu影响太多 对于时间间隔的计算并不准确
-而且从官方的man手册可知 它推荐下面的函数计算时间间隔 
+真正的时间间隔是它除以CLOCKS_PER_SEC来得出时间秒级，但在linux系统中其受cpu影响太多，对于时间间隔的计算并不准确。 
+代码见：D:\Github\Storage\c++\standard_library\time\time_interval.cpp
 
-## 10、clock_gettime
+### 7-3、clock_gettime
 ```
 #include <time.h>
 int clock_gettime(clockid_t clk_id, struct timespec *tp);
@@ -150,45 +145,30 @@ struct timespec {
     long     tv_nsec;       /* nanoseconds */
 };
 ```
-一般情况下 clk_id设置成CLOCK_REALTIME就足以应付了
-这种情况最高精度是纳秒级 但实际情况中毫秒就足够了
-tv_sec*1000+tv_nsec/1000000
+一般情况下 clk_id设置成CLOCK_REALTIME就足以应付了，这种情况最高精度是纳秒级 但实际情况中毫秒就足够了，tv_sec*1000+tv_nsec/1000000。
+CLOCK_REALTIME和CLOCK_MONOTONIC的区别见 7-6、对CLOCK_MONOTONIC的理解。
+代码见：D:\Github\Storage\c++\standard_library\time\time_interval.cpp
 
-
-## 10、推荐
+### 7-4、推荐使用
 ```
-struct timespec now, timestamp;
-clock_gettime(CLOCK_MONOTONIC, &now);
-timestamp = red_window->get_minimize_timestamp_value();
-time_t interval = (now.tv_sec - timestamp.tv_sec) * MICRO_SECONDS + 
-(now.tv_nsec - timestamp.tv_nsec) / ONE_SECONDS;    //毫秒级
-```
-
-```
-#include <time.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <limits.h>
-
-int main()
+/**
+* 获取当前时间
+*
+* @return 返回ms
+*/
+uint64_t get_current_time()
 {
-    //struct tm tm_obj = {0, 0, 8, 1, 1-1, 1970-1900};
-    struct tm tm_obj = {0, 0, 7, 14, 4, 2021-1900};
-    //1970年之前计算出来的是负值
-    //注意不要使用lu，虽然减的是1900，但是计算的却是从1970开始的
-	//date [-u] -d "20210414 7:00:00" +%s可能时区不同，可加参数-u
-    printf("from 1970.01.01 total seconds: %ld\n", mktime(&tm_obj));
-    printf("%d %d %d %d %d %d %d %d %d %ld %s\n", tm_obj.tm_sec,
-        tm_obj.tm_min, tm_obj.tm_hour, tm_obj.tm_mday,
-        tm_obj.tm_mon, tm_obj.tm_year, tm_obj.tm_wday,
-        tm_obj.tm_yday, tm_obj.tm_isdst, tm_obj.tm_gmtoff,
-        tm_obj.tm_zone);
-    printf("%ld\n", LONG_MAX);
-    return 0;
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return (ts.tv_sec * (1000ULL) + ts.tv_nsec / (1000000ULL));
 }
+
+uint64_t last_time	=	get_current_time();
+uint64_t now_time	=	get_current_time();
+uint64_t diff_time	=	now_time - last_time;
 ```
 
-## 11、Monolithic time单片时间
+### 7-5、Monolithic time单片时间
 Monolithic：单片;单片电路;整体式;整体的;单片集成电路
 monotonic：单调的；无变化的
 
@@ -202,7 +182,7 @@ struct timespec time_space;
 clock_gettime(CLOCK_MONOTONIC, &time_space);
 ```
 
-### 11-1、对CLOCK_MONOTONIC的理解
+### 7-6、对CLOCK_MONOTONIC的理解
 https://blog.csdn.net/qq_34489443/article/details/101010957
 
 CLOCK_MONOTONIC在timerfd_create以及clock_gettime中都有使用，具体函数如下：
@@ -212,22 +192,20 @@ int timerfd_create(int clockid, int flags);
 //clockid可以填CLOCK_REALTIME，CLOCK_MONOTONIC
 //flags可以填0，O_CLOEXEC，O_NONBLOCK
 
-
-
 int clock_gettime(clockid_t clk_id, struct timespec *tp);
 //得到当前的时间
 //clk_id 设置时间的类型
  
 //CLOCK_REALTIME:系统实时时间,随系统实时时间改变而改变,即从UTC1970-1-1 0:0:0开始计时,
                                    //中间时刻如果系统时间被用户改成其他,则对应的时间相应改变
-//CLOCK_MONOTONIC:从系统启动这一刻起开始计时,不受系统时间被用户改变的影响
+//CLOCK_MONOTONIC:从系统启动这一刻起开始计时,不受 系统时间被用户改变 的影响
 //CLOCK_PROCESS_CPUTIME_ID:本进程到当前代码系统CPU花费的时间
 //CLOCK_THREAD_CPUTIME_ID:本线程到当前代码系统CPU花费的时间
 ```
 
-demo程序见：D:\Github\Storage\c++\standard_library\time\study_time2.cpp
+demo程序见：D:\Github\Storage\c++\standard_library\time\CLOCK_MONOTONIC_example.cpp
 ```
-[root@ubuntu0006:/media/hankin/vdb/study] #g++ study_time2.cpp
+[root@ubuntu0006:/media/hankin/vdb/study] #g++ CLOCK_MONOTONIC_example.cpp
 [root@ubuntu0006:/media/hankin/vdb/study] #./a.out
 1648089302
 20220324 02:35:02.928545
@@ -260,12 +238,61 @@ int timerfd_settime(int fd,
 
 并且timerfd_settime的当前时间可以使用函数clock_gettime来获取，填写的参数要和创建timerfd时的参数一样，也就是clk_id和clockid一样。
 
+## 8、Linux 延时函数 sleep、usleep、nanosleep、select比较
+demo见：D:\Github\Storage\c++\standard_library\time\time_sleep_example.cpp
+
+- sleep的精度是秒
+- usleep的精度是微妙，不精确
+- nanosleep的精度是纳秒，不精确
+- select 的精度是微妙，精确
+
+注意：缺少毫秒ms，所以单位是1秒=1000 000微妙=1000 000 000纳秒
+
+### 8-1、说明
+usleep()有很大的问题：
+
+- 在一些平台下不是线程安全，如HP-UX以及Linux
+- usleep()会影响信号
+- 在很多平台，如HP-UX以及某些Linux下，当参数的值必须小于1000，1000也就是1秒，否则该函数会报错，并且立即返回。
 
 
+大部分平台的帮助文档已经明确说了，该函数是已经被舍弃的函数。还好，POSIX规范中有一个很好用的函数，nanosleep()，该函数没有usleep()的这些缺点，它的精度是纳秒级。在Solaris的多线程环境下编译器会自动把usleep()连接成nanosleep()。
 
+使用nanosleep应注意判断返回值和错误代码，否则容易造成cpu占用率100%。
 
+Linux下短延时推荐使用select函数，因为准确。
 
+使用sleep（）和usleep（）的确可以达到效果，但是使用这类延时可能会导致系统产生未知问题，所以往往使用select函数，而且select的延时作用精度足够高.
 
+几个注意事项：
+1、tv_sec的初始化最好在tv_usec的前面
+2、select的延时时间等于sec和usec时间之和
+3、不知为啥，select的延时时间与设定值有1ms左右的误差
+4、select每次运行之后，会将tv的值清零，所以如果要循环使用select，务必把tv.tv_usec的初始化放在循环中！
+5、https://www.onitroad.com/jc/linux/man-pages/linux/man2/nanosleep.2.html，纳秒字段的值必须在0到999999999之间。
 
+## 9、sleep() 函数，没想象种那么简单、(sleep 与 clock的碰撞使用)
+https://blog.csdn.net/qq_38505858/article/details/124667116
 
+### 9-1、线程sleep
+那么我们看一下：线程sleep。
+大家应该都对线程的五种状态有所了解，线程的五种状态包括：New、RUNNABLE、RUNNING、BLOCKED、DEAD。
+那么一个线程在调用sleep()后，线程的状态就变成了阻塞态。
 
+阻塞(BLOCKED)：阻塞状态是指线程因为某种原因放弃了cpu 使用权，也即让出了cpu timeslice，暂时停止运行。直到线程进入可运行(runnable)状态，才有机会再次获得cpu timeslice 转到运行(running)状态。阻塞的情况分三种：
+(一). 等待阻塞：运行(running)的线程执行o.wait()方法，JVM会把该线程放入等待队列(waitting queue)中。
+(二). 同步阻塞：运行(running)的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池(lock pool)中。
+(三). 其他阻塞：运行(running)的线程执行Thread.sleep(long ms)或t.join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入可运行(runnable)状态。
+
+线程在阻塞态时放弃了CPU的使用权，让出了cpu timeslice,停止运行。
+
+### 9-2、clock()函数
+clock（)函数的返回值是获取CPU使用的时间。
+
+基本上搞清楚了：clock()函数有以下描述：
+clock returns the processor time used by program since the beginning of the execution, or -1 if unavailable.
+即：clock()函数返回的是程序运行过程中耗掉得process time，也就是CPU time。
+那么这样理解就通了，sleep函数将进程挂起，而clock函数是获取CPU执行过程种消耗掉的的时间，由于进行没有执行，所以不存在CPU Time的消耗。即sleep不是表面上那么简单。
+
+### 9-3、测试
+代码见：D:\Github\Storage\c++\standard_library\time\time_interval.cpp

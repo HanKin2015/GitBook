@@ -46,8 +46,6 @@ ext2格式：(ext3、ext4)
 mount -t ext2 /dev/sda1 /mnt/usb
 ```
 
-
-
 ## 运行挂载命令如 mount /dev/sdb mnt出现错误：
 
 ```
@@ -185,8 +183,6 @@ mkfontdir
 fc-cache -fv
 ```
 
-
-
 > 将字体文件ttf或者ttc拷贝到/usr/share/fonts/opentype
 >
 > 使用fc-cache -fv即安装成功
@@ -194,8 +190,6 @@ fc-cache -fv
 > fc-list可以查看到字体是否安装成功
 >
 > fc-list :lang=zh
-
-
 
 命名方式（公司或者系统常用）：
 
@@ -206,21 +200,12 @@ fc-cache -fv
 - C++：
 - Python：
 
-
-
-
-
 # 12、快捷键
-
 ctrl+alt+F1	切换命令行模式
 
 shift+tab	退tab
 
 cd -	返回上一层所在工作区
-
-
-
-
 
 1. `QWebView *view = new QWebView(this->centralWidget());`
 2. `view->load(QUrl("file:///home//test.html"));`
@@ -317,7 +302,6 @@ ssh_keys:x:999:
 一个用户可以属于多个用户组
 
 # 16、lsblk
-
 lsblk 列出所有块设备信息（除了RAM类型的块设备）。lsblk是通过读取/sys/fs文件系统信息和udev db来收集信息。
 
 lsblk命令包含在util-linux包中，现在该包改名为util-linux。

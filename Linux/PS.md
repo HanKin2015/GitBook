@@ -13,8 +13,7 @@ top命令会查看到僵尸进程，不占用内存cpu，zombie就是僵尸进�
 ps aux | grep python 找到僵尸进程的父进程
 kill -9 父进程ID
 
-### 1-2、
-确定杀不掉进程的原因有两种：
+### 1-2、确定杀不掉进程的原因
 - 这个进程是僵尸进程
 - 此进程是"核心态"进程。
 
@@ -59,7 +58,7 @@ l      //多线程，克隆线程（使用 CLONE_THREAD, 类似 NPTL pthreads）
 +      //位于后台的进程组；
 ```
 
-注意一点，ps -l和ps l两者使用起来的结果是不同的，类似的有很多。
+注意一点，ps -l和ps l两者使用起来的结果是不同的，类似的有很多。注意还需要区分大小写ps -L。
 ```
 [root@ubuntu0006:~] #ps -l
 F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
@@ -76,5 +75,57 @@ F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
 0     0 17150 16599  20   0  10132   696 hrtime S    pts/4      0:00 sleep 2
 0     0 17162 12399  20   0  31760  1452 -      R+   pts/4      0:00 ps l
 4     0 31812     1  20   0  25792  5376 wait_w Ss+  tty2       0:00 /bin/bash
+
+[root@ubuntu0006:/proc/23416/task/23417] #ps -l -p 23416
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S     0 23416 12399 99  80   0 - 20062 futex_ pts/4    00:10:10 a.out
+[root@ubuntu0006:/proc/23416/task/23417] #ps -L -p 23416
+  PID   LWP TTY          TIME CMD
+23416 23416 pts/4    00:00:00 a.out
+23416 23417 pts/4    00:10:25 wangzherongyao
 ```
+
+使用man ps官方解答：
+```
+l      Display BSD long format.
+-l     Long format.  The -y option is often useful with this.
+-L     Show threads, possibly with LWP and NLWP columns.
+```
+
+## 3、PS命令
+PS，是Linux系统命令之一，是在Linux中是查看进程的命令。ps查看正处于Running的进程，ps aux查看所有的进程。
+
+### 3-1、进程状态
+- 运行状态(正在运行或在运行队列中等待[就绪队列])
+- 中断状态(休眠中, 受阻, 在等待某个条件的形成或接受到信号)
+- 不可中断状态(收到信号不唤醒和不可运行, 进程必须等待直到有中断发生)
+- 僵死状态(进程已终止, 但进程描述符存在, 直到父进程调用wait4()系统调用后释放)
+- 停止状态(进程收到SIGSTOP, SIGSTP, SIGTIN, SIGTOU信号后停止运行运行)
+
+### 3-2、PS工具标识进程的5种状态码
+- D 不可中断 uninterruptible sleep (usually IO)
+- R 运行 runnable (on run queue)
+- S 中断 sleeping
+- T 停止 traced or stopped
+- Z 僵死 a defunct (”zombie”) process
+
+### 3-3、相关参数
+-e 显示所有进程。
+-f 全格式。
+-h 不显示标题。
+-l 长格式。
+-w 宽输出。
+a 显示终端上的所有进程，包括其他用户的进程。
+r 只显示正在运行的进程。
+x 显示没有控制终端的进程。
+O[+|-] k1 [，[+|-] k2 [，…]] 根据SHORT KEYS、k1、k2中快捷键指定的多级排序顺序显示进程列表。
+--sort X[+|-] key [，[+|-] key [，…]] 从SORT KEYS段中选一个多字母键。“+”字符是可选的，因为默认的方向就是按数字升序或者词典顺序。比如： ps -jax -sort=uid，-ppid，+pid。
+--help 显示帮助信息。
+--version 显示该命令的版本信息。
+
+详细见man ps，有非常非常的多。
+
+
+
+
 

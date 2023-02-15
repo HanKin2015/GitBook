@@ -136,9 +136,7 @@ statusputton->setMenu(statusmenu);
 ```
 
 # 7、菜单栏的菜单图标大小修改icon
-
-挺麻烦的，重新定义icon样式
-
+挺麻烦的，重新定义icon样式。
 ```
 fileMenu    = new QMenu(QObject::tr("File"),parent);
  4     newAction    = new QAction(QObject::tr("New"),parent);
@@ -146,8 +144,6 @@ fileMenu    = new QMenu(QObject::tr("File"),parent);
  6     newAction->setShortcut(QKeySequence::New);//添加快捷键
  7     newAction->setStatusTip(tr("create a new file"));//添加任务栏提示
 ```
-
-
 
 # 8、字体
 

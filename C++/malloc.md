@@ -187,7 +187,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 uint8_t src_buf[1920*1080*4];
 
-
 int main()
 {
     int i = 0;
@@ -210,7 +209,6 @@ int main()
             record = new;
         }
     }
-
 
     return 0;
 }

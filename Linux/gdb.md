@@ -521,7 +521,7 @@ Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
 ImportError: No module named site
 ```
 
-## 17、gdb调试秒崩溃的程序
+## 17、gdb调试秒崩溃的闪退程序
 没有core文件生成，在/proc/sys/kernel/core_pattern发现生成在/tmp/目录下，但是是0大小的文件。
 然后使用ulimit -c发现结果就是0，但是此时是超级管理员执行，在非管理员执行时发现是unlimited，这是一个大坑啊。
 ```
@@ -828,7 +828,23 @@ Num     Type           Disp Enb Address            What
 有hardware watchpoint就会有software watchpoint，当硬件不支持hardware watchpoint时gdb会自动切换到software watchpoint，此时你的程序每被执行一条机器指令gdb就会查看相应的事件是否发生，因此software watchpoint要远比hardware watchpoint慢，你可以利用gdb中的”set can-use-hw-watchpoints“命令来控制gdb该使用哪类watchpoint。
 值得注意的是，在多线程程序中software watchpoint作用有限，因为如果被检测的一段内存被其它线程修改(就像本文中的示例)那么gdb可能捕捉不到该事件。
 
-
+## 24、程序闪退起不来
+（1）怀疑可能是产生了core dump，但是在/other/core目录下未看到dump文件（程序强制退出或被杀死不产生dump，可以使用脚本gdb挂进去，脚本见 17、gdb调试秒崩溃的闪退程序）
+（2）日志未看出任何异常
+（3）使用journalctl -f命令查看，发现报错symbol lookup error: hankin-spicec: undefined symbol: usbredirhost_init_same_model_printer_list\n"。
+查看依赖情况：
+```
+root@hankin:~# readelf -d /usr/local/bin/hankin-spicec | grep host
+ 0x0000000000000001 (NEEDED)             Shared library: [libusbredirhost.so.1]
+root@hankin:~# ldd /usr/local/bin/hankin-spicec | grep host
+        libusbredirhost.so.1 => /usr/local/lib/libusbredirhost.so.1 (0x00007f45d7cec000)
+root@hankin:~# ls -l /usr/local/lib/libusbredirhost.so.1*
+lrwxrwxrwx 1 root staff     28 Feb 13 20:29 /usr/local/lib/libusbredirhost.so.1 -> libusbredirhost.so.1.0.0.bak
+-rwxr-xr-x 1 root root  304096 Feb 13 03:09 /usr/local/lib/libusbredirhost.so.1.0.0
+-rwxr-xr-x 1 user user  302680 Dec 16 01:04 /usr/local/lib/libusbredirhost.so.1.0.0.bak
+```
+找到问题原因，软链接链接的文件有问题，链接到了备份文件，而不是正确的文件。
+真有毛病，以为发现一个bug问题，打算去上报，遇到问题自己要先排查排查，可能是我操作问题或者是环境问题，不要找人解决找到问题原因后很尴尬。
 
 
 
