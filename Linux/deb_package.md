@@ -459,3 +459,17 @@ Homepage: http://blog.csdn.net/qq_27818541/
 ## 8、查看控制信息
 dpkg -I xxx.deb
 
+## 9、deb包安装过程中报错/var/lib/dpkg/info/test.postinst: 7: [: x86_64: unexpected operator
+问题原因在于控制信息中postinst文件存在shell语法错误。
+```
+mkdir package
+dpkg -X test.deb package/
+dpkg -e test.deb
+mv DEBIAN package/
+vi package/DEBIAN/postins
+dpkg -b package/ package.deb    这里时间有点长3-5分钟左右
+
+dpkg-deb: building package `test' in `package.deb'.
+这里显示的test应该是控制信息中的Description
+```
+

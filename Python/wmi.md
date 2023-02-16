@@ -45,14 +45,15 @@ Windows提供了一个WMI测试器，使得查询这些内容变得尤为方便�
 了解了这么多内容，咱们就拿个对象练练手。现在有这么个需求，我们想要获取IIS的版本号以及它所有的站点名称，怎么办？
 
 在微软官网上比较容易的找到IIS WMI的说明，根据直觉，我们要查询的信息可能会是在类名中包含setting的类中，那么看起来比较有可能的有IIsSetting (WMI), IIsWebServerSetting (WMI), IIsWebInfoSetting (WMI)。
+代码见：D:\Github\Storage\python\wmi\wmi_example.py
 
+## 7、利用wmi可以进行usb设备检测
+代码见：D:\Github\Storage\python\udev\获取USB设备加载时间
 
+需求设计检测当前电脑系统的所有usb设备信息。
+代码见：D:\Github\Storage\python\wmi\udev_detect\udev_detect.py
 
-
-
-
-
-
+https://blog.csdn.net/13011803189/article/details/122698978
 
 
 

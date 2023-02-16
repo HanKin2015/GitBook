@@ -51,10 +51,10 @@ clean:
 * 文 件 名: read_write.cpp
 * 文件描述: 探究读写文件速度效率
 * 作    者: HanKin
-* 创建日期: 2022.06.30
-* 修改日期：2022.06.30
+* 创建日期: 2023.06.30
+* 修改日期：2023.06.30
 *
-* Copyright (c) 2022 HanKin. All rights reserved.
+* Copyright (c) 2023 HanKin. All rights reserved.
 */
 
 #include <cstdio>
