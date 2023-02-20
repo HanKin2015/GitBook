@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Aug  3 14:17:24 2020
+文 件 名: remove_eference_dimension.py
+文件描述: gitbook的SUMMARY.md自动生成脚本
+备    注: 规定md文件读取第一个#开头的句子作为子目录名
+作    者: HanKin
+创建日期: 2020.08.03
+修改日期：2023.02.20
 
-@author: hankin
-@description:
-    gitbook的SUMMARY.md自动生成脚本
-    规定md文件读取第一个#开头的句子作为子目录名
+Copyright (c) 2023 HanKin. All rights reserved.
 """
 
+import time
 import os
 
 # 当前相对路径
@@ -65,28 +68,29 @@ def get_type():
             print(dir, "is not file and dir")
 
 # 过滤的文件夹
-filter_dirs = ['.', '.\\node_modules', '.\\.git', '.\\Styles', '.\\Source']
+filter_dirs = ['.', './node_modules', './.git', './Styles', './Source', './_book']
 
 def generate_summary():
     '''生成summary.md目录文件
     '''
+    
     summary_file = absolute_path + 'SUMMARY.md'
-    
-    
-    with open(summary_file, 'w') as f:
+    with open(summary_file, 'w', encoding = 'utf-8', newline = '\n') as f:
         f.write('# Summary\n\n')
         f.write('* [前言](README.md)\n')
         
         for root, dirs, files in os.walk('.'):
+            root = root.replace('\\', '/')
             #print(root)
-            if root.count('\\') != 1:
+            if root.count('/') > 1:
+                print('this is a multistage directory [{}], filter out'.format(root))
                 continue
             if root in filter_dirs:
-                #print(root)
+                print('this is a special filter directory [{}], filter out'.format(root))
                 continue
             #print(root)
             # 获取目录文件夹README.md文件目录名称
-            root_path = root + '\\README.md'
+            root_path = root + '/README.md'
             root_catalog_name = get_file_catalog_name(root_path)
             print(root_path, root_catalog_name)
             
@@ -94,34 +98,34 @@ def generate_summary():
             for file in files:
                 if file == 'README.md':
                     continue
-                file_path = root + '\\' + file
+                file_path = root + '/' + file
                 file_catalog_name = get_file_catalog_name(file_path)
                 #print('\t', file) 
-                f.write('\t* [{}]({})\n'.format(file_catalog_name, file_path))
-        
+                f.write('    * [{}]({})\n'.format(file_catalog_name, file_path))
+        f.write('\n')
     print('generate summary suceccd')
 
-  
-
-
 def main():
+    """主函数
+    """
+    
     #file_path = get_file_path()
     #print(file_path)
-    file_catalog_name = get_file_catalog_name('./readme.md')
-    print(file_catalog_name)
+    #file_catalog_name = get_file_catalog_name('./readme.md')
+    #print(file_catalog_name)
     
     generate_summary()
-    print('done')
 
-if __name__=='__main__':
+if __name__ == '__main__':
+    """程序入口
+    """
+    
+    #os.system('chcp 936 & cls')
+    print('******** starting ********')
+    start_time = time.time()
+
     main()
-    '''
-    for root, dirs, files in os.walk('.'):
-        if root.count('\\') == 1:
-            print(root)
-        #for file in files:
-        #    print('\t', file)
-        #break
-    '''
 
+    end_time = time.time()
+    print('process spend {} s.\n'.format(round(end_time - start_time, 3)))
 

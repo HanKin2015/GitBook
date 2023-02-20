@@ -101,5 +101,7 @@ DWG格式以及它的ASCII格式变体DXF，已经成为CAD制图数据交换中
 个人推荐：https://activity.gstarcad.com/activity/promotionNewBaiduDwg?bd_vid=11620778029514412338
 浩辰CAD看图王。
 
+[开源中国](https://www.oschina.net/)
 
+KMSAuto Net - Windows 操作系统自动 KMS 激活程序。
 

@@ -4,7 +4,7 @@
 - 分支gitbook是项目原始文件，并且会编译生成_book文件夹
 - 分支master是渲染的网页框架文件
 
-因此在gitbook分支上操作。
+因此主体操作是在gitbook分支上进行平时的源文件md编辑，间隔一段时间之后进行gitbook编译生成_book文件夹，然后将生成的html文件布置到分支master上面。
 
 会创建 README.md 和 SUMMARY.md 这两个文件，README.md 应该不陌生，就是说明文档,书籍的介绍写在这个文件里。而 SUMMARY.md 其实就是书的章节目录，书籍的目录结构在这里配置。
 
@@ -12,27 +12,53 @@
 由于已经搭建好，使用gitbook build即可编译成功。
 
 # 2、目录
-
 - ACM
+- Books
 - C++
+- Checklist
+- Database
+- Emtertainment
+- Golang
 - Linux
-- Network
+- ML
+- node_modules（nodejs库）
 - Others
 - Project
+- Python
+- QT
 - Scripts
 - Shell-vim
-- Source
+- Source（图标）
 - StudyNotes
+- Styles（网页格式）
+- todo
 - Tools
-
+- USBDevice
+- Web
+- Windows
 
 # 3、日常维护操作
-github上面默认在仓库根目录下调用index.html文件，是不是可以跳转到_book文件夹呢?
 
+## 3-1、git上库更新
+git add .
+git commit -m"20230220"
+git push origin
+
+## 3-2、使用脚本生成SUMMARY.md文件
+python generate_summary.py
+否则需要自己一个一个手动添加。
+
+## 3-3、注意事项
+- md文件不能以中文命名。
+- md文件不能包含#符号
+- gitbook build报错，book.json中的插件出现问题（当前发现summary插件出现问题，已过滤掉，自动生成SUMMARY.md文件插件）
+- SUMMARY.md文件一定要是UTF-8格式
+
+## 3-4、gitbook编译
 在Gitbook文件夹里使用：
->gitbook init
-gitbook build 
-gitbook serve   #编译后并在本地可使用地址查看
+- gitbook init   （会根据生成的SUMMARY.md文件进行初始化检测操作，不存在的文件会自动创建）
+- gitbook build . ../master     （创建时间会有点长）
+- gitbook serve   # 编译后并在本地可使用地址查看
 
 ## 老式维护方式
 然后将生成的_book文件夹里的动态替换到Github/GitBook/文件夹里：
@@ -43,14 +69,12 @@ git push origin master
 ## 新式维护方式
 https://blog.csdn.net/guoshenglong11/article/details/22306721/
 
+github上面默认在仓库根目录下调用index.html文件，是不是可以跳转到_book文件夹呢?答案是不能。
+
 删除分支gitbook，只保留master分支，然后通过自己单独编写的index.html文件来处理跳转问题。
 
 但是出现一个很奇怪的问题，重新上库后整个目录没有任何变化。
-
-
-
-
-
+忘记之前出现什么问题了，反正总之失败了，还是采用老式维护方式。
 
 # 4、给gitbook的目录添加数字 添加章节序号
 默认情况下，GitBook的目录是没有序号的，若想为目录编号，
@@ -66,13 +90,12 @@ https://blog.csdn.net/guoshenglong11/article/details/22306721/
 }
 ```
 
-
 # 5、文件
 book.json：文件配置
 README.md：图书简介
 SUMMARY.md：目录
 GLOSSARY.md：要注释的术语列表
-
+generate_summary.py：生成SUMMARY.md文件
 
 # 6、gitbook build文章到非_book默认目录
 在使用gitbook创建文章时。有时候我们不希望自己写的文章在_book目录下又不想手动去拷贝一遍，那么，我们可以在build指令后传入参数
@@ -117,15 +140,12 @@ error: src refspec master does not match any
 
 git push origin master --force强制替换
 
-
 使用GitBook+GitHub pages建立在线电子书笔记。
 
 # 网站地址
 >https://hankin2015.github.io/GitBook/
 
-
 master是解析的html文件，GitBook分支是源码。
-
 
 # 日常维护
 gitbook init（更新目录）
@@ -167,7 +187,6 @@ book.json 存放配置信息
 </details>
 
 程序员变量命名网站：https://unbug.github.io/codelf/
-
 
 ## 20220124
 发现一个不错的网站，免费下载各种学习的pdf资料：https://www.bookstack.cn/

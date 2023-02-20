@@ -60,6 +60,13 @@ Updates to manifest files in HanKin2015/Storage introduced 5 vulnerable dependen
 以前就放其任意处置，今天仔细看，发现可能是我的一个python/requirements.txt文件导致，限制了我使用的python环境，我删除了该文件。
 后面是我的python/requirements.txt文件中的库版本过低，需要提升到新版本，遇到障碍失败了。
 
+## 8、访问人数记录
+20220408-0
+20230217-105
+
+## 9、查看仓库访问流量
+https://docs.github.com/zh/repositories/viewing-activity-and-data-for-your-repository/viewing-traffic-to-a-repository
+
 
 
 

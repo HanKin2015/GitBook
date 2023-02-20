@@ -27,9 +27,8 @@
         "sharing-plus",
         "anchor-navigation-ex",
         "favicon",
-		"toggle-chapters",
-		"theme-comscore",
-		"summary"
+        "toggle-chapters",
+        "theme-comscore"
     ],
     "pluginsConfig": {
         "edit-link": {

@@ -173,6 +173,69 @@ adb push path1 path2	#推送文件
 adb pull path1 path2	#拉取文件
 adb shell screencap path	#截屏
 -v 显示日志格式  -v time 以时间为显示格式
+
+查询连接设备：adb devices
+启动adb服务：adb start-server
+关闭adb服务：adb kill-server
+连接设备：adb connect 设备名称：端口号
+进入Android系统：adb shell
+操作指定Android设备：adb -s 设备名称:端口号 命令
+上传文件：adb push 本地文件 Android系统目录
+指定设备：adb -s 设备名称:端口号 push 本地文件 Android系统目录
+下载文件：adb pull Android系统文件 本地目录
+安装应用：adb install 安装文件
+覆盖安装：adb install -r 安装文件
+卸载应用：adb uninstall 包名
+
+查询应用的包名：
+方法1：adb shell ls /data/data，列出系统当前已经安装的应用程序包名
+方法2：adb shell pm list packages -3，列出系统当前已经安装的第三方应用程序包名
+方法3：aapt dump badging 应用安装文件
+方法4：
+（1）运行待查询的应用程序
+（2）进入Android设备
+（3）执行命令：dumpsys window windows | grep -i current
+
+启动应用：adb shell am start -n 包名/主类名
+获取应用的启动时间：adb shell am start -W -n 包名/主类名
+停止应用：adb shell am force-stop 包名
+获取CPU使用情况：adb shell dumpsys cpuinfo | grep 包名
+获取内存使用情况：adb shell dumpsys meminfo | grep 包名
+输入(在光标处输入)：adb shell input text 文本内容，只能输入英文
+发送系统按键：adb shell input keyevent keycode
+单击指定位置：adb shell input tap 横坐标 纵坐标
+
+获取坐标方法：
+运行应用，打开指定的界面
+运行命令：adb shell uiautomator dump，运行完成后会生成一个xml文件
+将xml文件下载到本地，使用浏览器打开，找到指定位置的坐标，bounds="[975,667][1300,950]"
+
+logcat：
+语法：logcat 参数 过滤器 ......
+
+系统日志的缓冲区：
+（1）main，保存大多数应用的日志
+（2）system，保存系统信息
+（3）event，
+（4）radio
+
+优先级（由低到高）：
+（1）V，详细
+（2）D，调试
+（3）I，信息
+（4）W，警告
+（5）E，错误
+（6）F，严重错误
+（7）S，静默
+
+adb logcat *:E，显示大于等于错误级别的日志
+adb logcat MyApp:E，显示标签为MyApp的，大于等于错误级别的日志
+adb logcat ActivityManager:W MyApp:E
+
+实战：
+2023-02-20 14:41:02 adb -s 172.22.16.113:9011 push grab_usb_data.sh /sdcard/
+2023-02-20 14:41:02 adb -s 172.22.16.113:9011 push limit_file_size.sh /sdcard/
+2023-02-20 14:55:23 adb -s 172.22.16.113:9011 shell
 ```
 
 ### 1-7、USBlyzer

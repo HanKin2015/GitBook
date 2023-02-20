@@ -48,17 +48,10 @@ Windows提供了一个WMI测试器，使得查询这些内容变得尤为方便�
 代码见：D:\Github\Storage\python\wmi\wmi_example.py
 
 ## 7、利用wmi可以进行usb设备检测
-代码见：D:\Github\Storage\python\udev\获取USB设备加载时间
-
 需求设计检测当前电脑系统的所有usb设备信息。
 代码见：D:\Github\Storage\python\wmi\udev_detect\udev_detect.py
 
 https://blog.csdn.net/13011803189/article/details/122698978
-
-
-
-
-
 
 
 

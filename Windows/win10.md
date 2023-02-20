@@ -52,7 +52,6 @@ windows 10 14393 是第三正式版，也就是去年 7 月份推出的周年版
 
 然后就可以随便修改信息了。
 
-
 ## 5、您需要TrustedInstaller权限才能对此文件更改
 https://jingyan.baidu.com/article/da1091fb4dcf5b027849d6d1.html
 
@@ -103,17 +102,16 @@ Windows Vista较上一个版本Windows XP增加了上百种新功能，其中包
 2011年7月12日，微软已终止Service Pack 1的支持。2012年4月10日，微软已终止Windows Vista的主流技术支持；
 微软于2017年4月11日正式终止对Windows Vista的一切支持。至此，Windows Vista寿终正寝。
 
+## 10、任务计划程序
+windows自带的任务计划程序：
+- 新建一个定时任务（创建任务）
+- 触发器-》新建-》重复任务间隔-》持续时间
+- 操作-》编辑-》启动程序-》程序或脚本（msg）-》添加参数（windows登录的用户名 弹框提醒的文字）
 
+## 11、新版power shell和旧版power shell
+管理员打开是/windows/根目录，非管理员打开是/users/根目录。
+runas /user:administrator cmd
 
-
-
-
-
-
-
-
-
-
-
-
-
+## 12、Windows cmd窗口的切换目录命令无法切换盘符
+发现为cd命令不会切换当前的盘符，只能在一个盘符内切换
+使用cd /d d:就可以了。

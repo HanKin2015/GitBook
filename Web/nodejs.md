@@ -2,7 +2,7 @@
 
 下载官网：http://nodejs.cn/download/
 
-## 安装express模块
+## 1、安装express模块
 ```
 npm install express -g
 npm ls -g	查看全局安装的模块
@@ -75,19 +75,16 @@ Type ".help" for more information.
 ```
 导入express模块搞定。
 
-## 无法解决require模块问题
+## 2、无法解决require模块问题
 https://blog.csdn.net/kdl_csdn/article/details/104307358
-
 
 slice()函数
 indexOf()函数
 length函数
 
-
 https://blog.csdn.net/nayi_224/article/details/98480814
 
-
-## 最后一个字符
+## 3、最后一个字符
 1、charAt()
 
 str.charAt(str.length-1)
@@ -100,10 +97,9 @@ var str = str.split("")
  
 var targetStr = str[str.length-1]
 
-
 isNaN()函数
 
-## 这个错误居然是文件名错误......
+## 4、这个错误居然是文件名错误......
 ```
 D:\Github\Storage\html\httprequest>node https-url.js
 internal/modules/cjs/loader.js:983
@@ -175,13 +171,13 @@ http://dev.kdlapi.com/testproxy
 https://dev.kdlapi.com/testproxy
 可以通过443端口访问
 
-## Nodejs HTTP请求的超时处理 Nodejs HTTP Client Request Timeout Handle
+## 5、Nodejs HTTP请求的超时处理 Nodejs HTTP Client Request Timeout Handle
 https://blog.csdn.net/shulianghe/article/details/40108271
 https://www.cnblogs.com/flyingzl/articles/2286738.html
 
 代码中有一些错误需要修正。
 
-## 注意点
+## 6、注意点
 split()函数：以某个字符串分割
 slice()函数：按位置切割子字符串
 startsWith()函数：判断是否是以某个字符串作为头部开始
@@ -191,10 +187,41 @@ startsWith()函数：判断是否是以某个字符串作为头部开始
 
 修改传参函数值不会有异步问题，全局变量会有异步问题。
 
+## 7、node.js和nodejs的区别
+两者没有区别
+
+## 8、npm
+npm（全称 Node Package Manager，即“node包管理器”）是Nodejs默认的、以JavaScript编写的软件包管理系统。通过npm可以安装、共享、分发代码，管理项目依赖关系。
+npm是JavaScript世界的包管理工具，并且是Node.js平台的默认包管理工具，会随着Nodejs一起安装。类似Java语法中的maven，gradle，python中的pip。
+
+npm能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：
+- 允许用户从NPM服务器下载别人编写的第三方包到本地使用。
+- 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。
+- 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。
+
+npm是和Nodejs一起并存的，只要安装了Nodejs，npm也安装好了，安装好Nodejs之后。打开终端，执行如下命令，检查是否安装成功。
+
+## 9、nodejs安装
+linux：
+```
+apt-get update
+apt-get install nodejs
+但是通过node -v查看版本会很低
+
+建议去官网下载：https://nodejs.org/en/download/
+```
+windows同理。
+
+## 10、查看版本确认安装成功
+node版本号：node -v
+npm版本号： npm -v
+
+## 11、nvm
 
 
 
 
+https://github.com/nwjs/nw.js/tree/nw24
 
 
 

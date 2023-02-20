@@ -1,9 +1,10 @@
 [TOC]
-# nodejs安装那些事儿
+# nodejs那些事儿
 
 # 1、nodejs
 常常对nvm和npm搞混淆。
 
+nvm是一个node的版本管理工具，可以简单操作node版本的切换、安装、查看。。。等等，与npm不同的是，npm是依赖包的管理工具。
 nvm是管理nodejs的工具，安装nodejs可以从官网下载。但是最好是使用nvm进行安装。
 npm是nodejs的命令工具。
 
@@ -76,7 +77,6 @@ gitbook ls-remote却显示latest是2.6.9
 npm6.14.6
 node12.18.3
 nvm1.1.7
-
 
 官网：http://gitbook.hushuang.me/setup.html
 

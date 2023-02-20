@@ -1,6 +1,5 @@
 # 机器学习入门总结
 
-	
 分层：人工智能-》机器学习-》神经网络-》深度学习
 深度学习关键：数据+算力
 
@@ -56,6 +55,7 @@ https://github.com/xiaodongxiexie/python-widget
 https://mp.weixin.qq.com/s/UGFtM1Toue9B4NMdCss-OA
 
 
-
-
+## 竞赛
+https://www.industrial-bigdata.com/Title
+https://www.dcic-china.com/competitions/10060/datasets
 
