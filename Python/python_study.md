@@ -1,4 +1,3 @@
-[TOC]
 # python学习
 
 画画的baby 画画的baby

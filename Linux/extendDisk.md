@@ -1,4 +1,3 @@
-[TOC]
 # 磁盘那些事儿
 相关命令：lsblk,fdisk,du,df,lspci,mount
 

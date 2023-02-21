@@ -1,4 +1,3 @@
-[TOC]
 
 # python爬虫
 

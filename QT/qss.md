@@ -1,4 +1,3 @@
-[TOC]
 # QT之Qss
 
 # 1、Qt 的一些心得]( https://blog.csdn.net/lpt19832003/article/details/5381095 )

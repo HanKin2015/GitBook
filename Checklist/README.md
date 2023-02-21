@@ -1,4 +1,3 @@
-[TOC]
 
 # 编程checklist
 

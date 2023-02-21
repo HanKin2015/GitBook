@@ -1,4 +1,3 @@
-[TOC]
 # nodejs那些事儿
 
 # 1、nodejs

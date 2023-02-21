@@ -1,4 +1,3 @@
-[TOC]
 # 使用sphinx、github、readthedocs搭建书环境
 
 参考：https://www.jianshu.com/p/78e9e1b8553a

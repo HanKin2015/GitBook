@@ -1,4 +1,3 @@
-[TOC]
 # c语言编译器
 
 建议使用codeblocks。

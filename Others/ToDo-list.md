@@ -1,4 +1,3 @@
-[TOC]
 # TO-DO_list
 
 # TODO

@@ -1,4 +1,3 @@
-[TOC]
 
 # 工具之notepad++
 

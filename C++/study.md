@@ -1,4 +1,3 @@
-[TOC]
 
 # 每天一点一滴进步
 just do it

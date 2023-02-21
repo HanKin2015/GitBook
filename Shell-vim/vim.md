@@ -1,4 +1,3 @@
-[TOC]
 
 # VIM操作笔记
 更多vim配置还可以见：D:\Github\GitBook\gitbook\Linux\bashrc.md

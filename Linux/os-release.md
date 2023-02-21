@@ -1,4 +1,3 @@
-[TOC]
 
 # os-release文件
 　

@@ -1,4 +1,3 @@
-[TOC]
 # 数据包抓取工具
 
 参考：https://blog.csdn.net/zcshoucsdn/article/details/81448023

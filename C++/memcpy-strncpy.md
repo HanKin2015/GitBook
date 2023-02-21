@@ -1,4 +1,3 @@
-[TOC]
 # memcpy_s和memcpy
 
 

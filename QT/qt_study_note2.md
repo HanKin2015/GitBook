@@ -1,4 +1,3 @@
-[TOC]
 # QT学习笔记2
 
 接qt_study_note1.md文件内容

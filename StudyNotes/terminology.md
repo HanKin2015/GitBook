@@ -1,4 +1,3 @@
-[TOC]
 # terminology术语
 
 # BNF

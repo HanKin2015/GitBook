@@ -1,5 +1,3 @@
-[TOC]
-
 # 1、写在前面
 - 分支gitbook是项目原始文件，并且会编译生成_book文件夹
 - 分支master是渲染的网页框架文件
@@ -53,11 +51,12 @@ python generate_summary.py
 - md文件不能包含#符号
 - gitbook build报错，book.json中的插件出现问题（当前发现summary插件出现问题，已过滤掉，自动生成SUMMARY.md文件插件）
 - SUMMARY.md文件一定要是UTF-8格式
+- md文件内容不能出现连续两个大括号\{\{ \}\}，否则gitbook编译不通过，必须要使用反斜杠转义
 
 ## 3-4、gitbook编译
 在Gitbook文件夹里使用：
 - gitbook init   （会根据生成的SUMMARY.md文件进行初始化检测操作，不存在的文件会自动创建）
-- gitbook build . ../master     （创建时间会有点长）
+- gitbook build . ../master     （创建时间会非常长3001.9s，可以通过打开生成目录查看html文件的生成过程）
 - gitbook serve   # 编译后并在本地可使用地址查看
 
 ## 老式维护方式
@@ -133,7 +132,6 @@ gitbook build . ../master
 发现SUMMARY.md也变回去了。
 思考：是不是应该修改md文件名为中文名？？？
 
-
 git remote add origin git@github.com:HanKin2015/GitBook.git
 git push origin master报错如下面，原来是忘记git add了。
 error: src refspec master does not match any
@@ -198,5 +196,16 @@ linux命令搜索大全：https://wangchujiang.com/linux-command/
 - 福利双色球
 - 电视剧动漫表格编辑学习
 
+## 问题一：关于gitbook 使用3.2.3版本，导致build编译后的自动生成的左侧目录无法跳转问题的解决办法
+当前使用gitbook在写一些文档，但使用导出编译git build 后，生成的静态HTML页面，无法翻页到上下章节。 但放在服务器上线上就正常。于是乎是去查询相关资料。目前方法有二。
 
+当前gitbook版本   3.2.3 
+```
+# gitbook --version
+# CLI version: 2.3.2
+# GitBook version: 3.2.3
+```
+
+## 问题二：静态或者线上都无法单击展开
+线上能双击展开，静态干脆不行，左侧的展开按钮简直就是一个摆设。
 

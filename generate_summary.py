@@ -74,6 +74,7 @@ def generate_summary():
     '''生成summary.md目录文件
     '''
     
+    count = 0
     summary_file = absolute_path + 'SUMMARY.md'
     with open(summary_file, 'w', encoding = 'utf-8', newline = '\n') as f:
         f.write('# Summary\n\n')
@@ -95,6 +96,7 @@ def generate_summary():
             print(root_path, root_catalog_name)
             
             f.write('* [{}]({})\n'.format(root_catalog_name, root_path))
+            count += 1
             for file in files:
                 if file == 'README.md':
                     continue
@@ -102,8 +104,9 @@ def generate_summary():
                 file_catalog_name = get_file_catalog_name(file_path)
                 #print('\t', file) 
                 f.write('    * [{}]({})\n'.format(file_catalog_name, file_path))
+                count += 1
         f.write('\n')
-    print('generate summary suceccd')
+    print('generate summary suceccd，there are {} markdown files'.format(count))
 
 def main():
     """主函数

@@ -1,4 +1,3 @@
-[TOC]
 
 #　圈圈教你玩USB
 http://computer00.21ic.org/

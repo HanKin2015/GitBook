@@ -410,7 +410,7 @@
     * [蓝奏云之程序自主更新](./Python/lanzouyun.md)
     * [list](./Python/list.md)
     * [日志：logging](./Python/logging.md)
-    * [Python：两种魔法参数 args和*kwargs的用法](./Python/magic_argument.md)
+    * [Python：两种魔法参数 *args和**kwargs的用法](./Python/magic_argument.md)
     * [使用Python来写mock代码](./Python/mock.md)
     * [numpy](./Python/numpy.md)
     * [实现软件在线升级](./Python/online_update.md)

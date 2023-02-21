@@ -78,7 +78,7 @@
             ]
         },
         "anchor-navigation-ex": {
-            "showLevel": true
+            "showLevel": false
         },
         "favicon":{
             "shortcut": "./Source/Images/favicon-32x32.ico",
