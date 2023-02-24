@@ -36,6 +36,7 @@
 - Windows
 
 # 3、日常维护操作
+详细教程参考：https://zhuanlan.zhihu.com/p/34946169
 
 ## 3-1、git上库更新
 git add .
@@ -57,7 +58,10 @@ python generate_summary.py
 在Gitbook文件夹里使用：
 - gitbook init   （会根据生成的SUMMARY.md文件进行初始化检测操作，不存在的文件会自动创建）
 - gitbook build . ../master     （创建时间会非常长3001.9s，可以通过打开生成目录查看html文件的生成过程）
-- gitbook serve   # 编译后并在本地可使用地址查看
+- gitbook serve [--port xxxx]    # 编译后并在本地可使用地址查看，默认 4000 端口
+- gitbook pdf ./ ./bookname.pdf
+- gitbook epub ./ ./bookname.epub
+- gitbook mobi ./ ./bookname.mobi
 
 ## 老式维护方式
 然后将生成的_book文件夹里的动态替换到Github/GitBook/文件夹里：
@@ -206,6 +210,21 @@ linux命令搜索大全：https://wangchujiang.com/linux-command/
 # GitBook version: 3.2.3
 ```
 
+方法一，使用 2.6.7 这个版本就可以。
+```
+git build  --gitbook=2.6.7
+```
+
+方法二，修改相关文件。
+在导出的文件夹目录下找到gitbook->theme.js文件
+找到下面的代码（搜索 if(m)for(n.handler&&）
+将if(m)改成if(false)，问题完美解决，推荐使用方法二。
+
 ## 问题二：静态或者线上都无法单击展开
 线上能双击展开，静态干脆不行，左侧的展开按钮简直就是一个摆设。
 
+## Debugging
+您可以使用选项 --log=debug 和 --debug 来获取更好的错误消息（使用堆栈跟踪）。例如：
+```
+$ gitbook build ./ --log=debug --debug
+```

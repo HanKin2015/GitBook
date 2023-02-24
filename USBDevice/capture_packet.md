@@ -297,11 +297,12 @@ https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
 4、可以对USB Host Controllers的活动进行全面周详的分析
 5、一个完整的软件解决方案，所以你不需要安装任何额外的软件或硬件
 
-## strace命令
-https://www.cnblogs.com/bangerlee/archive/2012/02/20/2356818.html
+## 7、USB Packet Viewer 简介
+https://www.usbzh.com/article/detail-768.html
 
-## mknod
-创建块设备或者字符设备文件。此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、SUSE、openSUSE、Fedora。
+USB Packet Viewer是一款便携式USB协议分析仪，能够捕捉USB通讯的底层数据包以及总线事件。它由USB 数据包抓包设备和配套的协议解析软件组成，能够对 USB 通讯数据进行可视化分析。
+
+
 
 
 

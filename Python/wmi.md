@@ -53,5 +53,8 @@ Windows提供了一个WMI测试器，使得查询这些内容变得尤为方便�
 
 https://blog.csdn.net/13011803189/article/details/122698978
 
+## 8、查看wmi对象的所有成员
+https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-processor
+代码见：D:\Github\Storage\python\wmi\udev_detect\wmi_usb_example.py
 
 

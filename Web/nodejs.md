@@ -222,7 +222,7 @@ npm版本号： npm -v
 
 
 https://github.com/nwjs/nw.js/tree/nw24
-
-
+https://blog.csdn.net/kaimo313/article/details/126405942
+https://github.com/nwjs/nw.js/wiki/Full-Console-Logging
 
 

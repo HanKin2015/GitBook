@@ -1,9 +1,10 @@
 # python学习笔记
 
+Pythonic: python化、python风格
+
 # python2.x
 
 2020年1月1日停止更新python2.x。
-
 
 # 学习预告
 - 下载：使用you-get

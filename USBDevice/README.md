@@ -1,6 +1,5 @@
 # USB外部设备
 
-
 ## 1、USB官网
 https://www.usb.org/documents
 https://www.intel.cn/content/www/cn/zh/products/docs/io/universal-serial-bus/ehci-v1-1-addendum.html?wapkw=ehci
@@ -23,5 +22,6 @@ EDN China 是第一家关注中国电子设计领域的媒体，开创性地引�
 
 官网：https://www.ednchina.com/
 
-
+## 5、USB中文网
+https://www.usbzh.com/article/detail-627.html
 

@@ -63,3 +63,9 @@ USB 3.1是一项传输标准。而USB Type-C是一种接口标准。所以USB 3.
 有USB Type-C接口，未必就代表着其支持USB 3.1标准。而USB 3.1标准未必就一定是USB Type-C接口。
 
 主要区别：USB Type-C传输速度更高，正反都可以插，充电功率更高。
+
+## 7、
+[USB接口](https://baike.baidu.com/item/USB%E6%8E%A5%E5%8F%A3/493294?fr=aladdin)
+http://events.jianshu.io/p/ab1a1dce39b4
+[别再搞混了 一图看懂USB 3.X、USB4与雷电4区别](https://m.sohu.com/a/582250594_163726/)
+![USB接口](https://iknow-pic.cdn.bcebos.com/8644ebf81a4c510fefcdd28f7259252dd42aa51d?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_600%2Ch_800%2Climit_1%2Fquality%2Cq_85%2Fformat%2Cf_autohttps://iknow-pic.cdn.bcebos.com/8644ebf81a4c510fefcdd28f7259252dd42aa51d?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_600%2Ch_800%2Climit_1%2Fquality%2Cq_85%2Fformat%2Cf_auto)

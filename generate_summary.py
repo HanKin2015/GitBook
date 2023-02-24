@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-文 件 名: remove_eference_dimension.py
+文 件 名: generate_summary.py
 文件描述: gitbook的SUMMARY.md自动生成脚本
 备    注: 规定md文件读取第一个#开头的句子作为子目录名
 作    者: HanKin
@@ -105,7 +105,7 @@ def generate_summary():
                 #print('\t', file) 
                 f.write('    * [{}]({})\n'.format(file_catalog_name, file_path))
                 count += 1
-        f.write('\n')
+        f.write('\n')   # 为了与自动生成SUMMARY.md文件一致
     print('generate summary suceccd，there are {} markdown files'.format(count))
 
 def main():

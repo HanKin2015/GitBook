@@ -19,8 +19,6 @@ SPICE Client： SPICE客户端 存在于终端设备上的组件，可以是瘦�
 
 参考：https://www.cnblogs.com/jython/p/4301944.html
 
-
-
 # qxl驱动
 QXL实现的功能主要包含两块：Display Driver 和 Video Miniport。
 

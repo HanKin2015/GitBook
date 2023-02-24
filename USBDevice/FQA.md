@@ -50,6 +50,15 @@ It is not ideal solution however, hopefully the driver removal and re-installati
 也可能是属性数据对象（Property Data Object, PDO）
 最有可能是属性设备对象（Property Device Object, PDO）
 
+## 7、USB3CV
+官网：https://www.usb.org/documents?search=&category%5B0%5D=50&items_per_page=50
+USB3CV_x64 tool：https://www.usb.org/document-library/usb3cvx64-tool
 
+如果访问 USB 官方 网站，将找到一个名为 USBCV (USB 命令验证器 ) 的软件工具，其中有一部分名为 “ 第 9 章测试 ” 。这些测试可以证明您的枚举代码是否正确。在进行 USB 实验室测试时也要用到 USBCV 。 
+
+USB 3 Command Verifier (USB3CV) is the official tool for USB 3 Hub and Device Framework testing. All USB 3.1 peripherals are required to pass the Device Framework tests in order to gain certification. The USB3CV tool includes the xHCI Compliance Drivers for use with the USB3CV. In order to use USB3CV, User Account Control (UAC) must be turned off. If you are running on 64-bit Windows, you must install the 64-bit CV.
+
+参考：https://blog.csdn.net/weixin_34005042/article/details/92173108
+具体使用实战还未尝试过，后续有机会再探究。
 
 

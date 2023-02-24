@@ -70,7 +70,6 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
  - 使用ps aux找到占锁的进程，关键字apt或者apt-get
  
  ## 7、The system is running in low-graphics mode时解决方法
-
 1. df -h
 2. cd /etc/X11
 3. sudo cp xorg.conf.failsafe xorg.conf
@@ -78,24 +77,14 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 
 
 ## 8、chroot: failed to run command `/bin/bash': No such file or directory
-
 缺少依赖，lib和lib64、sbin虽然是软链接，但是chroot后路径会变化
-
- https://www.bbsmax.com/A/pRdBB4vDdn/ 
-
-
+https://www.bbsmax.com/A/pRdBB4vDdn/ 
 
 ## 9、linux 上删除所有的无效文件链接
 
 ### 9-1、linux删除文件夹软链接
-
- (2018-09-02 00:00:29)
-
 错误：rm dirname/ 
-
 正确：rm dirname --> 只删除链接文件夹，元文件夹不变
-
-
 
 ## 10、[shell之列表的定义与循环](https://www.cnblogs.com/zyy98877/p/10234527.html)
 https://cloud.tencent.com/developer/ask/92780 
@@ -146,15 +135,14 @@ aa = $(expr 3 + 4)
 aa = $[ 3 + 4]
 
 aa = $(( 3 + 4 ))
+
 #自加
-
 let i++
-#自减
 
+#自减
 let i--
 
 #简写
-
 let no+=6 等同于 let no = no + 6
 ```
 
@@ -230,7 +218,95 @@ Linux localhost.localdomain 3.10.0-862.el7.x86_64 #1 SMP Fri Apr 20 16:44:24 UTC
 libpthread.so    libpthread.so.0
 ```
 
-## 19、
+## 19、Linux查看程序卡死位置方法|GDB|strace
+https://blog.csdn.net/bandaoyu/article/details/114303378
+
+ps auxf
+strace -p [进程id]
+
+进程的所有信息路径：/proc/
+
+### ltrace和strace对比分析
+strace一共消耗了0.19秒,strace把性能提升了30倍,这主要是strace在跟踪系统调用的时候不需要动态库,而ltrace是根据动态库来分析程序运行的.
+所以ltrace也只能跟踪动态库,不能跟踪静态库.
+事实上我们用ltrace和strace都可以发现程序在哪个系统调用时发生了性能瓶径.
+ltrace用-T,而strace也用-T.
+ 
+ 
+三)ltrace与strace的相同点
+ 
+ltrace与strace都可以指定PID,即对运行中的程序进行跟踪.
+ltrace -p PID与strace -p PID
+ 
+ltrace与strace都可以跟踪程序fork或clone子进程.
+ltrace是用-f参数,而strace是用-f(fork/clone)和-F(vfork).
+https://www.cnblogs.com/machangwei-8/p/10388938.html
+
+## 20、rm命令失效
+
+### 20-1、现象
+使用mobaxterm软件ssh到xubuntu系统使用rm命令执行失败
+
+确认当前登录的是root用户：whoami
+
+创建一个文件：touch xxxxx
+删除文件：rm xxxxx
+提示如下：
+Broadcast message from root@ubuntu0006 (pts/1) (Mon Mar  1 10:28:03 2021):
+
+文件xxxxx未被删除
+
+### 20-2、gdb调试
+gdb /bin/rm
+进入后: set args xxxxx
+r
+删除成功
+
+### 20-3、strace命令追踪
+strace rm xxxxx
+删除成功
+
+### 20-4、怀疑rm命令是不是被人动了手脚
+/bin/rm xxxxx
+结果：删除成功
+
+which rm
+结果：/bin/rm
+
+拷贝rm命令到当前目录
+
+alias命令执行后发现：
+```
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+alias rm='wall'
+```
+what???????
+
+### 20-5、alias删除
+unalias rm
+
+发现被人写在了/etc/profile中，需要删除对应的行
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

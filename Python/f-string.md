@@ -1,6 +1,7 @@
 # Python新式格式化输出：f-string
 
 参考：https://www.bilibili.com/read/cv15716944
+https://blog.csdn.net/qq_45726327/article/details/115042863
 
 ## 1、f-string简介
 python3.6引入了一种新的字符串格式化方式：f-string格式化字符串。从%s格式化到format格式化再到f-string格式化，格式化的方式越来越直观，f-string的效率也较前两个高一些，使用起来也比前两个简单一些。

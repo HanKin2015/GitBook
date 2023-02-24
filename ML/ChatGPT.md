@@ -24,7 +24,9 @@ You must sign up for an OpenAI account before continuing (error=signup_required)
 那就去寻找一下吧~
 还请手下留情，帮助科研人员
 
-
+## 3、中国版
+MOSS 体验链接：https://moss.fastnlp.top/
+MOSS 项目主页：https://txsun1997.github.io/blogs/moss.html
 
 
 

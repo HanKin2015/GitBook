@@ -263,8 +263,16 @@ virtio-net-pci
 https://zhuanlan.zhihu.com/p/32125940
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/sect-graphic_user_interface_tools_for_guest_virtual_machine_management-remote_viewer
 
+## 8、Freedesktop.org 
+致力于Linux和其他类Unix上的X窗口系统的桌面环境之间的互操作性和基础技术共享的项目
+freedesktop.org（fd.o）是一个致力于Linux和其他类Unix上的X窗口系统的桌面环境之间的互操作性和基础技术共享的项目。
+外文名Freedesktop.org成立时间2000年3月
+由红帽的HavocPennington于2000年3月创立。
+该组织关注用户。X有很多开发框架，将来很可能也这样。而该组织力求这其中的不同不会为最终用户所察觉。
+最流行的开源X桌面——GNOME、KDE和Xfce都与该项目紧密合作。在2006年该项目发布了Portland1.0(xdg-utils)，一个常用的桌面环境接口的集合。
+freedesktop.org最初的名称叫XDesktopGroup（X桌面工作组），其缩写"XDG"在他们的工作中仍然经常被用到。
 
-
+github：https://github.com/freedesktop/spice-usbredir
 
 
 
