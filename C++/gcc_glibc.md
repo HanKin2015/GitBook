@@ -104,4 +104,27 @@ gdb调试
 
 代码见：D:\Github\Storage\c++\force_conversion
 
+## 3、升级glibc
+在 CentOS 系统中，可以使用以下命令来更新 glibc：
+```
+sudo yum update glibc
+```
+在 Debian 系统中，可以使用以下命令来更新 glibc：
+```
+sudo apt-get update
+sudo apt-get install libc6
+```
+如果你想要更新到最新版本的 glibc，可以使用 Debian 的测试版本（testing）或不稳定版本（unstable）。
 
+在 Debian 的测试版本中，可以使用以下命令来更新 glibc：
+```
+sudo apt-get update
+sudo apt-get -t testing install libc6
+```
+在 Debian 的不稳定版本中，可以使用以下命令来更新 glibc：
+```
+sudo apt-get update
+sudo apt-get -t unstable install libc6
+```
+更新 glibc 可能会对系统造成不可预知的影响，因此不建议直接更新 glibc。如果你确实需要更新 glibc，建议使用系统包管理器来更新，以确保更新过程正确无误。
+在更新 glibc 之前，建议备份系统数据和重要文件，以免出现不可预知的问题。

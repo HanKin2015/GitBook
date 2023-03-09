@@ -2,9 +2,6 @@
 
 http://download.qt.io/archive/qt
 
-
-PyQt、PySide、PySide2这三者到底有什么区别？https://blog.csdn.net/luoyayun361/article/details/99281515
-
 # 1、QT的安装
 
 ## 1-1、QT MSVC和MinGW版本的区别

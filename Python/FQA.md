@@ -343,8 +343,9 @@ def set_wallpaper():
         print(img_path)
 ```
 
-
-
-
+## 34、报错：ModuleNotFoundError: No module named 'skimage.metrics'
+尝试安装skimage库：pip install scikit-image
+重新安装此库，运行程序仍显示错误，故查阅到可能是因为skimage库版本过低，导致没有metrics。所以运行下面代码更新了该库：
+pip install scikit-image --upgrade
 
 

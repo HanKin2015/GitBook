@@ -8,6 +8,12 @@
 15.7 MB Files 805.9 GB Storage
 不能被这些数字迷惑，实际下载大小约为211.87 MiB（20210526）
  git clone https://gitlab.com/qemu-project/qemu.git
+ 
+v5.0.0       Apr 29, 2020
+v5.0.0-rc0   Mar 25, 2020
+v2.5.1       Mar 30, 2016
+
+基本上都是x.0.0~x.2.0版本命名方式
 
 ## 2、简介
 VMWare Workstation 就是这样一个可以完美满足我要求的桌面用户最满意的虚拟机。我经常使用它来折腾各个 Linux 发行版，而且运行流畅。当然，在 Linux 这个开源的世界我们是不该去使用破解版这样的东西的。不过不用担心，在 Linux 江湖中，还有 VirtualBox、QEMU 这样的虚拟机软件可用。

@@ -220,7 +220,8 @@ dialog.setTitle(_translate("Form", "标题栏"))
 需要每项每项的在linguist.exe程序中进行手动翻译，py文件中的英文是上下文，可以理解为是变量名。
 将每一个进行翻译，翻译完成后，点击File-Release,就会在当前目录生成english.qm文件。
 
-
+## 15、《快速掌握PyQt5》第三十五章 网络应用
+https://zhuanlan.zhihu.com/p/75665490
 
 
 

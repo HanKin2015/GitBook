@@ -29,6 +29,27 @@ pip uninstall  pySide6-essentials
 ```
 然后运行就没有问题了。
 
+## 2、系统托盘无法实现导致我放弃PySide6
+
+## 3、PyQt、PySide、PySide2这三者到底有什么区别？
+https://blog.csdn.net/luoyayun361/article/details/99281515
+
+## 4、PyQt和PySide这两个项目目前的开发状况如何，有什么区别或者优劣之分？
+https://www.zhihu.com/question/21237276
+
+优劣的话，个人认为主要还是体现在项目成熟性和协议。PyQt是GPLv3协议，大意是你的程序中用了它，你的程序就要开源，如果闭源商用就会违反协议（后果自负，脸皮够厚无所谓）。除非你搞封装动态加载那一套来强行规避。
+PySide是LGPL协议，如果你只是作为库用用它，你的程序还是可以闭源商用。所以很多人喜欢PySide。
+
+如果不做商业项目，强烈建议使用PyQt，资料多，稳定。需要开发闭源商用软件的就用PySide。
+
+https://www.iteye.com/blog/zhongwei-leg-753459
+PyQt 是商业及 GPL 的版权， 而 PySide 是 LGPL.
+也就是如果使用 PyQt 做商业应用的话就需要付费， 而使用 Nokia 的 PySide 则不需要。
+
+
+
+
+
 
 
 

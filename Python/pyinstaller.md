@@ -257,8 +257,232 @@ pyinstaller通过最开始生成的spec文件进行打包，也可以自定义sp
 
 总之，64位程序无法在32位系统上面运行。
 
+## 8、文件版本信息永远是1.0.0.1
+不明白为啥file_version_info.txt文件版本信息只能修改filevers参数，而产品版本则是修改ProductVersion参数，很奇怪。
 
+## 9、打包图标只能是ico格式
 
+## 10、打包报错hook-zmq.py 'utf-8' codec can't decode byte 0xce in position 89: invalid continuation by
+https://blog.csdn.net/itnerd/article/details/103498853
+
+修改C:\Users\Administrator\Anaconda3\Lib\site-packages\PyInstaller\compat.py 431行，增加：
+```
+out = out.decode(encoding, errors='ignore')
+```
+
+## 11、pyqt5打包过大
+打出来居然有326MB，并且软件启动很慢。
+
+尝试使用pipenv打包：
+
+### 报错：AttributeError: 'AnsiToWin32' object has no attribute 'fileno'
+解决方法：https://github.com/pypa/pipenv/issues/5560
+pip install pipenv==2022.11.30
+
+### 报错：Creating virtual environment...PermissionError: [Errno 13] Permission denied: 'C:\\Users\\Administrator\\.virtualenvs\\Administrator-S9WHhKuh\\Scripts\\python.exe'
+这个问题解决不了。。。
+
+pipenv --venv 获取当前venv
+pipenv shell
+pipenv --python "C:\\Users\\Administrator\\.virtualenvs\\k-ykYYjHD4\\Scripts\\python.exe"
+
+放弃。
+
+### Python利用conda创建新环境，以及利用Pyinstaller打包exe文件
+https://zhuanlan.zhihu.com/p/507865434
+看到结论200MB就OK了。
+
+### 找到一个详细博主教程
+https://www.cnblogs.com/strides/p/16422602.html
+
+### 发现numpy是大头
+使用D:\Github\Storage\qt\python\usb_camera_monitor_tool\tool.py文件获取了pip list的所有第三方库，然后在D:\Github\Storage\qt\python\usb_camera_monitor_tool\usb_camera_monitor_tool.spec文件中排除了这些所有库。
+意料之中肯定运行不了，大约也有74MB的大小，然后添加numpy库后达到273MB的大小，一个numpy库占到了200MB左右的大小。。。。。
+
+所有文件都没有引入numpy库，但是却要往里面打包加入，很是让人费解。
+
+我发现：
+```
+import math
+import operator
+from functools import reduce
+import cv2
+```
+删除了以上这些库打包成72.4MB就可以正常运行了，这些库只是引入了但是代码中并没有使用，继续探寻具体是哪一个库造成的。
+正常：
+```
+import math
+import operator
+from functools import reduce
+```
+异常：
+```
+import cv2
+```
+很说明问题，就是cv2这个库导致的。
+
+### 依赖cv2的python项目需要打包成exe,但是它太大了
+chatGPT的回答：
+打包成exe文件时，cv2库的体积较大，这是因为cv2库依赖于许多底层的C++库，所以无法避免。但是，可以尝试通过以下几种方法来减小exe文件的体积：
+
+只打包项目需要的cv2模块：可以使用PyInstaller等打包工具，通过--exclude-module参数排除掉cv2库中不需要的模块，只打包项目中需要的模块。例如，如果项目只需要cv2中的视频捕获模块，可以使用以下命令打包：
+```
+pyinstaller --exclude-module numpy --exclude-module tkinter --exclude-module PyQt5 --exclude-module PyQt5.QtGui --exclude-module PyQt5.QtCore --exclude-module PyQt5.QtWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtPrintSupport --exclude-module PyQt5.QtSvg --exclude-module PyQt5.QtNetwork --exclude-module PyQt5.QtSql --exclude-module PyQt5.QtXml --exclude-module PyQt5.QtOpenGL --exclude-module PyQt5.QtMultimedia --exclude-module PyQt5.QtMultimediaWidgets --exclude-module PyQt5.QtPositioning --exclude-module PyQt5.QtQuick --exclude-module PyQt5.QtQml --exclude-module PyQt5.QtTest --exclude-module PyQt5.QtBluetooth --exclude-module PyQt5.QtNfc --exclude-module PyQt5.QtSerialPort --exclude-module PyQt5.QtWebSockets --exclude-module PyQt5.QtWebChannel --exclude-module PyQt5.QtWebEngine --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtX11Extras --exclude-module PyQt5.QtWinExtras --exclude-module PyQt5.QtMacExtras --exclude-module PyQt5.QtAndroidExtras --exclude-module PyQt5.QtWebEngineWidgets --exclude-module PyQt5.QtWebEngineCore --exclude-module PyQt5.QtWebChannel -F -w -i icon.ico main.py
+```
+在上面的命令中，我们排除了许多不需要的模块，只打包了项目中需要的cv2模块。
+根据答案命令确实只有29.7MB了，但是运行失败：
+```
+D:\Github\Storage\python\图片处理\比较两张图片\dist>identify_black_white_image_optimize.exe
+ImportError: numpy.core.multiarray failed to import
+Traceback (most recent call last):
+  File "identify_black_white_image_optimize.py", line 12, in <module>
+  File "c:\users\administrator\anaconda3\lib\site-packages\PyInstaller\loader\pyimod03_importers.py", line 623, in exec
+module
+    exec(bytecode, module.__dict__)
+  File "site-packages\cv2\__init__.py", line 5, in <module>
+ImportError: numpy.core.multiarray failed to import
+[6156] Failed to execute script identify_black_white_image_optimize
+```
+去掉numpy之后又回到了241MB，看来这问题是没法解决的。
+
+使用PyOxidizer：PyOxidizer是一个新型的Python打包工具，它可以将Python应用程序打包成一个单独的可执行文件，包括Python解释器和所有依赖的库。使用PyOxidizer可以将cv2库打包进可执行文件中，从而减小exe文件的体积。具体使用方法可以参考PyOxidizer的官方文档。
+
+使用虚拟环境：在打包之前，可以使用虚拟环境来减小cv2库的体积。在虚拟环境中只安装项目所需的cv2模块，从而减小依赖库的体积。具体使用方法可以参考Python的虚拟环境文档。
+
+## 12、PyOxidizer
+
+### 12-1、简介
+作为打包和分发领域的最新产品之一，PyOxidizer非常有前途。它利用了为Rust编程语言创建的打包工具。
+
+与PyInstaller非常相似，你可以完全控制想要绑定到其中的所有内容，但它也可以允许你执行类似Pex或Shiv的代码。这意味着你可以创建你的包，使它作为一个REPL运行，其中的所有依赖项都已预先安装。
+
+分发一个包括REPL的完整Python环境会产生一些令人兴奋的应用程序，特别是对于需要多个包来进行数据探索的研究团队或科学计算。
+
+与PyInstaller相比的一个优点是，它不是提取到文件系统，而是将自身提取到内存中，从而大大缩短了实际的Python应用程序的启动时间。
+
+这个特性与PyInstaller有类似的缺点。你必须将任何内部引用调整为__file__或类似的操作，因此它们依赖于运行时PyOxidizer配置的环境。
+
+### 12-2、简单使用
+PyOxidizer是一个新型的Python打包工具，它可以将Python应用程序打包成一个单独的可执行文件，包括Python解释器和所有依赖的库。下面是一个简单的PyOxidizer使用示例：
+
+安装PyOxidizer
+PyOxidizer可以通过pip安装：
+```
+pip install pyoxidizer
+```
+创建PyOxidizer项目
+
+在项目的根目录下创建一个名为pyoxidizer.toml的文件，用于配置PyOxidizer项目。例如：
+```
+[project]
+name = "myapp"
+version = "0.1.0"
+
+[build]
+target = "x86_64-pc-windows-msvc"
+
+[python]
+interpreter = "python3"
+packages = [
+    { name = "numpy", version = "1.20.3" },
+    { name = "opencv-python", version = "4.5.3.56" },
+]
+```
+在上面的配置文件中，我们指定了项目的名称和版本号，以及使用的Python解释器和依赖的库。这里使用了numpy和opencv-python两个库作为示例。
+
+构建PyOxidizer项目
+
+在项目的根目录下打开命令行，执行以下命令构建PyOxidizer项目：
+```
+pyoxidizer build
+```
+这个命令会下载Python解释器和依赖的库，并将它们打包进一个可执行文件中。构建完成后，在项目的target目录下会生成一个名为myapp的可执行文件。
+
+运行PyOxidizer项目
+
+在命令行中执行生成的可执行文件即可运行PyOxidizer项目：
+```
+./target/myapp
+```
+这个命令会启动Python解释器，并执行项目中的代码。
+
+以上是一个简单的PyOxidizer使用示例。PyOxidizer还提供了许多高级功能，例如自定义打包逻辑、交叉编译等等。如果需要了解更多信息，可以参考PyOxidizer的官方文档。
+
+### 12-3、需要rust环境
+https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_getting_started.html
+
+是的，PyOxidizer是基于Rust编程语言开发的，因此在使用PyOxidizer之前需要安装Rust编程环境。
+安装Rust的方法因操作系统而异。在Linux和macOS上，可以使用以下命令安装Rust：
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+在Windows上，可以从Rust官网下载安装程序进行安装。
+
+安装完成后，需要运行以下命令来验证Rust是否正确安装：
+```
+rustc --version
+```
+如果输出了Rust的版本号，则说明Rust已经成功安装。
+
+需要注意的是，PyOxidizer会自动下载和安装所需的Rust工具链，因此不需要手动安装任何Rust工具链。但是，为了能够成功构建PyOxidizer项目，需要确保系统中已经安装了正确版本的Rust编程环境。
+
+然而并没有，需要单独下载rust。
+
+### 12-4、报错：error: unable to find PyOxidizer config file at .
+可能就是缺乏rust环境。
+PyOxidizer is a Rust application and requires Rust (1.61 or newer) to be installed in order to build PyOxidizer.
+
+下载rustup-init.exe：https://www.rust-lang.org/learn/get-started
+虽然安装文件只有9.53MB，然而安装的时候还需要225MB左右，还是挺大的。
+
+安装了rust还是不行。。。。。。
+
+### 12-5、pyoxidizer.bzl和pyoxidizer.toml文件区别
+pyoxidizer.bzl和pyoxidizer.toml都是用于配置和构建PyOxidizer项目的文件，但它们的作用和使用方式有所不同。
+
+pyoxidizer.toml是一个PyOxidizer项目的配置文件，用于指定项目的名称、版本、依赖库、构建选项等等。它使用TOML格式，可以通过编辑器或文本编辑器进行编辑。通常情况下，我们会在项目的根目录下创建一个名为pyoxidizer.toml的文件，并在其中指定项目的配置信息。
+
+pyoxidizer.bzl是一个Bazel构建文件，用于在Bazel构建系统中使用PyOxidizer。它定义了一个名为pyoxidizer_binary的Bazel规则，用于构建PyOxidizer项目。通常情况下，我们会在Bazel项目的构建文件中引入pyoxidizer.bzl文件，并使用pyoxidizer_binary规则构建PyOxidizer项目。
+
+需要注意的是，pyoxidizer.toml和pyoxidizer.bzl都是可选的文件，您可以根据具体需求选择是否使用它们。如果您只需要使用PyOxidizer的命令行工具构建项目，可以只使用pyoxidizer.toml文件；如果您需要在Bazel构建系统中使用PyOxidizer，可以使用pyoxidizer.bzl文件。
+
+### 12-6、怎么搞都不成功，哎，已放弃，还是老老实实选择pyinstaller吧
+一个用Rust编写的新项目旨在使Python应用程序作为独立的二进制可执行文件进行打包和发布变得更加容易--这一直是Python开发人员的痛点。
+
+PyOxidizer，根据其GitHub README，是 "一个Rust crates的集合，便于构建包含Python解释器的库和二进制文件"。它的开发者声称，有了PyOxidizer，就可以为一个嵌入了Python解释器的Python应用构建一个可执行文件，而没有其他的运行时依赖。
+
+PyOxidizer需要安装Rust 1.31或更高版本，并且只打包使用Python 3.7编写的应用程序。要使用PyOxidizer，开发者需要创建一个TOML文件，描述如何嵌入特定的Python应用程序，然后通过指向该TOML文件的环境变量构建并运行PyOxidizer。
+
+PyOxidizer与其他打包解决方案不同，它使用的是Python解释器的自定义构建，旨在静态链接并嵌入到另一个程序。其他解决方案，如PyInstaller，重新分配现有的CPython .DLL--方便且兼容，但不是很灵活。PyOxidizer也将Python应用程序的字节码打包到可执行镜像中，并直接从内存中加载（快速），而不是从文件系统中加载（较慢）。
+
+不过，与PyInstaller一样，PyOxidizer并没有对Python代码进行任何优化。另一个项目，Nuitka，不仅将Python应用程序编译为独立的可执行文件，而且还试图对编译后的代码进行性能优化。然而，Nuitka仍被认为是一个测试级别的项目，许多预期的性能改进还没有实现。
+
+PyOxidizer本身仍是一个非常早期的项目。它只能生成Linux二进制文件，因为它所依赖的上游项目之一，即CPython的可嵌入版本，目前仅在Linux构建中可用。
+
+## 12-7、Fatal Python error: initfsencoding: unable to load the file system codec
+还把python环境弄坏了。
+原来是我在下载的缺失库文件导致，删除api-ms-win-core-path-l1-1-0.dll即可。
+
+## 13、Nuitka
+Nuitka是一个用于编译Python代码的工具，可以将Python代码编译为C语言代码，并生成可执行文件。下面是使用Nuitka的一些步骤：
+
+安装Nuitka
+您可以从官方网站下载适用于您操作系统的Nuitka安装包，并按照提示进行安装。在安装过程中，您可以选择是否安装Nuitka的依赖项，例如Python解释器、C编译器等等。
+
+编写Python代码
+使用任何您喜欢的文本编辑器编写Python代码。需要注意的是，Nuitka在编译Python代码时需要一些特殊的注释和语法，以便正确地转换Python代码为C语言代码。具体语法和注释请参考Nuitka的官方文档。
+
+编译Python代码
+使用以下命令编译Python代码：
+
+nuitka --standalone --recurse-all your_script.py
+其中，--standalone选项表示生成独立的可执行文件，不需要依赖于Python解释器；--recurse-all选项表示递归地编译所有依赖的Python模块。
+
+运行生成的可执行文件
+在编译完成后，会生成一个名为your_script.exe的可执行文件。您可以通过以下命令运行它：
+
+./your_script.exe
+需要注意的是，由于Nuitka是一个第三方工具，可能会存在一些兼容性和稳定性问题。如果您遇到任何问题，请参考Nuitka的官方文档或者在社区中寻求帮助。
 
 
 

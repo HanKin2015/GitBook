@@ -17,7 +17,6 @@
 python -m ensurepip
 python -m pip install --upgrade pip
 
-
 pip检测更新
 命令：pip list –outdated
 
@@ -40,8 +39,36 @@ pip show 包名：显示安装的python包的详细信息，包括安装路径
 distribution，没有individuation版本。
 后面发现地址：https://repo.anaconda.com/archive/
 
+## 4、配置镜像源
+找到.condarc文件的位置: conda config --show-sources
+查看anaconda中已经存在的镜像源: conda config --show channels
+添加镜像源(永久添加):
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+设置搜索时显示通道地址: conda config --set show_channel_urls yes
+若不想按照上述步骤添加镜像，可使用以下命令直接指定安装时使用的镜像地址(以opencv为例)：
+conda install opencv -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 
+## 5、卡在
+```
+(base) D:\Github\Storage\qt\python\PyQt中文教程\对话框>conda install pyside6
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+Solving environment: failed with repodata from current_repodata.json, will retry with next repodata source.
 
+CondaError: KeyboardInterrupt
+```
+参考：https://zhuanlan.zhihu.com/p/504206858
+出现该问题的原因有可能是镜像源的http与https的识别错误，
+亲测才是最有效的：
+```
+ssl_verify: true
+channels:
+    - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/win-64/
+    - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/win-64
+show_channel_urls: true
+```
 
 
 

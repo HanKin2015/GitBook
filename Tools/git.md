@@ -1430,5 +1430,36 @@ error: failed to push some refs to 'git@github.com:hankin/test.git
 git restore命令是撤销的意思，也就是把文件从缓存区撤销，回到未被追踪的状态。
 https://baijiahao.baidu.com/s?id=1683763863529120088&wfr=spider&for=pc
 
+## 查看时间段之间的提交
+git log --after="2013-11-12 00:00" --before="2013-11-12 23:59"
+git log --stat --after="2016-01-01 00:00" --before="2020-05-01 23:59" hcd-xhci.c
 
+## git clone下载失败
+```
+[root@docker <hejian681> ~/hejian ]#git clone git@code.org:package/test.git
+Cloning into 'hci-builder'...
+The authenticity of host 'code.org (10.100.202.21)' can't be established.
+ECDSA key fingerprint is 07:fe:e4:42:bc:9f:da:83:8b:f4:7b:d6:2d:6f:11:3c.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'code.org,100.10.202.21' (ECDSA) to the list of known hosts.
+Permission denied (publickey).
+fatal: Could not read from remote repository.
 
+Please make sure you have the correct access rights
+and the repository exists.
+```
+然后去其他docker环境把别人的id_rsa和id_rsa.pub文件拷贝过来，放在/root/.ssh/目录下。
+有时候就没有什么问题了，但是有可能出现以下情况：
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for '/root/.ssh/id_rsa' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "/root/.ssh/id_rsa": bad permissions
+``` 
+只要把秘钥权限下降就好了：
+```
+chmod 0600 id_rsa
+```

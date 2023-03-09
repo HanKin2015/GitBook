@@ -145,11 +145,18 @@ time_array = time.strptime(str_time, '%Y-%m-%dT%H:%M:%S')
 time_stamp = int(time.mktime(time_array))
 ```
 
+## 21、any和all函数
+Python内置的any函数用来判断一个可迭代对象中是否至少有一个值为True，如果是则返回True，否则返回False。相当于对可迭代对象的所有元素做or运算，但是返回的结果只有True或False。
+all()是判断可迭代对象中每一个元素是否都是True，是则返回True，否则返回False。也就是说只要有一个是False则返回False。
 
-
-
-
-
+但是它们对于空的迭代对象的返回结果是不一样的：
+```
+print(any([]))  # Fasle
+print(all([]))  # True
+```
+对于这个结果，可以理解为：
+any是“至少有一个值为True时返回True”，空列表显然不满足，所以是False。
+all是“至少有一个值为False时返回False”，空列表显然不满足，所以是True。
 
 
 
