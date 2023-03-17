@@ -1,6 +1,9 @@
 # 英语学习
 
 ```
+premium: n.保险费;额外费用;附加费adj.高昂的;优质的
+spacer：垫片;隔板;衬垫;撑挡
+Constraint：约束;约束条件;限制;束缚;制约
 extrema: n.极值（extremum的复数形式）
 downgrading: n.降级;(路等的)下坡，向下的趋势(或路线)vt.使降级;使降职;贬低，降低（downgrade的现在分词）
 DATAIN: 数据输入;输入数据;输入比特流;数据端口

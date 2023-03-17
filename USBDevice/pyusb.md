@@ -4,6 +4,13 @@
 
 ### 1-1、usb.core.NoBackendError: No backend available
 https://blog.csdn.net/yuanli_best/article/details/85321631
+这个错误通常是由于PyUSB库无法找到可用的USB后端驱动程序，导致无法访问USB设备。解决这个问题的方法是安装并配置正确的USB后端驱动程序。
+
+在Windows系统中，PyUSB库默认使用libusb-win32作为USB后端驱动程序。你可以从libusb-win32的官方网站（https://sourceforge.net/projects/libusb-win32/files/libusb-win32-releases/）下载最新版本的驱动程序，并按照安装说明进行安装。安装完成后，PyUSB库应该能够自动识别并使用libusb-win32驱动程序。
+
+如果你使用的是Linux或Mac系统，PyUSB库默认使用系统自带的USB后端驱动程序。你需要确保系统已经正确安装了相应的驱动程序，并且当前用户有访问USB设备的权限。你可以尝试使用sudo命令以管理员权限运行Python程序，或者将当前用户添加到dialout或usb组中，以获取访问USB设备的权限。
+
+另外，你也可以尝试使用其他的USB后端驱动程序，如libusb或OpenUSB。你可以在PyUSB库的官方文档中查找相关的安装和配置说明。
 
 pyusb需要libusb。
 已下载：D:\Github\Storage\python\udev\U盘自动拷贝\libusb
@@ -69,8 +76,6 @@ usb.core.find(find_all=True, backend=backend)
 ```
 由于没有导入库，程序出错，然后被find函数给捕获异常后，导致我前端看不出错误出现在哪里。。。
 直接调用find_library函数就可以看见具体的报错。
-
-
 
 python执行成功了，但是编译出来的exe运行失败。
 
@@ -139,12 +144,36 @@ NotImplementedError: Operation not supported or unimplemented on this platform
 测试发现，就算使用inf-wizard.exe程序安装了指定设备驱动后还是这样。后来发现，主控是没法打印的，后面修改成U盘设备后正常打印出USB设备信息。
 解决方案：去掉8086的vid设备。
 
+### 2-3、难道在Windows+python+libusb-win32不能进行获取usb设备吗？
+Python可以获取USB设备描述符信息。可以使用PyUSB库来实现这个功能。
+在PyUSB库中，可以使用usb.core.find()方法来查找USB设备，并使用usb.util.find_descriptor()方法来查找设备的配置信息。
+PyUSB库可以识别USB 3.0设备。PyUSB库支持使用libusb 1.0作为USB后端驱动程序，而libusb 1.0已经支持USB 3.0设备。
+
+在使用PyUSB库时，你需要确保安装了支持USB 3.0设备的libusb 1.0驱动程序，并且使用正确的USB后端驱动程序来初始化PyUSB库。你可以在PyUSB库的官方文档中查找相关的安装和配置说明。
+
+另外，需要注意的是，USB 3.0设备通常需要使用USB 3.0接口才能发挥其最大的传输速度。如果你的计算机没有USB 3.0接口，你可以考虑使用USB 3.0扩展卡或其他外部设备来扩展USB 3.0接口。
+
+libusb-win32驱动程序可以识别USB 3.0设备。libusb-win32是一个开源的USB后端驱动程序，它支持USB 1.1、USB 2.0和USB 3.0设备，并且可以在Windows系统中使用。
+
+在使用libusb-win32驱动程序时，你需要确保安装了最新版本的驱动程序，并且使用正确的驱动程序来初始化PyUSB库。你可以从libusb-win32的官方网站（https://sourceforge.net/projects/libusb-win32/files/libusb-win32-releases/）下载最新版本的驱动程序，并按照安装说明进行安装。
+
+需要注意的是，USB 3.0设备通常需要使用USB 3.0接口才能发挥其最大的传输速度。如果你的计算机没有USB 3.0接口，你可以考虑使用USB 3.0扩展卡或其他外部设备来扩展USB 3.0接口。
+
+讨论：https://stackoverflow.com/questions/13773132/pyusb-on-windows-no-backend-available
+
+发现libusb-win32可能还需要借助libusbK-inf-wizard.exe软件，太麻烦，还是pip install libusb吧，安装生成libusb-1.0.dll文件。
+
+### 2-4、这里给了一个合理的解释
+如果您可以通过 libusb-1.0.dll 获取到 USB 设备，但是无法通过 libusb0.dll 获取到 USB 设备，可能是因为您的 USB 设备需要使用 libusb-1.0.dll 或其他驱动程序来正常工作，而不是 libusb0.dll。
+libusb0.dll 和 libusb-1.0.dll 都是用于 USB 设备通信的库文件，但它们之间存在一些区别。例如，libusb0.dll 是基于 Windows usbser.sys 驱动程序的，而 libusb-1.0.dll 则是独立的跨平台实现。因此，某些 USB 设备可能需要使用 libusb-1.0.dll 或其他驱动程序来正常工作，而不是 libusb0.dll。
+
 ## 3、使用PyUSB获取字符串描述符usb.util.get_string()
+
+### 3-1、平台不支持
 按照网上的教程一直报错：NotImplementedError: Operation not supported or unimplemented on this platform
 
 https://blog.csdn.net/weixin_42967006/article/details/108755972
 
-### 3-1、Error Accessing String
 这个问题需要为设备安装WinUSB驱动，点击下面的链接下载Zadig，这是一个Windows平台上专门用于安装USB相关驱动的小软件，下载后可直接运行。
 https://udomain.dl.sourceforge.net/project/libusb-win32/libusb-win32-releases/1.2.6.0/libusb-win32-bin-1.2.6.0.zip
 
@@ -178,7 +207,14 @@ usb.core.USBError: [Errno 19] No such device (it may have been disconnected)
 
 这不重要。
 
+## 7、pyusb和pyudev区别
+pyusb 和 pyudev 都是 Python 中用于操作 USB 设备的库，但它们的功能和使用方式有所不同。
 
+pyusb 是一个纯 Python 实现的 USB 库，可以用于在 Python 中访问 USB 设备。它提供了一组简单的 API，用于枚举 USB 设备、发送和接收 USB 控制传输请求、读写 USB 端点等操作。pyusb 支持 Python 2.x 和 Python 3.x 版本，并且可以在 Windows、Linux、Mac OS X 等操作系统上运行。
+
+pyudev 是一个基于 libudev 的 Python 库，用于监控和管理 Linux 系统中的设备。它提供了一组 API，用于枚举系统中的设备、获取设备的属性、监控设备的插拔事件等操作。pyudev 只能在 Linux 系统上运行，并且需要安装 libudev 库。
+
+虽然 pyusb 和 pyudev 的功能有所重叠，但它们的使用场景和目的不同。如果你需要在 Python 中访问 USB 设备的底层信息，例如设备描述符、端点描述符等，可以使用 pyusb 库。如果你需要在 Linux 系统中监控和管理设备，例如自动挂载 USB 存储设备、自动配置网络接口等，可以使用 pyudev 库。
 
 
 

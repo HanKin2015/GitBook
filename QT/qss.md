@@ -207,19 +207,12 @@ void setAlignment(Qt::Alignment align);    // 设置对齐方式
 
         这里的 Qt::Alignment 类型有以下取值。
         1）Qt::AlignLeft:：水平方向靠左。
-
         2）Qt::AlignRight：水平方向靠右。
-
         3）Qt::AlignHCenter：水平方向居中。
-
         4）Qt::AlignJustify：水平方向调整间距两端对齐。
-
         5）Qt::AlignTop：垂直方向靠上。
-
         6）Qt::AlignButton：垂直方向靠下。
-
         7）Qt::AlignVCenter：垂直方向居中。
-
         8）Qt::AlignCenter：等价于 Qt::AlignHCenter | Qt::AlignVCenter。
 ```
 

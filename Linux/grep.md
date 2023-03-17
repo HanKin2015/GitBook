@@ -281,3 +281,17 @@ i x k like
 a f g liker
 a f h g liker
 ```
+
+## 11、grep统计文件个数
+1) 查看某文件夹下文件的个数:
+```
+# ls -l |grep "^-"|wc -l    or    # find ./dir -type f | wc -l
+```
+2) 查看某文件夹下文件的个数，包括子文件夹里的: 
+```
+# ls -lR | grep "^-" | wc -l
+```
+3) 查看某文件夹下文件夹的个数，包括子文件夹里的:
+```
+# ls -lR | grep "^d" | wc -l
+```

@@ -23,9 +23,10 @@ https://www.iplaysoft.com/tools/chrome/
 
 然后Relunch，OK，成功
 
+## 6、谷歌Chrome浏览器将于1月10日停止对Win7、Win8 和 Win8.1的支持
+https://baijiahao.baidu.com/s?id=1754330757870542834&wfr=spider&for=pc
 
-
-
+Chrome 109 将是上述三个系统设备获得的最后一个版本更新。
 
 
 

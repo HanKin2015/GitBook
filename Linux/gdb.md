@@ -149,46 +149,95 @@ bt                        查看第2个线程的堆栈，即可可以看到线�
 ## 5、获取程序中的变量值并对其修改重新运行
 调试demo程序在：D:\Github\Storage\c++\gdb\modify_variable.cpp
 ```
+[root@ubuntu0006:/] #ps aux | grep a.out
+root     12901  0.0  0.0  13268  1540 pts/7    S+   11:07   0:00 ./a.out
+root     13530  0.0  0.0  17088  1012 pts/4    S+   11:08   0:00 grep --color=auto a.out
+[root@ubuntu0006:/] #gdb -p 12901
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+Attaching to process 12901
+Reading symbols from /media/hankin/vdb/a.out...done.
+Reading symbols from /usr/lib/x86_64-linux-gnu/libstdc++.so.6...(no debugging symbols found)...done.
+Reading symbols from /lib/x86_64-linux-gnu/libc.so.6...(no debugging symbols found)...done.
+Reading symbols from /lib/x86_64-linux-gnu/libm.so.6...(no debugging symbols found)...done.
+Reading symbols from /lib64/ld-linux-x86-64.so.2...(no debugging symbols found)...done.
+Reading symbols from /lib/x86_64-linux-gnu/libgcc_s.so.1...(no debugging symbols found)...done.
+0x00007f42d8973370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
 (gdb) bt
-#0  0x00007f323f86f370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
-#1  0x00007f323f86f2da in sleep () from /lib/x86_64-linux-gnu/libc.so.6
-#2  0x0000000000400ca8 in main (argc=1, argv=0x7ffeb6184098) at test.cpp:71
+#0  0x00007f42d8973370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007f42d89732da in sleep () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x0000000000400d8f in main (argc=1, argv=0x7ffc7f5d4358) at modify_variable.cpp:73
 (gdb) frame 2
-#2  0x0000000000400ca8 in main (argc=1, argv=0x7ffeb6184098) at test.cpp:71
-71                                                                                                                                                      sleep(2);
+#2  0x0000000000400d8f in main (argc=1, argv=0x7ffc7f5d4358) at modify_variable.cpp:73
+73              sleep(2);
 (gdb) info locals
-log_file_path = 0x400d9a "./hj.log"
+log_file_path = 0x400eb0 "./hj.log"
 __PRETTY_FUNCTION__ = "int main(int, char**)"
 index = 0
 (gdb) print g_log_fp
 $1 = (FILE *) 0x0
-(gdb) print LOG_TIGGER
-No symbol "LOG_TIGGER" in current context.
 (gdb) set g_log_fp=stderr
-'stderr' has unknown type; cast it to its declared type
-(gdb) print stderr
-$2 = (_IO_FILE *) 0x7fb8bcceb540 <_IO_2_1_stderr_>
-(gdb) set g_log_fp=0x7fb8bcceb540
 (gdb) continue
 Continuing.
-
 ^C
 Program received signal SIGINT, Interrupt.
-0x00007ff13328a370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+0x00007f42d8973370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+(gdb) set g_log_fp=NULL
+No symbol "NULL" in current context.
+(gdb) set g_log_fp=0
+(gdb) continue
+Continuing.
+^C
+Program received signal SIGINT, Interrupt.
+0x00007f42d8973370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+(gdb) print g_log_fp=stderr
+$2 = (FILE *) 0x7f42d8c6c540 <_IO_2_1_stderr_>
+(gdb) continue
+Continuing.
+^C
+Program received signal SIGINT, Interrupt.
+0x00007f42d8973370 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
 (gdb) q
+A debugging session is active.
 
-[root@ubuntu0006:/media] #./a.out
-stdin 0x7ff1335828e0, stdout 0x7ff133583620, stderr 0x7fb8bcceb540
+        Inferior 1 [process 12901] will be detached.
+
+Quit anyway? (y or n) y
+Detaching from program: /media/hankin/vdb/a.out, process 12901
+[Inferior 1 (process 12901) detached]
+
+另外一个窗口：
+[root@ubuntu0006:/media/hankin/vdb] #g++ modify_variable.cpp -g
+[root@ubuntu0006:/media/hankin/vdb] #./a.out
+stdin 0x7f42d8c6b8e0, stdout 0x7f42d8c6c620, stderr 0x7f42d8c6c540
 LOG_TIGGER file is not exist!
 g_log_fp is NULL, index = 0
 g_log_fp is NULL, index = 0
-g_log_fp is NULL, index = 0
-2022-12-07 10:51:06 index = 0
-2022-12-07 10:51:08 index = 1
-2022-12-07 10:51:10 index = 2
-2022-12-07 10:51:12 index = 3
-2022-12-07 10:51:14 index = 4
-...
+
+使用set修改成功：
+2023-03-14 11:09:33 index = 0
+2023-03-14 11:09:35 index = 1
+
+使用set修改成功：
+g_log_fp is NULL, index = 12
+g_log_fp is NULL, index = 12
+
+使用print修改成功：
+2023-03-14 11:10:52 index = 12
+2023-03-14 11:10:54 index = 13
 ```
 gdb调试修改变量后退出，程序依然以修改后的变量值继续执行。
 
@@ -431,7 +480,7 @@ disassemble
 在gdb里，用handle SIGPIPE nostop去掉SIGPIPE信号。
 
 ### 12-7、查看全局和静态变量
-info variables
+info variables 查看全局变量
 
 查看当前stack frame局部变量
 info locals
@@ -846,5 +895,30 @@ lrwxrwxrwx 1 root staff     28 Feb 13 20:29 /usr/local/lib/libusbredirhost.so.1 
 找到问题原因，软链接链接的文件有问题，链接到了备份文件，而不是正确的文件。
 真有毛病，以为发现一个bug问题，打算去上报，遇到问题自己要先排查排查，可能是我操作问题或者是环境问题，不要找人解决找到问题原因后很尴尬。
 
+## 25、gdb调试出现value optimized out解决方法
+现象：
+gdb调试 出现value optimized out解决方法
 
+原因：
+由于gcc在编译过程中默认使用-O2优化选项，希望进行单步跟踪调试时，应使用-O0选项。
+
+解决办法：
+使用-O0选项
+
+附录（优化等级的说明）：
+这个选项控制所有的优化等级。使用优化选项会使编译过程耗费更多的时间，并且占用更多的内存，尤其是在提高优化等级的时候。 -O设置一共有五种：-O0、-O1、-O2、-O3和-Os。除了-O0以外，每一个-O设置都会多启用几个选项，请查阅gcc手册的优化选项章节
+
+```
+-O0：这个等级（字母“O”后面跟个零）关闭所有优化选项，也是CFLAGS或CXXFLAGS中没有设置-O等级时的默认等级。这样就不会优化代码，这通常不是我们想要的。
+-O1：这是最基本的优化等级。编译器会在不花费太多编译时间的同时试图生成更快更小的代码。这些优化是非常基础的，但一般这些任务肯定能顺利完成。
+-O2：-O1的进阶。这是推荐的优化等级，除非你有特殊的需求。-O2会比-O1启用多一些标记。设置了-O2后，编译器会试图提高代码性能而不会增大体积和大量占用的编译时间。
+-O3：这是最高最危险的优化等级。用这个选项会延长编译代码的时间，并且在使用gcc4.x的系统里不应全局启用。自从3.x版本以来gcc的行为已经有了极大地改变。在3.x，-O3生成的代码也只是比-O2快一点点而已，而gcc4.x中还未必更快。用-O3来编译所有的软件包将产生更大体积更耗内存的二进制文件，大大增加编译失败的机会或不可预知的程序行为（包括错误）。这样做将得不偿失，记住过犹不及。在gcc 4.x.中使用-O3是不推荐的。
+-Os：这个等级用来优化代码尺寸。其中启用了-O2中不会增加磁盘空间占用的代码生成选项。这对于磁盘空间极其紧张或者CPU缓存较小的机器非常有用。但也可能产生些许问题，因此软件树中的大部分ebuild都过滤掉这个等级的优化。使用-Os是不推荐的。
+正如前面所提到的，-O2是推荐的优化等级。如果编译软件出现错误，请先检查是否启用了-O3。再试试把CFLAGS和CXXFLAGS倒回到较低的等级，如-O1甚或-O0 -g2 -ggdb（用来报告错误和检查可能存在的问题），再重新编译。
+-O0 不进行优化处理。
+-O 或 -O1 优化生成代码。
+-O2 进一步优化。
+-O3 比 -O2 更进一步优化，包括 inline 函数。
+
+```
 

@@ -136,3 +136,13 @@ tail -f /var/log/Xorg.0.log -n 1000             原来是wacom设备导致的，
 (EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
 (EE) Wacom Intuos3 6x8 Pen cursor: Error reading wacom device : No such device
 ```
+
+## 5、python存在多个键鼠库
+https://blog.csdn.net/caimengxin/article/details/123307605
+
+
+搜索了一半天，并没有发现pynput和pyautogui的区别，可能就是pynput多一个热键吗功能，即快捷键。
+https://zhuanlan.zhihu.com/p/133096887
+https://www.jianshu.com/p/acbd6f25b3ea
+https://blog.csdn.net/Fandes_F/article/details/103226341
+https://www.cnblogs.com/tobe-goodlearner/p/tutorial-pynput.html

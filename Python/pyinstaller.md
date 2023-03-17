@@ -484,5 +484,49 @@ nuitka --standalone --recurse-all your_script.py
 ./your_script.exe
 需要注意的是，由于Nuitka是一个第三方工具，可能会存在一些兼容性和稳定性问题。如果您遇到任何问题，请参考Nuitka的官方文档或者在社区中寻求帮助。
 
+## 14、获取python项目的依赖包和对应版本号，生成requirements.txt文件
+1、先安装pipreqs库
+pip install pipreqs -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 
+2、进入项目目录，使用以下命令生成
+```
+pipreqs ./
+会报错：
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x87 in position 32: illegal multibyte sequence
 
+pipreqs ./ --encoding=utf8
+还是会报错：
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /pypi/pillow/json (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSCo
+nnection object at 0x0000000003938E48>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。'))
+
+正确方式：
+pipreqs ./ --encoding=utf8 --force
+```
+
+3、生成的requements.txt文件内容类似下图
+使用中发现会有些依赖包的信息无法自动生成，如pytest-html、pytest-assume，需要手动添加进去，可不用添加版本号。
+
+4、使用requirements.txt文件
+迁移项目后就不需要逐个pip安装依赖包了，使用以下命令一次安装依赖包
+```
+pip install -r requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+```
+
+## 15、使用docker环境打包
+居然从900MB到30MB，pipenv居然也要200MB。
+https://blog.csdn.net/weixin_44424296/article/details/112078218
+
+这个方法后面有时间可以进行尝试。
+
+## 16、conda环境进行打包
+https://zhuanlan.zhihu.com/p/507865434
+
+## 17、使用pipenv环境打包
+https://blog.csdn.net/m0_37188294/article/details/115619510
+
+包含库文件后exe的大概大小：https://wenku.baidu.com/view/5864e46a28160b4e767f5acfa1c7aa00b52a9d32.html?_wkts_=1678755240712&bdQuery=pyqt5+%E6%89%93%E5%8C%85%E8%BF%87%E5%A4%A7
+
+## 18、使用upx进行压缩
+https://upx.github.io/
+
+后面也可以进行尝试一下。

@@ -25,3 +25,5 @@ EDN China 是第一家关注中国电子设计领域的媒体，开创性地引�
 ## 5、USB中文网
 https://www.usbzh.com/article/detail-627.html
 
+## 6、瞎折腾
+https://www.usbzh.com/article/detail-621.html

@@ -1463,3 +1463,40 @@ Load key "/root/.ssh/id_rsa": bad permissions
 ```
 chmod 0600 id_rsa
 ```
+
+## 
+```
+Counting objects: 23, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (15/15), 2.30 KiB, done.
+Total 15 (delta 13), reused 0 (delta 0)
+remote:  Error: 当前git用户名为：hejian,邮箱为：hejian@sangfor.com,不符合规范
+remote: +--------------------------------------+
+remote: |           用户名、邮箱规范           |
+remote: |-------------- + ---------------------|
+remote: |   用户名      |  姓名+工号           |
+remote: |   邮  箱      |  工号@sangfor.com    |
+remote: |-------------- + ---------------------|
+remote: | 例如:                                |
+remote: | 信服君88888(正式编制,实习生)         |
+remote: | 信服君w88888(合作方)                 |
+remote: | 88888@sangfor.com(所有人)            |
+remote: +--------------------------------------+
+remote: +----------------------------------------------------+
+remote: |               修改用户名、邮箱方法                 |
+remote: |----------------------------------------------------|
+remote: | 1、配置git：                                       |
+remote: | git config --global user.name 信服君88888          |
+remote: | git config --global user.email 88888@sangfor.com   |
+remote: |                                                    |
+remote: | 2、用以下命令确保用户名和邮箱的正确性：            |
+remote: | git config --list | grep user                      |
+remote: |                                                    |
+remote: | 3、修改提交：                                      |
+remote: | git commit --amend -m"此次提交的概要信息"          |
+remote: |                                                    |
+remote: | 4、再次push到远程仓库                              |
+remote: | git push origin <branch_name>                      |
+remote: +----------------------------------------------------+
+```

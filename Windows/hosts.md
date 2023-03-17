@@ -86,4 +86,14 @@ cmd窗口：ipconfig /flushdns
 3元一个月20G   https://cv2.work/auth/register?code=lwBC
 5月一个月18G   fengchi.buzz
 
+## 9、Clash for Windows
+https://clash.razord.top/#/proxies?host=127.0.0.1&port=12040&secret=ab6faad5-ee55-446f-963d-3292e5f76719
+https://github.com/Dreamacro/clash/releases/tag/premium
+https://github.com/Dreamacro/clash
 
+A rule-based tunnel in Go.
+
+订阅地址：https://sub.100oj.top/api/v1/client/subscribe?token=43e6c8c6584d6d17fa03cbc83e6ff942
+
+教程：https://easydoc.net/doc/15209814/WtVubGO0/mgJA1B8H
+MAC软件：https://github.com/yichengchen/clashX
