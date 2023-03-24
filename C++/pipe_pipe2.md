@@ -146,3 +146,28 @@ int mkfifo(const char *pathname, mode_t mode);
 real_mode = (mode & ~umask);  // 当前进程的umask掩码，可调用umask()获取
 ```
 
+### 2-3、打开FIFO文件
+通过调用open打开文件，close关闭文件。
+不能以O_RDWR（读、写）模式打开FIFO文件，O_RDWR模式打开FIFO文件行为未定义。
+
+使用FIFO文件的方法是：一个进程以只读模式（O_RDONLY）打开FIFO文件，另一个进程以只写模式（O_WRONLY）打开FIFO文件。负责写入FIFO的进程的写入内容，就可以被负责读出FIFO的进程读取到，从而实现通信的目的。
+
+### 2-4、O_NONBLOCK
+没有指定O_NONBLOCK模式时，以O_RDONLY只读打开FIFO文件不能返回（处于阻塞状态），等写打开；同样以O_WRONLY只写打开FIFO文件也不能返回，等读打开。O_RDONLY和O_WRONLY请求同时达到FIFO文件时，两个进程的打开请求就都能返回了。
+如果指定了O_NONBLOCK，读打开请求在没有写进程的时候，可以成功返回；但是没有读进程的写打开请求，返回-1（失败），errno = ENXIO。
+原因：FIFO只有读取端，没有写入端，没有明显的危害，尝试读取FIFO数据的操作不会返回任何数据。相反，如果允许只存在写入端不存在读取端，那么open之后，所有向FIFO文件的写入操作，都会导致产生SIGPIPE信号，以及调用write返回EPIPE的错误。因此，在源头上堵住（open返回失败）该问题反而合理。
+
+添加O_NONBLOCK选项标志
+对于无名管道，可以通过pipe2(fd, O_NONBLOCK);来指定O_NONBLOCK选项。
+如果忘记为FIFO文件设置O_NONBLOCK标志位，可以通过fcntl：
+```
+// 添加O_NONBLOCK标志位
+int flags = fcntl(fd, F_GETFL);
+flags |= O_NONBLOCK;
+fcntl(fd, F_SETFL, flags);
+
+// 清除O_NONBLOCK标志位
+int flags = fcntl(fd, F_GETFL);
+flags &= ~O_NONBLOCK;
+fcntl(fd, F_SETFL, flags);
+```

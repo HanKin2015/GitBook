@@ -348,4 +348,5 @@ def set_wallpaper():
 重新安装此库，运行程序仍显示错误，故查阅到可能是因为skimage库版本过低，导致没有metrics。所以运行下面代码更新了该库：
 pip install scikit-image --upgrade
 
-
+## 35、Configuration file contains invalid cp936 characters in C:\Users\YWX\pip\pip.ini. 已解决
+在pip.ini 配置文件里存在注释符号，去掉即可。
