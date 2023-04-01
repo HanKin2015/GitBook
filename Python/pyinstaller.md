@@ -530,3 +530,18 @@ https://blog.csdn.net/m0_37188294/article/details/115619510
 https://upx.github.io/
 
 后面也可以进行尝试一下。
+
+## 19、python pyusb 打包exe 报错
+在调试pyusb时，发现直接python scripts.py可以正常运行，但是打包成exe， 即经过了pyinstaller -F scripts.py ./scripts.exe运行就失败，提示错误是
+````
+usb.core.NoBackendError: No backend available.
+```
+
+不过我如何的写libusb-1.0.dll文件的路径，就是找不到这个文件。
+
+最终解决方案：
+将libusb-1.0.dll文件拷贝到C:\Windows\System32目录下，并且可以在py文件中直接调用libusb接口，并不需要进行backend指定。
+这时候打出来的包就是正常的。
+
+
+

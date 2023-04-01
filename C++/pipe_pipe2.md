@@ -171,3 +171,64 @@ int flags = fcntl(fd, F_GETFL);
 flags &= ~O_NONBLOCK;
 fcntl(fd, F_SETFL, flags);
 ```
+
+### 2-5、读写FIFO文件
+同普通文件操作，通过调用read读文件，write写文件。
+写文件的数据量不能超过PIPE_BUF个字节（limits.h），否则不能保证是原子的（内容连续）。多个进程同时写入，写入的内容也不会被其他进程写入内容打断。
+PIPE_BUF最少512byte，对Linux是4096（一个页面大小）。
+
+### 2-6、如何确认一个fd是PIPE还是FIFO？
+对于一个fd或文件，如何确认是PIPE，还是FIFO？
+可以使用S_ISFIFO，测试fd对应fstat结构的st_mode成员。如果结果为true，则被测fd是FIFO；如果false，则是PIPE。
+如果是文件（路径），可以用stat()/lstat()，从而获取文件对应stat结构对象信息。
+
+## 3、全双工管道socketpair
+socketpair() 创建一对匿名的、相互连接的全双工套接字。
+单个Unix Domain Socket IPC，参见之前这篇文章Linux 系统编程学习笔记 - socket编程
+```
+#include <sys/types.h>          /* See NOTES */
+#include <sys/socket.h>
+
+int socketpair(int domain, int type, int protocol, int sv[2]);
+```
+成功返回0；失败返回-1，errno被设置。
+
+### 3-1、特点
+1）这对套接字用于全双工通信，每个套接字都可以读写，不分读端还是写端，应用可以根据需要自行决定。
+2）两个套接字没有命名，不涉及隐式bind调用，因此创建过程相比较socket()创建的Unix Domain Socket要简洁很多。
+3）如果王其中一个套接字如fds[0]写入后，再从该套接字读取会阻塞，只能从另一个配对套接字fds[1]读取。
+4）读写操作可位于同一个进程，也可以位于不同进程。因为是匿名的，因此，如果是不同进程，则要求是亲缘进程（如父子进程）。
+
+### 3-2、示例：socketpair创建一对套接字，用于父子进程通信
+```
+int fds[2];
+int ret = socketpair(AF_LOCAL, SOCK_STREAM, 0, fds);
+if (ret < 0) {
+    perror("socketpair error");
+    exit(-1);
+}
+pid_t pid = fork();
+if (pid < 0) {
+    perror("fork error");
+    exit(-1);
+}
+else if (pid == 0) { // parent
+    close(fds[0]); // close one port
+    char buf[128];
+    snprintf(buf, sizeof(buf), "hello, I am parent process");
+    write(fds[1], buf, strlen(buf));
+    printf("Parent write: %s\n", buf);
+}
+else { // child
+    close(fds[1]); // close another port
+    char buf[128];
+    read(fds[0], buf, sizeof(buf));
+    printf("Child read: %s\n", buf);
+}
+```
+
+
+
+
+
+

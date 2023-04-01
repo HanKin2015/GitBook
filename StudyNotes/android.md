@@ -166,8 +166,9 @@ adb logcat ActivityManager:W MyApp:E
 2023-02-20 14:55:23 adb -s 172.22.16.113:9011 shell
 ```
 
+## 9、hdb连接设备是什么意思
+https://baijiahao.baidu.com/s?id=1736118598411372211&wfr=spider&for=pc
 
-
-
+hdb连接设备是指通过hdb接口使用PC版的华为手机助手管理当前设备。HDB是Huawei Data Bridge的英文缩写，中文意思为“华为数据桥”，是华为自定义的、用于移动终端的一种数据接口。
 
 

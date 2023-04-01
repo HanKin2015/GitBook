@@ -7,6 +7,7 @@ mobaxterm.mobatek.net
 
 ### 1-1、安装包
 zip安装包大约在27M，免安装使用方便大约在14M。
+注意一点：免安装的便携款你会发现主界面左边根本没有Sftp选项，这时候你可能就会放弃。但是并不是没有，它可以在Session-》SFTP即可。
 
 MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 数、SSH tunnels 数和其他一些定制化配置外限制外，免费版在终端底部还多了一个 “UNREGISTERED VERSION” 提示。
 

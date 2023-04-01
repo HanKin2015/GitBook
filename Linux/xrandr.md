@@ -29,8 +29,7 @@ qxl-3 disconnected
 ```
 
 执行之前使用：export DISPLAY=:0
-
-xrandr
+这样才会获取到两块屏幕信息，否则就是一块连屏。
 
 ## 2、修改分辨率
 xrandr -s 1600x900
@@ -41,15 +40,12 @@ xrandr -s 1600x900
 
 xrandr -q
 
-
 xrandr --output DFP1 --auto --left-of CRT1
 
 常见的显示屏名称有VGA, DVI, HDMI and LVDS等等
 
-
 ## 4、调整亮度
 xrandr --output LVDS --brightness 0.5
-
 
 # 复制屏幕
 xrandr --output HDMI-1-1 --same-as eDP-1-1 --auto
