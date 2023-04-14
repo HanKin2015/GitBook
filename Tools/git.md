@@ -10,6 +10,9 @@ ssh-keygen -t rsa -C "邮件地址"
 本地需要同时具有id_rsa.pub和id_rsa文件，缺一不可。
 
 访问令牌啥的应该不需要，添加完ssh秘钥之后需要稍微等待一段时间才能生效
+
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+cat ~/.ssh/id_rsa.pub
 ```
 
 ## 0-2、安装git
@@ -1471,24 +1474,24 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (15/15), done.
 Writing objects: 100% (15/15), 2.30 KiB, done.
 Total 15 (delta 13), reused 0 (delta 0)
-remote:  Error: 当前git用户名为：hejian,邮箱为：hejian@sangfor.com,不符合规范
+remote:  Error: 当前git用户名为：hejian,邮箱为：hejian@hankin.com,不符合规范
 remote: +--------------------------------------+
 remote: |           用户名、邮箱规范           |
 remote: |-------------- + ---------------------|
 remote: |   用户名      |  姓名+工号           |
-remote: |   邮  箱      |  工号@sangfor.com    |
+remote: |   邮  箱      |  工号@hankin.com    |
 remote: |-------------- + ---------------------|
 remote: | 例如:                                |
-remote: | 信服君88888(正式编制,实习生)         |
-remote: | 信服君w88888(合作方)                 |
-remote: | 88888@sangfor.com(所有人)            |
+remote: | 张三88888(正式编制,实习生)         |
+remote: | 张三w88888(合作方)                 |
+remote: | 88888@hankin.com(所有人)            |
 remote: +--------------------------------------+
 remote: +----------------------------------------------------+
 remote: |               修改用户名、邮箱方法                 |
 remote: |----------------------------------------------------|
 remote: | 1、配置git：                                       |
 remote: | git config --global user.name 信服君88888          |
-remote: | git config --global user.email 88888@sangfor.com   |
+remote: | git config --global user.email 88888@hankin.com   |
 remote: |                                                    |
 remote: | 2、用以下命令确保用户名和邮箱的正确性：            |
 remote: | git config --list | grep user                      |
@@ -1500,3 +1503,17 @@ remote: | 4、再次push到远程仓库                              |
 remote: | git push origin <branch_name>                      |
 remote: +----------------------------------------------------+
 ```
+
+## WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 
+```使用以下命令来删除旧的主机密钥:
+Administrator@WINedr-VDI0027 MINGW64 /d/Github/Storage (master)
+$ ssh-keygen -R github.com
+# Host github.com found: line 1
+/c/Users/Administrator/.ssh/known_hosts updated.
+Original contents retained as /c/Users/Administrator/.ssh/known_hosts.old
+```
+然后再git push搞定。
+
+
+
+

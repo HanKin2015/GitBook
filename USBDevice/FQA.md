@@ -61,4 +61,43 @@ USB 3 Command Verifier (USB3CV) is the official tool for USB 3 Hub and Device Fr
 参考：https://blog.csdn.net/weixin_34005042/article/details/92173108
 具体使用实战还未尝试过，后续有机会再探究。
 
+## 8、中断设备中的bInterval值
+```
+root@hankin:~# cat /sys/kernel/debug/usb/devices
+
+T:  Bus=01 Lev=03 Prnt=04 Port=02 Cnt=01 Dev#= 12 Spd=1.5  MxCh= 0
+D:  Ver= 1.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 8 #Cfgs=  1
+P:  Vendor=1a2c ProdID=2124 Rev= 1.10
+S:  Manufacturer=SEM
+S:  Product=USB Keyboard
+C:* #Ifs= 2 Cfg#= 1 Atr=a0 MxPwr= 98mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=01 Prot=01 Driver=usbfs
+E:  Ad=81(I) Atr=03(Int.) MxPS=   8 Ivl=10ms
+I:* If#= 1 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=00 Prot=00 Driver=usbfs
+E:  Ad=82(I) Atr=03(Int.) MxPS=   8 Ivl=10ms
+
+root@hankin:~# lsusb -d 1a2c:2124 -v | grep bInterval
+        bInterval              10
+        bInterval              10
+```
+这里来看，换算单位就是1毫秒。
+
+对于键盘设备，其换算单位通常与其他蓝牙设备相同。例如，键盘设备的连接间隔（connection interval）和中断包间隔（interrupt packet interval）的单位都是125微秒。此外，键盘设备还可能具有其他参数和特性，例如按键扫描间隔（key scan interval）、按键重复间隔（key repeat interval）等，这些参数的单位也可能是125微秒或其他单位。如果您需要查看具体设备的参数和单位信息，可以参考设备的规格说明书或数据手册，或者联系设备制造商的技术支持部门寻求帮助。
+
+## 9、根据usbmon抓取的usb数据包来分析但是无法确定当前时间
+```
+ffffffc01552cc00 3842027380 C Zi:1:002:1 0:1:0:0 15 0:0:12 0:2688:12 0:5376:12 0:8064:12
+```
+根据时间戳无法计算，例如3842027380，USBmon模块抓取的数据包时间戳是以microseconds（微秒）为单位的。它表示了数据包捕获的时间，通常使用相对于系统启动时刻的时间差来表示时间戳。可以通过将时间戳值除以1000000来将其转换为秒数。因此就是3842秒，太小了，并且只能是10位数。
+
+同理dmsg命令获取的时间戳是单位秒，是可以计算的。
+dmesg 命令显示的时间戳是内核启动后经过的秒数（seconds since kernel boot）和纳秒数。可以使用以下方式将其转换为人类可读的日期时间格式：
+- 获取系统启动时间，例如使用 uptime -s 命令。
+- 使用这个启动时间减去 dmesg 中的时间戳中的秒数，得到内核启动前的日期时间。
+- 将内核启动前的日期时间加上时间戳中的秒数和纳秒数，即可得到相应的日期时间。
+脚本见：D:\Github\Storage\shell\calc_dmsg_time_stamp.sh
+
+
+
+
 

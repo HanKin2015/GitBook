@@ -282,6 +282,12 @@ freedesktop.org最初的名称叫XDesktopGroup（X桌面工作组），其缩写
 
 github：https://github.com/freedesktop/spice-usbredir
 
+## 9、提高bulk设备传输速度
+网络问题无法进行优化
+bulk流只对in包有效，烧录是往设备里面写数据，因此是out包。
+修改端口的maxsize会有枚举问题，并且实际上跟这个无关，因为设备又不是根据这个进行发包的。
+可以修改设备描述符中maxsize值，可以提供映射速度。
+
 
 
 

@@ -350,3 +350,16 @@ pip install scikit-image --upgrade
 
 ## 35、Configuration file contains invalid cp936 characters in C:\Users\YWX\pip\pip.ini. 已解决
 在pip.ini 配置文件里存在注释符号，去掉即可。
+
+## 36、NameError: name '_thread' is not defined
+首先，_thread模块是Python的内置模块，因此不需要安装额外的库。在其他文件中调用_thread模块时，需要使用import _thread语句将其导入。
+其次，_thread模块中的函数需要在调用之前先定义。如果在其他文件中调用_thread模块中的函数，需要将这些函数定义在该文件中。
+最后，由于_thread模块是Python的低级线程模块，使用起来比较复杂，容易出现死锁等问题。因此，建议使用更高级别的线程模块，如threading模块，来实现多线程编程。threading模块提供了更多的功能和更好的线程管理，使用起来更加方便和安全。
+
+如果在其他文件中调用_thread模块中的函数，但是没有在该文件中定义这些函数，就会出现NameError等错误，提示相关的函数未定义。
+这是因为Python中的函数作用域是基于文件的。在一个文件中定义的函数只能在该文件中使用，如果在其他文件中调用该函数，就需要将该函数从定义它的文件中导入到调用它的文件中。
+如果在其他文件中调用_thread模块中的函数，但是没有将这些函数从定义它们的文件中导入到调用它们的文件中，Python解释器就无法找到这些函数的定义，从而导致错误。
+因此，如果要在其他文件中调用_thread模块中的函数，需要将这些函数从定义它们的文件中导入到调用它们的文件中，或者将这些函数定义在调用它们的文件中。
+
+
+

