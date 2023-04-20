@@ -361,5 +361,21 @@ pip install scikit-image --upgrade
 如果在其他文件中调用_thread模块中的函数，但是没有将这些函数从定义它们的文件中导入到调用它们的文件中，Python解释器就无法找到这些函数的定义，从而导致错误。
 因此，如果要在其他文件中调用_thread模块中的函数，需要将这些函数从定义它们的文件中导入到调用它们的文件中，或者将这些函数定义在调用它们的文件中。
 
+## 37、包引入的奇怪错误
+```
+import ctypes
+ctypes.wintypes.MSG()
+```
+报错：AttributeError: module 'ctypes' has no attribute 'wintypes'
+
+正确方式：
+```
+import ctypes
+from ctypes import wintypes
+ctypes.wintypes.MSG()
+```
+感觉不能跨越式引入第三方包库。
+
+
 
 

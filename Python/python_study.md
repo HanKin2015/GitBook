@@ -158,7 +158,12 @@ print(all([]))  # True
 any是“至少有一个值为True时返回True”，空列表显然不满足，所以是False。
 all是“至少有一个值为False时返回False”，空列表显然不满足，所以是True。
 
+## 22、装饰器
+Python装饰器是一种函数，它可以接受另一个函数作为输入，并返回一个新的函数作为输出。装饰器可以用来修改或增强函数的行为，而不需要修改函数本身的代码。
 
+装饰器的语法使用@符号，将装饰器函数放在被装饰函数的定义之前。
+
+代码见：D:\Github\Storage\python\study\decorator\decorator_example.py
 
 
 

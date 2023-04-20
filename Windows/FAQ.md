@@ -221,7 +221,7 @@ Win+R，敲入service.msc，找到Windows Time，把启动类型修改为自动�
 
 更换软件查看。
 
-## 28、使用Mimikatz没有获取密码失败
+## 28、使用Mimikatz获取密码失败
 参考：https://www.shuzhiduo.com/A/KE5QPBkMJL/
 https://www.ngui.cc/el/1503049.html?action=onClick
 https://blog.csdn.net/syl321314362/article/details/128868549
