@@ -301,7 +301,7 @@ hankin@hankin-KaiTianM630Z:/var/log/journal/72342e70085e4b7b81da1eeb168baf19$ gr
 通常，存储目录为/var/log/journal或/run/log/journal，但它不一定必须存在于系统中。
 如果只想检查日志当前在磁盘上所占用的空间量，只需键入：
 ```
-root@adesk:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --disk-usage
+root@hankin:/var/log/journal/eb4ec36f6ab94e6f99921968634e719e# journalctl --disk-usage
 Archived and active journals take up 104.1M in the file system.
 ```
 

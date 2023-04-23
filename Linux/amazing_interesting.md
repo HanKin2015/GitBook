@@ -35,7 +35,7 @@ gdb example & r
 
 正常的情况：
 ```
-root@adesk:~# ldd example
+root@hankin:~# ldd example
         linux-vdso.so.1 (0x00007fff8350d000)
         libuvc.so.0 => /usr/lib/libuvc.so.0 (0x00007fc28893a000)
         libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc28871d000)
@@ -45,8 +45,8 @@ root@adesk:~# ldd example
         /lib64/ld-linux-x86-64.so.2 (0x00007fc288b4e000)
         libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fc288d38000)
         librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc287cf7000)
-root@adesk:~# rm /usr/lib/libuvc.so.0
-root@adesk:~# ldd example
+root@hankin:~# rm /usr/lib/libuvc.so.0
+root@hankin:~# ldd example
         linux-vdso.so.1 (0x00007ffcc776f000)
         libuvc.so.0 => not found
         libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f8e1ffbd000)
@@ -56,11 +56,11 @@ root@adesk:~# ldd example
 
 异常的情况：
 ```
-root@adesk:~# ldd libuvc.so.0
+root@hankin:~# ldd libuvc.so.0
 ldd: exited with unknown exit code (135)
-root@adesk:~# file libuvc.so.0
+root@hankin:~# file libuvc.so.0
 libuvc.so.0: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, missing section headers
-root@adesk:~# readelf libuvc.so.0 -h
+root@hankin:~# readelf libuvc.so.0 -h
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
   Class:                             ELF64
@@ -84,10 +84,10 @@ ELF Header:
 readelf: Error: Reading 0x740 bytes extends past end of file for section headers
 readelf: Error: the dynamic segment offset + size exceeds the size of the file
 
-root@adesk:~# ldd example
-root@adesk:~# nm libuvc.so.0
+root@hankin:~# ldd example
+root@hankin:~# nm libuvc.so.0
 nm: libuvc.so.0: File truncated
-root@adesk:~# ./example
+root@hankin:~# ./example
 Bus error (core dumped)
 
 (gdb) bt

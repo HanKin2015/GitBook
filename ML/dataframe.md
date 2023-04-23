@@ -358,9 +358,19 @@ my_list = ['red', 'blue', 'green', 'yellow']
 df.query("`User Color`.str.contains('|'.join(@my_list))")
 ```
 
-
-
-
+## 23、将DataFrame中的某列数据类型转换为数值型，若个别数据不能转换替换为NaN
+```
+.astype('int')或.astype('float')或.astype('float64')
+```
+这种的只能转换原来就是数值型的，若是原数据中含有字符型就运行报错，无法得到结果。
+```
+for item in da.salary.tolist():
+    try:
+        dates.append(int(item))
+    except:
+        dates.append('NaN')
+print(dates)
+```
 
 
 

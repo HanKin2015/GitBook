@@ -99,9 +99,9 @@ https://www.jianshu.com/p/20d4b81f8d14
 https://hceng.cn/
 
 ```
-[root@ubuntu0006:/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media] #pwd
-/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media
-[root@ubuntu0006:/media/hankin/vdb/debians-kernel/extract/usr/src/linux-source-4.2/drivers/media] #find ./* -name *o.ko
+[root@ubuntu0006:/media/hankin/vdb/kernel/extract/usr/src/linux-source-4.2/drivers/media] #pwd
+/media/hankin/vdb/kernel/extract/usr/src/linux-source-4.2/drivers/media
+[root@ubuntu0006:/media/hankin/vdb/kernel/extract/usr/src/linux-source-4.2/drivers/media] #find ./* -name *o.ko
 ./i2c/tvaudio.ko
 ./mmc/siano/smssdio.ko
 ./radio/radio-raremono.ko
@@ -125,13 +125,13 @@ rmmod uvcvideo
 insmod uvcvideo.ko
 
 ## 5、编译内核
+
 ### 5-1、内核打包
 ```
 /usr/src/linux-source-4.2.tar.xz //内核源码
-debian8代码中内核路径：D:\Demo\debians\three-part-deb-depends\kernel\linux-source-4.2_4.2.5-1~bpo8+1_all.deb
-debian9代码中内核路径：D:\Demo\debians\deb9-xserver\linux-source-4.9_4.9.168-1+deb9u4_all.deb
+假如debian8系统内核路径：D:\Demo\debians\kernel\linux-source-4.2_4.2.5-1~bpo8+1_all.deb
 
-- 将文件拷贝到编译环境48.17
+- 将文件拷贝到编译环境
 - 解压缩：dpkg -X linux-source-4.2_4.2.5-1~bpo8+1_all.deb extract
 - 进入文件夹：cd extract/usr/src/
 - 再次解压缩：tar xJf linux-source-4.2.tar.xz
@@ -142,24 +142,20 @@ $ cd linux-source-4.2
 cp ../config.amd64_none_amd64 ./.config
 
 非常重要的一步，因为解压的内核文件是开源，没有任何我们的修改，因此需要先将修改的文件拷贝进去：
-D:\Demo\debians\adesk-kernel\src\linux-source-4.9
+D:\Demo\debians\kernel\src\linux-source-4.2
 
 修改内核代码，如：
 linux-source-4.2/drivers/usb/host/ehci-sched.c
-linux-source-4.9/drivers/media/usb/uvc/uvc_video.c
 
 当前目录：linux-source-4.2
 不要这一步$ make menuconfig
 $ scripts/config --disable DEBUG_INFO
 $ make clean
-修改最后4个数字：$ fakeroot make deb-pkg LOCALVERSION=-amd64 KDEB_PKGVERSION=4.2.5-1~bpo8+1+adesk5.4.5.2020 // 基础版本与linux-source-4.2的保持一致，并添加adesk的版本
-
-inux-source-4.9：fakeroot make deb-pkg LOCALVERSION=-amd64 KDEB_PKGVERSION=4.9.168-1~bpo8+1+adesk5.4.10.0
+修改最后4个数字：$ fakeroot make deb-pkg LOCALVERSION=-amd64 KDEB_PKGVERSION=4.2.5-1~bpo8+1+hj2023 // 基础版本与linux-source-4.2的保持一致，并添加自己的版本
 ```
 
 ### 5-2、单独编译
 https://blog.csdn.net/bingyu9875/article/details/95972059
-
 
 实测通过：
 ```

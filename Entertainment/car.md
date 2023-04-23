@@ -16,5 +16,10 @@
 ## 5、新能源
 http://jjs.mof.gov.cn/zhengcefagui/202112/t20211231_3780322.htm
 
-## 6、
+## 6、车机软件
+酷我音乐：http://www.kuwo.cn/down
+民间大神破解：https://docs.qq.com/doc/DQUJ2aWp0RGVsSFJ6
+
+
+
 

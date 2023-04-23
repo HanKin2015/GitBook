@@ -387,9 +387,9 @@ tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
 tcp        0      0 172.22.65.15:22         172.22.64.246:26504     ESTABLISHED 5348/sshd: root@not
 tcp        0     48 172.22.65.15:22         172.22.64.246:26503     ESTABLISHED 5331/2
 
-root@adesk:~# netstat -lnput |grep :22
+root@hankin:~# netstat -lnput |grep :22
 tcp        0      0 127.0.0.1:22            0.0.0.0:*               LISTEN      5300/sshd
-root@adesk:~# netstat -anp | grep :22
+root@hankin:~# netstat -anp | grep :22
 tcp        0      0 127.0.0.1:22            0.0.0.0:*               LISTEN      5300/sshd
 tcp        0      0 172.22.16.73:22         172.22.64.246:25762     ESTABLISHED 4943/sshd: root@not
 tcp        0     36 172.22.16.73:22         172.22.64.246:25756     ESTABLISHED 4937/sshd: root@pts
@@ -398,12 +398,12 @@ tcp        0     36 172.22.16.73:22         172.22.64.246:25756     ESTABLISHED 
 最终解决：
 0.0.0.0表示监听所有的IPv4地址，出于安全考虑，设置成主机的ip地址即可访问。
 ```
-root@adesk:~# netstat -anp | grep :22
+root@hankin:~# netstat -anp | grep :22
 tcp        0      0 172.22.16.73:22         0.0.0.0:*               LISTEN      28357/sshd
 tcp        0      0 172.22.16.73:22         172.22.64.246:22000     TIME_WAIT   -
 tcp        0      0 172.22.16.73:22         172.22.64.246:25762     ESTABLISHED 4943/sshd: root@not
 tcp        0     36 172.22.16.73:22         172.22.64.246:25756     ESTABLISHED 4937/sshd: root@pts
-root@adesk:~# netstat -lnput |grep :22
+root@hankin:~# netstat -lnput |grep :22
 tcp        0      0 172.22.16.73:22         0.0.0.0:*               LISTEN      28357/sshd
 
 C:\Users\User\Downloads>telnet 172.22.16.73 22

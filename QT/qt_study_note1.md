@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 QString title, vmid, hide, vdiuname, shutdown, snap_enflag = "0",
-    rcid = "", rcs_length = "", vmp_host = ADESK_BAR_INVALID_HOST,
+    rcid = "", rcs_length = "", vmp_host = HANKIN_BAR_INVALID_HOST,
     self_service;
 QStringList arglists = app.arguments();
 //加载语言
@@ -241,7 +241,7 @@ char*就不能转换成QString，这时候就可以用 QLatin1String来代替在
 
 ```
 //忽略SSL错误，绕过SSL证书认证
-void AdeskPopDialog::ignoreNetworkReplySslErrors(QNetworkReply* reply, const QList<QSslError> &sslErrors)
+void HankinPopDialog::ignoreNetworkReplySslErrors(QNetworkReply* reply, const QList<QSslError> &sslErrors)
 {
 	int i, sslCertificateCount;
 	int sslErrorsCount = sslErrors.count();

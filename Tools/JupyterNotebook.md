@@ -106,6 +106,79 @@ git clone https://github.com/ricklamers/gridstudio
 cd gridstudio && ./run.sh
 ```
 
+## 4、IPython
+
+### 4-1、魔术命令
+IPython是一个交互式的Python解释器，它提供了许多有用的魔术命令来增强交互式编程体验。以下是一些常用的IPython魔术命令：
+```
+%run: 运行Python脚本文件
+%load: 加载外部Python脚本文件
+%timeit: 测试代码的执行时间
+%debug: 进入调试模式
+%reset: 重置命名空间
+%who: 列出当前命名空间中的变量
+%whos: 显示当前命名空间中的变量的详细信息
+%history: 显示历史命令
+%matplotlib: 配置Matplotlib图形库
+%pwd: 显示当前工作目录
+%cd: 更改当前工作目录
+%ls: 列出当前工作目录中的文件和文件夹
+%mkdir: 创建新的文件夹
+%rm: 删除文件或文件夹
+%cp: 复制文件或文件夹
+%mv: 移动文件或文件夹
+%paste 粘贴文本
+%pdb 调试工具
+%%writefile：将代码写入文件
+使用%lsmagic命令列出所有可用的魔术命令
+```
+这些魔术命令可以通过在IPython中输入%符号后跟命令名称来调用。例如，要运行Python脚本文件，可以使用%run命令，如下所示：
+```
+%run my_script.py
+```
+IPython是一个交互式的Python解释器，可以提供更好的交互式编程体验。如果你使用的是Anaconda发行版，IPython已经包含在其中，无需额外安装。
+
+### 4-2、在anaconda执行ipython报错TypeError: __init__() got an unexpected keyword argument 'inputhook'
+在另外一台电脑执行命令正常，猜测可能需要升级一下ipython。
+conda update ipython  卡住
+pip install --upgrade ipython
+将版本从7.8.0升级到7.34.0后正常。
+```
+In [2]: pwd
+Out[2]: 'D:\\Github\\Storage\\python\\windows_hook'
+
+In [3]: cd ..
+D:\Github\Storage\python
+
+In [4]: mkdir ipython
+
+In [5]: cd ipython/
+D:\Github\Storage\python\ipython
+
+In [6]: ls
+ 驱动器 D 中的卷是 新加卷
+ 卷的序列号是 641B-9BCA
+
+ D:\Github\Storage\python\ipython 的目录
+
+2023/04/20  16:58    <DIR>          .
+2023/04/20  16:58    <DIR>          ..
+               0 个文件              0 字节
+               2 个目录  3,970,531,328 可用字节
+
+In [7]: %run helloworld.py
+******** starting ********
+hello python
+process spend 0.002 s.
+```
+这好像就是Spyder软件的Terminal。
+
+
+
+
+
+
+
 
 
 

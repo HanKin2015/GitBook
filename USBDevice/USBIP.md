@@ -101,27 +101,23 @@ https://github.com/realthunder/usbip
 ## 4、个人理解
 USB/IP协议的主要功能：将A机器上的一个USB设备映射到B机器上使用。
 
-USBIP是用于将Linux系统上所识别到的USB设备通过以太网共享出来的一个工具，它可以使得USB外接设备可以跨电脑或跨服务器进行访问。在USBIP基本架构中，分服务端（Server）和客户端（Client）两种，其中服务端是指插入USB设备并将其共享出来的一端，而客户端则是连接共享USB的一端，目前USBIP已经是Linux内核的一个分支，Windows平台下也有相应的工具。
-服务端的USB设备被USBIP共享出来后，如果有客户端连接这个共享USB设备成功，在网络层面上建立一个TCP连接，以满足对信令和数据的传输。
+USB/IP是一种基于网络的设备共享机制，可将电脑A（server端）连接的USB设备通过网络共享给远程电脑B（client端）
+USB/IP有很多的实现方式（程序），除了下文中使用的免费程序，还有商用程序：USB Network Gate、FlexiHub、VirtualHere、[USB over Network](https://www.net-usb.com/cn/usb-over-ip/)。更多见[这篇文章](https://zh.altapps.net/soft/virtualhere)
 
-USBIP工具的相关安装包目前是已经集成在debian的软件仓库中的，并且没有其他的Linux依赖，因此我们可以直接通过“apt install usbip”命令进行安装，倘若网络环境与互联网隔离，且没有部署相应的离线仓库，也可以将外网拉取的USBIP安装包直接通过dpkg的方式进行离线安装。
 
-将USBIP安装完成后，进入/lib/modules/5.10.101-amd64-desktop/kernel/drivers/usb/usbip（具体路径视具体的Linux内核版本为准），可以看到此时USBIP生成了四个内核模块，分别为usbip-core.ko、usbip-host.ko、usbip-vudc.ko和vhci-hcd.ko。
-
-!()[https://img-blog.csdnimg.cn/9746a4d2bd734a94b1ddaee90382fa7f.png#pic_center]
 
 ## 5、实战
 
-### 5-1、新的命令
+### 5-1、通过usb前缀发现新的未知usb相关命令
 ```
 [root@ubuntu0006:/media/] #apt-file search usb-devices
 linux-doc: /usr/share/doc/linux-doc/ABI/testing/sysfs-bus-usb-devices-usbsevseg
 usbutils: /usr/bin/usb-devices
 usbutils: /usr/share/man/man1/usb-devices.1.gz
 ```
-默认有usb-device、usbhid-dump、usb_modeswitch、usb_modeswitch_dispatcher、usbmuxd等命令。
+似乎来自usbutils库，默认有usb-device、usbhid-dump、usb_modeswitch、usb_modeswitch_dispatcher、usbmuxd等命令。
 
-新大陆usb-device真的很好用。
+新大陆usb-device真的很好用，相当于是cat /sys/kernel/debug/usb/devices命令。
 ```
 root@admin-CE3000F:~# usbhid-dump
 001:005:001:DESCRIPTOR         1656402199.703653
@@ -170,11 +166,172 @@ root@admin-CE3000F:/lib/modules/5.4.18-35-generic/kernel/drivers/usb/usbip# date
 
 ### 5-3、可以使用USBIP工具使用远程USB设备
 参考：https://blog.csdn.net/muxia_jhy/article/details/124952561
+USBIP是用于将Linux系统上所识别到的USB设备通过以太网共享出来的一个工具，它可以使得USB外接设备可以跨电脑或跨服务器进行访问。在USBIP基本架构中，分服务端（Server）和客户端（Client）两种，其中服务端是指插入USB设备并将其共享出来的一端，而客户端则是连接共享USB的一端，目前USBIP已经是Linux内核的一个分支，Windows平台下也有相应的工具。
+服务端的USB设备被USBIP共享出来后，如果有客户端连接这个共享USB设备成功，在网络层面上建立一个TCP连接，以满足对信令和数据的传输。
 
-https://www.right.com.cn/forum/thread-1074227-1-1.html
+### 5-4、USBIP在debian系Linux中的安装
+USBIP工具的相关安装包目前是已经集成在debian的软件仓库中的，并且没有其他的Linux依赖，因此我们可以直接通过“apt install usbip”命令进行安装，倘若网络环境与互联网隔离，且没有部署相应的离线仓库，也可以将外网拉取的USBIP安装包直接通过dpkg的方式进行离线安装。
 
-usbipd -D
-usbip list -l
+将USBIP安装完成后，进入/lib/modules/5.10.101-amd64-desktop/kernel/drivers/usb/usbip（具体路径视具体的Linux内核版本为准），可以看到此时USBIP生成了四个内核模块，分别为usbip-core.ko、usbip-host.ko、usbip-vudc.ko和vhci-hcd.ko。
+```
+root@hankin:/lib/modules/4.9.168-amd64/kernel/drivers/usb/usbip# ll
+total 244
+-rw-r--r-- 1 root root 57584 May 26  2022 usbip-core.ko
+-rw-r--r-- 1 root root 53792 May 26  2022 usbip-host.ko
+-rw-r--r-- 1 root root 42832 May 26  2022 usbip-vudc.ko
+-rw-r--r-- 1 root root 72424 May 26  2022 vhci-hcd.ko
+```
+
+这四个文件的简单介绍：
+!()[https://img-blog.csdnimg.cn/9746a4d2bd734a94b1ddaee90382fa7f.png#pic_center]
+
+### 5-5、debian配置USBIP实现USB设备共享
+
+#### 5-5-1、服务端
+输入命令“sudo modprobe usbip-host”与“usbipd -D”加载usbip-host内核模块。
+lsmod可以查看加载的内核模块。
+```
+root@hankin:/# usbip list -l
+ - busid 3-2 (090c:2000)
+   Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.) : unknown product (090c:2000)
+
+ - busid 1-1.2 (1a81:203e)
+   Holtek Semiconductor, Inc. : unknown product (1a81:203e)
+
+ - busid 1-1.3 (1a81:223a)
+   Holtek Semiconductor, Inc. : unknown product (1a81:223a)
+```
+前面一个是U盘，后面是鼠标和键盘。
+
+输入命令“usbip bind -b 4-2”（id值视实际而定），绑定需要共享出去的USB设备，如果提示complete，则表示共享成功：
+```
+root@hankin:/# usbip bind -b 3-2
+usbip: info: bind device on busid 3-2: complete
+```
+
+#### 5-5-2、客户端
+尴尬，另外一台xubuntu的可能usbip版本过低，命令执行不了。
+```
+[root@ubuntu0006:/] #usbip -v
+usbip 0.1.7 ($Id: vhci_attach.c 42 2007-09-07 12:07:51Z hirofuchi $)
+[root@ubuntu0006:/] #usbip list -r 172.22.16.81
+usbip: invalid option -- 'r'
+Usage: usbip [options]
+        -a, --attach [host] [bus_id]
+                Attach a remote USB device.
+
+        -x, --attachall [host]
+                Attach all remote USB devices on the specific host.
+
+        -d, --detach [ports]
+                Detach an imported USB device.
+
+        -l, --list [hosts]
+                List exported USB devices.
+
+        -p, --port
+                List virtual USB port status.
+
+        -D, --debug
+                Print debugging information.
+
+        -v, --version
+                Show version.
+
+        -h, --help
+                Print this help.
+[root@ubuntu0006:/] #usbip -a 172.22.16.81 3-2
+usbip err: usbip_network.c: 119 (usbip_recv_op_common) recv op_common, -1
+usbip err: vhci_attach.c: 324 (query_import_device) recv op_common
+usbip err: vhci_attach.c: 362 (attach_device) query
+[root@ubuntu0006:/] #usbip -x 172.22.16.81
+- 172.22.16.81
+usbip err: usbip_network.c: 119 (usbip_recv_op_common) recv op_common, -1
+usbip err: vhci_attach.c: 439 (attach_exported_devices) recv op_common
+usbip err: vhci_attach.c: 493 (attach_devices_all) query
+[root@ubuntu0006:/] #usbip -l 172.22.16.81
+- 172.22.16.81
+usbip err: usbip_network.c: 119 (usbip_recv_op_common) recv op_common, -1
+usbip err: vhci_attach.c: 202 (query_exported_devices) recv op_common
+usbip err: vhci_attach.c: 417 (show_exported_devices) query
+```
+
+服务端能执行命令：
+```
+root@hankin:/# usbip list -r 172.22.16.81
+Exportable USB devices
+======================
+ - 172.22.16.81
+        3-2: Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.) : unknown product (090c:2000)
+           : /sys/devices/pci0000:00/0000:00:10.0/usb3/3-2
+           : (Defined at Interface level) (00/00/00)
+```
+后面搭建一个ubuntu系统之后再测试看看，输入命令“usbip attach -r 192.168.100.191 -b 4-2”，连接服务端共享出来的USB设备，对于部分带GUI的Linux发行版（例如deepin/UOS）而言，如果服务端共享出来的USB设备是U盘，此时等待片刻，文件管理器便会自动将来自服务端U盘挂载上。
+
+### 5-4、USBIP在windows系统中的安装
+参考：https://www.right.com.cn/forum/thread-1074227-1-1.html
+参考：https://blog.csdn.net/OTZ_2333/article/details/124073337
+
+dibian装好usbip后，可以使用usbipd命令查看是否安装成功，usbipd -D是守护进程：
+```
+root@hankin:/# usbip unbind -b 3-2
+usbip: info: unbind device on busid 3-2: complete
+root@hankin:/# ps aux | grep usbipd
+root      6883  0.0  0.1  12976  1948 ?        Ss   16:01   0:00 usbipd -D
+root     15511  0.0  0.0  16328  1020 pts/0    S+   17:26   0:00 grep --color=auto usbipd
+root@hankin:/# kill -9 6883
+root@hankin:/# usbipd
+usbipd: info: starting usbipd (usbip-utils 2.0)
+usbipd: info: listening on 0.0.0.0:3240
+usbipd: info: listening on :::3240
+usbipd: info: shutting down usbipd
+root@hankin:/# usbipd -D
+root@hankin:/# usbip bind -b 3-2
+usbip: info: bind device on busid 3-2: complete
+root@hankin:/# usbipd
+usbipd: info: starting usbipd (usbip-utils 2.0)
+usbipd: error: bind: 0.0.0.0:3240: 98 (Address already in use)
+usbipd: error: bind: :::3240: 98 (Address already in use)
+usbipd: error: failed to open a listening socket
+```
+
+#### 5-4-1、安装
+windows端的客户端一直都不太稳定，而且usbip这个项目只支持从服务端单向发送数据给客户端，virtualhere则支持双向。可不管怎么样，windows下还是有能用的客户端，这里来试一下。在https://github.com/cezuni/usbip-win的release下载载编译好的windows文件回来，手动安装驱动。
+
+由于现在这个驱动还在开发，还没有windows的认证，也就没有windows的数字签名，我们首先要手动将签名导入进来并启用安装未经签名的驱动。
+- 双击文件usbip_test.pfx，测试发现只需要安装“受信任的发布者”即可
+- 安装密码已在官网https://github.com/cezanne/usbip-win写明：usbip
+- 运行命令开启测试签名bcdedit.exe /set TESTSIGNING ON
+- 由于我已关闭了防火墙，因此省去规则开放usbip所需端口：默认端口是3240
+- 发现一个好东西：http://www.linux-usb.org/usb.ids，里面记录了大部分的usb设备的vpid，真是一个宝贝，还可以自己添加
+
+```
+root@hankin:/# find / -name "usb.ids"
+/usr/share/misc/usb.ids
+/var/lib/usbutils/usb.ids
+
+安装vhci驱动
+D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip.exe install
+usbip: info: vhci(ude) driver installed successfully
+
+D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip.exe attach -r 172.22.16.81 -b 4-2
+succesfully attached to port 0
+
+D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip port
+Imported USB devices
+====================
+Port 00: <Device in Use> at Unknown Speed
+       Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.) : He Jian Upan (090c:2000)
+       ?-? -> unknown host, remote port and remote busid
+           -> remote bus/dev ???/???
+
+D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip.exe detach -p 0
+port 0 is succesfully detached
+
+D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip.exe list -l
+ - busid 1-209 (0409:55aa)
+   NEC Corp. : Hub (0409:55aa)
+```
 
 ## 6、libsysfs2库
 在使用apt install usbip时，这个libsysfs2库也一起安装。
@@ -183,28 +340,6 @@ usbip list -l
 
 2.1.0版本：https://github.com/Distrotech/sysfsutils
 2.1.1版本：https://github.com/linux-ras/sysfsutils
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
