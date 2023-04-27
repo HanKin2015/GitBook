@@ -1,5 +1,7 @@
 # 读写文件
-https://www.cnblogs.com/xiugeng/p/8635862.html
+
+## 1、三种读取方法
+参考：https://www.cnblogs.com/xiugeng/p/8635862.html
 
 一、read方法
 　　特点是：读取整个文件，将文件内容放到一个字符串变量中。
@@ -8,12 +10,21 @@ https://www.cnblogs.com/xiugeng/p/8635862.html
 二、readline方法
 　　特点：readline()方法每次读取一行；返回的是一个字符串对象，保持当前行的内存
 　　缺点：比readlines慢得多
+```
+with open(r'D:\Users\Administrator\Desktop\vm.txt', 'r') as f:
+    while True:
+        line = f.readline()
+        if line:
+            #print(type(line), line)
+        else:
+            break
+```
 
 三、readlines方法
 　　特点：一次性读取整个文件；自动将文件内容分解成一个行的列表。
     劣势是：如果文件非常大，尤其是大于内存时，无法使用readlines()方法。
 
-# Windows系统写文件如何实现Linux风格的换行符
+## 2、Windows系统写文件如何实现Linux风格的换行符
 参考：https://blog.csdn.net/tangyin025/article/details/123108752
 
 一个方法是将文件按wb方式打开，并且将要写入的字符转换成bytes字节写入：

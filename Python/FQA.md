@@ -349,7 +349,8 @@ def set_wallpaper():
 pip install scikit-image --upgrade
 
 ## 35、Configuration file contains invalid cp936 characters in C:\Users\YWX\pip\pip.ini. 已解决
-在pip.ini 配置文件里存在注释符号，去掉即可。
+在pip.ini配置文件里存在注释符号，去掉即可。
+今日发现，只需要将文件编码修改成ANSI即可。
 
 ## 36、NameError: name '_thread' is not defined
 首先，_thread模块是Python的内置模块，因此不需要安装额外的库。在其他文件中调用_thread模块时，需要使用import _thread语句将其导入。

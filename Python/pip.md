@@ -21,6 +21,8 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 Writing to C:\Users\Administrator\AppData\Roaming\pip\pip.ini
 把这个路径添加到系统环境变量就好了（不添加好像也行，可能以前添加了）
 
+今日发现，本地并没有pip.ini文件，需要自己手动创建pip文件夹，然后再创建pip.ini文件，然后填写镜像源地址即可。
+
 ## 2、安装whl文件
 直接使用pip install xxx.whl
 

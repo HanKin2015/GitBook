@@ -103,7 +103,74 @@ $(addsuffix .c,foo bar) 
 返回值为“foo.c bar.c”
 
 ## 6、编译so文件并使用
+
+### 6-1、# 动态调用链接
+[-Wl,-export-dynamic参数](https://blog.csdn.net/zhensansan/article/details/104590688)
+
+### 6-2、示例实战
+代码地址：D:\Github\Storage\c++\dynamic
+```
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #make
+gcc -fPIC -c main.c -o main.o
+gcc -fPIC -c lib_so1.c -o lib_so1.o
+gcc -shared -o lib_so1.so lib_so1.o
+gcc -o main main.o -ldl
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #./main
+lib_so1.c[6]:fun_so
+./main: symbol lookup error: ./lib_so1.so: undefined symbol: fun
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #ldd main
+        linux-vdso.so.1 =>  (0x00007fffed3df000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fa3b0d85000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa3b09bb000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fa3b0f89000)
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #readelf -sD main
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #gcc -o main main.o -ldl -Wl,-export-dynamic
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #./main
+lib_so1.c[6]:fun_so
+main.c[8]:fun
+in main
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #readelf -sD main
+
+Symbol table of `.gnu.hash' for image:
+  Num Buc:    Value          Size   Type   Bind Vis      Ndx Name
+   11   0: 0000000000601058     0 NOTYPE  GLOBAL DEFAULT  25 _edata
+   12   0: 0000000000601048     0 NOTYPE  GLOBAL DEFAULT  25 __data_start
+   13   0: 0000000000601060     0 NOTYPE  GLOBAL DEFAULT  26 _end
+   14   1: 0000000000601048     0 NOTYPE  WEAK   DEFAULT  25 data_start
+   15   1: 0000000000400a20     4 OBJECT  GLOBAL DEFAULT  16 _IO_stdin_used
+   16   1: 00000000004009a0   101 FUNC    GLOBAL DEFAULT  14 __libc_csu_init
+   17   1: 0000000000400800    42 FUNC    GLOBAL DEFAULT  14 _start
+   18   1: 0000000000601058     0 NOTYPE  GLOBAL DEFAULT  26 __bss_start
+   19   1: 0000000000400931   108 FUNC    GLOBAL DEFAULT  14 main
+   20   1: 0000000000400758     0 FUNC    GLOBAL DEFAULT  11 _init
+   21   2: 0000000000400a10     2 FUNC    GLOBAL DEFAULT  14 __libc_csu_fini
+   22   2: 0000000000400a14     0 FUNC    GLOBAL DEFAULT  15 _fini
+   23   2: 00000000004008f6    59 FUNC    GLOBAL DEFAULT  14 fun
+[root@ubuntu0006:/media/hankin/vdb/study/dynamic] #
+```
+
+### 6-3、SO文件的编写，编译，使用方法
 https://blog.csdn.net/qq_33832591/article/details/52288255
+
+- linux下的.so文件为共享库，相当于windows下的dll文件。在系统目录/usr/lib/下，我们可以看到很多应用程序库文件（常用的动态链接库和软件包的配置文件）
+- SO文件没有main
+- 编译时gcc后加-fPIC，这可以使gcc产生于位置无关的代码
+- 连接时，使用-shared，指示生成一个共享库文件
+- 共享库文件一lib开头+扩展名.so
+
+实战见：D:\Github\Storage\c++\dynamic\SO文件的编写编译使用
+```
+[root@ubuntu0006:~/hh] #make
+gcc -Wall -g -fPIC -o libtest.o -c libtest.c
+gcc -shared -o  libtest.so libtest.o
+[root@ubuntu0006:~/hh] #readelf -a libtest.so | grep SONAME
+[root@ubuntu0006:~/hh] #make
+g++ -o main main.o -L../SO文件编译 -ltest
+[root@ubuntu0006:~/hh] #./main
+max=5
+add=9
+```
+可以执行export LD_LIBRARY_PATH=LDLIBRARYPATH:.是为了，调用.so文件时候于.so文件位置无关。
 
 ## 7、“#ifdef __cplusplus extern "C" { #endif”的定义
 有意思：https://www.cnblogs.com/nx520zj/p/5920782.html

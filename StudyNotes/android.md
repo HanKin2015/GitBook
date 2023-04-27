@@ -1,20 +1,20 @@
 # android浅认识
 
-## 1、hankin.mk
+## 1、Android.mk
 
 ### 1-1、简介
-hankin.mk 文件位于项目 jni/ 目录的子目录中，用于向编译系统描述源文件和共享库。它实际上是编译系统解析一次或多次的微小 GNU makefile 片段。hankin.mk 文件用于定义 Application.mk、编译系统和环境变量所未定义的项目范围设置。它还可替换特定模块的项目范围设置。
+Android.mk 文件位于项目 jni/ 目录的子目录中，用于向编译系统描述源文件和共享库。它实际上是编译系统解析一次或多次的微小 GNU makefile 片段。Android.mk 文件用于定义 Application.mk、编译系统和环境变量所未定义的项目范围设置。它还可替换特定模块的项目范围设置。
 
-hankin.mk 的语法支持将源文件分组为模块。模块是静态库、共享库或独立的可执行文件。您可在每个 hankin.mk 文件中定义一个或多个模块，也可在多个模块中使用同一个源文件。编译系统只将共享库放入您的应用软件包。此外，静态库可生成共享库。
+Android.mk 的语法支持将源文件分组为模块。模块是静态库、共享库或独立的可执行文件。您可在每个 Android.mk 文件中定义一个或多个模块，也可在多个模块中使用同一个源文件。编译系统只将共享库放入您的应用软件包。此外，静态库可生成共享库。
 
-除了封装库之外，编译系统还可为您处理各种其他事项。例如，您无需在 hankin.mk 文件中列出头文件或生成的文件之间的显式依赖关系。NDK 编译系统会自动计算这些关系。因此，您应该能够享受到未来 NDK 版本中新工具链/平台支持带来的益处，而无需处理 hankin.mk 文件。
+除了封装库之外，编译系统还可为您处理各种其他事项。例如，您无需在 Android.mk 文件中列出头文件或生成的文件之间的显式依赖关系。NDK 编译系统会自动计算这些关系。因此，您应该能够享受到未来 NDK 版本中新工具链/平台支持带来的益处，而无需处理 Android.mk 文件。
 
-此文件的语法与随整个 hankin 开源项目分发的 hankin.mk 文件中使用的语法非常接近。虽然使用这些语法的编译系统实现并不相同，但通过有意将语法设计得相似，可使应用开发者更轻松地将源代码重复用于外部库。
+此文件的语法与随整个 Android 开源项目分发的 Android.mk 文件中使用的语法非常接近。虽然使用这些语法的编译系统实现并不相同，但通过有意将语法设计得相似，可使应用开发者更轻松地将源代码重复用于外部库。
 
 ### 1-2、基础知识
-在详细了解语法之前，最好先了解 hankin.mk 文件所含内容的基本信息。为此，本部分使用 Hello-JNI 示例中的 hankin.mk 文件解释文件中每一行的作用。
+在详细了解语法之前，最好先了解 Android.mk 文件所含内容的基本信息。为此，本部分使用 Hello-JNI 示例中的 Android.mk 文件解释文件中每一行的作用。
 
-hankin.mk 文件必须先定义 LOCAL_PATH 变量：
+Android.mk 文件必须先定义 LOCAL_PATH 变量：
 
 LOCAL_PATH := $(call my-dir)
 
@@ -209,5 +209,85 @@ adb logcat ActivityManager:W MyApp:E
 https://baijiahao.baidu.com/s?id=1736118598411372211&wfr=spider&for=pc
 
 hdb连接设备是指通过hdb接口使用PC版的华为手机助手管理当前设备。HDB是Huawei Data Bridge的英文缩写，中文意思为“华为数据桥”，是华为自定义的、用于移动终端的一种数据接口。
+
+## 10、logcat命令
+logcat命令是Android开发中常用的命令之一，用于查看设备的系统日志。以下是一些常用的logcat命令：
+```
+logcat: 显示所有日志消息。
+logcat -d: 显示最新的日志消息。
+logcat -c: 清除日志缓存。
+logcat -s <TAG>: 显示指定标签的日志消息。
+logcat -f <FILE>: 将日志消息保存到指定文件中。
+logcat -v <FORMAT>: 指定日志消息的输出格式，常用的格式有brief、process、tag、thread、raw和time等。
+```
+
+其中，“<format>”是您想要使用的输出格式。以下是一些常用的输出格式：
+```
+brief：简短格式，只显示日志消息的优先级和标记。
+process：显示进程ID和进程名称。
+tag：显示标记和消息。
+thread：显示线程ID和线程名称。
+time：显示时间戳和消息。
+```
+
+问题现象：我在安卓系统上面使用logcat命令，发现能执行logcat -v hj命令，很奇怪，明明format是有指定的格式，不能乱写，但是执行不报任何错误。然后就在chatgpt上面搜啊搜啊，然后百度啊，都没有结果。搜索了大约2个小时，我才选择了放弃，最终认为可能是重新编译了logcat命令。
+
+export LOGCAT_FORMAT=hj="threadtime"，怀疑可能是别名，但是这样执行后不行：
+```
+root@android:/system # set | grep hj
+LOGCAT_FORMAT='hj=threadtime'
+root@android:/system # env| grep hj
+LOGCAT_FORMAT=hj=threadtime
+root@android:/system # logcat -v hj
+Invalid parameter to -v
+Usage: logcat [options] [filterspecs]
+```
+
+logcat是Android系统中的一个命令行工具，用于查看系统日志。其源代码可以在Android开源项目的代码库中找到。
+
+具体来说，logcat的源代码位于Android源代码树的/system/core/logcat目录下。您可以通过以下步骤获取Android源代码并查看logcat的源代码：
+
+- 访问Android开源项目的官方网站：https://source.android.com/
+- 按照网站上的指引，下载并安装repo工具。
+- 使用repo工具下载Android源代码树：repo init -u https://android.googlesource.com/platform/manifest -b [branch_name]，其中[branch_name]是您想要下载的Android版本的代码分支名称。
+- 进入源代码树的/system/core/logcat目录，即可找到logcat的源代码。
+
+首先发现brief 是 Android 系统中 logcat 工具的一种输出格式，它会输出每条日志的优先级、标记、进程 ID 和消息内容。brief 格式的原型定义在 Android 源代码中的 system/core/include/log/logd.h 文件中，因此搜索logd.h文件，找到了system/core目录，然后找到了logcat.cpp文件，看代码追踪，找到一个liblog目录，里面有个logprint.c文件，也是开源的：
+```
+然后在android_log_formatFromString函数中找到：
+/**
+ * Returns FORMAT_OFF on invalid string
+ */
+AndroidLogPrintFormat android_log_formatFromString(const char * formatString)
+{
+    static AndroidLogPrintFormat format;
+
+    if (strcmp(formatString, "brief") == 0) format = FORMAT_BRIEF;
+    else if (strcmp(formatString, "process") == 0) format = FORMAT_PROCESS;
+    else if (strcmp(formatString, "tag") == 0) format = FORMAT_TAG;
+    else if (strcmp(formatString, "thread") == 0) format = FORMAT_THREAD;
+    else if (strcmp(formatString, "raw") == 0) format = FORMAT_RAW;
+    else if (strcmp(formatString, "time") == 0) format = FORMAT_TIME;
+    else if (strcmp(formatString, "threadtime") == 0) format = FORMAT_THREADTIME;
+    else if (strcmp(formatString, "long") == 0) format = FORMAT_LONG;
+    else if (strcmp(formatString, "hj") == 0) format = FORMAT_HJ;
+    else format = FORMAT_OFF;
+
+    return format;
+}
+
+    case FORMAT_HJ:
+        prefixLen = snprintf(prefixBuf, sizeof(prefixBuf),
+            "%s.%03ld [%5d/%5d] [%5s] %-8s: ", timeBuf, entry->tv_nsec / 1000000,
+            entry->pid, entry->tid, filterPriToStr(entry->priority), entry->tag);
+        strcpy(suffixBuf, "\n");
+        suffixLen = 1;
+        break;
+```
+官方文档：https://developer.android.google.cn/studio/command-line/logcat.html?hl=zh_cn
+终结束，有时候无法立即搜索到自己的答案，说明是有可能是自定义的，不是官方的。
+
+## 11、log命令
+log -t "tag" "there are 5 usb devices"
 
 

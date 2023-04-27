@@ -372,7 +372,40 @@ for item in da.salary.tolist():
 print(dates)
 ```
 
+## 24、ValueError: If using all scalar values, you must pass an index（四种解决方案）
+错误发生场景：
+```
+import pandas as pd
+dict = {'a':1,'b':2,'c':3}
+data = pd.DataFrame(dict)
+```
 
+错误原因：直接传入标称属性为value的字典需要写入index，也就是说，需要在创建DataFrame对象时设定index。
+
+解决方案：通过字典来创建DataFrame对象是很常见的需求，但是针对不同的对象形式，可能会有不同的写法。看代码，以下这四种方法都是可以修正这个错误，而且产生相同的正确结果，具体使用哪种方法根据自己的需求来选择就好。
+```
+import pandas as pd
+
+#方法一：直接在创建DataFrame时设置index即可
+dict = {'a':1,'b':2,'c':3}
+data = pd.DataFrame(dict,index=[0])
+print(data)
+
+#方法二：通过from_dict函数将value为标称变量的字典转换为DataFrame对象
+dict = {'a':1,'b':2,'c':3}
+pd.DataFrame.from_dict(dict,orient='index').T
+print(data)
+
+#方法三：输入字典时不要让Value为标称属性，把Value转换为list对象再传入即可
+dict = {'a':[1],'b':[2],'c':[3]}
+data = pd.DataFrame(dict)
+print(data)
+
+#方法四：直接将key和value取出来，都转换成list对象
+dict = {'a':1,'b':2,'c':3}
+pd.DataFrame(list(dict.items()))
+print(data)
+```
 
 
 

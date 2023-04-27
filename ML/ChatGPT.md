@@ -28,5 +28,7 @@ You must sign up for an OpenAI account before continuing (error=signup_required)
 MOSS 体验链接：https://moss.fastnlp.top/
 MOSS 项目主页：https://txsun1997.github.io/blogs/moss.html
 https://chat.forchange.cn/
+文心一言：https://yiyan.baidu.com/
 
-
+## 4、不错但是需要翻墙
+https://poe.com/
