@@ -125,7 +125,15 @@ $ ./flamegraph.pl out.folded > out.svg
 
 
 
+用 perf 抓取 火焰图
 
+解压 FlameGraph.rarFlameGraph.rar (2.8 MB) 到运行环境
+
+先运行 perf record -g -p pidof Xorg 抓取运行帧信息
+
+再运行 perf script | FlameGraph/stackcollapse-perf.pl | FlameGraph/flamegraph.pl > flameGraph.svg 生成火焰图
+
+用谷歌浏览器查看火焰图，分析CPU使用情况
 
 
 

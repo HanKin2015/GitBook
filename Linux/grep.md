@@ -100,21 +100,35 @@ $ grep "abc"   # 结果为abcd, abcde, abc等
 $ grep -Rw "abc" # 结果为abc 
 
 ## 6、grep时显示"匹配到二进制文件"
-原因
+
+### 6-1、原因
 grep如果碰到\000 NUL字符，就会认为文件是二进制文件，而 grep 匹配 默认忽略二进制数据。
 我发现是匹配的那一行出现了中文，并且中文格式还有些问题，删除中文后grep正常。。。。。。。。。。。。。
-
 
 所以要使用grep -a属性：不忽略二进制的数据。
 grep的-a或--text参数功能：将 binary 文件以 text 文件的方式搜寻数据
 
-解决
+### 6-2、解决
 grep -a file_name
 grep --text file_name
 
 grep时提示：Binary file (standard input) matches grep只递归匹配文本文件，不匹配二进制文件中的内容
 grep get_default_error_string /* -rFn --binary-files=without-match
 增加--binary-files=without-match参数即可。
+
+### 6-3、进一步思考
+```
+rk1314_64bit:/proc # grep -R "null pointer" / 2>/dev/null
+Binary file /vendor/lib/modules/wifi/8822be.ko matches
+Binary file /vendor/lib/modules/wifi/8821cu.ko matches
+Binary file /vendor/lib/modules/wifi/bcmdhd.ko matches
+
+rk1314_64bit:/proc # grep -aR "null pointer" / 2>/dev/null
+/vendor/lib/modules/wifi/8822be.ko:null pointer!!
+/vendor/lib/modules/wifi/8821cu.ko:[ERR]null pointer
+/vendor/lib/modules/wifi/bcmdhd.ko:%s : bus is null pointer , exit
+```
+所以说不添加a参数还是最好的，最好是过滤掉二进制内容显示。
 
 ## 7、使用grep搜索多个字符串
 三种方法：
@@ -295,3 +309,22 @@ a f h g liker
 ```
 # ls -lR | grep "^d" | wc -l
 ```
+
+## 12、grep出现大量的各种错误
+```
+rk1314_64bit:/proc # grep -R "null pointer" /
+/system/bin/grep: /sys/bus/cpu/uevent: Permission denied
+/system/bin/grep: /sys/bus/cpu/drivers_probe: Permission denied
+/system/bin/grep: /sys/bus/i2c/devices/i2c-0/i2c-dev/i2c-0/power/autosuspend_delay_ms: I/O error
+/system/bin/grep: warning: /sys/bus/i2c/devices/i2c-0/i2c-dev/i2c-0/device: recursive directory loop
+
+解决方法：
+rk1314_64bit:/proc # grep -R "null pointer" / 2>/dev/null
+```
+
+
+
+
+
+
+

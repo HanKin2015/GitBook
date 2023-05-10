@@ -1,4 +1,3 @@
-
 # Linux中常见的命令大全
 
 # 1、alias
@@ -323,6 +322,68 @@ udev处理的所有设备信息都存储在udev数据库中， 并且会发送�
 
 http://www.jinbuguo.com/systemd/udev.html
 
+# 17、tee命令
+
+## 17-1、简介
+Linux tee命令用于读取标准输入的数据，并将其内容输出成文件。
+tee指令会从标准输入设备读取数据，将其内容输出到标准输出设备，同时保存成文件。
+
+## 17-2、实战
+使用指令"tee"将用户输入的数据同时保存到文件"file1"和"file2"中，输入如下命令：
+```
+$ tee file1 file2                   #在两个文件中复制内容 
+
+$ tee file							#在一个文件中复制内容
+```
+
+在终端进行输入数据，并将内容保存到文件。
+
+目前并没有发现其太大的用处。
+
+```
+[root@ubuntu0006:/media/hankin/vdb/study] #echo "ds"
+ds
+[root@ubuntu0006:/media/hankin/vdb/study] #echo -n "ds"
+ds[root@ubuntu0006:/media/hankin/vdb/study] #tee hj
+dsadl
+dsadl
+dsalkdk
+dsalkdk
+dsad
+dsad
+sdasda
+sdasda
+^C
+[root@ubuntu0006:/media/hankin/vdb/study] #cat hj
+dsadl
+dsalkdk
+dsad
+sdasda
+[root@ubuntu0006:/media/hankin/vdb/study] #echo -n "this is word" | tee hj
+this is word[root@ubuntu0006:/media/hankin/vdb/study] #cat hj
+this is word[root@ubuntu0006:/media/hankin/vdb/study] #
+```
+
+# 18、last命令
+
+## 18-1、查看最近一次开机时间
+> who -b
+或者
+> last -1 reboot
+1
+2
+3
+
+## 18-2、查看关机记录
+> last -x | grep shutdown #以关机时间段显示
+1
+查看失败登录记录, 来源以IP显示
+> sudo lastb -i
+1
+查看系统从上次开机到现在已经运行多久了
+> uptime
+或者
+> w
 
 
 

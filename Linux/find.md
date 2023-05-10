@@ -111,3 +111,52 @@ drwxr-xr-x 5 root root 4096 6月  20 14:54 ../
 -rw-r--r-- 1 root root    0 6月  20 14:54 test.log
 ```
 
+## 5、# xargs命令
+
+### 5-1、简介
+xargs命令是一个非常有用的Linux命令，它可以将标准输入数据转换成命令行参数，使得命令可以处理更多的数据。xargs命令通常与其他命令一起使用，例如find、grep和rm等。
+
+xargs命令的基本语法如下：
+```
+command | xargs [options] [command]
+```
+其中，command是要执行的命令，options是xargs命令的选项，command是要传递给command命令的参数。
+
+xargs命令的常用选项包括：
+```
+-n：指定每次传递给command命令的参数个数；
+-I：指定替换字符串，用于替换command命令中的参数；
+-t：显示xargs命令执行的每个命令。
+```
+
+### 5-2、实战
+例如，要在当前目录下查找所有扩展名为.txt的文件，并删除它们，可以使用以下命令：
+```
+find . -name "*.txt" | xargs rm
+```
+这个命令会将find命令查找到的所有.txt文件传递给xargs命令，然后xargs命令将这些文件名作为参数传递给rm命令，从而删除这些文件。
+
+使用xargs命令会把前面命令的结果添加到后面命令的参数：
+```
+sudo pidof DisplayLinkManager | xargs sudo lsof -p  | grep -e REG -e CHR
+```
+
+## 6、find命令出现大量的错误
+```
+rk1314_64bit:/ # find / -name core-pattern
+find: /proc/2/task/2/exe: No such file or directory
+find: /proc/2/exe: No such file or directory
+find: /proc/3/task/3/exe: No such file or directory
+find: /proc/3/exe: No such file or directory
+find: /proc/5/task/5/exe: No such file or directory
+find: /proc/5/exe: No such file or directory
+
+解决方法：
+rk1314_64bit:/proc # find / -name "kmsg" 2>/dev/null
+/sys/devices/virtual/mem/kmsg
+/sys/class/mem/kmsg
+/proc/kmsg
+/dev/kmsg
+```
+
+

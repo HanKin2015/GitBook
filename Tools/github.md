@@ -67,7 +67,11 @@ Updates to manifest files in HanKin2015/Storage introduced 5 vulnerable dependen
 ## 9、查看仓库访问流量
 https://docs.github.com/zh/repositories/viewing-activity-and-data-for-your-repository/viewing-traffic-to-a-repository
 
+## 10、github下载项目下到一半出现需要登陆此站点objects.githubusercontent.com
+https://blog.csdn.net/bmseven/article/details/129243386 操作过于复杂
 
+https://blog.51cto.com/u_8681773/5897904 操作简化，只有鼠标右键复制链接地址
 
-
+但是不清楚为啥迅雷还是下载下载就中断了。。。。然后等啊等啊就下载好了，反正那叫一个不流畅不丝滑。
+https://github.com/fandesfyf/JamTools/releases/download/0.14.0B/JamTools0.14.0BSetup_for_windows.exe
 
