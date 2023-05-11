@@ -3,8 +3,8 @@
 ## 1、源码下载地址
 官网链接：https://www.kernel.org/
 
-HTTP	https://www.kernel.org/pub/
-GIT	https://git.kernel.org/
+HTTP    https://www.kernel.org/pub/
+GIT	    https://git.kernel.org/
 
 查看上库记录及源码：https://www.kernel.org/  点击browse即可。
 
@@ -17,6 +17,7 @@ http://ftp.sjtu.edu.cn/sites/ftp.kernel.org/pub/linux/kernel/
 linux-4.9.249.tar.gz                               29-Dec-2020 12:51           142328958
 linux-4.9.249.tar.sign                             29-Dec-2020 12:51                 991
 linux-4.9.249.tar.xz                               29-Dec-2020 12:51            93596052
+因此推荐下载tar.xz文件，能节省三分之一的大小。
 
 ## 2、内核配置文件位置
 在/boot文件夹下面config开头
@@ -257,4 +258,17 @@ Linux version 4.4.0-210-generic (buildd@lgw01-amd64-009) (gcc version 5.4.0 2016
 [root@ubuntu0006:/media/Hankin/vdb/kernel/linux-5.15.4] #cat /proc/sys/kernel/osrelease
 4.4.0-210-generic
 ```
+
+## 12、linux内核代码中include/linux和include/uapi/linux目录有什么区别
+在Linux内核代码中，include/linux和include/uapi/linux目录的区别如下：
+
+1. include/linux目录包含内核的核心头文件，这些头文件定义了内核的数据结构、函数和常量等。这些头文件只能由内核代码和内核模块使用。
+
+2. include/uapi/linux目录包含用户空间应用程序接口（User-space API）的头文件。这些头文件定义了用户空间应用程序可以使用的内核接口，例如系统调用、ioctl命令和网络协议等。这些头文件可以由用户空间的应用程序和库使用。
+
+因此，include/linux目录中的头文件只能由内核代码和内核模块使用，而include/uapi/linux目录中的头文件可以由用户空间的应用程序和库使用。这种分离可以帮助保持内核和用户空间的隔离，同时也可以提供一种清晰的方式来定义内核和用户空间之间的接口。
+
+
+
+
 

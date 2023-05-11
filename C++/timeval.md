@@ -248,13 +248,21 @@ demo见：D:\Github\Storage\c++\standard_library\time\time_sleep_example.cpp
 
 注意：缺少毫秒ms，所以单位是1秒=1000 000微妙=1000 000 000纳秒
 
-### 8-1、说明
+### 8-1、usleep函数
+usleep() 函数是一个 C 标准库函数，用于让当前线程挂起一段时间，以微秒为单位。它的原型定义在 unistd.h 头文件中，函数原型如下：
+```
+unsigned int usleep(unsigned int microseconds);
+```
+usleep() 函数的参数是一个无符号整数，表示要挂起的时间，单位是微秒。函数会让当前线程挂起指定的时间，然后再继续执行。
+
+需要注意的是，usleep() 函数已经被标记为过时的函数，不建议在新的代码中使用。在 POSIX 标准中，建议使用 nanosleep() 函数来代替 usleep() 函数。nanosleep() 函数的精度更高，可以支持纳秒级别的时间精度。
+
+### 8-2、usleep函数已经被舍弃
 usleep()有很大的问题：
 
 - 在一些平台下不是线程安全，如HP-UX以及Linux
 - usleep()会影响信号
 - 在很多平台，如HP-UX以及某些Linux下，当参数的值必须小于1000，1000也就是1秒，否则该函数会报错，并且立即返回。
-
 
 大部分平台的帮助文档已经明确说了，该函数是已经被舍弃的函数。还好，POSIX规范中有一个很好用的函数，nanosleep()，该函数没有usleep()的这些缺点，它的精度是纳秒级。在Solaris的多线程环境下编译器会自动把usleep()连接成nanosleep()。
 
@@ -271,7 +279,7 @@ Linux下短延时推荐使用select函数，因为准确。
 4、select每次运行之后，会将tv的值清零，所以如果要循环使用select，务必把tv.tv_usec的初始化放在循环中！
 5、https://www.onitroad.com/jc/linux/man-pages/linux/man2/nanosleep.2.html，纳秒字段的值必须在0到999999999之间。
 
-## 9、sleep() 函数，没想象种那么简单、(sleep 与 clock的碰撞使用)
+## 9、sleep() 函数，没想象中那么简单、(sleep 与 clock的碰撞使用)
 https://blog.csdn.net/qq_38505858/article/details/124667116
 
 ### 9-1、线程sleep

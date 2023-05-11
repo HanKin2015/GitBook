@@ -50,7 +50,6 @@ HCI，即主机控制接口，属于蓝牙协议栈的一部分。
 [五 3月 11 10:01:05 2022] hub 4-0:1.0: 2 ports detected
 ```
 
-
 ubuntu的xhci主控挂掉恢复方式：
 ```
 echo -n "0000:00:14.0" | tee /sys/bus/pci/drivers/xhci_hcd/unbind
@@ -94,9 +93,10 @@ mount
 fdisk -l
 果然看见U盘，但是没有挂载，手动挂载一下搞定。mount /dev/loop /media/xx。
 
-
-
-
+## 5、再次尝试使用命令linux命令卸载和加载usb设备驱动
+```
+/sys/bus/hid/drivers/hid-multitouch/
+```
 
 
 

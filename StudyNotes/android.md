@@ -110,6 +110,8 @@ getprop命令的作用就是从系统的各种配置文件中读取一些设备�
 
 Kconfig的作用：Kconfig用来配置内核，它就是各种配置界面的源文件，内核的配置工具读取各个Kconfig文件，生成配置界面供开发人员配置内核，最后生成配置文件.config
 
+更多详情见：D:\Github\GitBook\gitbook\Linux\kernel.md
+
 ## 6、错误日志
 untracked pid XXX exited
 

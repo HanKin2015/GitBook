@@ -385,6 +385,7 @@ this is word[root@ubuntu0006:/media/hankin/vdb/study] #
 或者
 > w
 
+# 19、echo命令
 
 
 
