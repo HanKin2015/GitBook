@@ -1,5 +1,7 @@
 # 读写文件
 
+代码见：D:\Github\Storage\c++\standard_library\file\文件操作\读写文件
+
 ## 1、
 fopen
 
@@ -13,6 +15,8 @@ fprintf
 fclose
 fread
 fwrite
+
+需要注意fopen和open函数的区别，头文件都引入不同。
 
 ## 2、高拍仪花屏
 使用了数据传输加密导致花屏。

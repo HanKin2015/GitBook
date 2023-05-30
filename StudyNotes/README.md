@@ -82,3 +82,15 @@ normal & abnormal 正常与异常
 阿里云函数计算（fc）使用体验
 
 https://mp.weixin.qq.com/s/P9m0REcDqL75SLQVAXPH7g
+
+
+左耳听风：https://coolshell.cn/articles/3738.html
+
+
+
+
+
+
+
+
+

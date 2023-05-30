@@ -9,7 +9,7 @@ CMake是一个跨平台的安装（编译）工具，可以用简单的语句来
 
 ### 2-1、安装
 - 安装cmake，CMake官网 https://cmake.org/
-- 安装GCC、G++，mingW不错的选择
+- 安装GCC、G++，mingW是不错的选择
 
 安装好mingw32-make.exe以后，如果希望可以像Linux下那样键入 make 执行Makefile文件，就把mingw32-make.exe修改为make.exe，否则会提示找不到make命令。
 
@@ -23,7 +23,6 @@ CMake是一个跨平台的安装（编译）工具，可以用简单的语句来
 ### 2-3、构建Makefile文件
 https://my.oschina.net/u/2501904/blog/1162753
 编写CMakeLists.txt 文件，编写和Linux下都一样，只是在设置编译器的时候，要指定头文件和库的路径，都要指向mingw。
-
 ```
 D:\Users\User\Desktop\xml>make Makefile         # 错误
 
@@ -39,25 +38,81 @@ D:\Users\User\Desktop\xml>mingw32-make.exe
 ```
 
 ## 3、linux环境使用
-apt install cmake
+安装命令：apt install cmake
 
 ### 3-1、CMake指定C++版本
-由C++升级、是致很多代码需要用C++11的规范进行缩译a方案
-修改Makefile手动修改在Makefile中，指定编译C++版本为增加编译开关-std=c++11。如下例：
-CFLAGS+=-std-c++11使用CMake指定
-使用CMake指定C++版本有两种方法。
-修改CMakeLists.txt
+由于C++升级，导致很多代码需要用 C++ 11 的规范进行编译。
 
+#### 3-1-1、修改Makefile
+手动修改在Makefile中，指定编译C++版本为增加编译开关-std=c++11。如下例：
+```
+CFLAGS+=-std-c++11
+```
+
+#### 3-1-2、使用CMake指定: 修改CMakeLists.txt(推荐)
 在CmakeLists.txt中增加对C++版本的定义。方法如下：
-#Enable C++11
-set（CMAKE_CXX_STANDARD 11）
-生成Makefile的时候指定
+```
+# Enable C++11
+set(CMAKE_CXX_STANDARD 11)
+```
+
+#### 3-1-3、使用CMake指定: 生成Makefile的时候指定
 使用cmake的命令行时候指定。方法如下：
-cmake-DCMAKE_CXX_STANDARD=11.
-个人推荐使用方法一，即修改CMakeLists.txt文件。
+```
+cmake -DCMAKE_CXX_STANDARD=11 ..
+```
 
+### 3-2、编写CMakeLists.txt文件之关键字介绍
+PROJECT (xxx) 指定工程名称
+例：PROJECT(hello)
 
+SET 设置指定变量
+例：SET(LRC_LIST main.cpp) LRC_LIST变量中包含main.cpp
 
+MESSAGE 向终端中输出用户自定义信息
+例：MESSAGE(STATUS “message output” ${HELLO_BINARY_DIR})
+
+ADD_EXECUTABLE 生成可执行文件
+例：ADD_EXECUTABLE(hello $ {LRC_LIST})
+这里的${LRC_LIST}也可以直接写各源文件的名称(只写cpp)
+有的时候也会使用一些.o文件，添加和.cpp一样，直接在ADD_EXECUTABLE中添加即可
+
+INSTALL 安装文件
+例：INSTALL(FILES doc1 doc2 DESTINATION /usr/share/doc/cmake/) 安装到/usr/share/doc/cmake
+例：INSTALL(PROGRAMS hello.sh DESTINATION bin) 安装到/usr/bin
+
+ADD_SUBDIRECTORY 指定中间文件生成并存放的位置
+例：ADD_SUBDIRECTORY(src bin) 指定可执行文件生成和放在./src/bin中，常用于外层CMakeLists.txt
+
+INCLUDE_DIRECTORIES 向⼯程添加多个特定的库⽂件搜索路径
+例：INCLUDE_DIRECTORIES(./include) 把inlcude文件夹增加到库文件的搜索目录中
+
+LINK_DIRECTORIES 向⼯程添加多个特定的库⽂件搜索路径
+例：LINK_DIRECTORIES(./data/lib) lib文件夹中有动态库/静态库文件
+
+TARGET_LINK_LIBRARIES 可执行文件链接动态库静态库
+例：TARGET_LINK_LIBRARIES(hello libhello.so)
+
+### 3-3、静态库动态库构建
+很多情况下，不希望把程序变成可执行文件，而希望把程序变成静态库或者动态库供他人使用。下面介绍cmake构建动态库/静态库的过程(差别不大，只是CMakeLists中有改变)：
+1.先写好.h和.cpp
+2.项目中有一个CMakeLists.txt， src中有一个CMakeLists.txt
+
+项目中的CMakeLists.txt写生成路径，src中的CMakeLists.txt写编译规则，重点有三行：
+SET(LIBHELLO_SRC hello.cpp)
+ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC}) #构建动态库,hello.so
+ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC}) #构建静态库hello_static.a
+
+### 3-4、INSTALL文件安装
+有的时候希望把文件安装到特定的路径，就使用INSTALL关键字
+将hello.h安装到/usr/include/hello
+INSTALL(FILES hello.h DESTINATION /usr/include/hello)
+
+静态库动态库安装，LIBRARY是动态 ARCHIVE是静态
+INSTALL(TARGETS hello hello_static LIBRARY DESTINATION /usr/lib ARCHIVE DESTINATION /usr/lib)
+
+## 4、实战
+代码见：D:\Github\Storage\c++\cmake
 
 
 

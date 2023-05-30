@@ -187,6 +187,9 @@ tc qdisc del dev eth4 root
 ```
 5%丢包已经很严重了，1%一般即可。
 
+延迟丢包，依赖netem内核驱动。
+加载驱动：modprobe sch_netem
+
 ## 4、tc命令包装器tcconfig
 使其更容易设置到network-interface/Docker-container(veth)的网络带宽/延迟/数据包丢失/数据包损坏等的流量控制。
 

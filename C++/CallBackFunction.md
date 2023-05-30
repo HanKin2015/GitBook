@@ -1,16 +1,11 @@
 # 回调函数
 
-回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。
-
+## 1、简介
 不要误解为递归回调。
 不要理解为是函数式编程。
 
-
-
 回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
 回调是任何一个被以方法为其第一个参数的其它方法的调用的方法。很多时候，回调是一个当某些事件发生时被调用的方法。
-
-
 
 [C语言回调函数详解](https://www.cnblogs.com/jiangzhaowei/p/9129105.html)
 
@@ -22,229 +17,52 @@
 
 再来看看来自Stack Overflow某位大神简洁明了的表述：A "callback" is any function that is called by another function which takes the first function as a parameter。 也就是说，函数 F1 调用函数 F2 的时候，函数 F1 通过参数给 函数 F2 传递了另外一个函数 F3 的指针，在函数 F2 执行的过程中，函数F2 调用了函数 F3，这个动作就叫做回调（Callback），而先被当做指针传入、后面又被回调的函数 F3 就是回调函数。到此应该明白回调函数的定义了吧？
 
-## 回到函数的好处和作用
-解耦
-
+## 2、回调函数的好处和作用
+解耦，就是因为这个特点，普通函数代替不了回调函数。
 ```
 #include<stdio.h>
-
-int Callback_1() // Callback Function 1
-
-{
-
-printf("Hello, this is Callback_1 ");
-
-return 0;
-
-}
-
-int Callback_2() // Callback Function 2
-
-{
-
-printf("Hello, this is Callback_2 ");
-
-return 0;
-
-}
-
-int Callback_3() // Callback Function 3
-
-{
-
-printf("Hello, this is Callback_3 ");
-
-return 0;
-
-}
-
-int Handle(int (*Callback)())
-
-{
-
-printf("Entering Handle Function. ");
-
-Callback();
-
-printf("Leaving Handle Function. ");
-
-}
-
-int main()
-
-{
-
-printf("Entering Main Function. ");
-
-Handle(Callback_1);
-
-Handle(Callback_2);
-
-Handle(Callback_3);
-
-printf("Leaving Main Function. ");
-
-return 0;
-
-}
-
-运行结果：
-
-Entering Main Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_1
-
-Leaving Handle Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_2
-
-Leaving Handle Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_3
-
-Leaving Handle Function.
-
-Leaving Main Function.
-```
-
-
-```
-#include<stdio.h>
-
-int Callback_1(int x) // Callback Function 1
-
-{
-
-printf("Hello, this is Callback_1: x = %d ", x);
-
-return 0;
-
-}
-
-int Callback_2(int x) // Callback Function 2
-
-{
-
-printf("Hello, this is Callback_2: x = %d ", x);
-
-return 0;
-
-}
-
-int Callback_3(int x) // Callback Function 3
-
-{
-
-printf("Hello, this is Callback_3: x = %d ", x);
-
-return 0;
-
-}
-
-int Handle(int y, int (*Callback)(int))
-
-{
-
-printf("Entering Handle Function. ");
-
-Callback(y);
-
-printf("Leaving Handle Function. ");
-
-}
-
-int main()
-
-{
-
-int a = 2;
-
-int b = 4;
-
-int c = 6;
-
-printf("Entering Main Function. ");
-
-Handle(a, Callback_1);
-
-Handle(b, Callback_2);
-
-Handle(c, Callback_3);
-
-printf("Leaving Main Function. ");
-
-return 0;
-
-}
-
-运行结果：
-
-Entering Main Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_1: x = 2
-
-Leaving Handle Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_2: x = 4
-
-Leaving Handle Function.
-
-Entering Handle Function.
-
-Hello, this is Callback_3: x = 6
-
-Leaving Handle Function.
-
-Leaving Main Function.
-````
-
-# 带参数的回调函数
-```
-#include <stdio.h>
+#include<softwareLib.h> // 包含Library Function所在读得Software library库的头文件
  
-int add(int a,int b);
-int sub(int a,int b);
- 
-void functionchoose(int a, int b, int (*pf)(int, int));
- 
- 
-int main()
+int Callback() // Callback Function
 {
-    int a1=3,a2=4;
-    functionchoose(a1,a2,add);
-    functionchoose(a1,a2,sub);
+    // TODO
     return 0;
 }
  
-int add(int a, int b)
+int main() // Main program
 {
-    printf("add function \n");
-    return a+b;
- 
-}
- 
-int sub(int a, int b)
-{
-    printf("sub function \n");
-    return a-b;
-}
- 
-void functionchoose(int a,int b,int (*pf)(int,int))
-{
-    printf("the result is %d \n",(*pf)( a, b));
- 
+    // TODO
+    Library(Callback);
+    // TODO
+    return 0;
 }
 ```
+乍一看，回调似乎只是函数间的调用，和普通函数调用没啥区别，但仔细一看，可以发现两者之间的一个关键的不同：在回调中，主程序把回调函数像参数一样传入库函数。这样一来，只要我们改变传进库函数的参数，就可以实现不同的功能，这样有没有觉得很灵活？并且丝毫不需要修改库函数的实现，这就是解耦。再仔细看看，主函数和回调函数是在同一层的，而库函数在另外一层，想一想，如果库函数对我们不可见，我们修改不了库函数的实现，也就是说不能通过修改库函数让库函数调用普通函数那样实现，那我们就只能通过传入不同的回调函数了，这也就是在日常工作中常见的情况。现在再把main()、Library()和Callback()函数套回前面 F1、F2和F3函数里面，是不是就更明白了？
 
-## 
+明白了回调函数的特点，是不是也可以大概知道它应该在什么情况下使用了？没错，你可以在很多地方使用回调函数来代替普通的函数调用，但是在我看来，如果需要降低耦合度的时候，更应该使用回调函数。
 
+代码见：D:\Github\Storage\c++\function\callback_function_example.c
+带参数的回调函数：D:\Github\Storage\c++\function\callback_function_with_argument_example.c
+
+## 3、使用场景
+在C语言中，回调函数是一种函数指针，它作为参数传递给另一个函数，并在该函数执行期间被调用。回调函数通常用于以下场景：
+
+事件处理：当某个事件发生时，回调函数可以被调用来处理该事件。例如，当用户单击按钮时，回调函数可以被调用来执行相应的操作。
+排序算法：回调函数可以用于排序算法中，以便在排序期间比较元素。例如，快速排序算法可以使用回调函数来比较元素。
+网络编程：回调函数可以用于网络编程中，以便在数据到达时通知应用程序。例如，当套接字接收到数据时，回调函数可以被调用来处理数据。
+GUI编程：回调函数可以用于GUI编程中，以便在用户与界面交互时执行相应的操作。例如，当用户单击按钮时，回调函数可以被调用来更新界面。
+
+总之，回调函数是一种非常有用的编程技术，可以使程序更加灵活和可扩展。
+
+发现槽函数就是一个回调函数。
+
+## 4、回调函数与指针函数区别
+回调函数和指针函数都是函数指针的应用，但它们的用途和实现方式有所不同。
+
+回调函数是一种函数指针，它作为参数传递给另一个函数，并在该函数执行期间被调用。回调函数通常用于异步事件处理、排序算法、网络编程、GUI编程等场景中，以便在特定事件发生时执行相应的操作。
+
+指针函数是一种返回指针类型的函数，它返回一个指向某个数据类型的指针。指针函数通常用于动态内存分配、字符串处理、数据结构等场景中，以便在程序运行时动态地分配和管理内存。
+
+因此，回调函数和指针函数的用途和实现方式有所不同，但它们都是函数指针的应用，可以提高程序的灵活性和可扩展性。
+
+快排的回调函数：D:\Github\Storage\c++\function\quicksort_example.c

@@ -1,8 +1,6 @@
 # 其他
 
 主要是一些不知道怎么分类的一些文档。
-
-
 ```
 99669999996669999996699666699666999966699666699
 99699999999699999999699666699669966996699666699
@@ -13,8 +11,6 @@
 99666666666996666666666699666666999966669999996
 ```
 查找-》标记-》输入9-》全部标记
-
-
 
 [古老的社工库查询](http://site3.sjk.space/)
 
@@ -37,7 +33,8 @@ https://baijiahao.baidu.com/s?id=1696841394317533854&wfr=spider&for=pc
 
 
 
-
+https://github.com/flaneur2020/pua-lang
+https://flaneur2020.github.io/pua-lang/?s=BQRgDABA1BBMCUEBUEDMkYFYg
 
 
 

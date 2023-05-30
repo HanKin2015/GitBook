@@ -1,29 +1,23 @@
 # QT学习中遇到的问题
 
-# 1、运行时提示无法启动进程错误
-
+## 1、运行时提示无法启动进程错误
 在左侧项目选项中=》构建项目是红色的=》选择项目的目录=》运行
 
-# 2、QObject::connect: No such slot . 当信号与槽不能链接
+## 2、QObject::connect: No such slot . 当信号与槽不能链接
+成员函数没有放到public slots里面，信号槽函数必须要放在这里。
 
- 成员函数没有放到public slots里面，信号槽函数必须要放在这里。
-
-# 3、error: 无法打开文件“d:\Qt\2010.05\qt\lib\qtmaind.lib”
-
+## 3、error: 无法打开文件“d:\Qt\2010.05\qt\lib\qtmaind.lib”
 vc的编译器， 而你安装的是mingw版本的qt。
 
 工具-选项-构建和运行-构建套件，你应该是选择的是桌面（默认）。点击它，看看编译器那个框选择的是什么？默认选择的是M..V..C++(86)。编译方式从VS2010改成Mingw，就不会报错了
 
-# 4、make时出现/usr/bin/ld: skipping incompatible
+## 4、make时出现/usr/bin/ld: skipping incompatible
+一个是arm架构的，一个是x86架构的，当然不兼容了 
 
- 一个是arm架构的，一个是x86架构的，当然不兼容了 
-
-# 5、[Qt & SSL, Handshake failed](https://stackoverflow.com/questions/21636728/qt-ssl-handshake-failed)
-
+## 5、[Qt & SSL, Handshake failed](https://stackoverflow.com/questions/21636728/qt-ssl-handshake-failed)
 使用qwebview直接打开https网页报错，但是中间跳转就不会报错。
 
-# 6、如何由QString转化为char数组
-
+## 6、如何由QString转化为char数组
 ```
 QString str;
 char* ch;
@@ -36,8 +30,7 @@ std::string str = qstr.toStdString();
 const char* ch = str.c_str();
 ```
 
-# 7、 error: ‘void QTimer::timeout()’ is protected within this context connect(timer, &QTimer::timeout, this, &RelayController::onTimeout); 
-
+## 7、 error: ‘void QTimer::timeout()’ is protected within this context connect(timer, &QTimer::timeout, this, &RelayController::onTimeout); 
 ```
 使用新风格会报错。
 
@@ -47,21 +40,19 @@ connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
 //connect(timer, &QTimer::timeout, this, &RelayController::onTimeout);
 ```
 
-# 8、close和hide区别
-
+## 8、close和hide区别
 那么close和hide区别就很明显了：
 hide只是隐藏窗体。不会发送任何信号。
 close一般也是隐藏窗口。但是它会发送QCloseEvent事件。你可以重写void QWidget::closeEvent(QCloseEvent * event) [virtual protected]，可以隐藏widget或者不隐藏。Qt::WA_DeleteOnClose标志还会影响窗体在内存中的状态，如果设置了该标志，窗体就会被删除，而hide则不会。最后主窗体的close会导致整个程序的退出，而hide明显不会。
 
 PS：再对一个窗体调用close函数后，如果再调用show()，这个窗体又会被显示出来。
 
-# 9、QOBject及其之类不允许复制拷贝
+## 9、QOBject及其之类不允许复制拷贝
 QOject 中没有提供一个拷贝构造函数和赋值操作符给外界使用，其实拷贝构造和赋值的操作都是已经声明了的，但是它们被使用了Q_DISABLE_COPY () 宏放在了private区域。因此所有继承自QObject的类都使用这个宏声明了他们的拷贝构造函数和赋值操作符为私有。 
 
 试想如果我们有一个QPushButton对象btnSubmit，如果我们可以复制出一个和btnSubmint完全一样的button对象，那么新的button对象的名字应该是什么？如果也叫btnSubmit，当我们给其中的btnSubmit接收事件或发出信号时，系统如何区分把事件由哪个button对象接收，或者哪个对象发送了信号？ 
 
-# 10、QT获取系统屏幕分辨率
-
+## 10、QT获取系统屏幕分辨率
 ```
 QDesktopWidget* desktopWidget = QApplication::desktop();
 
@@ -72,21 +63,18 @@ QRect deskRect = desktopWidget->availableGeometry();
 QRect screenRect = desktopWidget->screenGeometry();
 ```
 
-# 11、[Qt如何去掉按钮等控件的虚线框（焦点框](https://www.cnblogs.com/findumars/p/5836143.html)
-
- pushButton->setFocusPolicy(Qt::NoFocus) 
-
- pushButton->setStyleSheet("outline: none");  
-
+## 11、[Qt如何去掉按钮等控件的虚线框（焦点框](https://www.cnblogs.com/findumars/p/5836143.html)
+```
+pushButton->setFocusPolicy(Qt::NoFocus) 
+pushButton->setStyleSheet("outline: none");  
 pushButton->setStyleSheet("padding: -1"); 
+playVideoButton->setEnable(false); 
+```
 
-  playVideoButton->setEnable(false); 
-
-# 12、[Qt 中QString 字符串操作：连接、组合、替换、去掉空白字符](https://www.cnblogs.com/meime7/p/6432529.html)
-
+## 12、[Qt 中QString 字符串操作：连接、组合、替换、去掉空白字符](https://www.cnblogs.com/meime7/p/6432529.html)
 使用加号或者str = QString("%1 was born in %2.").arg("Joy").arg(1993); 
 
-# 13、键盘事件案例
+## 13、键盘事件案例
 ```
 void MainForm::keyPressEvent(QKeyEvent *ev)
 {
@@ -110,16 +98,12 @@ void MainForm::keyReleaseEvent(QKeyEvent *ev)
     QWidget::keyReleaseEvent(ev);
 ```
 
-# 14、boder:none问题
-
+## 14、boder:none问题
 如果在一个按钮的样式中添加了这个属性，图片会变得有点细和颜色淡。
-
 网上搜索了很多也找不到结果。
-
 PS：border:none和border:0的区别。
 
-# 15、error:crosses initialization of ...
-
+## 15、error:crosses initialization of ...
 ```
 switch(x) {
 case 1:
@@ -132,8 +116,7 @@ default:
 上面tmp的作用域是switch整个区域，如果x!=1就会出现tmp未定义错误，所以要么添加大括号，要么写在外面声明。
 ```
 
-# 16、Linux下QT执行shell命令
-
+## 16、Linux下QT执行shell命令
 ```
 #inlucde <QProcess>
 
@@ -163,7 +146,7 @@ t2.append("C:/aa.dll");
 int bret = pro.execute(t1,t2); 
 ```
 
-# 17、Qt中控件new之后需不需要delete的问题
+## 17、Qt中控件new之后需不需要delete的问题
 这里也牵涉到内存管理机制
 
 可以参考文章：https://blog.csdn.net/Aidam_Bo/article/details/85698862
@@ -198,69 +181,23 @@ int main(int argc, char *argv[])
 
 卧槽无情，写代码要注意了，并不是所有在类中new的对象就是它的子类，检查检查检查。
 
- 纯c++的问题，其实基本上Qt已经自成一个阵营了。c++里面new出来的，你自己需要delete置空，但是Qt只要继承QObject，也就是说在对象树系统里，一般只要你delete ui，那么很多new出来的，你自己不用管的，Qt核心会帮你完成。而纯c++不行 。
+纯c++的问题，其实基本上Qt已经自成一个阵营了。c++里面new出来的，你自己需要delete置空，但是Qt只要继承QObject，也就是说在对象树系统里，一般只要你delete ui，那么很多new出来的，你自己不用管的，Qt核心会帮你完成。而纯c++不行 。
 
-
-
-# 18、qt编译解决-make[1]：lrelease：未找到命令
-
+## 18、qt编译解决-make[1]：lrelease：未找到命令
 ts文件翻译命令，需要安装。
-
 apt install -y qt5-linguist
 
-# 19、defaultServiceProvider::requestService(): no service found for - "org.qt-project.qt.camera"
-发现在
+## 19、defaultServiceProvider::requestService(): no service found for - "org.qt-project.qt.camera"
+发现在“彩虹屁，网络流行语，饭圈常用语，最早流行起来的时间是在2017年。意思为粉丝们花式吹捧自己的偶像，浑身是宝，全是优点，字面意思为就连偶像放屁都能把它出口成章面不改色的吹成是彩虹。”
 
-
-
-
-
-
-“彩虹屁，网络流行语，饭圈常用语，最早流行起来的时间是在2017年。意思为粉丝们花式吹捧自己的偶像，浑身是宝，全是优点，字面意思为就连偶像放屁都能把它出口成章面不改色的吹成是彩虹。”
-
-## 提示Windows已遇到关键问题一分钟后自动重新启动怎么办
-
-> sfc/verifyonly   扫描问题
->
->  sfc/scannow    修复问题
->
->  shutdown-a 命令 强制取消重启 
-
-
-
-
-
-
-
-
-
-
-
-https://github.com/flaneur2020/pua-lang
-https://flaneur2020.github.io/pua-lang/?s=BQRgDABA1BBMCUEBUEDMkYFYg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 20、QSystemTrayIcon::setVisible: No Icon set
+原因是在继承QSystemTrayIcon类后，里面单独创建了QSystemTrayIcon对象，只给创建的对象添加了图标，然后在调用类的时候还使用了show函数。
+```
+app = QApplication(sys.argv)
+systemTrayIcon = Ui_SystemTrayIcon()
+#systemTrayIcon.show()  # 注释掉就可以了
+sys.exit(app.exec_())
+```
 
 
 

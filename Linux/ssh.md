@@ -421,3 +421,11 @@ ssh端口设置是否正确
 防火墙策略是否合理
 
 既然ssh都不通，那就另想版本，使用跳板进行拷贝，即使用第三台机器进行中转拷贝。
+
+## 14、永久开启ssh调试
+```
+/home/mobaxterm: ssh root@172.22.16.81
+ssh: connect to host 172.22.16.81 port 22: Connection refused
+```
+修改 /etc/ssh/sshd_config 文件，将 ListenAddress 修改为 ListenAddress 0.0.0.0
+重启 ssh 服务, /etc/init.d/ssh restart

@@ -204,12 +204,48 @@ make install
 
 搞定。
 
+## 9、升级pip失败
+```
+升级pip
+python -m pip install --upgrade pip
 
+清除pip缓存
+python -m pip cache purge
 
+重新安装pip
+python -m ensurepip --upgrade
 
+pypi官网安装
+pip install pip-23.0.1-py3-none-any.whl
+python -m pip install --upgrade pip-23.0.1-py3-none-any.whl
+```
+全都失败了，报错是：
+```
+  File "C:\Users\User\AppData\Roaming\Python\Python37\site-packages\pip\_vendor\distlib\scripts.py", line 242, in _write_script
+    launcher = self._get_launcher('t')
+  File "C:\Users\User\AppData\Roaming\Python\Python37\site-packages\pip\_vendor\distlib\scripts.py", line 390, in _get_launcher
+    raise ValueError(msg)
+ValueError: Unable to find resource t64.exe in package pip._vendor.distlib
+```
+百度给了正确的答案：https://blog.csdn.net/changyana/article/details/122449120
 
+使用pip install --user --upgrade pip成功升级
 
+## 10、--user参数选项
+--user参数是pip命令的一个选项，用于将Python包安装到当前用户的主目录下，而不是全局安装到系统目录中。这意味着，使用--user选项安装的Python包只对当前用户可用，而不是对整个系统可用。
 
+使用--user选项安装Python包的语法如下：
+```
+pip install <package-name> --user
+```
 
+例如，要使用--user选项安装numpy包，可以使用以下命令：
+```
+pip install numpy --user
+```
+
+这将会将numpy包安装到当前用户的主目录下，而不是全局安装到系统目录中。这对于在共享计算机上使用Python时非常有用，因为它允许您在不需要管理员权限的情况下安装Python包。
+
+需要注意的是，使用--user选项安装的Python包可能会与全局安装的Python包发生冲突，因此建议在使用--user选项安装Python包时，先检查当前用户的Python环境中是否已经安装了相同的包。
 
 
