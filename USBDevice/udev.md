@@ -348,3 +348,10 @@ echo -e "idVendor = ${idVendor} \nidProduct = ${idProduct}" > /home/admin/vpid.t
 ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", RUN+="/home/admin/get_udev_vpid.sh %s{idVendor} $sysfs{idProduct}"
 ```
 
+## 7、写个程序检测我们的设备插拔
+参考：https://blog.csdn.net/fjb2080/article/details/5009791
+
+其中具体代码的API可参考libudev Reference Manual的说明：http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/ch01.html
+
+代码见：D:\Github\Storage\c++\udev\libudev\detect_hotplug.c
+

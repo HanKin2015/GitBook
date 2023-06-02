@@ -165,15 +165,16 @@ Python装饰器是一种函数，它可以接受另一个函数作为输入，�
 
 代码见：D:\Github\Storage\python\study\decorator\decorator_example.py
 
+## 23、变量作用域
+参考：https://blog.csdn.net/weixin_45479740/article/details/125906628
 
+注：在使用global修饰后变量是不可以直接赋值的，直接赋值会报错
 
+使用nonlocal修饰变量后，变量不会直接修改全局变量的而是修改函数体父级函数内部的同名变量，而nonlocal关键字修饰变量后标识该变量是上一级函数中的局部变量，如果上一级函数中不存在该局部变量，nonlocal位置会发生错误（最上层的函数使用nonlocal修饰变量必定会报错）。
 
+locals()可以获取所有的局部变量，也可以像global()获取变量的值，但是不能修改变量的值，但是全局范围可以修改
 
-
-
-
-
-
+vars(Object)：以字典的形式返回一个对象里面的所有变量，如果没有参数，就和locals()的功能一样
 
 
 

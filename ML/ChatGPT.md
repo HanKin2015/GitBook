@@ -16,7 +16,7 @@ You must sign up for an OpenAI account before continuing (error=signup_required)
 ## 2、解决 OpenAI's API is not available in your country
 首先分为两种情况：
 
-一、有魔法网络，但是还出现这种问题
+一、有魔法网络，但是还出现这种问题（注意可能是选择了香港的节点）
 首先测试油管，排除魔法失效问题
 使用魔法的地区选择日本 (原因：不可抗力)
 
@@ -32,3 +32,19 @@ https://chat.forchange.cn/
 
 ## 4、不错但是需要翻墙
 https://poe.com/
+
+## 5、图片美化
+https://github.com/Arthurzhangsheng/CodeFormer_GUI
+
+## 6、风口浪尖
+https://www.modb.pro/db/573357
+
+
+
+
+
+
+
+
+
+

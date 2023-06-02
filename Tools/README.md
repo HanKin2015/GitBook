@@ -107,4 +107,6 @@ KMSAuto Net - Windows 操作系统自动 KMS 激活程序。
 
 桌面录屏小工具：https://github.com/fandesfyf/JamTools
 
-
+Todo List：https://www.ricocc.com/todo/
+我爱工作：https://ilove.works/
+GifFox电子书搜索：https://www.giffox.com/

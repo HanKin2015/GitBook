@@ -114,15 +114,69 @@ INSTALL(TARGETS hello hello_static LIBRARY DESTINATION /usr/lib ARCHIVE DESTINAT
 ## 4、实战
 代码见：D:\Github\Storage\c++\cmake
 
+- 不区分大小写
 
+## 5、option和set区别
+都是用来定义变量的命令，但是option命令用于定义一个布尔类型的变量，一个开关选项，用户可以通过命令行或者图形界面来设置这个选项的值；
+set命令用于定义一个普通类型的变量。
 
+## 6、find_package命令
+find_package 是 CMake 中的一个命令，用于查找和加载外部依赖库。它的语法如下：
 
+find_package(<package> [version] [EXACT] [QUIET] [MODULE] [REQUIRED] [[COMPONENTS] [components...]])
+其中，<package> 表示要查找的依赖库的名称，version 表示要查找的依赖库的版本号，EXACT 表示要求精确匹配版本号，QUIET 表示不输出查找信息，MODULE 表示只查找 CMake 模块文件，REQUIRED 表示如果找不到依赖库则停止 CMake 构建过程，[COMPONENTS] 表示要查找的依赖库的组件。
 
+find_package 命令会在系统中查找指定名称的依赖库，并设置相关变量，以便在后续的 CMake 构建过程中使用。通常情况下，find_package 命令会在系统路径中查找依赖库，如果找不到，则可以通过设置 CMAKE_PREFIX_PATH 变量来指定依赖库的安装路径。
+```
+find_package(Threads REQUIRED)
+```
 
+## 7、CMAKE_BUILD_TYPE变量
+```
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+```
 
+这句代码是一个 CMake 中的条件语句，用于判断当前 CMake 构建的类型是否为 Debug。
 
+在 CMake 中，可以通过设置 CMAKE_BUILD_TYPE 变量来指定构建类型，常见的构建类型包括 Debug、Release、RelWithDebInfo 和 MinSizeRel。Debug 类型的构建通常用于开发和调试阶段，包含调试信息和不进行优化的代码，而 Release 类型的构建则用于发布阶段，包含优化后的代码和不包含调试信息的代码。
 
+因此，当 CMAKE_BUILD_TYPE 变量的值为 Debug 时，条件语句 if(CMAKE_BUILD_TYPE STREQUAL "Debug") 的判断结果为真，其后面的代码块将会被执行。这样可以在 Debug 构建时进行一些特殊的处理，例如开启调试信息、关闭优化等。
 
+## 8、代码覆盖率
+```
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
+    append_coverage_compiler_flags()
+    setup_target_for_coverage_gcovr_xml(
+        NAME gcovr_xml
+        EXECUTABLE ctest -V -j ${PROCESSOR_COUNT}
+        DEPENDENCIES ${PROJECT_NAME}_shared
+        BASE_DIRECTORY "${PROJECT_SOURCE_DIR}"
+        EXCLUDE "tests/*"
+    )
+    setup_target_for_coverage_gcovr_html(
+        NAME gcovr_html
+        EXECUTABLE ctest -V -j ${PROCESSOR_COUNT}
+        DEPENDENCIES ${PROJECT_NAME}_shared
+        BASE_DIRECTORY "${PROJECT_SOURCE_DIR}"
+        EXCLUDE "tests/*"
+    )
+else()
+    message(WARNING "Code coverage results with an optimised (non-Debug) build may be misleading")
+endif()
 
+# unit tests
+enable_testing()
+add_subdirectory(tests)
+```
 
+## 9、configure_file命令
+configure_file 是 CMake 中的一个命令，用于将一个文件作为模板，根据用户定义的变量值生成一个新的文件。它的语法如下：
+
+configure_file(<input> <output> [COPYONLY] [ESCAPE_QUOTES] [@ONLY])
+其中，<input> 表示模板文件的路径，<output> 表示生成的文件的路径，COPYONLY 表示只复制文件而不进行变量替换，ESCAPE_QUOTES 表示对生成的文件中的双引号进行转义，@ONLY 表示只替换 @ 符号包含的变量。
+
+configure_file 命令会读取模板文件，并根据用户定义的变量值替换模板文件中的变量，然后将生成的文件保存到指定的路径中。在模板文件中，可以使用 ${VAR} 的形式来引用变量，其中 VAR 是用户定义的变量名。
+
+configure_file 命令通常用于生成配置文件，例如将一个包含变量的模板文件复制到指定的位置，并将其中的变量替换为用户定义的值，以便在程序运行时读取配置信息。
 

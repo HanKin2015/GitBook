@@ -59,3 +59,31 @@ https://mp.weixin.qq.com/s/UGFtM1Toue9B4NMdCss-OA
 https://www.industrial-bigdata.com/Title
 https://www.dcic-china.com/competitions/10060/datasets
 
+https://blog.csdn.net/CSDNhuaong/article/details/127141000
+
+## 队名
+泰裤辣队
+嘴巴佳人成双队
+醉把佳人成双队
+旧厂街地头蛇队
+干饭不想排队
+什么都队
+我和评委站一队
+香肠派队
+你还爱我对不队
+什么档次和我做（作）队
+什么档次和我排一队
+啊对对队
+我邀请你看看这些队
+海底小纵队
+啦啦队
+认真的草率队
+精神小伙成双队
+下岗工人再就业队
+你是闰土我是猹队
+发际线和我作队
+干就完了奥利给队
+素质教育漏网之鱼队
+一给我里giaogiao队
+铁道游击队
+为爱拼搏队
