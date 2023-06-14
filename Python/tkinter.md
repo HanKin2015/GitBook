@@ -153,3 +153,7 @@ pyinstaller -F -w copy_tool.py D:\Github\Storage\python\libary\entrywithplacehol
 
 最终发现ftp.mkd不能创建多层目录，利用ftp.pwd()和ftp.dir()函数显示当前目录路径。
 一定要增加捕获异常。
+
+使用pyqt5编写的程序也会存在这个问题，后面在https://blog.csdn.net/qq_47452807/article/details/124233469网址发现人家为啥能直接给出错误信息，以为是windows的错误信息服务没有打开，发现按照修改了还是不行，win7和win10都试过。https://jingyan.baidu.com/article/fc07f9895d0a2512ffe51927.html
+
+还是老老实实通过去掉w参数进行排查吧。

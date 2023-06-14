@@ -13,7 +13,8 @@ https://docs.microsoft.com/en-us/cpp/sanitizers/asan?view=msvc-160
 ASAN ，全称 AddressSanitizer，也即地址消毒技术。可以用来检测内存问题，例如缓冲区溢出或对悬空指针的非法访问等。根据谷歌的工程师介绍 ASAN 已经在 chromium 项目上检测出了300多个潜在的未知bug，而且在使用 ASAN 作为内存错误检测工具对程序性能损耗也是及其可观的。根据检测结果显示可能导致性能降低 2 倍左右，比 Valgrind （官方给的数据大概是降低 10-50 倍）快了一个数量级。而且相比于 Valgrind 只能检查到堆内存的越界访问和悬空指针的访问， ASAN 不仅可以检测到堆内存的越界和悬空指针的访问，还能检测到栈和全局对象的越界访问。这也是 ASAN 在众多内存检测工具的比较上出类拔萃的重要原因，基本上现在 C/C++ 项目都会使用 ASAN 来保证产品质量，尤其是大项目中更为需要。
 
 ## 2、举例使用
-demo见：D:\Github\Storage\c++\覆盖率和内存泄露工具\address_sanitizer
+demo见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer
+infect vt.传染;使携带病菌;使感染(计算机病毒);使感染（某种感情）
 ```
 [root@ubuntu0006:/media/hankin/vdb/perl] #vim address_deinfect.cpp
 [root@ubuntu0006:/media/hankin/vdb/perl] #g++ address_deinfect.cpp

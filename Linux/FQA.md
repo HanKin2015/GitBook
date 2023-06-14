@@ -293,17 +293,116 @@ unalias rm
 
 发现被人写在了/etc/profile中，需要删除对应的行
 
+## 21、时间不匹配
+```
+[Tue Jun 13 16:13:30 2023] usb 2-3.2: USB disconnect, device number 96
+[Tue Jun 13 16:13:30 2023] usb 2-3.2.2: USB disconnect, device number 97
+[Tue Jun 13 16:13:31 2023] usb 2-3.2: new high-speed USB device number 98 using xhci_hcd
+[Tue Jun 13 16:13:31 2023] usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
+[Tue Jun 13 16:13:31 2023] usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+[Tue Jun 13 16:13:31 2023] usb 2-3.2: Product: USB 2.0 Hub
+[Tue Jun 13 16:13:31 2023] hub 2-3.2:1.0: USB hub found
+[Tue Jun 13 16:13:31 2023] hub 2-3.2:1.0: 4 ports detected
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: new full-speed USB device number 99 using xhci_hcd
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: Product: SDSES Custom HID
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
+[Tue Jun 13 16:13:32 2023] usb 2-3.2.2: SerialNumber: 6D78F9D00B37
+[Tue Jun 13 16:13:32 2023] hid-generic 0003:261A:000C.006B: hiddev0,hidraw0: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
+[Tue Jun 13 16:13:32 2023] input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.006C/input/input82
+[Tue Jun 13 16:13:32 2023] hid-generic 0003:261A:000C.006C: input,hidraw1: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
+[Tue Jun 13 16:13:32 2023] hid-generic 0003:261A:000C.006D: hiddev0,hidraw2: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
 
+root@hankin:~# date
+Tue Jun 13 14:59:30 CST 2023
 
+root@hankin:~# journalctl -f
+-- Logs begin at Mon 2023-06-12 05:43:53 CST. --
+Jun 13 15:00:07 hankin kernel: usb 2-3.2: USB disconnect, device number 98
+Jun 13 15:00:07 hankin kernel: usb 2-3.2.2: USB disconnect, device number 99
+Jun 13 15:00:08 hankin kernel: usb 2-3.2: new high-speed USB device number 100 using xhci_hcd
+Jun 13 15:00:08 hankin kernel: usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
+Jun 13 15:00:08 hankin kernel: usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+Jun 13 15:00:08 hankin kernel: usb 2-3.2: Product: USB 2.0 Hub
+Jun 13 15:00:08 hankin kernel: hub 2-3.2:1.0: USB hub found
+Jun 13 15:00:08 hankin kernel: hub 2-3.2:1.0: 4 ports detected
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: new full-speed USB device number 101 using xhci_hcd
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: Product: SDSES Custom HID
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
+Jun 13 15:00:09 hankin kernel: usb 2-3.2.2: SerialNumber: 6D78F9D00B37
+Jun 13 15:00:09 hankin kernel: hid-generic 0003:261A:000C.006E: hiddev0,hidraw0: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
+Jun 13 15:00:09 hankin kernel: input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.006F/input/input83
+Jun 13 15:00:09 hankin kernel: hid-generic 0003:261A:000C.006F: input,hidraw1: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
+Jun 13 15:00:09 hankin kernel: hid-generic 0003:261A:000C.0070: hiddev0,hidraw2: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
+```
+这是为什么呢？？？
 
+参考：https://blog.csdn.net/s_alted/article/details/129936086
+```
+root@hankin:~# cat /var/log/kern.log
+Jun 13 15:00:07 adesk kernel: [2349004.967206] usb 2-3.2: USB disconnect, device number 98
+Jun 13 15:00:07 adesk kernel: [2349004.967215] usb 2-3.2.2: USB disconnect, device number 99
+Jun 13 15:00:08 adesk kernel: [2349006.278438] usb 2-3.2: new high-speed USB device number 100 using xhci_hcd
+Jun 13 15:00:08 adesk kernel: [2349006.366803] usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
+Jun 13 15:00:08 adesk kernel: [2349006.366808] usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+Jun 13 15:00:08 adesk kernel: [2349006.366811] usb 2-3.2: Product: USB 2.0 Hub
+Jun 13 15:00:08 adesk kernel: [2349006.367456] hub 2-3.2:1.0: USB hub found
+Jun 13 15:00:08 adesk kernel: [2349006.367483] hub 2-3.2:1.0: 4 ports detected
+Jun 13 15:00:09 adesk kernel: [2349006.655186] usb 2-3.2.2: new full-speed USB device number 101 using xhci_hcd
+Jun 13 15:00:09 adesk kernel: [2349006.760692] usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
+Jun 13 15:00:09 adesk kernel: [2349006.760698] usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jun 13 15:00:09 adesk kernel: [2349006.760702] usb 2-3.2.2: Product: SDSES Custom HID
+Jun 13 15:00:09 adesk kernel: [2349006.760705] usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
+Jun 13 15:00:09 adesk kernel: [2349006.760707] usb 2-3.2.2: SerialNumber: 6D78F9D00B37
+Jun 13 15:00:09 adesk kernel: [2349006.762022] hid-generic 0003:261A:000C.006E: hiddev0,hidraw0: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
+Jun 13 15:00:09 adesk kernel: [2349006.762903] input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.006F/input/input83
+Jun 13 15:00:09 adesk kernel: [2349006.815795] hid-generic 0003:261A:000C.006F: input,hidraw1: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
+Jun 13 15:00:09 adesk kernel: [2349006.816631] hid-generic 0003:261A:000C.0070: hiddev0,hidraw2: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
+```
+发现文件上面时间是对的上的。
 
+这个 -T 参数可以直接转换为人类可读时间（即年月日小时分钟秒），但是不一定精确，如果系统挂起或者恢复之后，日志使用的时间源是不会更新的
+关于dmesg -T 时间戳不精确的情况，我查了好多资料都说没有解决方法。
+https://www.cnblogs.com/hugetong/p/12222470.html
+https://www.jb51.cc/linux/400861.html
 
+chatgpt回答：
+dmesg 命令显示的是内核日志，而 date 命令显示的是系统时间。这两个时间戳可能会有一些微小的差异，因为它们是由不同的系统组件维护的。
+内核日志中的时间戳是由内核维护的，它记录了内核中发生的事件的时间。而系统时间是由系统时钟维护的，它是用户空间程序使用的时间。
+如果您发现 dmesg 命令和 date 命令显示的时间戳之间存在较大的差异，那么可能是因为系统时钟出现了问题。您可以尝试重新同步系统时钟，例如使用 ntpdate 命令或者手动设置时间。
 
+发现好像真的没有解决办法，唯有重启大法：
+如果您的系统上没有 ntpdate 命令，您可以尝试使用 timedatectl 命令来同步系统时间。以下是使用 timedatectl 命令同步系统时间的步骤：
+检查当前系统时间和时区：
+```
+timedatectl
+```
+如果时区不正确，可以使用以下命令设置正确的时区：
+```
+timedatectl set-timezone <timezone>
+```
 
+其中 <timezone> 是您所在的时区，例如 Asia/Shanghai。
 
+启用网络时间协议（NTP）：
+```
+timedatectl set-ntp true
+```
 
+手动同步系统时间：
+```
+timedatectl set-time "YYYY-MM-DD HH:MM:SS"
+```
+其中 "YYYY-MM-DD HH:MM:SS" 是您想要设置的时间。
 
-
+检查系统时间是否已经同步：
+```
+timedatectl
+```
+如果输出中的 System clock synchronized 字段为 yes，则表示系统时间已经同步。
 
 
 

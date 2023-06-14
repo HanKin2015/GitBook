@@ -267,5 +267,68 @@ cd $LROOT
 test -n "${TMOUT}" || export TMOUT=600
 ```
 
-## 9、
+## 9、Bash与Dash的概念及区别
+![](https://img-blog.csdn.net/20180717114409303?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTIxMjc3Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+Shell的多样性下的bash与dash
+
+我们可能会问：既然shell是解释命令的工具，那么这个工具可不可以多样化呢？不同的解释工具可不可以遵从不同的规则呢？
+这是必然的咯，何况是像Linux这种开源的好东西，怎么会缺乏多样性呢？！
+所以，我们不难就理解Linux中的shell有多种类型了吧，这其中最常用的几种是Bourne shell（sh）、C shell（csh）和Korn shell（ksh）。其中三种shell各有优缺点：
+
+Bourne shell是UNIX最初使用的shell，并且在每种UNIX上都可以使用。Bourne shell在shell编程方面相当优秀，但在处理与用户的交互方面做得不如其他几种shell。
+
+Bourne Again shell，它是Linux操作系统缺省的shell，是Bourne shell的扩展，简称Bash，与Bourne shell完全向后兼容，并且在Bourne shell的基础上增加、增强了很多特性。Bash放在/bin/bash中，它有许多特色，可以提供如命令补全、命令编辑和命令历史表等功能，它还包含了很多C shell和Korn shell中的优点，有灵活和强大的编程接口，同时又有很友好的用户界面。
+所以在GNU/Linux 操作系统中的 /bin/sh 是 bash（Bourne-Again Shell）的符号链接（但是这只是比较原始的做法，现在开始有了新的做法了），也就是若脚本第一行为“#!/bin/bash”，我们使用命令：”sh script_name.sh“时是调用的bash去解释脚本；
+
+下面我们接着来看看所谓的新的改变
+Dash，GNU/Linux操作系统中的/bin/sh本是bash (Bourne-Again Shell) 的符号链接，但鉴于bash过于复杂，有人把bash从NetBSD移植到Linux并更名为dash (Debian Almquist Shell)，并建议将/bin/sh指向它，以获得更快的脚本执行速度。Dash Shell 比Bash Shell小的多，符合POSIX标准。也就是若脚本第一行为“#!/bin/sh”，我们使用命令：”sh script_name.sh“时是调用的dash去解释脚本；
+
+Ubuntu继承了Debian，所以从Ubuntu 6.10开始默认是Dash Shell。
+
+### 9-1、实战
+为什么把参数-e都输出了呢？这不是我们想要的啊！
+
+原来是我的Ubuntu 默认的sh命令调用dash去解释一个改用bash去解释的shell script，因为dash 对echo命令的解释标准中不支持 -e 参数，故出错！
+
+```
+[root@ubuntu0006:/media/hankin/vdb/study/log/shell] #dash bash_dash.sh
+-e he   jian
+hello   world
+[root@ubuntu0006:/media/hankin/vdb/study/log/shell] #bash bash_dash.sh
+he      jian
+hello\tworld
+[root@ubuntu0006:/media/hankin/vdb/study/log/shell] #cat bash_dash.sh
+#/bin/sh
+
+echo -e "he\tjian"
+echo "hello\tworld"
+```
+
+## 10、zsh
+想知道你的系统有几种 shell：cat /etc/shells
+
+Zsh 是一个 Linux 下强大的 shell, 由于大多数 Linux 产品安装，以及默认使用bash shell, 但是丝毫不影响极客们对 zsh 的热衷, 几乎每一款 Linux 产品都包含有 zsh，通常可以用 apt-get、urpmi 或 yum 等包管理器进行安装
+
+Zsh 具有以下主要功能
+- 开箱即用、可编程的命令行补全功能可以帮助用户输入各种参数以及选项
+- 在用户启动的所有 shell 中共享命令历史
+- 通过扩展的文件通配符，可以不利用外部命令达到 find 命令一般展开文件名
+- 改进的变量与数组处理
+- 在缓冲区中编辑多行命令
+- 多种兼容模式，例如使用 / bin/sh 运行时可以伪装成 Bourne shell
+- 可以定制呈现形式的提示符；包括在屏幕右端显示信息，并在键入长命令时自动隐藏
+- 可加载的模块，提供其他各种支持：完整的 TCP 与 Unix 域套接字控制，FTP 客户端与扩充过的数学函数
+- 完全可定制化
+
+之前是因为看到这篇文章：终极 Shell——Zsh 才选择使用 zsh，被它的自动完成、补全功能吸引了。官网：www.zsh.org
+选择 oh-my-zsh, oh-my-zsh 是基于 zsh 的功能做了一个扩展，方便的插件管理、主题自定义，以及漂亮的自动完成效果。
+在 Github 上找关于 zsh 的项目时发现的，试用了一下觉得很方便，不用像上面文章里面提到的那么复杂，配置一些插件的名称即可使用相应的功能。
+官网：https://github.com/robbyrussell/oh-my-zsh
+
+更详细配置见：https://zhuanlan.zhihu.com/p/514153374
+
+
+
+
 

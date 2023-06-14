@@ -33,8 +33,11 @@ OCR （Optical Character Recognition，光学字符识别）是指电子设备�
 
 2020/01/13星期一（阴晴）
 
-阿里巴巴天池：[首页](https://tianchi.aliyun.com/home)/[天池实验室](https://tianchi.aliyun.com/notebook-ai)/【机器学习入门】拥抱人工智能，从机器学习开始
-
+2023/06/06星期二（阴晴）
+- LintCode：https://www.lintcode.com/course/list/?tagId=863&type=1&chargeStatus=-1
+- 阿里巴巴天池：[首页](https://tianchi.aliyun.com/home)/[天池实验室](https://tianchi.aliyun.com/notebook-ai)/【机器学习入门】拥抱人工智能，从机器学习开始
+- 数据科学：
+- 比赛：
 
 Linux的设计艺术
 

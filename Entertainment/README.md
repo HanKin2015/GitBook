@@ -170,4 +170,20 @@ Tigergraph：是一家做图形处理的公司，外企，薪资待遇在长沙�
 
 
 
+小空调：https://wxurl.cn/PME
 
+小电视：https://wxurl.cn/36C
+
+小掌机：https://wxurl.cn/U0T
+
+小霸王：http://yx.1dly.cn/
+
+# 下载外国软件的好地方
+https://sourceforge.net/
+https://www.fosshub.com/
+
+# 免费观看大量影视综艺
+http://zyplayer.fun/
+
+# 壁纸
+https://ss.netnr.com/wallpaper

@@ -258,4 +258,17 @@ https://github.com/RowTeam/SharpDecryptPwd
 https://github.com/HyperSine/how-does-navicat-encrypt-password
 https://www.freesion.com/article/93941500785/
 
+## 29、xps文件
+xps是 XML Paper Specification的简称，是电子文件格式，可以使用Microsoft XPS打开。
+
+xps是微软公司开发的一种文档保存与查看的规范。这个规范本身描述了这种格式以及分发、归档、显示以及处理 XPS 文档所遵循的规则。最为显著的特点是，XPS 所用的置标语言是 WPF所用的 XAML的一个子集，因此显示 Windows应用程序所用的方法可以用于 XPS 文档。 XPS 是一个静态文档格式，其本身不包括类似于 PDF 所具有的动态特性。 XPS是微软推出的一种文档记录格式工具，即XPS Viewer。它可以打开xps文件，和pdf类似,但不能打开PDF。
+
+XPS Viewer 这个工具被集成到了vista和win7操作系统中，如果你的系统是Vista或win7,那么你就可以直接浏览该XPS文件，其他系统需要下载安装XPS Viewer软件，这是微软为了对抗pdf的一种类似的新格式，不过不能用PDF阅读器打开。
+
+对于其它操作系统的用户来说，就需要下载XPS Viewer这款软件：首先在百度搜索框中输入并下载“XPS Viewer”，下载完成后进行安装，其过程很简单，直接点下一步就可正确安装。
+
+
+
+
+
 

@@ -290,6 +290,8 @@ Linux version 4.4.0-210-generic (buildd@lgw01-amd64-009) (gcc version 5.4.0 2016
 
 因此，include/linux目录中的头文件只能由内核代码和内核模块使用，而include/uapi/linux目录中的头文件可以由用户空间的应用程序和库使用。这种分离可以帮助保持内核和用户空间的隔离，同时也可以提供一种清晰的方式来定义内核和用户空间之间的接口。
 
+## 13、向dmesg内核日志中写日志
+echo TEST > /dev/kmsg
 
 
 

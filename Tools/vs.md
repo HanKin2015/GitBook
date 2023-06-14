@@ -173,3 +173,5 @@ Tools>Options>Text Editor>All Languages>Tabs>
 
 推荐Consolas字体
 
+## 20、tab键改为4个空格
+工具-》选项-》文本编辑器-》C/C++-》制表符-》插入空格

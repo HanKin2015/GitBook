@@ -1,6 +1,9 @@
 # 正则表达式
 
 详情代码见：D:\Github\Storage\python\regular_expression
+教程地址：https://www.runoob.com/regexp/regexp-usage-summary.html
+测验工具：https://www.runoob.com/try/try-regex.php
+测试工具：https://c.runoob.com/front-end/854/
 
 ## 1、简介
 正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。

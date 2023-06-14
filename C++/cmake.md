@@ -172,11 +172,106 @@ add_subdirectory(tests)
 
 ## 9、configure_file命令
 configure_file 是 CMake 中的一个命令，用于将一个文件作为模板，根据用户定义的变量值生成一个新的文件。它的语法如下：
+```
+configure_file(input_file output_file [COPYONLY] [ESCAPE_QUOTES] [@ONLY])
+```
+其中，input_file 是模板文件的路径，output_file 是生成的文件的路径。COPYONLY 参数表示只复制文件，不进行变量替换；ESCAPE_QUOTES 参数表示对变量值中的引号进行转义；@ONLY 参数表示只替换 @VAR@ 形式的变量，不替换 ${VAR} 形式的变量。
 
-configure_file(<input> <output> [COPYONLY] [ESCAPE_QUOTES] [@ONLY])
-其中，<input> 表示模板文件的路径，<output> 表示生成的文件的路径，COPYONLY 表示只复制文件而不进行变量替换，ESCAPE_QUOTES 表示对生成的文件中的双引号进行转义，@ONLY 表示只替换 @ 符号包含的变量。
+在模板文件中，可以使用 @VAR@ 或 ${VAR} 的形式来表示变量。例如，假设有一个模板文件 config.h.in，内容如下：
+```
+#define VERSION "@PROJECT_VERSION@"
+```
+在 CMakeLists.txt 文件中，可以定义变量 PROJECT_VERSION，然后使用 configure_file 命令生成一个新的文件 config.h，代码如下：
+```
+set(PROJECT_VERSION "1.0.0")
+configure_file(config.h.in config.h)
+```
 
-configure_file 命令会读取模板文件，并根据用户定义的变量值替换模板文件中的变量，然后将生成的文件保存到指定的路径中。在模板文件中，可以使用 ${VAR} 的形式来引用变量，其中 VAR 是用户定义的变量名。
+执行上述代码后，会生成一个新的文件 config.h，内容如下：
+```
+#define VERSION "1.0.0"
+```
+这样就可以在代码中使用 #include "config.h" 来引用版本号了。
 
-configure_file 命令通常用于生成配置文件，例如将一个包含变量的模板文件复制到指定的位置，并将其中的变量替换为用户定义的值，以便在程序运行时读取配置信息。
+## 10、Makefile文件已生成，然后更改CMakeLists.txt文件会影响编译
+比如项目需要C++11标准，在CMakeLists.txt文件增加了CXX_STANDARD 11，如果直接cmake，然后make编译没有问题。但是如果先cmake，然后修改CMakeLists.txt文件删除标准，再make则会报错误。
+
+原因是：
+使用CMake生成Makefile文件后，如果您修改了CMakeLists.txt文件，再次运行make命令时，会重新执行CMake生成新的Makefile文件，因为CMakeLists.txt文件是用来生成Makefile文件的脚本文件。如果您修改了CMakeLists.txt文件，CMake会重新解析该文件并生成新的Makefile文件，这可能会导致重新编译一些文件，因为CMake可能会重新计算依赖关系。因此，建议在修改CMakeLists.txt文件后，先运行cmake命令重新生成Makefile文件，然后再运行make命令进行编译。
+
+```
+[root@ubuntu0006:~/cmake/build] #ll
+总用量 76
+drwxr-xr-x 5 root root  4096 6月   6 19:08 ./
+drwxr-xr-x 4 root root  4096 6月   6 19:08 ../
+-rw-r--r-- 1 root root 13568 6月   6 19:07 CMakeCache.txt
+drwxr-xr-x 6 root root  4096 6月   6 20:19 CMakeFiles/
+-rw-r--r-- 1 root root  1493 6月   6 19:07 cmake_install.cmake
+-rw-r--r-- 1 root root   256 6月   6 19:07 CTestTestfile.cmake
+drwxr-xr-x 2 root root  4096 6月   6 19:08 include/
+-rwxr-xr-x 1 root root 20560 6月   6 19:07 libmain.so*
+-rw-r--r-- 1 root root  5833 6月   6 19:08 Makefile
+drwxr-xr-x 3 root root  4096 6月   6 19:08 tests/
+[root@ubuntu0006:~/cmake/build] #vi ../CMakeLists.txt
+[root@ubuntu0006:~/cmake/build] #make
+-- [variable]
+-- CMAKE_BUILD_TYPE=
+-- PROJECT_SOURCE_DIR=/root/cmake
+-- PROJECT_NAME=CMakeStudy
+-- PROCESSOR_COUNT=
+-- CMAKE_CURRENT_SOURCE_DIR=/root/cmake/tests
+-- CMAKE_BINARY_DIR=/root/cmake/build
+-- PROJECT_BINARY_DIR=/root/cmake/build
+-- CMAKE_INSTALL_PREFIX=/usr/local
+-- [options]
+-- ENABLE_LIBUVC_BACKEND=ON
+-- BUILD_TESTING=ON
+-- BUILD_COVERAGE_REPORT=OFF
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /root/cmake/build
+[ 33%] Building CXX object CMakeFiles/CMakeStudy_shared.dir/mymath.cpp.o
+[ 66%] Building CXX object CMakeFiles/CMakeStudy_shared.dir/main.cpp.o
+[100%] Linking CXX shared library libmain.so
+[100%] Built target CMakeStudy_shared
+[root@ubuntu0006:~/cmake/build] #ll
+总用量 76
+drwxr-xr-x 5 root root  4096 6月   6 20:19 ./
+drwxr-xr-x 4 root root  4096 6月   6 20:19 ../
+-rw-r--r-- 1 root root 13568 6月   6 19:07 CMakeCache.txt
+drwxr-xr-x 5 root root  4096 6月   6 20:19 CMakeFiles/
+-rw-r--r-- 1 root root  1493 6月   6 19:07 cmake_install.cmake
+-rw-r--r-- 1 root root   256 6月   6 19:07 CTestTestfile.cmake
+drwxr-xr-x 2 root root  4096 6月   6 20:19 include/
+-rwxr-xr-x 1 root root 20560 6月   6 20:19 libmain.so*
+-rw-r--r-- 1 root root  5833 6月   6 20:19 Makefile
+drwxr-xr-x 3 root root  4096 6月   6 20:19 tests/
+```
+
+## 11、单测和覆盖率
+D:\Github\GitBook\gitbook\C++\gcov_lcov.md
+
+## 12、cmake set_target_properties的使用
+set_target_properties 是 CMake 中用于设置目标属性的命令。它可以用于设置编译选项、链接选项、输出路径等等。
+更多详情见：D:\Github\Storage\c++\cmake\practice4\CMakeLists.txt
+
+## 13、target_include_directories的使用
+target_include_directories 是 CMake 中用于指定目标（target）的头文件搜索路径的命令。
+```
+target_include_directories(target
+    [SYSTEM] [BEFORE]
+    <INTERFACE|PUBLIC|PRIVATE> [items1...]
+    [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
+```
+其中，target 是目标名称，可以是库或可执行文件的名称；SYSTEM 表示这些头文件是系统头文件，会被编译器以不同的方式处理；BEFORE 表示这些路径会被添加到已有的路径之前；INTERFACE 表示这些路径只会被添加到目标的接口属性中，不会被添加到目标自身的编译选项中；PUBLIC 表示这些路径会被添加到目标自身的编译选项中，同时也会被添加到目标的依赖项的编译选项中；PRIVATE 表示这些路径只会被添加到目标自身的编译选项中，不会被添加到目标的依赖项的编译选项中。
+
+## 14、target_link_libraries的使用
+target_link_libraries 是 CMake 中用于将库链接到目标文件的命令。
+```
+target_link_libraries(my_executable /usr/local/lib/libfoo.a -pthread)
+```
+这将链接 /usr/local/lib/libfoo.a 库，并将 -pthread 标志传递给链接器。
+
+
+
 

@@ -1,8 +1,6 @@
-
 # C++/C
 
 学习和膜拜：https://codechina.csdn.net/mirrors/fengbingchun/messy_test
-
 
 ## 1、isspace
 用于检查参数c是否为空格字符。
@@ -22,7 +20,6 @@ int main(int argc, char *argv[]) {
     std::cout << "uint64_t max : " << std::numeric_limits<uint64_t>::max() << std::endl;
     return 0;
 }
-
 
 结果都是：18446744073709551615
 ```
@@ -336,3 +333,11 @@ _Bool是C99新增加的关键字，长度是1，
 
 ## 21、JNI
 JNI是Java Native Interface的缩写，通过使用 Java本地接口书写程序，可以确保代码在不同的平台上方便移植。从Java1.1开始，JNI标准成为java平台的一部分，它允许Java代码和其他语言写的代码进行交互。JNI一开始是为了本地已编译语言，尤其是C和C++而设计的，但是它并不妨碍你使用其他编程语言，只要调用约定受支持就可以了。使用java与本地已编译的代码交互，通常会丧失平台可移植性。但是，有些情况下这样做是可以接受的，甚至是必须的。例如，使用一些旧的库，与硬件、操作系统进行交互，或者为了提高程序的性能。JNI标准至少要保证本地代码能工作在任何Java 虚拟机环境。
+
+## 22、CUDA
+CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的运算平台。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。 开发人员可以使用C语言来为CUDA™架构编写程序，所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。CUDA3.0已经开始支持C++和FORTRAN。
+
+## 23、Mojo语言
+新推出的Mojo语言，被宣传为多个领域中最好的：Python的易用性和清晰的语法，以及Rust的速度和内存安全。这些多少有些夸大其词。由于Mojo仍处于开发的早期阶段，用户还需要一段时间才能亲眼看到这种语言是如何达到他们的要求的。
+https://docs.modular.com/mojo/get-started.html
+Mojo的创建者，一家名为Modular的公司，提供了一个早期的在线运行环境：一个Jupyter Notebook环境，用户可以在这里运行Mojo代码并了解该语言的功能和行为。

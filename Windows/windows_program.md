@@ -67,9 +67,43 @@ KeReleaseSpinLock(&s_hookEntry.Lock, oldIrql);
 ```
 驱动中，我把cnt弄成int类型输出，虚拟机启动不起来，后面改成LONG后正常。只能解释cnt输出超了，LONG的范围更大，因为我在其他地方输出int类型了。
 
+## 6、windows GetProcAddress函数
+GetProcAddress 是 Windows API 中的一个函数，用于获取动态链接库（DLL）中导出函数的地址。它的函数原型如下：
+```
+FARPROC GetProcAddress(
+  HMODULE hModule,
+  LPCSTR lpProcName
+);
+```
+其中，hModule 参数是指向包含导出函数的 DLL 模块的句柄，可以使用 LoadLibrary 函数获取。lpProcName 参数是指向导出函数名称的指针，可以是 ANSI 字符串或 Unicode 字符串。
 
+GetProcAddress 函数返回一个指向导出函数的地址的函数指针，可以将其转换为正确的函数类型并调用该函数。如果函数不存在，则返回 NULL。
 
+使用 GetProcAddress 函数可以实现动态加载 DLL 并调用其中的函数，这在一些需要动态加载插件或扩展的应用程序中非常有用。
 
+```
+void CCImportDLL::initDLL()
+{
+    //char path_DLL[MAX_PATH] = {0};
+    //memcpy(path_DLL, h_ThisModleName, strlen(h_ThisModleName));
+    //strcat(path_DLL, "\\SS728M05_SDK.dll");
+    h_SS728M05_SDK = LoadLibrary("SS728M05_SDK.dll");
+
+    DWORD rtn = GetLastError();
+
+    if(h_SS728M05_SDK == NULL)
+    {
+        return;
+    }
+    else
+    {
+        b_LoadLibrary = true;
+
+        //ICC_HID_32
+        Test_HIDModel_P=(Test_HIDModel_DEF)GetProcAddress(h_SS728M05_SDK,"Test_HIDModel");
+    }
+}
+```
 
 
 

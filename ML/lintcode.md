@@ -1,6 +1,8 @@
 # lintcode人工智能学习
 https://www.lintcode.com/learn?dimension_id=103&level_id=104
 
+学习笔记见：D:\Github\Machine_to_DeepingLearning\Note\LintCode
+
 ## 1、Windows 系统下的环境安装配置
 Anaconda是Python的一个科学计算发行版，内置了Python和数百个Python经常会使用的库，也包括许多我们做机器学习或数据挖掘的库，包括Scikit-learn、NumPy、SciPy、Pandas等，其中可能有一些还是深度学习框架TensorFlow的依赖库。
 

@@ -529,7 +529,26 @@ https://blog.csdn.net/m0_37188294/article/details/115619510
 ## 18、使用upx进行压缩
 https://upx.github.io/
 
-后面也可以进行尝试一下。
+下载文件后解压放在一个目录，然后直接使用命令即可。
+pyinstaller office_assistant.spec --upx-dir="D:\upx-4.0.2-win64"
+
+最终还是逃不过numpy库。
+使用upx后，从318MB降到了219MB。
+另外一个文件从249MB降到了155MB。
+
+但是存在一个问题，报错qt.qpa.plugin: Could not find the Qt platform plugin "windows" in "" This ap
+解决方式：http://hk.aiuxian.com/article/p-dmovcgyq-mc.html
+
+使用 PyInstaller 打包的可执行文件，如果使用了 UPX 压缩，可能会出现依赖 Qt 插件的情况。这是因为 UPX 压缩会将可执行文件中的一些动态链接库压缩，导致运行时无法找到这些库。
+
+如果你的 PyInstaller 打包的可执行文件依赖 Qt 插件，可以尝试以下解决方法：
+- 不使用 UPX 压缩，或者使用 UPX 的 --lzma 选项，这样可以避免压缩 Qt 插件。
+- 将 Qt 插件打包到可执行文件中，可以使用 PyInstaller 的 --add-data 选项将 Qt 插件打包到可执行文件中。
+- 将 Qt 插件放到可执行文件同级目录下，这样可执行文件就可以找到 Qt 插件。
+
+需要注意的是，不同的操作系统和 Qt 版本可能需要不同的 Qt 插件，需要根据实际情况选择正确的 Qt 插件。
+
+将生成exe拷贝到upx文件夹，然后执行命令upx.exe office_assistant.exe搞笑的吧，就压缩了一点点。
 
 ## 19、python pyusb 打包exe 报错
 在调试pyusb时，发现直接python scripts.py可以正常运行，但是打包成exe， 即经过了pyinstaller -F scripts.py ./scripts.exe运行就失败，提示错误是
@@ -543,5 +562,15 @@ usb.core.NoBackendError: No backend available.
 将libusb-1.0.dll文件拷贝到C:\Windows\System32目录下，并且可以在py文件中直接调用libusb接口，并不需要进行backend指定。
 这时候打出来的包就是正常的。
 
+## 20、打包成windows安装包
+https://blog.csdn.net/xhc6666/article/details/129179497
+https://blog.csdn.net/hj960511/article/details/128220877
+
+## 21、虚拟文件打包工具(Enigma Virtual Box)9.50汉化去广告版.exe
+从927MB压缩成347MB，效果还行吧。
+
+## 22、20230609
+放弃再研究打包问题了，总之一句话，能不使用numpy就不使用numpy，使用了就接受现实。
+文件增大了，并且打开速度从原来的8秒也增加到了15秒。
 
 

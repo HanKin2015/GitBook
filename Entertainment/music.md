@@ -16,6 +16,8 @@ https://tools.liumingye.cn/music/#/artist/kAO4 （推荐）
 https://thewind.xyz/
 http://ayy.ayxhk.com（不推荐）
 https://music.y444.cn/#/?ifxdh
+http://music.jsososo.com/
+另外一个差些：http://gequdaquan.net/gqss/
 
 ## 4、
 https://mcool.appinn.me/
