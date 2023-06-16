@@ -384,6 +384,30 @@ CMocka和gtest都是流行的C语言和C++语言的单元测试框架，它们�
 
 总的来说，CMocka和gtest都是优秀的单元测试框架，它们都有自己的优点和适用场景。选择哪个框架取决于项目的具体需求和开发语言。
 
+## 6、函数规范
+```
+#include <gtest/gtest.h>
 
+// 测试用例，测试两个整数相加
+TEST(AdditionTest, PositiveNumbers) {
+  int a = 2;
+  int b = 3;
+  int result = a + b;
+  EXPECT_EQ(result, 5);
+}
 
+// 测试用例，测试两个负数相加
+TEST(AdditionTest, NegativeNumbers) {
+  int a = -2;
+  int b = -3;
+  int result = a + b;
+  EXPECT_EQ(result, -5);
+}
+
+int main(int argc, char **argv) {
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
+```
+TEST函数的两个参数可以随便写，但是需要写出实际的意义，方便区分。
 

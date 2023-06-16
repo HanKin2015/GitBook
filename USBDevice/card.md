@@ -151,3 +151,99 @@ GA467协议采用窄带物联网（NB-IoT）技术，支持长距离、低功耗
 总之，居民身份证验证安全控制模块接口技术规范是一项重要的技术规范，它规定了居民身份证与读卡设备之间的接口技术规范和安全控制要求，以确保居民身份证的安全性和可靠性。
 
 GA 467-2013确实是居民身份证验证安全控制模块接口技术规范之一，是指中国移动物联网有限公司制定的一种物联网通信协议，旨在为物联网设备提供低功耗、低成本、低复杂度的通信方案，并且支持居民身份证验证。因此，GA 467-2013和居民身份证验证安全控制模块接口技术规范是有关联的
+
+## 23、
+```
+[Tue Jun 13 22:31:00 2023] usb 2-3.2: new high-speed USB device number 116 using xhci_hcd
+[Tue Jun 13 22:31:00 2023] usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
+[Tue Jun 13 22:31:00 2023] usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+[Tue Jun 13 22:31:00 2023] usb 2-3.2: Product: USB 2.0 Hub
+[Tue Jun 13 22:31:00 2023] hub 2-3.2:1.0: USB hub found
+[Tue Jun 13 22:31:00 2023] hub 2-3.2:1.0: 4 ports detected
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: new full-speed USB device number 117 using xhci_hcd
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: New USB device found, idVendor=261a, idProduct=002c
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: Product: USBKey Module
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: Manufacturer: USBKey Chip
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.1: SerialNumber: 202730041341
+[Tue Jun 13 22:31:01 2023] input: USBKey Chip USBKey Module as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.1/2-3.2.1:1.0/0003:261A:002C.007F/input/input90
+[Tue Jun 13 22:31:01 2023] hid-generic 0003:261A:002C.007F: input,hidraw0: USB HID v1.10 Keyboard [USBKey Chip USBKey Module] on usb-0000:00:14.0-3.2.1/input0
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.2: new full-speed USB device number 118 using xhci_hcd
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.2: Product: SDSES Custom HID
+[Tue Jun 13 22:31:01 2023] usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
+[Tue Jun 13 22:31:01 2023] hid-generic 0003:261A:000C.0080: hiddev0,hidraw1: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
+[Tue Jun 13 22:31:01 2023] input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.0081/input/input91
+[Tue Jun 13 22:31:01 2023] hid-generic 0003:261A:000C.0081: input,hidraw2: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
+[Tue Jun 13 22:31:01 2023] hid-generic 0003:261A:000C.0082: hiddev0,hidraw3: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
+```
+
+ctronics: 电子
+electronic：电子的
+tronics：电子学;光电器件
+
+发现设备连接序号最大只会到127，如下，神思读卡器有1a40:0101和261a:000c，一设备在127，另外一个设备却重新开始编号2：
+```
+Bus 001 Device 002: ID 8087:07e6 Intel Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 002: ID 0bda:0411 Realtek Semiconductor Corp.
+Bus 003 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 002 Device 123: ID 1a2c:2124 China Resource Semico Co., Ltd
+Bus 002 Device 002: ID 261a:000c
+Bus 002 Device 127: ID 1a40:0101 Terminus Technology Inc. 4-Port HUB
+Bus 002 Device 003: ID 0bda:5411 Realtek Semiconductor Corp.
+Bus 002 Device 124: ID 093a:2532 Pixart Imaging, Inc.
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+## 24、stm32 
+ARM Cortex-M内核单片机
+STM32系列专为要求高性能、低成本、低功耗的嵌入式应用设计的ARM Cortex®-M0，M0+，M3, M4和M7内核 （ST's product portfolio contains a comprehensive range of microcontrollers, from robust, low-cost 8-bit MCUs up to 32-bit ARM-based Cortex®-M0 and M0+, Cortex®-M3, Cortex®-M4 Flash microcontrollers with a great choice of peripherals. ST has also extended this range to include an ultra-low-power MCU platform）。按内核架构分为不同产品：
+主流产品（STM32F0、STM32F1、STM32F3）、超低功耗产品（STM32L0、STM32L1、STM32L4、STM32L4+）、高性能产品（STM32F2、STM32F4、STM32F7、STM32H7）。
+
+STM32代表ARM Cortex-M内核的32位微控制器。
+
+## 25、读卡器工作原理
+读卡器是一种用于读取磁条卡、IC卡、身份证等各种类型卡片信息的设备。其工作原理主要包括以下几个方面：
+
+读卡器与卡片之间的通信：读卡器通过物理接口与卡片进行连接，如磁条卡读卡器通过磁头读取磁条卡上的信息，IC卡读卡器通过接触式或非接触式接口与IC卡进行通信，身份证读卡器通过接触式接口与身份证芯片进行通信。
+
+读卡器对卡片信息的解析：读卡器通过内部的解析算法对卡片上的信息进行解析，如磁条卡读卡器通过磁头读取磁条上的二进制数据，并将其转换为可读的文本信息，IC卡读卡器通过解析IC卡芯片上的数据文件，获取卡片上的信息。
+
+读卡器对卡片信息的处理：读卡器将解析出的卡片信息进行处理，如身份证读卡器将身份证芯片中的信息进行解密、验证、比对等操作，以确保身份证的真实性和有效性。
+
+读卡器与外部系统的通信：读卡器将处理后的卡片信息通过接口与外部系统进行通信，如将身份证信息传输给公安系统进行身份验证，将银行卡信息传输给银行系统进行交易等。
+
+总之，读卡器的工作原理是通过与卡片进行通信，解析卡片上的信息，处理卡片信息并与外部系统进行通信，以实现对卡片信息的读取和处理。
+
+## 26、读取身份证信息的工作原理
+读取身份证信息的工作原理主要包括以下几个步骤：
+
+- 插入身份证：将身份证插入读卡器的接口中，读卡器会检测身份证是否插入，并对身份证进行供电。
+- 与身份证芯片进行通信：读卡器通过接触式接口与身份证芯片进行通信，发送指令并接收芯片返回的数据。
+- 解析身份证信息：读卡器通过内部的解析算法对身份证芯片中的数据进行解析，获取身份证上的各项信息，如姓名、性别、民族、出生日期、地址、身份证号码等。
+- 验证身份证信息：读卡器对身份证上的信息进行验证，如验证身份证号码的有效性、验证出生日期是否合法等。
+- 输出身份证信息：读卡器将解析出的身份证信息输出到外部系统，如计算机、手机等，以供后续处理和使用。
+
+需要注意的是，读取身份证信息的过程需要保证读卡器与身份证之间的通信安全和可靠性，以确保身份证信息的真实性和有效性。同时，读取身份证信息的过程需要遵守相关法律法规和隐私保护原则，保护个人隐私和信息安全。
+
+可以使用C语言读取身份证信息，但需要使用相应的读卡器和身份证阅读器的SDK（软件开发工具包）或API（应用程序接口）来实现。这些SDK或API通常由读卡器或身份证阅读器的厂商提供，可以在其官方网站上下载和使用。
+
+## 27、PSAM卡和SAM模块区别
+PSAM卡和SAM模块都是用于存储和处理加密密钥和算法的安全模块，但它们之间有一些区别。
+
+PSAM卡（Processor Security Access Module）是一种带有处理器的安全模块，通常用于POS机、自助售货机等终端设备中。它可以独立完成加密算法的计算和密钥管理等功能，具有较高的安全性和灵活性。PSAM卡通常采用ISO7816标准的接口，可以通过串口或USB等方式与终端设备进行通信。
+
+SAM模块（Secure Access Module）是一种不带处理器的安全模块，通常用于智能卡、SIM卡等应用中。它需要与读卡器或终端设备配合使用，由读卡器或终端设备完成加密算法的计算和密钥管理等功能。SAM模块通常采用ISO7816标准的接口，可以通过接触式或非接触式方式与读卡器或终端设备进行通信。
+
+因此，PSAM卡和SAM模块的主要区别在于是否带有处理器和是否独立完成加密算法的计算和密钥管理等功能。
+
+## 28、SAM卡和SIM卡区别
+SAM卡（Secure Access Module）和SIM卡（Subscriber Identity Module）都是智能卡，但它们之间有一些区别。
+
+SIM卡是一种用于移动通信的智能卡，主要用于存储用户的身份信息、通信密钥和短信等数据。SIM卡通常由移动通信运营商提供，用于验证用户身份和控制用户的通信服务。SIM卡通常采用ISO7816标准的接口，可以通过接触式或非接触式方式与移动设备进行通信。
+
+SAM卡是一种用于安全认证和加密的智能卡，主要用于存储和处理加密密钥和算法。SAM卡通常由安全设备厂商提供，用于保护终端设备和应用程序的安全。SAM卡通常采用ISO7816标准的接口，可以通过接触式或非接触式方式与读卡器或终端设备进行通信。
+
+因此，SIM卡和SAM卡的主要区别在于用途和提供者。SIM卡主要用于移动通信，由移动通信运营商提供；SAM卡主要用于安全认证和加密，由安全设备厂商提供。

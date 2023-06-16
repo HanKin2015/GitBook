@@ -1,4 +1,3 @@
-
 # 每天一点一滴进步
 just do it
 奥利给
@@ -187,13 +186,24 @@ auto可以在声明变量的时候根据变量初始值的类型自动为此变�
     cout << typeid(au_a).name() << endl;
 ```
 
+## 16、C++中bool型变量按位取反总是为true
+代码见：D:\Github\Storage\python\study\二进制数\invert_true.cpp
 
+我想是：
+false=0000 0000，取反后为1111 1111，非零为true
+true = 0000 0001，取反后为1111 1110，同样也是非零
 
+注意对 bool 变量按位取反永远是 true；
+0000 0001
+1111 1110
 
+所以用非运算符！代替
+```
+bool showGrid;
 
-
-
-
+showGrid = !showGrad;   // 这个才变
+showGrid = ~showGrad;   // 不变
+```
 
 
 

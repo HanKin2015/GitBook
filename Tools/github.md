@@ -75,3 +75,6 @@ https://blog.51cto.com/u_8681773/5897904 操作简化，只有鼠标右键复制
 但是不清楚为啥迅雷还是下载下载就中断了。。。。然后等啊等啊就下载好了，反正那叫一个不流畅不丝滑。
 https://github.com/fandesfyf/JamTools/releases/download/0.14.0B/JamTools0.14.0BSetup_for_windows.exe
 
+## 11、给github添加代码覆盖率微标
+有时间研究研究。
+https://zhuanlan.zhihu.com/p/463469133?utm_id=0
