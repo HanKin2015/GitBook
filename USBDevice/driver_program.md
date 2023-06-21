@@ -4,6 +4,9 @@
 
 https://blog.csdn.net/feixiaoxing/article/details/8533822
 
+不错的linux驱动博客：https://hceng.cn/
+https://blog.csdn.net/hceng_linux?type=blog
+
 ## 1、linux加载insmod和卸载rmmod驱动
 ### 加载驱动模块
 方法一： 

@@ -109,3 +109,47 @@ apt update
 /etc/apt/sources.list.d/appstore.list
 ```
 要么进行配置修改，要么就进行注释。
+
+## 6、linux的主机名
+
+有时候默认主机名过于长，操作很别扭。
+
+$之前@之后是主机名。
+查看主机名命令：
+```
+> uname -n
+> hostname
+```
+
+### 6-1、修改主机名
+1、通过hostname命令。
+命令格式：hostname newhostname
+此命令的作用是暂时的修改linux的主机名，存活时间linux当前的运行时间，即在重启前的运行时间内。一般修改以后就生效，但是不能永久修改。
+
+PS:重启终端生效。
+
+### 6-2、 通过配置文件/etc/sysconfig/network修改。
+/etc/sysconfig/*是红帽系统下服务初始化环境配置文件，ubuntu就没有这个文件夹，只能对各个服务的存放位置分别寻找，比如centos里的/etc/sysconfig/network对应ubuntu里的/etc/network/interfaces文件。
+
+cat /etc/sysconfig/network
+```
+NETWORKING=yes
+HOSTNAME=yourname //在这修改hostname
+GATEWAY=192.168.1.1
+```
+
+通过修改此文件的内容，它能够实现永久修改linux的主机名，不会立即生效，即有可能不在当前运行时间生效，即在从下次重启后才开始生效，至少是不在当前session生效，需要用户退出以后才生效。通过修改此配置文件，再配合hostname命令，可实现立即永久修改linux的主机名。
+
+systemd
+
+### 6-3、永久修改配置文件 /etc/hosts /etc/hostname
+需要把主机名和ip绑定在一起时，才需要修改这个hosts文件 。
+> vi /etc/hosts
+```
+127.0.0.1 localhost.localdomain localhost
+192.168.1.121 yourname //在这修改hostname
+//有时候只有这一行
+127.0.0.1 yourname localhost.localdomain localhost
+```
+重启计算机以使更改生效。
+ubuntu系统亲测有效。

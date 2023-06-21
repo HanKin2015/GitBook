@@ -40,11 +40,14 @@ https://github.com/Arthurzhangsheng/CodeFormer_GUI
 https://www.modb.pro/db/573357
 
 
+https://mp.weixin.qq.com/s/4wq9kFW9PAa1VJdCOxYCKA
+Hugging Face：https://huggingface.co/baichuan-inc/baichuan-7B
+Github：https://github.com/baichuan-inc/baichuan-7B
+Model Scope：https://modelscope.cn/models/baichuan-inc/baichuan-7B/summary
 
-
-
-
-
+## StableStudio
+https://mp.weixin.qq.com/s/mY-gXNHUAmAVWlkASB2EWw
+https://github.com/Stability-AI/StableStudio
 
 
 

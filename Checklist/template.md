@@ -32,16 +32,8 @@ clean:
 	rm -rf $(TARGET) *.o
 ```
 
-## 2、git上库模板
-```
-[问题描述] 
-[问题单号] 20210329
-[问题原因] 
-[修改方案] 
-[影响模块] 模块
-[本地自测] 
-[测试建议] 参考自测
-```
+## 2、cmake通用模板
+代码见：D:\Github\Storage\c++\状态机\CMakeLists.txt
 
 ## 3、头文件和函数注释
 
@@ -253,21 +245,21 @@ stop
 const char *file_path;
 file_path  = "D:/hejian.txt";
 if (_access(file_path, 0)) {
-	FILE *fp;
-	fp = fopen(file_path, "a");
-	if (fp == NULL) {
-		OUTPUT_DEBUG_PRINTF("[keyword] open file failed!");
-		break;
-	}
-	struct _timeb now;                                              
-	struct tm today;                                                
-	char datetime_str[20];                                          
-	_ftime_s(&now);                                                 
-	localtime_s(&today, &now.time);                                 
-	strftime(datetime_str, 20, "%Y-%m-%d %H:%M:%S", &today);
-	fprintf(fp, "%s [%04d/%04d] INFO [%s] WM_TIMER wparam is %d.\n", datetime_str, GetCurrentProcessId(), GetCurrentThreadId(), __FUNCTION__, wparam);
-	fclose(fp);
-	fp = NULL;
+    FILE *fp;
+    fp = fopen(file_path, "a");
+    if (fp == NULL) {
+        OUTPUT_DEBUG_PRINTF("[keyword] open file failed!");
+        break;
+    }
+    struct _timeb now;                                              
+    struct tm today;                                                
+    char datetime_str[20];                                          
+    _ftime_s(&now);                                                 
+    localtime_s(&today, &now.time);                                 
+    strftime(datetime_str, 20, "%Y-%m-%d %H:%M:%S", &today);
+    fprintf(fp, "%s [%04d/%04d] INFO [%s] WM_TIMER wparam is %d.\n", datetime_str, GetCurrentProcessId(), GetCurrentThreadId(), __FUNCTION__, wparam);
+    fclose(fp);
+    fp = NULL;
 }
 ```
 
@@ -276,16 +268,24 @@ if (_access(file_path, 0)) {
 ```
 
 ## 5、日常测试脚本（含参数）
+
 ### shell
-详细全面见Shell-vim/template.md文件
+详细全面见D:\Github\GitBook\gitbook\Shell-vim\template.md文件
 
 ```
 #!/bin/bash
-
-
 ```
 
-
+## 6、git上库模板
+```
+[问题描述] 
+[问题单号] 20210329
+[问题原因] 
+[修改方案] 
+[影响模块] 模块
+[本地自测] 
+[测试建议] 参考自测
+```
 
 
 

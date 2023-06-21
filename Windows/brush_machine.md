@@ -137,7 +137,6 @@ Boot failed: please change disks and press a key to continue.
 其实对这个问题，有一个更简单的办法，只需要在ultraiso做U盘启动盘，写入方式USB-HDD改为RAW即可。
 
 ## 7、GRUB Minimal BASH-like line editing is supported 
-
 问题很奇怪，安装完ubuntu后重启出现这个，百度了一下，说：
 - 直接在BASH-like 窗口中输入exit, 会跳转到boot 选项窗口，直接选择windows 启动就行了。
 - 下载EasyUEFI，将Windows启动项优先级高于ubuntu,即可。但是此时，ubuntu的引导文件依然存在于SSD内的系统盘中，如果EasyUEFI可以直接删除Ubuntu引导文件，就可以直接删除掉；否则，参考一下步骤
@@ -256,4 +255,15 @@ Failed to load ldlinux.c32
 F2一般是BIOS界面
 F7、F11、F12、Delete都有可能是启动选项界面。
 
+## 16、安装ubuntu23.04系统：No Systemdisk. Booting from harddisk.
+按F12，选择U盘启动。
+
+更改写入方式USB-HDD改为RAW后，结果还是报错：error:invalid arch-independent ELF magic.
+没有找到方法解决，我重新更换了一个U盘，然后使用默认写入方式试试，另外这个Ubuntu23.04不支持便捷写入。
+
+更换了U盘还是同样的情况。。。
+难道真的需要更换软件吗？https://blog.csdn.net/right_moon/article/details/128584755
+更换成rufus软件后还真的可以进行下一步刷机了，神啊。
+
+然后在安装ubuntu18.04的时候居然出现了Failed to ldlinux.c32。错误完全不一样，这个选择了USB-HDD模式，而不是默认的USB-HDD+。过了一晚上居然忘记了我前一晚是使用的是rufus软件，以后我决定脱坑UltraISO软件，rufus软件多好，还是便携式免安装版本。好用，选择使用DD模式烧录即可。
 

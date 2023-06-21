@@ -26,21 +26,34 @@ DMZ 区可以理解为一个不同于外网或内网的特殊网络区域，DMZ 
 5.DMZ访问内网有限制
 6.DMZ不能访问外网
 
-
-
-
-
-
-
-
-
 DHCP服务器查询：ipconfig /all
 DHCPv6
 IPv6地址到底是一个什么东西
 
+## 5、DHCP工作过程
+DHCP客户机在启动时，会搜寻网络中是否存在DHCP服务器。如果找到，则给DHCP服务器发送一个请求。DHCP服务器接到请求后，为DHCP客户机选择TCP/IP配置的参数，并把这些参数发送给客户端。 如果已配置冲突检测设置，则DHCP服务器在将租约中的地址提供给客户机之前会使用Ping测试作用域中每个可用地址的连通性。这可确保提供给客户的每个IP地址都没有被使用手动TCP/IP配置的另一台非DHCP计算机使用。
 
+## 6、搭建DHCP服务器
 
+### 6-1、实验目的
+手动搭建一台DHCP服务器，使其达到该网段内的所有主机，都能通过该服务器自动获取ip地址，并且获取到的ip地址是自己在DHCP服务器上所指定的网段
 
+### 6-2、看了一下，还是放弃尝试
+首先是怕破坏了环境，另外这个学习了作用不是很大，知道其中工作原理即可。
 
+```
+apt install dhcp
+vim /etc/dhcp/dhcpd.conf
 
+ddns-update-style none; # 设置DNS服务不自动进行动态更新
+ignore client-updates; # 忽略客户端更新DNS记录
+subnet 192.168.10.0 netmask 255.255.255.0 # 作用域为192.168.10.0/24网段
+range 192.168.10.50 192.168.10.150; # IP地址池为192.168.10.50-150（约100个IP地址）
+option subnet-mask 255.255.255.0; # 定义客户端默认的子网掩码
+option routers 192.168.10.1; # 定义客户端的网关地址
+option domain-name "linuxprobe.com"; # 定义默认的搜索域
+option domain-name-servers 192.168.10.1; # 定义客户端的DNS地址
+default-lease-time 21600; # 定义默认租约时间（单位：秒）
+max-lease-time 43200; # 定义最大预约时间（单位：秒）
+```
 

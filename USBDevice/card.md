@@ -217,6 +217,16 @@ STM32代表ARM Cortex-M内核的32位微控制器。
 
 总之，读卡器的工作原理是通过与卡片进行通信，解析卡片上的信息，处理卡片信息并与外部系统进行通信，以实现对卡片信息的读取和处理。
 
+https://zhuanlan.zhihu.com/p/187483465
+https://www.ibangquan.com/an/121796.html
+https://blog.csdn.net/u014798590/article/details/82595133
+https://www.sohu.com/a/658475977_121201259
+https://www.ruiwen.com/ziliao/kepu/3306615.html
+https://www.elecfans.com/d/608460.html
+https://zhuanlan.zhihu.com/p/100465498
+http://www.hntjdz.com/prod/104.html
+https://wenku.baidu.com/view/4a92c502960590c69fc3767b.html?_wkts_=1686725294217
+
 ## 26、读取身份证信息的工作原理
 读取身份证信息的工作原理主要包括以下几个步骤：
 

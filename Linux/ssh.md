@@ -46,11 +46,11 @@ ssh_exchange_identification: read: Connection reset by peer
 也没有
 
 (5)秘钥问题？
-
 清除/root/.ssh/known_hosts文件和你所要连接ip或者主机名有关的ssh加密Key？
 发现好像还没有这个文件，因为是刚装的系统，服务器还没有ssh别人，所以没有这个文件。这里说一下，这个文件是ssh别的主机的时候和别的主机建立的ssh通信，通常shh同一台主机的时候会在这里，如果ssh一台主机，然后那台主机修改了一些配置，RSA加密更改了等等，会发现连不上的。会出现一下这个错误，说明就是要删除/root/.ssh/known_hosts文件相关的ip和主机名了。
 (6)vi /etc/ssh/sshd.conf（有些可能是vi /etc/ssh/sshd.confg）
 找到X11Forwarding yes，将其注释掉或者改为no,重启启动ssh服务。
+测试不行
 
 ### 解决办法
 我的解决方法就是重新安装ssh。
@@ -59,6 +59,20 @@ ssh_exchange_identification: read: Connection reset by peer
 报错：ssh：connect to host localhost port 22: Connection refused
 ps -ef|grep sshd，如果出现了sshd，则说明安装了，反之则没安装。
 sudo apt-get install openssh-server
+
+安装了ssh服务也遇到这种情况，关键是我有台虚拟机能ssh连接上，其余的虚拟机无法进行ssh连接。这种事情打算放弃了，可能真是拥有什么安全软件进行了端口拦截，只允许同网络的虚拟机进行访问。
+```
+systemctl status ssh
+systemctl start ssh
+ufw status
+ufw allow ssh
+
+SSH配置文件/etc/ssh/sshd_config
+Port 22
+PermitRootLogin no
+PasswordAuthentication yes
+systemctl restart ssh
+```
 
 ## 4、Windows远程操作
 右键点击’我的电脑‘进入’属性‘点击左过菜单栏中的’远程设置‘;把远程桌面选项设置成’允许运行任意版本远程桌面的计算机连接‘。

@@ -7,6 +7,7 @@
 ```
 
 ## 2、DNS设置
+
 ### ubuntu
 vi /etc/systemd/resolved.conf
 DNS= 10.0.0.3 10.0.0.4
@@ -131,7 +132,7 @@ gateway 192.168.1.1		(默认网关)
 ```
 
 ## 7、查看本机网关地址
-1. ip route show
+1.ip route show
 2.route -n or netstat -rn
 3.traceroute
 
@@ -155,4 +156,40 @@ https://zhuanlan.zhihu.com/p/422812398
 很奇怪，不能ping通ip，但是能通过mstsc远程连接。
 关闭防火墙之后就能ping通。
 
+## 10、Ubuntu23.04
 
+### 10-1、hostname太长了
+hostname命令临时生效
+修改/etc/hostname和/etc/hosts文件后重启永久生效
+
+### 10-2、/etc/network目录下没有interfaces
+可自行创建会生效
+
+### 10-3、/etc/init.d/目录下没有network-manager或者networking
+但是通过命令可以看见网络服务：
+```
+sudo apt-get update
+sudo apt-get install network-manager
+sudo systemctl start NetworkManager
+sudo systemctl enable NetworkManager    # 在系统启动时自动启动
+service NetworkManager status
+```
+注意大小写。
+
+### 10-4、使用桥接模式有网络了，但是似乎有卡慢
+这是最好的模式
+
+### 10-5、需要配置DNS解析
+完全可以在可视化界面进行设置，方便快捷：114.114.114.114
+
+### 11-6、查看dhcp地址
+```
+root@hankin:~# cat /var/lib/dhcp/dhclient.leases | grep dhcp-server-identifier
+  option dhcp-server-identifier 172.22.16.254;
+  option dhcp-server-identifier 172.22.19.254;
+  option dhcp-server-identifier 172.22.16.254;
+  option dhcp-server-identifier 172.22.16.254;
+  option dhcp-server-identifier 172.22.16.254;
+  option dhcp-server-identifier 172.22.16.254;
+  option dhcp-server-identifier 172.22.16.254;
+```

@@ -205,5 +205,8 @@ https://baike.baidu.com/item/YUV/3430784?fr=aladdin
 
 https://blog.csdn.net/qq_42820594/article/details/126353005
 
+## 9、vivid驱动
+The Virtual Video Test Driver (vivid)
 
+https://www.kernel.org/doc/html/v4.12/media/v4l-drivers/vivid.html
 

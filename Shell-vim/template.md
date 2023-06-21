@@ -48,15 +48,15 @@ version()
 # 用法说明
 usage()
 {
-	cat << EOF
-		Usage: $0 [options] [directroy]
-		Options:
-			-h, 		显示帮助信息
-			-V,			显示当前脚本版本信息
-			-f file,	从文件读取ip地址
-		Examples:
-			$0 -f ip_addr.txt
-	EOF
+    cat << EOF
+        Usage: $0 [options] [directroy]
+        Options:
+            -h, 		显示帮助信息
+            -V,			显示当前脚本版本信息
+            -f file,	从文件读取ip地址
+        Examples:
+            $0 -f ip_addr.txt
+    EOF
 }
 ```
 
@@ -129,15 +129,15 @@ usage(){}
 ```
 usage()
 {
-	cat << EOT
-		Usage: $0 [options] [directroy]
-		Options:
-			-i	install
-			-u	update
-			-h	help(usage) and exit
-		Examples:
-			$0 -i dir
-	EOT
+    cat << EOT
+        Usage: $0 [options] [directroy]
+        Options:
+            -i	install
+            -u	update
+            -h	help(usage) and exit
+        Examples:
+            $0 -i dir
+    EOT
 }
 ```
 
@@ -169,9 +169,8 @@ while getopts "" opt
 ```
 while getopts ":i:u:h" opt    # 冒号表示安装目标的文件夹
 do
-	case ${opt} in
-	i)
-		
+    case ${opt} in
+    i)
 ```
 
 su （需要输入管理员密码）
@@ -179,7 +178,6 @@ su （需要输入管理员密码）
 sudo su(只需要输入当前用户的密码)
 
 su root转换到root账户   =====  su （账户密码，及root）
-
 
 
 内网wifi：TP未限速
@@ -194,11 +192,11 @@ $？获取上一个命令的退出状态
 
 function kill_lock_process()
 {
-	local lock_pid=$(lsof /var/lib/dpkg/lock | grep /var/lib/dpkg/lock | awk '{print $2}')
-	if [ -n "${lock_pid}" ]; then
-		kill -9 ${lock_pid}
-		dpkg --configure -a
-	fi
+    local lock_pid=$(lsof /var/lib/dpkg/lock | grep /var/lib/dpkg/lock | awk '{print $2}')
+    if [ -n "${lock_pid}" ]; then
+        kill -9 ${lock_pid}
+        dpkg --configure -a
+    fi
 }
 
 # 等于0执行成功，不等于0执行失败

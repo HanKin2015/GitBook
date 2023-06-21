@@ -78,3 +78,12 @@ https://github.com/fandesfyf/JamTools/releases/download/0.14.0B/JamTools0.14.0BS
 ## 11、给github添加代码覆盖率微标
 有时间研究研究。
 https://zhuanlan.zhihu.com/p/463469133?utm_id=0
+
+## 12、使用github加载图片
+https://HanKin2015.github.io/img/cc.png
+https://HanKin2015.github.io/Mount/Images/img7.jpg
+https://Hankin2015.github.io/Storage/qt/python/usb_camera_monitor_tool/img/usb_camera_monitor_tool.png
+
+一个可行是开启了github pages服务，另外一个没有开启所以打不开图片。
+另外需要https://Hankin2015.github.io/网址作为开头，相当于是根目录，以及也是Hankin2015.github.io仓库的根目录。
+
