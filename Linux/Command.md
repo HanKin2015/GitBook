@@ -395,7 +395,7 @@ echo 命令是一个常用的命令行工具，用于在终端输出文本。它
 ```
 字符串是要输出的文本内容，可以是一个或多个字符串，用空格分隔。如果字符串中包含空格或其他特殊字符，需要用引号将其括起来。
 
-### 19-1、实战
+## 19-1、实战
 ```
 [root@ubuntu0006:~] #echo "这是一个双引号：\t3"
 这是一个双引号：\t3
@@ -407,11 +407,63 @@ echo 命令是一个常用的命令行工具，用于在终端输出文本。它
 这是一个双引号：\t3[root@ubuntu0006:~] #
 ```
 
-### 19-2、echo命令修改内核debug配置文件值
+## 19-2、echo命令修改内核debug配置文件值
 有时候需要修改内核debug文件，需要使用到echo命令。
 ```
-
+root@hankin:~# cat /sys/module/hid/parameters/debug
+0
+root@hankin:~# cat /sys/module/usbcore/parameters/usbfs_snoop
+N
+root@hankin:~# echo 1 > /sys/module/hid/parameters/debug
+root@hankin:~# echo 1 > /sys/module/usbcore/parameters/usbfs_snoop
 ```
 
+# 20、Linux 命令中“!”操作符的 8 个神秘用途
+https://mp.weixin.qq.com/s/v_yoCyKTvuhrbEWZjJwysg
 
+## 20-1、使用命令编号从历史记录中运行命令
+!58
 
+## 20-2、在Linux中运行先前执行的命令
+!-3
+
+## 20-3、将先前命令的参数传递给新命令
+!$
+
+## 20-4、如何处理命令中的两个或多个参数
+```
+[root@ubuntu0006:~/cmake] #mv 123.txt 321.txt
+[root@ubuntu0006:~/cmake] #echo !^
+echo 123.txt
+123.txt
+[root@ubuntu0006:~/cmake] #echo !mv:2
+echo 321.txt
+321.txt
+[root@ubuntu0006:~/cmake] #echo !mv:1
+echo 123.txt
+123.txt
+```
+注意，第一个参数可以打印为"!^"，而其余的参数可以通过执行"![命令名称]:[参数编号]"来打印。
+可以通过"!*"访问所有的参数。
+
+## 20-5、根据特定关键词运行最近的命令
+!ls
+
+## 20-6、在Linux中重复上次执行的命令
+感谢上箭头键的救命作用。但是如果是安装安装包，我在非root用户使用了apt，没有加sudo，则有需要输入一遍命令。
+但是可以使用“!!”（不带引号），它将调用该用户的最后一个命令。
+```
+su -c !! root
+```
+这里的su是切换用户的命令，root是要切换到的用户，-c是以指定的用户身份运行命令的选项，最重要的部分是!!将被替换为上次运行的命令。是的！你需要提供root密码。
+
+## 20-7、使用'!'操作符删除除一个文件之外的所有文件
+rm !(important_file.txt)
+rm !(*.pdf)
+
+## 20-8、检查Linux中的目录是否存在
+```
+[ ! -d /home/linuxmi/linuxmi.com ] && printf '\nno such /home/linuxmi/linuxmi.com directory exist\n' || printf '\n/home/linuxmi/linuxmi.com directory exist\n'
+[ ! -d /home/linuxmi/linuxmi.com] && exit
+[ ! -d /home/linuxmi/linuxmi.com] && mkdir /home/linuxmi/linuxmi.com
+```

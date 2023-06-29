@@ -54,8 +54,27 @@ const typeof( ((type *)0)->member ) *__mptr = (ptr);
 ```
 它的作用是什么呢？ 其实没什么作用（勿喷勿喷，让我把话说完），但就形式而言 _mptr = ptr,  那为什么要要定义一个一样的变量呢？？？ 其实这正是内核人员的牛逼之处：如果开发者使用时输入的参数有问题：ptr与member类型不匹配，编译时便会有warnning， 但是如果去掉改行，那个就没有了，而这个警告恰恰是必须的（防止出错有不知道错误在哪里）。
 
+## 6、typeof
+在C语言中，typeof是一个编译器扩展，用于获取一个表达式的数据类型。它的语法如下：
+```
+typeof (expression)
+```
+其中，expression是一个C语言表达式，可以是变量、常量、函数等。
+typeof函数返回一个表示expression数据类型的编译器内部类型。例如，如果expression是一个整数变量，typeof将返回int类型。
 
+typeof函数通常用于宏定义中，以便在编译时确定表达式的数据类型。例如，下面的宏定义可以用于计算两个数的最大值：
+```
+#define max(a, b) \
+    ({ typeof (a) _a = (a); \
+       typeof (b) _b = (b); \
+       _a > _b ? _a : _b; })
+```
+在这个宏定义中，typeof用于获取变量a和b的数据类型，并将它们存储在_a和_b变量中。然后，宏定义使用这些变量来计算最大值。
 
+## 7、总结
+container_of（ptr, type,member）函数的实现包括两部分：
+1.  判断ptr 与 member 是否为同意类型
+2.  计算size大小，结构体的起始地址 = (type *)((char *)ptr - size)   (注：强转为该结构体指针)
 
-
-
+现在我们知道container_of()的作用就是通过一个结构变量中一个成员的地址找到这个结构体变量的首地址。
+container_of(ptr,type,member),这里面有ptr,type,member分别代表指针、类型、成员。
