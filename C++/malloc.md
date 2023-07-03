@@ -189,27 +189,45 @@ uint8_t src_buf[1920*1080*4];
 
 int main()
 {
-    int i = 0;
-    uint8_t * dst_buf;
-    int count;
-    time_t record = 0;
-    time_t new = 0;
+    int i = 0;
+    uint8_t * dst_buf;
+    int count;
+    time_t record = 0;
+    time_t new = 0;
 
 
-    for(i = 0;i<10000;i++){
-        dst_buf = malloc(sizeof(src_buf));
-        memcpy(dst_buf,src_buf,sizeof(src_buf));
-        free(dst_buf);
-        usleep(10000);
-        count++;
-        new = time(NULL);
-        if(new != record){
-            printf("count %d per second\n",count);
-            count = 0;
-            record = new;
-        }
-    }
+    for(i = 0;i<10000;i++) {
+        dst_buf = malloc(sizeof(src_buf));
+        memcpy(dst_buf,src_buf,sizeof(src_buf));
+        free(dst_buf);
+        usleep(10000);
+        count++;
+        new = time(NULL);
+        if(new != record) {
+            printf("count %d per second\n",count);
+            count = 0;
+            record = new;
+        }
+    }
 
-    return 0;
+    return 0;
 }
 ```
+
+# calloc和malloc的区别
+calloc和malloc都是C语言中用于动态分配内存的函数，但它们有一些不同之处。
+
+malloc函数用于分配指定大小的内存块，返回一个指向该内存块的指针。这个内存块中的内容是未定义的，可能包含任意值。如果分配失败，malloc函数返回NULL指针。
+
+calloc函数也用于分配内存块，但它需要两个参数：所需内存块的数量和每个内存块的大小。calloc函数会分配一个大小为“数量*大小”的内存块，并将其所有位初始化为0。如果分配失败，calloc函数也会返回NULL指针。
+
+因此，calloc函数相对于malloc函数的优点是可以确保分配的内存块中的所有位都被初始化为0，而malloc函数则不提供这个保证。但是，由于calloc函数需要初始化内存块中的所有位，因此它可能比malloc函数稍微慢一些。
+
+realloc 函数在重新分配内存时，会保留原有内存块中的数据，并将其复制到新的内存块中。如果新的内存块比原有内存块大，那么新增的内存空间将不会被初始化，其值是未定义的。如果新的内存块比原有内存块小，那么超出新内存块大小的部分将被截断，数据也会丢失。
+
+因此，realloc 函数不会自动将新分配的内存初始化为0。如果需要将新分配的内存初始化为0，可以使用 calloc 函数来分配内存，它会将分配的内存初始化为0。
+
+代码见：D:\Github\Storage\c++\standard_library\malloc\xalloc.c
+
+
+

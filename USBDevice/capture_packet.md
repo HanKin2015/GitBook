@@ -229,6 +229,16 @@ https://www.usbzh.com/article/detail-768.html
 
 USB Packet Viewer是一款便携式USB协议分析仪，能够捕捉USB通讯的底层数据包以及总线事件。它由USB 数据包抓包设备和配套的协议解析软件组成，能够对 USB 通讯数据进行可视化分析。
 
+## 8、对于数据包返回值-2的思考
+有被理解为输超时的情况。但是，这个错误码通常是由USB主机控制器或USB设备驱动程序返回的，用于指示在传输数据时发生了超时错误。
+但是这样理解也是有道理的，详情可见：https://www.cnblogs.com/erhu-67786482/p/13456667.html
+
+https://www.kernel.org/doc/Documentation/usb/error-codes.txt
+linux-5.13.7/Documentation/driver-api/usb/error-codes.rst
+/usr/include/asm-generic/errno-base.h
+/usr/include/asm-generic/errno.h
+
+
 
 
 

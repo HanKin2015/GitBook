@@ -40,7 +40,6 @@ VSC只是一个纯文本编辑器(editor)，不是IDE(集成开发环境)，不�
 python.exe路径添加
 run code插件直接运行
 
-
 ### 安装扩展(extension)
 
 - C/C++：又名 cpptools，提供Debug和Format功能
@@ -139,11 +138,11 @@ C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
 ### 10-3、配置远程连接
 - 左侧导航栏电脑图标
 - 放在SSH TARGETS上面，点击齿轮设置
-- 选择‪C:\Users\User\.ssh\config配置
+- 选择C:\Users\User\.ssh\config配置
 - 第一行显示名称、第二行服务器ip地址、第三行登录账户，可以填写多个服务器
 - 点击打开窗口会显示Setting up SSH Host my_linux_vm: ([details](command:opensshremotes.showDetails "Show details")) Initializing VS Code Server
 - 由于未连接外网，所以肯定是无法正常连接的。
-```‪C:\Users\User\.ssh\config
+```C:\Users\User\.ssh\config
 # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
 Host my_linux_vm
     HostName 172.22.65.15
