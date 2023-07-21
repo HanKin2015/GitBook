@@ -93,6 +93,8 @@ https://blog.csdn.net/tttyd/article/details/8825181
 发现ffbuild/config.mak文件里面有-Wsign-compare字样，修改为-Wno-error=sign-compare或者删除。
 可以，后面又遇到了，修改Makefile文件为-Wno-error=sign-compare或者删除。
 
+在编译libusb的时候也遇见这个错误，删除libusb/Makefile中的-Wsign-compare字样即可，记得不要删错位置。
+
 **错误4**：libavdevice/lavfi.c:406:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow]
 同理，ffbuild/config.mak文件里删除即可。
 

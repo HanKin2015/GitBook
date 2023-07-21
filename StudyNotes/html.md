@@ -22,8 +22,11 @@
 td标签中不能直接改字体颜色，但body中可以，如：<body text="red">
 td标签中只可以设置背景颜色，如：<td bgcolor="gray">
 
-
-
+## 4、学习
+更多可参考：D:\Github\Storage\html\switch_zh_en
+js日志打印：alert
+引入css文件：<link rel="stylesheet" href="language.css" type="text/css">
+引入js文件：<script type="text/javascript" src="language.js"></script>
 
 
 

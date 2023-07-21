@@ -146,3 +146,29 @@ https://zhuanlan.zhihu.com/p/133096887
 https://www.jianshu.com/p/acbd6f25b3ea
 https://blog.csdn.net/Fandes_F/article/details/103226341
 https://www.cnblogs.com/tobe-goodlearner/p/tutorial-pynput.html
+
+
+## 6、触摸屏内核不上报触摸事件
+只有安卓8.1系统无法使用，使用安卓4.2系统是正常的。但是如果登录虚拟机后屏幕自动映射，然后再退出来触摸也是正常的。
+发现cat /sys/kernel/debug/hid/0003\:AAEC\:C021.0010/events存在数据，但是使用getevent却没有数据。
+
+最后通过，首先缩小相关的文件范围hid-multitouch.c，然后对比内核代码提交commit，找到两个版本之间的修改差异，最终：
+参考Linux源代码内核修改https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/hid/hid-multitouch.c?h=v4.14.316&id=b897f6db3ae2cd9a42377f8b1865450f34ceff0e
+```
+HID: multitouch: do not retrieve all reports for all devices
+We already have in place a quirk for Windows 8 devices, but it looks
+like the Surface Cover are not conforming to it.
+Given that we are only interested in 3 feature reports (the ones that
+the Windows driver retrieves), we should be safe to unconditionally apply
+the quirk to everybody.
+In case there is an issue with a controller, we can always mark it as such
+in the transport driver, and hid-multitouch won't try to retrieve the
+feature report.
+```
+
+
+
+
+
+
+

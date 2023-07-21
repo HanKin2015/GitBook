@@ -1,6 +1,6 @@
 # linux驱动编程
 
-资料：https://blog.csdn.net/feixiaoxing/article/details/79913476
+资料（强烈推荐）：https://blog.csdn.net/feixiaoxing/article/details/79913476
 
 https://blog.csdn.net/feixiaoxing/article/details/8533822
 
@@ -77,7 +77,7 @@ cat /sys/kernel/debug/usb/usbmon/2u | grep "003:"
 
 https://ywnz.com/linux/depmod/
 
-
+## 4、
 
 
 

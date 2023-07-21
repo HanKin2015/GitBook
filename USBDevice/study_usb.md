@@ -205,4 +205,7 @@ vertical垂直的
 ## 30、块设备
 块设备是i/o设备中的一类，是将信息存储在固定大小的块中，每个块都有自己的地址，还可以在设备的任意位置读取一定长度的数据，例如硬盘,U盘，SD卡等。
 
+## 31、USB类码
+USB中interface代表其USB功能，这里判断设备类型就是根据interface的描述符中的bInterfaceClass，bInterfaceSubClass，bInterfaceProtocol。三个字段进行判断的。
 
+https://www.usb.org/defined-class-codes

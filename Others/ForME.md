@@ -137,7 +137,8 @@ qq邮箱：hejian0616@qq.com（1058198502@qq.com）
 高考547分，13890名
 http://www.gaokw.com/gaokao/chongqing/59925_2.html
 
-
+## 2023年度湖南湘江新区中高级职称评审
+http://www.15job.com/news/detail/?key=327A63BDA73FA7DF
 
 
 
