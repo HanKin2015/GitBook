@@ -292,6 +292,19 @@ fetchtr_py(fi.absoluteFilePath(), fetchedTor, defaultContext, True, codecForSour
 ```
 文件的绝对路径，我才恍然大悟，是我的中文路径问题。
 
+使用ftplib访问中文路径报同样的错误：
+```
+path = '/中文路径/文件.txt'.encode('latin-1', 'ignore').decode('latin-1')
+ftp.cwd(path)
+
+这将忽略无法编码的字符，并将路径转换为 latin-1 编码，不可取。
+
+中文路径问题：由于FTP支持ASCII编码，Python ftplib中编码方式使用latin-1,而window默认编码方式为gbk，所以使用Python处理时需先将中文路径编码为gbk之后译码为latin-1字符：
+
+path = '/中文路径/文件.txt'.encode(encoding='gbk').decode(encoding='latin-1')
+ftp.cwd(path)
+```
+
 ## 31、成功解决TypeError: ‘float‘ object cannot be interpreted as an integer
 在使用Python的for w in range(0.0, 4.1, 0.1):时遇到报错：TypeError: 'float' object cannot be interpreted as an integer
 

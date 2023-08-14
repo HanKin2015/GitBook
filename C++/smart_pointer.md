@@ -35,7 +35,6 @@ p2 = p1; //auto_ptr不会报错
 （2）建立所有权（ownership）概念。对于特定的对象，只能有一个智能指针可拥有，这样只有拥有对象的智能指针的析构函数会删除该对象。然后让赋值操作转让所有权。这就是用于 auto_ptr 和 unique_ptr 的策略，但 unique_ptr 的策略更严格。
 （3）创建智能更高的指针，跟踪引用特定对象的智能指针数。这称为引用计数。例如，赋值时，计数将加 1，而指针过期时，计数将减 1,。当减为 0 时才调用 delete。这是 shared_ptr 采用的策略。
 
-
 ## 2、unique_ptr和auto_ptr
 
 ### 2-1、auto_ptr淘汰原因
@@ -179,8 +178,6 @@ weak_ptr 被设计为与 shared_ptr 共同工作，可以从一个 shared_ptr �
 在 Man 类内部会引用一个 Woman，Woman 类内部也引用一个 Man。当一个 man 和一个 woman 是夫妻的时候，他们直接就存在了相互引用问题。man 内部有个用于管理wife生命期的 shared_ptr 变量，也就是说 wife 必定是在 husband 去世之后才能去世。同样的，woman 内部也有一个管理 husband 生命期的 shared_ptr 变量，也就是说 husband 必须在 wife 去世之后才能去世。这就是循环引用存在的问题：husband 的生命期由 wife 的生命期决定，wife 的生命期由 husband 的生命期决定，最后两人都死不掉，违反了自然规律，导致了内存泄漏。
 weak_ptr 对象引用资源时不会增加引用计数，但是它能够通过 lock() 方法来判断它所管理的资源是否被释放。做法就是上面的代码注释的地方取消注释，取消 Woman 类或者 Man 类的任意一个即可，也可同时取消注释，全部换成弱引用 weak_ptr。
 
-
-
 下面给出几个使用指南。
 （1）如果程序要使用多个指向同一个对象的指针，应选择 shared_ptr。这样的情况包括：
 （a）将指针作为参数或者函数的返回值进行传递的话，应该使用 shared_ptr；
@@ -194,7 +191,6 @@ weak_ptr 对象引用资源时不会增加引用计数，但是它能够通过 l
 （4）为了解决 shared_ptr 的循环引用问题，我们可以祭出 weak_ptr。
 
 （5）在局部作用域（例如函数内部或类内部），且不需要将指针作为参数或返回值进行传递的情况下，如果对性能要求严格，使用 scoped_ptr 的开销较 shared_ptr 会小一些。
-
 
 ## 5、error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = log4cplus::Layout; _Dp = std::default_delete<log4cplus::Layout>]’
 https://zhuanlan.zhihu.com/p/359964081

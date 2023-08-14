@@ -47,10 +47,12 @@ https://blog.csdn.net/lys_828/article/details/107843255
 import os
 import shutil
 
-os.remove(path)   #删除文件
-os.removedirs(path)   #删除空文件夹
+os.remove(path)       #删除文件
+os.removedirs(path)   #删除多级空文件夹
+os.rmdir(path)        #删除空文件夹
 
-shutil.rmtree(path)    #递归删除文件夹
+shutil.rmtree(path)   #递归删除文件夹，即：删除非空文件夹
+shutil.rmtree(path, ignore_errors=True)
 ```
 
-https://gitee.com/crossin/easy-py/tree/master
+[人人都能学Python](https://gitee.com/crossin/easy-py/tree/master)

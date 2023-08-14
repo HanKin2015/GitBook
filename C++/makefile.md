@@ -72,7 +72,7 @@ clean:
 
 ## 3、自动生成makefile文件
 
-### automake.ac 和automake.in的区别
+### 3-1、automake.ac和automake.in的区别
 老版本autoconf支持automake.in,不过现在尽量首选使用automake.ac.
 如果用automake.in 容易和autoheader 产生的config.h.in产生扩展名冲突,因为.in文件是configure要处理的文件.
 并且如果用automake.in  会出现警告：aclocal: warning: autoconf input should be named 'configure.ac', not 'configure.in'
@@ -83,23 +83,42 @@ clean:
 
 缺少命令：autoconf-2.68.tar.bz2、automake-1.11.1.tar.bz2、m4-1.4.14.tar.bz2
 
-
 修改c++编译标准只能在makefile里面 gcc -std=c99 -o xx xx.c 
+
+### 3-2、autoconf和automake的区别
+autoconf 和 automake 是 GNU 工具链中的两个工具，它们都用于自动化软件包的构建和安装过程，但它们的作用不同。
+- 编写 configure.ac 文件：configure.ac 文件是 autoconf 工具使用的输入文件，用于描述如何检测和配置软件包的编译和安装过程。该文件通常包含了检测系统特性和限制的宏定义、检测库和工具的宏定义、定义编译选项和链接选项的宏定义等。
+
+- 编写 Makefile.am 文件：Makefile.am 文件是 automake 工具使用的输入文件，用于描述如何构建和安装软件包。该文件通常包含了软件包的源代码文件、头文件、编译选项、链接选项、可执行文件、静态库、共享库等目标的规则，以及安装目标的规则。
+
+- 生成 configure 脚本：使用 autoconf 工具生成 configure 脚本，该脚本可以根据当前系统的环境和特性，自动检测和配置软件包的编译和安装过程。
+
+- 生成 Makefile.in 文件：使用 automake 工具生成 Makefile.in 文件，该文件包含了编译和安装软件包所需的规则和指令。
+
+- 生成 Makefile 文件：使用 configure 脚本生成 Makefile 文件，该文件包含了编译和安装软件包所需的详细指令。
+
+- 编译和安装软件包：使用 make 命令编译软件包，使用 make install 命令安装软件包。
+
+总的来说，autoconf 和 automake 工具的使用可以大大简化软件包的构建和安装过程，提高软件开发的效率。
+
+### 3-3、autoconf和automake的实战
+
+
 
 ## 4、大坑
 由于修改了vim的tab键转换为4个空格的设置，导致makefile文件无法进行缩进，必须要tab。
 去掉/etc/vim/vimrc     expandtab
 
 ## 5、Linux之Makefile（addsuffix）
-函数名称：加后缀函数—addsuffix。 
+函数名称：加后缀函数—addsuffix。
 函数功能：为“NAMES…”中的每一个文件名添加后缀“SUFFIX”。参数“NAMES…”
 为空格分割的文件名序列，将“SUFFIX”追加到此序列的每一个文件名
-的末尾。 
-返回值：以单空格分割的添加了后缀“SUFFIX”的文件名序列。 
-函数说明： 
-示例： 
-$(addsuffix .c,foo bar) 
- 
+的末尾。
+返回值：以单空格分割的添加了后缀“SUFFIX”的文件名序列。
+函数说明：
+示例：
+$(addsuffix .c,foo bar)
+
 返回值为“foo.c bar.c”
 
 ## 6、编译so文件并使用
