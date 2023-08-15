@@ -26,7 +26,7 @@ p->a = 1;
 ## 2、
 ```
 //此宏展开后，类似于printf("%d""%d", 1, 2);  
-#define TRACE_CMH_2(fmt,...) \  
+#define TRACE_CMH_2(fmt, ...) \  
     printf("%s(%d)-<%s>: "##fmt, __FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) 
 ```
 

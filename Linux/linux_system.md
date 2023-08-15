@@ -40,16 +40,27 @@ SELinux 主要作用就是最大限度地减小系统中服务进程可访问的
 关于SELinux更多知识后续再补充吧。
 
 ## 4、最小的linux比拼
+https://zhuanlan.zhihu.com/p/614258778
+
+
+Tiny Core Linux ：https://blog.csdn.net/stevenldj/article/details/112852507
+有界面，能安装，但似乎只能联网安装。
+https://baijiahao.baidu.com/s?id=1666021023166364812&wfr=spider&for=pc
 
 
 
 ## 5、刷入系统后一直重启
 最终解决方法还是使用大白菜，先刷入了一个centos系统，然后再刷入后启动正常。
 
+看安装过程中有一个叫vmlinuz的文件在安装： 
+vmlinuz是可引导的、压缩的内核。“vm”代表 “Virtual Memory”。Linux 支持虚拟内存，不像老的操作系统比如DOS有640KB内存的限制。Linux能够使用硬盘空间作为虚拟内存，因此得名“vm”。vmlinuz是可执行的Linux内核，它位于/boot/vmlinuz，它一般是一个软链接。
 
+## 6、大白菜可能只支持安装windows系统
+或者只支持安装GHO文件。
+https://zhuanlan.zhihu.com/p/452299125
 
-
-
+因此就不支持安装ubuntu.iso文件。
+https://www.mryunwei.com/279797.html
 
 
 

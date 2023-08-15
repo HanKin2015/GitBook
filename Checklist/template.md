@@ -160,6 +160,10 @@ def main():
     """主函数
     """
 
+def debug():
+    """调试
+    """
+
 if __name__ == '__main__':
     """程序入口
     """
@@ -169,6 +173,7 @@ if __name__ == '__main__':
     start_time = time.time()
 
     main()
+    #debug()
 
     end_time = time.time()
     print('process spend {} s.\n'.format(round(end_time - start_time, 3)))

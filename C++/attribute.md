@@ -368,7 +368,6 @@ https://blog.csdn.net/lisfaf/article/details/98990043
 
 ## 7、补充
 [__attribute__ ((format (printf, 2, 3))); 介绍](https://blog.csdn.net/zzhongcy/article/details/90057284)
-
 https://blog.csdn.net/tongdh/article/details/20530415
 
 ```
@@ -384,8 +383,6 @@ __attribute__((unused))
 __attribute__((format(printf, 3, 4)))
 #endif
 ```
-
-
 
 ```
 static void
@@ -410,4 +407,6 @@ va_开头可能是varargs缩写
 __attribute__告诉要像printf那样检查入参，第2个参数是格式化参数，从第3个参数开始应用这个规则检测。
 vsnprintf函数:int vsnprintf (char * s, size_t n, const char * format, va_list arg );
 
+这段代码中的 #if defined __GNUC__ 和 __attribute__((format(printf, 2, 3))) 是 GCC 编译器的特性，用于告诉编译器对函数参数进行格式化检查。具体来说，__attribute__((format(printf, 2, 3))) 表示第二个参数是格式化字符串，而第三个参数是可变参数列表。这样可以让编译器在编译时检查函数调用中的格式化字符串是否与实际参数匹配，从而避免潜在的格式化字符串漏洞。
 
+示例代码见：D:\Github\Storage\c++\study\attribute\attribute_example.c

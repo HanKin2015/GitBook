@@ -12,6 +12,14 @@ https://docs.microsoft.com/en-us/cpp/sanitizers/asan?view=msvc-160
 
 ASAN ，全称 AddressSanitizer，也即地址消毒技术。可以用来检测内存问题，例如缓冲区溢出或对悬空指针的非法访问等。根据谷歌的工程师介绍 ASAN 已经在 chromium 项目上检测出了300多个潜在的未知bug，而且在使用 ASAN 作为内存错误检测工具对程序性能损耗也是及其可观的。根据检测结果显示可能导致性能降低 2 倍左右，比 Valgrind （官方给的数据大概是降低 10-50 倍）快了一个数量级。而且相比于 Valgrind 只能检查到堆内存的越界访问和悬空指针的访问， ASAN 不仅可以检测到堆内存的越界和悬空指针的访问，还能检测到栈和全局对象的越界访问。这也是 ASAN 在众多内存检测工具的比较上出类拔萃的重要原因，基本上现在 C/C++ 项目都会使用 ASAN 来保证产品质量，尤其是大项目中更为需要。
 
+AddressSanitizer (ASan) 是一种内存错误检测工具，用于检测 C/C++ 程序中的内存错误，例如使用已释放的内存、缓冲区溢出等。它是由 Google 开发的，现在已经被集成到许多编译器中，例如 Clang 和 GCC。
+
+ASan 使用了一种内存隔离技术，它会在程序运行时动态地分配内存，并在内存块之间留下一些空间，这些空间被称为“防护带”。当程序访问这些防护带时，ASan 会检测到这个错误，并输出错误信息，包括错误的位置和类型。
+
+ASan 可以检测到许多常见的内存错误，例如缓冲区溢出、使用已释放的内存、使用未初始化的内存等。它还可以检测到一些难以发现的内存错误，例如使用已经被修改的内存等。
+
+使用 ASan 可以帮助开发人员及时发现和修复内存错误，从而提高程序的稳定性和安全性。
+
 ## 2、举例使用
 demo见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer
 infect vt.传染;使携带病菌;使感染(计算机病毒);使感染（某种感情）
@@ -93,7 +101,12 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 -O0 ： 不适用编译期优化，避免优化asan效果
 -Wall : 显示所有告警信息
 
+## 3、无法检测文件描述符是否关闭
+代码见：D:\Github\Storage\c++\standard_library\file\已打开文件可删除\fopen_example.c
+D:\Github\Storage\c++\standard_library\file\已打开文件可删除\open_example.c
 
+根据简介可知，那是否可以检测内存是否被释放呢？
+答案是可检测，代码见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer\malloc_no_free.cpp
 
 
 
