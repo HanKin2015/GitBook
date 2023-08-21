@@ -1,4 +1,4 @@
-# C++ 中如何区分std::endl、std::ends、std::flush的差异性
+# C++中如何区分std::endl、std::ends、std::flush的差异性
 
 ## 1、简介
 头文件：#include <iostream>
@@ -8,8 +8,8 @@
 
 类型	描述
 endl	Insert newline and flush (刷新缓存区并插入换行符)
-ends	Insert null character (插入空字符)
-flush	Flush stream buffer (刷新流缓存区)
+ends	Insert null character    (插入空字符)
+flush	Flush stream buffer      (刷新流缓存区)
 
 ## 2、示例讲解
 ```
@@ -20,7 +20,7 @@ using namespace std;
 int main(int *argc, char* argv)
 {
 
-	std::cout << "1" ;
+	std::cout << "1";
 	std::cout << "2" << std::endl;
 	std::cout << "3" << std::ends;
 	std::cout << "4" << std::flush;

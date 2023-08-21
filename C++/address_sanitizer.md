@@ -101,12 +101,42 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 -O0 ： 不适用编译期优化，避免优化asan效果
 -Wall : 显示所有告警信息
 
+https://www.coder.work/article/3236742
+
 ## 3、无法检测文件描述符是否关闭
 代码见：D:\Github\Storage\c++\standard_library\file\已打开文件可删除\fopen_example.c
 D:\Github\Storage\c++\standard_library\file\已打开文件可删除\open_example.c
 
 根据简介可知，那是否可以检测内存是否被释放呢？
 答案是可检测，代码见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer\malloc_no_free.cpp
+
+AddressSanitizer (ASan) 是一种内存错误检测工具，它主要用于检测内存相关的错误，例如缓冲区溢出、使用已释放的内存等。ASan 并不是一个完整的静态分析工具，它无法检测所有类型的错误，包括文件描述符未关闭的问题。
+
+文件描述符未关闭的问题是一种资源泄漏问题，它会导致程序占用过多的系统资源，最终可能导致程序崩溃或者系统崩溃。ASan 并不会直接检测文件描述符未关闭的问题，因为这个问题不是一个内存相关的错误。
+
+不过，ASan 可以通过检测内存泄漏来间接地发现文件描述符未关闭的问题。当程序使用 malloc 或 new 等函数分配内存时，ASan 会跟踪这些内存块，并在程序结束时检查是否有未释放的内存块。如果有未释放的内存块，ASan 就会报告内存泄漏的错误，这可能是由于文件描述符未关闭导致的。
+
+因此，虽然 ASan 不能直接检测文件描述符未关闭的问题，但它可以通过检测内存泄漏来间接地发现这个问题。开发人员可以结合其他工具和技术，例如静态分析工具和代码审查，来更全面地检测和修复文件描述符未关闭的问题。
+
+## 4、可以使用什么工具能检测文件描述符未关闭
+可以使用一些静态分析工具来检测文件描述符未关闭的问题，例如：
+
+Coverity：Coverity 是一种商业静态分析工具，它可以检测 C/C++ 代码中的各种错误，包括文件描述符未关闭的问题。
+
+Clang Static Analyzer：Clang Static Analyzer 是一个开源的静态分析工具，它可以检测 C/C++ 代码中的各种错误，包括文件描述符未关闭的问题。
+
+PVS-Studio：PVS-Studio 是一种商业静态分析工具，它可以检测 C/C++ 代码中的各种错误，包括文件描述符未关闭的问题。
+
+这些工具都可以在编译时对代码进行静态分析，检测出潜在的文件描述符未关闭的问题，并给出相应的警告或错误信息。开发人员可以根据这些信息及时修复代码中的问题，从而提高程序的稳定性和安全性。
+
+测试发现clang这个工具并不能，也只能检测出内存泄露，代码见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer\clang_example.c
+还得是cppcheck工具好用，小巧才1.4MB左右，并且执行简单。代码见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer\cppcheck_example.c
+
+结论：暂时没有工具可以检测open函数打开的文件描述符未关闭问题。
+动态和静态都不行。
+自己猜测的原因：首先它仅仅是一个数字，在程序关闭后会自动回收。如果在程序中打开同一个文件多次，文件描述符数字会自动增加，也应该没有办法判断后面会不会关闭。总的来说，个人感觉静态工具应该能检测出来的，但是搜索了大量资料也没有一个明确的工具可以对齐进行检测。
+https://blog.csdn.net/weixin_38331755/article/details/124545159
+
 
 
 

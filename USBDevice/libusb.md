@@ -2,10 +2,11 @@
 
 ## 1、libusb学习网站
 website：http://libusb.info/
-API：http://libusb.sourceforge.net/api-1.0/
+API：http://libusb.sourceforge.net/api-1.0/libusb_api.html 
 download：https://github.com/libusb/libusb
 mailing list：http://mailing-list.libusb.info
 libusb test demo：https://github.com/crazybaoli/libusb-test
+https://github.com/libusb/libusb/blob/master/examples/xusb.c
 
 ## 2、安装
 提示：configure: error: “udev support requested but libudev not installed”

@@ -218,6 +218,7 @@ https://m.airconnectsolutions.com.cn/xtjc/2474.html
 5、再次重启系统，看看是否问题解决。
 
 卸载了EDGE相关的一些软件，以及一个补丁包后正常，很神奇。
+不久后还是存在问题，应该之前没有解决，现在就参考http://needc.com/soft/64411/卸载windows补丁包试试。
 
 ## 2、其他windows
 

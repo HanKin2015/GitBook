@@ -211,3 +211,13 @@ dpkg -r --force-remove-reinstreq ufw
 E: 无法定位软件包 xar
 ```
 
+## 10、使用apt安装失败但是更新一下apt后就成功了
+```
+E: Failed to fetch http:/www.bai.com/linux-libc_6.2.0-23.23_amd64.deb 404 Not Found [IP: 199.200.1.1 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+
+然后使用apt-get update更新后，再使用apt install clang就成功了。
+```
+
+
+

@@ -218,5 +218,8 @@ pointer_free.cpp:12:24: error: ‘MAXN’ was not declared in this scope
 
 注意：不能直接在程序中使用#号输出变量名。
 
+## 5、#if比较
+D:\Github\Storage\c++\standard_library\define\if_instruct_example.c
 
+`#if`只支持常量表达式,不能含有变量。
 
