@@ -97,30 +97,12 @@ inspector->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog);
 inspector->setMinimumSize(800, 800);
 inspector->setPage(ui->webView->page());
 inspector->show()
-————————————————
-版权声明：本文为CSDN博主「Robinson-sir」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/zbc415766331/article/details/81173672
-
-
 
 # 9、Qt窗体设置
-
 Qt窗体设置Qt::WA_TranslucentBackground
-
-
 
 # 10、vs2015安装时提示“安装包丢失或损坏”解决办法
 https://blog.csdn.net/qq_19307465/article/details/87869639
 
-
-# 11、Electron使用快速入门
- https://baijiahao.baidu.com/s?id=1622258269985547290&wfr=spider&for=pc 
- https://cloud.tencent.com/developer/doc/1070 
-
-跨越平台桌面应用开发框架electron使用的心路历程
-
-请问一下，跨平台解决方案中，Qt 和 Electron 孰优孰劣？]( https://www.zhihu.com/question/53230344 )
-
-# 12、总结
-
- https://www.jianshu.com/p/5680fe783832 
+# 11、总结
+https://www.jianshu.com/p/5680fe783832 

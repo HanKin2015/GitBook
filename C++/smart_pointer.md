@@ -4,8 +4,8 @@ https://blog.csdn.net/K346K346/article/details/81478223
 https://blog.csdn.net/MEIYOUDAO_JIUSHIDAO/article/details/114379891
 
 - unique_ptr
-- shared_ptr
-- auto_ptr（C++98 提出的，C++11 已将其摒弃，并提出了 unique_ptr 替代 auto_ptr）
+- shared_ptr（shared_ptr 和 weak_ptr 则是 C+11 从准标准库 Boost 中引入的两种智能指针）
+- auto_ptr（C++98 提出的，C++11已将其摒弃，并提出了 unique_ptr 替代 auto_ptr。虽然 auto_ptr 已被摒弃，但在实际项目中仍可使用，但建议使用更加安全的 unique_ptr）
 - wear_ptr
 
 Boost 库还提出了 boost::scoped_ptr、boost::scoped_array、boost::intrusive_ptr 等智能指针。
@@ -33,9 +33,10 @@ p2 = p1; //auto_ptr不会报错
 如果p1和p2是普通指针，那么两个指针将指向同一个string对象。那么在删除同一个对象两次的时候，会出错。要避免这种问题，方法有多种：
 （1）定义陚值运算符，使之执行深复制。这样两个指针将指向不同的对象，其中的一个对象是另一个对象的副本，缺点是浪费空间，所以智能指针都未采用此方案。
 （2）建立所有权（ownership）概念。对于特定的对象，只能有一个智能指针可拥有，这样只有拥有对象的智能指针的析构函数会删除该对象。然后让赋值操作转让所有权。这就是用于 auto_ptr 和 unique_ptr 的策略，但 unique_ptr 的策略更严格。
-（3）创建智能更高的指针，跟踪引用特定对象的智能指针数。这称为引用计数。例如，赋值时，计数将加 1，而指针过期时，计数将减 1,。当减为 0 时才调用 delete。这是 shared_ptr 采用的策略。
+（3）创建智能更高的指针，跟踪引用特定对象的智能指针数。这称为引用计数。例如，赋值时，计数将加 1，而指针过期时，计数将减 1。当减为 0 时才调用 delete。这是 shared_ptr 采用的策略。
 
 ## 2、unique_ptr和auto_ptr
+nique_ptr 由 C++11 引入，旨在替代不安全的 auto_ptr。unique_ptr 是一种定义在头文件<memory>中的智能指针。它持有对对象的独有权——两个unique_ptr 不能指向一个对象，即 unique_ptr 不共享它所管理的对象。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 （STL）算法。只能移动 unique_ptr，即对资源管理权限可以实现转移。这意味着，内存资源所有权可以转移到另一个 unique_ptr，并且原始 unique_ptr 不再拥有此资源。实际使用中，建议将对象限制为由一个所有者所有，因为多个所有权会使程序逻辑变得复杂。因此，当需要智能指针用于存 C++ 对象时，可使用 unique_ptr，构造 unique_ptr 时，可使用 make_unique Helper 函数。
 
 ### 2-1、auto_ptr淘汰原因
 使用 shared_ptr 时运行正常，因为 shared_ptr 采用引用计数，pwin 和 films[2] 都指向同一块内存，在释放空间时因为事先要判断引用计数值的大小因此不会出现多次删除一个对象的错误。
@@ -61,6 +62,22 @@ auto_ptr<string> apt1=apt;	//编译通过
 ```
 
 unique_ptr 不仅安全，而且灵活。如果 unique_ptr 是个临时右值，编译器允许拷贝语义。
+
+### 2-4、unique_ptr的基本操作
+```
+// 智能指针的创建
+unique_ptr<int> u_i; 	//创建空智能指针
+u_i.reset(new int(3)); 	//绑定动态对象  
+unique_ptr<int> u_i2(new int(4));//创建时指定动态对象
+unique_ptr<T,D> u(d);	//创建空 unique_ptr，执行类型为 T 的对象，用类型为 D 的对象 d 来替代默认的删除器 delete
+
+// 所有权的变化  
+int *p_i = u_i2.release();	//释放所有权  
+unique_ptr<string> u_s(new string("abc"));  
+unique_ptr<string> u_s2 = std::move(u_s); //所有权转移(通过移动语义)，u_s所有权转移后，变成“空指针” 
+u_s2.reset(u_s.release());	//所有权转移
+u_s2=nullptr;//显式销毁所指对象，同时智能指针变为空指针。与u_s2.reset()等价
+```
 
 ## 3、shared_ptr
 shared_ptr最初实现于Boost库中，后由 C++11 引入到 C++ STL。shared_ptr 利用引用计数的方式实现了对所管理的对象的所有权的分享，即允许多个 shared_ptr 共同管理同一个对象。像 shared_ptr 这种智能指针，《Effective C++》称之为“引用计数型智能指针”（reference-counting smart pointer，RCSP）。
@@ -141,7 +158,8 @@ private:
 ````
 
 ### 测试
-```int main()
+```
+int main()
 {
     //定义一个基础对象类指针
     Point *pa = new Point(10, 20);
@@ -171,7 +189,6 @@ private:
 
 ## 4、weak_ptr
 weak_ptr 被设计为与 shared_ptr 共同工作，可以从一个 shared_ptr 或者另一个 weak_ptr 对象构造而来。weak_ptr 是为了配合 shared_ptr 而引入的一种智能指针，它更像是 shared_ptr 的一个助手而不是智能指针，因为它不具有普通指针的行为，没有重载 operator* 和 operator-> ，因此取名为 weak，表明其是功能较弱的智能指针。它的最大作用在于协助 shared_ptr 工作，可获得资源的观测权，像旁观者那样观测资源的使用情况。观察者意味着 weak_ptr 只对 shared_ptr 进行引用，而不改变其引用计数，当被观察的 shared_ptr 失效后，相应的 weak_ptr 也相应失效。
-
 
 其实 weak_ptr 可用于打破循环引用。引用计数是一种便利的内存管理机制，但它有一个很大的缺点，那就是不能管理循环引用的对象。
 

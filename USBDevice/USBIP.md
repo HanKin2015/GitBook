@@ -103,8 +103,8 @@ USB/IP协议的主要功能：将A机器上的一个USB设备映射到B机器上
 
 USB/IP是一种基于网络的设备共享机制，可将电脑A（server端）连接的USB设备通过网络共享给远程电脑B（client端）
 USB/IP有很多的实现方式（程序），除了下文中使用的免费程序，还有商用程序：USB Network Gate、FlexiHub、VirtualHere、[USB over Network](https://www.net-usb.com/cn/usb-over-ip/)。更多见[这篇文章](https://zh.altapps.net/soft/virtualhere)
-
-
+https://www.eltima.com/cn/products/usb-over-ethernet/
+https://www.eltima.com/cn/usb-network-gate-competitive.html
 
 ## 5、实战
 

@@ -62,27 +62,16 @@ Omnipeek 是出自WildPackets的著名的抓包软件。
 以前写的文章跟翔一样？？？？
 
 Electron和NW.js是一个可以使用Web开发技术来开发跨平台的桌面级应用的一个框架，而传统桌面应用开发要求懂高级编程语言以及专门的框架。有了Electron和NW.js，你可以将现有Web开发技术运用到仅仅使用HTML、CSS和JavaScript就能开发的桌面应用中。而且，开发出来的应用还能在Windows、Mac和Linux中工作，显著减少了开发和培训的时间。
-
 这篇教程我们重点讲解下NW.js，NW.js是Intel的工程师写的一个基于node.js和chromium的应用程序运行环境。项目地址是：https://github.com/rogerwang/node-webkit。
-
-使用它的好处：
-
-（1）以网络最流行的技术编写原生应用程序的新方法
-
-（2）基于HTML5, CSS3, JS and WebGL而编写
-
-（3）完全支持nodejs所有api及第三方模块
-
-（4）可以使用DOM直接调用nodejs模块
-
-（5）容易打包和分发
-
+使用它的好处：
+（1）以网络最流行的技术编写原生应用程序的新方法
+（2）基于HTML5, CSS3, JS and WebGL而编写
+（3）完全支持nodejs所有api及第三方模块
+（4）可以使用DOM直接调用nodejs模块
+（5）容易打包和分发
 （6）支持运行环境包括32位和64位的Window、Linux和Mac OS
-
-使用方法：
-
+使用方法：
 第一步，我们先下载NW的运行环境，官网地址：http://nwjs.io/。
-
 打开后有两个下载项，NORMAL和SDK，分别表示运行时和开发调试环境。这里我们学习使用可以选择下载SDK。
 
 第二步，在开发目录新建一个package.json的全局配置文件。
