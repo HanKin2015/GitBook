@@ -1,7 +1,7 @@
 # USB组合设备 Interface Association Descriptor (IAD)
-
-
-
+https://blog.51cto.com/u_8475449/5630151
+https://www.ngui.cc/el/3208308.html?action=onClick
+感觉这篇文章写的有问题：https://www.usbzh.com/article/detail-1175.html
 Communication Device Class，简称CDC
 USB Compound Device，USB复合设备
 USB Composite Device，USB组合设备
@@ -18,7 +18,7 @@ Composite Device内只有一个Function，只有一套PID/VID，通过将不同�
 很多人认为一个USB接口上实现多个设备，就是指复合设备，其实，这是不确切的，
 虽然USB Compound Device和USB Composite Device都会被百度翻译为USB复合设备。
 
-在一个USB接口上实现多个设备有2中方法，
+在一个USB接口上实现多个设备有2种方法，
 一种是Compound Device，就是复合设备；
 另一种是Composite Device，就是组合设备。
 

@@ -14,6 +14,9 @@ https://cloud.tencent.com/developer/doc/1070
 官方文档：https://www.electronjs.org/zh/docs/latest/
 
 ## 2、安装和使用
+还是比较想弄好离线安装问题：https://registry.npmmirror.com/binary.html?path=electron/26.0.0/
+[安装 Electron 的正确姿势](https://blog.csdn.net/qq_39124701/article/details/128299948)
+简单尝试了一下没有成功，也可能是安装的版本过高导致的。
 
 ### 2-1、问题一：执行electron -v报错误
 cmd命令下执行Electron -v直接报如下错误：
@@ -74,7 +77,24 @@ unsupported platforms will not be fixed.
 nvm install 12.22.12
 ```
 
-### 2-4、electron-quick-start npm start 启动报错
+### 2-4、electron-quick-start npm start启动报错
+```
+D:\Github\Storage\electron\helloworld>npm run start
+
+> helloworld@1.0.0 start D:\Github\Storage\electron\helloworld
+> electron .
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 3221225785
+npm ERR! helloworld@1.0.0 start: `electron .`
+npm ERR! Exit status 3221225785
+npm ERR!
+npm ERR! Failed at the helloworld@1.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\Administrator\AppData\Roaming\npm-cache\_logs\2023-08-28T02_59_18_228Z-debug.log
+```
 https://blog.csdn.net/FFFAN_KIKI/article/details/130193151
 
 这个虽然没有解决https://imba97.cn/archives/672/，但是也看见一个不错误的主题。

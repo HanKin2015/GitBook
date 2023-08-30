@@ -1,10 +1,7 @@
-
 # 工具之typora
 
 # 1、typora自动添加序号
-
 - 文件-》偏好设置-》外观-》打开主题文件夹
-
 - 新建base.user.css（名字唯一）文件
 
 ```CSS
@@ -79,13 +76,7 @@ h6.md-focus:before {
     line-height: inherit;
 }
 ```
-
-
-
 文件中的句号.就是数字间隔符号，可以修改成自己喜欢的样式。
-
-
-
 ```CSS
 /* 正文标题区: #write */
 /* [TOC]目录树区: .md-toc-content */
@@ -234,18 +225,12 @@ h6.md-focus:before {
 
 下面这个版本没有修改过来，还需要修改完善。
 
-
-
 还有一个问题，虽然这样添加了自动编号，但是实际上原始文件是没有添加编号的。。。。。。
 
 ***因此，还是自己养成一个添加编号的好习惯吧。***
 
-
-
 参考：
-
 https://blog.csdn.net/qq_33159059/article/details/87910522
-
 https://blog.csdn.net/qq_21768483/article/details/84562095
 
 # 2、修改标题的级数
@@ -253,21 +238,15 @@ https://blog.csdn.net/qq_21768483/article/details/84562095
 快捷键ctrl+数字，如`ctrl+2`。 
 
 # 3、**Pandoc**
-
 **Pandoc**是由[John MacFarlane](https://baike.baidu.com/item/John MacFarlane)开发的[标记语言](https://baike.baidu.com/item/标记语言/5964436)转换工具，可实现不同标记语言间的格式转换，堪称该领域中的“[瑞士军刀](https://baike.baidu.com/item/瑞士军刀/152816)”。
-
-
 
 Pandoc使用[Haskell](https://baike.baidu.com/item/Haskell)语言编写，以[命令行](https://baike.baidu.com/item/命令行)形式实现与用户的交互，可支持多种操作系统；Pandoc采用[GNU GPL](https://baike.baidu.com/item/GNU GPL)授权协议发布，属于[自由软件](https://baike.baidu.com/item/自由软件)。
 
 
-
 # 4、typora入门
-
 Markdown的语法因不同的解析器或编辑器而异，Typora使用的是[GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/)。
 
 ## 4-1、常用快捷键
-
 - 加粗： `Ctrl/Cmd + B`
 - 标题： `Ctrl/Cmd + H`
 - 插入链接： `Ctrl/Cmd + K`

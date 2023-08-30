@@ -1,6 +1,6 @@
 # TO-DO_list
 
-# TODO
+推荐一个网页版本的Todo List：https://www.ricocc.com/todo/
 
 三个软件：
 数据分析：电影、消费
@@ -15,10 +15,6 @@
 - [ ] 学习SHELL
 - [ ] 完成百度之星初赛总结
 - [ ] 完成steam账号总结
-- [ ] 
-
-## 20190908
-- [ ] 
 
 ## 20200305
 - [ ] 删除短信，清理小米云盘
@@ -36,12 +32,6 @@
 - [ ] 博客网站是时候要开始维护了
 - [ ] 有一个电子书网站也不错，在微信文件里
 - [ ] 自我简历，建立仓库
-
-
-记住，周末有时间去了解了解这个作者，以及动漫公司
-
-[AGE动漫](https://www.agefans.tv/)
-
 
 ## 20200508
 汽车学习
@@ -62,6 +52,24 @@
 - 完成
 
 ## 20230828
+- [ ] 鹊刀门传奇
+- [ ] [AGE动漫](https://www.homyin.com/)
+- [ ] https://imba97.cn/links/
+- [ ] https://www.52pojie.cn/
+- [ ] https://www.jianshu.com/p/1fca1522df4d
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+
+AGE动漫【www.homyin.com】 提供免费热门动漫免费在线观看,拥有海量高清完整版国创、番剧等视频,极速播放观看体验极佳,手机看热门动漫就来age动漫网。
+
+https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh
+
+
+
+
+
 
 
 

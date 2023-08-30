@@ -74,7 +74,7 @@ node -v                 // 检测是否切换完成，新开一个cmd
 nvm uninstall <version> // 卸载制定的版本
 nvm current             // 显示当前版本
 nvm arch                // 当前系统是多少位，并指定安装多少位的nodejs
-nvm root　              // 查看nvm安装路径
+nvm root                // 查看nvm安装路径
 
 nvm升级：下载nvm-update.exe即可，双击自动安装打印5分钟左右
 ```
