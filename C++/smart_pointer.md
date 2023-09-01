@@ -212,7 +212,7 @@ weak_ptr 对象引用资源时不会增加引用计数，但是它能够通过 l
 ## 5、error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = log4cplus::Layout; _Dp = std::default_delete<log4cplus::Layout>]’
 https://zhuanlan.zhihu.com/p/359964081
 
-
+原因分析：unique_ptr指向的内存区域只能由一个unique_ptr的对象来指定。把testPtr作为传入参数的时候，就会发现有两个unique_ptr同时指向一个内存区域，实际参数testPtr和形式参数ptrHandle。
 
 
 

@@ -1,6 +1,8 @@
 # gitee搭建个人网站
 
 ## 1、简介
+参考：https://blog.csdn.net/qq_42477843/article/details/107165026
+
 Gitee （中文名：码云 ，原名 Git@OSC ）是开源中国推出的基于 Git 的代码托管服务。目前已经托管超过 500 万的项目。
 
 Gitee 包括三个版本，分别是：社区版、企业版 和 高校版。
@@ -20,8 +22,6 @@ GitHub、GitLab 不同点：
     (3)允许用户设置project的获取权限，进一步提升安全性
     (4)可以设置获取到团队整体的改进进度
     (5)通过innersourcing让不在权限范围内的人访问不到该资源
-
-参考：https://blog.csdn.net/qq_42477843/article/details/107165026
 
 ## 3、gitee开通gitee pages服务
 Gitee Pages 服务 一个支持Jekyll、Hugo、Hexo静态网站的服务。

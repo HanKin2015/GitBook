@@ -8,6 +8,8 @@ https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifica
 
 [List of USB ID](http://www.linux-usb.org/usb.ids)
 
+peripheral：外围设备
+
 ## 2、USB协议
 USB基础知识概论: https://www.crifan.com/files/doc/docbook/usb_basic/release/webhelp/index.html
 USB2.0官方协议：https://www.usb.org/sites/default/files/usb_20_20211008.zip

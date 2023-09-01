@@ -109,6 +109,12 @@ https://blog.csdn.net/FFFAN_KIKI/article/details/130193151
 详细代码见：D:\Github\Storage\electron\helloworld
 npm run start
 
+## 3、打包您的应用程序
+```
+npm install --save-dev @electron-forge/cli
+```
+结果安装不上，安装了nvm install 14.21.3结果在windows7系统上面运行不起来。还得需要windows10系统。
 
+2023.09.01后面再继续学习吧。
 
 

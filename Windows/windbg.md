@@ -2,14 +2,11 @@
 
 ## 1、运行调试
 - 加载
-
 查找关键字：STACK_COMMAND:  .ecxr ; kb ; ** Pseudo Context ** ; kb
 或者使用kb命令查看堆栈信息。
 
 ctrl+break中断下载操作，只发现右上角有个pause break键。
 正确方式是ctrl+c。
-
-
 
 ### 使用windbg捕获程序崩溃
 https://blog.csdn.net/dyzhen/article/details/6402226
@@ -21,7 +18,6 @@ https://blog.csdn.net/dyzhen/article/details/6402226
 注意：x86编译的程序只能使用x86版本的windbg捕获。
 
 ## 2、WinDbg调试内存泄露
-
 执行.reload /f之前!sym noisy很重要。
 
 ### 2-1、直接在任务管理器右键创建转储文件
@@ -315,24 +311,68 @@ View->call stack
 locals
 processes and threads
 
-
 有些dump文件可能不是在最后的地方崩溃，可以在之前已经出现内存访问错误，从而后面是随机地方出现崩溃。
 
 ```
 线程命令是以~开始，后面跟线程id（一个windbg从0开始的一个编号），或者.,#,*等，可和其他命令混合使用。
 
-~                简洁地显示当前进程的所有线程，
-~.                表示当前线程
-~#                表示异常或者产生调试事件的线程
-~*                表示所有线程
-~1                表示一号线程
+~               简洁地显示当前进程的所有线程，
+~.              表示当前线程
+~#              表示异常或者产生调试事件的线程
+~*              表示所有线程
+~1              表示一号线程
 ~2 s            表示选择2号线程作为当前线程
 ~3 f            冻结三号线程
 ~3 u            解冻三号线程
 ~2 n            挂起二号线程
 ~2 m            恢复二线程
-~*e    !clrstack   遍历每个线程, 依次输出它们的托管调用栈.
+~*e !clrstack   遍历每个线程, 依次输出它们的托管调用栈.
 !threads        查看所有的托管线程
 ```
 
+## 6、实战之打印运行进程中的变量值
+在Windbg中，!sym noisy命令用于控制符号加载的详细程度。符号是用于调试和分析二进制文件的重要元素，它们包含了函数、变量和类型的信息。
+当使用!sym noisy命令时，Windbg会显示符号加载的详细信息，包括正在加载的符号文件的名称、路径和加载状态。这对于调试复杂的程序或分析崩溃时的堆栈信息非常有用。
+通过使用!sym noisy命令，您可以获得更多关于符号加载过程的信息，以便更好地理解和分析调试会话。
 
+0n19920972是一个十进制数字，表示19920972。在Windbg中，数字前面的0n前缀表示这是一个十进制数字，而不是一个十六进制数字（没有前缀）或一个八进制数字（前缀为0）。这种表示方法可以避免数字被错误地解释为十六进制或八进制数字。
+
+WinDbg软件尽量使用新版的，当前我使用的是6.x版本，就存在一些不足。
+- bool变量显示ffffffff0，实际为true（可能是命令问题，使用dx）
+- 不能直接跳转到代码文件
+- 十进制表示为0n
+
+（1）修改环境变量配置符号表地址：系统变量=》新建_NT_SYMBOL_PATH-》srv*c:\Symbols*http://1.2.48.40/symbols;srv*c:\Symbols*http://1.2.47.47/symbols;d:/symbols
+（2）打开WinDbgx86软件
+（3）Symbol File Path 手动加载符号表，注意勾选reload
+（4）Source File Path 手动加载代码文件夹
+（5）Attach to a Process 挂载进程
+（6）!sym noisy
+（7）执行.reload /f 加载符号表（这个可能会很久很久）
+（8）lm 命令查看当前加载的模块列表
+（9）bp session!class:function 下断点，session为模块名，然后是类名函数名
+（10）g 继续运行程序
+（11）k 查看堆栈信息
+（12）.frame 0 进入捕获位置
+（13）dv 打印局部变量
+（14）dt this 打印类的全部变量（低版本dt class 0x12344）
+
+## 7、实战之分析dmp文件
+（1）生成dmp文件：以管理员打开procexp.exe软件，找到进程，右键=》Create Dump
+（2）打开WinDbgx86软件
+（3）Symbol File Path 手动加载符号表，注意勾选reload
+（4）Source File Path 手动加载代码文件夹
+（5）Open Crash Dump 加载dmp文件
+（6）!sym noisy
+（7）执行.reload /f 加载符号表
+（8）k 查看堆栈信息
+（9）.frame 0 进入捕获位置
+（10）dv 打印局部变量
+（11）dt this 打印类的全部变量
+
+## 8、其他命令
+bd * 删除所有断点
+bl 显示断点
+dv /x myVar 以十六进制格式输出变量的值
+!analyze -v
+可以直接用鼠标点击this指针，直接运行命令dx -r1 ((session!class *)0x12ff5f8)

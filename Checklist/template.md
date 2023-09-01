@@ -39,7 +39,7 @@ clean:
 
 ### c/c++文件
 ```
-/**
+/*******************************************************************************
 * 文 件 名: read_write.cpp
 * 文件描述: 探究读写文件速度效率
 * 作    者: HanKin
@@ -47,7 +47,7 @@ clean:
 * 修改日期：2023.06.30
 *
 * Copyright (c) 2023 HanKin. All rights reserved.
-*/
+*******************************************************************************/
 
 #include <cstdio>
 #include <iostream>
@@ -77,9 +77,29 @@ system("PAUSE");
 return EXIT_SUCCESS;
 
 typedef struct _NODE {
-	int x;
-	int y;
+    int x;
+    int y;
 } NODE;
+
+#pragma once
+#ifndef _SRC_TEST_H_
+#define _SRC_TEST_H_
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+* 函数说明：读取二进制文件全部内容
+* @param [in]filename 文件名
+* @param [out]size 文件大小
+* @return new[size]大小的文内容缓存指针(需要调用者delete[]该缓存指针)
+*/
+char* ReadBinFile(const char* filename, uint32_t& size);
+
+#ifdef __cplusplus
+}
+#endif
+#endif//_SRC_TEST_H_
 ```
 
 ### shell脚本
