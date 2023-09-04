@@ -1,5 +1,7 @@
 # netstat命令
 
+注意windows系统和Linux系统中两者命令参数有所不同。
+
 ## 1、简介
 Netstat 命令用于显示各种网络相关信息，如网络连接，路由表，接口状态 (Interface Statistics)，masquerade 连接，多播成员 (Multicast Memberships) 等等。
 
@@ -53,7 +55,7 @@ netstat 将每隔一秒输出网络信息 netstat -c
 ## 4、关闭某个端口
 ```
 root@kali:~# netstat -anp | grep 3000
-tcp        0      0 0.0.0.0:3000            0.0.0.0:*               LISTEN      5632/ruby       
+tcp     0       0 0.0.0.0:30000.0.0.0:* LISTEN      5632/ruby
 root@kali:~# kill 5632
 root@kali:~# netstat -anp | grep 3000
 root@kali:~#

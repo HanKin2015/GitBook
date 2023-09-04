@@ -23,7 +23,10 @@ Tools-->>preferences-->>editor-->>display-->>show blank spaces
 
 ## 2、PyCharm
 官网：https://www.jetbrains.com/pycharm/
+激活插件及教程：https://txx.lanzoub.com/iq6cH086qrad
+根据教程已激活PyCharm2022.3.3版本。
 
-
+### 2-1、简单使用
+字体主题修改：可以在“File”-“Settings”-“Editor”-“Color Scheme”中找到这些主题。
 
 

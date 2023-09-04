@@ -220,6 +220,10 @@ https://m.airconnectsolutions.com.cn/xtjc/2474.html
 卸载了EDGE相关的一些软件，以及一个补丁包后正常，很神奇。
 不久后还是存在问题，应该之前没有解决，现在就参考http://needc.com/soft/64411/卸载windows补丁包试试。
 
+### 1-22、显示桌面图标快捷键
+右边ctrl键的左边一个键调出桌面右键菜单或者shift+F10。
+然后点击V键=》点击D键
+
 ## 2、其他windows
 
 ### 2-1、20210201
@@ -262,7 +266,7 @@ Windows Registry Editor Version 5.00
 ### 2-6、DX基础 | DXGI(DirectX Graphics Infrastructure)
 https://www.pianshen.com/article/40881199723/
 
-ntoskenl 是 Windows 的内核进程，负责 Windows 核心部分的操作，也就是负责操作系统核心的五大任务：处理机管理、存储管理、设备管理、文件管理、接口，这从它的 PID = 4 就能看出来它的地位是操作系统最先启动的进程。操作系统（四）操作系统的主要功能 - 魏亚林 - 博客园​www.cnblogs.com因此它是接管整个电脑硬件的程序，具有最高权限，或者说它要运行在硬件的环境上。而我们日常使用的其他程序都是在 ntoskrnl 的掌管下运行的，而且运行方式是调用 Windows 的接口。如果你在 Windows 环境下直接运行它，那么就变成了 Windows 的环境，所以提示无法在 Win32 模式下运行。注意 win32 是指 Windows NT 系列内核，而不是指 32 位 Windows。64 位 Windows 同样也叫 Win32。应用程序在调用 Windows 接口时，功能的执行需要由 ntoskrnl 进行。因此当某些程序在大量调用系统接口或者系统功能时，会造成 ntoskrnl 的高占用。由于没有便捷的方式可以排查问题，你可以尝试逐个结束其他进程。这不会造成系统损坏。
+ntoskenl 是 Windows 的内核进程，负责 Windows 核心部分的操作，也就是负责操作系统核心的五大任务：处理机管理、存储管理、设备管理、文件管理、接口，这从它的 PID = 4 就能看出来它的地位是操作系统最先启动的进程。操作系统（四）操作系统的主要功能 - 魏亚林 - 博客园www.cnblogs.com因此它是接管整个电脑硬件的程序，具有最高权限，或者说它要运行在硬件的环境上。而我们日常使用的其他程序都是在 ntoskrnl 的掌管下运行的，而且运行方式是调用 Windows 的接口。如果你在 Windows 环境下直接运行它，那么就变成了 Windows 的环境，所以提示无法在 Win32 模式下运行。注意 win32 是指 Windows NT 系列内核，而不是指 32 位 Windows。64 位 Windows 同样也叫 Win32。应用程序在调用 Windows 接口时，功能的执行需要由 ntoskrnl 进行。因此当某些程序在大量调用系统接口或者系统功能时，会造成 ntoskrnl 的高占用。由于没有便捷的方式可以排查问题，你可以尝试逐个结束其他进程。这不会造成系统损坏。
 
 ### 2-7、给软件添加开机启动项
 - 给软件创建桌面快捷方式
@@ -368,36 +372,6 @@ Remove-LocalGroup -Name "组名"
 Set-LocalUser -Name "用户名" -Password (ConvertTo-SecureString "新密码" -AsPlainText -Force)
 ```
 将“用户名”替换为你要修改密码的本地用户的用户名，将“新密码”替换为你要设置的新密码。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -26,10 +26,93 @@ GitHub、GitLab 不同点：
 ## 3、gitee开通gitee pages服务
 Gitee Pages 服务 一个支持Jekyll、Hugo、Hexo静态网站的服务。
 居然要个人身份证正反面以及手持身份证照片，太严格了。
+但是后面不清楚为何又不需要验证了。
 
-## 4、
-### 新建仓库，此处一定要为gitee.io
-### 利用gitee部署网站
+## 4、gitee搭建个人博客以及更换主题
+
+### 4-1、新建仓库，此处一定要为gitee.io
+
+### 4-2、利用gitee部署网站
 服务-》gitee pages-》身份认证申请（身份证正面、反面、手持身份证照片）
 
-###
+### 4-3、安装环境
+在windows上安装node.js
+安装heox：https://hexo.io/zh-cn/docs/
+npm install -g hexo-cli
+
+坑点：node版本低，无法完成安装。
+使用nvm命令更新node版本，结果更新到最新版本后却在windows7版本上面运行失败。
+两个链接都需要参考：
+https://www.mmzsblog.cn/articles/2021/12/18/1639798198040.html
+https://blog.csdn.net/YukiGreen/article/details/131480726
+
+nvm install 18.17.0
+nvm use 18.17.0
+```
+D:\Github\Gitee\hexo>nvm ls
+
+    18.17.0
+    14.21.3
+    14.15.3
+    12.22.12
+    12.16.2
+
+D:\Github\Gitee\hexo>nvm current
+No current version. Run 'nvm use x.x.x' to set a version.
+
+D:\Github\Gitee\hexo>node -v
+Node.js is only supported on Windows 8.1, Windows Server 2012 R2, or higher.
+Setting the NODE_SKIP_PLATFORM_CHECK environment variable to 1 skips this
+check, but Node.js might not execute correctly. Any issues encountered on
+unsupported platforms will not be fixed.
+```
+增加环境变量，这个很重要，NODE_SKIP_PLATFORM_CHECK值为1。
+增加系统变量，NODE_HOME值为C:\Users\Administrator\AppData\Roaming\nvm\v18.17.0;，然后添加到path值为%NODE_HOME%。
+搞定解决。
+
+### 4-4、本地创建hexo项目
+mkdir hexo
+cd hexo
+hexo init
+
+### 4-5、配置_config.yml文件
+我的域名为http://hankin1994.gitee.io/gitee.io
+我的仓库为https://gitee.com/hankin1994/gitee.io.git
+
+### 4-6、本地调试
+hexo clean
+hexo g
+hexo server
+http://localhost:4000/gitee.io/
+
+解决方案参考：https://github.com/nodemailer/nodemailer/issues/1410
+```
+问题现象：
+D:\Github\Gitee\hexo>hexo clean
+ERROR A system error occurred: uv_os_gethostname returned ENOSYS (function not implemented)
+ERROR Local hexo loading failed in D:\Github\Gitee\hexo
+ERROR Try running: 'rm -rf node_modules && npm install --force'
+
+问题定位：
+Administrator@WINedr-VDI0027 MINGW64 /d/Github/Gitee/hexo/node_modules
+$ grep -R "os.hostname"
+cuid/lib/fingerprint.js:    hostname = os.hostname(),
+
+解决方案：
+pid = pad(process.pid.toString(36), padding),
+hostname = 'localhost',
+length = hostname.length,
+```
+
+### 4-7、上传并重新部署网站
+hexo d
+
+### 4-8、更换主题
+进入官网选择主题https://hexo.io/themes/
+
+将其克隆到本地，去文件名-master，并复制到主题目录D:\Github\Gitee\hexo\themes下，然后在_comfig.yum中修改对应的主题名。
+
+
+
+
+

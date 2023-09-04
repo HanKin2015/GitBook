@@ -376,3 +376,18 @@ bl 显示断点
 dv /x myVar 以十六进制格式输出变量的值
 !analyze -v
 可以直接用鼠标点击this指针，直接运行命令dx -r1 ((session!class *)0x12ff5f8)
+
+## 9、分析窗口被关闭了怎么复原
+分析窗口为Command窗口，在工具栏一只手的右边有个Command按钮。
+
+## 10、Procexp.exe软件下载dump文件尽量下载全量
+简单的dump文件看不见部分内存内容：
+```
+0:000> dv
+           this = <Memory access error>
+              x = 0n741
+              y = 0n502
+  buttons_state = 0n0
+     display_id = 0n0
+           lock = class Lock
+```

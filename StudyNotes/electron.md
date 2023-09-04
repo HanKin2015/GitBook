@@ -114,6 +114,7 @@ npm run start
 npm install --save-dev @electron-forge/cli
 ```
 结果安装不上，安装了nvm install 14.21.3结果在windows7系统上面运行不起来。还得需要windows10系统。
+已解决版本高无法在windows7系统运行的问题。
 
 2023.09.01后面再继续学习吧。
 
