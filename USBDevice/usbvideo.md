@@ -210,3 +210,13 @@ The Virtual Video Test Driver (vivid)
 
 https://www.kernel.org/doc/html/v4.12/media/v4l-drivers/vivid.html
 
+## 10、网络摄像机(IPC)介绍
+https://mp.weixin.qq.com/s/RHUSnXLnwc6o2jU9X2gkdw
+
+网络摄像机是一种结合传统摄像机与网络技术所产生的新一代摄像机，它可以将视频影像通过网络传至地球另一端，且远端的浏览者不需用任何专业软件，只要标准的网络浏览器（如“Microsoft IE或Netscape）即可监视其视频影像。网络摄像机一般由镜头、图像传感器、声音传感器、信号处理器、A/D转换器、编码芯片、主控芯片、网络及控制接口等部分组成。
+
+IPC网络摄像机要联网设置IP地址、授权帐户和视频参数等等，按照菜单在浏览器中设置网络摄像机。
+
+
+
+

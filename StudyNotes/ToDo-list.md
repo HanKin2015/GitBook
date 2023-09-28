@@ -67,7 +67,8 @@
 - [ ] blog主题更新以及内容修正
 - [ ] 日志网站部署
 
-
+## 20230907
+- [ ] 牛逼https://github.com/tjy-gitnub/win12
 
 
 
@@ -82,6 +83,7 @@ AGE动漫【www.homyin.com】 提供免费热门动漫免费在线观看,拥有�
 https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh
 
 
+「爱发电」是连接创作者与粉丝的会员制网站及 App（支持安卓与 iOS 平台）。「爱发电」的功能包括创作者可以制定自己的付费会员计划、发布付费内容等等。
 
 # 未来规划
 

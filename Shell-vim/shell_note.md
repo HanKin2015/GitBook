@@ -191,9 +191,9 @@ echo $*
 ```
 
 ## 11、linux c解析命令行选项getopt、optarg、optind、opterr、optopt
-### getopts/getopt
 
- 处理命令行参数是一个相似而又复杂的事情，为此，c提供了getopt/getopt_long等函数，
+### getopts/getopt
+处理命令行参数是一个相似而又复杂的事情，为此，c提供了getopt/getopt_long等函数，
 c++的boost提供了options库，在shell中，处理此事的是getopts和getopt.
 getopts和getopt功能相似但又不完全相同，其中getopt是独立的可执行文件，而getopts是由bash内置的。 
 

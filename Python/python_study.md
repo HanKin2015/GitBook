@@ -40,13 +40,49 @@ b = [1, 2, 3]
 c = dict(zip(a, b))
 
 ## 7、json格式
+
+### 7-1、json和字符串之间的转换
+将字符串转换为JSON对象：
 ```
->>> import json
->>> print json.dumps({'a': 'Runoob', 'b': 7}, sort_keys=True, indent=4, separators=(',', ': '))
-{
-    "a": "Runoob",
-    "b": 7
-}
+import json
+
+json_str = '{"name": "Alice", "age": 25}'
+json_obj = json.loads(json_str)
+print(json_obj)  # 输出：{'name': 'Alice', 'age': 25}
+```
+
+将JSON对象转换为Python字典：
+```
+import json
+
+json_obj = {"name": "Alice", "age": 25}
+json_str = json.dumps(json_obj)
+print(json_str)  # 输出：'{"name": "Alice", "age": 25}'
+
+dict_obj = json.loads(json_str)
+print(dict_obj)  # 输出：{'name': 'Alice', 'age': 25}
+```
+从上面可以看出，其实字典和json对象非常相似。
+
+### 7-2、json.load和json.loads区别
+json.load()函数用于从文件中读取JSON数据并将其转换为Python对象。它接受一个文件对象作为参数，并返回解析后的Python对象。示例代码如下：
+```
+import json
+
+with open('data.json', 'r') as file:
+    data = json.load(file)
+
+print(data)
+```
+
+json.loads()函数用于将JSON字符串转换为Python对象。它接受一个JSON字符串作为参数，并返回解析后的Python对象。
+```
+import json
+
+json_str = '{"name": "Alice", "age": 25}'
+data = json.loads(json_str)
+
+print(data)
 ```
 
 ## 8、rsa加密解密
@@ -182,7 +218,7 @@ https://mp.weixin.qq.com/s/TvLD9farUXNmYo5IfSFd9A
 numpy.sort(arr)
 ```
 
-## 25、list
+## 25、list列表
 
 ### 25-1、list插入数据
 insert：指定位置插入
@@ -200,3 +236,33 @@ lis.sort(reverse=True)
 ```
 lis.sort(key=(lambda x:x[0]))
 ```
+
+## 26、Python 函数返回两个值, 如何将其中一个省略
+假设 func(parms) 返回 两个 值, 利用 ‘下划线’ _ 来省略其中一个值, 如
+```
+v, _ = func(parms)
+```
+
+## 27、set去重
+```
+inter_set = set()
+inter_set.add(4)
+len(inter_set)
+inter_set.remove(3)
+
+# 使用discard函数，该函数和remove函数功能一样，同时在删除不存在的元素时不会触发错误
+inter_set.discard(0)
+
+# 计算两个集合的并集
+s1 = {1,2,3,4}
+s2 = {3,4,5,6}
+s3 = s1.union(s2)
+
+# 计算两个集合的交集
+s3 = s1.intersection(s2)
+
+# 计算两个集合的差集
+s3 = s1 - s2
+```
+
+## 28、

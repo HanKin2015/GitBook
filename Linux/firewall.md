@@ -24,9 +24,9 @@ iptables命令是Linux上常用的防火墙软件，是netfilter项目的一部�
 -o<网络接口>：指定数据包要离开本机所使用的网络接口。
 
 ### 1-2、清除已有iptables规则
-iptables -F
-iptables -X
-iptables -Z
+iptables -F（好用）
+iptables -X（报错iptables: Too many links.）
+iptables -Z（未生效）
 
 ### 1-3、开放指定的端口
 iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)
@@ -43,7 +43,54 @@ iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问
 iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令
 iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令
 iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令
-iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是
+iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令
+
+### 1-5、实战
+```
+iptables -A INPUT -s 123.70.10.72 --dport 22 -j DROP  禁止123.70.10.72的ip访问本机的22端口
+无法进行ssh连接
+
+iptables -A INPUT -p tcp --dport 9000:9999 -j DROP 禁止所有ip访问本机的9000到9999端口
+由于adb命令连接使用的是9000到9999端口，因此会进行大量的重试操作，直至超时unable to connect to 172.22.16.82:9045:9045
+
+iptables -A INPUT -s 123.70.10.72 -j DROP 禁止123.70.10.72的ip访问
+无法进行ssh连接，并且会两者互相ping不通，而且也会报错unable to connect to 172.22.16.82:9045:9045
+
+只禁止某个ip的22端口访问，需要优先关闭22端口，然后再允许指定ip能访问来反向操作。并且不像网上说的有iptables服务
+[root@WZRY ~]# service iptables start
+Redirecting to /bin/systemctl start iptables.service
+Failed to start iptables.service: Unit not found.
+[root@WZRY ~]# systemctl start iptables
+Failed to start iptables.service: Unit not found.
+[root@WZRY ~]# cat hj.sh
+iptables -I INPUT -p tcp --dport 22 -j DROP
+iptables -I INPUT -p tcp -s 123.22.64.246 --dport 22 -j ACCEPT
+
+iptables -A OUTPUT -p icmp --icmp-type echo-request -d 123.70.10.72 -j DROP
+着实能让本机不能ping通123.70.10.72
+
+iptables -A INPUT -p icmp --icmp-type echo-request -s 123.70.10.72 -j DROP
+两者都不通
+
+iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
+同时执行这两句，则会实现本机能ping通其他ip地址，但是其他ip地址ping不通本机，但是无法阻止adb connect的连接
+
+我发现一旦使用adb connect连接某个端口之后，然后其他端口就会立即返回unable to connect to 123.22.16.82:9059:9059
+也就是说难道是有其他机器占用端口，导致我无法连接进入？？？但是找不到
+如果全部禁用9xxx端口不会立即返回错误，默认情况下使用adb connect连接其端口就是立即返回，即报错unable to connect to 123.22.16.82:9033:9033
+最后的尝试挣扎：
+iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
+iptables -A INPUT -p tcp --dport 9000:9999 -j DROP
+前后顺序调换都尝试过，都不行
+
+放弃放弃，最接近的就是关闭所有9xxx端口，只不过可能需要等待1分钟的超时，最有可能还是跳板机之类的东西吧
+```
+
+参考资料：
+https://www.cnblogs.com/amoyzhu/p/9288117.html
+https://blog.csdn.net/qq_21847285/article/details/128189035
 
 ## 2、ufw
 有命令，但是执行报错：
@@ -68,7 +115,6 @@ export PYTHONHOME=$PYTHONHOME:/usr/bin
 ln -sf /usr/local/bin/python3.5 python
 ```
 未解决。
-
 
 ## 3、firewalld
 我身边只有ubuntu系统，因此没有这个命令

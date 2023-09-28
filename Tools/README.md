@@ -113,3 +113,31 @@ Todo List：https://www.ricocc.com/todo/
 GifFox电子书搜索：https://www.giffox.com/
 
 InnoKB server使用使用的人应该不是很多。
+
+MasterGo在线设计工具
+seerdesignmg == seerdesign MasterGo
+
+如果你正在寻找一种快速简便的方法来监控你的网络流量，这个用 Rust 编写的跨平台应用程序sniffnet可以试试：https://github.com/GyulyVGC/sniffnet
+但是我试了三台电脑都没有正常运行起来。。。
+https://mp.weixin.qq.com/s/DY3iuYMgS7GOWK8aB3AJnA
+
+https://mp.weixin.qq.com/s/QrMpX2DuGoB62gVKBbJBQA
+下载所支持的数字图书馆内珍藏的古籍图书：https://pan.lanzouy.com/iGUhZ18z6une
+教习网下载器：https://pan.lanzouy.com/i1BLN18uc4qh
+装机伴侣：https://pan.lanzouy.com/iWUAO18z6qda
+抽奖工具：https://pan.lanzouy.com/iatvT17xr8vi
+
+## 12、新技巧之split.exe工具
+split.exe工具可以分隔文件，可以直接在git bash窗口使用，拿一个jpg图片为例。
+
+- 先计算原始文件的md5sum：md5sum.exe test.jpg
+- 将原始文件剪切为多份(以2份为例）：split.exe -n 2 test.jpg
+- 得到两个分割的文件不指定被分割出来的的文件前缀的话，一般都是xaa, xab等等
+- 使用cat命令将文件合并成一个：cat xa* > new_test.jpg
+- 计算重新合并成的文件的md5sum：md5sum.exe new_test.jpg
+- 对比原始文件与重新合并成的文件的md5sum， 一致则处理成功
+
+
+
+
+

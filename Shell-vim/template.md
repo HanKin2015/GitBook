@@ -107,25 +107,17 @@ set -e
 set +e
 
 # shell
-
 printf输出
-
 echo输出
-
 变量不加引号、加单引号、双引号
-
 REPOPATH=git@github.com:github/test.git
-
 REPOPATH = git@github.com:github/test.git  (错误，等号两边不能有空格，系统会把变量当作命令，提示REPOPATH未找到)
 
 # 脚本的编写
 
 #!/bin/bash
-
 变量定义(目录、路径、flag...)
-
 usage(){}
-
 ```
 usage()
 {
@@ -142,11 +134,9 @@ usage()
 ```
 
 各种函数
-
 cd $(dirname $0)    ===== cd \`dirname $0\`
 
 参数判断
-
 ```
 #!/bin/bash
 
@@ -162,10 +152,7 @@ do
 done
 ```
 
-
-
 while getopts "" opt
-
 ```
 while getopts ":i:u:h" opt    # 冒号表示安装目标的文件夹
 do
@@ -174,16 +161,11 @@ do
 ```
 
 su （需要输入管理员密码）
-
 sudo su(只需要输入当前用户的密码)
-
 su root转换到root账户   =====  su （账户密码，及root）
 
-
 内网wifi：TP未限速
-
 桌面巡检工具
-
 ---
 
 $？获取上一个命令的退出状态

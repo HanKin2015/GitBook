@@ -199,6 +199,17 @@ if __name__ == '__main__':
     print('process spend {} s.\n'.format(round(end_time - start_time, 3)))
     
 print('-------- {}[{}] --------'.format(sys._getframe().f_code.co_name, sys._getframe().f_lineno))
+
+
+def zipDir(dirpath, outpath_zip):
+    """
+    压缩指定文件夹
+    
+    :param dirpath: 目标文件夹路径
+    :param outpath_zip: 压缩文件保存路径
+    :return: 无
+    :raise keyError: raise an exception
+    """
 ```
 
 ### batch脚本

@@ -47,4 +47,28 @@ python3.6引入了一种新的字符串格式化方式：f-string格式化字符
 ### 2.9 f-string针对date、datetime和time对象，进行年月日、时分秒等信息提取
 说明：针对date、datetime和time对象，进行年月日、时分秒等提取，我们直接可以使用datetime模块中的方法就可以解决。
 
+## 3、format格式化输出
+https://www.cnblogs.com/2016024291-/p/8047285.html
+
+```
+vid_pid = "{:04x}:{:04x}".format(int(device_info.get("idVendor")), int(device_info.get("idProduct")))
+
+>>> print('{} and {}'.format('hello','world'))  # 默认左对齐
+hello and world
+>>> print('{:10s} and {:>10s}'.format('hello','world'))  # 取10位左对齐，取10位右对齐
+hello      and      world
+>>> print('{:^10s} and {:^10s}'.format('hello','world'))  # 取10位中间对齐
+  hello    and   world
+>>> print('{} is {:.2f}'.format(1.123,1.123))  # 取2位小数
+1.123 is 1.12
+>>> print('{0} is {0:>10.2f}'.format(1.123))  # 取2位小数，右对齐，取10位
+1.123 is       1.12
+```
+
+
+
+
+
+
+
 

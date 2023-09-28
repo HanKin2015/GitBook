@@ -114,7 +114,7 @@ service sshd restart
 好奇怪，到底哪个是真的？
 
 ## 8、ssh反映特别慢，但是网络没有问题的时怎么办
-vi sshd_config 找到注释的useDNS yes，修改为如下，并取消注释
+vi sshd_config找到注释的useDNS yes，修改为如下，并取消注释
 useDNS no
 
 完成添加后，保存退出
@@ -126,10 +126,10 @@ useDNS no
 重新创建一个，感觉一下，是不是反映速度0.1秒都不到，特别迅速
 
 如果是想让图形化界面连接快的话
-还是找到vi sshd_config 
-找到#GSSAPIAuthentication  yes
-将yes修改为no  并且取消注释
-GSSAPIAuthentication  no
+还是找到vi sshd_config
+找到#GSSAPIAuthentication yes
+将yes修改为no 并且取消注释
+GSSAPIAuthentication no
 重启sshd服务即可
 
 ## 9、ssh/scp指定端口用法
@@ -443,3 +443,25 @@ ssh: connect to host 172.22.16.81 port 22: Connection refused
 ```
 修改 /etc/ssh/sshd_config 文件，将 ListenAddress 修改为 ListenAddress 0.0.0.0
 重启 ssh 服务, /etc/init.d/ssh restart
+
+## 15、连接不上服务器
+```
+[root@HANKIN etc]# ssh root@localhost -p 9370
+kex_exchange_identification: read: Connection reset by peer
+Connection reset by 127.0.0.1 port 9370
+```
+网上有这样说的，https://blog.csdn.net/saynaihe/article/details/131609562但是也得先进入服务器，因此估计只能重新刷服务器的方法了。
+
+但是搜索了大量资料都没有一个好的办法，只能重刷。
+
+## 16、使用git bash窗口连接不上服务器
+但是使用mobaxterm是可以的，原因是密码太短，设置成1了，设置成长一些的密码则能登录成功。
+但是这个时候使用xface的ui界面还是无法登录root用户，其他用户也不行，密码是正确的。
+后来在界面上面乱点，如查看当前是什么ui桌面后，奇迹般的好了，也能直接使用短密码了，也能登录进入UI界面了。
+
+
+
+
+
+
+

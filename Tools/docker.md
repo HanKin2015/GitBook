@@ -16,6 +16,14 @@ Docker 是一个[开源](https://baike.baidu.com/item/开源/246339)的应用容
 拷贝文件进入docker：docker cp 86d66188df09:/root/compile/qemu/qemu-5.0.0/x86_64-softmmu/qemu-system-x86_64 .
 拷贝文件导出docker：docker cp uvc_qemu.c 86d66188df09:/home/
 
+https://mp.weixin.qq.com/s/801GmqZk-dP2q_ESpxf94A
+
+## 2、docker中容器和镜像的关系是什么
+https://mp.weixin.qq.com/s/hVqn-KrUjAnH11qclet-DA
+
+- 镜像你可以把它看成Java中的类，而容器可以看做是类的实例化对象。
+- 一个类可以有多个对象，同理，一个镜像可以有多个容器。
+
 
 
 

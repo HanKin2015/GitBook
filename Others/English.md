@@ -1,6 +1,7 @@
 # 英语学习
 
 ```
+"manual troubleshooting" 和 "manual investigation" 都可以用来表示人工排查问题，具体使用哪个取决于上下文和具体的语境。一般来说，"manual troubleshooting" 更强调解决问题的过程，而 "manual investigation" 更强调调查和分析问题的过程。
 ingroup: n.内群体;内团体，内部集团，派系，小团体
 premium: n.保险费;额外费用;附加费adj.高昂的;优质的
 spacer：垫片;隔板;衬垫;撑挡

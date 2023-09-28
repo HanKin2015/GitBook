@@ -49,7 +49,8 @@ FAT32是一种常见的文件系统格式，用于格式化U盘、SD卡等可移
 文件系统结构：FAT32格式的U盘采用FAT表来记录文件的存储位置和状态，因此在存储大量小文件时，可能会出现FAT表过大的问题，导致U盘读写速度变慢。
 兼容性问题：FAT32格式的U盘在存储一些特殊文件时，可能会出现兼容性问题，例如存储超过8个字符的文件名、存储某些系统文件等。
 
-
+## 4、FATFS文件系统详解:关于SD卡、SD nand、spi nor flash等众多flash
+https://mp.weixin.qq.com/s/JoVw8QUxo4kT_PF92tZRtw
 
 
 

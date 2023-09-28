@@ -87,3 +87,26 @@ https://Hankin2015.github.io/Storage/qt/python/usb_camera_monitor_tool/img/usb_c
 一个可行是开启了github pages服务，另外一个没有开启所以打不开图片。
 另外需要https://Hankin2015.github.io/网址作为开头，相当于是根目录，以及也是Hankin2015.github.io仓库的根目录。
 
+## 13、github 一直提示 Dependabot 的解决办法
+
+### 13-1、Dependabot 作用
+Dependabot可以为你repo做的事情主要分成三大类：
+- 实时检测你的repo，并keep你所有的dependency都能被updated
+- 检测vulnerable dependencies并发出Dependabot alert
+- 帮助你停止使用有vulnerable的dependencies
+Dependabot的负面影响
+一些 demo 项目不需要这么严谨的检查。但他会一直提示，甚至还会发邮件。
+
+关闭 Dependabot 的方法
+去到repo的设置界面的“Code security and analysis”，按需禁用Dependency graph 和 Dependabot alerts 即可。
+
+如果有他创建的分支，则先处理 pull request，然后删了分支就可以了。
+————————————————
+版权声明：本文为CSDN博主「threewhisky」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/threewhisky/article/details/124138920
+
+
+
+
+
+

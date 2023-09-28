@@ -412,7 +412,6 @@ MIDI是乐器数字接口的缩写。
 WAV文件：3分钟的歌曲需要30MB，MIDI文件只需要几十KB。
 
 ## 第8章 U盘
-
 mass storage device
 
 大容量存储设备的接口类代码bInterfaceclass字段：0x08

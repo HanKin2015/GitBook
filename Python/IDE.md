@@ -1,6 +1,8 @@
 # 集成开发环境
 集成开发环境（IDE，Integrated Development Environment ）是用于提供程序开发环境的应用程序，一般包括代码编辑器、编译器、调试器和图形用户界面等工具。集成了代码编写功能、分析功能、编译功能、调试功能等一体化的开发软件服务套。所有具备这一特性的软件或者软件套（组）都可以叫集成开发环境。如微软的Visual Studio系列，Borland的C++ Builder、Delphi系列等。该程序可以独立运行，也可以和其它程序并用。IDE多被用于开发HTML应用软件。例如，许多人在设计网站时使用IDE（如HomeSite、DreamWeaver等），因为很多项任务会自动生成。
 
+https://mp.weixin.qq.com/s/uRevNQeHBAH-yIOMFtZ4Sw
+
 ## 1、spyder
 
 ### 1-1、缩进风格：空格和tab键
@@ -24,9 +26,31 @@ Tools-->>preferences-->>editor-->>display-->>show blank spaces
 ## 2、PyCharm
 官网：https://www.jetbrains.com/pycharm/
 激活插件及教程：https://txx.lanzoub.com/iq6cH086qrad
-根据教程已激活PyCharm2022.3.3版本。
+解压密码：3342
+右键图标找到程序安装位置bin=》放在bin同级目录=》在`jetbra`--->`scripts`目录下双击install-all-users.vbs文件
+大约等待半分钟左右会弹出done框，使用事先准备好的激活码`jetbra`--->`自用激活码code.txt`即可激活，根据教程已激活PyCharm2022.3.3版本。
 
 ### 2-1、简单使用
 字体主题修改：可以在“File”-“Settings”-“Editor”-“Color Scheme”中找到这些主题。
+导入python环境：File=》Settings=》Project=》Python Interpreter
+Interpreter：n.解释程序;口译译员;口译工作者;演绎(音乐、戏剧中人物等)的人
+中文主题包：https://plugins.jetbrains.com/plugin/13710-chinese-simplified-language-pack----/versions
+    File=>Settings=>Plugins=>Install from Disk(离线安装选择lib/zh.232.172.jar即可)
+    注意PyCharm的版本一定需要和中文汉化包版本对应，否则安装不上。
+    
+### 2-2、快捷键
+https://baijiahao.baidu.com/s?id=1765421542320923566&wfr=spider&for=pc
+- Ctrl + /：行注释/取消行注释
+- Ctrl + Alt + L：代码格式化
+- Ctrl + Alt + I：自动缩进
+- Ctrl + Numpad+/-：展开/折叠代码块（当前位置的：函数，注释等）
+- Ctrl + shift + Numpad+/-：展开/折叠所有代码块
+
+
+
+
+
+
+
 
 

@@ -8,6 +8,12 @@ passwd		修改root用户密码
 su命令需要给root用户增加密码后使用，即需要执行passwd
 ```
 
+- sudo su
+- 输入当前用户密码进入root账户
+
+普通用户设置密码提示不能太短（弱）：
+- sudo passwd 用户名（管理员权限可以设置短密码）
+
 ## 2、删除用户
 ```
 userdel hj
