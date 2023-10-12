@@ -343,24 +343,24 @@ Jun 13 15:00:09 hankin kernel: hid-generic 0003:261A:000C.0070: hiddev0,hidraw2:
 参考：https://blog.csdn.net/s_alted/article/details/129936086
 ```
 root@hankin:~# cat /var/log/kern.log
-Jun 13 15:00:07 adesk kernel: [2349004.967206] usb 2-3.2: USB disconnect, device number 98
-Jun 13 15:00:07 adesk kernel: [2349004.967215] usb 2-3.2.2: USB disconnect, device number 99
-Jun 13 15:00:08 adesk kernel: [2349006.278438] usb 2-3.2: new high-speed USB device number 100 using xhci_hcd
-Jun 13 15:00:08 adesk kernel: [2349006.366803] usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
-Jun 13 15:00:08 adesk kernel: [2349006.366808] usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
-Jun 13 15:00:08 adesk kernel: [2349006.366811] usb 2-3.2: Product: USB 2.0 Hub
-Jun 13 15:00:08 adesk kernel: [2349006.367456] hub 2-3.2:1.0: USB hub found
-Jun 13 15:00:08 adesk kernel: [2349006.367483] hub 2-3.2:1.0: 4 ports detected
-Jun 13 15:00:09 adesk kernel: [2349006.655186] usb 2-3.2.2: new full-speed USB device number 101 using xhci_hcd
-Jun 13 15:00:09 adesk kernel: [2349006.760692] usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
-Jun 13 15:00:09 adesk kernel: [2349006.760698] usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-Jun 13 15:00:09 adesk kernel: [2349006.760702] usb 2-3.2.2: Product: SDSES Custom HID
-Jun 13 15:00:09 adesk kernel: [2349006.760705] usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
-Jun 13 15:00:09 adesk kernel: [2349006.760707] usb 2-3.2.2: SerialNumber: 6D78F9D00B37
-Jun 13 15:00:09 adesk kernel: [2349006.762022] hid-generic 0003:261A:000C.006E: hiddev0,hidraw0: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
-Jun 13 15:00:09 adesk kernel: [2349006.762903] input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.006F/input/input83
-Jun 13 15:00:09 adesk kernel: [2349006.815795] hid-generic 0003:261A:000C.006F: input,hidraw1: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
-Jun 13 15:00:09 adesk kernel: [2349006.816631] hid-generic 0003:261A:000C.0070: hiddev0,hidraw2: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
+Jun 13 15:00:07 kernel: [2349004.967206] usb 2-3.2: USB disconnect, device number 98
+Jun 13 15:00:07 kernel: [2349004.967215] usb 2-3.2.2: USB disconnect, device number 99
+Jun 13 15:00:08 kernel: [2349006.278438] usb 2-3.2: new high-speed USB device number 100 using xhci_hcd
+Jun 13 15:00:08 kernel: [2349006.366803] usb 2-3.2: New USB device found, idVendor=1a40, idProduct=0101
+Jun 13 15:00:08 kernel: [2349006.366808] usb 2-3.2: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+Jun 13 15:00:08 kernel: [2349006.366811] usb 2-3.2: Product: USB 2.0 Hub
+Jun 13 15:00:08 kernel: [2349006.367456] hub 2-3.2:1.0: USB hub found
+Jun 13 15:00:08 kernel: [2349006.367483] hub 2-3.2:1.0: 4 ports detected
+Jun 13 15:00:09 kernel: [2349006.655186] usb 2-3.2.2: new full-speed USB device number 101 using xhci_hcd
+Jun 13 15:00:09 kernel: [2349006.760692] usb 2-3.2.2: New USB device found, idVendor=261a, idProduct=000c
+Jun 13 15:00:09 kernel: [2349006.760698] usb 2-3.2.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jun 13 15:00:09 kernel: [2349006.760702] usb 2-3.2.2: Product: SDSES Custom HID
+Jun 13 15:00:09 kernel: [2349006.760705] usb 2-3.2.2: Manufacturer: SDSESSTM32ctronics
+Jun 13 15:00:09 kernel: [2349006.760707] usb 2-3.2.2: SerialNumber: 6D78F9D00B37
+Jun 13 15:00:09 kernel: [2349006.762022] hid-generic 0003:261A:000C.006E: hiddev0,hidraw0: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input0
+Jun 13 15:00:09 kernel: [2349006.762903] input: SDSESSTM32ctronics SDSES Custom HID as /devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.2/2-3.2.2/2-3.2.2:1.1/0003:261A:000C.006F/input/input83
+Jun 13 15:00:09 kernel: [2349006.815795] hid-generic 0003:261A:000C.006F: input,hidraw1: USB HID v1.10 Keyboard [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input1
+Jun 13 15:00:09 kernel: [2349006.816631] hid-generic 0003:261A:000C.0070: hiddev0,hidraw2: USB HID v1.10 Device [SDSESSTM32ctronics SDSES Custom HID] on usb-0000:00:14.0-3.2.2/input2
 ```
 发现文件上面时间是对的上的。
 

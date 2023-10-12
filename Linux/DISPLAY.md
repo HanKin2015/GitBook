@@ -83,7 +83,6 @@ export DISPLAY=:0
 
 使用xdpyinfo可以查看到当前显示的更详细的信息.
 
-
 ## 5、简介
 DISPLAY环境变量格式如下
        host:NumA.NumB
