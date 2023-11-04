@@ -2,7 +2,6 @@
 
 ## 1、模糊匹配需要转义字符
 发现一个奇怪的现象，在git bash窗口操作如下：
-
 ```
 Administrator@WINedr-VDI0027 MINGW64 /d/Github/Storage/linux (master)
 $ find . -name *str*.*
@@ -157,6 +156,72 @@ rk1314_64bit:/proc # find / -name "kmsg" 2>/dev/null
 /sys/class/mem/kmsg
 /proc/kmsg
 /dev/kmsg
+```
+
+## 7、查找文件后执行其他命令操作文件，如读取文件内容
+```
+这个命令会在当前目录及其子目录中查找文件名为"product"的文件，并使用cat命令来显示文件的内容。{}表示找到的文件名，\;表示命令的结束。
+[root@ubuntu0006:/sys/devices] #find . -name product
+./pci0000:00/0000:00:01.2/usb3/3-1/product
+./pci0000:00/0000:00:18.0/usb4/product
+./pci0000:00/0000:00:18.1/usb5/product
+./pci0000:00/0000:00:18.2/usb6/product
+./pci0000:00/0000:00:18.3/usb7/product
+./pci0000:00/0000:00:18.4/usb8/product
+./pci0000:00/0000:00:18.5/usb9/product
+./pci0000:00/0000:00:18.7/usb1/product
+./pci0000:00/0000:00:19.0/usb11/product
+./pci0000:00/0000:00:19.0/usb12/product
+./pci0000:00/0000:00:1d.0/usb10/product
+./pci0000:00/0000:00:1d.7/usb2/product
+./virtual/input/input24/id/product
+./platform/i8042/serio0/input/input1/id/product
+./platform/i8042/serio1/input/input3/id/product
+./platform/i8042/serio1/input/input4/id/product
+./LNXSYSTM:00/LNXPWRBN:00/input/input0/id/product
+[root@ubuntu0006:/sys/devices] #find . -name product -exec cat {} \;
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+EHCI Host Controller
+xHCI Host Controller
+xHCI Host Controller
+UHCI Host Controller
+EHCI Host Controller
+0000
+0001
+0013
+0013
+0001
+[root@ubuntu0006:/sys/devices] #find . -name product | xargs cat
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+UHCI Host Controller
+EHCI Host Controller
+xHCI Host Controller
+xHCI Host Controller
+UHCI Host Controller
+EHCI Host Controller
+0000
+0001
+0013
+0013
+0001
+
+如果有多个文件匹配到"product"，则会依次显示每个文件的内容。如果只想查看第一个匹配到的文件内容，可以使用-quit选项来终止find命令的执行
+find . -name product -exec cat {} \; -quit
+
+如果找到的文件名包含空格或特殊字符，上述命令可能会出现问题。为了处理这种情况，可以使用-print0选项和-0选项来确保文件名以空字符分隔
+find . -name product -print0 | xargs -0 cat
+这样，find命令的输出将以空字符分隔，并传递给xargs命令进行处理。xargs命令使用-0选项来解析以空字符分隔的输入，并将每个文件名作为参数传递给cat命令。
 ```
 
 

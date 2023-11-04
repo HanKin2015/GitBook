@@ -254,3 +254,6 @@ https://mp.weixin.qq.com/s/as4iCQRumGihKe5wx5nRdQ
 
 最后建议，公司电脑不要做违反纪律的事，不要安装微信等。
 另外也有安全从业人员来解密，除了截屏，聊天记录数据包也是可以解密的。
+
+## 4K世界
+https://www.4khdr.cn/

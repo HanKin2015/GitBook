@@ -142,9 +142,9 @@ typedef uint32_t uint32;
 
 ## 15、编译在qemu中自己新加独立的文件可能报大量的错误
 ```
-#include "qemu/osdep.h"  /* Always first... */
-#include <...>           /* then system headers... */
-#include "..."           /* and finally QEMU headers. */
+#include "qemu/osdep.h" /* Always first... */
+#include <...>  /* then system headers... */
+#include "..."  /* and finally QEMU headers. */
 ```
 
 "qemu/osdep.h"包含预处理器宏，这些宏影响核心的系统头文件，比如<stdint.h>。该头文件必须第一个被include，以使被其他函数库所引用的核心系统头文件可以得到正确的qemu依赖的预处理宏。

@@ -40,61 +40,7 @@ static int hello_init(void)
 }
 ```
 
-## 4、system与exec的区别
-1、system（）和exec（）都可以执行进程外的命令，system是在原进程上开辟了一个新的进程，但是exec是用新进程（命令）覆盖了原有的进程
-2、system（）和exec（）都有能产生返回值，system的返回值并不影响原有进程，但是exec的返回值影响了原进程
-
-char cmd[MAX_BUF_LEN];
-memset(cmd, 0, MAX_BUF_LEN);
-snprintf(cmd, MAX_BUF_LEN, "mkdir -p %s", today_dir_path);
-pid_t status = system(cmd);
-
-if (!(status != -1 && WIFEXITED(status) && WEXITSTATUS(status) == 0)) {
-	printf("system error, exit status value");
-}
-
-```
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <sys/types.h>
- 
-int main()
-{
-    pid_t status;
- 
- 
-    status = system("./test.sh");
- 
-    if (-1 == status)
-    {
-        printf("system error!");
-    }
-    else
-    {
-        printf("exit status value = [0x%x]\n", status);
- 
-        if (WIFEXITED(status))
-        {
-            if (0 == WEXITSTATUS(status))
-            {
-                printf("run shell script successfully.\n");
-            }
-            else
-            {
-                printf("run shell script fail, script exit code: %d\n", WEXITSTATUS(status));
-            }
-        }
-        else
-        {
-            printf("exit status = [%d]\n", WEXITSTATUS(status));
-        }
-    }
- 
-    return 0;
-}
-```
-
-## 5、细节决定成败
+## 4、细节决定成败
 我的小伙伴还以为是编译器长时间不用凉了么
 ```
 int j = 0;
@@ -107,25 +53,3 @@ for (j = 0; j < 10; j++);
 如果是1的，肯定就是一行，这就会很迷惑。因此要养成良好的代码习惯。
 我见过for循环末尾，函数末尾添加分号的，这种情况虽然没有影响，但是个人觉得还是不要有才好。
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

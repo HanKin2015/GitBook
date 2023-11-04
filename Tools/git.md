@@ -1322,6 +1322,10 @@ git push
 git ls-files命令会一直递归显示全部文件，没有找到只显示当前文件夹的选项。
 git ls-tree -l HEAD可以试试。
 
+20231016更新：
+很奇怪，并没有找到大小写不同的文件。但是找到一些上库不规范的文件，然后顺手删除掉后重新commit后，奇怪的事情发生了，之前存在红色感叹号或者没有任何图标的文件瞬间加上了绿色的勾。然而新修改的文件夹却一直存在红色感叹号，使用git push和git pull后也无济于事，可能还需要下一次的提交吧。
+解决方式：使用新的commit进行覆盖操作。
+
 ## docker环境配置git无法输入中文
 可以使用shell脚本执行
 ```
@@ -1514,6 +1518,23 @@ Original contents retained as /c/Users/Administrator/.ssh/known_hosts.old
 ```
 然后再git push搞定。
 
+## github如何删除大量远程的分支
+```
+git branch -r | awk -F/ '/\/prefix_to_delete/{print $0}' | xargs -I {} git push origin --delete {}
+```
+其中，prefix_to_delete是你要删除的分支的前缀。这个命令会列出所有以prefix_to_delete开头的远程分支，并将它们全部删除。
 
+## known_hosts文件警告
+当进行上库或者拉库的时候就会出现如下警告，虽然不影响使用，但是还是有点别扭。
+```
+Warning: the ECDSA host key for 'github.com' differs from the key for the IP address '20.205.243.166'
+Offending key for IP in /c/Users/Administrator/.ssh/known_hosts:6
+Matching host key in /c/Users/Administrator/.ssh/known_hosts:13
+Are you sure you want to continue connecting (yes/no)?
+```
+- 使用everything找到known_hosts文件（C:\Users\Administrator\.ssh）
+- 在打开的文件中，找到与警告中提到的IP地址相关的行。在你的情况下，它是第6行。
+- 删除该行或将其注释掉（在行首添加 # 符号）。
+- 保存文件并关闭编辑器。
 
-
+## 学习到新的语法WIP

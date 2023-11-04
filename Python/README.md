@@ -62,7 +62,7 @@ shutil.rmtree(path, ignore_errors=True)
 
 ## 索引
 深拷贝和浅拷贝：D:\Github\Storage\python\study\others\deep_shallow_copy.py
-
+python中base64库用法详解：https://blog.csdn.net/weixin_44799217/article/details/125949538
 
 
 

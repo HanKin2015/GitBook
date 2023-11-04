@@ -101,12 +101,15 @@ Dependabot的负面影响
 去到repo的设置界面的“Code security and analysis”，按需禁用Dependency graph 和 Dependabot alerts 即可。
 
 如果有他创建的分支，则先处理 pull request，然后删了分支就可以了。
-————————————————
-版权声明：本文为CSDN博主「threewhisky」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/threewhisky/article/details/124138920
 
+## 14、please add an env variable called PAT_1 with your github token in vercel
+http://30daydo.com/article/44566
 
+最近登录github后，发现之前显示的状态都不正常了。
+直接替换了前面的链接就成功显示了：https://github-readme-stats-ten-gilt.vercel.app
 
+可以多试几个，可能其中还会有过期的。
 
-
-
+解决方案：
+1. 自己到vercel上部署一个这样的app （复杂）
+2. 换一个其他人部署好的链接 （容易)

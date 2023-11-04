@@ -14,6 +14,11 @@ https://github.com/libusb/libusb/blob/master/examples/xusb.c
 
 一般来说可能没有问题，直接configure 、 make 、make install三部曲即可。
 
+当前文件夹进行局部安装，即拿来就用，不需要全局安装：
+无非就是需要libusb.h头文件，以及编译生成的so文件。
+linux的so文件只能自己编译出来，没有现成可下载的。
+D:\Github\Storage\c++\udev\libusb\局部使用
+
 ## 3、libusbi.h和libusb.h
 libusbi.h: Internal header for libusb
 libusb.h:  Public libusb header file
@@ -260,7 +265,7 @@ libusb_set_interface_alt_setting ：激活接口的备用设置。该接口必�
 libusb_clear_halt: 清除端点的停止/停止条件
 
 ### 7-7.描述符
-libusb_get_device_descriptor：获取设备描述符
+libusb_get_device_descriptor：获取设备描述符===>只是做一个拷贝操作
 libusb_get_active_config_descriptor：获取当前活动配置的配置描述符
 libusb_get_config_descriptor：根据索引获取 USB 配置描述符
 libusb_get_config_descriptor_by_value：获取具有特定 bConfigurationValue 的 USB 配置描述符
@@ -316,22 +321,183 @@ libusb_context对象包含了libusb库的全局状态信息，例如USB设备的
 libusb_context在调用libusb_init函数后会进行赋值，正如上面所说置为NULL也是能获取信息，但是不推荐。
 代码见:D:\Github\Storage\c++\udev\libusb\libusb入门\libusb_context.c
 
-# 获取描述符
-libusb_control_transfer
-libusb_get_descriptor
-libusb_get_device_descriptor ===>只是做一个拷贝操作
-    
-# libusb_hankin_get_active_config_descriptor为何做封装
+## 11、在windows系统上面使用libusb
+首先下载https://github.com/libusb/libusb/releases中的libusb-1.0.26-binaries.7z可以确定，里面的D:\Users\User\Desktop\libusb-1.0.26-binaries\libusb-1.0.26-binaries\VS2015-x64\examples是可以使用的，说明libusb在windows系统上面是支持的。
 
+下载Source code(zip)里面有现成的代码项目，可以参考里面的使用。
+https://www.usbzh.com/article/detail-482.html
+https://blog.csdn.net/zb774095236/article/details/83748747
 
+其实很简单，导入libusb.h和libusb-1.0.lib文件就可以了，然后就跟在linux系统下面使用是一样的效果。
+代码见：D:\Github\Storage\c++\udev\libusb\windows\LibusbExample
 
+## 12、在windows系统上面无法使用libusb获取字符串描述符
+无法获取字符串描述符，需要进行通信获取，一定需要替换成特定的驱动才能完成，这样才能使用libusb_open或者libusb_open_device_with_vid_pid才能成功，否则使用不了。
+https://blog.csdn.net/qq_36098477/article/details/127525152
 
+因此不能使用libusb库。
 
+所以只能参考usbview代码去修改：https://github.com/microsoft/Windows-driver-samples/tree/main/usb/usbview
+参考uscview.c文件的RefreshTree函数
+需要参考微软的usbview源代码进行参考编写：
+在uvcview.c文件中：
 
+函数追踪：从函数开始RefreshTree--EnumerateHostControllers--EnumerateHostController--EnumerateHub--EnumerateHubPorts
 
+设备描述符就是：connectionInfoEx->DeviceDescriptor
+其他描述符信息也都在EnumerateHubPorts函数里面。
 
+### 12-1、SetWindowText函数报错
+修改字符集：项目-属性-配置属性-常规-字符集-未设置
 
+### 12-2、GUID_DEVINTERFACE_USB_DEVICE未定义
+怎么修改都不行：
+- 引入头文件#include <usbiodef.h>和#include <initguid.h>
+- 导入#pragma comment(lib, "setupapi.lib")和#pragma comment(lib, "winusb.lib")
+都会报无法解析的外部符号错误，最终还是直接把文件中的定义拷贝过来定义就行了。
+```
+#include <initguid.h>
 
-    
-    
-    
+/* A5DCBF10-6530-11D2-901F-00C04FB951ED */
+DEFINE_GUID(GUID_DEVINTERFACE_USB_DEVICE, 0xA5DCBF10L, 0x6530, 0x11D2, 0x90, 0x1F, 0x00, \
+             0xC0, 0x4F, 0xB9, 0x51, 0xED);
+```
+
+### 12-3、方案一：从usbview中摘抄关键函数使用
+发现无法直接通过USB设备句柄进行DeviceIoControl函数通信，尝试了许久已放弃。
+https://www.coder.work/article/7955478
+https://bbs.csdn.net/topics/617112992
+http://www.hzhcontrols.com/new-238393.html
+http://www.manongjc.com/detail/7-xhbooqfnezctzhb.html
+https://www.debugease.com/vc/2669312.html
+
+hid设备：https://blog.csdn.net/qq_39554698/article/details/99586564
+
+这篇文章让我最好奇，很想知道他实现了吗？无赖需要付费：https://blog.csdn.net/trustbo/article/details/50053229
+
+### 12-4、方案二：备选直接使用usbvew代码
+最终还是选择了妥协，先枚举hub，然后通过hub的各个port再去枚举usb设备。
+
+奇怪之一：EnumerateAllDevicesWithGuid函数中，遍历SetupDiEnumDeviceInfo到最后一个时，调用FreeDeviceInfoNode函数偶尔会出现崩溃问题，然后注释掉就正常了。通过奇怪之二后发现也是没有对malloc的内存进行初始化，是同一个问题。
+
+奇怪之二：GetStringDescriptors函数中，在遍历StringDescNodeHead时，Next指针存在异常，大概率会出现乱踩内存崩溃问题，但是usbview源代码没有这个问题。查了半天才发现是malloc函数分配内存后没有进行0初始化，这事情说明了malloc后初始化的重要性。为何源代码没有这个问题呢？原因是它使用了GlobalAlloc函数进行分配，我修改了这个函数到malloc。
+
+在Windows操作系统中，GlobalAlloc函数用于在进程的堆中分配指定大小的内存块，并返回一个指向该内存块的全局唯一句柄。该函数的声明如下：
+
+c
+HGLOBAL GlobalAlloc(
+  UINT   uFlags,
+  SIZE_T dwBytes
+);
+其中，参数uFlags指定内存分配的方式，可以是以下值之一：
+
+GMEM_FIXED：分配固定内存，返回的句柄指向的内存块不会移动。
+GMEM_MOVEABLE：分配可移动内存，返回的句柄指向的内存块可以移动。
+GMEM_ZEROINIT：分配内存时将其初始化为0。
+参数dwBytes指定要分配的内存块的大小，以字节为单位。
+
+使用GlobalAlloc函数分配的内存块可以通过GlobalLock函数获取指向该内存块的指针，通过GlobalUnlock函数释放该指针。使用GlobalFree函数释放内存块。
+
+需要注意的是，GlobalAlloc函数分配的内存块是在进程的堆中分配的，因此在使用完毕后需要及时释放，否则可能会导致内存泄漏。
+
+### 12-5、CSDN付费文章破解
+https://www.jianshu.com/p/8683c79adcb5
+然而百度已下线百度快照功能。
+https://zhuanlan.zhihu.com/p/513246692?utm_id=0
+百度文库：https://blog.csdn.net/m0_64139004/article/details/127918651
+https://www.zhihu.com/question/320230733
+   
+## 13、引入cJSON库
+由于之前做了配置修改，导致引入后报大量的错误，如：
+```
+“初始化”: 无法从“void *(__cdecl *)(std::size_t)”转换为“void *(__stdcall *)(std::size_t)”	UsbviewGetDescriptor	D:\Users\User\My Document\Visual Studio 2015\Projects\UsbviewGetDescriptor\UsbviewGetDescriptor\cJSON.c	83	
+```
+原因是属性-》C/C++-》高级-》调用约定-》__stdcall(/Gz)，这样配置后还有“main”: 必须是“__cdecl”。
+恢复默认值就解决了：https://blog.csdn.net/flyingworm_eley/article/details/6516540
+__cdecl(/Gd)
+
+消除警告：'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS.
+属性-》C/C++-》预处理器-》预处理器定义-》_CRT_SECURE_NO_WARNINGS
+
+错误	LNK2005	_EnumeratedHCListHead 已经在 devnode.obj 中定义
+纯c项目不支持这种语法：
+```add.h
+#pragma once
+#ifndef __ADD_H__
+#define __ADD_H__
+
+int a;
+int b = 2;
+int add(int x, int y);
+
+#endif // __ADD_H__
+```
+
+```main.cpp
+// main.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include "add.h"
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	printf("%d\n", add(3, 4));
+	return 0;
+}
+```
+
+```add.c
+#include "stdafx.h"
+#include "add.h"
+
+int add(int x, int y)
+{
+	return x + y;
+}
+```
+
+在vs项目中编译只有b是多次定义，a不是。但是在linux中就神奇了：
+```
+[root@ubuntu0006:~/cmake] #gcc main.c add.c
+/tmp/ccRvNcFB.o:(.data+0x0): `b'被多次定义
+/tmp/ccrLSfLK.o:(.data+0x0)：第一次在此定义
+collect2: error: ld returned 1 exit status
+[root@ubuntu0006:~/cmake] #g++ main.c add.c
+/tmp/cccJVJ53.o:(.bss+0x0): `a'被多次定义
+/tmp/ccAZh1jz.o:(.bss+0x0)：第一次在此定义
+/tmp/cccJVJ53.o:(.data+0x0): `b'被多次定义
+/tmp/ccAZh1jz.o:(.data+0x0)：第一次在此定义
+collect2: error: ld returned 1 exit status
+```
+
+由于头文件在编译时会被包含到每个包含它的源文件中，因此在编译时会导致a和b被多次定义。正确的修改方式是：
+```add.h
+#pragma once
+#ifndef __ADD_H__
+#define __ADD_H__
+
+extern int a;
+extern int b;
+int add(int x, int y);
+
+#endif // __ADD_H__
+```
+
+```add.c
+#include "add.h"
+
+int a;
+int b = 2;
+
+int add(int x, int y)
+{
+    return x + y;
+}
+```
+使用extern关键字声明全局变量a和b，然后在add.cpp中进行定义和初始化，可以避免重复定义的问题。
+
+## 14、一开始项目还有控制台弹框，但是修改配置后会一闪而过
+修改项目配置，右键点击项目，在右键菜单中选择属性，然后在弹出的对话框左侧列表中中选择“配置属性”-->“链接器”-->“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）”
+
+另外一种方法：system("pause");

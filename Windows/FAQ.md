@@ -50,7 +50,7 @@ https://www.cnblogs.com/icebutterfly/p/7834453.html
 ## 4、解决vs运行程序一闪而过
 方法一：程序末尾增加输入语句，这样程序运行结束前会要求用户输入，控制台就会保持存在
 方法二：在程序末尾添加语句：system("pause");  加上这句后，控制台显示运行结果后会显示“请按任意键继续”
-方法三：修改项目配置，右键点击项目，在右键菜单中选择属性，然后在弹出的对话框左侧列表中中选择“配置属性”-->“链接器”-->“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）“
+方法三：修改项目配置，右键点击项目，在右键菜单中选择属性，然后在弹出的对话框左侧列表中中选择“配置属性”-->“链接器”-->“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）”
 
 ## 5、缺少vcruntime140d.dll的解决办法
 安装Visual C++ Redistributable for Visual Studio 2015(需要Windows7withSP1)。
@@ -272,5 +272,11 @@ ActiveX是Microsoft对于一系列策略性面向对象程序技术和工具的�
 ActiveX 控件是用于互联网的很小的程序，有时称为插件程序。它们会允许播放动画，或帮助执行任务，如在 Microsoft Update 安装安全更新，因此可以增强您的浏览体验。在创建包括ActiveX程序时，主要的工作就是组件，一个可以自足的在ActiveX网络（Windows，Mac，Linux）中任意运行的程序。这个组件就是ActiveX控件。ActiveX是Microsoft为抗衡Sun Microsystems的JAVA技术而提出的，此控件的功能和java applet功能类似。
 
 [如何解读微软的 OCX 控件和 ActiveX？](https://www.zhihu.com/question/579996174)
+
+## 31、不能拷贝文件到桌面，但是能拷贝到D盘，能拷贝文件出去
+解决方法：重启explorer即可。
+
+
+
 
 

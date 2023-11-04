@@ -50,7 +50,7 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 若不想按照上述步骤添加镜像，可使用以下命令直接指定安装时使用的镜像地址(以opencv为例)：
 conda install opencv -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 
-## 5、卡在
+## 5、当使用conda命令进行更新包的时候会失败，一直卡在更新中
 ```
 (base) D:\Github\Storage\qt\python\PyQt中文教程\对话框>conda install pyside6
 Collecting package metadata (current_repodata.json): done
@@ -62,6 +62,9 @@ CondaError: KeyboardInterrupt
 参考：https://zhuanlan.zhihu.com/p/504206858
 出现该问题的原因有可能是镜像源的http与https的识别错误，
 亲测才是最有效的：
+1、在路径C:\Users\Administrator下找到文件“.condarc”
+2、右键".condarc"->用记事本打开->Ctrl+A->DEL->删除所有内容
+3、复制以下内容到文件中，进行替换，保存即可
 ```
 ssl_verify: true
 channels:
@@ -69,9 +72,20 @@ channels:
     - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/win-64
 show_channel_urls: true
 ```
+注意ssl_verify要是true，同时网址必须是http而不是https
 
+但是，看着好像是下载成功了，还是会报其他的错误：
+```
+failed with repodata from current_repodata.json, will retry with next repodata source.
+```
+https://blog.csdn.net/kaede_xiao/article/details/129114479
+https://www.jianshu.com/p/4c7b9127cf83
+https://blog.51cto.com/u_16175443/6779019
 
+真的难受，更新就是卡住不动，还是老老实实重新安装anaconda来的快些。
+https://www.anaconda.com/
 
-
-
-
+结果还是存在坑，win7不支持新版本的anaconda，需要下载老版本。
+https://betheme.net/houduan/196685.html?action=onClick
+https://zhuanlan.zhihu.com/p/616300447
+更新完后就ok了，这样python就升级到了3.8.8，这样就可以使用f-string的新语法了。因此，win7支持的最高版本是python3.8。

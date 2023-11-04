@@ -14,63 +14,51 @@ unzip *.zip -d 解压到的文件夹
 附录：
 ```
 tar
-
-　　解包：tar zxvf FileName.tar
-　　打包：tar czvf FileName.tar DirName
+    解包：tar zxvf FileName.tar
+    打包：tar czvf FileName.tar DirName
 
 gz
-
-　　解压1：gunzip FileName.gz
-　　解压2：gzip -d FileName.gz
-　　压缩： gzip FileName
+    解压2：gzip -d FileName.gz
+    压缩： gzip FileName
 
 .tar.gz 和 .tgz
-
-　　解压：tar zxvf FileName.tar.gz
-　　压缩：tar zcvf FileName.tar.gz DirName
-　　压缩多个文件：tar zcvf FileName.tar.gz DirName1 DirName2 DirName3 ...
+    解压：tar zxvf FileName.tar.gz
+    压缩：tar zcvf FileName.tar.gz DirName
+    压缩多个文件：tar zcvf FileName.tar.gz DirName1 DirName2 DirName3 ...
 
 bz2
-
-　　解压1：bzip2 -d FileName.bz2
-　　解压2：bunzip2 FileName.bz2
-　　压缩： bzip2 -z FileName
+    解压1：bzip2 -d FileName.bz2
+    解压2：bunzip2 FileName.bz2
+    压缩： bzip2 -z FileName
 
 .tar.bz2
-
-　　解压：tar jxvf FileName.tar.bz2（tar -xf FileName.tar.bz2）
-　　压缩：tar jcvf FileName.tar.bz2 DirName
+    解压：tar jxvf FileName.tar.bz2（tar -xf FileName.tar.bz2）
+    压缩：tar jcvf FileName.tar.bz2 DirName
 
 bz
-
-　　解压1：bzip2 -d FileName.bz
-　　解压2：bunzip2 FileName.bz
-　　压缩：未知
+    解压1：bzip2 -d FileName.bz
+    解压2：bunzip2 FileName.bz
+    压缩：未知
 
 .tar.bz
-
-　　解压：tar jxvf FileName.tar.bz
+    解压：tar jxvf FileName.tar.bz
 
 Z
-
-　　解压：uncompress FileName.Z
-　　压缩：compress FileName
+    解压：uncompress FileName.Z
+    压缩：compress FileName
 
 .tar.Z
-
-　　解压：tar Zxvf FileName.tar.Z
-　　压缩：tar Zcvf FileName.tar.Z DirName
+    解压：tar Zxvf FileName.tar.Z
+    压缩：tar Zcvf FileName.tar.Z DirName
 
 zip
-
-　　解压：unzip FileName.zip
-　　压缩文件：zip FileName.zip FileName1 FileName2
-	压缩文件夹：zip -r FileName.zip DirName 
+    解压：unzip FileName.zip
+    压缩文件：zip FileName.zip FileName1 FileName2
+    压缩文件夹：zip -r FileName.zip DirName 
 
 rar
-
-　　rar a all *.jpg
-　　unrar e all.rar
+    rar a all *.jpg
+    unrar e all.rar
 ```
 
 ## 3、tar 压缩并删除源文件
@@ -85,7 +73,7 @@ gunzip解压gz文件后，得到一个没有后缀的文件，一脸懵逼。
 后面不管三七二十一，就是tar再进行解压。
 
 ## 6、pkg文件的解压和压缩
-``
+```
 xar -xf ../Foo.pkg
 xar -cf ../Foo-new.pkg *
 ```
@@ -105,8 +93,17 @@ make
 make install
 ```
 
+## 7、tar.gz只能在linux系统使用tar命令生成
+注意压缩的文件夹路径有什么就会压缩什么进去，并且解压到指定的文件夹只能提前创建完毕。
+```
+[root@ubuntu0006:~/cmake] #tar zxvf hj.tar.gz -C k
+tar: k：无法 open: 没有那个文件或目录
+tar: Error is not recoverable: exiting now
 
-
+需要提前mkdir k即可
+```
+c====create
+x====extract
 
 
 

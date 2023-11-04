@@ -170,7 +170,6 @@ int main()
 definitely：明确地
 reachable：可获得的
 
-
 ## 5、命令
 ```
 valgrind --trace-children=yes --track-origins=yes --tool=memcheck --leak-check=full  --show-leak-kinds=all --error-limit=no --log-file=test.log ./a.out
@@ -182,14 +181,6 @@ valgrind --leak-check=full --show-leak-kinds=all ./a.out
 
 ## 7、pthread_create内存泄露
 发现只有调用pthread_join函数后才会消除，pthread_detach无效。
-
-
-
-
-
-
-
-
 
 
 

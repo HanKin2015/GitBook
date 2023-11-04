@@ -41,7 +41,6 @@ python.exe路径添加
 run code插件直接运行
 
 ### 安装扩展(extension)
-
 - C/C++：又名 cpptools，提供Debug和Format功能
 - Code Runner：右键即可编译运行单文件，很方便；但无法Debug
 
@@ -79,11 +78,11 @@ run code插件直接运行
 
 
 ## 6、插件离线安装
-教程一：将C:\Users\Administrator\.vscode\extensions下面的文件夹拷贝到环境中，重启两次vscode即可。
+教程一（需要版本匹配）：将C:\Users\Administrator\.vscode\extensions下面的文件夹拷贝到环境中，重启两次vscode即可。
 
 教程二：https://www.jianshu.com/p/17bcf79f1c85
 
-教程三：https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
+教程三（插件网搜索下载vsix插件）：https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
 在右边Resources-》Downloads Extension即可。
 
 ## 7、输出窗口中文乱码
@@ -95,7 +94,6 @@ run code插件直接运行
 
 https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#!
 这个是对于python代码，不清楚有没有效果，待测试。
-
 
 ## 8、设置默认的终端
 - 打开左下角设置
@@ -135,8 +133,10 @@ C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
 
 注意版本的一致性，只要相差不大就行，如果一个是user版本一个是system版本就可能有问题，会出现安装成功，但是无法使用问题。
 
+结果下载的vsix插件报错不匹配安装，下载了稍早的历史版本也不行（找不到更早的了），无奈试试更新vscode试试，然后就成功了。
+
 ### 10-3、配置远程连接
-- 左侧导航栏电脑图标
+- 左侧导航栏电脑图标（新版本的vscode还变样了，不再是电脑图标，显示在左下角，勾选Connect to Host）
 - 放在SSH TARGETS上面，点击齿轮设置
 - 选择C:\Users\User\.ssh\config配置
 - 第一行显示名称、第二行服务器ip地址、第三行登录账户，可以填写多个服务器
@@ -160,6 +160,7 @@ Host linux_x86_compile
 - 目录/root/.vscode-server/bin/下面有个文件夹名是commit，即~/.vscode-server/bin/
 - 稳定版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/stable
 - insider版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/insider
+
 
 
 ## 11、visual studio code 重置所有设置（还原默认设置）

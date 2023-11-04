@@ -168,9 +168,159 @@ in the transport driver, and hid-multitouch won't try to retrieve the
 feature report.
 ```
 
+## 7、鼠标出现像6节那样的问题
+- 更换其他鼠标是使用正常的
+- 键盘能正常使用
+- 鼠标灯是亮着的，内核也正常显示鼠标插入
+- 现象是鼠标无法使用
+- 使用xev命令没有任何鼠标信息
+- 抓取usb数据包也没有任何数据包
+```
+root@hankin:/sys/kernel/debug/hid# cat /proc/bus/input/devices
+I: Bus=0003 Vendor=093a Product=2532 Version=0111
+N: Name="PixArt Gaming Mouse"
+P: Phys=usb-0000:00:1d.0-1.3.2/input0
+S: Sysfs=/devices/pci0000:00/0000:00:1d.0/usb1/1-1/1-1.3/1-1.3.2/1-1.3.2:1.0/0003:093A:2532.002F/input/input62
+U: Uniq=
+H: Handlers=mouse0 event12
+B: PROP=0
+B: EV=17
+B: KEY=1f0000 0 0 0 0
+B: REL=103
+B: MSC=10
 
+I: Bus=0003 Vendor=093a Product=2532 Version=0111
+N: Name="PixArt Gaming Mouse"
+P: Phys=usb-0000:00:1d.0-1.3.2/input1
+S: Sysfs=/devices/pci0000:00/0000:00:1d.0/usb1/1-1/1-1.3/1-1.3.2/1-1.3.2:1.1/0003:093A:2532.0030/input/input63
+U: Uniq=
+H: Handlers=kbd event13
+B: PROP=0
+B: EV=10001f
+B: KEY=3007f 0 0 483ffff17aff32d bf54444600000000 1 130f938b17c007 ffff7bfad9415fff febeffdfffefffff fffffffffffffffe
+B: REL=40
+B: ABS=100000000
+B: MSC=10
+鼠标和键盘都会看见两个input设备，一般选择第一个input即可，第一个input才会存在事件消息。
 
+root@hankin:/sys/kernel/debug/hid# ls
+0003:093A:2532.002F  0003:093A:2532.0030  0003:1A2C:2124.002D  0003:1A2C:2124.002E
+root@hankin:/sys/kernel/debug/hid# cat 0003\:093A\:2532.002F/events
 
+root@hankin:/sys/kernel/debug/hid# cat 0003\:1A2C\:2124.002D/events
 
+report (size 8) (unnumbered) =  00 00 62 00 00 00 00 00
+Keyboard.00e0 = 0
+Keyboard.00e1 = 0
+Keyboard.00e2 = 0
+Keyboard.00e3 = 0
+Keyboard.00e4 = 0
+Keyboard.00e5 = 0
+Keyboard.00e6 = 0
+Keyboard.00e7 = 0
+Keyboard.0062 = 1
 
+report (size 8) (unnumbered) =  00 00 00 00 00 00 00 00
+Keyboard.00e0 = 0
+Keyboard.00e1 = 0
+Keyboard.00e2 = 0
+Keyboard.00e3 = 0
+Keyboard.00e4 = 0
+Keyboard.00e5 = 0
+Keyboard.00e6 = 0
+Keyboard.00e7 = 0
+Keyboard.0062 = 0
 
+root@hankin:/sys/kernel/debug/hid# cat /dev/input/event10
+▒1e▒▒▒1e▒▒%▒1e▒▒▒1eo▒▒1eo▒%▒1eo▒
+root@hankin:/sys/kernel/debug/hid# cat /dev/input/event12
+▒1etM
+        ▒1etM
+▒1etM
+▒1e▒
+        ▒1e▒
+▒1e▒
+
+root@hankin:~# export DISPLAY=:0
+root@hankin:~# xinput list
+⎡ Virtual core pointer                          id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ SEM USB Keyboard                          id=11   [slave  pointer  (2)]
+⎜   ↳ PixArt Gaming Mouse                       id=12   [slave  pointer  (2)]
+⎜   ↳ PixArt Gaming Mouse                       id=13   [slave  pointer  (2)]
+⎣ Virtual core keyboard                         id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Video Bus                                 id=7    [slave  keyboard (3)]
+    ↳ Power Button                              id=8    [slave  keyboard (3)]
+    ↳ Sleep Button                              id=9    [slave  keyboard (3)]
+    ↳ SEM USB Keyboard                          id=10   [slave  keyboard (3)]
+```
+测试发现/sys/kernel/debug/hid下没有任何事件，但是在/dev/input/event下是存在事件消息的。
+
+```
+root@hankin:/sys/kernel/debug/hid# lsusb -t
+/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=ehci-pci/8p, 480M
+    |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 3: Dev 4, If 0, Class=Hub, Driver=hub/4p, 480M
+            |__ Port 1: Dev 17, If 0, Class=Human Interface Device, Driver=usbhid, 1.5M
+            |__ Port 1: Dev 17, If 1, Class=Human Interface Device, Driver=usbhid, 1.5M
+            |__ Port 2: Dev 16, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+            |__ Port 2: Dev 16, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+root@hankin:/sys/kernel/debug/hid# lsusb
+Bus 001 Device 016: ID 093a:2532 Pixart Imaging, Inc.
+Bus 001 Device 017: ID 1a2c:2124 China Resource Semico Co., Ltd
+Bus 001 Device 004: ID 0bda:5411 Realtek Semiconductor Corp.
+Bus 001 Device 002: ID 8087:07e6 Intel Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+最新结论，多次测试发现跟我使用了同品牌的键鼠有关，当前终端由于是一个主控，因此只要同时插入这同品牌的键鼠，第二个插入的设备就会使用不了，鼠标是灯亮，但是没有usb数据包，键盘灯不亮，但是有usb数据包。
+再拿了一个同品牌的鼠标测试是相同效果，如果插两个同品牌的鼠标，两者现象一样，要么都能用，要么都不能用。
+使用其他品牌的鼠标，插入当前品牌的键盘，也是都能使用。
+鼠标和U盘同时插入，都能使用。
+现象很奇怪，终端并没有做任何重启操作，前一天正常使用，第二天一来使用就出现了这个问题。重启终端即可恢复。
+
+## 8、dumpkeys命令
+dumpkeys 是一个 Linux 命令，用于显示当前系统上键盘映射的信息。它可以显示键盘的按键和功能键的映射关系，以及其他与键盘相关的设置。
+
+以下是 dumpkeys 命令的基本用法：
+
+dumpkeys [选项]
+常用的选项包括：
+
+-f <文件> 或 --file=<文件>：指定要使用的键盘映射文件，默认为 /dev/tty。
+-1 或 --one-column：以单列模式显示键盘映射。
+-2 或 --two-columns：以双列模式显示键盘映射。
+-3 或 --three-columns：以三列模式显示键盘映射。
+-k 或 --keys-only：仅显示按键的映射，不显示注释和其他信息。
+例如，要显示当前系统上键盘映射的详细信息，可以运行以下命令：
+
+dumpkeys
+如果你只想查看按键的映射，可以使用 -k 选项：
+
+dumpkeys -l
+请注意，dumpkeys 命令通常需要以 root 或者具有适当权限的用户身份运行，以便访问键盘映射文件。具体的命令和输出可能因你使用的 Linux 发行版和键盘配置而有所不同。
+
+## 9、dumpsys命令
+dumpsys 是一个 Android 平台上的命令，用于获取系统服务的信息和状态。它可以提供有关各种系统组件和应用程序的详细信息，包括进程、内存、网络、传感器、电池、窗口管理等。
+
+以下是 dumpsys 命令的基本用法：
+
+adb shell dumpsys [选项] [服务名]
+其中，adb shell 是用于在连接的 Android 设备上执行命令的前缀。[选项] 是可选的，用于指定不同的输出格式或过滤条件。[服务名] 是可选的，用于指定要获取信息的特定系统服务。
+
+一些常用的选项包括：
+
+-l：列出所有可用的系统服务。
+-c：清除缓存并强制重新获取最新的信息。
+-a：获取所有可用服务的信息。
+-s：按服务名进行过滤，只获取指定服务的信息。
+例如，要获取所有可用系统服务的信息，可以运行以下命令：
+
+adb shell dumpsys -a
+如果你只想获取特定服务的信息，可以指定服务名，例如：
+
+adb shell dumpsys activity
+请注意，dumpsys 命令通常需要在开发者模式下或者具有适当权限的用户身份运行。具体的命令和输出可能因你使用的 Android 设备和系统版本而有所不同。
+
+可以通过dumpsys input查看输入设备。
