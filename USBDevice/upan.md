@@ -1,6 +1,113 @@
 # U盘那些事儿
 
-## 1、
+## 1、这张磁盘有写保护
+起因：家里摄像头的内存卡异常，无法进行格式化以及往里面写内容。
+使用笔记本进行格式化报这张磁盘有写保护错误。
+离了一个大谱，原来是物理写保护，我的读卡器有一个物理写保护开关。
 
+网上的使用dos命令进行清楚U盘只读属性方法根本行不通，虽然我这个是物理开关导致，但是之前是U盘尝试过。
 
+### 1-1、现象
+格式化U盘不成功，告知“这张磁盘有写保护”。
+
+### 1-2、方法1失败
+磁盘管理无法进行任何操作，显示只读。
+
+### 1-3、方法2失败
+dos窗口输入diskpart
+```
+lisk disk（显示所有磁盘）
+select disk 1（数字表示选择你要操作的盘，如1表示为我的移动硬盘;）
+diskpart（显示帮助信息）
+att disk clear readonly（清楚只读属性）
+attribute disk（显示磁盘属性）
+```
+结果显示已成功清除磁盘属性，但是还是存在问题。
+
+### 1-4、方法3失败
+注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies
+根本没有这个选项。
+
+bat脚本：
+```
+@echo off
+
+reg add HKLM\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies /v WriteProtect /t REG_DWORD /d 00000000
+reg add HKLM\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies /v WriteProtect /t REG_DWORD /d 00000001
+
+pause
+```
+
+### 1-5、失败
+用DiskGenius软件来格式化U盘。
+
+### 1-6、没有试过
+建议 进入 PE 格式下 格式化 U 盘 或者 在 安全格式 下 进行格式化 U 盘 里面有错误数据 在运行 就算 你提取 出来的文件 信息 也是 不完整的 数据 时间长 还是一样
+
+### 1-7、未尝试，已把U盘弄坏
+https://segmentfault.com/q/1010000007503021
+查到可以使用dosfsck -v -a U盘所在位置
+
+umount /media/（U盘被挂在后的名字）
+sudo dosfsck -v -a /dev/sde1
+
+### 1-8、金士顿u盘写保护修复工具绿色版(restore)v3.7 中文版
+发现真的也只有金士顿有这个问题？？？
+
+http://www.downyi.com/downinfo/145100.html
+
+## 2、Windows无法完成格式化
+然后进入U盘能手动删除所有文件，但是还是无法快速格式化。
+去掉快速格式化选项后，等待一段时间后还是报错Windows无法完成格式化，并且所有文件都恢复回来了。另外发现把设备拔插一下后所有文件还是会恢复回来。并且文件都是正常的，还可以正常使用。
+
+使用diskpart查看属性，没有只读属性，属性都是正常的。
+```
+DISKPART> att disk
+当前只读状态: 否
+只读: 否
+启动磁盘: 否
+页面文件磁盘: 否
+休眠文件磁盘: 否
+故障转储磁盘: 否
+群集磁盘  : 否
+```
+往里面添加文件后也会在拔插之后恢复原状，在网上看见一句话说：这是U盘使用期限到了，最后保持这种只读状态是为了客户拷贝里面最终的文件进行备份，不久后就会彻底报废。感觉好像很有道理。
+
+## 3、小米摄像头生成的MP4格式视频无法使用Windows自带的两款视频软件打开
+推荐使用potplayer：
+https://www.zhihu.com/question/20710497/answers/updated
+https://zhuanlan.zhihu.com/p/639279632
+Potplayer 官网： https://potplayer.daum.net （尴尬的是，国内打不开，原因你懂的。。。）
+Potplayer 另一个官网地址: http://potplayer.tv/
+
+如果只下载potplayer播放器，还是打不开，会报错不支持H265解码，请搜索解码器：https://github.com/Nevcairiel/LAVFilters/releases
+解码器安装完成后就能正常打开视频了。
+
+## 4、使用量产工具
+ChipGenius_v4_19_0319：下载地址：https://chipgenius.en.softonic.com
+ChipGenius4.21.0701：下载地址：https://www.onlinedown.net/soft/559408.htm
+是目前的最新版本（20231106），后面应该也不会再进行更新了。
+
+然鹅并不能检测出主控型号，无法进行下一步使用量产工具。放弃，更换另外一款U盘来尝试是否能使用量产工具解决U盘无法使用问题。
+
+量产工具网：https://www.upantool.com/liangchan/
+现象一样，U盘为金士顿（0951:1666）。
+首先尝试使用rufus软件进行格式化操作，首先第一步也是检测出多分区，继续下一步格式化操作，报错could not be performed。有一个效果是一开始文件资源管理器能看见3个盘符，现在只有一个了。
+然后磁盘管理器发现不能进行任何操作。
+
+ChipGenius识别出主控厂商为Innostor(银灿)，型号IS918M_GA。
+银灿IS918主控U盘量产工具MPTool_180703A：https://pan.baidu.com/s/1Bybmqld89ZeX2bweQV5iJQ
+提取码: 7y5v
+还有难点，居然这个网站下载的量产工具无法使用，最终在http://wuyou.net/forum.php?mod=viewthread&tid=436519找到了工具，直接点击开始即可，并且能正常使用。
+https://www.bilibili.com/read/cv23056591/
+下载网址：https://modou.lanzoul.com/b036ysufc，密码是：点赞
+量产后的结果（一般来说多多少少会缩水，并且耗时长）：
+耗时未统计，量产过后软件自动退出了。但是缩水严重，原来32G的U盘变成16G了。。。但是总算能使用了。
+另外我仔细发现，U盘的vpid变了，并且字符串描述符名称也变了，估计是进行了相关的重写操作，把这个U盘换成了其他品牌U盘，这很合理，但是按道理来说能拿到所有描述符信息，为何还是要变。还好速度还是usb3.0。
+
+## 5、多分区U盘无法在Windows系统上面挂载
+从而导致无法进行格式化操作，在磁盘管理器里面能看见U盘容量，并有一个EFI分区和RAW主分区，并不能增加简单卷让U盘在文件资源管理器里面显示出来。
+将U盘插入ubuntu23里面，结果直接导致枚举失败，更换一个ubuntu版本能枚举成功，也是无法在资源管理器中看见U盘内容。
+最后想到使用rufus软件进行格式化操作，果然rufus软件能识别到U盘，需要选择一个ISO文件并刷入即可格式化操作，并检测到本盘包含多分区，继续下一步格式化操作。
+然后我就成功了，文件资源管理器成功识别U盘。
 

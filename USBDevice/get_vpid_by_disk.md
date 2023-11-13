@@ -31,3 +31,6 @@ SYSTEM\\CurrentControlSet\\services\\USBSTOR\\Enum（无用）
 [HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices]这个导出后通过notepad++对比可以找出volume，但是再也找不到下一层对应关系。
 
 探索无果。
+
+## 4、可以通过deviceiocontrol函数获取
+代码见：D:\Github\Storage\c++\udev\libusb\windows\GiveUp.c

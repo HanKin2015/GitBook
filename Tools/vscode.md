@@ -160,8 +160,9 @@ Host linux_x86_compile
 - 目录/root/.vscode-server/bin/下面有个文件夹名是commit，即~/.vscode-server/bin/
 - 稳定版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/stable
 - insider版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/insider
-
-
+- 下载成功后上传到远程服务器。复制到 ~/.vscode-server-insiders/bin/【commit号】，通过使用tar -xvf vscode-server-linux-x64.tar.gz --strip-components 1解压文件
+- 使用chmod +x node server.sh为node和server.sh添加可执行权限
+- 重新打开vscode。
 
 ## 11、visual studio code 重置所有设置（还原默认设置）
 a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换pcName为自己电脑设置的名称）

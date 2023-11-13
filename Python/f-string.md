@@ -65,6 +65,9 @@ hello      and      world
 1.123 is       1.12
 ```
 
+## 4、新特性
+在 print(f"{monkey.Me.who_am_i = }") 和 print(f"{monkey.Me.who_am_i = }") 这两行代码中，使用了 f-string 的新特性，即在字符串中使用 = 来打印变量名和值。这是 Python 3.8+ 的语法，如果你的 Python 版本低于 3.8，这些行会引发 SyntaxError。如果你的 Python 版本低于 3.8，请将这两行代码修改为普通的打印语句。
+
 
 
 

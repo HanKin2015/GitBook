@@ -84,7 +84,9 @@ cmd窗口：ipconfig /flushdns
 ## 8、其他人使用的工具
 我也来个AFF，全专线，全流媒体解锁，千兆网速，延迟低，高峰期网速快https://flower.yt/aff.php?aff=1166
 3元一个月20G   https://cv2.work/auth/register?code=lwBC
-5月一个月18G   fengchi.buzz
+5月一个月18G   fengchi.
+流量包：https://dhh.moe/#/register?code=dRST23mr
+https://金坷垃.com/auth/register?code=WAet  126.4一年
 
 ## 9、Clash for Windows
 https://clash.razord.top/#/proxies?host=127.0.0.1&port=12040&secret=ab6faad5-ee55-446f-963d-3292e5f76719

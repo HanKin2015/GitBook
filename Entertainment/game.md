@@ -13,10 +13,15 @@
 20200910截至最强点卷车：极夜幽冥
 
 ## 2、航海王：热血航线
+
 ## 3、王者荣耀
+
 ## 4、火影忍者：巅峰对决
+
 ## 5、皇室战争
+
 ## 6、忍者必须死3
+
 ## 7、穿越火线
 
 ## 8、每日十次机会猜四字词语
@@ -29,4 +34,46 @@ http://chengyu.t086.com
 ## 9、PC端有趣的小游戏
 小游戏合集：
 http://www.flashbynight.com
+
+## 10、完蛋，LLM
+通过小游戏学习prompt技巧：https://zhuanlan.zhihu.com/p/665237751
+http://llmriddles.opendilab.net/
+
+## 11、游戏网名
+https://zhuanlan.zhihu.com/p/439000132
+https://www.zhihu.com/question/264163742/answer/2783750382
+https://www.zhihu.com/question/545428654/answer/2594091855
+https://zhuanlan.zhihu.com/p/353711046
+https://zhuanlan.zhihu.com/p/348998747
+
+叔叔一身公主病
+轻松学IT
+高贵冷艳健少
+异次元的狙击手
+异次元的突击手
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

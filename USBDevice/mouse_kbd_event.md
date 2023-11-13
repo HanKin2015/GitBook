@@ -324,3 +324,27 @@ adb shell dumpsys activity
 请注意，dumpsys 命令通常需要在开发者模式下或者具有适当权限的用户身份运行。具体的命令和输出可能因你使用的 Android 设备和系统版本而有所不同。
 
 可以通过dumpsys input查看输入设备。
+
+## 10、evtest工具
+https://faq.uniontech.com/tools/faq/212a
+```
+[root@ubuntu0006:~/cmake] #./evtest
+No device specified, trying to scan all of /dev/input/event*
+Available devices:
+/dev/input/event0:      Power Button
+/dev/input/event1:      AT Translated Set 2 keyboard
+/dev/input/event2:      VirtualPS/2 VMware VMMouse
+/dev/input/event3:      VirtualPS/2 VMware VMMouse
+/dev/input/event4:      spice vdagent tablet
+Select the device event number [0-4]: 0
+Input driver version is 1.0.1
+Input device ID: bus 0x19 vendor 0x0 product 0x1 version 0x0
+Input device name: "Power Button"
+Supported events:
+  Event type 0 (EV_SYN)
+  Event type 1 (EV_KEY)
+    Event code 116 (KEY_POWER)
+Properties:
+Testing ... (interrupt to exit)
+```
+

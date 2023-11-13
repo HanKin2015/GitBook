@@ -8,7 +8,7 @@ https://docs.microsoft.com/zh-cn/windows-hardware/drivers/debugger/debugger-down
 http://www.windbg.org/
 
 ## 2、系统蓝屏dump文件位置
-‪C:\Windows\MEMORY.DMP
+C:\Windows\MEMORY.DMP
 
 ## 3、管理员运行windbg工具（调试）
 加载符号表：File->Symbol File Path (D:\Users\User\My Document\Visual Studio 2015\Projects\KMDFUSBDriver\x64\Debug)

@@ -303,6 +303,11 @@ Ping命令使用的是ICMP协议，不是端口号。ICMP不像http、https、FT
 Ping不使用端口，而是使用协议。Ping通过将Internet控制消息协议（ICMP）回显请求数据包发送到目标主机并等待ICMP回显应答来进行操作。但是，出于安全考虑，通常你可以禁用ping功能。
 
 ping命令不支持端口检测，使用telnet命令即可。下载tcping.exe也可以。
+
+用于探测对比百度的延时和抖动情况
+如下方法：
+tcping.exe -d -t --tee ./baidu.txt www.baidu.com
+
 ```
 C:\Users\User\Downloads>tcping.exe 172.22.65.15
 
@@ -316,8 +321,6 @@ Ping statistics for 172.22.65.15:80
      0 successful, 3 failed.  (100.00% fail)
 Was unable to connect, cannot provide trip statistics.
 
-C:\Users\User\Downloads>
-C:\Users\User\Downloads>
 C:\Users\User\Downloads>tcping.exe 172.22.65.15 22
 
 Probing 172.22.65.15:22/tcp - Port is open - time=15.560ms

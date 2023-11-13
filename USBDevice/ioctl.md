@@ -31,17 +31,22 @@ _IOWR(type,nr, datatype) //双向传送
 
 ## 2、注意点
 linux内核中有：
+```
 src/linux-source-5.3/include/uapi/linux/uvcvideo.h
 #define UVCIOC_GET_BUSID_DEVICEID _IOR('V',  104, struct v412_usb_device_info)
 #define UVCIOC_USB_CONTROL_MSG _IOWR('V',  105, struct v412_usb_control_msg)
+```
 
 应用层一定要对齐好对应的序号（104、105），这个很重要：
+```
 spicec/libcamera/src/include/kernel-5.3/include/uapi/linux/uvcvideo.h
 #define UVCIOC_GET_BUSID_DEVICEID _IOR('V',  104, struct v412_usb_device_info)
 #define UVCIOC_USB_CONTROL_MSG _IOWR('V',  105, struct v412_usb_control_msg)
+```
 
-
-
+## 3、IOCTL码解析工具
+https://learn.microsoft.com/en-us/previous-versions/windows/embedded/aa914767(v=winembedded.60)?redirectedfrom=MSDN
+ctlcode.exe 
 
 
 

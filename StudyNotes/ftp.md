@@ -199,3 +199,16 @@ https://blog.csdn.net/m0_43584016/article/details/104985031
 尝试使用mobaxterm连接ftp，然后出现中文文件夹乱码问题，解决不了，放弃。
 使用WinSCP软件连接ftp，没有中文文件夹乱码问题，但是会不断的出现连接超时问题，导致下载进度很漫长。
 计划使用python脚本进行下载，然而也会存在下载中断的问题，代码见：D:\Github\Storage\python\study\ftp\download_directory.py
+
+## 14、使用python开server
+我也是后来同事告诉了我这个方法，起因是环境限制了FTP协议需要使用的20和21端口，因此需要使用python开server自主设置端口号即可跳过限制。
+```
+python -m http.server -b 0.0.0.0 8852
+
+C:\Users\test>telnet 172.22.64.246 20
+正在连接172.22.64.246...无法打开到主机的连接。 在端口 20: 连接失败
+C:\Users\test>telnet 172.22.64.246 21
+正在连接172.22.64.246...无法打开到主机的连接。 在端口 21: 连接失败
+C:\Users\test>telnet 172.22.64.246 8852
+成功，没有错误提示
+```

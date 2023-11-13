@@ -35,6 +35,7 @@ print(math.isnan(nan))
 import pandas as pd
 nan = float('nan')
 print(pd.isna(nan))
+pd.notna() 或 pd.notnull()
 
 # 4、利用Nan值不等于其自身判断
 def is_nan(nan):

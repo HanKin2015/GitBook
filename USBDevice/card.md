@@ -12,7 +12,7 @@ https://blog.csdn.net/bigger_belief/article/details/130386487
 SIM卡的全称是Subscriber Identity Module，简称SIM卡，也就是我们俗称的“手机卡”。SIM卡插入到移动终端设备中，可以实现设备的通讯功能，即通话与上网。SIM卡形式又可以分为卡片式（大卡）和嵌入式（小卡）。现在小卡已经逐渐取代了大卡，成为了现在应用的主流。蓝畅PDA也是采用小卡的SIM卡。
 
 ## 2、TF卡
-TF卡的全称是Trans Flash卡，又称“Micro SD卡”，就是我们常说的存储卡。TF卡的体积小，仅为15mmx11mmx1mm，可以节省空间。TF卡的有许多种存储容量，常见的储存容量为2G、4G、8G、16G、32G、64G、128G。目前蓝畅终端设备的Micro SD(TF)卡的储存容量可扩展至128G。
+TF卡的全称是Trans Flash卡，又称“Micro SD卡”，就是我们常说的存储卡（内存卡）。TF卡的体积小，仅为15mmx11mmx1mm，可以节省空间。TF卡的有许多种存储容量，常见的储存容量为2G、4G、8G、16G、32G、64G、128G。目前蓝畅终端设备的Micro SD(TF)卡的储存容量可扩展至128G。
 
 ## 3、PSAM卡
 PSAM卡全称Purchase Secure Access Module，中文名为“销售点终端安全存取模块”。PSAM主要内嵌于终端设备，起着安全保护的作用，此外PSAM卡还具有计算功能。PSAM卡可以加密数据信息，更多应用于金融领域、企业管理等领域。符合《中国金融集成电路（IC卡）PSAM卡规范》，包括普通PSAM卡和高速PSAM卡。
