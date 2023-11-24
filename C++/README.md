@@ -341,3 +341,37 @@ CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的�
 新推出的Mojo语言，被宣传为多个领域中最好的：Python的易用性和清晰的语法，以及Rust的速度和内存安全。这些多少有些夸大其词。由于Mojo仍处于开发的早期阶段，用户还需要一段时间才能亲眼看到这种语言是如何达到他们的要求的。
 https://docs.modular.com/mojo/get-started.html
 Mojo的创建者，一家名为Modular的公司，提供了一个早期的在线运行环境：一个Jupyter Notebook环境，用户可以在这里运行Mojo代码并了解该语言的功能和行为。
+
+## 24、EOF
+在 C语言中，EOF 是一个宏定义，它代表"end of file"，表示文件结束标志。EOF 是一个特殊的字符，它的值在不同的编译器中可能不同，但总是负数。在大多数系统中，EOF 的值为 -1。
+
+EOF 常常用于文件的输入输出中，当读取到文件结束时，会返回 EOF。
+
+## 25、字符串对齐输出
+```
+          id = 9
+  event_time = 1699952602
+   user_name = hj
+   server_ip = 174.127.0.0
+      vm_tag = 13
+     latency = 1
+      jitter = 1
+  link_proto = 0
+   link_type = 0
+```
+
+c语言模式就是右对齐，所以不需要任何处理：
+```
+printf("%12s = %d\n", "vm_tag", htonl(iter->vm_tag));   // 右对齐
+printf("%-12s = %d\n", "jitter", htons(iter->jitter));  // 左对齐
+```
+
+## 26、C++ 20居然支持import语法
+https://mp.weixin.qq.com/s/AMNPuISJyDohirU_KupDxA
+
+## 27、%X和%x在c语言中的区别
+在 C 语言中，%X 和 %x 是用于格式化输出的转换说明符，它们用于指定十六进制数的输出格式。它们之间的区别在于输出的字母的大小写。
+
+%X 用于以大写字母表示十六进制数的输出，即输出的字母为大写的 A-F。
+%x 用于以小写字母表示十六进制数的输出，即输出的字母为小写的 a-f。
+例如，如果你有一个整数变量 num 的值为 255（十六进制为 0xFF），那么使用 %X 将会输出 FF，而使用 %x 将会输出 ff。

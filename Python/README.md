@@ -82,4 +82,43 @@ C:\Users\test>telnet 172.22.64.246 8852
 成功，没有错误提示
 ```
 
+## 10、python -m中-m参数详解
+python -m 是 Python 解释器的一个命令行选项，用于执行一个指定的模块。当你使用 python -m <module_name> 时，Python 解释器会在 sys.path 中查找指定的模块，并执行它。
 
+例如，如果你有一个名为 example_module 的模块，你可以使用以下命令来执行它：
+```
+python -m example_module
+```
+这将导入 example_module 并执行它。这种方式的好处是，不需要担心模块所在的路径，Python 解释器会自动帮你找到它。
+
+另外，python -m 也可以用来执行 Python 自带的工具模块，比如 unittest、pdb 等。例如，你可以使用以下命令来执行 unittest 模块：
+```
+python -m unittest
+```
+这样做可以方便地在不同的环境中执行 Python 模块，而不用担心模块所在的路径或者环境变量的设置。
+
+可以通过加载-m参数来指定当前文件夹下的python环境。
+
+### Error while finding module specification for 'solve_mariaDB_data_question.py' (ModuleNotFoundError: _
+_path__ attribute not found on 'solve_mariaDB_data_question' while trying to find 'solve_mariaDB_data_question.py')
+这是由于加了-m参数导致，或者在代码中增加：
+```
+import sys
+sys.path.append('D:\\迅雷下载\\Tools4.5.10\\python')
+```
+
+### requests.exceptions.SSLError: HTTPSConnectionPool(host='11.6.30.54', port=8001): Max retries exceeded with url: /totals (Caused by S
+or(1, '[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1124)')))
+原因：本来http连接的请求，我写成了https。
+
+这个错误表明你的程序尝试通过 HTTPS 连接到 121.46.130.154 的 8001 端口，但是遇到了 SSL 错误。错误信息 "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1124)" 表明 SSL 库检测到了错误的版本号。
+
+可能的原因包括：
+
+服务器端 SSL 配置问题，导致无法正确处理连接请求。
+客户端和服务器之间的 SSL/TLS 版本不兼容。
+为了解决这个问题，你可以尝试以下方法：
+
+检查目标服务器的 SSL 配置，确保其支持所需的 SSL/TLS 版本，并且没有配置错误。
+确保你的客户端程序使用的是与服务器兼容的 SSL/TLS 版本。你可能需要更新你的 SSL 库或调整 SSL 配置。
+另外，你也可以尝试使用非加密的 HTTP 连接，或者联系服务器管理员寻求帮助。

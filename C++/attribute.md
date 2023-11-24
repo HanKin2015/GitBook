@@ -179,7 +179,6 @@ If packed is used on a structure, or if bit-fields are used it may be that the M
 The ms_struct and gcc_struct attributes correspond to the -mms-bitfields and -mno-ms-bitfields command-line options, respectively; see x86 Options, for details of how structure layout is affected. See x86 Variable Attributes, for information about the corresponding attributes on variables.
 ```
 
-
 ### 4-1、位域对齐
 3.7版本之后GCC都默认使用了-mms-bitfields，此选项意义为使用Microsoft的方式进行对齐操作，其对齐策略为将对所有类型相同的位域合并到一起。与之相对的是GCC对齐方式，其对齐策略为将所有位域合并到一起，并不区分位域类型。
 

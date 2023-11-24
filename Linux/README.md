@@ -305,8 +305,17 @@ Type "apropos word" to search for commands related to "word".
 /                           \
 ```
 
-
-
+## 22、命令返回值
+使用反引号（``）包裹命令时，Shell会尝试执行反引号中的内容，并将其结果作为命令的参数。
+等价于（$()）包裹命令。
+注意：有时候中间会有空格出现，需要外面再裹一层双引号，如：
+```
+[root@ubuntu0006:~/cmake] #date -d $(date +'%Y%m%d %H:%M:%S') +%s
+date: 额外的操作数 "+%s"
+Try 'date --help' for more information.
+[root@ubuntu0006:~/cmake] #date -d "$(date +'%Y%m%d %H:%M:%S')" +%s
+1700537669
+```
 
 
 

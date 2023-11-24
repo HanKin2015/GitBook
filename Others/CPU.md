@@ -1,6 +1,7 @@
 # CPU那些事儿
 
 ## 1、CISC & RISC
+(ARM与x86：有何区别？)[https://mp.weixin.qq.com/s/X2syU5xDH93BJdtUGnKHyg]
 要了解X86和ARM，就得先了解复杂指令集(CISC,complex instruction set computer)和精简指令集(RISC,Reduced Instruction-Set Computer)。从CPU发明到现在，有非常多种架构，从我们熟悉的X86，ARM，到不太熟悉的MIPS，IA64，它们之间的差距都非常大。但是如果从最基本的逻辑角度来分类的话，它们可以被分为两大类，即所谓的“复杂指令集”与“精简指令集”系统，也就是经常看到的“CISC”与“RISC”。
 
 ## 2、Intel和ARM处理器的区别

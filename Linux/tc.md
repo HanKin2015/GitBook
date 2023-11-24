@@ -146,7 +146,7 @@ qdisc netem 8001: root refcnt 9 limit 1000 delay 100.0ms  10.0ms
 直接找到原因，存在网络延迟规则。
 
 （3）删除所有规则
-tc qdisc del dev eth4 root
+tc qdisc del dev eth0 root
 执行之后再次查看流量配置
 ```
 执行：tc qdisc show dev eth0
@@ -165,7 +165,7 @@ qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 tc qdisc add dev eth0 root netem delay 100ms 10ms
 想使用过滤器进行过滤，居然会失败。
 
-## 3、一次给指定ip增加延迟
+## 3、一次给指定ip增加延迟(完整流程，需要全部执行)
 把ip修改成指定物理机ip即可，中间可能出现当前主机网口不是eth0。支持多个ip指定。
 ```
 查看网卡 eth0 的流控的配置 (qdisc 表示排队规则 queueing discipline)
@@ -173,10 +173,9 @@ tc qdisc show dev eth0
 
 设置指定IP的延迟和丢包
 tc qdisc add dev eth0 root handle 1: prio
+tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 123.2.3.6 flowid 1:1
 
 限制带宽, 延迟, 丢包
-tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 123.2.3.6 flowid 1:1
-tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 223.22.23.26 flowid 1:1
 tc qdisc add dev eth0 parent 1:1 handle 10: netem delay 50ms loss 1%
 
 修改规则
@@ -210,13 +209,4 @@ https://www.5axxw.com/wiki/content/ztvxjf
 
 tc自 linux2.2内核以后逐渐被加在了内核里，成为linux服务器本身就能提供的一种服务。
 个人觉得还是学好使用tc吧。
-
-
-
-
-
-
-
-
-
 

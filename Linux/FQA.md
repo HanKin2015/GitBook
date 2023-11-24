@@ -169,33 +169,38 @@ rsync -av --progress t01/demo.zip t02/
 ### 17-1、解决Linux系统下，出现“不在sudoers文件中，此事将被报告”的问题
 https://blog.csdn.net/sinat_39589027/article/details/85323996
 
-1.切换到root用户权限，输入命令："su root"，回车后输入密码再回车
-过了一段时间再来写解决方案，结果没有环境让我尝试了，之前问题也未解决。
-
-### 17-2、方法二，推荐方法一
 解决方法:编辑sudoers文件有两种办法，一种是以root帐号执行visudo，另一种是root帐号执行vi /etc/sudoers.其实两者都是修改/etc/sudoers。
 
-注意：在修改 /etc/sudoers时，一定注意该文件是否有写权限，如果没有写权限，则使用 chmod u+w /etc/sudoers使其拥有写权限
-。写完后注意将写权限去掉，以防止误操作。
+注意：在修改 /etc/sudoers时，一定注意该文件是否有写权限，如果没有写权限，则使用 chmod u+w /etc/sudoers使其拥有写权限。写完后注意将写权限去掉，以防止误操作。
 
 假设你的用户名是“minghai”，属于“minghai”用户组。
 
-为了让用户minghai能够执行sudo命，你可以在sudoers文件中加上一下四行的任意一行。
+为了让用户minghai能够执行sudo命令，你可以在sudoers文件中加上下面四行的任意一行。
 ```
-minghai            ALL=（ALL）             ALL 
-%minghai          ALL=（ALL）             ALL
-minghai            ALL=（ALL）             NOPASSWD：ALL(出于方便，推荐使用此设置) 
-%minghai          ALL=（ALL）             NOPASSWD：ALL
+minghai     ALL=（ALL）             ALL 
+%minghai    ALL=（ALL）             ALL
+minghai     ALL=（ALL）             NOPASSWD：ALL(出于方便，推荐使用此设置) 
+%minghai    ALL=（ALL）             NOPASSWD：ALL
 ```
 解释说明：
 第一行：允许用户minghai执行sudo命令（需要输入密码）。
 第二行：允许用户组minghai里面的用户执行sudo命令（需要输入密码）。
 第三行：允许用户minghai执行sudo命令，并且在执行的时候不输入密码。
 第四行：允许用户组minghai里面的用户执行sudo命令，并且在执行的时候不输入密码。
-当然如果你理解上面的原理后，可以直接输入如下命令解决此问题
 
-su -
-echo 'xxx ALL=(ALL) ALL' >> /etc/sudoers  (其中xxx代表用户名) 
+当然如果你理解上面的原理后，可以直接输入如下命令解决此问题
+```
+su echo 'xxx ALL=(ALL) ALL' >> /etc/sudoers  (其中xxx代表用户名) 
+```
+
+### 17-2、sudoedit和visudo命令
+sudoedit和visudo都是用于编辑sudoers文件的命令，sudoers文件是授权用户使用sudo命令的配置文件。
+
+sudoedit命令是一个简单的文本编辑器，它允许授权用户编辑sudoers文件。使用sudoedit命令编辑sudoers文件时，会将文件副本复制到临时目录中，编辑完成后再将其复制回原始位置。这种方式可以避免在编辑过程中意外破坏sudoers文件。
+
+visudo命令是一个更高级的sudoers文件编辑器，它会检查编辑后的文件是否符合sudoers文件的语法规则。如果文件存在语法错误，visudo会提示用户进行修正。这种方式可以避免由于语法错误导致sudoers文件无法使用的情况。
+
+总的来说，如果你只需要简单地编辑sudoers文件，可以使用sudoedit命令。如果你需要对sudoers文件进行更复杂的编辑，并且需要确保文件的语法正确，可以使用visudo命令。
 
 ## 18、error: /lib64/libpthread.so.0: symbol h_errno
 是真的烦，不要轻易升级glibc，导致整个环境坏了。然后安装gcc后出现这种情况。

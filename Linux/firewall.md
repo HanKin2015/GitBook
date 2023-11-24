@@ -45,13 +45,22 @@ iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123
 iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令
 iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令
 
+### 1-5、端口限制
+iptables -A INPUT -s 123.70.10.72 --dport 22 -j DROP    禁止123.70.10.72的ip访问本机的22端口
+iptables -A INPUT -p tcp --dport 9000:9999 -j DROP      禁止所有ip访问本机的9000到9999端口
+
+为何debian8系统没有限制住9xxx端口，是由于localhost参数，如果使用服务端实际ip地址则就会报错ssh: connect to host 172.22.16.184 port 9626: Connection timed out
+是因为我的ip地址写错了，localhost是一个特殊的主机名，它通常被解析为本地计算机上的回环地址127.0.0.1。当你在本地计算机上使用localhost时，实际上是在指向本地计算机自身。
+如果我使用ssh root@127.0.0.1 -p 9626那么这样我就成功了。
+那到底为什么我连接本地计算机地址后却能连接到服务端？答案是ssh反向连接，详细可见：D:\Github\GitBook\gitbook\Linux\ssh.md
+
 ### 1-5、实战
 ```
 iptables -A INPUT -s 123.70.10.72 --dport 22 -j DROP  禁止123.70.10.72的ip访问本机的22端口
 无法进行ssh连接
 
 iptables -A INPUT -p tcp --dport 9000:9999 -j DROP 禁止所有ip访问本机的9000到9999端口
-由于adb命令连接使用的是9000到9999端口，因此会进行大量的重试操作，直至超时unable to connect to 172.22.16.82:9045:9045
+由于adb命令连接使用的是9000到9999端口，因此会进行大量的重试操作，直至超时unable to connect to 172.22.16.82:9045:9045（大约需要3分钟左右超时）
 
 iptables -A INPUT -s 123.70.10.72 -j DROP 禁止123.70.10.72的ip访问
 无法进行ssh连接，并且会两者互相ping不通，而且也会报错unable to connect to 172.22.16.82:9045:9045

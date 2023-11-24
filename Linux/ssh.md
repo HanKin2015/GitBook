@@ -462,9 +462,103 @@ Connection reset by 127.0.0.1 port 9370
 但是这个时候使用xface的ui界面还是无法登录root用户，其他用户也不行，密码是正确的。
 后来在界面上面乱点，如查看当前是什么ui桌面后，奇迹般的好了，也能直接使用短密码了，也能登录进入UI界面了。
 
+## 17、SSH反向隧道
+反向连接通常指的是由目标主机主动连接到客户端，而不是客户端连接到目标主机。在SSH中，反向连接通常是指使用SSH反向隧道（SSH reverse tunneling）来建立从目标主机到客户端的连接，这种连接方式可以用于一些特定的网络配置和安全需求。
 
+SSH服务默认使用的端口是TCP Port 22
+```
+[root@HANKIN ~]# ssh 172.22.16.184
+ssh: connect to host 172.22.16.184 port 22: Connection refused
+```
+因此使用反向连接则需要把22端口关闭掉，通过修改ssh配置文件/etc/ssh/sshd_config，把最后一行ListenAddress 0.0.0.0改成其他地址，如ListenAddress 127.0.0.1。
 
+```
+# 打印syslog日志专用
+LOG="logger -t hankin-debug-ssh-start.sh[$$]"
 
+killall ssh
+# 打开ssh通道, 不加-f的话，会阻塞
+ssh -NfR "$remote_forward_port:localhost:22" "admin@10.70.10.70" -F "/etc/ssh/sshd_config" -i "/etc/ssh/ssh_host_rsa_key"
+if [ $? != 0 ];then
+    $LOG "start ssh debug tunnel fail"
+    exit 4
+fi
+$LOG "Establish hankin debug ssh tunnel ok"
+```
 
+### 17-1、实战
+（1）关闭22端口，监听127.0.0.1地址(修改/etc/ssh/sshd_config配置文件)：
+```
+[root@ubuntu0006:~] #ssh root@172.22.65.15
+Warning: Permanently added '172.22.65.15' (RSA) to the list of known hosts.
+root@172.22.65.15's password:
 
+[root@ubuntu0006:~] #ssh root@172.22.65.15
+ssh: connect to host 172.22.65.15 port 22: Connection refused
+```
 
+（2）在目标服务端创建反向隧道
+```
+开放1979端口，客户端需要开通22端口，172.22.16.1是客户端ip，而服务端ip是无需告知的
+ssh -NfR "1979:localhost:22" "root@172.22.16.1"
+root@172.22.16.1's password:    # 输入客户端密码
+```
+
+（3）客户端连接
+```
+root@hankin:~# ping 172.22.16.184           # 能ping通服务端ip地址
+PING 172.22.16.184 (172.22.16.184) 56(84) bytes of data.
+64 bytes from 172.22.16.184: icmp_seq=1 ttl=64 time=0.144 ms
+64 bytes from 172.22.16.184: icmp_seq=2 ttl=64 time=0.171 ms
+
+--- 172.22.16.184 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1028ms
+rtt min/avg/max/mdev = 0.144/0.157/0.171/0.018 ms
+root@hankin:~# telnet 172.22.16.184 22      # 但是22端口不通
+Trying 172.22.16.184...
+telnet: Unable to connect to remote host: Connection refused
+root@hankin:~# telnet 172.22.16.184 1979    # 但是1979端口不通
+Trying 172.22.16.184...
+telnet: Unable to connect to remote host: Connection refused
+root@hankin:~# ssh root@localhost -p 1979   # 直接连接127.0.0.1的ip地址的1979端口成功连接到服务端
+root@localhost's password:
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Nov 20 14:41:38 2023 from localhost
+sh: 1: gcc: not found
+dpkg-architecture: warning: couldn't determine gcc system type, falling back to default (native compilation)
+root@hankin:~# ifconfig
+eth0      Link encap:Ethernet  HWaddr a4:17:91:04:01:87
+          inet addr:172.22.16.184  Bcast:172.22.16.255  Mask:255.255.255.0
+          inet6 addr: fe80::a617:91ff:fe04:187/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:360402 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:10852 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:47220346 (45.0 MiB)  TX bytes:1061084 (1.0 MiB)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:4903 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:4903 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:484028 (472.6 KiB)  TX bytes:484028 (472.6 KiB)
+
+root@hankin:~#
+```
+
+### 17-2、ping有指定端口吗
+ping命令通常用于测试主机之间的连通性，它并不涉及端口。ping命令发送ICMP（Internet Control Message Protocol）数据包到目标主机，并等待目标主机的响应，以检测目标主机是否可达。
+
+与ping不同，telnet是一种用于远程登录到目标主机的协议，它需要指定目标主机的IP地址和端口号。因此，ping和telnet是两种不同的网络工具，用途和功能也不同。
+
+如果您需要测试目标主机的特定端口是否可达，可以使用telnet命令或者其他端口扫描工具，而不是ping命令。
+
+因此常常会有能ping通，但是ssh连接不上，很大概率是端口被防火墙限制了。

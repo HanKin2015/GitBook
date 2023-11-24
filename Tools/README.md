@@ -1,5 +1,7 @@
 # 程序猿工具
 
+科赫曲线
+
 舔狗的最终奥义是：舔一个女神，你是备胎；舔一百个女神，她们是你的备胎。
 告诫大家一句话：舔狗——舔到最后,什么都有。
 
@@ -39,7 +41,6 @@ certutil：
 dism++是一款非常好用的系统清理和维护工具，使用它可以更好的精简系。
 
 FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
-
 
 ## 3、工具推荐
 用途	           |	       工具
@@ -137,7 +138,9 @@ split.exe工具可以分隔文件，可以直接在git bash窗口使用，拿一
 - 计算重新合并成的文件的md5sum：md5sum.exe new_test.jpg
 - 对比原始文件与重新合并成的文件的md5sum， 一致则处理成功
 
+## 13、Github上一款强大的时间管理工具：TidGi-Desktop！
+https://github.com/tiddly-gittly/TidGi-Desktop/releases
+https://mp.weixin.qq.com/s/CVWudgKH3JP8hVXbeYxDFA
 
-
-
-
+## 14、有时候电脑系统磁盘爆满需要清理空间
+强烈推荐使用SpaceSniffer工具。

@@ -207,6 +207,8 @@ adb logcat ActivityManager:W MyApp:E
 2023-02-20 14:55:23 adb -s 172.22.16.113:9011 shell
 ```
 
+由于我把所有的9xxx端口限制，导致adb命令执行失败，只能通过killall adb杀死所有卡住的进程后就能正常使用adb命令了。
+
 ## 9、hdb连接设备是什么意思
 https://baijiahao.baidu.com/s?id=1736118598411372211&wfr=spider&for=pc
 
@@ -292,4 +294,6 @@ AndroidLogPrintFormat android_log_formatFromString(const char * formatString)
 ## 11、log命令
 log -t "tag" "there are 5 usb devices"
 
-
+中间的部分代表AID, settings应用的AID为system, 无法更新persist.usb.*的系统属性
+setprop persist.usb.dwc_driver 2
+setprop persist.sys.dwc_driver 2

@@ -91,5 +91,28 @@ coproc
 compgen: 用法: compgen [-abcdefgjksuv] [-o 选项]  [-A 动作] [-G 全局模式] [-W 词语列表]  [-F 函数] [-C 命令] [-X 过滤模式] [-P 前缀] [-S 后缀] [词语]
 ```
 
+## 3、setsid
+在新的会话中运行程序
+```
+[root@ubuntu0006:~] #ping 10.70.10.70
+PING 10.70.10.70 (10.70.10.70) 56(84) bytes of data.
+64 bytes from 10.70.10.70: icmp_seq=1 ttl=61 time=1.62 ms
+64 bytes from 10.70.10.70: icmp_seq=2 ttl=61 time=0.848 ms
+^C
+--- 10.70.10.70 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.848/1.235/1.623/0.389 ms
+[root@ubuntu0006:~] #setsid ping 10.70.10.70
+PING 10.70.10.70 (10.70.10.70) 56(84) bytes of data.
+64 bytes from 10.70.10.70: icmp_seq=1 ttl=61 time=1.23 ms
+[root@ubuntu0006:~] #64 bytes from 10.70.10.70: icmp_seq=2 ttl=61 time=0.866 ms
+64 bytes from 10.70.10.70: icmp_seq=3 ttl=61 time=2.06 ms
+64 bytes from 10.70.10.70: icmp_seq=4 ttl=61 time=1.45 ms
+64 bytes from 10.70.10.70: icmp_seq=5 ttl=61 time=1.61 ms
+```
+无法使用ctrl+c方法关闭，只能通过ps -ef | grep ping找到进程id，然后kill命令杀死。
 
-
+同样的效果命令还有：
+```
+nohup sh test.sh &
+```

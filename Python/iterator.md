@@ -19,14 +19,21 @@ print(str1, str2)
 print(hex(data1), hex(data2))
 ```
 
-## 3、列表保存为文件
+## 3、十六进制字符串转整数
+```
+hex_str = '0xABCD'
+dec = int(hex_str, 16)
+print(dec)
+```
+
+## 4、列表保存为文件
 ```
 file = open('file_name.txt','w');
 file.write(str(list_variable));
 file.close();
 ```
 
-## 4、迭代器
+## 5、迭代器
 
 
 

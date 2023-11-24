@@ -1,5 +1,7 @@
 # htonl和ntohl函数
 
+示例：D:\Github\Storage\c++\study\endian\htonl_example.c
+
 ## 1、什么是字节序
 主机字节序：
 就是自己的主机内部，内存中数据的处理方式，可以分为两种：
@@ -8,7 +10,7 @@
 
 网络字节序：
 网络字节序转化为主机字节序时，一定要注意是否需要转换。网络字节序是确定的。
-网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释。网络字节顺序采用big-endian（大端）排序方式。
+网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释。**网络字节顺序采用big-endian（大端）排序方式。**
 
 ## 2、深入理解字节序
 网络字节序与主机字节序是经常导致混淆的两个概念，网络字节序是确定的，而主机字节序的多样性往往是混淆的原因。
@@ -25,7 +27,7 @@ a的主机字节序----------网络字节序 ---------b的主机字节序
 小端字节序（little-endian）：按照内存的增长方向，高位数据存储于高位内存中
 
 数据：0x12345678
-从左往右是内存地址增长的方向
+从左往右是内存地址增长的方向（可以理解为USB数据包，后面来的数据需要往高位内存中存储）
 低------------------->>>>高
 大端字节序：12 34 56 78
 小端字节序：78 56 34 12
@@ -57,15 +59,32 @@ int main()
 Byte Order:            Little Endian
 ```
 
-## 3、htonl()函数
+## 3、所有相关函数
 ```
+网络和主机字节序之间转换
 #include <arpa/inet.h>
 uint32_t htonl(uint32_t hostlong);      "host to network long"
 uint16_t htons(uint16_t hostshort);     "host to network short"
 uint32_t ntohl(uint32_t netlong);       "network to host long"
 uint16_t ntohs(uint16_t netshort);      "network to host short"
-```
 
+大小端和主机字节序之间转换
+#include <endian.h>
+uint16_t htobe16(uint16_t host_16bits);
+uint16_t htole16(uint16_t host_16bits);
+uint16_t be16toh(uint16_t big_endian_16bits);
+uint16_t le16toh(uint16_t little_endian_16bits);
+
+uint32_t htobe32(uint32_t host_32bits);
+uint32_t htole32(uint32_t host_32bits);
+uint32_t be32toh(uint32_t big_endian_32bits);
+uint32_t le32toh(uint32_t little_endian_32bits);
+
+uint64_t htobe64(uint64_t host_64bits);
+uint64_t htole64(uint64_t host_64bits);
+uint64_t be64toh(uint64_t big_endian_64bits);
+uint64_t le64toh(uint64_t little_endian_64bits);
+```
 将主机数转换成无符号长整型的网络字节顺序。本函数将一个32位数从主机字节顺序转换成网络字节顺序。
 
 h是主机host，n是网络net，l是长整形long，s是短整形short。
@@ -124,7 +143,6 @@ b=4096
 
 解释一下，数字16的16进制表示为0x0010，数字4096的16进制表示为0x1000。 由于Intel机器是小尾端，存储数字16时实际顺序为1000，存储4096时实际顺序为0010。因此在发送网络包时为了报文中数据为0010，需要经过htons进行字节转换。如果用IBM等大尾机器，则没有这种字节顺序转换，但为了程序的可移植性，也最好用这个函数。
 
-
 ## 6、ntohs()函数
 ntohs()是一个函数名，作用是将一个16位数由网络字节顺序转换为主机字节顺序。
 
@@ -153,16 +171,5 @@ uint32_t htole32(uint32_t hostlong);
 使用本文第2节的代码进行修改，并且第2节有小白版本解释，这节详细代码见：D:\Github\Storage\c++\study\endian\htole32_example.c
 
 因为网络字节序一定是大端字节序，那么也就是说htonl函数就是转换为大端字节序函数。
-
-
-
-
-
-
-
-
-
-
-
 
 
