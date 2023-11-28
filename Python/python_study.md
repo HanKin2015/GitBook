@@ -10,6 +10,8 @@
 让凡尔赛宫的艺术家改毛笔作画
 
 每天一个python小知识。
+[68个Python内置函数，建议你吃透](https://mp.weixin.qq.com/s/jNRsCUzGfMsVmdG-F37kJg)
+[Python 其实自带了小型数据库dbm和shelve](https://mp.weixin.qq.com/s/nMsZnypgc_S6hh7BPPlGRw)
 
 ## 1、打开和杀死exe文件
 ```

@@ -24,8 +24,29 @@ nohup command > myout.file 2>&1 &
 在上面的例子中，0 – stdin (standard input)，1 – stdout (standard output)，2 – stderr (standard error) ；
 2>&1是将标准错误（2）重定向到标准输出（&1），标准输出（&1）再被重定向输入到myout.file文件中。
 使用 jobs 查看任务。
-使用 fg %n　关闭。
+使用 fg %n关闭。
 有两个常用的ftp工具ncftpget和ncftpput，可以实现ftp上传和下载，我们可以利用nohup命令在后台实现文件的上传和下载。
+
+执行nohup命令后，会有一个类似日志文件的东西，会把程序的输出到nohup.out文件中，如：
+```
+[root@ubuntu0006:~/cmake] #nohup ./a.out -p a b c &
+[1] 12524
+nohup: 忽略输入并把输出追加到'nohup.out'
+[1]+  已完成               nohup ./a.out -p a b c
+[root@ubuntu0006:~/cmake] #cat nohup.out
+Option -p with value a
+Extra argument: b
+Extra argument: c
+[root@ubuntu0006:~/cmake] #nohup ./a.out -p a b c
+nohup: 忽略输入并把输出追加到'nohup.out'
+[root@ubuntu0006:~/cmake] #cat nohup.out
+Option -p with value a
+Extra argument: b
+Extra argument: c
+Option -p with value a
+Extra argument: b
+Extra argument: c
+```
 
 ## 3、运行脚本时nohub和&的区别
 https://www.jianshu.com/p/93a45927f013 
@@ -60,7 +81,7 @@ nohup ./a.out
 -bash: fg: 当前: 无此任务
 ```
 使用 jobs 查看任务。
-使用 fg %n　关闭。
+使用 fg %n关闭。
 
 ## 4、对kill -HUP 234的认识
 ```

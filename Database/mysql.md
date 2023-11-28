@@ -15,4 +15,6 @@ MariaDB的目标是成为一个完全兼容MySQL的替代品，它支持与MySQL
 进入数据库：use database_name;
 显示表格：show tables;
 显示表格内容：select * from table_name;
-显示表格结构：descript table_name;
+显示表格结构：describe table_name; 或者 show columns from table_name;
+显示表格后5行：select * from total order by id desc limit 5;
+显示表格前5行：select * from total limit 5;

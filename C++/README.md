@@ -1,6 +1,12 @@
 # C++/C
 
 学习和膜拜：https://codechina.csdn.net/mirrors/fengbingchun/messy_test
+C++那些事：https://github.com/Light-City/CPlusPlusThings
+在线编译：https://wandbox.org/
+汇编：https://godbolt.org/
+基准测试：https://quick-bench.com/q/paKQEp0HMpgT6BpAW6TA4BoRo-M
+benchmark库：https://github.com/google/benchmark
+综合网站：https://www.build-bench.com/b/UisJAsK0HhePtnse9KODYslfVm0
 
 ## 1、isspace
 用于检查参数c是否为空格字符。

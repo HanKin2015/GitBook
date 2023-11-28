@@ -51,16 +51,15 @@ https://github.com/HanKin2015/Machine_to_DeepingLearning
 
 ipynb文件是可以在线浏览：https://hankin2015.github.io/2018/10/03/20181003GuoQin/
 
+(14个超有趣的数据分析项目，数据集都给你整理好啦)[https://mp.weixin.qq.com/s/_mwKHusgvHtrp0o8JPyvJA]
+
 # 一个不错的学习demo
 https://github.com/xiaodongxiexie/python-widget
-
 https://mp.weixin.qq.com/s/UGFtM1Toue9B4NMdCss-OA
-
 
 ## 竞赛
 https://www.industrial-bigdata.com/Title
 https://www.dcic-china.com/competitions/10060/datasets
-
 https://blog.csdn.net/CSDNhuaong/article/details/127141000
 
 ## 队名

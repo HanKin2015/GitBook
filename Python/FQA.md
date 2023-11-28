@@ -413,6 +413,30 @@ https://blog.csdn.net/popboy29/article/details/131086841
 .py 文件作为Python源代码文件，自己编辑，debug用。
 .pyd 文件可以在源代码编辑完成基础上，加密打包，用于分发作业环境使用。
 .pyw 文件在你不想看见DOS黑窗口的时候使用。当然也可以直接使用pythonw hello.py来运行，就不用改扩展名了。
+.pyc 文件为编译文件，使用命令:
+```
+(base) D:\Users\User\Desktop>python -O -m compileall -b k.py
+Compiling 'k.py'...
+
+(base) D:\Users\User\Desktop>python k.pyc
+[2, 4, 6, 8, 10]
+[2, 4, 6, 8, 10]
+<generator object <genexpr> at 0x0000020423B771C8>
+```
+
+## 40、__init__.py文件
+__init__.py 文件是 Python 包的一个特殊文件，它可以用来执行包的初始化代码。当一个目录被当作包使用时，这个目录下的 __init__.py 文件会在包被导入时首先被执行。
+
+__init__.py 文件的作用包括：
+- 定义包的公共接口，包括导入的模块、变量和函数，以便在包外部使用时可以直接访问。
+- 执行包的初始化代码，例如设置包的默认配置、初始化数据库连接等操作。
+- 控制包被导入时的行为，可以在其中进行一些必要的检查或预处理操作。
+
+在较新的 Python 版本中（3.3 及以上），__init__.py 文件并不是必需的，因为 Python 已经支持隐式命名空间包。但是，为了确保向后兼容性，建议在编写包时仍然包含 __init__.py 文件。
+
+## 41、
+
+
 
 
 

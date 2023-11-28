@@ -118,6 +118,11 @@ InnoKB server使用使用的人应该不是很多。
 MasterGo在线设计工具
 seerdesignmg == seerdesign MasterGo
 
+自带几百款实用插件：
+官网地址：https://u.tools/
+utools 支持 Windows/Mac/Linux，
+下载链接：https://u.tools/download.html
+
 如果你正在寻找一种快速简便的方法来监控你的网络流量，这个用 Rust 编写的跨平台应用程序sniffnet可以试试：https://github.com/GyulyVGC/sniffnet
 但是我试了三台电脑都没有正常运行起来。。。
 https://mp.weixin.qq.com/s/DY3iuYMgS7GOWK8aB3AJnA
