@@ -229,6 +229,7 @@ ValueError: Unable to find resource t64.exe in package pip._vendor.distlib
 百度给了正确的答案：https://blog.csdn.net/changyana/article/details/122449120
 
 使用pip install --user --upgrade pip成功升级
+python -m pip install --user --upgrade pip
 
 ## 10、--user参数选项
 --user参数是pip命令的一个选项，用于将Python包安装到当前用户的主目录下，而不是全局安装到系统目录中。这意味着，使用--user选项安装的Python包只对当前用户可用，而不是对整个系统可用。
@@ -247,4 +248,5 @@ pip install numpy --user
 
 需要注意的是，使用--user选项安装的Python包可能会与全局安装的Python包发生冲突，因此建议在使用--user选项安装Python包时，先检查当前用户的Python环境中是否已经安装了相同的包。
 
-
+## 11、安装imshow库时出现警告：DEPRECATION: pyodbc 4.0.0-unsupported has a non-standard version number.
+然后更新了一下pip install -U pyodbc就没有这个警告了。

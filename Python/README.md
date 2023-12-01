@@ -122,3 +122,13 @@ or(1, '[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1124)')))
 检查目标服务器的 SSL 配置，确保其支持所需的 SSL/TLS 版本，并且没有配置错误。
 确保你的客户端程序使用的是与服务器兼容的 SSL/TLS 版本。你可能需要更新你的 SSL 库或调整 SSL 配置。
 另外，你也可以尝试使用非加密的 HTTP 连接，或者联系服务器管理员寻求帮助。
+
+## 11、安全编程
+使用sshpass免密连接：方法详细见D:\Github\GitBook\gitbook\Linux\sshpass.md
+使用ssh免密连接：方法详细见D:\Github\Storage\shell\ssh\SSH_ASKPASS.sh
+其实这两种方法都会暴露密码
+
+
+
+
+

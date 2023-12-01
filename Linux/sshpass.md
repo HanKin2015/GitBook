@@ -37,6 +37,15 @@ sshpass 可以通过参数接受密码，或者通过环境变量读取密码，
 sshpass -p password ssh ostechnix@192.168.1.30 uname -a
 SSHPASS=password sshpass -e ssh ostechnix@192.168.1.30 uname -a
 sshpass -f mypassword.txt ssh ostechnix@192.168.1.30 uname -a
+
+[admin@HANKIN bin]$ sshpass -p handsome@888 ssh root@localhost -p 9888 uname -a
+Linux kernel 4.2.4 #1 SMP Thu Jul 6 16:28:43 CST 2023 x86_64 GNU/Linux
+[admin@HANKIN bin]$ SSHPASS=handsome@888 sshpass -e ssh root@localhost -p 9888 uname -a
+Linux kernel 4.2.4 #1 SMP Thu Jul 6 16:28:43 CST 2023 x86_64 GNU/Linux
+[admin@HANKIN ~]$ sshpass -f /home/admin/hj.txt ssh root@localhost -p 9888 uname -a
+Linux kernel 4.2.4 #1 SMP Thu Jul 6 16:28:43 CST 2023 x86_64 GNU/Linux
+[admin@HANKIN ~]$ cat hj.txt
+handsome@888
 ```
 
 ### 4-2、OpenSSH配置选项
@@ -70,7 +79,20 @@ SSH_ASKPASS是一个环境变量，用于指定一个可执行程序的路径，
 需要注意的是，为了安全起见，SSH_ASKPASS程序应该是可信的，并且应该采取适当的安全措施来保护密码的存储和传输。
 代码见：D:\Github\Storage\shell\ssh\SSH_ASKPASS.sh
 
+使用SSH_ASKPASS变量，一定需要setsid命令，否则还是会需要输入密码：
+```
+[admin@HANKIN ~]$ export SSH_ASKPASS="/home/admin/hj_psw"
+[admin@HANKIN ~]$ echo $SSH_ASKPASS
+/home/admin/hj_psw
+[admin@HANKIN ~]$ export DISPLAY=YOURDOINGITWRONG
+[admin@HANKIN ~]$ ssh -o stricthostkeychecking=no root@localhost -p 9889 uname -a
+root@localhost's password:
 
+[admin@HANKIN ~]$ setsid ssh -o stricthostkeychecking=no root@localhost -p 9889 uname -a
+[admin@HANKIN ~]$ Linux kernel 4.2.4 #1 SMP Thu Jul 6 16:28:43 CST 2023 x86_64 GNU/Linux
+
+[admin@HANKIN ~]$ 
+```
 
 
 

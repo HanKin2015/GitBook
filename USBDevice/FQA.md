@@ -105,5 +105,9 @@ dmesg 命令显示的时间戳是内核启动后经过的秒数（seconds since 
 
 因此，"上电"和"通电"虽然有些相似，但它们并不是完全相同的概念。
 
+## 11、这个设备（服务）的驱动程序已被禁用。另一个驱动程序可以提供这个功能。（代码32）
+https://blog.csdn.net/weixin_51575203/article/details/130406151
 
+修改注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR
+双击Start键值，弹出编辑DWORD（32位）值窗口，修改Start的数值，其中2代表自启动，3代表默认启动，4代表禁止启动，将数值改为2或者3，重启电脑后，插上U盘，可以正常访问U盘。
 

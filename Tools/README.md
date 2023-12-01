@@ -123,6 +123,9 @@ seerdesignmg == seerdesign MasterGo
 utools 支持 Windows/Mac/Linux，
 下载链接：https://u.tools/download.html
 
+[桌面窗口管理菜单工具](https://github.com/AlexanderPro/SmartSystemMenu)
+[最懂程序员的新一代AI搜索引擎](https://devv.ai/zh)
+
 如果你正在寻找一种快速简便的方法来监控你的网络流量，这个用 Rust 编写的跨平台应用程序sniffnet可以试试：https://github.com/GyulyVGC/sniffnet
 但是我试了三台电脑都没有正常运行起来。。。
 https://mp.weixin.qq.com/s/DY3iuYMgS7GOWK8aB3AJnA

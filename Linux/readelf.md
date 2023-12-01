@@ -123,3 +123,40 @@ Dynamic section at offset 0x1e18 contains 25 entries:
 原因可能是二进制文件是为32位系统构建的，但是您正在64位系统上进行检查。
 原因也可能是二进制文件是AArch64系统架构的，但是您正在x86结构上进行检查。
 还有一种可能就是两个系统内核版本不同导致，如在UOS1032版本编译，然后二进制文件在UOS1050版本运行。。
+```
+[hankin]# ldd a.out
+/usr/bin/ldd: line 94: lddlibc4: command not found
+        not a dynamic executable
+[hankin]# ./a.out
+-bash: ./a.out: cannot execute binary file
+[hankin]# uname -a
+Linux KERNAL 2.4.32-hello123-bic #149 SMP Fri Dec 12 11:35:24 CST 2014 i686 i686 i386 GNU/Linux
+
+[compile]# ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffd2d91b000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007fde867bf000)
+        /lib64/ld-linux-x86-64.so.2 (0x00005595475c2000)
+[compile]# readelf a.out -h
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x400440
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          6432 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         9
+  Size of section headers:           64 (bytes)
+  Number of section headers:         30
+  Section header string table index: 29
+```
+i686 是 Intel 32 位处理器架构的一种变体，通常用于较旧的计算机或者嵌入式系统。
+i386 是 Intel 32 位处理器架构的一种变体，常用于早期的个人计算机和一些嵌入式系统。
