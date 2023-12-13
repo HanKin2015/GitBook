@@ -1,5 +1,7 @@
 # USB外部设备
 
+在U盘、移动硬盘、USB HUB和各种USB读卡器的主控芯片板上，都存有设备的出品商（vender）、制造商（producter）、版本号（version）和序列号（SN）信息，前两者一般是英文单词记录的商标品牌名称，如TOSHIBA、SANSUNG等，版本号为简单的十进制数字，如0.15、1.2等，而序列号是一长串十进制或十六进制的编码，通常情况下vender+SN就可以唯一标识一个USB设备了。
+
 ## 1、USB官网
 https://www.usb.org/documents
 https://www.intel.cn/content/www/cn/zh/products/docs/io/universal-serial-bus/ehci-v1-1-addendum.html?wapkw=ehci

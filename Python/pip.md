@@ -250,3 +250,70 @@ pip install numpy --user
 
 ## 11、安装imshow库时出现警告：DEPRECATION: pyodbc 4.0.0-unsupported has a non-standard version number.
 然后更新了一下pip install -U pyodbc就没有这个警告了。
+
+## 12、Windows PowerShell和cmd窗口的区别差异
+Windows PowerShell窗口支持部分linux命令，更高级，部分命令使用起来注意差别区分，主要体现在python和./python查找程序路径的先后顺序。
+```
+Windows PowerShell窗口：
+PS D:\Demo\cc> cd .\python\
+PS D:\Demo\cc\python> python -m pip list
+Package Version
+------- -------
+pip     23.3.1
+tqdm    4.58.0
+PS D:\Demo\cc\python> ./python -m pip list
+Package           Version
+----------------- ---------
+APScheduler       3.6.3
+bcrypt            3.2.0
+...........
+PS D:\Demo\cc\python> python --version
+Python 3.7.6
+PS D:\Demo\cc\python> ./python --version
+Python 3.8.6
+
+cmd窗口：
+D:\Demo\cc\python>./python
+'.' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+D:\Demo\cc\python>python --version
+Python 3.8.6
+
+D:\Demo\cc\python>cd ..
+
+D:\Demo\cc>python --version
+Python 3.7.6
+
+D:\Demo\cc>python -m pip list
+Package Version
+------- -------
+pip     23.3.1
+tqdm    4.58.0
+
+D:\Demo\cc\python>python -m pip list
+Package           Version
+----------------- ---------
+APScheduler       3.6.3
+bcrypt            3.2.0
+..........
+
+Anaconda Prompt窗口：
+(base) D:\Users\User\Desktop>python --version
+Python 3.7.6
+
+(base) D:\Users\User\Desktop>pip list
+Package                            Version
+---------------------------------- -------------------
+alabaster                          0.7.12
+anaconda-client                    1.7.2
+...........
+
+(base) D:\Demo\cc\python>python -m pip list
+Package           Version
+----------------- ---------
+APScheduler       3.6.3
+bcrypt            3.2.0
+```
+
+

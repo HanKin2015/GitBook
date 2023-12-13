@@ -119,3 +119,23 @@ Zen架构将以四个核心为一个群组，AMD将其称为“CPU Complex”(CC
 我在一台华为笔记本上面使用lscpu命令显示cortex-A55，但是cat /proc/cpuinfo显示硬件为HUAWEI Kirin 9006C，另外一款同型号笔记本lscpu显示HUAWEI Kirin 9006C。
 两者装的系统不同，可能是系统识别错误导致。曾经我在一个盒子上面刷机时发现cpu为FT-2000，结果我刷到其他系统后变成FT-D2000，后面我没有刷回去进一步验证。
 
+## 12、一图看透国产CPU指令集架构
+来源：https://mp.weixin.qq.com/s/XZLpAr7Oau0rwtAm7B_3TQ
+
+国产CPU是信创产业的基座，其指令集架构代表着信创技术路线。
+国产CPU在信创市场已形成“四种技术路径（x86、ARM、MIPS、Alpha）、六大主要厂商（兆芯、海光、鲲鹏、飞腾、龙芯、申威）”的发展格局。
+![](https://mmbiz.qpic.cn/mmbiz_png/2EmNbMswUYuicSSDMhF6lMmq5IIWGjxzodtqp4dBs425lVjbqo1qicfVmCDqeBQSRsthCY19eRyMKHIfCc8OaH8g/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1)
+
+CPU本质是一块集中了不同功能电路的芯片，要使用这些功能电路，CPU需要调用对应的指令—也就是由0、1组成的二进制数。而用来规定指令格式的东西就叫做指令集架构（英文简称：ISA），不同的架构反映了设计者对同一功能的不同实现思路。
+
+指令集架构（ISA），是软件和硬件之间的接口“语言“，是交互的标准规范。
+指令集分为两大阵营：复杂指令集架构（CISC）和 精简指令集架构（RISC）：
+- CISC尽可能将任务一次性做完，高效但费脑（性能高、功耗大）；
+- RISC则是将任务拆解，分次做完，虽然对个人能力要求不高（性能低、功耗小），代价是效率更低。
+指令集中，x86架构为复杂指令集架构（CISC）；ARM、MIPS、RISC-V、Alpha等架构为精简指令集架构（RISC）。
+
+
+
+
+
+

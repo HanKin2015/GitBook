@@ -12,6 +12,7 @@
 每天一个python小知识。
 [68个Python内置函数，建议你吃透](https://mp.weixin.qq.com/s/jNRsCUzGfMsVmdG-F37kJg)
 [Python 其实自带了小型数据库dbm和shelve](https://mp.weixin.qq.com/s/nMsZnypgc_S6hh7BPPlGRw)
+[一篇文章学透所有Python知识](https://mp.weixin.qq.com/s/PDz1gPQaBWkKqn1vV3_UXg)
 
 ## 1、打开和杀死exe文件
 ```

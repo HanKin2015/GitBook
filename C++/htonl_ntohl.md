@@ -124,7 +124,8 @@ hostshort：主机字节顺序表达的16位数。
 ```
 #include <winsock2.h>
 #include <iostream>
- 
+
+// 注意需要引入lib文件
 #pragma comment(lib,"ws2_32.lib") 
 using namespace std;
 

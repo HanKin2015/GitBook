@@ -409,11 +409,15 @@ True
 
 ## 39、.py .pyd .pyw 都是干什么用文件？想分发时加密py脚本文件？
 https://blog.csdn.net/popboy29/article/details/131086841
+https://mp.weixin.qq.com/s/c42PuUF5Z6nL7KwUOG7Uow
 
-.py 文件作为Python源代码文件，自己编辑，debug用。
-.pyd 文件可以在源代码编辑完成基础上，加密打包，用于分发作业环境使用。
-.pyw 文件在你不想看见DOS黑窗口的时候使用。当然也可以直接使用pythonw hello.py来运行，就不用改扩展名了。
-.pyc 文件为编译文件，使用命令:
+- .py 文件作为Python源代码文件，自己编辑，debug用。
+- .pyd 文件可以在源代码编辑完成基础上，加密打包，用于分发作业环境使用。是Python扩展模块的扩展名，用于表示使用C或C++编写的二进制Python扩展模块文件。.pyd文件是编译后的二进制文件，它包含了编译后的扩展模块代码以及与Python解释器交互所需的信息。此外，.pyd文件通过import语句在Python中导入和使用，就像导入普通的Python模块一样。由于C或C++的执行速度通常比纯Python代码快，可以使用扩展模块来优化Python代码的性能，尤其是对于计算密集型任务。
+- .pyw 文件在你不想看见DOS黑窗口的时候使用。当然也可以直接使用pythonw hello.py来运行，就不用改扩展名了。
+- .ipynb是Jupyter Notebook文件的扩展名，它代表"IPython Notebook"。
+- .pyx是Cython源代码文件的扩展名。Cython是一种编译型的静态类型扩展语言，它允许在Python代码中使用C语言的语法和特性，以提高性能并与C语言库进行交互。
+- .pyi文件是Python中的类型提示文件，用于提供代码的静态类型信息。一般用于帮助开发人员进行类型检查和静态分析。.pyi文件的命名约定通常与相应的.py文件相同，以便它们可以被自动关联在一起。
+- .pyc是Python字节码文件的扩展名，用于存储已编译的Python源代码的中间表示形式，因为是二进制文件所以我们无法正常阅读里面的代码。可以使用命令生成:
 ```
 (base) D:\Users\User\Desktop>python -O -m compileall -b k.py
 Compiling 'k.py'...
@@ -434,12 +438,24 @@ __init__.py 文件的作用包括：
 
 在较新的 Python 版本中（3.3 及以上），__init__.py 文件并不是必需的，因为 Python 已经支持隐式命名空间包。但是，为了确保向后兼容性，建议在编写包时仍然包含 __init__.py 文件。
 
-## 41、
+## 41、TypeError: can only concatenate str (not “int“) to str
+错误原因：字符串和数字类型进行加减算法。
+```
+name = '小米'
+age  = 30
+# TypeError: can only concatenate str (not "int") to str
+#print('我的名字是' + name + ',' + '今年' + age + '岁')
+print('我的名字是' + name + ',' + '今年' + str(age) + '岁')
 
+scenario_number = "-1"
+if scenario_number != -1 and int(scenario_number) + 1 < 5:
+    print("没有int强制转换会报错")
+```
 
+## 42、python报错：AttributeError: ‘ImageDraw‘ object has no attribute ‘textbbox‘
+使用词云图wordcloud库的依赖库pillow没有安装或者版本过低。
 
-
-
+## 43、
 
 
 

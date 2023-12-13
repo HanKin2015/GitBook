@@ -154,12 +154,12 @@ tmpfs           799M   36K  799M    1% /run/user/0
 ```
 
 ### 11-1、int shm_open(const char *name, int oflag, mode_t mode);
-功能说明：shm_open　用于创建或者打开共享内存文件。笔者认为shm_open 也许仅仅是系统函数open的一个包装，不同之处就是shm_open操作的文件一定是位于tmpfs文件系统里的，常见的Linux发布版的tmpfs文件系统的存放目录就是/dev/shm。
+功能说明：shm_open用于创建或者打开共享内存文件。笔者认为shm_open 也许仅仅是系统函数open的一个包装，不同之处就是shm_open操作的文件一定是位于tmpfs文件系统里的，常见的Linux发布版的tmpfs文件系统的存放目录就是/dev/shm。
 
 返回值:成功返回fd>0，失败返回fd<0
 
 参数说明：
-name：要打开或创建的共享内存文件名，由于shm_open　打开或操作的文件都是位于/dev/shm目录的，因此name不能带路径，例如：/var/myshare 这样的名称是错误的，
+name：要打开或创建的共享内存文件名，由于shm_open打开或操作的文件都是位于/dev/shm目录的，因此name不能带路径，例如：/var/myshare 这样的名称是错误的，
       而myshare是正确的，因为 myshare 不带任何路径。如果你一定要在name添加路径，那么，请在/dev/shm目录里创建一个目录，例如，如果你想创建一个        bill/myshare 的共享内存文件，那么请先在/dev/shm目录里创建 bill这个子目录，由于不同厂家发布的linux系统的tmpfs的位置也许不是/dev/shm，因此带路径的名称也许在别的环境下打开不成功。
 oflag：打开的文件操作属性：O_CREAT、O_RDWR、O_EXCL的按位或运算组合
 mode：文件共享模式，例如 0777

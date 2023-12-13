@@ -202,6 +202,29 @@ visudo命令是一个更高级的sudoers文件编辑器，它会检查编辑后�
 
 总的来说，如果你只需要简单地编辑sudoers文件，可以使用sudoedit命令。如果你需要对sudoers文件进行更复杂的编辑，并且需要确保文件的语法正确，可以使用visudo命令。
 
+## 17-3、不只是跟/etc/sudoers文件有关
+我在/etc/group文件中修改了wheel:x:10:admin后的用户名后，然后重新ssh连接服务器后，这时候sudo切换root命令后就会报错admin is not in the sudoers file.  This incident will be reported.
+
+系统中存在其他提供 root 权限的用户组/etc/group可能有：sudo 组、admin 组、wheel 组。
+在我的xubuntu中则就是sudo 组。
+```
+[root@ubuntu0006:~] #su hejian
+hejian@ubuntu0006:/root$ sudo -i
+[sudo] hejian 的密码：
+hejian 不在 sudoers 文件中。此事将被报告。
+hejian@ubuntu0006:/root$ su
+密码：
+[root@ubuntu0006:~] #vi /etc/group
+[root@ubuntu0006:~] #su hejian
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+hejian@ubuntu0006:/root$ sudo -i
+[sudo] hejian 的密码：
+[root@ubuntu0006:~] #
+```
+另外查看/etc/group文件不需要root权限，但是查看/etc/sudoers则需要。修改那就必须要。
+
 ## 18、error: /lib64/libpthread.so.0: symbol h_errno
 是真的烦，不要轻易升级glibc，导致整个环境坏了。然后安装gcc后出现这种情况。
 
@@ -409,18 +432,67 @@ timedatectl
 ```
 如果输出中的 System clock synchronized 字段为 yes，则表示系统时间已经同步。
 
+## 22、认证失败
+```
+[admin@HANKIN device_helper]$ echo "hello@999" | sudo -S /tmp/device_helper_info/sshpass -p "world@123" ssh -o StrictHostKeyChecking=no root@localhost -p 9284
+[sudo] password for admin: Pseudo-terminal will not be allocated because stdin is not a terminal.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:kCa8N5BYjc6PsoyXlRO4o5zF66nJRprrGIOGkh/rA3M.
+Please contact your system administrator.
+Add correct host key in /root/.ssh/known_hosts to get rid of this message.
+Offending ED25519 key in /root/.ssh/known_hosts:38
+Password authentication is disabled to avoid man-in-the-middle attacks.
+Keyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.
+UpdateHostkeys is disabled because the host key is not trusted.
+root@localhost: Permission denied (publickey,password).
+```
+然后发现/root/.ssh/known_hosts文件有好多信息存储，删除指定那一行即可。但是其他端口可能在其他那一行，删除整个文件即可。
+很奇怪，我自己重新创建的known_hosts内容居然也通过了，我更换远程主机试试，我通过来回主机切换以及手动创建多个端口的known_hosts内容终于复现了问题。
+因此可能就是ssh连接建立太多，端口序号占满，或者是服务器重启后端口序号重新开始。
 
+发现是sudo -S语句导致出现这种情况，如果单纯ssh root@localhost -p 9292没有问题。但是sudo -S ssh root@localhost -p 9292则就会出现这种情况。
+```
+-S, --stdin                   read password from standard input
+```
+又想原始问题，无奈文件被我给删除了，里面的内容还没有来得及看，其他服务器根本没有这么多内容，回不去了。但是我想到一个方法，那就是使用python脚本频繁连接，然后就会创建很多个内容，然后我再重启服务器，连接另外一个客户端不就行了。
 
+## 23、密码不正确，Sorry，try again
+结果出现大问题了，sudo -i密码不对，导致sudo -S执行输入密码也不对。
+然后又莫名其妙的自己好了。。。。。密码还是原来的密码，怀疑可能是某个服务没有起来，导致密码未生效。
+放弃了，关键文件被我直接删除了，另外客户问题找到原因了，是密码不准确导致，但是为何出现这种情况不清楚，内部重启服务器没有出现。
+AI说种情况可能与系统中的密码缓存有关。当您使用sudo -i命令时，系统会要求您输入密码以进行特权提升。如果密码一开始被拒绝，但随后又被接受，这可能是因为密码缓存导致的。
+密码缓存是一种机制，用于在一段时间内记住您输入的密码，以便在短时间内不必重复输入。这种缓存机制可以导致在一段时间内即使输入了正确的密码也被拒绝，然后在一段时间后又被接受，因为系统在缓存中找到了正确的密码。
+如果您遇到这种情况，可以尝试等待一段时间后再次尝试，或者在密码被拒绝后清除密码缓存，然后再次输入密码。您可以使用sudo -k命令来清除密码缓存，然后再次尝试使用sudo -i命令并输入密码。
 
+下一步步骤：
+1、查看/etc/group文件，看admin用户是否在wheel组里面：存在
+2、查看密码输入正确后报错信息：Sorry, try again
+3、PAM 配置：检查 PAM 的配置文件，通常位于 /etc/pam.d/ 目录下，特别是 su 和 sudo 相关的文件，看看是否在这些文件中进行了特殊的配置：跟正常的没有什么区别
+4、/etc/security/access.conf文件：全注释掉
 
+查看系统认证日志：/var/log/secure
+记录表明系统中启用了pam_tally2模块来限制用户的登录尝试次数，并且用户admin的sudo认证失败次数已经达到了限制，导致了拒绝登录。
+```
+pam_tally2 --user admin         # 查看用户admin的登录失败次数
+pam_tally2 --user admin --reset # 重置用户admin的登录失败次数
+```
 
-
-
-
-
-
-
-
-
-
+最终真相大白：原来是密码中存在$符号，在linux系统中属于转义字符，需要添加斜杠或者使用单引号，通过单引号彻底解决了这个问题。
+```
+[root@ubuntu0006:~/cmake] #echo "password@123$hj"
+password@123
+[root@ubuntu0006:~/cmake] #echo "password@123\$hj"
+password@123$hj
+[root@ubuntu0006:~/cmake] #echo 'password@123$hj'
+password@123$hj
+[root@ubuntu0006:~/cmake] #echo password@123$hj
+password@123
+```
+也能解释为何ssh正常，直接echo密码错误，另外复制粘贴密码时而成功时而失败就是因此保护机制，当出现过多错误时，拒绝登录。这时候exit后也会ssh连接不上。
 

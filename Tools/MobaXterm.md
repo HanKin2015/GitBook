@@ -11,6 +11,7 @@ zip安装包大约在27M，免安装使用方便大约在14M。
 
 MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 数、SSH tunnels 数和其他一些定制化配置外限制外，免费版在终端底部还多了一个 “UNREGISTERED VERSION” 提示。
 
+中文版：https://github.com/RipplePiam/MobaXterm-Chinese-Simplified
 现在专业版需要先付款再下载。。。
 
 破解MobaXterm20.2软件方法步骤：https://www.jianshu.com/p/fa5a2fac4148
@@ -57,6 +58,9 @@ mobaxterm标签页最下方默认有个服务器内存硬盘情况信息的状�
 
 ### 1-7、使用scp命令
 直接可以在MobaXterm软件上面使用，注意需要插件CygUtils.plugin文件。
+
+### 1-8、使用23.05版本报错缺少mottynew.exe文件
+因此无法直接使用MobaXterm_Personal_23.5.exe，需要通过安装这个版本文件，然后才会在电脑上面生成这个文件。这个算是一个bug，试过两台电脑都不行。但是我又试了两台电脑却又可以，会自动生成mottynew.exe文件。那应该不是bug，不然早就被人发现了。
 
 ## 2、xshell
 研究生的时候使用过，好像还不错。现在想想文件还挺大的，并且上下传文件还需要安装搭配的xshell ftp软件，整体下来整个安装包就很大。

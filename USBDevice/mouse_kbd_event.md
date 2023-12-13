@@ -273,12 +273,17 @@ Bus 001 Device 017: ID 1a2c:2124 China Resource Semico Co., Ltd
 Bus 001 Device 004: ID 0bda:5411 Realtek Semiconductor Corp.
 Bus 001 Device 002: ID 8087:07e6 Intel Corp.
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+root@hankin:~# cat /dev/input/      # 其中event10、mice和mouse0都有事件消息
+by-id/   event0   event10  event2   event4   event6   event8   mice
+by-path/ event1   event11  event3   event5   event7   event9   mouse0
 ```
-最新结论，多次测试发现跟我使用了同品牌的键鼠有关，当前终端由于是一个主控，因此只要同时插入这同品牌的键鼠，第二个插入的设备就会使用不了，鼠标是灯亮，但是没有usb数据包，键盘灯不亮，但是有usb数据包。
+最新结论，多次测试发现出现问题时跟我使用了同品牌的键鼠有关，当前终端由于是一个主控，因此只要同时插入这同品牌的键鼠，第二个插入的设备就会使用不了，鼠标是灯亮，但是没有usb数据包，键盘灯不亮，但是有usb数据包。
 再拿了一个同品牌的鼠标测试是相同效果，如果插两个同品牌的鼠标，两者现象一样，要么都能用，要么都不能用。
 使用其他品牌的鼠标，插入当前品牌的键盘，也是都能使用。
 鼠标和U盘同时插入，都能使用。
 现象很奇怪，终端并没有做任何重启操作，前一天正常使用，第二天一来使用就出现了这个问题。重启终端即可恢复。
+
+今天出现相同问题，但是我居然通过拔掉所有usb设备后再插入鼠标就恢复正常了。就很神奇！
 
 ## 8、dumpkeys命令
 dumpkeys 是一个 Linux 命令，用于显示当前系统上键盘映射的信息。它可以显示键盘的按键和功能键的映射关系，以及其他与键盘相关的设置。

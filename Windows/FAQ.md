@@ -218,6 +218,10 @@ Win+R，敲入service.msc，找到Windows Time，把启动类型修改为自动�
 更换软件查看。
 
 ## 28、使用Mimikatz获取密码失败
+[破解windows系统登录密码](https://mp.weixin.qq.com/s/cabS2oX4_0jrFN1fA3n_AQ)
+说到windows系统密码，就不得不提到一个文件，那就是SAM，因为这个文件是用来存放用户账号信息的一个文件，不过这个文件是打不开的，而且也不能修改，不然程序可能会出现未知错误，SAM文件的位置：C:\Windows\System32\config\SAM
+Mimikatz是法国人benjamin 开发的一款功能强大的轻量级调试工具，他可以将windows密码以明文的形式显示出来，这款工具的包含了很多种用法。
+
 参考：https://www.shuzhiduo.com/A/KE5QPBkMJL/
 https://www.ngui.cc/el/1503049.html?action=onClick
 https://blog.csdn.net/syl321314362/article/details/128868549
@@ -253,6 +257,8 @@ https://github.com/AlessandroZ/LaZagne
 https://github.com/RowTeam/SharpDecryptPwd
 https://github.com/HyperSine/how-does-navicat-encrypt-password
 https://www.freesion.com/article/93941500785/
+
+终极方法：winpe登录密码破解工具
 
 ## 29、xps文件
 xps是 XML Paper Specification的简称，是电子文件格式，可以使用Microsoft XPS打开。

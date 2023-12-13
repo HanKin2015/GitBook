@@ -53,6 +53,86 @@ ps -ef|grep vdi
 killall
 ldd
 
+[Linux 问题故障定位的技巧大全](https://mp.weixin.qq.com/s/LCOE58rOkxQrTx2PBuLNgg)
+//查看系统cpu使用情况
+top
+
+//查看所有cpu核信息
+mpstat -P ALL 1
+
+//查看cpu使用情况以及平均负载
+vmstat 1
+
+//进程cpu的统计信息
+pidstat -u 1 -p pid
+
+//跟踪进程内部函数级cpu使用情况
+perf top -p pid -e cpu-clock
+
+//查看系统内存使用情况
+free -m
+
+//虚拟内存统计信息
+vmstat 1
+
+//查看系统内存情况
+top
+
+//1s采集周期，获取内存的统计信息
+pidstat -p pid -r 1
+
+//查看进程的内存映像信息
+pmap -d pid
+
+//检测程序内存问题
+valgrind --tool=memcheck --leak-check=full --log-file=./log.txt  ./程序名
+
+//查看系统io信息
+iotop
+
+//统计io详细信息
+iostat -d -x -k 1 10
+
+//查看进程级io的信息
+pidstat -d 1 -p  pid
+
+//查看系统IO的请求，比如可以在发现系统IO异常时，可以使用该命令进行调查，就能指定到底是什么原因导致的IO异常
+perf record -e block:block_rq_issue -ag
+^C
+perf report
+
+//显示网络统计信息
+netstat -s
+
+//显示当前UDP连接状况
+netstat -nu
+
+//显示UDP端口号的使用情况
+netstat -apu
+
+//统计机器中网络连接各个状态个数
+netstat -a | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+
+//显示TCP连接
+ss -t -a
+
+//显示sockets摘要信息
+ss -s
+
+//显示所有udp sockets
+ss -u -a
+
+//tcp,etcp状态
+sar -n TCP,ETCP 1
+
+//查看网络IO
+sar -n DEV 1
+
+//抓包以包为单位进行输出
+tcpdump -i eth1 host 192.168.1.1 and port 80 
+
+//抓包以流为单位显示数据内容
+tcpflow -cp host 192.168.1.1
 ```
 
 
@@ -70,12 +150,6 @@ Linux reset命令其实和 tset 是一同个命令，它的用途是设定终端
 
 # Linux 网络wifi操作常用命令，查看WiFi密码
 https://blog.csdn.net/qq_27413937/article/details/99714197
-
-
-
-
-
-
 
 source是一个Shell内置命令，用以在当前上下文中执行某文件中的一组命令。
 “当前的上下文”一般指的是在交互式会话中，用户当前敲入命令的那个终端。source命令可简写为一个点（.） 。

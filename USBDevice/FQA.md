@@ -111,3 +111,19 @@ https://blog.csdn.net/weixin_51575203/article/details/130406151
 修改注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR
 双击Start键值，弹出编辑DWORD（32位）值窗口，修改Start的数值，其中2代表自启动，3代表默认启动，4代表禁止启动，将数值改为2或者3，重启电脑后，插上U盘，可以正常访问U盘。
 
+## 12、由于其配置信息(注册表中的)不完整或已损坏,Windows 无法启动这个硬件设备。 (代码19)
+声卡设备：找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}UpperFilters里面数据删除 (鼠标双击可打开UpperFilters)
+大容量存储设备：找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}UpperFilters里面数据删除 (鼠标双击可打开UpperFilters)或者LowerFilters
+可以通过设备管理器中的驱动程序详细信息看到加载了什么乱七八糟的驱动，一般就是这个驱动缺失导致的鬼。
+
+## 13、RJ
+RJ是Registered Jack（注册插孔）的英文缩写，是一种工业术语。
+RJ是美国EIA（电子工业协会）、TIA（电信工业协会）确立的一种以太网连接器的接口标准。
+
+https://baijiahao.baidu.com/s?id=1770002208323287497&wfr=spider&for=pc
+https://baijiahao.baidu.com/s?id=1774263572605493856&wfr=spider&for=pc
+RJ45是一种标准的物理连接接口，它代表"Registered Jack 45"。它是用于以太网（Ethernet）局域网连接中最常见的插座类型之一。
+RJ45插座通常用于将计算机、交换机、路由器、网络存储设备等网络设备连接到局域网或广域网。它采用8P8C（八位置、八触点连接器）接线方式，具有8个针脚和8个金属联系点，每个针脚都有特定的功能。这些针脚用来传输和接收以太网数据信号，支持各种速率的以太网连接，包括10 Mbps、100 Mbps、1 Gbps和更高速率的千兆以太网（Gigabit Ethernet）。
+
+RJ11代表"Registered Jack 11"，是一种标准的电话线连接接口。它通常用于传输模拟语音信号，包括电话通信、传真机、调制解调器等设备。
+RJ11插座采用6P4C（六位置、四触点连接器）接线方式，具有6个针脚和4个金属联系点。其中，只有前两个针脚（2P2C）被广泛使用，用于传输语音信号。这两个针脚主要用于发送和接收电话信号，以及提供电源供应到电话设备中。

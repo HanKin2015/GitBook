@@ -107,6 +107,14 @@ DWG格式以及它的ASCII格式变体DXF，已经成为CAD制图数据交换中
 
 KMSAuto Net - Windows 操作系统自动 KMS 激活程序。
 
+操作系统原版镜像:
+http://msdn3.cn/index.html
+https://msdn.itellyou.cn/?ang=2h-cn
+imsdn：https://www.imsdn.cn/
+HelloWindows : https://hellowindows.cn
+系统库 : https://www.xitongku.com
+山己几子木 : https://msdn.sjjzm.com
+
 桌面录屏小工具：https://github.com/fandesfyf/JamTools
 
 Todo List：https://www.ricocc.com/todo/
@@ -118,13 +126,10 @@ InnoKB server使用使用的人应该不是很多。
 MasterGo在线设计工具
 seerdesignmg == seerdesign MasterGo
 
-自带几百款实用插件：
-官网地址：https://u.tools/
-utools 支持 Windows/Mac/Linux，
-下载链接：https://u.tools/download.html
-
 [桌面窗口管理菜单工具](https://github.com/AlexanderPro/SmartSystemMenu)
 [最懂程序员的新一代AI搜索引擎](https://devv.ai/zh)
+[77MB桌面端效率工具 Rubick](https://rubick.vip/)
+[64MB新一代效率工具平台 utools](https://u.tools/)
 
 如果你正在寻找一种快速简便的方法来监控你的网络流量，这个用 Rust 编写的跨平台应用程序sniffnet可以试试：https://github.com/GyulyVGC/sniffnet
 但是我试了三台电脑都没有正常运行起来。。。
@@ -135,6 +140,30 @@ https://mp.weixin.qq.com/s/QrMpX2DuGoB62gVKBbJBQA
 教习网下载器：https://pan.lanzouy.com/i1BLN18uc4qh
 装机伴侣：https://pan.lanzouy.com/iWUAO18z6qda
 抽奖工具：https://pan.lanzouy.com/iatvT17xr8vi
+
+[在线图片压缩，免费快捷](https://www.yalijuda.com)
+[在线网盘，免费免登陆不限速](https://p.xwh.at)
+[在线工具网站 , 拥有大量工具网站](https://tool.lu/)
+[PPT下载站](https://ypppt.com/)
+[菜鸟教程，学习代码编程免费网站](https://www.runoob.com)
+[文心一言](https://yiyan.baidu.com)
+[改图鸭](https://www.gaituya.com/)
+[沉浸式翻译](https://immersivetranslate.com/)
+[Librera电子书阅读器应用](https://gongju66.lanzouy.com/iTv8n171px7a)
+[EV 录屏](https://www.ieway.cn/evcapture.html)
+[关灯看视频](https://www.crxsoso.com/webstore/detail/bfbmjmiodbnnpllbbbfblcplfjjepjdn)
+[Z-File搭建个人网盘](https://github.com/zhaojun1998/zfile)
+[BenVista PhotoZoom Pro无损放大图片](http://www.benvista.com/photozoompro)
+[PxHere商用图片网站](https://pxhere.com/zh/)
+[FilmoraGo（万兴喵剪）](https://www.shencut.com/)
+[ePSxe 模拟器](https://www.epsxe.com/)
+[豆皮图片下载器](http://www.doupi.tech/)
+[WireShark](https://www.wireshark.org/)
+[Aipix修图](https://aipix.net/editor/?lang=zh)
+[screenToGif录屏](https://www.screentogif.com/?l=zh_cn)
+[Snatch](https://snatch.kasper.io/)
+[一个工具箱](http://www.atoolbox.net/)
+[RegCool](https://kurtzimmermann.com/index_e.html)
 
 ## 12、新技巧之split.exe工具
 split.exe工具可以分隔文件，可以直接在git bash窗口使用，拿一个jpg图片为例。
