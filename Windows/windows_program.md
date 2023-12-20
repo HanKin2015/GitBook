@@ -46,11 +46,8 @@ dll和exe放在同一个目录、dll放在系统目录、dll放在PATH环境变�
 Windows下c语言编程：
 ndows下的函数_access与linux下的access函数功能类似，用来判断指定的文件或目录是否仅存在(00)，已存在的文件或目录是否有仅读(04)、仅写(02)、既可读又可写(06)权限。这四种方式通过_access函数中的第二个参数mode指定，如果mode传入的值不是0或2或4或6，调用此函数则会crash。如果指定的方式有效，则此函数返回0，否则返回-1。
 
-
 linux下c语言编程：
 Windows编程：
-
-
 ```
 PSFUSB_PDO_LIST hj = NULL;
 LONG cnt = 0;

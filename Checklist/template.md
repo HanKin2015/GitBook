@@ -279,10 +279,32 @@ stop
 ```
 
 ### javaScript
+```
+/**
+* 文 件 名: hello_wolrd.js
+* 文件描述: 学习js语言
+* 作    者: HanKin
+* 创建日期: 2023.12.19
+* 修改日期：2023.12.19
+*
+* Copyright (c) 2023 HanKin. All rights reserved.
+*/
+```
 
 ### css
 
 ### html
+```
+<!--
+* 文 件 名: hello_world.html
+* 文件描述: 学习html语言
+* 作    者: HanKin
+* 创建日期: 2023.12.19
+* 修改日期：2023.12.19
+*
+* Copyright (c) 2023 HanKin. All rights reserved.
+-->
+```
 
 ## 4、调试日志
 ```C++

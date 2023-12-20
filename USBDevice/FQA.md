@@ -45,10 +45,27 @@ articles.slicehost.com/2010/6/30/underst...ate-on-ubuntu-part-1
 You should be able to set the size not to exceed and a default hourly rotate with only 1 older copy being retained, which will cut down things a lot.
 It is not ideal solution however, hopefully the driver removal and re-installation may do something
 
-## 6、PDO是什么
+## 6、Windows系统中PDO是什么
 供电数据对象（Power Data Object, PDO）
 也可能是属性数据对象（Property Data Object, PDO）
 最有可能是属性设备对象（Property Device Object, PDO）
+
+驱动程序通常使用设备对象（PDO，Physical Device Object）来与设备进行交互。设备对象是操作系统内核中表示设备的数据结构，它包含有关设备的信息和操作方法。
+
+在驱动程序中，通常会使用设备对象来执行与设备相关的操作，例如打开、关闭、读取和写入等。通过打开设备对象，驱动程序可以与设备进行通信并执行所需的操作。
+
+因此，在驱动程序中，通常会使用设备对象来打开设备，而不是使用设备路径或设备名称。设备路径或设备名称通常是用户空间应用程序使用的标识符，用于与驱动程序进行通信，而驱动程序则使用设备对象来实际执行与设备的交互操作。
+
+### 6-1、查看驱动程序的设备对象
+使用调试工具：可以使用调试工具（如WinDbg、KD等）连接到目标系统，并通过调试工具的命令或脚本来查看驱动程序的设备对象。通过调试工具，可以检查设备对象的地址、属性和状态等信息。
+
+阅读驱动程序源代码：如果有驱动程序的源代码，可以通过阅读源代码来查看驱动程序是如何创建和管理设备对象的。在源代码中，通常会有相关的设备对象创建、初始化和操作的代码。
+
+使用系统工具：在Windows系统中，可以使用一些系统工具来查看设备对象的信息，例如Device Manager、DeviceTree等工具可以显示设备对象的层次结构和属性信息。
+
+需要注意的是，查看驱动程序的设备对象通常需要一定的系统调试和驱动开发知识，同时需要谨慎操作以避免对系统造成不良影响。
+
+实践通过DeviceTree软件确实能看见驱动的Device_Name，然后使用CreateFile(L"\\\\.\\commonUsb"打开对应的驱动设备程序。
 
 ## 7、USB3CV
 官网：https://www.usb.org/documents?search=&category%5B0%5D=50&items_per_page=50

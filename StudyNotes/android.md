@@ -137,9 +137,9 @@ adb工具即Android Debug Bridge（安卓调试桥） tools，是Android开发�
 发现：前面是路径，永远在后面的是目标路径。
 把解压出来的文件直接复制到‘C:\Windows’文件夹下，这样，每次你进入cmd就可以直接使用adb命令了很方便的。
 ```
-adb devices	#查看已连接的设备
-adb push path1 path2	#推送文件
-adb pull path1 path2	#拉取文件
+adb devices	                #查看已连接的设备（调试adb接口必备第一条命令）
+adb push path1 path2	    #推送文件
+adb pull path1 path2	    #拉取文件
 adb shell screencap path	#截屏
 -v 显示日志格式  -v time 以时间为显示格式
 

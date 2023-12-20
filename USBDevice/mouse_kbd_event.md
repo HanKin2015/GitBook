@@ -283,7 +283,10 @@ by-path/ event1   event11  event3   event5   event7   event9   mouse0
 鼠标和U盘同时插入，都能使用。
 现象很奇怪，终端并没有做任何重启操作，前一天正常使用，第二天一来使用就出现了这个问题。重启终端即可恢复。
 
-今天出现相同问题，但是我居然通过拔掉所有usb设备后再插入鼠标就恢复正常了。就很神奇！
+20231213出现类似问题，但是我居然通过拔掉所有usb设备后再插入鼠标就恢复正常了。只有鼠标出现异常，键鼠先后拔插无法进行正常切换，现象略有不同，可能是插了一款神思读卡器有关。
+20231218又出现问题了，键盘失灵，鼠标正常，键盘有USB数据包，键盘灯不亮，键鼠可以进行先后插入切换设备正常（先插入的设备正常）。
+写了一个c语言demo测试键鼠数据无问题，使用X11框架不行，见：D:\Github\Storage\c++\udev\get_kbd_mouse_event\get_mouse_event2.c
+测试发现是nwjs文件无法捕获到键鼠事件消息，然后写了一个前端demo，然鹅在调试上面的时候重启了终端，导致无法复现问题现象，待下次出现问题再进行排查：D:\Github\Storage\javascript\get_keyboard_mouse_event\get_keyboard_mouse_event.html
 
 ## 8、dumpkeys命令
 dumpkeys 是一个 Linux 命令，用于显示当前系统上键盘映射的信息。它可以显示键盘的按键和功能键的映射关系，以及其他与键盘相关的设置。

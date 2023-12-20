@@ -217,12 +217,50 @@ node版本号：node -v
 npm版本号： npm -v
 
 ## 11、nvm
-
-
-
-
 https://github.com/nwjs/nw.js/tree/nw24
 https://blog.csdn.net/kaimo313/article/details/126405942
 https://github.com/nwjs/nw.js/wiki/Full-Console-Logging
 
+## 12、配置文件package.json
+模板见：D:\Github\Storage\javascript\nwjs\helloworld\package.json
+```
+{
+    "name": "test_nwjs",
+    "main": "html/index.html",
+    "node-main": "node_main/nodemain.js",
+    "chromium-args":"--ignore-certificate-errors --disable-devtools --disable-features=WebUSB",
+    "window": {
+        "width": 1,
+        "height": 1,
+        "toolbar": false,
+        "fullscreen": true,
+        "always-on-top": true,
+        "show" : true,
+        "focus" : true
+    }
+}
+```
+调试去掉"–disable-devtools"参数即可。
 
+## 13、浏览器中执行Linux系统命令
+```
+exec = require('child_process').exec
+exec('ifconfig', function(err, stdout, stderr) {
+  if(err) 
+    console.error(err) 
+  else
+    console.log(stdout)
+})
+```
+
+## 14、Uncaught ReferenceError: require is not defined
+这个错误通常出现在浏览器环境下，因为浏览器不支持require 语法。而require 是Node.js 中用于引入模块的语法。如果你想在浏览器
+中使用require，可以借助一些工具，如Browserify、Webpack 等。
+如果你不需要在浏览器中使用require，而是在 Node.js 环境中出现了这个错误，那可能是因为你没有正确引入模块或者没有安装相应的
+依赖。建议你检查一下代码和依赖是否正确。
+
+## 15、Openbox
+Openbox是一个轻量级的窗口管理器，用于X Window System。它是一个自由开源软件，采用C语言编写，旨在提供简洁、快速和可定制的窗口管理器。Openbox提供了一些基本的窗口管理功能，同时也支持用户通过配置文件进行高度定制，使其成为一个受欢迎的选择，特别是对那些寻求简洁和高度可定制性的用户来说。
+
+配置文件路径：~/.config/openbox/rc.xml
+openbox --reconfigure

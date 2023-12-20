@@ -13,8 +13,6 @@ JavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 
 
 脚本语言\轻量级的编程语言\可插入 HTML 页面的编程代码\可由所有的现代浏览器执行\很容易学习。
 
-
-
 您只能在 HTML 输出中使用 document.write。如果您在文档加载后使用该方法，会覆盖整个文档。
 alert() 函数在 JavaScript 中并不常用，但它对于代码测试非常方便。
 onclick 事件只是您即将在本教程中学到的众多事件之一。
@@ -30,19 +28,17 @@ ECMAScript 6 也称为 ECMAScript 2015。
 ECMAScript 7 也称为 ECMAScript 2016。
 
 # 2、用法
+我的第一个 JavaScript 程序: D:\Github\Storage\javascript\helloworld\hello_wolrd.html
 
-
+Chrome 浏览器中执行 JavaScript
 
 # JS入门学习
-
 李清照老是认为是一位男诗人。。。与辛弃疾合称济南二安，有千古第一才女之称。
 
 ## 双引号和单引号区别
-
 timequery是不是应该翻译成实时查询，而不是时间查询。Real-time query
 
 ## 判断变量是否未定义
-
 ```
 if (Object.prototype.toString.call(varStr) === "[object Undefined]") {
 	varStr = g.nwglobvalObj.getval("key");
@@ -50,7 +46,6 @@ if (Object.prototype.toString.call(varStr) === "[object Undefined]") {
 ```
 
 ## 排序
-
 arr = ['1230x1024', '800x600', '1920x1080',  '1024x768']
 arr.sort().reverse()
 

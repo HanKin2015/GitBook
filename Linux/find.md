@@ -70,18 +70,18 @@ find: 路径必须在表达式之前: zlib_decoder.h
 将当前目录及其子目录下所有最近 20 天内更新过的文件列出: # find . -ctime  20
 https://www.runoob.com/linux/linux-comm-find.html
 
-find / -type d　　# 查找目录文件
-find / -type f　　# 查找普通文件
-find / -type l　　# 查找链接文件
-find / -type f |xargs rm -rf 　　# 利用管道作为参数删除
-find / -type f -exec rm -rf {} ; # ; 不能少, 前面空格不能少
-rm -rf $(find / -type f)　　     # 查找结果直接以变量 删除
-rm -rf `find / -type f`　　      # 同上做变量 删除
+find / -type d  # 查找目录文件
+find / -type f  # 查找普通文件
+find / -type l  # 查找链接文件
+find / -type f |xargs rm -rf        # 利用管道作为参数删除
+find / -type f -exec rm -rf {} ;    # ; 不能少, 前面空格不能少
+rm -rf $(find / -type f)            # 查找结果直接以变量 删除
+rm -rf `find / -type f`             # 同上做变量 删除
 ps aux | grep sleep |grep -v grep |awk ‘{print $2}‘ |xargs kill -9
-find -type f -size 1k　　# k 是小写
-find -size +1k　　       # 大于1k的文件
-find -size -1M　　       # M是大写, 小于1M的文件
-find -size -1G　　       # G是大写
+find -type f -size 1k   # k 是小写
+find -size +1k          # 大于1k的文件
+find -size -1M          # M是大写, 小于1M的文件
+find -size -1G          # G是大写
 
 ## 3、找到指定格式文件然后删除
 find . -name *.pyc | xargs rm -rf

@@ -15,7 +15,6 @@ icon是指定点击的图标，并不是demo中的title。
 
 如果生成脚本，建议去掉w参数，即pyinstaller -F demo.py
 
-
 ## 2、linux环境使用pyinstaller进行打包
 
 ### 2-1、
@@ -47,9 +46,7 @@ Processing dependencies for PyInstaller==3.3
 Searching for macholib>=1.8
 Reading https://pypi.python.org/simple/macholib/
 
-
 ^Cinterrupted
-
 
 [root@ubuntu0006:/media/hankin/vdb/study/upan_auto_copy] #pip3 install pyinstaller-4.10-py3-none-musllinux_1_1_x86_64.whl
 pyinstaller-4.10-py3-none-musllinux_1_1_x86_64.whl is not a supported wheel on this platform.
@@ -551,7 +548,7 @@ pyinstaller office_assistant.spec --upx-dir="D:\upx-4.0.2-win64"
 将生成exe拷贝到upx文件夹，然后执行命令upx.exe office_assistant.exe搞笑的吧，就压缩了一点点。
 
 ## 19、python pyusb 打包exe 报错
-在调试pyusb时，发现直接python scripts.py可以正常运行，但是打包成exe， 即经过了pyinstaller -F scripts.py ./scripts.exe运行就失败，提示错误是
+在调试pyusb时，发现直接python scripts.py可以正常运行，但是打包成exe，即经过了pyinstaller -F scripts.py ./scripts.exe运行就失败，提示错误是
 ````
 usb.core.NoBackendError: No backend available.
 ```
@@ -573,4 +570,30 @@ https://blog.csdn.net/hj960511/article/details/128220877
 放弃再研究打包问题了，总之一句话，能不使用numpy就不使用numpy，使用了就接受现实。
 文件增大了，并且打开速度从原来的8秒也增加到了15秒。
 
+## 23、Failed to execute script 
+其实是确认库文件，你会发现很难排查，可以通过去掉w参数，然后在dos窗口执行exe文件即可。
 
+程序中使用了pyzbar库，这个库需要依赖libzbar-64.dll和libiconv.dll文件。因此需要将这个文件C:\Users\Administrator\Anaconda3\Lib\site-packages\pyzbar放在C:\Windows\System32目录下，以及src目录下。
+
+但是为什么没有把这两个文件依赖给打包进去呢？？？
+一种方法就是写入py文件里面然后程序还原成dll文件，放入当前环境或者放入C:\Windows\System32目录下。
+
+排查20231220遇到的这个问题，下载Dependency Walker和PE Explorer查看，只看见四个dll文件依赖，使用objdump命令（对于Windows系统，你可以下载MinGW或Cygwin等工具集，它们包含了objdump命令）查看也是这四个dll文件。
+```
+D:\FTP服务器>objdump -x office_assistant.exe | findstr dll
+        DLL Name: USER32.dll
+        DLL Name: KERNEL32.dll
+        DLL Name: ADVAPI32.dll
+        DLL Name: WS2_32.dll
+D:\FTP服务器>objdump -p office_assistant.exe | findstr dll
+        DLL Name: USER32.dll
+        DLL Name: KERNEL32.dll
+        DLL Name: ADVAPI32.dll
+        DLL Name: WS2_32.dll
+```
+放弃还是去掉w参数老老实实查看吧。
+之前anaconda重装过，导致好多库缺失，导致exe运行缺失库依赖，先解决这些依赖问题。
+没有安装这些依赖之前打包出来才46MB，安装后居然276MB，就四个库安装pyusb、pyzbar、pyqtchart、pyautogui。
+
+但是之前有修改过spec文件，过滤掉部分占用大的无用的库，过滤后还是46MB左右。
+命令中使用-w参数关闭dos窗口，spec文件修改console参数为True打开dos窗口。

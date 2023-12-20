@@ -2,7 +2,26 @@
 
 ## 0、前言
 
-### 0-1、配置一个完整的环境简单步骤
+### 0-1、Linux安装git
+```
+sudo apt install git
+```
+明白为啥使用sudo而不是直接root账户，防止错误操作，sudo进一步确认了一下。
+
+Windows下载安装很随意。有个注意点：尽量选择下载和上传git仓库的时候不要进行Linux和Windows的换行符的转换，否则在不同环境下运行代码的时候很尴尬。
+
+### 0-2、Windows安装git
+使用镜像网站不错。
+[下载Windows下的Git命令行客户端](https://repo.huaweicloud.com/git-for-windows/)
+[下载Windows下的Git小海龟客户端](https://repo.huaweicloud.com/tortoisegit/)
+
+1、 先安装Git.exe
+2、 再安装TortoiseGit.msi
+3、 根据自己喜欢安装中文翻译补丁包LanguagePack
+
+git update-git-for-windows   更新git客户端
+
+### 0-3、配置一个完整的环境简单步骤
 ```
 git config --global user.email "49660@zhangsan.com"
 ssh-keygen -t rsa -C "邮件地址"
@@ -15,25 +34,58 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 cat ~/.ssh/id_rsa.pub
 ```
 
-## 0-2、安装git
-使用镜像网站不错。
-[下载Windows下的Git命令行客户端](https://repo.huaweicloud.com/git-for-windows/)
-[下载Windows下的Git小海龟客户端](https://repo.huaweicloud.com/tortoisegit/)
+### 0-4、配置家门，即上传者的身份
+设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。
 
-1、 先安装Git.exe
-2、 再安装TortoiseGit.msi
-3、 根据自己喜欢安装中文翻译补丁包LanguagePack
+设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。以前并没有觉得多大作用，慢慢地发现一个git仓库是可以多人上传的，而这个配置就是显示上传者的身份，一般会填写个人的GitHub相关的信息，比如GitHub用户名和注册邮箱。乱写也是🆗的。
 
-git update-git-for-windows   更新git客户端
+```
+$ git config -l  ===  git config --list
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
 
-## 0-2、解决TortoiseGit文件夹和文件状态图标不显示问题
+还有一个local参数，即为单独仓库配置单独的上传者身份。
+global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+```
 
+### 0-5、修改global配置
+简单粗暴：直接使用命令git config --global user.name "Your Name"。。。。
+修改配置.gitconfig文件。
+
+### 0-6、配置SSH-Key
+提交代码需要的github权限，下载私有仓库代码时也会需要这个配置，主要在于上传代码，不配置就会每次输入账户和密码。
+
+如果你想要使用 SSH url 克隆的话，你必须是这个项目的拥有者。否则你是无法添加 SSH key 的。
+使用https url很好用？？？
+
+### 0-7、https 和 SSH 的区别：
+1、前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key ，否则无法克隆。
+
+2、https url 在push的时候是需要验证用户名和密码的；而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。
+
+```
+ssh -T git@github.com    查看是否配置好
+ssh-keygen -t rsa -C "邮件地址"
+秘钥配置见本文章第5行。
+```
+
+代码参数含义：
+
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+
+以上代码省略了 -f 参数，使用默认文件名（推荐），那么就会生成 id_rsa 和 id_rsa.pub 两个秘钥文件。
+接着又会提示你输入两次密码（该密码是你push文件的时候要输入的密码，而不是github管理者的密码），
+
+当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码（推荐），直接提交到github上了。
+
+### 0-8、解决TortoiseGit文件夹和文件状态图标不显示问题
 - 先重启试试
 - 修改注册表
 - 设置里面设置显示icon overlays
 
-# 1、使用git下载单个指定的文件夹
-
+## 1、使用git下载单个指定的文件夹
 更多搜索“稀疏检出”。
 
 git log -p filename   注意-p参数必须在log后面
@@ -82,15 +134,15 @@ git pull origin master    //下载
 
  https://blog.csdn.net/qq_35860352/article/details/80313078 不行
 
-## 下载指定分支
+### 1-1、下载指定分支
 git clone -b branch git@github.com:github/test.git 
 
-## 20210813更新
+### 1-2、20210813更新
 git clone --single-branch -b master url .
 git clone --depth=commit_num URL：可以只克隆最近几次提交的代码
 如：git clone --depth=2 --single-branch -b master git@yyds.hankin.org:OUR/YYDS.git .
 
-# 2、git add命令参数说明
+## 2、git add命令参数说明
 git add -u：将文件的修改、文件的删除，添加到暂存区。
 git add .：将文件的修改，文件的新建，添加到暂存区。
 git add -A：将文件的修改，文件的删除，文件的新建，添加到暂存区。
@@ -100,7 +152,7 @@ git add -A：将文件的修改，文件的删除，文件的新建，添加到�
 \2.  git add .     保存新的添加和修改，但是不包括删除
 \3.  git add -u   保存修改和删除，但是不包括新建文件。
 
-# 3、git push 的 -u 参数具体适合含义？
+## 3、git push 的 -u 参数具体适合含义？
 
 一般只有同时存在多个远程仓库时才会用到--set-upstream。每个git branch可以有个对应的upstream。假设你有两个upstream，分别叫server1和server2，本地master branch的upstream是server1上的master，那么当你不带参数直接输入git pull或者git push时，默认是对server1进行pull/push。如果你成功运行"git push -u server2 master"，那么除了本地branch会被push到server2之外，还会把server2设置成upstream。
 
@@ -123,7 +175,7 @@ upstream不是针对远程仓库的，而是针对branch的，这一点应了那
 
 这两种方式都可以达到目的。但是1方法更通用，因为你的远程库有可能并没有mybranch1分支，这种情况下你用2方法就不可行，连目标分支都不存在，怎么进行关联呢？所以可以总结一下：git push -u origin mybranch1 相当于 git push origin mybranch1 + git branch --set-upstream-to=origin/mybranch1 mybranch1
 
-# 4、分支管理
+## 4、分支管理
 ```
 git branch 查看本地分支
 git branch -r 查看远程分支
@@ -136,7 +188,7 @@ git remote [-v] 查看远程仓库地址
 git branch -m oldBranchName newBranchName 重命名
 ```
 
-## 4-1、删除分支
+### 4-1、删除分支
 ```
 git branch -d [本地分支名]
 git branch -D [本地分支名]
@@ -153,7 +205,7 @@ git branch -D 是git branch --delete --force的简写，它会直接删除。
 -d 一般就用它。
 -D 嘛，比如分支已在远端处理过了，已在远端合并了，那我本地就没必要保留可以删除了。还有就是你临时创建的几个分支，测试完保留一个然后把其它的就不保留删除了。
 
-## 4-2、合并分支
+### 4-2、合并分支
 1. git pull (git checkout -b newBname Bname)
 
 一、开发分支（dev）上的代码达到上线的标准后，要合并到 master 分支
@@ -175,7 +227,7 @@ git merge master
 git push -u origin dev
 ```
 
-## 4-3、远程分支覆盖本地分支
+### 4-3、远程分支覆盖本地分支
 
 有时候同一个分支，远程的和本地的都被修改的面目全非了，如果想要把本地的替换成远程的，用下面的命令
 
@@ -183,18 +235,18 @@ git fetch --all
 git reset --hard origin/master (这里master要修改为对应的分支名)
 git pull
 
-# 5、git冲突
+## 5、git冲突
 
-## 5-1、产生冲突的场景
+### 5-1、产生冲突的场景
 - git merage, git push后在远端建立合并请求
 - git pull
 - git stash pop
 
-## 5-2、在线git解决，git界面
+### 5-2、在线git解决，git界面
 
 方便快捷操作简单。
 
-## 5-3、检出，在本地审查和合并
+### 5-3、检出，在本地审查和合并
 
 - git pull origin 分支（生产冲突文件）
 - 在冲突文件里修改：删除和保留（git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容（数量为7））
@@ -217,13 +269,14 @@ Step 4. 推送合并的结果到 GitLab
 git checkout -b [newBName]
 git push origin [newBName]
 
-## 5-4、撤销合并冲突
+### 5-4、撤销合并冲突
 git reset        (保留修改文件，即撤销合并操作)
 git reset --hard (不保留文件，恢复到上一个commit状态)
 
-# 6、git commit
+## 6、git commit
 
-### 修改commit内容
+### 6-1、修改commit内容
+
 当我们想要对上一次的提交进行修改时，我们可以使用git commit –amend命令。git commit –amend既可以对上次提交的内容进行修改，也可以修改提交说明。
 
 如果有新的文件修改，需要合并到最近一次提交的commit里面，也可以使用上面命令直接修改即可。
@@ -233,14 +286,14 @@ git status
 git log
 git show
 
-### 6-1、删除commit
+### 6-2、删除commit
 > git reset HEAD^    删除最新commit记录
 
-### 6-2、误删除commit
+### 6-3、误删除commit
 - git reflog
 - git reset commitId
 
-# 7、多个commit合并(git rebase)  
+## 7、多个commit合并(git rebase)  
 实战中终于理解这条命令的作用。当我们在合并请求时又双叒叕发现一个小错误，又不得不commit一次，真想删除分支全部重新提交。但是commit是可以合并的。
 [git 几个commit点合并成一个commit点](https://blog.csdn.net/u013276277/article/details/82470177)
 
@@ -257,7 +310,7 @@ You are currently editing a commit while rebasing branch 'hejian' on 'ddd330e'.
   (use "git commit --amend" to amend the current commit)
   (use "git rebase --continue" once you are satisfied with your changes)
 
-# 8、如何切换分支并且改变其修改的不同的内容
+## 8、如何切换分支并且改变其修改的不同的内容
 就是本地像远程分支管理一样，不同分支不同的内容。但是实践看到都是一样的，后来发现姿势不对。
 
 ### 实验
@@ -290,7 +343,7 @@ git log
 
 总结：远程和本地一样，这就为啥有个叫本地仓库的概念了，本地修改了内容尽量commit到本地，只有commit了才会切换分支看到效果。
 
-# 9、stash的作用
+## 9、stash的作用
 [stash —— 一个极度实用的Git操作](https://www.jianshu.com/p/fcf69e2d3e6b)
 git stash   藏好代码
 git stash list  
@@ -307,7 +360,7 @@ git stash pop
 git stash list
 git stash -h
 
-# 10、Git 全局设置（必须）
+## 10、Git 全局设置（必须）
 ```
 git config --global user.name "张三"
 git config --global user.email "49660@zhangsan.com"
@@ -318,7 +371,7 @@ git config --global user.email "49660@zhangsan.com"
 - git config --local -l
 - git config --global -l
 
-# 11、回退命令（放弃所有本地修改）
+## 11、回退命令（放弃所有本地修改）
 ```
 git reflog
 git reset --hard 7edb984	放弃修改
@@ -348,7 +401,7 @@ git push origin HEAD --force
 
 2、Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper，后者之前一直是 Linux 内核开发人员在全球使用的主要源代码工具。开放源码社区中的有些人觉得BitKeeper 的许可证并不适合开放源码社区的工作，因此 Torvalds 决定着手研究许可证更为灵活的版本控制系统。尽管最初 Git 的开发是为了辅助 Linux 内核开发的过程，但是我们已经发现在很多其他自由软件项目中也使用了 Git。例如 很多 Freedesktop 的项目迁移到了 Git 上。
 
-# # 12、Updates were rejected because the tip of your current branch is behind
+## 12、Updates were rejected because the tip of your current branch is behind
 1.使用强制push的方法：
 $ git push -u origin master -f 
 这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。
@@ -356,8 +409,7 @@ $ git push -u origin master -f
 $ git pull origin master
 $ git push -u origin master   （后续就是解决冲突）
 
-# 13、git clean的用法（如何使用Git删除新增的文件？）
-
+## 13、git clean的用法（如何使用Git删除新增的文件？）
 git clean命令用来从你的工作目录中删除所有没有track过的文件
 git clean经常和git reset --hard一起使用. 记住reset只影响被track过的文件, 所以需要clean来删除没有track过的文件。结合使用这两个命令能让你的工作目录完全回到一个指定的的状态。
 
@@ -398,109 +450,15 @@ git clean -df
 ```
 运行后, 工作目录和缓存区回到最近一次commit时候一摸一样的状态，git status会告诉你这是一个干净的工作目录, 又是一个新的开始了！
 
-## 其他
-
---force
---hard
---soft
--d  等价于  --delete
--u  表示：
-加了参数-u后，以后即可直接用git push 代替git push origin master
-在git add -u中表示添加此次修改的全部原先存在的文件（即新建的不会添加 --update）。
-
-```
-1) 远程仓库相关命令
-检出仓库：$ git clone git://github.com/jquery/jquery.git
-查看远程仓库：$ git remote -v
-添加远程仓库：$ git remote add [name] [url]
-删除远程仓库：$ git remote rm [name]
-修改远程仓库：$ git remote set-url --push[name][newUrl]
-拉取远程仓库：$ git pull [remoteName] [localBranchName]
-推送远程仓库：$ git push [remoteName] [localBranchName]
- 
-2）分支(branch)操作相关命令
-查看本地分支：$ git branch
-查看远程分支：$ git branch -r
-创建本地分支：$ git branch [name] ----注意新分支创建后不会自动切换为当前分支
-切换分支：$ git checkout [name]
-创建新分支并立即切换到新分支：$ git checkout -b [name]
-删除分支：$ git branch -d [name] ---- -d选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项
-合并分支：$ git merge [name] ----将名称为[name]的分支与当前分支合并
-创建远程分支(本地分支push到远程)：$ git push origin [name]
-删除远程分支：$ git push origin :heads/[name]
-```
-
-
-
-## mintty.exe.stackdump文件
-
-关于Git bash在win10重装系统情况下闪退并生成mintty.exe.stackdump文件的问题
-
-总结：我也是在git commit时闪退产生了这个文件。试了几次同样的commit内容一直闪退，原因可能是中文时输入英文字母按回车键后闪退，然后在输入英文时shift切换没有闪退情况。我的问题不大，不能解决闪退网上有很多解决方法。
-
-# 哭笑不得：git branch -a看不见一个分支
-
-如果是下载项目就不要使用`git init test && cd test`初始化。
-
-使用`git clone git@git.com master`下载项目后，会在当前目录下新建文件夹master并将项目下载这个目录下。
-
-由于先前init初始化后，导致没有进入项目的文件夹中，使用git branch -a看不见任何分支。
-
-更新服务端的分支到本地仓库
-git fetch --all
-列出所有的分支
-git branch --all
-切换到一个已有的分支
-git checkout <您的分支名>
-基于当前分支新建一个分支
-git checkout -b <您的新分支名>
-推送当前分支到服务端
-git push origin <您的分支名>
-删除本地的一个分支（当前所在分支和要删除的分支不能相同）
-git branch -D <您的分支名>
-删除服务端的一个分支
-git push origin :<您的分支名>
-
-应该右上角会有ssh和https转换，然而并没有。但是两者使用是一样的。
-git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
-
-2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
-   a. 重命名远程分支对应的本地分支
-
-git branch -m oldName newName
-b. 删除远程分支
-
-git push --delete origin oldName
-c. 上传新命名的本地分支
-
-git push origin newName
-d.把修改后的本地分支与远程分支关联
-
-git branch --set-upstream-to origin/newName
-
-http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
-
-
-## Git 恢复本地误删的文件
-起因：git clone下来的项目不久后就自动出现修改的红色感叹号标志，实际什么都没有做。后来猜测应该是杀毒软件之类的给我自动删除了，后来还真是。使用恢复方法恢复后，一会儿又给我删除了，要么关闭杀毒软件或者添加信任。
-
-使用git pull --force强制拉取
-
-正确的打开方式：
-```
-git reset HEAD 文件或文件夹
-git checkout 文件或文件夹
-```
-
 ## 14、进阶
-### .gitignore
+### 14-1、.gitignore
 一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。我们可以创建一个名为 .gitignore 的文件，列出要忽略的文件模式。来看一个实际的例子：
 $ cat .gitignore
 *.[oa]
 *~
 第一行告诉 Git 忽略所有以 .o 或 .a 结尾的文件。一般这类对象文件和存档文件都是编译过程中出现的，我们用不着跟踪它们的版本。第二行告诉 Git 忽略所有以波浪符（~）结尾的文件，许多文本编辑软件（比如 Emacs）都用这样的文件名保存副本。此外，你可能还需要忽略 log，tmp 或者 pid 目录，以及自动生成的文档等等。
 
-### 打patch
+### 14-2、打patch
 生成patch：
 git format-patch commitID -1 生成当前commitID 的patch
 git format-patch commitID -3 从当前commitID开始往下生成总共三个commit的patch文件
@@ -518,12 +476,12 @@ git如何生成单个文件的补丁
 
 答:git format-patch "参照的commit-id" filename1 filename2
 
-### 自定义别名（更高级的git log）
+### 14-3、自定义别名（更高级的git log）
 ```
 alias lg="git log --graph --pretty=format:’'Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
 ```
 
-### git子模块使用
+### 14-4、git子模块使用
 一个大型工程总会被分拆为一些子工程,git-submodule 就是完成这样一种子工程拆分与整合的工具.
 
 添加一个子工程
@@ -547,64 +505,7 @@ git log -p
 查看文件最后的修改人
 git blame -L 起始行号,结束行号
 
-# git学习笔记
-
-# 1、下载安装git
->sudo apt install git
-
-明白为啥使用sudo而不是直接root账户，防止错误操作，sudo进一步确认了一下。
-
-Windows下载安装很随意。有个注意点：尽量选择下载和上传git仓库的时候不要进行Linux和Windows的换行符的转换，否则在不同环境下运行代码的时候很尴尬。
-
-# 2、配置
-## 配置家门，即上传者的身份
-设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。
-
-设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。以前并没有觉得多大作用，慢慢地发现一个git仓库是可以多人上传的，而这个配置就是显示上传者的身份，一般会填写个人的GitHub相关的信息，比如GitHub用户名和注册邮箱。乱写也是🆗的。
-
-```
-$ git config -l  ===  git config --list
-$ git config --global user.name "Your Name"
-$ git config --global user.email "email@example.com"
-
-还有一个local参数，即为单独仓库配置单独的上传者身份。
-global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
-```
-
-## 修改global配置
-简单粗暴：直接使用命令git config --global user.name "Your Name"。。。。
-修改配置.gitconfig文件。
-
-## 配置SSH-Key
-提交代码需要的github权限，下载私有仓库代码时也会需要这个配置，主要在于上传代码，不配置就会每次输入账户和密码。
-
-如果你想要使用 SSH url 克隆的话，你必须是这个项目的拥有者。否则你是无法添加 SSH key 的。
-使用https url很好用？？？
-
-### https 和 SSH 的区别：
-1、前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key ，否则无法克隆。
-
-2、https url 在push的时候是需要验证用户名和密码的；而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。
-
-```
-ssh -T git@github.com    查看是否配置好
-ssh-keygen -t rsa -C "邮件地址"
-秘钥配置见本文章第5行。
-```
-
-代码参数含义：
-
--t 指定密钥类型，默认是 rsa ，可以省略。
--C 设置注释文字，比如邮箱。
--f 指定密钥文件存储文件名。
-
-以上代码省略了 -f 参数，使用默认文件名（推荐），那么就会生成 id_rsa 和 id_rsa.pub 两个秘钥文件。
-接着又会提示你输入两次密码（该密码是你push文件的时候要输入的密码，而不是github管理者的密码），
-
-当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码（推荐），直接提交到github上了。
-
-
-# git cherry-pick教程
+## 15、git cherry-pick教程
 http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
 
 对于多分支的代码库，将代码从一个分支转移到另一个分支是常见需求。
@@ -631,14 +532,13 @@ $ git cherry-pick f
          \
            e - f - g Feature
 
-
 $ git cherry-pick feature	将feature分支最新提交应用过来
 $ git cherry-pick <A> <B>	将A和B提交应用过来
 $ git cherry-pick A..B		将A之后到B应用过来
 $ git cherry-pick A^..B 	将包括A到B应用过来
 ```
 
-# LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master' 
+## 16、LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master' 
 remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a manual "git lfs push --all".
 
 无解，只能重新创建本地仓库。
@@ -649,7 +549,7 @@ remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a 
 - 如果这些文件是你在本地新增的，说明.git目录下有些文件被你误删了；
 - 如果这些文件是你在本地新增的，但是是从别处目录拷贝过来的，你有可能拷贝的是git lfs pointer文件，这些文件会出发git lfs命令的bug，也就是文件被添加了，但.git下没有，也就遇到了上述git lfs fsck输出的错误。
 
-# git 查看最近或某一次提交修改的文件列表相关命令整理。
+## 17、git 查看最近或某一次提交修改的文件列表相关命令整理。
 git log --name-status 每次修改的文件列表, 显示状态
 git log --name-only 每次修改的文件列表
 git log --stat 每次修改的文件列表, 及文件修改的统计
@@ -718,13 +618,13 @@ git怎样删除未监视的文件untracked files
 
 ### 删除 untracked files
 git clean -f
- 
+
 ### 连 untracked 的目录也一起删掉
 git clean -fd
- 
+
 ### 连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）
 git clean -xfd
- 
+
 ### 在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
 git clean -nxfd
 git clean -nf
@@ -1465,7 +1365,7 @@ Permissions 0644 for '/root/.ssh/id_rsa' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
 Load key "/root/.ssh/id_rsa": bad permissions
-``` 
+```
 只要把秘钥权限下降就好了：
 ```
 chmod 0600 id_rsa
@@ -1550,4 +1450,111 @@ Are you sure you want to continue connecting (yes/no)?
 
 另外，如果您使用的是GitLab或Bitbucket等其他Git托管服务，它们可能有自己的WIP标记方式。请查阅相关文档以了解更多信息。
 
+## 其他
+--force
+--hard
+--soft
+-d  等价于  --delete
+-u  表示：
+加了参数-u后，以后即可直接用git push 代替git push origin master
+在git add -u中表示添加此次修改的全部原先存在的文件（即新建的不会添加 --update）。
 
+```
+1) 远程仓库相关命令
+检出仓库：$ git clone git://github.com/jquery/jquery.git
+查看远程仓库：$ git remote -v
+添加远程仓库：$ git remote add [name] [url]
+删除远程仓库：$ git remote rm [name]
+修改远程仓库：$ git remote set-url --push[name][newUrl]
+拉取远程仓库：$ git pull [remoteName] [localBranchName]
+推送远程仓库：$ git push [remoteName] [localBranchName]
+ 
+2）分支(branch)操作相关命令
+查看本地分支：$ git branch
+查看远程分支：$ git branch -r
+创建本地分支：$ git branch [name] ----注意新分支创建后不会自动切换为当前分支
+切换分支：$ git checkout [name]
+创建新分支并立即切换到新分支：$ git checkout -b [name]
+删除分支：$ git branch -d [name] ---- -d选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项
+合并分支：$ git merge [name] ----将名称为[name]的分支与当前分支合并
+创建远程分支(本地分支push到远程)：$ git push origin [name]
+删除远程分支：$ git push origin :heads/[name]
+```
+
+## mintty.exe.stackdump文件
+
+关于Git bash在win10重装系统情况下闪退并生成mintty.exe.stackdump文件的问题
+
+总结：我也是在git commit时闪退产生了这个文件。试了几次同样的commit内容一直闪退，原因可能是中文时输入英文字母按回车键后闪退，然后在输入英文时shift切换没有闪退情况。我的问题不大，不能解决闪退网上有很多解决方法。
+
+# 哭笑不得：git branch -a看不见一个分支
+如果是下载项目就不要使用`git init test && cd test`初始化。
+
+使用`git clone git@git.com master`下载项目后，会在当前目录下新建文件夹master并将项目下载这个目录下。
+
+由于先前init初始化后，导致没有进入项目的文件夹中，使用git branch -a看不见任何分支。
+
+更新服务端的分支到本地仓库
+git fetch --all
+列出所有的分支
+git branch --all
+切换到一个已有的分支
+git checkout <您的分支名>
+基于当前分支新建一个分支
+git checkout -b <您的新分支名>
+推送当前分支到服务端
+git push origin <您的分支名>
+删除本地的一个分支（当前所在分支和要删除的分支不能相同）
+git branch -D <您的分支名>
+删除服务端的一个分支
+git push origin :<您的分支名>
+
+应该右上角会有ssh和https转换，然而并没有。但是两者使用是一样的。
+git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
+
+2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
+   a. 重命名远程分支对应的本地分支
+
+git branch -m oldName newName
+b. 删除远程分支
+
+git push --delete origin oldName
+c. 上传新命名的本地分支
+
+git push origin newName
+d.把修改后的本地分支与远程分支关联
+
+git branch --set-upstream-to origin/newName
+
+http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
+
+
+## Git 恢复本地误删的文件
+起因：git clone下来的项目不久后就自动出现修改的红色感叹号标志，实际什么都没有做。后来猜测应该是杀毒软件之类的给我自动删除了，后来还真是。使用恢复方法恢复后，一会儿又给我删除了，要么关闭杀毒软件或者添加信任。
+
+使用git pull --force强制拉取
+
+正确的打开方式：
+```
+git reset HEAD 文件或文件夹
+git checkout 文件或文件夹
+```
+
+## git怎么添加空文件夹
+在Git中，空文件夹是不会被跟踪的，因为Git只跟踪文件的内容而不跟踪文件夹本身。但是，你可以通过在空文件夹中添加一个占位文件来解决这个问题。以下是在Git中添加空文件夹的步骤：
+
+1.在空文件夹中创建一个占位文件，可以命名为.gitkeep或者其他任意名称。这个文件不需要包含任何内容，它只是用来占位的。
+
+2.打开终端或命令行界面，导航到你的Git仓库所在的目录。
+
+3.使用以下命令将占位文件添加到Git中：
+```
+git add path/to/empty/folder/.gitkeep
+```
+注意替换path/to/empty/folder为你的空文件夹的实际路径。
+
+4.提交你的更改：
+```
+git commit -m "Add empty folder"
+```
+现在，你的空文件夹和占位文件将被添加到Git中，并且可以被跟踪和提交。请记住，这只是一种约定，用于表示你希望保留空文件夹的意图。

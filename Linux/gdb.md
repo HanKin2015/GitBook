@@ -919,6 +919,57 @@ gdb调试 出现value optimized out解决方法
 -O 或 -O1 优化生成代码。
 -O2 进一步优化。
 -O3 比 -O2 更进一步优化，包括 inline 函数。
-
 ```
 
+## 26、囧事：gdb调试把系统调卡住了
+写了一个demo，需要传入一个数字参数，但是出现段错误，因此使用gdb调试，结果：
+```
+[root@ubuntu0006:~/cmake] #gdb ./a.out 1
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./a.out...done.
+Attaching to program: /root/cmake/a.out, process 1
+Reading symbols from /lib64/ld-linux-x86-64.so.2...(no debugging symbols found)...done.
+0x00007f50e0d73b13 in ?? ()
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+
+Network error: Software caused connection abort
+```
+
+原因是忘记了gdb命令的使用方法：
+```
+[root@ubuntu0006:~/cmake] #gdb --help
+This is the GNU debugger.  Usage:
+
+    gdb [options] [executable-file [core-file or process-id]]
+    gdb [options] --args executable-file [inferior-arguments ...]
+```
+调试core文件，则gdb xxx.exe xxx.core；调试进程gdb xxx.exe -p process-id。但是这个-p参数原来是可以省略的。
+然后可以查看process-id为1的程序是什么，系统不卡才怪，由于gdb挂起超时重新恢复：
+```
+[root@ubuntu0006:~/cmake] #top
+top - 21:03:56 up 11:28,  3 users,  load average: 0.04, 0.07, 0.08
+Tasks: 199 total,   1 running, 198 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  1.4 us,  1.6 sy,  0.0 ni, 95.5 id,  0.5 wa,  0.0 hi,  0.0 si,  0.9 st
+KiB Mem :  8174988 total,  6365976 free,   488148 used,  1320864 buff/cache
+KiB Swap:  2095100 total,  2095100 free,        0 used.  7340056 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+  587 avahi     20   0   45304   3960   3320 S   6.2  0.0   2:13.78 avahi-daemon
+    1 root      20   0  119340   5380   3860 S   0.0  0.1   0:02.25 systemd
+```
