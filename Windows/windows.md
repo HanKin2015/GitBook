@@ -322,6 +322,18 @@ sc del jk
 ### 2-11、win7系统设置壁纸
 我有一张3840x2160的壁纸，直接右键设置壁纸发现图片会完全展开，屏幕分辨率为1920x1080，但是通过双击打开图片，然后再右键设置壁纸，这时候就会被缩放成1920x1080的壁纸。
 
+### 2-12、切换系统语言
+win10系统：设置=》时间和语言=》语言=》windows显示语言
+win7系统（旗舰版和企业版）：控制面板=》时钟、语言和区域=》区域和语言=》键盘和语言=》显示语言
+[Windows 7 语言包适用于运行 Windows 7 Ultimate 或 Windows 7 Enterprise 的计算机](https://support.microsoft.com/zh-cn/topic/windows-7-%E8%AF%AD%E8%A8%80%E5%8C%85%E9%80%82%E7%94%A8%E4%BA%8E%E8%BF%90%E8%A1%8C-windows-7-ultimate-%E6%88%96-windows-7-enterprise-%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA-c3b547df-3ebd-f155-5f16-7b9b268606a3)
+对于Windows 7专业版，官方并未提供直接更改系统语言的方法。
+
+如果您使用的是Windows 7专业版，并且需要更改系统语言，最佳的选择可能是升级到Windows 7 Ultimate版或Windows 7 Enterprise版，以便获得更改系统语言的功能。
+
+如果升级不是一个选项，您可能需要考虑其他解决方案，例如使用第三方语言包软件或者在操作系统级别进行一些调整。但需要注意的是，这些方法可能会带来不稳定性或不完全兼容的问题。
+https://tieba.baidu.com/p/8630913406
+https://www.xpwin7.com/jiaocheng/25004.html
+
 ## 3、win11那些事儿
 
 ### 3-1、提示这台电脑不符合安装此版本的Windows所需的最低系统要求

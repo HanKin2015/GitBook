@@ -122,3 +122,11 @@ http://www.downcc.com/k/uplcgj/
 U盘读写权限其实是在投递scsi command的MODE_SENSE6指令来获取的。只需要我们能解析出MODE_SENSE6的指令，修改它的返回值 ，即可以产生写保护的功能(U盘只读功能)。
 经过阅读协议文档可知，DEVICE-SPECIFIC PARAMETER字段即表示其可读写标记，当为0x80表示其受写保护。
 
+## 7、U盘或者硬盘显示无媒体
+https://baijiahao.baidu.com/s?id=1781611581811639384&wfr=spider&for=pc
+https://www.disktool.cn/content-center/usb-no-media-fix-windows-7-6540.html
+现象：当出现U盘无媒体情况时，您可以在磁盘管理工具中看到一个空白的磁盘框，并且在文件资源管理器中不会显示出来。
+
+未解决。
+初步怀疑是设备上的MBR或PBR出现故障，拔插后恢复。
+

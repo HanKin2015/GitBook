@@ -87,7 +87,9 @@ vim /etc/sysconfig/i18n
 #LANG="zh_CN.UTF-8"
 LANG="en_US.UTF-8"
 
-重启
+注意此配置修改后只能重启生效额，dpkg-reconfigure /etc/default/locale是无法整体调整系统语言系统；
+另外有可能在英文语言系统中还是会存在一些是中文，这个可能并不是系统语言，也可能是桌面框架的语言系统存在异常；
+在测试/etc/default/locale文件时，发现LANGUAGE="zh_CN:zh"是中文，LANGUAGE="en"是英文，也可能是配置异常，因为我发现LANGUAGE="zh"也是英文，系统默认是英文，如果配置无法识别就会走英文语言。
 
 /etc/default/locale   Xubuntu
 /etc/locale.conf      中标麒麟  （有个控制面板进行切换）

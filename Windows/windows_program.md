@@ -87,11 +87,9 @@ void CCImportDLL::initDLL()
     //memcpy(path_DLL, h_ThisModleName, strlen(h_ThisModleName));
     //strcat(path_DLL, "\\SS728M05_SDK.dll");
     h_SS728M05_SDK = LoadLibrary("SS728M05_SDK.dll");
-
-    DWORD rtn = GetLastError();
-
     if(h_SS728M05_SDK == NULL)
     {
+        printf("LoadLibrary SS728M05_SDK dll失败！错误码：%lu\n", GetLastError());
         return;
     }
     else
@@ -104,10 +102,31 @@ void CCImportDLL::initDLL()
 }
 ```
 
+## 7、注意TRUE和FALSE的值
+有点颠覆之前的认知，以为跟函数执行结果返回值匹配。
+```
+#include <minwindef.h>
 
+#ifndef FALSE
+#define FALSE               0
+#endif
 
+#ifndef TRUE
+#define TRUE                1
+#endif
+```
 
-
+## 8、读取注册表时，注意RegOpenKeyExA函数的第四个参数
+```
+LONG lRes = ::RegOpenKeyExA(
+            HKEY_LOCAL_MACHINE,
+            lpAppName,
+            0,
+            KEY_READ | KEY_WOW64_32KEY,
+            &hkey
+        );
+```
+如果有KEY_WOW64_32KEY参数时，是读取计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Test目录下，没有就是计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Test目录下。
 
 
 

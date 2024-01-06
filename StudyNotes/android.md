@@ -129,11 +129,18 @@ ps
 发现使用bash命令时，sh脚本第一行是注释行，不起作用。但是增加执行x权限之后，第一行就会起作用。
 
 ## 8、adb工具
-windows安装包：
-D:\将要上传到百度网盘\USB工具\platform-tools_r34.0.1-windows.zip
 
+### 8-1、简介
 adb工具即Android Debug Bridge（安卓调试桥） tools，是Android开发工具中的一个命令行工具，可以用于与连接的Android设备进行通信和调试。
 
+### 8-2、安装包
+免安装使用
+D:\将要上传到百度网盘\USB工具\platform-tools_r34.0.1-windows.zip
+Windows版本：https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+Mac版本：https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+Linux版本：https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+
+### 8-3、使用手册
 发现：前面是路径，永远在后面的是目标路径。
 把解压出来的文件直接复制到‘C:\Windows’文件夹下，这样，每次你进入cmd就可以直接使用adb命令了很方便的。
 ```
@@ -207,7 +214,17 @@ adb logcat ActivityManager:W MyApp:E
 2023-02-20 14:55:23 adb -s 172.22.16.113:9011 shell
 ```
 
+### 8-4、adb命令卡住
 由于我把所有的9xxx端口限制，导致adb命令执行失败，只能通过killall adb杀死所有卡住的进程后就能正常使用adb命令了。
+
+### 8-5、设备管理器有ADB interface设备但是使用adb devices命令无法检测到设备
+一般来说，以下是常见的原因：
+1、设备驱动没有安装或者没有正常工作。
+2、USB数据线连接不良。
+3、设备没有开启USB调试功能。
+4、设备上的ADB进程没有正常运行。
+
+最终我将ADB interface设备进行卸载设备，然后扫描硬件改动重新加载设备后就正常了。
 
 ## 9、hdb连接设备是什么意思
 https://baijiahao.baidu.com/s?id=1736118598411372211&wfr=spider&for=pc

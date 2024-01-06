@@ -591,9 +591,23 @@ D:\FTP服务器>objdump -p office_assistant.exe | findstr dll
         DLL Name: ADVAPI32.dll
         DLL Name: WS2_32.dll
 ```
-放弃还是去掉w参数老老实实查看吧。
+Dependency Walker工具（DEPENDS.EXE）下载：http://www.dependencywalker.com/
+PE Explorer工具（只支持32位程序查看）下载：http://www.pe-explorer.com/
+PE Explorer工具（支持64位程序查看）下载：https://github.com/zodiacon/PEExplorerV2
+
+放弃还是去掉w参数老老实实排查问题吧。
 之前anaconda重装过，导致好多库缺失，导致exe运行缺失库依赖，先解决这些依赖问题。
 没有安装这些依赖之前打包出来才46MB，安装后居然276MB，就四个库安装pyusb、pyzbar、pyqtchart、pyautogui。
 
 但是之前有修改过spec文件，过滤掉部分占用大的无用的库，过滤后还是46MB左右。
 命令中使用-w参数关闭dos窗口，spec文件修改console参数为True打开dos窗口。
+
+## 24、打包dll文件进入exe文件中
+```
+pyinstaller.exe --version-file=doc/file_version_info.txt -i img/office_assistant.ico --add-binary "D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libzbar-64.dll;." --add-binary "D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libiconv.dll;." -F src/office_assistant.py
+```
+
+另外可以通过修改spec文件配置：
+```
+binaries=[('D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libzbar-64.dll', '.'), ('D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libiconv.dll', '.')],
+```

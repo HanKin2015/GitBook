@@ -15,16 +15,13 @@
 只需要在使用windeployqt工具命令加入qml文件编译路径即可。
 windeployqt StudyQml.exe --qmldir C:\Qt\Qt5.12.5\5.12.5\mingw73_64\qml
 
-
-
-
 ## QDebug函数使用
-
-
-
-
-
-
+```
+#include <QDebug>
+qDebug() << id << endl;
+qDebug("%d", id);
+```
+注意不需要换行符，自带。
 
 
 

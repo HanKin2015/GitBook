@@ -391,3 +391,34 @@ dv /x myVar 以十六进制格式输出变量的值
      display_id = 0n0
            lock = class Lock
 ```
+
+## 11、使用VS工具进行代码编程程序崩溃问题排查
+最终结论：使用WinDbg软件进行程序崩溃调试，发现定位根本不准，原因是踩内存的崩溃就会有这个问题，它会在不同的地方报错，这时候只能通过看代码，注释代码一步一步的手动调式定位问题的根本所在。
+调试demo：D:\Github\Storage\windows\WinDbgExample
+原问题demo（问题已解决，原因在于CharLowerBuff函数，去掉注释可复现，非必现）：D:\Github\Storage\windows\GetVideoDesciptor
+
+### 11-1、方式一：使用procexp.exe生成dump排查
+- 以管理员打开procexp
+- 找到程序右键Create Dump=>Create Full Dump
+
+但是我遇到一个问题，生成的时候要么为0Kb文件要么报错Error writing dump file:拒绝访问。
+原来是必须要在程序的根目录进行操作，如果在程序子文件进行Create Minidump和Create Full Dump都只会有0Kb大小的文件，并且一旦操作过后再在根目录操作就会报错Error writing dump file:拒绝访问。这时候只能重启procexp.exe软件再在根目录操作即可。
+
+### 11-2、方式二：将WinDbg设置为默认调试工具
+- 找到WinDbg程序目录
+- 以管理员打开cmd
+- WinDbg.exe -I执行点击确定按钮即可
+
+关闭此配置花了我2天时间，怎么百度都没有搜索到，反正最终都没有搜索到命令实现，最可能的答案是修改注册表：https://blog.csdn.net/lxhuster_csdn/article/details/53153855，然后跟着做了却无法生效。
+最终还是靠自己，在我想要放弃的时候灵机一动，使用Process Monitor.exe软件监控WinDbg -I命令生效的时候做了什么事情，由于操作事件过多，重点关注过滤path值的AeDebug是否存在，果然让我找到了蛛丝马迹：
+根据链接修改计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug注册表即可，即将Auto值从1修改为0即可。
+
+### 11-3、注册表设置WinDbg为默认调试工具
+不同的电脑可能有不同的路径，选其一：
+路径1：计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GetVideoDesciptor.exe
+创建一个字符串值REG_SZ的debugger，并设置值为"C:\program files (x86)\Windows Kits\10\Debuggers\x86\windbg.exe"。
+
+路径2：计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GetVideoDesciptor.exe
+创建一个字符串值REG_SZ的debugger，并设置值为"C:\program files (x86)\Windows Kits\10\Debuggers\x86\windbg.exe"。
+
+

@@ -22,6 +22,7 @@ printf("%S\n", Path);
 
 ## 2、Windows错误码大全
 https://www.cnblogs.com/icebutterfly/p/7834453.html
+Microsoft Visual Studio自带错误码查询软件，在工具=》错误查找。
 ```
 0000 操作已成功完成。
 0001 错误的函数。
@@ -50,7 +51,7 @@ https://www.cnblogs.com/icebutterfly/p/7834453.html
 ## 4、解决vs运行程序一闪而过
 方法一：程序末尾增加输入语句，这样程序运行结束前会要求用户输入，控制台就会保持存在
 方法二：在程序末尾添加语句：system("pause");  加上这句后，控制台显示运行结果后会显示“请按任意键继续”
-方法三：修改项目配置，右键点击项目，在右键菜单中选择属性，然后在弹出的对话框左侧列表中中选择“配置属性”-->“链接器”-->“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）”
+方法三：修改项目配置，右键点击项目，在右键菜单中选择属性，然后在弹出的对话框左侧列表中中选择“配置属性”-->“链接器”-->“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）”（解决不了生成的exe双击一闪而过问题）
 
 ## 5、缺少vcruntime140d.dll的解决办法
 安装Visual C++ Redistributable for Visual Studio 2015(需要Windows7withSP1)。

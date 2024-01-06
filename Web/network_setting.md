@@ -8,7 +8,7 @@
 
 ## 2、DNS设置
 
-### ubuntu
+### 2-1、ubuntu
 vi /etc/systemd/resolved.conf
 DNS= 10.0.0.3 10.0.0.4
 :wq
@@ -33,7 +33,55 @@ nameserver 8.8.8.8
 nameserver  8.8.4.4
 
 通过/etc/network/interfaces，在它的最后增加一句：
-dns-nameservers 8.8.8.8 
+dns-nameservers 8.8.8.8
+
+### 2-2、nslookup命令
+https://zhuanlan.zhihu.com/p/603946755
+nslookup是一种常用于查询DNS解析记录，查找DNS解析故障的命令。通过nslookup的熟练使用，我们可以查询目标域名是否正常解析，以及查找DNS解析故障的原因，并针对性进行解决。
+```
+nslookup http://www.163.com             # 直接查询
+nslooup http://www.163.com 8.8.8.8      # 使用指定DNS服务器
+nslookup -qt=CNAME http://www.163.com   # 查询目标域名的其他记录类型（包括AAAA记录、CNAME记录、MX 邮件服务器记录、NS 名字服务器记录、PTR 反向记录等）
+nslookup -qt=ptr ip                     # 通过IP地址反查域名（IP逆向解析）
+nslookup -d http://www.sfn.cn           # 查询域名的缓存
+```
+
+### 2-3、如何使用nslookup查询DNS解析故障
+DNS解析故障一般表现在修改解析记录后，域名解析不生效，其中主要原因是递归服务器中的缓存尚未失效，没有及时同步最新的解析记录所导致的，对于这种情况，我们就可以通过nslookup命令，分别指定递归服务器和权威服务器去查询。
+```
+(base) D:\Github\Storage\python\study\others>nslookup baidu.com 114.114.114.114
+服务器:  public1.114dns.com
+Address:  114.114.114.114
+
+非权威应答:
+名称:    baidu.com
+Addresses:  39.156.66.10
+          110.242.68.66
+(base) D:\Github\Storage\python\study\others>nslookup baidu.com 223.5.5.5
+服务器:  public1.alidns.com
+Address:  223.5.5.5
+
+非权威应答:
+名称:    baidu.com
+Addresses:  39.156.66.10
+          110.242.68.66
+(base) D:\Github\Storage\python\study\others>nslookup baidu.com vip1.sfndns.cn
+DNS request timed out.
+    timeout was 2 seconds.
+服务器:  UnKnown
+Address:  218.98.111.251
+
+DNS request timed out.
+    timeout was 2 seconds.
+DNS request timed out.
+    timeout was 2 seconds.
+DNS request timed out.
+    timeout was 2 seconds.
+DNS request timed out.
+    timeout was 2 seconds.
+*** 请求 UnKnown 超时
+```
+如果两次查询结果一致，表明域名解析在指定的递归服务器已经生效，如果两次结果不一致，表明该递归服务器的尚存在DNS缓存，域名解析还没有生效。
 
 ## 3、路由设置
 Linux系统的route命令用于显示和操作IP路由表（show / manipulate the IP routing table）。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。

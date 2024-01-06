@@ -66,7 +66,7 @@ pacmd - Reconfigure a PulseAudio sound server during runtime
 ```
 head -n 5 /etc/passwd       显示文件前五行，默认显示十行
 head -n 2 /et/passwd /etc/shadow    可以同时查看两个文件前两行
-tial -n 5 /etc/passwd       显示文件后五行
+tail -n 5 /etc/passwd       显示文件后五行
 ```
 xrdb
 $TERM

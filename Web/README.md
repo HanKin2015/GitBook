@@ -11,7 +11,6 @@
 
 网络协议就是沟通的语言。
 
-
 ### 1-2、socket
 使用TCP/IP协议的应用程序通常采用应用编程接口：UNIX BSD的套接字（socket）和UNIX System V的TLI（已经被淘汰），来实现网络进程之间的通信。就目前而言，几乎所有的应用程序都是采用socket，而现在又是网络时代，网络中进程通信是无处不在，这就是我为什么说“一切皆socket”。
 
@@ -22,12 +21,9 @@ socket是“open—write/read—close”模式的一种实现。
 [超详细的握手和对称加密](https://www.cnblogs.com/zhuoqingsen/p/9456787.html)
 
 ## 2、HTML5
+C 语言本身并不支持将双引号直接转换成 &quot; 这样的 HTML 实体。这种转换通常是在前端开发中的 HTML 或 XML 中使用的一种写法，用于在网页中显示双引号而不会被解释为 HTML 标签的一部分。在前端代码中，将双引号转换成 &quot; 是一种常见的做法，以确保在 HTML 中正确显示特殊字符。
 
 ## 3、JavaScript
-
-
-
-
 
 # 2、svn原理
 ## openssl 

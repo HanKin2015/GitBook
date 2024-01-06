@@ -428,15 +428,41 @@ Compiling 'k.py'...
 <generator object <genexpr> at 0x0000020423B771C8>
 ```
 
-## 40、__init__.py文件
-__init__.py 文件是 Python 包的一个特殊文件，它可以用来执行包的初始化代码。当一个目录被当作包使用时，这个目录下的 __init__.py 文件会在包被导入时首先被执行。
+## 40、在gdb中使用python
+```
+[root@ubuntu0006:~] #gdb
+GNU gdb (GDB) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
-__init__.py 文件的作用包括：
-- 定义包的公共接口，包括导入的模块、变量和函数，以便在包外部使用时可以直接访问。
-- 执行包的初始化代码，例如设置包的默认配置、初始化数据库连接等操作。
-- 控制包被导入时的行为，可以在其中进行一些必要的检查或预处理操作。
-
-在较新的 Python 版本中（3.3 及以上），__init__.py 文件并不是必需的，因为 Python 已经支持隐式命名空间包。但是，为了确保向后兼容性，建议在编写包时仍然包含 __init__.py 文件。
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) python print("Hello, World!")
+Hello, World!
+(gdb) python
+>print("Hello, World!")
+>Hello, World!
+(gdb) python
+>import qemu
+>Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ImportError: No module named qemu
+Error while executing Python code.
+(gdb) python
+>import logging
+>(gdb) help logging
+Undefined command: "logging".  Try "help".
+(gdb)
+```
 
 ## 41、TypeError: can only concatenate str (not “int“) to str
 错误原因：字符串和数字类型进行加减算法。
@@ -455,7 +481,49 @@ if scenario_number != -1 and int(scenario_number) + 1 < 5:
 ## 42、python报错：AttributeError: ‘ImageDraw‘ object has no attribute ‘textbbox‘
 使用词云图wordcloud库的依赖库pillow没有安装或者版本过低。
 
-## 43、
+## 43、xgettext: translation.py:14 处有非 ASCII 字符串。
+xgettext是一个用于提取源代码中的文本字符串以进行国际化和本地化的工具。它通常用于提取需要翻译的字符串，并生成一个翻译文件供翻译人员使用。
+在这种情况下，错误提示表明在translation.py文件的第14行存在一个非ASCII字符。非ASCII字符是指不属于ASCII字符集的字符，例如中文、日文、俄文等。
+要解决这个问题，你可以尝试以下几种方法：
+- 确保你的源代码文件使用了正确的字符编码。在Python中，默认的字符编码是UTF-8，所以你需要确保你的文件使用UTF-8编码保存。
+- 如果你的源代码文件确实包含非ASCII字符，你可以使用Unicode转义序列来表示这些字符。例如，对于中文字符，你可以使用\uXXXX的形式来表示，其中XXXX是该字符的Unicode码点。
+- 如果你使用的是Python 3.x版本，你可以在文件的开头添加以下注释来指定文件的编码：
+```
+# -*- coding: utf-8 -*-
+```
+这将告诉Python解释器该文件使用UTF-8编码。
 
+## 44、使用lxml库的两种写法莫名其妙报错
+为啥这样写是正确的：
+```
+from lxml import etree
+with open("./data.xml", "r", encoding="utf-8") as f:
+    data_xml = f.read()
+tree = etree.XML(data_xml)
+```
 
+而这样写报错module 'lxml' has no attribute 'etree'：
+```
+import lxml
+with open("./data.xml", "r", encoding="utf-8") as f:
+    data_xml = f.read()
+tree = lxml.etree.XML(data_xml)
+```
+
+chatgpt回答：实际上，无论是第一种写法还是第二种写法，都应该能够正常工作。
+如果你在使用第二种写法时遇到了"module 'lxml' has no attribute 'etree'"的错误，可能是因为你的lxml库版本较旧或安装有问题。
+
+请尝试更新lxml库到最新版本，可以使用以下命令来更新：
+```
+pip install --upgrade lxml
+```
+
+如果更新后仍然出现相同的错误，请尝试重新安装lxml库：
+```
+pip uninstall lxml
+pip install lxml
+```
+如果问题仍然存在，请确保你的Python环境中没有其他与lxml冲突的库，并且确认你的代码中没有其他地方导入了名为lxml的模块。
+
+解决方案：把lxml库更新后就正常了。
 

@@ -166,6 +166,9 @@ pip卸载包
 清理缓存：使用以下命令清理pip缓存：
 pip cache clean
 
+安装指定版本的安装包
+命令：pip install pybind11==2.9
+
 pip list：显示所有已安装的python包
 pip -v list：显示所有已安装的python包的详细信息（安装地址），默认pypi源地址
 pip uninstall 包名：卸载python包

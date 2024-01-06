@@ -18,3 +18,6 @@ MariaDB的目标是成为一个完全兼容MySQL的替代品，它支持与MySQL
 显示表格结构：describe table_name; 或者 show columns from table_name;
 显示表格后5行：select * from total order by id desc limit 5;
 显示表格前5行：select * from total limit 5;
+统计date_time字段从2023-11-24到2023-12-25范围内device字段的总和：SELECT SUM(device) AS total_device FROM your_table_name WHERE date_time >= '2023-11-24' AND date_time <= '2023-12-25';
+计算数量：SELECT COUNT(device) AS device_count FROM your_table_name WHERE date_time >= '2023-11-24' AND date_time <= '2023-12-25';
+
