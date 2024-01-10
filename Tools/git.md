@@ -1558,3 +1558,9 @@ git add path/to/empty/folder/.gitkeep
 git commit -m "Add empty folder"
 ```
 现在，你的空文件夹和占位文件将被添加到Git中，并且可以被跟踪和提交。请记住，这只是一种约定，用于表示你希望保留空文件夹的意图。
+
+## 黑魔法教程
+```
+git log --pretty=oneline --name-status
+```
+打印提交和改动文件 包对比好用

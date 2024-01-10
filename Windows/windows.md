@@ -235,6 +235,16 @@ https://www.duotin.com/en/102900.html
 ### 1-24、视觉效果设置
 文件资源管理器设置成无边框模式：此电脑-》属性-》高级系统设置-》性能设置-》视觉效果-》在窗口下显示阴影
 
+### 1-25、Win10多个版本版本business editions和consumer editions的区别
+https://www.jb51.net/os/win10/852577.html
+https://pythonjishu.com/gtplzynxwpncont/
+https://m.uc23.net/jiaocheng/76218.html
+一、两者的产品名称区别：win10 business edition为批量版（也称VOL版），指市面上的win10商业版集合，Business Editions是专门为企业和商业用户设计的Win10版本，可以在大型组织内提供额外的安全性、管理功能和部署选项。而consumer edition则为零售版，指的是市面上的win10普通版本集合。Consumer Editions是为普通消费者设计的Win10版本，提供了许多家庭用户所需要的功能和工具。
+
+二、两者的内置win10版本区别：
+consumer editions版本包含Home(家庭版)、Education(教育版)、Professional(专业版)；
+business editions版本包含Education(教育版)、Enterprise (企业版)、Professional(专业版)。
+
 ## 2、其他windows
 
 ### 2-1、20210201

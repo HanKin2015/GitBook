@@ -47,5 +47,7 @@ https://www.usbzh.com/article/detail-621.html
 
 对于1-2米的USB在数据线，磁环更多的是为了防止外部高频信号干扰，屏蔽层也可以达到屏蔽高频信号干扰的效果，因此选择USB数据线简单判断是否有加磁环太一概而论，不太合理。如果前期设计好USB数据线可满足日常使用，无需配备磁环。当然，不同材料、不同厂家生产的磁环对屏蔽滤波有不同的效果。反正记住质量决定价格吧。
 
-
+## 8、UCX框架
+https://learn.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/get-started-with-host-controller-driver-development
+可以用来开发虚拟USB控制器。
 

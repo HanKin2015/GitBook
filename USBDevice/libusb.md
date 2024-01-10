@@ -362,6 +362,7 @@ https://blog.csdn.net/qq_36098477/article/details/127525152
 DEFINE_GUID(GUID_DEVINTERFACE_USB_DEVICE, 0xA5DCBF10L, 0x6530, 0x11D2, 0x90, 0x1F, 0x00, \
              0xC0, 0x4F, 0xB9, 0x51, 0xED);
 ```
+这个值可见文件，也可以通过usbtreeview软件查看设备的Device Path能看见这个值。
 
 ### 12-3、方案一：从usbview中摘抄关键函数使用
 发现无法直接通过USB设备句柄进行DeviceIoControl函数通信，尝试了许久已放弃。
