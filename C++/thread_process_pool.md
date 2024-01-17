@@ -23,8 +23,12 @@ demo见：D:\Github\Storage\c++\standard_library\thread\thread_pool.c
 https://zhuanlan.zhihu.com/p/397590343
 
 ## 3、新词汇：纤程和协程的区别
-https://www.zhihu.com/question/23955356
-()[https://img-blog.csdnimg.cn/20200725105231269.png]
+[协程和纤程的区别是什么？](https://www.zhihu.com/question/23955356)
+微软叫 纤程 其实是一个东西。我觉得强调这二者区别的回答都在扯淡。
+
+[进程 线程 协程 管程 纤程 概念对比理解](https://zhuanlan.zhihu.com/p/26757689)
+
+![](https://img-blog.csdnimg.cn/20200725105231269.png)
 coroutine通常是说, 啊, 我正在等待一些事, 线程(调度者)啊你叫其他人先做吧.  coroutine是排队做任务,  一张办公桌只给一个人用,  谁脑袋卡住了没事干就自觉把桌子上的东西打包走, 以后回来的话, 就跑去队列后面继续排fiber则是, 我暂时没事干, 你(另外一个fiber)先做.  fiber是主动决策哪个是接棒的fiber, 让另外一个fiber继续执行任务.
 
 纤程包含独立的目态栈，寄存器状态的控制信息·目态控制的纤程转接要求较高的编程经验·由于纤程属于目态对象，一个纤程被封锁意味着所在线程被封锁·应用程序可以通过ConvertThreadToFiber将线程转换为纤程·与线程对比，纤程具有切换速度快的特点·

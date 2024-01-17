@@ -51,3 +51,18 @@ https://www.usbzh.com/article/detail-621.html
 https://learn.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/get-started-with-host-controller-driver-development
 可以用来开发虚拟USB控制器。
 
+## 9、USB协议速度
+dmesg
+lsusb -v
+find /dev/bus
+lsusb -t
+12M 意味着 USB 1.0 / 1.1的速率是 12Mbit/s
+480M 意味着 USB 2.0的速率是 480Mbit/s
+如果你找到5.0G，那意味这你有USB 3.0类型接口。它有5.0Gbit/s的传输速率。
+
+## 10、系统里面有个Realtek Semiconductor Corp设备
+这个是音频驱动程序。
+
+Realtek 瑞昱
+Semiconductor 半导体
+Corp 公司

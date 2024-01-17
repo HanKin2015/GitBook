@@ -1,4 +1,6 @@
 # 学习高阶C++
+原子性：指事务的不可分割性，一个事务的所有操作要么不间断地全部被执行，要么一个也没有执行。
+资源获取即初始化 - RAII（Resource Acquisition Is Initialization）
 
 ## 1、指向结构体的指针必须初始化
 ```
@@ -23,7 +25,7 @@ struct abc temp;
 p=&temp;
 p->a = 1; 
 
-## 2、
+## 2、高级宏展开
 ```
 //此宏展开后，类似于printf("%d""%d", 1, 2);  
 #define TRACE_CMH_2(fmt, ...) \  
@@ -53,4 +55,24 @@ for (j = 0; j < 10; j++);
 如果是1的，肯定就是一行，这就会很迷惑。因此要养成良好的代码习惯。
 我见过for循环末尾，函数末尾添加分号的，这种情况虽然没有影响，但是个人觉得还是不要有才好。
 ```
+
+## 5、c++标准发展史
+1998年，C++的ANSI/IS0标准被投入使用。
+C++ 03
+C++ 11
+C++ 14
+C++ 17
+C++ 20
+
+## 6、c++11新特性
+https://zhuanlan.zhihu.com/p/650986900
+https://m.baidu.com/sf?pd=topone_multi&top=%7B%22sfhs%22%3A1%7D&atn=index&word=c%2B%2B11%E6%96%B0%E7%89%B9%E6%80%A7&lid=16524987177891995353&key=ODjAz5JIKOstxE1s4UBHiW1Rd8Dz4F%2F8%2FVCvqUmSw10p7xL%2FVg1lVWSpvCcpjntjo0LSAunaVLhKqIifyl9fhmAxtz94ezwv9I7NuBdI%2Fos%3D&type=bpage
+
+
+## 6、c++14新特性
+
+## 6、c++17新特性
+
+## 6、c++20新特性
+
 

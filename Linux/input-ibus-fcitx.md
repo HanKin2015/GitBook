@@ -67,7 +67,7 @@ void CWidget::moveEvent(QMoveEvent *event)
 
 Cookie文件的格式
 
-　　IE的Cookie文件实际上就是一个txt文本文件，只不过换行符标记为Unix换行标记（0x0A），由于记事本对Unix换行标记不兼容，打开后内容全在一行看起来不方便，我们可以用EditPlus或UltraEdit-32打开，打开之后，会看到形式如下的内容：
+IE的Cookie文件实际上就是一个txt文本文件，只不过换行符标记为Unix换行标记（0x0A），由于记事本对Unix换行标记不兼容，打开后内容全在一行看起来不方便，我们可以用EditPlus或UltraEdit-32打开，打开之后，会看到形式如下的内容：
 name
 value
 domain/
@@ -92,15 +92,15 @@ Line Summary
 9 The Cookie Record Delimiter (a * character)
 
 中文说明：
-第一行　Cookie变量名
-第二行　Cookie变量值
-第三行　该Cookie变量所属域，形如csdn.net/、blog.csdn.net/或blog.csdn.net/lixianlin/
-第四行　可选标志（cooke是否加密？）
-第五行　该Cookie过期时间（FILETIME格式）的高位整数
-第六行　该Cookie过期时间（FILETIME格式）的低位整数
-第七行　该Cookie创建时间（FILETIME格式）的高位整数
-第八行　该Cookie创建时间（FILETIME格式）的低位整数
-第九行　Cookie记录分隔符（为一个星号* ）
+第一行Cookie变量名
+第二行Cookie变量值
+第三行该Cookie变量所属域，形如csdn.net/、blog.csdn.net/或blog.csdn.net/lixianlin/
+第四行可选标志（cooke是否加密？）
+第五行该Cookie过期时间（FILETIME格式）的高位整数
+第六行该Cookie过期时间（FILETIME格式）的低位整数
+第七行该Cookie创建时间（FILETIME格式）的高位整数
+第八行该Cookie创建时间（FILETIME格式）的低位整数
+第九行Cookie记录分隔符（为一个星号* ）
 
 
 

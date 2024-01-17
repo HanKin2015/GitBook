@@ -52,7 +52,7 @@
 - 完成
 
 ## 20230828
-- [ ] 鹊刀门传奇
+- [x] 鹊刀门传奇
 - [ ] [AGE动漫](https://www.homyin.com/)
 - [ ] https://imba97.cn/links/
 - [ ] https://www.52pojie.cn/
@@ -70,7 +70,11 @@
 ## 20230907
 - [ ] 牛逼https://github.com/tjy-gitnub/win12
 
-
+## 20240111
+- [ ] 学习人工智能
+- [ ] 完成闲置
+- [ ] 完成域名
+- [ ] 完成趋势
 
 
 https://github.com/yscoder/vue-schedule-calendar
@@ -195,19 +199,15 @@ https://www.jianshu.com/p/7cbd50058ea3
   第五步. 修改API方案，将构思成熟的API输出到表格
 
 #### [产出]
-
 1. 思路分析思维导图
-
   * 场景分析
   * 功能分解
   * 注意事项
 
 2. demo代码
-
   切换为API使用者的视角，利用API去实现readme.md中要求的功能，即生成一个复杂json值的内存数据结构表示
 
 3. API设计表格
-
   API原型，API功能，API参数和返回值说明，设计思路（为什么这么设计，以及后续实现思路）
 
 

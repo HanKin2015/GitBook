@@ -87,7 +87,14 @@ https://mp.weixin.qq.com/s/P9m0REcDqL75SLQVAXPH7g
 ## Flutter
 Flutter是Google开源的构建用户界面（UI）工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。 [5] Flutter 开源、免费，拥有宽松的开源协议，适合商业项目。
 
+## 超分辨率
+https://zhuanlan.zhihu.com/p/558813267
+超分辨率（Super-Resolution），简称超分（SR）。是指利用光学及其相关光学知识，根据已知图像信息恢复图像细节和其他数据信息的过程，简单来说就是增大图像的分辨率，防止其图像质量下降。
 
-
-
+## LDAP统一认证
+https://cloud.tencent.com/developer/article/2055095
+- 首先LDAP是一种通讯协议，LDAP支持TCP/IP。协议就是标准，并且是抽象的。在这套标准下，AD（Active Directory）是微软出的一套实现。
+- 那AD是什么呢？暂且把它理解成是个数据库。也有很多人直接把LDAP说成数据库(可以把LDAP理解成存储数据的数据库)。像是其他数据库一样，LDAP也是有client端和server端。server端是用来存放资源，client端用来操作增删改查等操作。
+- 而我们通常说的LDAP是指运行这个数据库的服务器。
+- 可以简单理解AD =LDAP服务器＋LDAP应用。
 

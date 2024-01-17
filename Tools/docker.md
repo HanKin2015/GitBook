@@ -13,8 +13,8 @@ Docker 是一个[开源](https://baike.baidu.com/item/开源/246339)的应用容
 查看docker环境：docker ps -a
 进入docker环境1(CONTAINER ID)：docker exec -it 86d66188df09 bash
 进入docker环境2(NAMES)：docker exec -it compile-x86_64 bash
-拷贝文件进入docker：docker cp 86d66188df09:/root/compile/qemu/qemu-5.0.0/x86_64-softmmu/qemu-system-x86_64 .
-拷贝文件导出docker：docker cp uvc_qemu.c 86d66188df09:/home/
+拷贝文件或者文件夹导出docker：docker cp 86d66188df09:/root/compile/qemu/qemu-5.0.0/x86_64-softmmu/qemu-system-x86_64 .
+拷贝文件或者文件夹进入docker：docker cp uvc_qemu.c 86d66188df09:/home/
 
 https://mp.weixin.qq.com/s/801GmqZk-dP2q_ESpxf94A
 

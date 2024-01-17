@@ -161,6 +161,7 @@ dpkg-deb -e xxx.deb
 -b	创建Debian软件包
 
 dpkg也能使用-x或-X参数解压deb文件（一个显示过程一个不显示-x, --extract, -X, --vextract）。
+注意：dpkg -l xxx时默认不能模糊匹配，需要dpkg -l "xxxx*"才能模糊匹配。
 ```
 [root@ubuntu0006:/media/hankin/vdb/deb] #dpkg -e vim_7.4.488-7+deb8u3_amd64.deb
 [root@ubuntu0006:/media/hankin/vdb/deb] #ll
@@ -472,4 +473,30 @@ dpkg -b package/ package.deb    这里时间有点长3-5分钟左右
 dpkg-deb: building package `test' in `package.deb'.
 这里显示的test应该是控制信息中的Description
 ```
+
+## 10、再次创建deb包
+需求：在四种架构操作系统运行二进制文件获取信息，由于部分操作系统存在安全性，需要二进制文件签名后方可运行，因此需要将二进制文件打包成deb并签名，然后安装后执行二进制文件即可。（备注：需要打包成一个deb包，根据架构安装对应的二进制文件）
+
+.deb 包的安装过程是由 dpkg 控制的，它会解压所有文件到相应的位置。如果不想看见可以通过postinst文件使用rm命令删除。
+control文件中Architecture: all表示这个包适用于所有架构。
+在postinst文件中额外的操作不会在dpkg -r中进行析构操作，只能再编辑postrm文件进行析构。
+注意安装的时候通过dpkg -r xxx.deb，卸载的时候而是dpkg -r Package（control文件中的包名）。
+注意control文件的每个字段首字母都是大写，需要严格要求，否则会存在系统不认识，在银河麒麟中包名没有识别出来就是由于这个原因。
+
+## 11、dpkg --print-architecture和arch命令
+dpkg --print-architecture：这个命令是Debian包管理系统的一部分，它返回的是dpkg和apt用来管理和安装软件包的架构名称。这个命令的结果可能会受到多架构设置的影响，如果你的系统支持安装多个架构的软件包，那么dpkg --print-architecture返回的将是主架构的名称。
+
+arch：这个命令实际上是uname -m的别名，它返回的是内核提供的硬件架构信息。这个命令的结果通常更接近硬件的实际架构，而不受软件包管理系统的影响。
+
+在你的例子中，dpkg --print-architecture返回的是amd64，这是Debian和Ubuntu用来表示x86_64架构的名称。而arch返回的是x86_64，这是内核提供的硬件架构信息。
+
+总的来说，如果你正在编写和软件包安装相关的脚本，那么你可能需要使用dpkg --print-architecture。如果你需要获取硬件的实际架构信息，那么你应该使用arch或uname -m。
+
+在编写control文件的时候，有个Architecture参数值就是根据dpkg --print-architecture获取的。
+
+## 12、deb包签名
+直接打包的deb包通过7zip解压后只有data.tar，但是签名后的deb包解压后存在四个文件：control.tar.xz、data.tar.xz、debian-binary、sign。
+
+签名后的二进制文件md5值是有所变化的。
+
 

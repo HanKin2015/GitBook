@@ -43,27 +43,37 @@ dism++是一款非常好用的系统清理和维护工具，使用它可以更�
 FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 
 ## 3、工具推荐
-用途	           |	       工具
-:-------------:|:-------------:
-流程图软件   |diagrams
-笔记		       |蚂蚁、有道云
-C/C++        |codeblocks
-看图            |wps
-进程监视器   |apimonitor
-查看依赖      |procexp
-文件搜索神器|everithing
-下载工具       |迅雷
-在线视频播放 |ZY Player
-卸载工具		|geek
-本地搜索      | everything
-解压工具		| 7z
-代码编辑器   |vs code、sublime、notepad++、southinsight
-md5校验     | md5sum
-md文件编辑|typro
 
-## 4、Coodesker
-这款工具能很好的帮助大家整理桌面，不用消耗多少精力就能得到一个分类清晰、排布整齐的桌面啦！
-https://www.coodesker.com/
+|     用途     |                   工具                    |
+| :----------- | :---------------------------------------- |
+|  流程图软件  |                 diagrams                  |
+|     笔记     |               蚂蚁、有道云                |
+|    C/C++     |                codeblocks                 |
+|     看图     |                    wps                    |
+|  进程监视器  |                apimonitor                 |
+|   查看依赖   |                  procexp                  |
+| 文件搜索神器 |                everithing                 |
+|   下载工具   |                   迅雷                    |
+| 在线视频播放 |                 ZY Player                 |
+|   卸载工具   |                   geek                    |
+|   本地搜索   |                everything                 |
+|   解压工具   |                    7z                     |
+|  代码编辑器  | vs code、sublime、notepad++、southinsight |
+|   md5校验    |                  md5sum                   |
+|  md文件编辑  |                   typro                   |
+
+
+## 4、外设工具箱
+
+| name        | desc                               | url                                                          |
+| ----------- | ---------------------------------- | ------------------------------------------------------------ |
+| amcap       | 一款小巧的视频捕获软件             | http://noeld.com/programs.asp?cat=video#amcap                |
+| MobaXterm   | 一款集万千于一身的全能型终端神器   | https://mobaxterm.mobatek.net/download-home-edition.html     |
+| usbtreeview | 查看USB设备的详细描述符信息        | https://www.uwe-sieber.de/usbtreeview_e.html#download        |
+| usbview     | 查看USB设备的详细描述符信息        | https://sourceforge.net/projects/usbview/files/usbview/      |
+| Wireshark   | 抓取USB数据包的常用工具            | https://www.wireshark.org/download.html                      |
+| DebugView   | 监视PC客户端在本地系统上的调试输出 | https://learn.microsoft.com/zh-cn/sysinternals/downloads/debugview |
+| InputHooks  | 一款捕获键盘和鼠标操作事件的工具   | https://www.codeproject.com/Articles/6362/Global-System-Hooks-in-NET |
 
 ## 5、无界鼠标
 一套键鼠控制多台电脑的工具！(可跨电脑拷贝/拖放文件) 
@@ -181,3 +191,7 @@ https://mp.weixin.qq.com/s/CVWudgKH3JP8hVXbeYxDFA
 
 ## 14、有时候电脑系统磁盘爆满需要清理空间
 强烈推荐使用SpaceSniffer工具。
+
+## 15、Coodesker
+这款工具能很好的帮助大家整理桌面，不用消耗多少精力就能得到一个分类清晰、排布整齐的桌面啦！
+https://www.coodesker.com/

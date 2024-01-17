@@ -93,6 +93,10 @@ at xxx.log | grep -A 10 ERROR 后10行
 cat xxx.log | grep -B 10 ERROR 前10行
 cat xxx.log | grep -C 30 ERROR 前后各30行  经常用  迅速定位ERROR上下文 
 
+grep -C 5 foo file 显示file文件里匹配foo字串那行以及上下5行
+grep -B 5 foo file 显示foo及前5行
+grep -A 5 foo file 显示foo及后5行
+
 ## 5、字符串全匹配
 模糊匹配
 $ grep "abc"   # 结果为abcd, abcde, abc等
