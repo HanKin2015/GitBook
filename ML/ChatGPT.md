@@ -49,5 +49,5 @@ Model Scope：https://modelscope.cn/models/baichuan-inc/baichuan-7B/summary
 https://mp.weixin.qq.com/s/mY-gXNHUAmAVWlkASB2EWw
 https://github.com/Stability-AI/StableStudio
 
-
+https://www.coze.com/
 

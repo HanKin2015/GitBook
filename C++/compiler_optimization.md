@@ -21,6 +21,8 @@ https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
 - O3：较为激进的优化选项（对错误编码容忍度最低），在O2的基础上额外打开了十多个优化选项
 - Ofast：打开可导致不符合IEEE浮点数等标准的性能优化选项。
 
+打开后编译会有各种警告信息。
+
 ## 3、怀疑stripped字段与编译器优化选项有关
 ```
 [root@ubuntu0006:/media/hankin/vdb/boost] #g++ hello_boost.cpp

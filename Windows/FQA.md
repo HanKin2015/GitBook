@@ -287,3 +287,10 @@ https://www.zhihu.com/question/62726908
 点击地址栏不安全=》Cookie=》清除对应网站的内容=》重新打开网页即可。
 待验证网页重定向次数多能否使用此方法解决。
 
+## 34、在dos终端模式下是不可以显示中文汉字的，只能显示英文
+http://blog.chinaunix.net/uid-6638-id-107736.html
+
+## 35、如何检测 CMD 是否以管理员身份运行/是否具有提升的权限？
+https://www.huntsbot.com/qa/vdrD
+
+亲测net session命令有效。

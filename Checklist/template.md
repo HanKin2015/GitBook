@@ -118,7 +118,7 @@ char* ReadBinFile(const char* filename, uint32_t& size);
 # Copyright (c) 2023 HanKin. All rights reserved.
 #
 
-
+好像是使用linux命令生成的。figlet Ich liebe dich。其余的是我拼凑加自创组合起来的。
 echo '
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   _   _       ___   __   _   _   __  _   __   _             #
@@ -203,7 +203,7 @@ if __name__ == '__main__':
     
 print('-------- {}[{}] --------'.format(sys._getframe().f_code.co_name, sys._getframe().f_lineno))
 
-
+注释
 def zipDir(dirpath, outpath_zip):
     """
     压缩指定文件夹
@@ -212,6 +212,16 @@ def zipDir(dirpath, outpath_zip):
     :param outpath_zip: 压缩文件保存路径
     :return: 无
     :raise keyError: raise an exception
+    """
+
+更喜欢这种
+def zipDir(dirpath, outpath_zip):
+    """
+    压缩指定文件夹
+    @param dirpath: 目标文件夹路径
+    @param outpath_zip: 压缩文件保存路径
+    @return: 无
+    @raise keyError: raise an exception
     """
 ```
 

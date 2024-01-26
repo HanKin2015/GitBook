@@ -540,3 +540,46 @@ pip install lxml
 - snakeviz：可视化解析cProfile生成的数据
 - line_profiler：分析函数中每一行执行的耗时（需要改代码才能实现）
 强推memray
+
+## 46、os.path.exists判断文件是否存在有时候会失败
+```
+if os.path.exists(r"C:\Windows\System32\drivers\vdiusbfilter.sys"):
+    print("hallo global")
+
+if __name__ == '__main__':
+    if os.path.exists(r"C:\Windows\System32\drivers\vdiusbfilter.sys"):
+        print("hello main")
+```
+在两台电脑上都是这个问题，全局安装的python环境能判断文件存在，但是隔离的python环境却判断环境不存在。
+怀疑1：python版本问题，但是不存在的是python3.8.6，而另外两个分别是python3.9.13和python3.7.6。
+怀疑2：运行权限不同，使用net session命令发现都不是管理员权限运行。另外使用同一个dos窗口使用不同的python版本执行一样结果。
+怀疑3：os库的版本不同。
+
+后来测试判断桌面上的文件是否存在时发现都能判断文件存在，然后就怀疑到System32文件夹的特殊性，然后刚好之前解决过这类问题，见D:\Github\GitBook\gitbook\Windows\windows_program.md第9节。
+https://www.coder.work/article/5023771
+最终使用：
+```
+import platform
+
+system32_path = r"C:\Windows\System32"
+bit_number = platform.architecture()[0]
+logger.debug(bit_number)
+if bit_number == '32bit':
+    system32_path = r"C:\Windows\Sysnative"
+```
+
+## 47、获取python环境位数
+推荐：Platform库获取清晰明了，sys.maxsize虽然简洁但还是需要注释一下。
+python -VV查看详细的版本信息。
+demo见：D:\Github\Storage\python\study\others\get_python_env_bit.py
+
+## 48、打印当前函数名称和行号
+两种方法：inspect库和sys库。
+demo见：D:\Github\Storage\python\study\others\get_python_env_bit.py
+
+## 49、exe文件被检测出是病毒文件被杀死
+https://www.zhihu.com/question/361772293/answer/2896672510
+
+思路将其加密压缩成zip包，WinRAR软件在加密的时候有一个加密文件名，具体表现为：
+https://zhuanlan.zhihu.com/p/605941280?utm_id=0
+

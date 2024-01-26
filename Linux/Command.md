@@ -467,3 +467,18 @@ rm !(*.pdf)
 [ ! -d /home/linuxmi/linuxmi.com] && exit
 [ ! -d /home/linuxmi/linuxmi.com] && mkdir /home/linuxmi/linuxmi.com
 ```
+
+# 21、strip命令
+https://zhuanlan.zhihu.com/p/640026481
+在 Linux 系统下开发软件，输出的可执行文件可大可小，运行环境如果是在服务器那么可能资源比较充足，但如果是在嵌入式环境，那么存储资源是寸土必争的。所以会有对可执行文件进行瘦身的需求，比如使用指令 strip。
+
+关于 strip 的操作，有人戏称是“脱衣服”，我这里的描述不会这么赤裸裸，改成“瘦身”。
+
+在 man 手册里，strip 的说明是：
+```
+discard symbols from object files
+```
+意思就是把文件内的符号信息移除，这样文件的大小就降下来了，同时不影响可执行文件被运行。另外，把可执行文件内的部分信息移除有助于防止被逆向工程破解。
+
+看可执行文件的内部符号信息，通过命令 readelf -s 读取。
+

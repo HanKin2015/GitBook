@@ -276,4 +276,29 @@ gcc -g -no-pie l.c
 ```
 结果都跟这些无关，还是无法使用ldd命令，最终发现docker环境，编译出来的文件就可以使用ldd命令查看依赖了，就是编译环境的问题，无语。那个printf函数打印两遍并存在乱码的问题也不存在了。
 
+后面下载了gdb.deb安装包，gdb无法调试出这种问题，乱码属于正常执行，段错误提示是libc库问题。
 
+感觉还是跟gcc版本有关吧：
+```
+docker环境：
+root@d771cec23daf:/# gcc --version
+gcc (Ubuntu 5.4.0-6kord1~16.04.4k2) 5.4.0 20160609
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+编译环境：
+root@hankin-pc:~/mips64# gcc --version
+gcc (Debian 8.3.0-8.lnd.4) 8.3.0
+Copyright © 2018 Free Software Foundation, Inc.
+本程序是自由软件；请参看源代码的版权声明。本软件没有任何担保；
+包括没有适销性和某一专用目的下的适用性担保。
+
+工作环境：
+test@test-PC:/tmp$ gcc --version
+gcc (Uos 8.3.0.7-1+dde) 8.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+只能版本低的编译适应高版本的运行环境。

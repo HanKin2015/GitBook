@@ -1,8 +1,6 @@
 # .so .a .pc .o文件区别
 编译加速参数-j
-
 查看电脑核数：lscpu  cat/proc/cpuinfo
-
 
 ## windows下obj,lib,dll,exe的关系
 lib是和dll对应的。lib是静态链接库的库文件，dll是动态链接库的库文件。 
@@ -23,31 +21,21 @@ Archive档案文件档案室
 中间目标文件打个包，在Windows下这种包叫“库文件”（Library File），也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。
 
 ## linux查看so文件的一些信息命令
-
 查看so文件是32位还是64位
-
+```
 [root@n1 native]# file libhadoop.so.1.0.0
-
 libhadoop.so.1.0.0: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, not stripped
-
-
+```
 
 nm用来列出目标文件的符号清单.
-
 ar命令可以用来创建、修改库，也可以从库中提出单个模块。
-
-
-
 objdump：显示目标文件中的详细信息
 objdump -d <command>，可以查看这些工具究竟如何完成这项任务
-ldd  查看可执行文件链接了哪些  系统动态链接库
+ldd 查看可执行文件链接了哪些系统动态链接库
 -d是ldd的缩写
 
 readelf 显示关于 ELF 目标文件的信息
 readelf -d libffmpeg.so | grep NEEDED
-
-
-
 objdump -V libhadoop.so.1.0.0
 
 ## linux编译第三方库未生成so文件

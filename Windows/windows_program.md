@@ -143,6 +143,7 @@ sysnative目录是由系统保留的虚拟目录，不会在文件系统中创�
 另外判断驱动文件是否存在不需要管理员权限执行即可。
 
 另外如果你的程序是64位的，直接使用C:\Windows\System32即可，不需要借助sysnative跳过重定向机制。
+因此路径应写成：C:\\Windows\\Sysnative\\drivers\\ahcache.sys
 
 ## 10、注册表中的LowerFilters和UpperFilters有什么区别
 在Windows操作系统的注册表中，LowerFilters和UpperFilters是与设备驱动程序加载顺序相关的键值。它们通常位于HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class这个注册表路径下的某个特定硬件类别键中。这些键值用于指定设备类别的驱动程序筛选器，这些筛选器是在设备的主驱动程序之外加载的额外驱动程序，可以提供额外的功能或处理。

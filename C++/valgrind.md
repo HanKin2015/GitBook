@@ -20,7 +20,7 @@ apt install valgrind
 
 ## 2、检测内存泄露
 ```
-valgrind --leak-check=full --show-reachable=yes --trace-children=yes   ./a.out
+valgrind --leak-check=full --show-reachable=yes --trace-children=yes ./a.out
 ```
 其中--leak-check=full指的是完全检查内存泄漏，--show-reachable=yes是显示内存泄漏的地点，--trace-children=yes是跟入子进程。
 
@@ -32,19 +32,18 @@ killall memcheck
 
 ## 3、检查代码覆盖和性能瓶颈
 我们调用valgrind的工具执行程序：
-
+```
 #valgrind --tool=callgrind ./sec_infod
-
+```
 会在当前路径下生成callgrind.out.pid（当前生产的是callgrind.out.19689），如果我们想结束程序，可以：
-
+```
 #killall callgrind
-
+```
 然后我们看一下结果：
-
-#callgrind_annotate --auto=yes callgrind.out.19689   > log
-
+```
+#callgrind_annotate --auto=yes callgrind.out.19689 > log
 #vim log
-
+```
 使用后没有看出什么结论。
 
 ## 4、实战

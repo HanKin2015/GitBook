@@ -98,3 +98,4 @@ https://cloud.tencent.com/developer/article/2055095
 - 而我们通常说的LDAP是指运行这个数据库的服务器。
 - 可以简单理解AD =LDAP服务器＋LDAP应用。
 
+[全程Linux底层拷问](https://mp.weixin.qq.com/s/3P1fL5RbuLq_ARqp4ATIaw)

@@ -19,3 +19,5 @@ struct kfifo {
 ## 3、
 在涉及到模块与模块间数据传输缓存处理、通信程序中，经常使用环形缓冲区（Ring Buffer）作为数据结构来存放通信中发送和接收的数据。
 
+https://mp.weixin.qq.com/s/apD2gAsrgguJT_uPMPSf7A
+demo见：D:\Github\Storage\c++\study\ringbuffer.c

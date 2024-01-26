@@ -84,9 +84,6 @@ oilet和banner有点类似，都可以用字符拼出大字，但是toilet用到
 
 用来无限输出某一条语句，按下Ctrl+C即可终止输出：yes "I love you three thousand!" | lolcat
 
-
-
-
 https://tanyaodan.blog.csdn.net/article/details/89932124
 
 ## 3、其他

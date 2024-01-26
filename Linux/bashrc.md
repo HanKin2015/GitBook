@@ -54,7 +54,6 @@ source xxxx/git-prompt.sh
 ```
 
 完全可以使用__git_ps1自带函数代替git_branch函数
-
 ```/root/.bashrc
 export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
 ```
@@ -68,7 +67,7 @@ export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
 
 ~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者～。
 
-~/.bash_logout:当每次退出系统(退出bashshell)时,执行该文件. 
+~/.bash_logout:当每次退出系统(退出bashshell)时,执行该文件.
 
 可以明白的是：针对于用户的配置，应该将配置信息写入~/.bashrc文件。(只对当前用户有效，重新打开的如果不是当前用户的terminal当然没有效果！所以lz一般设置两次，一个root用户，一个当前普通用户)
 
@@ -104,12 +103,9 @@ alias setjdk7='setjdk /usr/lib/jvm/java-7-openjdk-amd64'
 alias setjdk8='setjdk /usr/lib/jvm/java-8-openjdk-amd64'
 alias setndk10='test -d /android/android-ndk-r10e && setndk /android/android-ndk-r10e || setndk /ndk/r10e'
 alias tree='tree -A'
-
-
-alias ll='ls -alF'
+alias ll='ls -alF --color=auto'
 alias la='ls -A'
 alias l='ls -CF'
- 
 alias vi='vim'
 alias ssu='sudo su'
 #alias cp='cp -i'
@@ -329,15 +325,12 @@ Zsh 具有以下主要功能
 更详细配置见：https://zhuanlan.zhihu.com/p/514153374
 
 ## 11、修改linux命令行提示符路径显示
-
 修改环境变量PS1（命令行提示符）
-
 vi编辑~/.bashrc文件（个人的配置文件）
-
 root权限 vi编辑/etc/profile文件在最后加上一行语句
-
+```
 > export PS1=’[\u@\h $PWD]\\$ ‘
-
+```
 修改完成后，执行: source /etc/profile 使配置生效即可。 
 
 - 最后的地方需要留有一个空格，使用符号和命令中间有隔开
@@ -345,5 +338,6 @@ root权限 vi编辑/etc/profile文件在最后加上一行语句
 - $PWD和\\W区别：前者显示完整路径，后者只显示当前的路径，及文件夹名。注意使用\\w可以显示当前完整的工作路径
 - 其中\u显示当前用户账号，\h显示当前主机名，\w显示当前完整工作路径（**\W显示当前工作路径**），\\$显示对应的符号。
 
-
+## 12、欢迎界面
+D:\Github\GitBook\gitbook\Linux\motd.md
 

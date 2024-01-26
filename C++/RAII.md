@@ -28,7 +28,8 @@ ON_SCOPE_EXIT是一个宏，它定义了一个匿名的类，并在该类的析�
 作用域退出和资源获取即初始化的区别在于，作用域退出是指变量和函数的作用域被销毁的过程，而资源获取即初始化是指为变量或对象分配内存空间并进行初始化的过程。作用域退出是一个语言特性，而资源获取即初始化是一个编程概念。
 
 ## 4、实战
-代码见：
+代码见：D:\Github\Storage\c++\study\RAII\scope_guard.cpp
+D:\Github\Storage\c++\study\RAII\README.md
 
 
 

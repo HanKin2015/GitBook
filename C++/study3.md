@@ -64,15 +64,34 @@ C++ 14
 C++ 17
 C++ 20
 
+```
+[root@ubuntu0006:~/cmake] #g++ a.cpp -std=c++17
+[root@ubuntu0006:~/cmake] #g++ a.cpp -std=c++19
+g++: error: unrecognized command line option ‘-std=c++19’
+[root@ubuntu0006:~/cmake] #g++ a.cpp -std=c++20
+g++: error: unrecognized command line option ‘-std=c++20’
+[root@ubuntu0006:~/cmake] #g++ --version
+g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+虽然编译的时候能识别-std=c++17，但是由于编译器版本过旧，实际上是不支持的。编译器版本过旧：确保你的编译器版本足够新，以支持 C++17 中的结构化绑定。例如，GCC 需要至少是 7.1 版本，Clang 需要至少是 4.0 版本。
+
 ## 6、c++11新特性
 https://zhuanlan.zhihu.com/p/650986900
 https://m.baidu.com/sf?pd=topone_multi&top=%7B%22sfhs%22%3A1%7D&atn=index&word=c%2B%2B11%E6%96%B0%E7%89%B9%E6%80%A7&lid=16524987177891995353&key=ODjAz5JIKOstxE1s4UBHiW1Rd8Dz4F%2F8%2FVCvqUmSw10p7xL%2FVg1lVWSpvCcpjntjo0LSAunaVLhKqIifyl9fhmAxtz94ezwv9I7NuBdI%2Fos%3D&type=bpage
 
+c++11关于继承新增了两个关键字，final用于修饰一个类，表示禁止该类进一步派生和虚函数的进一步重载，override用于修饰派生类中的成员函数，标明该函数重写了基类函数，如果一个函数声明了override但父类却没有这个虚函数，编译报错，使用override关键字可以避免开发者在重写基类函数时无意产生的错误。
 
-## 6、c++14新特性
+## 7、c++14新特性
+c++14并没有太大的改动，就连官方说明中也指出，c++14相对于c++11来说是一个比较小的改动，但是在很大程度上完善了c++11，所以可以说c++14就是在c++11标准上的查漏补缺。
+```
+C++14 is a minor but important upgrade over C++11, and largely “completes C++11.”
+```
 
-## 6、c++17新特性
+## 8、c++17新特性
 
-## 6、c++20新特性
+## 9、c++20新特性
 
 

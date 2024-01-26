@@ -99,6 +99,8 @@ python -m unittest
 
 可以通过加载-m参数来指定当前文件夹下的python环境。
 
+特别注意：-m参数是来执行命令的，如python -m pip install xxx，而不是来执行py脚本的，这个是错误的python -m xxx.py。
+
 ### Error while finding module specification for 'solve_mariaDB_data_question.py' (ModuleNotFoundError: _
 _path__ attribute not found on 'solve_mariaDB_data_question' while trying to find 'solve_mariaDB_data_question.py')
 这是由于加了-m参数导致，或者在代码中增加：

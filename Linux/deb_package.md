@@ -483,6 +483,9 @@ control文件中Architecture: all表示这个包适用于所有架构。
 注意安装的时候通过dpkg -r xxx.deb，卸载的时候而是dpkg -r Package（control文件中的包名）。
 注意control文件的每个字段首字母都是大写，需要严格要求，否则会存在系统不认识，在银河麒麟中包名没有识别出来就是由于这个原因。
 
+安装包生成的文件无法被普通用户删除，会报错：是否删除有写保护的普通文件？解铃还须系铃人！
+demo见：D:\Github\Storage\linux\deb\hello_deb
+
 ## 11、dpkg --print-architecture和arch命令
 dpkg --print-architecture：这个命令是Debian包管理系统的一部分，它返回的是dpkg和apt用来管理和安装软件包的架构名称。这个命令的结果可能会受到多架构设置的影响，如果你的系统支持安装多个架构的软件包，那么dpkg --print-architecture返回的将是主架构的名称。
 

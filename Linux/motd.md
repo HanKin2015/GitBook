@@ -1,14 +1,38 @@
 # ssh欢迎界面之motd
 
-编辑这个文件 /etc/motd即message of today（布告栏信息）每次用户登录时，/etc/motd文件的内容会显示在用户的终端。
+## 1、简介
+motd是message of the day的缩写，意思是“当天的提示信息”，通常在用户成功登录到Linux后出现，该信息可以从/etc/motd文本文件中找到。
 
+提示：/etc/motd文件有时不一定是个常规文本文件，也可能是一个软链接到某个特定的文件，如/var/run/motd。
 
+一般来说，这个文件是一个静态文本文件，只在某个Linux发行版本完成安装或升级后才会更新。
+
+提示：UNIX/Linux系统管理员也通常会把一些重要的信息写到这个文件里面，以方便其他人或自己下次成功登录时需要注意什么和做什么，非常方便。
+
+通常一个标准的motd信息有以下内容：
+- 欢迎信息，一般包括Linux发行版本名称，内核版本、操作系统位数
+- 操作系统当前信息，如操作系统负载，进程数量，文件系统使用情况，当前用户登录数，内存（含swap）使用情况，IP地址
+- 文档和帮助信息
+- 可更新的软件包和可升级的安全补丁
+
+由此可见，motd展示出来的一定是一个当前的信息，是一组固定时间下特定参数所对应的数值，而不是一成不变的信息，因此静态的文本文件不足以满足以上内容。
+
+想要做到每次登录都要显示出当前的motd，则需要一种机制来实现，pam_motd就是实现这个功能的模块。可参考motd(5), pam.conf(5), pam.d(5), pam(7), update-motd(5)
+
+在Ubuntu中有update-motd来帮助系统管理员或用户实现这个功能。可执行的脚本位于/etc/update-motd.d/*下，在每次登录时以root身份由pam_motd调用，脚本运行的次序由run-parts（run scripts or programs in a directory，在一个目录里运行脚本或程序）的--lsbsysinit选项决定。pam_motd也支持不动态更新，只需要在其选项中添加noupdate即可。
+
+编辑/etc/pam.d/login文件，
+启用动态更新motd模块：session  optional  pam_motd.so  motd=/etc/motd
+关闭动态更新motd模块：session  optional  pam_motd.so  noupdate
+
+## 2、实战
+编辑这个文件 /etc/motd即message of the day（布告栏信息）每次用户登录时，/etc/motd文件的内容会显示在用户的终端。
 /etc/issue 文件设置，在tty1-tty6没有登录的情况下显示登录前提示信息。
 
 实战发现：可能有其他文件在作怪。
 如：/etc/update-motd.d/目录下配置。
 
-## 模板
+## 3、模板
 ```
 /**
  *                    .::::.
