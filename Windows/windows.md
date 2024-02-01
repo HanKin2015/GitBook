@@ -422,4 +422,20 @@ Windows系统中的C:\Windows\Temp文件夹也是用于存储临时文件的目�
 ### 3-4、dos创建直接进行复制粘贴
 设置：属性=》选项=》勾选快速编辑模式即可，这样可以直接标记，然后右键就可以复制粘贴了。
 
+## 4、激活Windows
+脚本：D:\Github\Storage\batch\windows10激活工具.bat
+```
+以管理员身份打开CMD然后依次运行以下3条命令：
+slmgr /ipk #Windows批量授权客户端密钥#   \\安装操作系统版本对应的批量许可密钥
+slmgr /skms #KMS服务器地址#              \\指定KMS服务器的地址
+slmgr /ato                               \\激活Windows
 
+@echo 
+slmgr /ipk ABCDE-ABCDE-ABCDE-ABCDE-ABCDE
+
+@echo
+slmgr /skms 2.2.74.170
+
+@echo 
+slmgr /ato
+```

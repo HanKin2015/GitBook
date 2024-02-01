@@ -100,14 +100,11 @@ print ("Hello, Python!") # 第二个注释
 ### 2-4、那我就直接升级到高版本的pyinstaller吧
 安装macholib
 Collecting altgraph>=0.15 (from macholib==1.16)
-
 安装altgraph
-
 安装pefile
-
 安装future
-
 还是不行，都已经是配置3.6了。
+
 ### 2-5、迷茫
 现在陷入迷茫状态。
 
@@ -119,7 +116,6 @@ export PYTHONPATH=/usr/local/lib/python3.5/
 
 unset PYTHONHOME
 unset PYTHONPATH
-
 
 [root@ubuntu0006:/media/hankin/vdb/study/upan_auto_copy] #pyinstaller
 Traceback (most recent call last):
@@ -611,3 +607,15 @@ pyinstaller.exe --version-file=doc/file_version_info.txt -i img/office_assistant
 ```
 binaries=[('D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libzbar-64.dll', '.'), ('D:\\Github\\Storage\\qt\\python\\office_assistant\\src\\libiconv.dll', '.')],
 ```
+
+## 25、Pyinstaller打包后运行，程序一闪而过，正常运行退出了
+```
+import os
+
+#原始代码
+...
+os.system("pause")
+```
+
+
+

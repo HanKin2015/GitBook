@@ -17,6 +17,11 @@ ubuntu默认存在：/etc/ssh/ssh_config
 UOS:(openssh-client)
 /etc/ssh/ssh_config
 
+sshd_config 和 ssh_config 是两个不同的配置文件，用于配置 OpenSSH 客户端和服务器的行为。
+- sshd_config 文件是 OpenSSH 服务器的配置文件，用于配置 SSH 服务器的行为。这个文件通常位于 /etc/ssh/sshd_config。在这个文件中，你可以配置诸如端口号、认证方式、访问限制等与 SSH 服务器相关的设置。
+- ssh_config 文件是 OpenSSH 客户端的配置文件，用于配置 SSH 客户端的行为。这个文件通常位于 ~/.ssh/config（针对单个用户）或 /etc/ssh/ssh_config（全局配置）。在这个文件中，你可以配置诸如主机别名、身份验证方式、连接参数等与 SSH 客户端相关的设置。
+因此，sshd_config 用于配置 SSH 服务器，而 ssh_config 用于配置 SSH 客户端。这两个文件分别控制着服务器和客户端的行为，允许用户根据自己的需求进行定制化配置。
+
 ## 3、不同Linux系统网络重启
 ```
 if [ "${ID_LIKE}" == "debian" ]; then
@@ -132,7 +137,7 @@ useDNS no
 GSSAPIAuthentication no
 重启sshd服务即可
 
-## 9、ssh/scp指定端口用法
+## 9、ssh/scp指定端口用法（注意p的大小写）
 1、scp指定端口传输，端口需放在scp后面
 scp -P 34543 root@1.2.3.4:/home/admin/xx ./
 
@@ -562,3 +567,13 @@ ping命令通常用于测试主机之间的连通性，它并不涉及端口。p
 如果您需要测试目标主机的特定端口是否可达，可以使用telnet命令或者其他端口扫描工具，而不是ping命令。
 
 因此常常会有能ping通，但是ssh连接不上，很大概率是端口被防火墙限制了。
+
+## 18、安全加固指南：如何更改 SSH 服务器的默认端口号
+```
+sudo vim /etc/ssh/sshd_config
+其中有个Port参数，后面改成对应的端口即可
+sudo systemctl restart sshd.service
+```
+
+## 19、查看当前ssh服务器的端口号
+

@@ -7,11 +7,9 @@ ioctl是设备驱动程序中对设备的I/O通道进行管理的函数。所谓
 其中fd是用户程序打开设备时使用open函数返回的文件标示符，cmd是用户程序对设备的控制命令，至于后面的省略号，那是一些补充参数，一般最多一个，这个参数的有无和cmd的意义相关。
 ioctl函数是文件结构中的一个属性分量，就是说如果你的驱动程序提供了对ioctl的支持，用户就可以在用户程序中使用ioctl函数来控制设备的I/O通道。
 
-
 用户空间的程序通常发出一个给内核的请求，该请求称为系统调用，它的实现代码在内核层。
 
 一个Ioctl接口是一个独立的系统调用，通过它用户空间可以跟设备驱动沟通。对设备驱动的请求是一个以设备和请求号码为参数的Ioctl调用，如此内核就允许用户空间访问设备驱动进而访问设备而不需要了解具体的设备细节，同时也不需要一大堆针对不同设备的系统调用。
-
 
 在驱动程序中实现的ioctl函数体内，实际上是有一个switch{case}结构，每一个case对应一个命令码，做出一些相应的操作。怎么实现这些操作，这是每一个程序员自己的事情。
 
@@ -48,5 +46,5 @@ spicec/libcamera/src/include/kernel-5.3/include/uapi/linux/uvcvideo.h
 https://learn.microsoft.com/en-us/previous-versions/windows/embedded/aa914767(v=winembedded.60)?redirectedfrom=MSDN
 ctlcode.exe 
 
-
+在线解析工具：https://www.osronline.com/article.cfm%5Earticle=229.htm
 
