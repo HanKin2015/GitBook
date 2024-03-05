@@ -1,7 +1,5 @@
 # linux环境下运行佳能扫描仪
-
 插上扫描仪后，使用lsusb -t可以发现扫描仪驱动为空，正常来说有usbfs驱动。
-
 去官网下载对应驱动，发现只有Windows版本。
 
 ## 1、官网有打印机驱动
@@ -22,9 +20,16 @@ http://www.hyrh.com.cn/download-center/qudong.html
 https://gitlab.com/sane-project/backends/-/releases
 you may need a package called 'libusb-dev', 'libusb-devel' pr similar.
 
+## 5、方正高速文档扫描仪
+s8660，居然在官网没有找到驱动，还是只能使用光盘中的驱动才能进行使用。
+http://www.foundertech.com/search.html?t=0&k=ks&x=0&y=0
 
+使用驱动精灵：http://www.drivergenius.com/search-printer/result/?keyword=%E4%BD%B3%E8%83%BD&source=2&version=1&pid=5001&trynum=1611&uuid=8524d41e16af1c4d822e90cb42b2da6c
+好像只能搜索到打印机，并且相关机器也少之又少。
 
+使用360驱动大师：更全，但是只能在软件上面进行搜索，并且能直接下载下来。
 
+最终想尝试抓包，看是否是由于分包导致了问题，通过手动合包。
 
 
 

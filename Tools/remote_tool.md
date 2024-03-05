@@ -22,6 +22,8 @@ so
 ## 4、VNC
 VNC(Virtual Network Console)是虚拟网络控制台的缩写。它 是一款优秀的远程控制工具软件，由著名的 AT&T 的欧洲研究实验室开发的。VNC 是在基于 UNIX 和 Linux 操作系统的免费的开源软件，远程控制能力强大，高效实用，其性能可以和 Windows 和 MAC 中的任何远程控制软件媲美。 在 Linux 中，VNC 包括以下四个命令：vncserver，vncviewer，vncpasswd，和 vncconnect。大多数情况下用户只需要其中的两个命令：vncserver 和 vncviewer。
 
+是一种C/S架构的协议，所以需要客户端和服务端同时执行，在服务端监听5800,5801，5901等多个可能的端口，而客户端只需要想sever端发起连接请求，并输入账号密码（不是linux系统内用户的账号密码，而是VNC自己的密码）即可访问了，但是VNC在网上传输的时候是没有加密的，所以我们的账号密码在网上传输的时候是很容易被“有心之人”捕获到的，这时候我们可以结合sshd来实现加密传送，另外VNC传输的是桌面应用，大家都知道，只要是传输需要绘图的东西计算量都是很大的（尤其是用SSHD加密之后），所以VNC会相当的占用带宽和系统资源，那么我们为什么还要使用它呢?因为有时候我们配置一些软件（比如oracle等）必须使用图形界面同时必须远程连接的时候我们就不得不用VNC了。
+
 ### 4-1、银河麒麟系统中安装x11vnc服务
 步骤1 ：更新系统
 sudo apt-get update
@@ -33,7 +35,7 @@ sudo apt-get install x11vnc -y
 sudo x11vnc -storepasswd /etc/x11vnc.pwd
 根据提示，输入并确认VNC连接的密码，密码保存在/etc/x11vnc.pwd文件中。
 
-步骤4 ：编写服务脚本
+步骤4 ：编写服务脚本（设置服务开机自启动）
 sudo vim /lib/systemd/system/x11vnc.service
 x11vnc.service文件内容如下：
 ```
@@ -109,3 +111,6 @@ https://blog.csdn.net/sinat_24424445/article/details/106757568
 
 ## 5、Radmin 
 Radmin (Remote Administrator)是一款屡获殊荣的远程控制软件，它将远程控制、外包服务组件、以及网络监控结合到一个系统里，提供最快速、强健而安全的工具包。
+
+## 6、网络人和pcanywhere
+http://netman123.cn/cw/lp_11.html

@@ -195,3 +195,7 @@ https://mp.weixin.qq.com/s/CVWudgKH3JP8hVXbeYxDFA
 ## 15、Coodesker
 这款工具能很好的帮助大家整理桌面，不用消耗多少精力就能得到一个分类清晰、排布整齐的桌面啦！
 https://www.coodesker.com/
+
+Glary Utilities
+CCleaner
+Wise Disk Cleaner

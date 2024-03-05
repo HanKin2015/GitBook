@@ -30,6 +30,11 @@ sqlite>.mode column 以列显示数据表，默认是list，显示不规整；�
 sqlite>.timer on
 
 sqlite>.schema sqlite_master
+
+打开数据库：.open xxx.db | sqlite3 xxx.db
+查看数据表：.tables
+数据表结构：.schema xxx.table
+数据表内容：select * from xxx.table;
 ```
 
 ## 5、语法
@@ -46,8 +51,8 @@ https://www.runoob.com/sqlite/sqlite-data-types.html
 
 ## 7、创建数据库
 ```
-sqlite3 dbName.pb
-.open dbName.pb
+sqlite3 dbName.db
+.open dbName.db
 
 发现sqlite3是可以简写命令的，如：
 .database
@@ -90,7 +95,6 @@ CREATE TABLE COMPANY(
    ADDRESS        CHAR(50),
    SALARY         REAL
 );
-
 
 .tables
 

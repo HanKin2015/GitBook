@@ -85,7 +85,7 @@ https://mp.weixin.qq.com/s/P9m0REcDqL75SLQVAXPH7g
 技术派：https://paicoding.com/
 
 ## Flutter
-Flutter是Google开源的构建用户界面（UI）工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。 [5] Flutter 开源、免费，拥有宽松的开源协议，适合商业项目。
+Flutter是Google开源的构建用户界面（UI）工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。Flutter 开源、免费，拥有宽松的开源协议，适合商业项目。
 
 ## 超分辨率
 https://zhuanlan.zhihu.com/p/558813267
@@ -99,3 +99,13 @@ https://cloud.tencent.com/developer/article/2055095
 - 可以简单理解AD =LDAP服务器＋LDAP应用。
 
 [全程Linux底层拷问](https://mp.weixin.qq.com/s/3P1fL5RbuLq_ARqp4ATIaw)
+
+## 1BRC挑战赛
+https://hotforknowledge.com/2024/01/13/1brc-in-dotnet-among-fastest-on-linux-my-optimization-journey/
+https://github.com/lehuyduc/1brc-simd/tree/main
+
+https://mp.weixin.qq.com/s/oWmhQDHv8T0CFOlcsmfnFQ
+
+## 马赛克恢复原图
+https://github.com/spipm/Depix
+

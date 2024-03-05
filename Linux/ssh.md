@@ -576,4 +576,9 @@ sudo systemctl restart sshd.service
 ```
 
 ## 19、查看当前ssh服务器的端口号
+```
+cat /etc/ssh/sshd_config | grep Port
+sudo netstat -anp | grep sshd | grep 0.0.0.0
+```
+如果不以管理员权限查看，可能会隐藏sshd进程名，但是能查到记录，做了一下隐秘措施。
 

@@ -288,7 +288,13 @@ bulk流只对in包有效，烧录是往设备里面写数据，因此是out包�
 修改端口的maxsize会有枚举问题，并且实际上跟这个无关，因为设备又不是根据这个进行发包的。
 可以修改设备描述符中maxsize值，可以提供映射速度。
 
+## 10、pipeline变量
+翻译成管道或者流水线。
 
+AI回答：在QEMU中，USBEndpoint结构体中的pipeline变量通常用于控制USB数据包的传输流程。当pipeline变量为false时，表示数据包的传输是单向的，即只能进行数据的接收或发送。而当pipeline变量为true时，表示数据包的传输是双向的，即可以进行数据的接收和发送。这个变量的取值影响着USB数据包在端点中的传输方式，根据其取值不同，USB设备模拟会采取相应的传输逻辑来处理数据包的接收和发送。
 
+不是很准确，通过代码来看pipeline默认为true时，bulk数据包会进行分包，把一个大包分成若干个小包，然后会进行分包和组包过程。
+在combined-packet.c文件中usb_combined_input_packet_complete函数。
 
+实践发现，设置pipeline为false后，整体数据包传输速度变慢，数据包大小也变小了。
 
