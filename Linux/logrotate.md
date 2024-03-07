@@ -11,13 +11,12 @@ logrotate [-?dfv][-s <状态文件>][--usage][配置文件]
 
 ## 3、参数说明
 
--?或--help 　在线帮助。
--d或--debug 　详细显示指令执行过程，便于排错或了解程序执行的情况。
--f或--force 　强行启动记录文件维护操作，纵使logrotate指令认为没有需要亦然。
--s<状态文件>或--state=<状态文件> 　使用指定的状态文件。
--v或--version 　显示指令执行过程。
--usage 　显示指令基本用法。
-
+-?或--help 在线帮助。
+-d或--debug 详细显示指令执行过程，便于排错或了解程序执行的情况。
+-f或--force 强行启动记录文件维护操作，纵使logrotate指令认为没有需要亦然。
+-s<状态文件>或--state=<状态文件> 使用指定的状态文件。
+-v或--version 显示指令执行过程。
+-usage 显示指令基本用法。
 
 ## 4、实战
 logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修改。日志文件的轮循设置在独立的配置文件中，它（们）放在/etc/logrotate.d/目录下。
@@ -26,8 +25,6 @@ logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修�
 创建一个日志文件，然后在其中填入一个10MB的随机比特流数据文件：
 touch /home/root/file.json
 head -c 10M < /dev/urandom > /home/root/file.json
-
-
 
 [root@xubuntu ~]# vim /etc/logrotate.d/usbrecord
 /var/log/file.json {
@@ -39,18 +36,17 @@ head -c 10M < /dev/urandom > /home/root/file.json
     notifempty
     create 644 root root
     postrotate
-        /usr/bin/killall -HUP rsyslogd
+    /usr/bin/killall -HUP rsyslogd
     endscript
 }
 ```
 
 即使轮循条件没有满足，我们也可以通过使用‘-f’选项来强制logrotate轮循日志文件，‘-v’参数提供了详细的输出。
 
-测试配置是否正确：lograte -d /etc/logrotate.d/usbrecord
+测试配置是否正确：logrotate -d /etc/logrotate.d/usbrecord
 
-强制运行配置文件：lograte -vf /etc/logrotate.d/usbrecord  记住不要添加-d参数
+强制运行配置文件：logrotate -vf /etc/logrotate.d/usbrecord  记住不要添加-d参数
 In debug mode, no changes will be made to the logs or to the logrotate state file.
-
 
 ## logrotate配置参数
 | **配置参数**                   | **功能说明**                                                 |
@@ -84,10 +80,6 @@ In debug mode, no changes will be made to the logs or to the logrotate state fil
 | dateext                        | 使用当期日期作为命名格式                                     |
 | dateformat .%s                 | 配合dateext使用，紧跟在下一行出现，定义文件切割后的文件名，必须配合dateext使用，只支持 %Y %m %d %s 这四个参数 |
 | size(或minsize) log-size       | 当日志文件到达指定的大小时才转储，log-size能指定bytes(缺省)及KB (sizek)或MB(sizem). |
-
-
-
-
 
 ## 命令执行过程
 ```
@@ -125,8 +117,6 @@ dateext：默认以1累积命名，加了dateext后1.json.1.gz变成1.json-20210
 compress：是否进行gzip压缩，一般配置
 delaycompress：缺少gzip这一步，下一次生效，一般不配置
 
-
-
 ## 5、crontab命令
 crontab -e可以直接进行编辑，和系统的不冲突。
 生成的配置文件路径：/var/spool/cron/crontabs/root
@@ -138,11 +128,8 @@ logrotate是基于crond服务来运行的，其crond服务的脚本是/etc/cron.
 
 所以logrotate执行脚本的命令其实是/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf。
 
-
 https://blog.csdn.net/qq_36470898/article/details/105978773
 https://www.runoob.com/w3cnote/linux-crontab-tasks.html
-
-
 
 rsyslog服务和logrotate服务
 ======================================================================
@@ -150,9 +137,7 @@ rsyslog 是一个 syslogd 的多线程增强版。
 现在Fedora和Ubuntu, rhel6默认的日志系统都是rsyslog了
 rsyslog负责写入日志, logrotate负责备份和删除旧日志, 以及更新日志文件
 
-
 ## 6、如果logrotate 1并且是datetext能不能成功？
-
 如果不限制格式(dateformat)，默认是按照日期命名，如20210325。这样压缩会报错文件已存在。
 如果加了格式限制，如dateformat -%Y-%m-%d-%s，按秒命名，文件名不会出现重复，就不会有文件存在错误。
 delaycompress延迟压缩，当出现需要压缩的时候，只会把原先的文件重新命名，等到下一次触发压缩的时候再进行压缩。对于只转存一次的脚本来说不需要，也可以需要。
@@ -176,10 +161,64 @@ su这个还是很重要的，不然可能会出现报错：error: skipping "/var
 }
 ```
 
+## 7、解决客户环境日志文件未转存问题
+```/etc/logrotate.d/rsyslog
+/var/log/syslog
+{
+    rotate 5
+    size 7M
+    copytruncate
+    missingok
+    notifempty
+    compress
+    su root
+}
+```
+- rotate 5: 表示保留5个旧的日志文件备份，当日志文件达到指定条件时进行轮转。
+- size 7M: 当日志文件大小达到7兆字节时触发轮转。
+- copytruncate: 在轮转时先复制日志文件内容到新文件，然后清空原文件，这样可以避免正在写入的进程出现问题。
+- missingok: 如果日志文件不存在，不报错，继续执行后续操作。
+- notifempty: 如果日志文件为空，不进行轮转。
+- compress: 对轮转后的日志文件进行压缩。
+- su root: 在执行轮转时使用root权限。
+这里需要说明：copytruncate参数导致如果剩余空间不足会导致轮转失败，如：
+```
+执行一次轮转：logrotate -vf /etc/logrotate.d/rsyslog
+
+copying /var/log/cec.log to /var/log/cec.log.1
+error: error writing to /var/log/cec.log.1: No space left on device
+error: error copying /var/log/cec.log to /var/log/cec.log.1: No space left on device
+```
+
+最终原因是，删除su root即可，可能由于安全限制或其他配置问题，这种切换可能会被拒绝：
+```
+rotating pattern: /var/log/ax_log
+ forced from command line (3 rotations)
+empty log files are not rotated, old logs are removed
+switching euid to 0 and egid to -1
+error: error switching euid to 0 and egid to -1: Invalid argument
+```
+- rotating pattern: /var/log/ax_log: 指定了要轮转的日志文件路径。
+- forced from command line (3 rotations): 表示通过命令行强制执行了3次轮转。
+- empty log files are not rotated, old logs are removed: 空的日志文件不会被轮转，而是直接删除旧的日志文件。
+- switching euid to 0 and egid to -1: 尝试切换有效用户ID（euid）为0（即root用户）和有效组ID（egid）为-1。
+- error: error switching euid to 0 and egid to -1: Invalid argument: 在切换用户ID和组ID时出现了错误，错误信息为"Invalid argument"，表示提供的参数无效。
 
 
+查看配置文件/etc/logrotate.conf:
+```
+# see "man logrotate" for details
+# rotate log files weekly
+hourly
 
+# keep 4 weeks worth of backlogs
+rotate 4
 
+# create new (empty) log files after rotating old ones
+create
 
+# uncomment this if you want your log files compressed
+#compress
+```
 
 

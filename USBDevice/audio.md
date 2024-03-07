@@ -19,7 +19,11 @@
 一开始以为是耳机坏了，然后在另外一台电脑发现能正常使用。
 后面发现在设备管理器中音频设备中缺少麦克风和扬声器的子设备，在另外一台电脑就有，怀疑是电脑的声卡驱动问题，然后就下载了一个360驱动大师，在安装稳定模式的驱动始终安装不上，然后安装了最新模式的驱动安装上了，然后耳机就正常了。
 
+## 4、PulseAudio
+PulseAudio是一个声音服务器，一个后台进程从一个或多个音源（进程或输入设备）接受声音输入 然后重定向声音到一个或多个槽（声卡，远程网络PulseAudio服务，或其他进程）。PulseAudio被几个主要Linux发行版使用，例如Fedora、Ubuntu、Mandriva、Linux Mint、openSUSE和OpenWRT。GNOME项目中还有越来越多的对Pulseaudio的支持。
 
-
-
-
+pactl info
+systemctl --user enable pulseaudio
+systemctl --user restart pulseaudio
+systemctl --user restart pulseaudio.socket
+aplay -Ddefault -f cd AudioTest.wav

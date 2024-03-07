@@ -96,6 +96,67 @@ dd if=/dev/zero of=1G.txt bs=1M seek=1000 count=0
 ```
 这里用了一个新的命令seek，表示略过1000个Block不写（这里Block按照bs的定义是1M），count=0表示写入0个Block。用ls(查看文件大小)命令看新生成的文件，大小可以看出是1000M。但是再用du（查看文件占用空间）一看，实际占用硬盘大小只有0M。
 
+## 7、对比命令两种写法的创建速度
+```
+[root@ubuntu0006:/media/vdb/study] #dd if=/dev/zero of=4000MBfile bs=1M count=4000
+记录了4000+0 的读入
+记录了4000+0 的写出
+4194304000 bytes (4.2 GB, 3.9 GiB) copied, 32.2885 s, 130 MB/s
+[root@ubuntu0006:/media/vdb/study] #dd if=/dev/zero of=4000MBfile bs=4000M count=1
+记录了0+1 的读入
+记录了0+1 的写出
+2147479552 bytes (2.1 GB, 2.0 GiB) copied, 19.9645 s, 108 MB/s
+[root@ubuntu0006:/media/vdb/study] #dd if=/dev/zero of=4000MBfile bs=2000M count=2
+记录了2+0 的读入
+记录了2+0 的写出
+4194304000 bytes (4.2 GB, 3.9 GiB) copied, 27.9118 s, 150 MB/s
+[root@ubuntu0006:/media/vdb/study] #getconf ARG_MAX
+2097152
+```
 
+2097152 * 1024 - 2147479552 = 4096
+另外由于系统块大小的限制，因此无法一次性直接创建一个超过最大块的文件，需要count参数多次读写。
+两者速度相差不太大，本来每次创建的时间波动还是挺大的，如：
+```
+[root@ubuntu0006:/media/vdb/study] #dd if=/dev/zero of=4000MBfile bs=4000M count=1
+记录了0+1 的读入
+记录了0+1 的写出
+2147479552 bytes (2.1 GB, 2.0 GiB) copied, 13.5828 s, 158 MB/s
+```
 
+## 8、另外两个创建文件的命令
+```
+fallocate -l 4000M 4000MBfile
+truncate -s 4000M 4000MBfile
+```
 
+## 9、探究dd命令创建的文件内容
+```
+root@debian-hankin:wwg# dd if=/dev/zero of=4000MBfile bs=1M count=4
+4+0 records in
+4+0 records out
+4194304 bytes (4.2 MB) copied, 0.00422733 s, 992 MB/s
+root@debian-hankin:wwg# wc -l 4000MBfile
+0 4000MBfile
+root@debian-hankin:wwg# ll -h
+total 4.1M
+-rw-r--r--  1 root root 4.0M Mar  7 10:05 4000MBfile
+drwxr-xr-x 27 root root 4.0K Mar  5 14:43 debians
+root@debian-hankin:wwg# cat 4000MBfile
+root@debian-hankin:wwg# cat 4000MBfile | wc
+      0       0 4194304
+root@debian-hankin:wwg# tail -n 100 4000MBfile >> hj
+root@debian-hankin:wwg# ll -h
+total 8.1M
+-rw-r--r--  1 root root 4.0M Mar  7 10:05 4000MBfile
+drwxr-xr-x 27 root root 4.0K Mar  5 14:43 debians
+-rw-r--r--  1 root root 4.0M Mar  7 10:07 hj
+root@debian-hankin:wwg# tail 4000MBfile
+root@debian-hankin:wwg# cat 4000MBfile >> jh
+root@debian-hankin:wwg# ll -h
+total 13M
+-rw-r--r--  1 root root 4.0M Mar  7 10:05 4000MBfile
+drwxr-xr-x 27 root root 4.0K Mar  5 14:43 debians
+-rw-r--r--  1 root root 4.0M Mar  7 10:07 hj
+-rw-r--r--  1 root root 4.0M Mar  7 10:07 jh
+```

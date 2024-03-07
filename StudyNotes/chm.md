@@ -10,9 +10,16 @@ CHM 文件因为使用方便，形式多样，也被采用作为电子书的格�
 
 https://jingyan.baidu.com/article/bad08e1ed644d309c85121c1.html
 
+使用Mybase软件就可以直接导出chm文件。
 
+## 3、Windows10打开chm文件无内容只有目录
+但是换了一台电脑能正常显示。
 
-
+解决方案，解除 Internet Explorer 安全限制：
+将 CHM 文件复制到本地磁盘上。
+右键点击 CHM 文件，选择“属性”。
+在“常规”选项卡中，如果有“解除锁定”复选框，勾选它以解除文件的安全限制。
+双击打开 CHM 文件，如果出现提示，选择“允许”以解除 Internet Explorer 的安全限制。
 
 
 

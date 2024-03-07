@@ -1,6 +1,6 @@
 # Linux中常见的命令大全
 
-# 1、alias
+## 1、alias
 https://blog.csdn.net/chuangjinweilai/article/details/51850803
 alias soff='sleep 5 && xset dpms force off'
 
@@ -11,16 +11,16 @@ alias soff='sleep 5 && xset dpms force off'
 
 推荐：df -h
 
-# 3、free
+## 3、free
 可以显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer。
 个人理解：cpu或者内存条内存
 
 推荐： free -h
 
-# 4、tracepath
+## 4、tracepath
 tracepath指令可以追踪数据到达目标主机的路由信息，同时还能够发现MTU值。它跟踪路径到目的地，沿着这条路径发现MTU。它使用UDP端口或一些随机端口。它类似于Traceroute，只是不需要超级用户特权，并且没有花哨的选项。tracepath 6很好地替代了tracerout 6和Linux错误队列应用程序的典型示例。tracepath的情况更糟，因为商用IP路由器在ICMP错误消息中没有返回足够的信息。
 
-# 5、mount使用u盘
+## 5、mount使用u盘
 
 - fdisk -l    查看存储信息（硬盘、u盘）
 - mount /dev/sdb /mnt（搞了一半天报错）
@@ -44,7 +44,7 @@ ext2格式：(ext3、ext4)
 mount -t ext2 /dev/sda1 /mnt/usb
 ```
 
-## 运行挂载命令如 mount /dev/sdb mnt出现错误：
+### 运行挂载命令如 mount /dev/sdb mnt出现错误：
 
 ```
 mount: wrong fs type, bad option, bad superblock on /dev/sdc1,
@@ -53,7 +53,7 @@ In some cases useful info is found in syslog - try
 dmesg | tail or so.
 ```
 
-# 6、wget下载文件
+## 6、wget下载文件
 
 wget -c 后面是该网络地址和文件的位置。
 
@@ -61,7 +61,7 @@ wget -c 后面是该网络地址和文件的位置。
 
 其中-c：[断点续传](https://www.baidu.com/s?wd=断点续传&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)，如果下载中断，那么连接恢复时会从上次断点开始下载。
 
-# 7、dirname
+## 7、dirname
 
 dirname $0   当前脚步文件的目录（路径）
 
@@ -71,9 +71,7 @@ dirname $0   当前脚步文件的目录（路径）
 
 echo \`pwd\`     ====   echo $PWD   ====   pwd
 
-
-
-# 8、--prefix参数
+## 8、--prefix参数
 
 Linux编译安装中的--prefix。
 
@@ -481,4 +479,30 @@ discard symbols from object files
 意思就是把文件内的符号信息移除，这样文件的大小就降下来了，同时不影响可执行文件被运行。另外，把可执行文件内的部分信息移除有助于防止被逆向工程破解。
 
 看可执行文件的内部符号信息，通过命令 readelf -s 读取。
+
+## 22、wc命令
+```
+[root@ubuntu0006:/media/hankin/vdb] #ls null/ | wc
+      0       0       0
+[root@ubuntu0006:/media/hankin/vdb] #ll null/ | wc
+      3      20     107
+```
+
+到底多了一些什么东西？？？
+```
+[root@ubuntu0006:/media/hankin/vdb] #cd null
+[root@ubuntu0006:/media/hankin/vdb/null] #ll
+总用量 8
+drwxr-xr-x  2 root root 4096 5月  21 09:25 ./
+drwxr-xr-x 11 root root 4096 5月  21 09:25 ../
+[root@ubuntu0006:/media/hankin/vdb/null] #ls
+[root@ubuntu0006:/media/hankin/vdb/null] #
+```
+使用ll的时候多了总计行、.文件夹、..文件夹，因此通过管道符 | 再进行wc命令计数的时候就会多统计一些东西。
+
+使用wc命令来统计文件的行数：wc -l file.txt
+
+
+
+
 

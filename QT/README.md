@@ -12,16 +12,16 @@ Qt 5.9 及之后的安装包与之前相比，不再区分 VC 版本和 MinGW �
 编码的问题，QT5的Qstring默认是UTF8格式，QT5极力推介把源码用UTF8格式存储。 但是MSVC只支持带BOM的UTF8格式，qmake不支持带BOM的UTF8格式，逼我只能用GBK么。这样的话，用qt5，每次都要Qstring::fromLocal8bit(“我是中国人”)；况且就算BOM问题解决了，源代码是UTF8了。MSVC的执行编码也是GBK。这个问题这里有一些探讨。
 
 Qt 中有两种方式编译：一种是MinGW ，另一种MSVC，是两种不同的编译器。
-
 1、MSVC是指微软的VC编译器
-
 2、MingGW是指是Minimalist GNU on Windows的缩写。它是一个可自由使用和自由发布的Windows特定头文件和使用GNU工具集导入库的集合，允许你     在GNU/Linux和Windows平台生成本地的Windows程序而不需要第三方运行时库。
+
+注意：MinGW版本的QT需要使用MinGW版本的gcc编译，默认是使用ms编译器。（lib里文件会是prl）
+还要注意x86和arm架构的不同。
 
 ## 1-2、安装包下载
 http://c.biancheng.net/view/3851.html
 官网地址：http://download.qt.io/official_releases/qt/5.14/5.14.2/
 最新版本只有3种类型：mac\linux\windows
-
 
 ## 20200927安装msvc版本qt以失败告终
 MinGW版本可以在qt安装包直接安装所需的编译环境，但是msvc版本不行，必须另外安装vs编译环境。

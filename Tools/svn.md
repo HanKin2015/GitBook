@@ -36,4 +36,5 @@ svn status
 ## 4、查看当前登录的账户
 目录路径：C:\Users\User\AppData\Roaming\Subversion\auth\svn.simple
 
-
+## 5、Windows系统中上库
+先在svn上面创建项目仓库，然后再在Windows系统上面右键SVN Checkout即可创建项目仓库，添加文件，然后右键SVN Commit即可。

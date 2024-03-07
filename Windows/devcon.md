@@ -79,5 +79,6 @@ PCI总线系统要求有一个PCI控制卡，它必须安装在一个PCI插槽�
 
 不好找到指定USB设备。
 
+pnputil /enum-drivers
 
 
