@@ -53,6 +53,20 @@ shutil.rmtree(path)   #递归删除文件夹，即：删除非空文件夹
 shutil.rmtree(path, ignore_errors=True)
 ```
 
+```
+import shutil
+import os
+import stat
+
+def remove_readonly(func, path, _):
+    """清除文件的只读属性，并重试删除操作"""
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+# 使用自定义的错误处理函数来删除非空目录
+shutil.rmtree('dir_name', onerror=remove_readonly)
+```
+
 [人人都能学Python](https://gitee.com/crossin/easy-py/tree/master)
 
 ## 6、低代码

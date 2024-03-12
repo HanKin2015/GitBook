@@ -66,3 +66,8 @@ lsusb -t
 Realtek 瑞昱
 Semiconductor 半导体
 Corp 公司
+
+## 11、RealTek (瑞昱)驱动程序下载
+https://www.realtek.com/zh/
+https://www.realtek.com/zh/products/communications-network-ics/item/rtl8812au
+https://driverpack.io/zh-cn/devices/wifi/realtek/realtek-8812au-wireless-lan-802-11ac-usb-nic?os=windows-10-x64

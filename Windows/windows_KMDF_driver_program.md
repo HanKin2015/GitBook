@@ -535,14 +535,26 @@ DbgPrint("hejian\n");
 
 KdPrint is identical to the DbgPrint routine in code that is compiled in a checked build environment. This routine has no effect if compiled in a free build environment. Only kernel-mode drivers can call theKdPrint routine.
 
+## 16、测试模式并不能真正阻挡签名检测
+启用了测试模式，然而还是报错：第三方inf不包含签名信息。因此测试模式并不能绝对阻止签名检测。最终使用高级重启关闭强制签名解决。
+https://consumer.huawei.com/cn/support/content/zh-cn15767193/
 
+计划打算给驱动签上微软签名，结果inf文件检验不通过，原因是语法被摈弃了：
+https://www.pnpon.com/article/detail-452.html
 
+使用infverfi.exe软件可以检验inf文件语法。注意这个文件还是要有400多KB的，并且显示版本号。
+```
+D:\Users\Administrator\Desktop>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\infverif.exe" /u "D:\Users\Administrato
+r\Desktop\Realtek_8812AU_Sniffer_Driver\USB_x64\netrtwlanu.inf"
 
+D:\Users\Administrator\Desktop>"C:\Program Files (x86)\Windows Kits\10\Tools\x64\infverif.exe"
 
+Microsoft (R) Driver Package INF Verifier
+Version 10.0.22000.1
 
-
-
-
+USAGE: InfVerif.exe [/v] [[/w] | [/u] | [/k]] [/info] [/stampinf] [/l <path>]
+                    [/osver TargetOSVersion>] [/product <ias file>] <files>
+```
 
 
 

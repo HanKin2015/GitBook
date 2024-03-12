@@ -40,9 +40,18 @@ cat ~/.ssh/id_rsa.pub
 设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。以前并没有觉得多大作用，慢慢地发现一个git仓库是可以多人上传的，而这个配置就是显示上传者的身份，一般会填写个人的GitHub相关的信息，比如GitHub用户名和注册邮箱。乱写也是🆗的。
 
 ```
+查看设置的命令:
 $ git config -l  ===  git config --list
+
+配置账号
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
+
+然后通过以下命令既可以修改设置的全局用户名和邮箱:
+git config --global --replace-all user.name "yourNewName"
+git config --global --replace-all user.email "yourNewEmail"
+
+认识git：工作区  本地仓库  暂存区
 
 还有一个local参数，即为单独仓库配置单独的上传者身份。
 global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
@@ -153,7 +162,6 @@ git add -A：将文件的修改，文件的删除，文件的新建，添加到�
 \3.  git add -u   保存修改和删除，但是不包括新建文件。
 
 ## 3、git push 的 -u 参数具体适合含义？
-
 一般只有同时存在多个远程仓库时才会用到--set-upstream。每个git branch可以有个对应的upstream。假设你有两个upstream，分别叫server1和server2，本地master branch的upstream是server1上的master，那么当你不带参数直接输入git pull或者git push时，默认是对server1进行pull/push。如果你成功运行"git push -u server2 master"，那么除了本地branch会被push到server2之外，还会把server2设置成upstream。
 
 ```
@@ -559,10 +567,12 @@ git show 显示最后一次的文件改变的具体内容
 git show -5 显示最后 5 次的文件改变的具体内容
 git show commitid 显示某个 commitid 改变的具体内容
 
-## 20210112
-今天发现git上库时间是根据本地系统时间来设定的，因此如果本地时间有错误，上库后会出现 有***提交于11个月后 的情况。
+## 18、其他
 
-特别有趣。
+### 20210112
+
+特别有趣：今天发现git上库时间是根据本地系统时间来设定的，因此如果本地时间有错误，上库后会出现 有***提交于11个月后 的情况。
+
 
 git blame xxx.cpp可以查看文件每一行修改的情况。
 
@@ -570,7 +580,7 @@ git log -p xxx.cpp：查看某个文件每次提交的详细修改
 
 查看文件在某次提交的修改内容：git show commitId xxx.cpp
 
-## 20200113
+### 20200113
 git切换到某次提交：	 
 
 git reset commitId和 在分支上面git checkout commitId都不是想要的结果。问题在于本地还是会包含后面的所有修改的东西。
@@ -578,8 +588,7 @@ git reset commitId和 在分支上面git checkout commitId都不是想要的结�
 正确做法：git checkout -b backtocommitid commitId
 建立新的分支，这时候就没有了后面修改的东西。
 
-## 20210202
-### 分支合并那些事儿
+### 20210202分支合并那些事儿
 不同的仓库按道理来说是不能进行合并的，但是似乎也是有种可能的。
 
 合并有三种方式：
@@ -591,14 +600,14 @@ git reset commitId和 在分支上面git checkout commitId都不是想要的结�
 
 git checkout -b 新的分支名 原有的分支
 
-## 20210205
+### 20210205
 撤销某次提交记录
 git revert commitId
 
-## 20210207
+### 20210207
 删除远程分支：git push origin --delete 分支名
 
-## 20210225
+### 20210225
 Step 1. 获取并检出此合并请求的分支
 git fetch origin
 git checkout -b [bName] origin/冲突分支
@@ -613,19 +622,19 @@ Step 4. 推送合并的结果到 GitLab
 git checkout -b [newBName]
 git push origin [newBName]
 
-## 20210226
+### 20210226
 git怎样删除未监视的文件untracked files
 
-### 删除 untracked files
+删除 untracked files
 git clean -f
 
-### 连 untracked 的目录也一起删掉
+连 untracked 的目录也一起删掉
 git clean -fd
 
-### 连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）
+连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）
 git clean -xfd
 
-### 在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
+在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
 git clean -nxfd
 git clean -nf
 git clean -nfd
@@ -643,10 +652,10 @@ git config --global i18n.commit.encoding utf-8
 git config --global i18n.logoutputencoding utf-8 
 ```
 
-# bash 环境下
+bash 环境下
 export LESSCHARSET=utf-8
 
-# cmd环境下：
+cmd环境下：
 set LESSCHARSET=utf-8
 ```
 $ git config --global core.quotepath false          # 显示 status 编码
@@ -677,22 +686,60 @@ fork：把别人的代码库中复制（fork）一份到你自己的代码库，
 start：用于收藏（start）或者点赞别人的代码
 watch：用于关注（watch）别人代码库的动态，默认是Not watching，设置为watching就可以关注这个代码库的动态了，假如有人push或者其他动作，你的邮箱就会收到消息。
 
-### 20210501
-# 认识git
-工作区  本地仓库  暂存区
+### 20210713
+```
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
+fatal: Unable to create '/home/vtcompile/vmps/.git/index.lock': File exists.
 
-# 配置账号
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
+If no other git process is currently running, this probably means a
+git process crashed in this repository earlier. Make sure no other git
+process is running and remove the file manually to continue.
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#rm /home/vtcompile/vmps/.git/index.lock
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
+error: pathspec './' did not match any file(s) known to git.
+[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git status
+# On branch Branches/VER6.6.6R1
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       deleted:    ../../.gitlab/gitlab_ci/ci_common_report.sh
+#       deleted:    ../../.gitlab/merge_request_templates/Bug.md
 
-查看设置的命令:
-git config --list    
+终结办法：
+git clean -fd
+git checkout .
+git reset xxx
+```
 
-然后通过以下命令既可以修改设置的全局用户名和邮箱:
-git config --global --replace-all user.name "yourNewName"
-git config --global --replace-all user.email "yourNewEmail"
+### 20210827
+git pull是更新远程所有分支最新修改到本地
+git pull origin branch_name 只更新远程指定分支到当前本地分支
 
-# 分支基础
+```
+git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态
+git stash #把所有没有提交的修改暂存到stash里面。可用git stash pop回复。
+
+git reset --hard HASH #返回到某个节点，不保留修改，已有的改动会丢失。
+git reset --soft HASH #返回到某个节点, 保留修改，已有的改动会保留，在未提交中，git status或git diff可看。
+
+git clean -df #返回到某个节点，（未跟踪文件的删除）
+git clean 参数
+    -n 不实际删除，只是进行演练，展示将要进行的操作，有哪些文件将要被删除。（可先使用该命令参数，然后再决定是否执行）
+    -f 删除文件
+    -i 显示将要删除的文件
+    -d 递归删除目录及文件（未跟踪的）
+    -q 仅显示错误，成功删除的文件不显示
+
+
+注：
+git reset 删除的是已跟踪的文件，将已commit的回退。
+git clean 删除的是未跟踪的文件
+
+git clean -nxdf（查看要删除的文件及目录，确认无误后再使用下面的命令进行删除）
+git checkout . && git clean -xdf
+```
+
+## 19、分支基础
 命令 | 说明
 :---|:---
 git branch | 查看分支
@@ -713,14 +760,12 @@ git stash | 储藏当前内容
 git stash list | 查看文件内容
 git stash pop | 恢复储藏的内容，即撤销
 
+备注：HEAD 当前分支别名
 
-# 备注
-HEAD 当前分支别名
-
-## stash和add的区别
+## 20、stash和add的区别
 add添加到本地仓库，stash添加到磁盘中，断电后会消失
 
-# 代码冲突
+## 21、代码冲突
 两个人修改了文件同一行代码
 
 git checkout master
@@ -729,7 +774,7 @@ git checkout <个人分支名>
 git merge master
 如果这时候有冲突的时候，需要手动修改
 
-## 冲突文件内容
+### 冲突文件内容
 7个向左的尖括号-起点
 7个向右的尖括号-终点
 7个等于号-隔开
@@ -738,10 +783,7 @@ git merge master
 
 git branch -av 查看具体的分支内容
 
-# demo （"demonstration"的缩写）
-DEMO是"demonstration"的缩写。DEMO的中文含意为“示范”、“展示”、“样片”、“样稿”、“原型”，常被用来称呼具有示范或展示功能及意味的事物。
-
-### 将当前更改追加到某个commit上
+## 22、将当前更改追加到某个commit上
 - git stash 保存工作空间的改动（如果新增文件则无需这步）
 - git rebase <指定commit的父commit> --interactive（注意父亲是下面的一个而不是上面的，必须是父亲，因为最终显示的是儿子节点commit及最新）
 - 将需要改动的commit前面的pick 改为 edit,然后保存退出（一般来说是第一个）
@@ -755,7 +797,7 @@ git add .
 git commit --amend
 解决冲突之后再执行git rebase --continue
 
-### Fast-Forward Git合并
+## 23、Fast-Forward Git合并
 分支合并是Git中常见的操作，在默认情况下，Git采用fast-forward的方式进行分支合并。
 
 Git将执行fast-forward合并方式。分支历史是线性的；
@@ -763,7 +805,7 @@ Git将执行fast-forward合并方式。分支历史是线性的；
 
 总结：fast-forward线性，把合并的提交直接挪用到目标分支。no fast-forward显著特点多一个commit，合并分支的提交记录。
 
-### git忽略某个目录或文件不上传
+## 24、git忽略某个目录或文件不上传
 在仓库根目录创建.gitignore文件
 ```
 target          //忽略这个target目录
@@ -772,11 +814,11 @@ log/*           //忽略log下的所有文件
 css/*.css       //忽略css目录下的.css文件
 ```
 
-### 获取几次提交的合并修改
+## 25、获取几次提交的合并修改
 git diff commit1 commit2
 获取commit1到commit2之间的修改内容
 
-### 不同仓库的提交怎么转移
+## 26、不同仓库的提交怎么转移
 使用git apply失败
 git diff c1 c2 > 123.patch
 git format-patch -5
@@ -812,63 +854,10 @@ git format-patch -2
 
 git apply只能合入修改，git am能合入提交时间和提交者。
 
-### 20210713
-```
-[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
-fatal: Unable to create '/home/vtcompile/vmps/.git/index.lock': File exists.
-
-If no other git process is currently running, this probably means a
-git process crashed in this repository earlier. Make sure no other git
-process is running and remove the file manually to continue.
-[root@chroot <vtcompile> ~/vmps/Trunk/source ]#rm /home/vtcompile/vmps/.git/index.lock
-[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git checkout .
-error: pathspec './' did not match any file(s) known to git.
-[root@chroot <vtcompile> ~/vmps/Trunk/source ]#git status
-# On branch Branches/VER6.6.6R1
-# Changes to be committed:
-#   (use "git reset HEAD <file>..." to unstage)
-#
-#       deleted:    ../../.gitlab/gitlab_ci/ci_common_report.sh
-#       deleted:    ../../.gitlab/merge_request_templates/Bug.md
-
-终结办法：
-git clean -fd
-git checkout .
-git reset xxx
-```
-
-### 删除关闭的合并请求
+## 27、删除关闭的合并请求
 只有仓库的创建者才能删除issues.
 
-### 20210827
-git pull是更新远程所有分支最新修改到本地
-git pull origin branch_name 只更新远程指定分支到当前本地分支
-
-```
-git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态
-git stash #把所有没有提交的修改暂存到stash里面。可用git stash pop回复。
-
-git reset --hard HASH #返回到某个节点，不保留修改，已有的改动会丢失。
-git reset --soft HASH #返回到某个节点, 保留修改，已有的改动会保留，在未提交中，git status或git diff可看。
-
-git clean -df #返回到某个节点，（未跟踪文件的删除）
-git clean 参数
-    -n 不实际删除，只是进行演练，展示将要进行的操作，有哪些文件将要被删除。（可先使用该命令参数，然后再决定是否执行）
-    -f 删除文件
-    -i 显示将要删除的文件
-    -d 递归删除目录及文件（未跟踪的）
-    -q 仅显示错误，成功删除的文件不显示
-
-
-注：
-git reset 删除的是已跟踪的文件，将已commit的回退。
-git clean 删除的是未跟踪的文件
-
-git clean -nxdf（查看要删除的文件及目录，确认无误后再使用下面的命令进行删除）
-git checkout . && git clean -xdf
-```
-
-### fatal: unable to access 'https://github.com/HanKin2015/GitBook.git/': Failed
+## 28、fatal: unable to access 'https://github.com/HanKin2015/GitBook.git/': Failed
 git clone 遇到问题：fatal: unable to access 'https://github.comxxxxxxxxxxx': Failed to connect to xxxxxxxxxxxxx
 将命令行里的http改为git重新执行。
 
@@ -885,7 +874,7 @@ git remote set-url origin git://github.com/HanKin2015/GitBook.git/
 git push
 ```
 
-### 提交检出换行符自动转换设置
+## 29、提交检出换行符自动转换设置
 git config -l
 git config --global -l
 
@@ -898,12 +887,12 @@ git config --global core.autocrlf input
 提交检出均不转换
 git config --global core.autocrlf false
 
-### Git diff 统计代码更改数量
+## 30、Git diff 统计代码更改数量
 1. git diff HEAD~2 获取最近两次提交的具体不同 包括增删的文件以及行数以及每行具体的改动
 2. git diff --stat 获取文件更改的个数 增加行数 删除行数
 3. git diff --numstat 表格形式获取增加行数和减少行数
 
-### 解决git diff没有高亮
+## 31、解决git diff没有高亮
 启用默认的颜色设置可以使用如下命令
 git config --global color.ui true
 git config --global color.ui false
@@ -949,7 +938,7 @@ export LESSCHARSET=utf-8
 329  git diff | iconv -f gbk -t utf-8
 330  iconv --help
 
-## 批量删除多个分支
+## 32、批量删除多个分支
 1、强制删除所有本地分支
 git branch |xargs git branch -D
 
@@ -977,7 +966,7 @@ git push -u origin $branch
 git branch --unset-upstream
 注释：跟踪分支origin/$branch和远程分支一一对应，和本地分支多寡无关
 
-## 忽略文件名大小写
+## 33、忽略文件名大小写
 默认情况下，如果我把文件名从小写全部更改为大写，git无法识别，但是界面上有红色标志，很别扭。
 
 使用git config core.ignorecase命令查看大小写敏感。
@@ -988,7 +977,7 @@ git config core.ignorecase true
 使用git切换到相应的文件目录修改文件名：
 git mv oldfile(旧文件名) newfile(新文件名)
 
-## 修改后git没有检测到
+## 34、修改后git没有检测到
 git diff不行
 git status . -uno不行
 
@@ -996,7 +985,7 @@ git status . -uno不行
 
 git status . | grep "\.c\|\.cpp\|\.h"
 
-## git bash响应非常慢
+## 35、git bash响应非常慢
 最近在打开git时极其卡顿，在这个界面经常需要等待一分多钟的时间才能初始化好，并且执行命令后也需等个几秒才能完成，用起来非常难受。重装、安装新版本也不能解决。
 
 用process monitor查看git bash进程进行了那些操作，在卡顿期间，一直在执行Process Profiling操作。
@@ -1008,7 +997,7 @@ git status . | grep "\.c\|\.cpp\|\.h"
 
 另外，不卡的时候，git bash也会进行Process Profiling操作，只是不会刷的这么快。
 
-## filename too long
+## 36、filename too long
 pull代码的时候，可能会报出：filename too long
 
 原因：
@@ -1017,7 +1006,7 @@ git有可以创建4096长度的文件名，然而在windows最多是260，因为
 解决：
 git config --global core.longpaths true
 
-## autocrlf
+## 37、autocrlf
 痛点
 windows系统git拉取代码或者打包仓库，一般都设置了autocrlf = true.
 这样设置的效果是：
@@ -1041,7 +1030,7 @@ git config --global --list
 core.autocrlf=false => 换行符自动转换为关闭状态
 core.autocrlf=true => 换行符自动转换为开启状态
 
-## 漂亮的显示git上库日志
+## 38、漂亮的显示git上库日志
 要做到这样，命令行如下：
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
@@ -1051,10 +1040,10 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 然后，我们就可以使用这样的短命令了：
 git lg
 
-## 常用的高级git总结命令
+## 39、常用的高级git总结命令
 git log -p	相当于增加git show [commit_id]
 
-## error: src refspec master does not match any.解决办法
+## 40、error: src refspec master does not match any.解决办法
 我这个原因是master分支没有权限，当前分支在master上，却想上库到另外一个分支上面。
 解决方法：本地创建新分支，然后再提交。
 ```
@@ -1083,12 +1072,12 @@ To http://58778:KHdfszrxLE3EqkvGptpk@github.org/spice.git
 Branch TD123456 set up to track remote branch TD123456 from origin.
 ```
 
-## 只查看提交记录
+## 41、只查看提交记录
 git log --oneline
 git log --stat
 git log -p
 
-## .git文件夹太大问题及解决方法（该方法过程有些繁琐，不清楚有没有批量删除文件的方法）
+## 42、.git文件夹太大问题及解决方法（该方法过程有些繁琐，不清楚有没有批量删除文件的方法）
 https://blog.csdn.net/lai1170137052/article/details/107009414/
 https://blog.csdn.net/qq_39798423/article/details/118055127
 
@@ -1123,13 +1112,13 @@ du -sh .git
 
 - 清理回收远程库缓存，这一步很重要，否则无法push
 
-## git怎样批量删除分支
+## 43、git怎样批量删除分支
 git 批量删除本地分支
 ```
 git branch | grep TD* | xargs git branch -D
 ```
 
-## 全局配置和局部配置
+## 44、全局配置和局部配置
 https://blog.csdn.net/A_bad_horse/article/details/117649966
 ```
 [root@ubuntu0006:/media/hankin/vdb/TransferStation] #git config -l
@@ -1186,7 +1175,7 @@ branch.master.merge=refs/heads/master
         merge = refs/heads/master
 ```
 
-## 应该仓库的分支提交到另一个仓库上面
+## 45、应该仓库的分支提交到另一个仓库上面
 1.git remote -v查看当前git仓库地址标题
 2.git remote rm origin清空对应的git仓库地址。（注意：我是之前的仓库地址不用了，迁移出去了，所以才选择的清空）
 3.git remote add origin http://***.git（origin是自己命令的仓库地址的名字，后边的连接是新仓库（要上传代码的仓库）的连接地址）
@@ -1196,11 +1185,11 @@ branch.master.merge=refs/heads/master
 注意一点：当前分支名和提交上去的分支名要一致，否则会提交失败。
 如当前分支名为A，远程无B，提交git push custom B会失败。
 
-## 最后一次提交的用户名不对
+## 46、最后一次提交的用户名不对
 git commit --amend --author="NewAuthor NewEmail@address.com"
 git commit --amend --reset-author
 
-## git文件已提交，但还是显示文件夹红色感叹号(windows系统)
+## 47、git文件已提交，但还是显示文件夹红色感叹号(windows系统)
 参考：https://www.jianshu.com/p/420d38913578?tdsourcetag=s_pctim_aiomsg
 
 原因是：远端存在相同名字但大小写不同的文件，本地windows大小写不区分
@@ -1226,7 +1215,7 @@ git ls-tree -l HEAD可以试试。
 很奇怪，并没有找到大小写不同的文件。但是找到一些上库不规范的文件，然后顺手删除掉后重新commit后，奇怪的事情发生了，之前存在红色感叹号或者没有任何图标的文件瞬间加上了绿色的勾。然而新修改的文件夹却一直存在红色感叹号，使用git push和git pull后也无济于事，可能还需要下一次的提交吧。
 解决方式：使用新的commit进行覆盖操作。
 
-## docker环境配置git无法输入中文
+## 48、docker环境配置git无法输入中文
 可以使用shell脚本执行
 ```
 git config --global user.name "张三12345"
@@ -1235,7 +1224,7 @@ git config --global user.email "12345@zhangsan.com"
 发现依然无法下载代码，决定使用git clone http://xxx.git。
 还是失败告终，最终通过拷贝别人docker环境的id_rsa文件搞定，注意这个文件的权限，需要chmod 0600 /root/.ssh/id_rsa。
 
-## 尬了一个尴尬
+## 49、尬了一个尴尬
 代码本地明明似乎有修改，但是还是能下载代码下来。
 然后windows本地看还是有修改，如下：
 ```
@@ -1293,7 +1282,7 @@ core.ignorecase=false
 使用git checkout可以无限重置，使用git clean -fd也不行，后来发现原来是远端仓库拥有同名的文件，只是大小写不同，但是windows系统是不区分大小写的。修改忽略大小写是行不通的。
 只能在linux环境下载代码看，要不忽略这些同名文件，一般来说正常环境是不会去修改这些莫名其妙的文件的。
 
-## git创建新项目
+## 50、git创建新项目
 命令行指令
 
 Git 全局设置
@@ -1323,25 +1312,25 @@ git remote add origin git@cs.zhangsan.org:12345/AI.git
 git push -u origin --all
 git push -u origin --tags
 
-## git上库完成后本地还是有红色感叹号
+## 51、git上库完成后本地还是有红色感叹号
 查了一会儿，发现有文件冲突，但这个文件是绿色的勾。但是过了一会儿，红色感叹号都消失了，很奇怪，莫非是反应不及时吗？
 
-## error: src refspec master does not match any. 错误处理办法
+## 52、error: src refspec master does not match any. 错误处理办法
 error: failed to push some refs to 'git@github.com:hankin/test.git
 
 原因：本地仓库为空
 当前分支为 TD1，但是我做了一些修改commit，然后提交到分支TD2，就报了上面的错误。
 原因在于本地并没有TD2分支，因此应该上传的分支还是TD1。
 
-## 高级命令git restore
+## 53、高级命令git restore
 git restore命令是撤销的意思，也就是把文件从缓存区撤销，回到未被追踪的状态。
 https://baijiahao.baidu.com/s?id=1683763863529120088&wfr=spider&for=pc
 
-## 查看时间段之间的提交
+## 54、查看时间段之间的提交
 git log --after="2013-11-12 00:00" --before="2013-11-12 23:59"
 git log --stat --after="2016-01-01 00:00" --before="2020-05-01 23:59" hcd-xhci.c
 
-## git clone下载失败
+## 55、git clone下载失败
 ```
 [root@docker <hejian681> ~/hejian ]#git clone git@code.org:package/test.git
 Cloning into 'hci-builder'...
@@ -1371,7 +1360,7 @@ Load key "/root/.ssh/id_rsa": bad permissions
 chmod 0600 id_rsa
 ```
 
-## 
+## 56、git规范
 ```
 Counting objects: 23, done.
 Delta compression using up to 4 threads.
@@ -1408,7 +1397,7 @@ remote: | git push origin <branch_name>                      |
 remote: +----------------------------------------------------+
 ```
 
-## WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 
+## 57、WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 
 ```使用以下命令来删除旧的主机密钥:
 Administrator@WINedr-VDI0027 MINGW64 /d/Github/Storage (master)
 $ ssh-keygen -R github.com
@@ -1418,13 +1407,13 @@ Original contents retained as /c/Users/Administrator/.ssh/known_hosts.old
 ```
 然后再git push搞定。
 
-## github如何删除大量远程的分支
+## 58、github如何删除大量远程的分支
 ```
 git branch -r | awk -F/ '/\/prefix_to_delete/{print $0}' | xargs -I {} git push origin --delete {}
 ```
 其中，prefix_to_delete是你要删除的分支的前缀。这个命令会列出所有以prefix_to_delete开头的远程分支，并将它们全部删除。
 
-## known_hosts文件警告
+## 59、known_hosts文件警告
 当进行上库或者拉库的时候就会出现如下警告，虽然不影响使用，但是还是有点别扭。
 ```
 Warning: the ECDSA host key for 'github.com' differs from the key for the IP address '20.205.243.166'
@@ -1437,7 +1426,7 @@ Are you sure you want to continue connecting (yes/no)?
 - 删除该行或将其注释掉（在行首添加 # 符号）。
 - 保存文件并关闭编辑器。
 
-## 学习到新的语法WIP
+## 60、学习到新的语法WIP
 在软件开发中，WIP是“Work In Progress”的缩写，表示正在进行中的工作。在Git中，WIP通常用于表示一个尚未完成的提交，以便在开发过程中保存进度。
 
 如果您在Git中创建了一个WIP提交，并且想要将其合并到主分支中，但不想让其他人看到它，可以在合并请求（Pull Request）中包含“WIP”标记。这样，其他人就知道这个合并请求是一个尚未完成的工作，而不是一个完整的、可供审核的提交。
@@ -1450,7 +1439,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 另外，如果您使用的是GitLab或Bitbucket等其他Git托管服务，它们可能有自己的WIP标记方式。请查阅相关文档以了解更多信息。
 
-## 其他
+## 61、高阶用法
 --force
 --hard
 --soft
@@ -1479,20 +1468,37 @@ Are you sure you want to continue connecting (yes/no)?
 合并分支：$ git merge [name] ----将名称为[name]的分支与当前分支合并
 创建远程分支(本地分支push到远程)：$ git push origin [name]
 删除远程分支：$ git push origin :heads/[name]
+创建全新分支：git checkout --orphan <new-branch-name>
+基于其他分支或者提交的哈希值创建：git checkout -b <new-branch-name> [<start-point>]
 ```
+--orphan 参数是用于创建一个孤立的分支，这意味着新分支将不会有任何父提交历史。它会创建一个空的分支，不会继承任何历史记录，使得它成为一个全新的、干净的分支。在这个分支上进行的任何提交都将与其他分支完全独立。这个特性通常用于创建一个完全不同于当前分支的新起点，比如创建一个全新的特性分支或者开始一个全新的项目。由于孤立分支没有共同的祖先提交，因此在这个分支上的提交与其他分支的提交是没有共同的历史记录的。这意味着在孤立分支上的提交不能直接被其他分支使用cherry-pick命令进行选择性合并。
 
-## mintty.exe.stackdump文件
+当你尝试在其他分支上使用cherry-pick命令来选择性合并孤立分支上的提交时，由于缺乏共同的历史记录，可能会导致冲突或者不符合预期的结果。因此，在这种情况下，最好的做法是考虑使用其他方式来合并需要的更改，比如手动复制粘贴或者重新实现相应的更改。
+
+
+## 62、mintty.exe.stackdump文件
 
 关于Git bash在win10重装系统情况下闪退并生成mintty.exe.stackdump文件的问题
 
 总结：我也是在git commit时闪退产生了这个文件。试了几次同样的commit内容一直闪退，原因可能是中文时输入英文字母按回车键后闪退，然后在输入英文时shift切换没有闪退情况。我的问题不大，不能解决闪退网上有很多解决方法。
 
-# 哭笑不得：git branch -a看不见一个分支
+## 63、哭笑不得：git branch -a看不见一个分支
 如果是下载项目就不要使用`git init test && cd test`初始化。
-
 使用`git clone git@git.com master`下载项目后，会在当前目录下新建文件夹master并将项目下载这个目录下。
 
 由于先前init初始化后，导致没有进入项目的文件夹中，使用git branch -a看不见任何分支。
+需要git add并git commit后才会生成分支：
+```
+User@new-win10x60050 MINGW64 /d/git分支/5.4.10R1 (支持usb3.0主控功能)
+$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git
+
+User@new-win10x60050 MINGW64 /d/git分支/5.4.10R1 (支持usb3.0主控功能)
+$ git branch
+
+User@new-win10x60050 MINGW64 /d/git分支/5.4.10R1 (支持usb3.0主控功能)
+$ git branch -a
+```
 
 更新服务端的分支到本地仓库
 git fetch --all
@@ -1513,23 +1519,21 @@ git push origin :<您的分支名>
 git clone -b gitbhttps://github.com/HanKin2015/GitBook.git
 
 2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
-   a. 重命名远程分支对应的本地分支
-
+a. 重命名远程分支对应的本地分支
 git branch -m oldName newName
+
 b. 删除远程分支
-
 git push --delete origin oldName
+
 c. 上传新命名的本地分支
-
 git push origin newName
-d.把修改后的本地分支与远程分支关联
 
+d.把修改后的本地分支与远程分支关联
 git branch --set-upstream-to origin/newName
 
 http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.8.1.3.exe
 
-
-## Git 恢复本地误删的文件
+## 64、Git 恢复本地误删的文件
 起因：git clone下来的项目不久后就自动出现修改的红色感叹号标志，实际什么都没有做。后来猜测应该是杀毒软件之类的给我自动删除了，后来还真是。使用恢复方法恢复后，一会儿又给我删除了，要么关闭杀毒软件或者添加信任。
 
 使用git pull --force强制拉取
@@ -1540,7 +1544,7 @@ git reset HEAD 文件或文件夹
 git checkout 文件或文件夹
 ```
 
-## git怎么添加空文件夹
+## 65、git怎么添加空文件夹
 在Git中，空文件夹是不会被跟踪的，因为Git只跟踪文件的内容而不跟踪文件夹本身。但是，你可以通过在空文件夹中添加一个占位文件来解决这个问题。以下是在Git中添加空文件夹的步骤：
 
 1.在空文件夹中创建一个占位文件，可以命名为.gitkeep或者其他任意名称。这个文件不需要包含任何内容，它只是用来占位的。
@@ -1559,8 +1563,39 @@ git commit -m "Add empty folder"
 ```
 现在，你的空文件夹和占位文件将被添加到Git中，并且可以被跟踪和提交。请记住，这只是一种约定，用于表示你希望保留空文件夹的意图。
 
-## 黑魔法教程
+## 66、黑魔法教程
 ```
 git log --pretty=oneline --name-status
 ```
 打印提交和改动文件 包对比好用
+
+## 67、git branch --set-upstream-to=origin/IndustrySDT IndustrySDT这句有什么作用
+这条命令的作用是将本地分支 IndustrySDT 设置为跟踪远程分支 origin/IndustrySDT。这样做的好处是在执行 git pull 或者 git push 时，不需要显式地指定远程分支的名称，而是可以直接使用 git pull 或者 git push，Git 将会自动使用远程分支进行交互。
+
+这个命令相当于设置了本地分支 IndustrySDT 的 upstream（上游）分支为远程分支 origin/IndustrySDT，这样在后续的操作中，Git 就能够知道本地分支应该与哪个远程分支进行交互。
+
+## 68、远程仓库22G，但是本地没有多余的空间剩余
+直接克隆拉取则报错：
+```
+kex protocol error: type 7 seq 996185, 13.96 GiB | 13.88 MiB/s
+fatal: write error: No space left on device6 GiB | 18.68 MiB/s
+fatal: index-pack failed
+```
+
+对于仓库的其他分支我是并不需要的，那么我们可以在本地初始化仓库，然后关联远程仓库即可:
+```
+mkdir xxx
+cd xxx
+git init
+git add .
+git commit -m"上库基线代码"
+git remote add origin xxx.git
+git remote show origin
+git remote get-url origin
+git push -u origin branch
+
+error: src refspec 支持usb3.0主控功能 does not match any
+error: failed to push some refs to 'cs.git'
+原因是本地没有《支持usb3.0主控功能》分支
+```
+
