@@ -1477,7 +1477,6 @@ Are you sure you want to continue connecting (yes/no)?
 
 
 ## 62、mintty.exe.stackdump文件
-
 关于Git bash在win10重装系统情况下闪退并生成mintty.exe.stackdump文件的问题
 
 总结：我也是在git commit时闪退产生了这个文件。试了几次同样的commit内容一直闪退，原因可能是中文时输入英文字母按回车键后闪退，然后在输入英文时shift切换没有闪退情况。我的问题不大，不能解决闪退网上有很多解决方法。

@@ -4,6 +4,7 @@
 ```
 /etc/init.d/network-manager restart
 /etc/init.d/networking restart
+systemctl restart NetworkManager.service
 ```
 
 ## 2、DNS设置
@@ -230,7 +231,7 @@ service NetworkManager status
 ### 10-5、需要配置DNS解析
 完全可以在可视化界面进行设置，方便快捷：114.114.114.114
 
-### 11-6、查看dhcp地址
+### 10-6、查看dhcp地址
 ```
 root@hankin:~# cat /var/lib/dhcp/dhclient.leases | grep dhcp-server-identifier
   option dhcp-server-identifier 172.22.16.254;
@@ -241,3 +242,68 @@ root@hankin:~# cat /var/lib/dhcp/dhclient.leases | grep dhcp-server-identifier
   option dhcp-server-identifier 172.22.16.254;
   option dhcp-server-identifier 172.22.16.254;
 ```
+
+## 11、网络代理
+问题来源：访问某个地址不通。
+问题原因：封堵了某个网段的ip地址访问。
+解决方案：使用一台非网段做代理进行访问。
+
+wget命令配置代理下载文件：
+wget --proxy=on --proxy-host=10.70.90.156 --proxy-port=3128 http://mirrors.org/assistants/ubuntu.sh
+
+查看配置的代理设置：
+```
+hankin@ubuntu:~/Desktop$ env | grep proxy
+no_proxy=localhost,127.0.0.0/8,::1
+ftp_proxy=http://192.168.56.102:3128/
+https_proxy=http://192.168.56.102:3128/
+http_proxy=http://192.168.56.102:3128/
+all_proxy=socks://192.168.56.102:3128/
+hankin@ubuntu:~/Desktop$ echo $http_proxy
+http://192.168.56.102:3128/
+```
+
+查看~/.bashrc或~/.profile文件：
+```
+cat ~/.bashrc | grep -i proxy
+cat ~/.profile | grep -i proxy
+```
+
+查看全局配置文件/etc/environment：
+```
+cat /etc/environment | grep -i proxy
+```
+
+查看git配置的代理（如果设置了）：
+```
+git config --global http.proxy
+git config --global https.proxy
+```
+
+查看wget配置的代理（如果设置了）：
+```
+wget --proxy-info
+```
+
+查看curl配置的代理（如果设置了）：
+```
+curl --proxy12</s>
+```
+
+apt命令设置代理：
+https://zhuanlan.zhihu.com/p/629584549
+```
+$ cat  /etc/apt/apt.conf.d/proxy.conf
+Acquire::http::Proxy "http://192.168.56.102:3128/";
+Acquire::https::Proxy "http://192.168.56.102:3128/";
+```
+
+
+
+
+
+
+
+
+
+

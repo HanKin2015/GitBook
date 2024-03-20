@@ -148,4 +148,10 @@ RJ11插座采用6P4C（六位置、四触点连接器）接线方式，具有6�
 ## 14、h264和h265区别
 https://zhuanlan.zhihu.com/p/71270595
 
-#
+## 15、usbhid can't find input interrupt endpoint
+https://unix.stackexchange.com/questions/116615/usbhid-cant-find-input-interrupt-endpoint
+https://blog.51cto.com/u_15127533/4326262
+
+最终发现这个错误并不影响设备的使用，无需关注。
+
+
