@@ -154,4 +154,17 @@ https://blog.51cto.com/u_15127533/4326262
 
 最终发现这个错误并不影响设备的使用，无需关注。
 
+## 16、嵌入式设备Xilinx
+https://blog.csdn.net/weixin_42837669/article/details/117000008
+
+Xilinx Platform Cable USB II Driver dlc10_win7.7z
+链接：https://pan.baidu.com/s/1HHuzZcSBgyDsukbrq-Httw
+提取码：z2jl
+
+Win7、Linux等系统下的驱动安装
+参考UG344 - USB Cable Installation Guide
+https://china.xilinx.com/search/site-keyword-search.html#q=UG344
+
+
+
 

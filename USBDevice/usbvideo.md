@@ -5,6 +5,7 @@ https://github.com/libuvc/libuvc
 ## 1、良田高拍仪
 官网：https://www.eloam.cn/
 官方软件：https://www.eloam.cn/download/list/1
+驱动下载：https://www.eloam.cn/download/list/10
 
 ## 2、USB video class
 官网：https://www.usb.org/documents?search=&type%5B0%5D=55&items_per_page=50
