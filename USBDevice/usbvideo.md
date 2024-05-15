@@ -295,3 +295,7 @@ Y5 V5 Y6 Y7 V7 Y8
 [Y0 U0 V5] [Y1 U0 V5] [Y2 U2 V7] [Y3 U2 V7]
 [Y5 U0 V5] [Y6 U0 V5] [Y7U2 V7] [Y8 U2 V7]
 ```
+
+## 12、部分定义
+linux-5.13.7/include/uapi/linux/usb/video.h
+

@@ -14,3 +14,6 @@ https://www.1ppt.com/
 ### 等宽字体
 - consolas
 - JetBrainsMono：https://www.jetbrains.com/lp/mono/
+
+## 3、ppt如何插入实时日期
+插入-》日期和时间

@@ -141,4 +141,72 @@ kill -9 %1
 ```
 这将向作业号为1的作业发送一个强制终止信号，使其立即停止运行。
 
+## 6、发现nohup命令启动的进程会被init进程接管
+```
+[root@ubuntu0006:~/cmake] #nohup ./a.out &
+[1] 15633
+nohup: 忽略输入并把输出追加到'nohup.out'
+[root@ubuntu0006:~] #ps -ef | grep a.out
+root     15633 16406 99 09:11 ?        00:00:26 ./a.out
+root     16504 16406  0 09:12 pts/0    00:00:00 grep --color=auto a.out
+[root@ubuntu0006:~] #ps aux | grep 16406
+root     16406  0.0  0.0  25772  5500 pts/0    Ss   09:12   0:00 -bash
+root     17978  0.0  0.0  17088   988 pts/0    S+   09:12   0:00 grep --color=auto 16406
+[root@ubuntu0006:~] #ps -ef | grep 16406
+root     16406 16346  0 09:12 pts/0    00:00:00 -bash
+root     18161 16406  0 09:13 pts/0    00:00:00 ps -ef
+root     18162 16406  0 09:13 pts/0    00:00:00 grep --color=auto 16406
+[root@ubuntu0006:~] #ps -ef | grep 16346
+root     16346  6371  0 09:12 ?        00:00:00 sshd: root@pts/0
+root     16406 16346  0 09:12 pts/0    00:00:00 -bash
+root     16440 16346  0 09:12 ?        00:00:00 bash -c while [ -d /proc/$PPID ]; do sleep 1;head -v -n 8 /proc/meminfo; head -v -n 2 /proc/stat /proc/version /proc/uptime /proc/loadavg /proc/sys/fs/file-nr /proc/sys/kernel/hostname; tail -v -n 16 /proc/net/dev;echo '==> /proc/df <==';df;echo '==> /proc/who <==';who;echo '==> /proc/end <==';echo '##Moba##'; done
+root     18895 16406  0 09:13 pts/0    00:00:00 grep --color=auto 16346
+[root@ubuntu0006:~] #ps -ef | grep 6371
+root      6371     1  0 2月27 ?       00:00:00 /usr/sbin/sshd -D
+root     16346  6371  0 09:12 ?        00:00:00 sshd: root@pts/0
+root     16374  6371  0 09:12 ?        00:00:00 sshd: root@notty
+root     19098 16406  0 09:13 pts/0    00:00:00 grep --color=auto 6371
 
+
+关闭shell终端再重新打开后查看：
+[root@ubuntu0006:~] #ps -ef | grep a.out
+root     15633     1 99 09:11 ?        00:00:26 ./a.out
+root     16504 16406  0 09:12 pts/0    00:00:00 grep --color=auto a.out
+```
+
+## 7、nohup和&的区别
+使用nohup命令：
+```
+[root@ubuntu0006:~] #ps -ef | grep a.out
+root     22964 22375  0 09:16 pts/0    00:00:00 grep --color=auto a.out
+[root@ubuntu0006:~] #cd cmake/
+[root@ubuntu0006:~/cmake] #nohup ./a.out
+nohup: 忽略输入并把输出追加到'nohup.out'
+
+
+此时我关闭shell终端，然后再重新打开终端查看就会出现一个a.out进程在运行
+[root@ubuntu0006:~] #ps -ef | grep a.out
+root     23228     1 99 09:16 ?        00:00:42 ./a.out
+root     24451 24207  0 09:16 pts/0    00:00:00 grep --color=auto a.out
+```
+
+使用&命令：
+```
+[root@ubuntu0006:~/cmake] #ps -ef | grep a.out
+root     26604 24207  0 09:18 pts/0    00:00:00 grep --color=auto a.out
+[root@ubuntu0006:~/cmake] #./a.out &
+[1] 26684
+目录存在
+目录存在
+目录存在
+19
+8
+[root@ubuntu0006:~/cmake] #ps -ef | grep a.out
+root     26684 24207 90 09:18 pts/0    00:00:05 ./a.out
+root     26888 24207  0 09:18 pts/0    00:00:00 grep --color=auto a.out
+
+
+此时我关闭shell终端，然后再重新打开终端查看就不会有a.out进程运行
+[root@ubuntu0006:~] #ps -ef | grep a.out
+root     27676 27535  0 09:18 pts/0    00:00:00 grep --color=auto a.out
+```

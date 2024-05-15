@@ -973,3 +973,65 @@ KiB Swap:  2095100 total,  2095100 free,        0 used.  7340056 avail Mem
   587 avahi     20   0   45304   3960   3320 S   6.2  0.0   2:13.78 avahi-daemon
     1 root      20   0  119340   5380   3860 S   0.0  0.1   0:02.25 systemd
 ```
+
+## 27、gdb调试输出map变量
+https://www.cnblogs.com/silentNight/p/5466418.html
+调试记录见：D:\Github\Storage\c++\gdb\print_map
+```
+(gdb) b 27
+Breakpoint 1 at 0x40177f: file a.cpp, line 27.
+(gdb) bt
+No stack.
+(gdb) r
+Starting program: /root/cmake/a.out
+
+Breakpoint 1, main () at a.cpp:27
+27          map<string, int*>::iterator it;
+(gdb) bt
+#0  main () at a.cpp:27
+(gdb) p *this
+No symbol "this" in current context.
+(gdb) info local
+map_ = {_M_t = {
+    _M_impl = {<std::allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, int*> > >> = {<__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, int*> > >> = {<No data fields>}, <No data fields>},
+      _M_key_compare = {<std::binary_function<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool>> = {<No data fields>}, <No data fields>}, _M_header = {_M_color = std::_S_red,
+        _M_parent = 0x6182d0, _M_left = 0x617c40, _M_right = 0x618030}, _M_node_count = 28}}}
+it = {_M_node = 0x7ffff7dd3340}
+(gdb) p *map_
+No symbol "operator*" in current context.
+(gdb) source gdb.gdb
+(gdb) help pmap
+    Prints std::map<TLeft and TRight> or std::multimap<TLeft and TRight> information. Works for std::multimap as well.
+    Syntax: pmap <map> <TtypeLeft> <TypeRight> <valLeft> <valRight>: Prints map size, if T defined all elements or just element(s) with val(s)
+    Examples:
+    pmap m - prints map size and definition
+    pmap m int int - prints all elements and map size
+    pmap m int int 20 - prints the element(s) with left-value = 20 (if any) and map size
+    pmap m int int 20 200 - prints the element(s) with left-value = 20 and right-value = 200 (if any) and map size
+(gdb) pmap map_
+Map type = std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int*, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, int*> > >
+Use pmap <variable_name> <left_element_type> <right_element_type> to see the elements in the map.
+Map size = 28
+(gdb) pmap map_ int int
+elem[0].left: $2 = 6388848
+elem[0].right: $3 = 0
+elem[1].left: $4 = 6388960
+elem[1].right: $5 = 0
+elem[2].left: $6 = 6389968
+elem[2].right: $7 = 0
+elem[3].left: $8 = 6390080
+elem[3].right: $9 = 0
+elem[4].left: $10 = 6390192
+elem[4].right: $11 = 0
+elem[5].left: $12 = 6390304
+elem[5].right: $13 = 0
+elem[6].left: $14 = 6390416
+elem[6].right: $15 = 0
+elem[7].left: $16 = 6390528
+elem[7].right: $17 = 0
+elem[8].left: $18 = 6390640
+```
+
+
+
+

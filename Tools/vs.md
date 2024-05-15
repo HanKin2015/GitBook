@@ -175,3 +175,19 @@ Tools>Options>Text Editor>All Languages>Tabs>
 
 ## 20、tab键改为4个空格
 工具-》选项-》文本编辑器-》C/C++-》制表符-》插入空格
+
+## 21、禁止VS JIT debugger
+Just In Timer
+```
+Delete the following registry key: 
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug\Debugger
+
+For 64-bit operating systems also delete:
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug\Debugger
+
+"C:\Windows\system32\vsjitdebugger.exe" -p %ld -e %ld
+```
+
+
+
+

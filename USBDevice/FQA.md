@@ -154,6 +154,13 @@ https://blog.51cto.com/u_15127533/4326262
 
 最终发现这个错误并不影响设备的使用，无需关注。
 
+
+USB中断传输是一种USB设备和主机之间的数据传输方式，用于传输具有时间敏感性的小型数据包。USB中断传输通常用于传输输入设备（如鼠标、键盘）的数据，以及需要定期更新的传感器数据等。
+
+USB中断传输是双向的，既包括IN方向（设备到主机）也包括OUT方向（主机到设备）。在USB规范中，IN方向的中断传输通常用于设备向主机传输数据，例如鼠标的移动信息、键盘的按键信息等。OUT方向的中断传输则用于主机向设备发送控制命令或配置信息。
+
+因此，USB中断传输是双向的，同时支持设备到主机和主机到设备的数据传输。这种特性使得USB中断传输非常适合于需要及时传输小型数据包的应用场景。
+
 ## 16、嵌入式设备Xilinx
 https://blog.csdn.net/weixin_42837669/article/details/117000008
 
@@ -165,6 +172,129 @@ Win7、Linux等系统下的驱动安装
 参考UG344 - USB Cable Installation Guide
 https://china.xilinx.com/search/site-keyword-search.html#q=UG344
 
+## 17、海康威视摄像头中有个CDC serial设备在win7虚拟机上面异常
+https://blog.csdn.net/zoomdy/article/details/102877153/
+在设备管理器上面安装驱动程序文件usbser.inf即可。
+```
+;/*++
+;
+;Copyright (c) Microsoft Corporation.  All rights reserved.
+;
+;Module Name:
+;    usbser.inf
+;
+;Abstract:
+;    INF file for installing the USB Serial driver
+;
+;--*/
 
+;*****************************************
+; Version section
+;*****************************************
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Ports
+ClassGUID   = {4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider    = %MSFT%
+PnpLockdown = 1
+DriverVer = 06/21/2006,10.0.18362.1
 
+[DestinationDirs]
+DefaultDestDir = 12
+UsbSerial_CopyFiles = 12
 
+;[SourceDisksNames]
+;3426 = windows cd
+
+;[SourceDisksFiles]
+;usbser.sys = 3426
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%MSFT% = Standard, NTamd64
+
+[Standard.NTamd64]
+%UsbSerial.DeviceDesc% = UsbSerial_Install, USB\Class_02&SubClass_02&Prot_01
+%UsbSerial.DeviceDesc% = UsbSerial_Install, USB\Class_02&SubClass_02
+
+; USB modem filter driver for use with Include/Needs only
+%UsbSerialModem.DeviceDesc% = UsbSerial_ModemFilter_Install
+
+[UsbSerial_Install.NT]
+CopyFiles   = UsbSerial_CopyFiles
+AddReg      = UsbSerial_AddReg
+AddProperty = UsbSerial_AddProperty
+
+; intentionally blank so that in future if we ever put anything in here
+; it will get get picked up via Include/Needs
+[UsbSerial_Install.NT.Hw]
+
+[UsbSerial_CopyFiles]
+usbser.sys,,,0x100
+
+[UsbSerial_AddReg]
+HKR,,PortSubClass,%REG_BINARY%,02
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[UsbSerial_AddProperty]
+GenericDriverInstalled,,,,1
+
+;*****************************************
+; Service installation section
+;*****************************************
+
+[UsbSerial_Install.NT.Services]
+AddService = usbser,0x00000002,UsbSerial_Service_Install, UsbSerial_EventLog_Install
+
+[UsbSerial_Service_Install]
+DisplayName   = %UsbSerial.DriverDesc%
+ServiceType   = 1           ; SERVICE_KERNEL_DRIVER
+StartType     = 3           ; SERVICE_DEMAND_START
+ErrorControl  = 1           ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\usbser.sys
+
+[UsbSerial_EventLog_Install]
+AddReg=UsbSerial_EventLog_AddReg
+
+[UsbSerial_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\Drivers\usbser.sys"
+HKR,,TypesSupported,0x00010001,7
+
+;***********************************************************
+; Modem install section to install usbser as a lower filter
+; (Include/Needs from modem INFs)
+;***********************************************************
+
+[UsbSerial_ModemFilter_Install]
+CopyFiles=UsbSerial_CopyFiles 
+
+[UsbSerial_ModemFilter_Install.Hw]
+AddReg=UsbSerial_ModemFilter_AddReg
+
+[UsbSerial_ModemFilter_AddReg]
+HKR,,LowerFilters,%REG_MULTI_SZ%,"usbser"
+
+[UsbSerial_ModemFilter_Install.Services]
+AddService=usbser,,UsbSerial_Service_Install,UsbSerial_EventLog_Install
+
+;*****************************************
+; Strings section
+;*****************************************
+
+[Strings]
+; localizable
+MSFT                      = "Microsoft"
+UsbSerial.DeviceDesc      = "USB Serial Device"
+UsbSerialModem.DeviceDesc = "USB Serial Modem Device"
+UsbSerial.DriverDesc      = "Microsoft USB Serial Driver"
+
+; non-localizable
+REG_BINARY   = 0x00000001
+REG_MULTI_SZ = 0x00010000
+```

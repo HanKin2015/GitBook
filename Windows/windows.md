@@ -13,6 +13,17 @@ OS版本：内部版本号
 
 从1703版本起，每年的更新在三月和九月，即只有xx03和xx09
 
+consumer editions：家庭版、家庭单语言版、教育版、专业版、专业教育版、专业工作站版
+business editions：更多详情见1-25
+
+Win10除了专业版、家庭版、企业版、教育版等版本外，还有Win10 LTSC版本，Win10 LTSC其实是企业版的精简版，相比下来更新频率，不像其他版本每半年要更新。
+
+win10 ltsc之前叫做win10 ltsb:
+LTSC = Long-Term Servicing Channel长期服务频道
+LTSB = Long-Term Servicing Branch长期服务分支
+
+win10 LTSC即长期服务频道为企业特定用户提供长达五年甚至十年支持，在有效的生命支持周期内用户无需升级操作系统。使用win10 ltsc版本的用户不会像win10普通版本一样被强制更新。微软提供长期支持版主要是方便某些特殊行业使用，例如某些工业基础设施基于稳定性考虑基本不会再升级。https://www.xitongzhijia.net/xtjc/20210813/221401.html
+
 ### 1-2、win10版本14393是什么版本
 win10版本14393是：Win10一周年更新（Windows 10 Anniversary Update）。
 

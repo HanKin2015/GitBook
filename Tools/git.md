@@ -503,7 +503,6 @@ git submodule update
 或者
 git clone --rescursive git@domain.com:massproj.git
 
-
 查看修改的文件
 git log --stat
 
@@ -570,7 +569,6 @@ git show commitid 显示某个 commitid 改变的具体内容
 ## 18、其他
 
 ### 20210112
-
 特别有趣：今天发现git上库时间是根据本地系统时间来设定的，因此如果本地时间有错误，上库后会出现 有***提交于11个月后 的情况。
 
 
@@ -597,15 +595,13 @@ git reset commitId和 在分支上面git checkout commitId都不是想要的结�
 解决方案二：线下合并使用git merge命令，手动处理完毕后直接git add即可，缺点没有合并请求这一步注释地方。
 解决方案三：在已知冲突的地方，修改对应的单个分支内容，修改后重新提交到单个分支上，刷新合并请求发现冲突没有了。
 
-
 git checkout -b 新的分支名 原有的分支
 
-### 20210205
-撤销某次提交记录
+### 撤销某次提交记录
 git revert commitId
 
-### 20210207
-删除远程分支：git push origin --delete 分支名
+### 删除远程分支
+git push origin --delete 分支名
 
 ### 20210225
 Step 1. 获取并检出此合并请求的分支
@@ -622,9 +618,7 @@ Step 4. 推送合并的结果到 GitLab
 git checkout -b [newBName]
 git push origin [newBName]
 
-### 20210226
-git怎样删除未监视的文件untracked files
-
+### git怎样删除未监视的文件untracked files
 删除 untracked files
 git clean -f
 
@@ -797,22 +791,21 @@ git add .
 git commit --amend
 解决冲突之后再执行git rebase --continue
 
-## 23、Fast-Forward Git合并
+## 23、剔除中间某个commit提交记录
+要从 Git 提交历史中删除某个提交，你可以使用 git rebase 命令。以下是一些步骤：
+- 首先，使用 git log 命令找到你想要删除的提交的哈希值。
+- 运行 git rebase -i <commit-before-the-one-you-want-to-remove> 命令，将 <commit-before-the-one-you-want-to-remove> 替换为你想要删除的提交的前一个提交的哈希值。
+- 这将打开一个交互式 rebase 窗口，其中列出了你选择的提交历史。找到你想要删除的提交，并将其前面的单词由 "pick" 改为 "drop"，然后保存并关闭编辑器。
+- Git 将会继续重播这些提交，但会跳过你标记为 "drop" 的提交。
+- 最后，如果你已经将这些更改推送到远程仓库，你可能需要使用 git push --force 命令来覆盖远程分支的提交历史。
+
+## 24、Fast-Forward Git合并
 分支合并是Git中常见的操作，在默认情况下，Git采用fast-forward的方式进行分支合并。
 
 Git将执行fast-forward合并方式。分支历史是线性的；
 另一种不同的合并方式是使用 -no-ff 参数（意思是no fast-forward）。在这种情况下，分支历史会有稍许区别：多了一个commit（虚线的圆圈）来实现合并。这个commit还会用右边的信息提示我们这次分支合并。
 
 总结：fast-forward线性，把合并的提交直接挪用到目标分支。no fast-forward显著特点多一个commit，合并分支的提交记录。
-
-## 24、git忽略某个目录或文件不上传
-在仓库根目录创建.gitignore文件
-```
-target          //忽略这个target目录
-angular.json    //忽略这个angular.json文件
-log/*           //忽略log下的所有文件
-css/*.css       //忽略css目录下的.css文件
-```
 
 ## 25、获取几次提交的合并修改
 git diff commit1 commit2
@@ -1360,6 +1353,8 @@ Load key "/root/.ssh/id_rsa": bad permissions
 chmod 0600 id_rsa
 ```
 
+windows系统是相同的道理，C:\Users\User\.ssh目录下面，注意需要将两个文件同时替换额。
+
 ## 56、git规范
 ```
 Counting objects: 23, done.
@@ -1598,3 +1593,33 @@ error: failed to push some refs to 'cs.git'
 原因是本地没有《支持usb3.0主控功能》分支
 ```
 
+## 69、git忽略某个目录或文件不上传
+在仓库根目录创建.gitignore文件
+```
+target          //忽略这个target目录
+angular.json    //忽略这个angular.json文件
+log/*           //忽略log下的所有文件
+css/*.css       //忽略css目录下的.css文件
+```
+
+## 70、本地存储空间不足但需要进行上库
+仓库可能有28GB左右，本地只有10GB，正常操作是git clone仓库，然而这样就会下载28GB内容，之前我也研究过使用git clone -b <branch_name> <repository_url>根本行不通，还是会有全部内容。
+
+实战发现使用git init后，然后在浏览器界面切换到指定分支再zip下载到本地，再git add添加基线代码即可。
+
+## 71、在克隆的时候提示需要输入账号和密码
+我已经将id_rsa.pub的ssh密钥贴到帐户上面了，但是为何克隆仓库代码时还需要我输入Username和Password。
+原来是我的克隆链接有问题，当您使用SSH密钥进行身份验证时，Git可能仍然尝试使用HTTPS URL而不是SSH URL来克隆仓库。请确保您在克隆命令中使用SSH URL，格式为git@github.com:username/repository.git，而不是HTTPS URL。
+```
+git clone git@code.hankin.org:DCCT/aCloud/repository.git
+git clone http://code.hankin.org/DCCT/aCloud/repository.git
+```
+
+## 72、拉代码时出现冲突但又不想处理冲突
+```
+git pull
+git add .
+git commit -m"临时处理冲突文件"
+git reset --hard 前面某一个commit
+git pull -f
+```
