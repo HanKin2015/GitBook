@@ -198,5 +198,7 @@ Failed to restart samba.service: Unit samba.service is masked.
 ```
 正常了。
 
-
-
+## 10、Windows映射网络驱动器连接Linux系统如果含有端口呢
+https://blog.csdn.net/Jlcczhangxu/article/details/130642005
+输入\\sshfs\user@192.168.xx.xx!port
+没有实战过。

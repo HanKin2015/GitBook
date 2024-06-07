@@ -164,6 +164,19 @@ echo '
 #
 ```
 
+### NSIS脚本
+```
+;
+; 文 件 名: initiation.nsi
+; 文件描述: 启蒙
+; 作    者: HanKin
+; 创建日期: 2024.06.04
+; 修改日期：2024.06.04
+; 
+; Copyright (c) 2024 HanKin. All rights reserved.
+;
+```
+
 ### python脚本
 ```
 # -*- coding: utf-8 -*-

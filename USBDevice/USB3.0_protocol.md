@@ -10,6 +10,21 @@ https://wwe.lanzouo.com/b01p0mlje
 
 对于无网卡驱动，不清楚360驱动大师有没有网卡版本。
 
+另外发现驱动人生7.1版本也是不好用，安装USB3.0主控失败，并且也没有其他驱动版本可供选择，但是360驱动大师就是不一样，有各种各样的版本供安装。
+
+注意有架构的区分：
+AMD USB 3.0 Host Controller版本最新是1.1.0.0249（20170505）
+Advanced Micro Devices, INC.
+amdhub30.sys  amdxhc.sys
+
+Intel(R) Corporation版本最新是5.0.4.24（20170505）
+iusb3xhc.sys
+
+Microsoft Corporation版本
+USBHUB3.sys  USBXHCI.SYS  
+
+装完后还有AMD USB 3.0 Root Hub版本最新是1.1.0.0249（20170505）
+
 ## 2、USB3.0为什么要叫USB3.1 Gen1 
 USB 3.1 Gen1就是USB 3.0。而USB 3.1 Gen2才是真正的USB3.1。USB 2.0的最大传输带宽为480Mbps（即60MB/s），USB 3.0（即USB 3.1 Gen1）的最大传输带宽为5.0Gbps（625MB/s），USB 3.1 Gen2的最大传输带宽为10.0Gbps。
 

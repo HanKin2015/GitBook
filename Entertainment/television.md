@@ -44,7 +44,33 @@ https://baijiahao.baidu.com/s?id=1688211366552871662&wfr=spider&for=pc
 
 总体上来讲，领衔主演是主角，其他所有的都是配角，但是特别主演的咖位比较大，这样就容易理解了。
 
+## 电视盒子
+tvbox和小苹果
 
+```
+以下为本人试过的配置资源，都可以使用。
+1．http://刚刚.live/猫
+2．https://agit.ai/Yoursmile7/TVBox/raw/branch/master/XC.json
+3．https://agit.ai/767820774/TVBox3/raw/branch/main/tvbox
+4．https://ghproxy.com/https://raw.githubusercontent.com/vpei/Free-TVUrl-Merge/main/out/tvbox.txt
+5．https://ghproxy.com/https://raw.githubusercontent.com/tv-player/tvbox-line/main/tv/fj.json
+6．https://agit.ai/z8126343/TVBox/raw/branch/master/xyh.json
+7．https://agit.ai/youxia/TVBox/raw/branch/main/XC.json
+8．https://agit.ai/Qingjin/TVBox/raw/branch/main/xh.json
+9．https://神器每日推送.tk/pz.json
+10．http://肥猫.love
+11．学前教育、中小学教育http://www.yunwp.cn/api/v3/file/get/1093/1007.json?sign=kJ5EJJLNzf63QKB1ykTZwbbW9vnMfi-2Wjumk-wtL-E%3D%3A0
+12．学习资源https://agit.ai/nbwzlyd/xiaopingguo/raw/branch/master/xiaopingguo/xiaopingguo.json
+13．https://raw.iqiq.io/liu673cn/box/main/m.json
+14．http://52bsj.vip:98/wuai
+15．http://9xi4o.tk/0725.json
+16．http://www.dmtv.ml/mao/single.json
+17．http://111.67.196.181/mtv/meow.txt
+18．https://ju.binghe.ga/4.txt
+19．https://download.kstore.space/download/2883/m3u8/dsj/guochan/mp1/1.m3u8
+20．http://52bsj.vip:81/api/v3/file/get/29899/box2.json?sign=3cVyKZQr3lFAwdB3HK-A7h33e0MnmG6lLB9oWlvSNnM%3D%3A0
+21．http://pandown.pro/tvbox/tvbox.json
+```
 
 
 

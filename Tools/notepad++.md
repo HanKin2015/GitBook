@@ -4,7 +4,11 @@
 可能左边行号字体小，也可以调整(语言格式设置-》line number margin)。
 markdown主题：markdown.material.udl.xml（注意不要勾选使用全局前景色）
 
-## 1、markdown主题包
+## 1、notepad++工具下载
+github：https://github.com/notepad-plus-plus/notepad-plus-plus
+官网（翻墙）：https://notepad-plus-plus.org/
+
+## 2、markdown主题包
 网址：https://github.com/Edditoria/markdown-plus-plus
 
 没有获得满意的主题，还是使用typora写md满意。
@@ -30,10 +34,6 @@ npx markdown-plus-plus --help
 将目录C:\Users\Administrator\AppData\Roaming\Notepad++\userDefineLangs下的xml文件拷贝到对应的目录下。该文件也可以在网站上面下载。
 
 推荐使用：Obsidian主题
-
-## 2、个性设置标签栏
-设置==》首选项==》常用==》标签栏：多行显示，不缩小
-设置==》首选项==》语言==》替换为空格
 
 ## 3、notepad++三步配置markdown环境
 ### 3-1、下载预览插件（可以不进行这一步）
@@ -154,4 +154,6 @@ https://blog.csdn.net/u010142729/article/details/127963874
 
 请尝试将鼠标移到软件窗口的最下边，往上面拉一下，就可以看到查询结果。反之，如果你想将悬浮窗口固定在最下面，也可以将窗口拖到最下面，它就会自动被磁贴进来。
 
-## 17、
+## 17、个性设置标签栏
+设置==》首选项==》常用==》标签栏：多行显示，不缩小
+设置==》首选项==》语言==》替换为空格

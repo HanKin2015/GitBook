@@ -299,3 +299,8 @@ Y5 V5 Y6 Y7 V7 Y8
 ## 12、部分定义
 linux-5.13.7/include/uapi/linux/usb/video.h
 
+## 13、工业级摄像头
+加载的驱动是miscellaneous device，而不是uvcvideo。
+
+杂项设备
+https://blog.csdn.net/zhanghui962623727/article/details/117754604

@@ -99,3 +99,10 @@ A rule-based tunnel in Go.
 
 教程：https://easydoc.net/doc/15209814/WtVubGO0/mgJA1B8H
 MAC软件：https://github.com/yichengchen/clashX
+
+## 9、免费翻墙
+http://code.newban.cn/295.html
+
+V2free软件:
+https://w1.v2free.cc/auth/register?code=FKsb
+https://cdn.v2free.top/doc/#/faq

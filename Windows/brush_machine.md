@@ -1,9 +1,7 @@
-
 # 装系统入门
 
 ## 1、hp瘦客户机刷机
 参考：https://wenku.baidu.com/view/cc573f05a6c30c2259019e54.html
-
 
 ### 1-1、usbwriter
 https://sourceforge.net/projects/usbwriter/
@@ -13,6 +11,11 @@ http://rufus.ie/
 Rufus 是一个开源免费的快速制作 U 盘系统启动盘和格式化 USB 的实用小工具，它可以快速把 ISO 格式的系统镜像文件快速制作成可引导的 USB 启动安装盘，支持 Windows 或 Linux 启动。Rufus 小巧玲珑，软件体积仅 7 百多 KB，然而麻雀虽小，它却五脏俱全。
 
 似乎不能单独作为格式化工具。
+
+加载ISO文件后直接点击开始失败了：IS镜像提取失败。（制作win7系统）
+最终还是选择使用UItraISO软件刷机，发现HDD+模式失败，最终选择RAW模式进行制作刷机盘。
+
+Windows 7旗舰版是微软公司开发的Windows 7操作系统系列中功能最高级的版本，也被称为Windows 7 Ultimate。这个版本是作为取代Windows XP和Windows Vista等老系统的系统版本而设计的，于2009年10月22日正式发行。Windows 7旗舰版被视为Windows 7系列中的终级版本，它不仅集合了Windows 7系统的所有功能，还基本与企业版的功能相似，但在具体的服务和授权方式上有所改变。这个版本主要针对软件爱好者、高端用户，相比家庭版还新增了域和组策略功能、Windows XP模式以及多个安全功能。
 
 ### 1-3、Ventoy
 https://ventoy.net/en/download.html
@@ -268,4 +271,51 @@ F7、F11、F12、Delete都有可能是启动选项界面。
 更换成rufus软件后还真的可以进行下一步刷机了，神啊。
 
 然后在安装ubuntu18.04的时候居然出现了Failed to ldlinux.c32。错误完全不一样，这个选择了USB-HDD模式，而不是默认的USB-HDD+。过了一晚上居然忘记了我前一晚是使用的是rufus软件，以后我决定脱坑UltraISO软件，rufus软件多好，还是便携式免安装版本。好用，选择使用DD模式烧录即可。
+
+## 17、win7系统刷机时出现无法找到磁盘驱动程序
+https://jingyan.baidu.com/article/4ae03de306ccf53eff9e6bea.html
+原因是直接选择U盘启动，并不是制作U盘镜像时选择的各种模式，需要去BIOS里面修改启动顺序即可。
+
+## 18、win7系统刷机的必备软件汇总
+360驱动大师网卡版（或者可以使用手机使用USB网络共享，有线网络也是不行的，也没有有线网卡驱动，除非是别人改过的iso镜像）
+7z
+chrome
+搜狗输入法
+企业微信
+微信
+everything
+notepad++
+
+## 19、通过bios改变usb口主控类型导致win7系统使用不了外设
+由于win7系统默认情况下是没有usb3.0。但是如果不切换到usb3.0状态，使用360驱动大师又扫描不到驱动缺少，使用驱动搜索功能又搜索不到。
+
+如果直接修改usb3.0主控，那么将会出现键鼠设备使用不了。如果在bios启动顺序中关闭磁盘，那么将会出现毁灭性打击，每次启动的时候都会在bios界面。
+
+恢复方法：扣掉里面的电池放电（需要拔掉电源，点击开机键），如果不行，就不装回电池使用主机。
+
+最终想到使用远程桌面连接进入系统，然后使用离线驱动文件安装（由于没有联网的有线和usb无线网卡使用不了）
+网上很多这个问题文章：https://baijiahao.baidu.com/s?id=1754714050419707431&wfr=spider&for=pc
+然鹅离线驱动在intel官网已经找不到：https://www.intel.cn/content/www/cn/zh/homepage.html
+
+最终在此网站免费下载到（已上传网盘Intel_USB_3.0_xHC_Driver_Skylake_PC_4.0.4.51.zip）：
+https://www.advantech.com.cn/zh-cn/support/details/driver?id=1-19FN8ZB
+
+这个没用，安装报错：此操作系统不受支持。
+https://www.dell.com/support/home/zh-cn/drivers/DriversDetails?c=cn&driverid=VX800&l=zh
+
+另外我使用360驱动大师在另外一台物理机上面下载了一个最新版本，然后进行备份导出尝试在其他物理机上面进行安装：
+报错您选中的INF文件不支持此安装方法。
+试试devcon安装，devcon -dp_add iusb3hub.inf也不行，直接暴力替换sys驱动。测试重启物理机后可以使用，但是信息没有变过来，只有sys文件信息变过来了。
+脑袋真是秀逗了，可以使用设备管理器更新驱动程序加载文件夹安装啊。。。。
+安装成功，此时键鼠无法使用了，只能强制重启物理机，重启后键鼠使用正常，查看设备管理器信息完美搞定，但是当时只备份到hub驱动，没有备份到host驱动（英特尔(R) USB 3.0 根集线器_5.0.4.43_5-11-2017_6.1_x64）。
+到时候使用我的笔记本再导出一个。
+
+## 20、关于win7系统激活
+KMSpico软件：http://kmspico.micaesoft.com/
+HEU_KMS_Activator（推荐）：https://heukmsactivator.com/
+KMS8软件（需要关注公众号获取）：https://www.pccppc.com/
+下载地址：http://pan.baidu.com/s/1mgMb1S8 密码: bleg
+
+https://blog.csdn.net/weixin_40191861/article/details/131240342
+GVLK 密匙是通过微软公司给与，用于 KMS 激话使用的，OEM 密匙一般是 OEM 生产商内嵌系统运用，OEM 密匙是永久性，GVLK 是 180 天时限。Windows 激话中 OEM 是永久性，KMS 激话时长是大半年的。
 

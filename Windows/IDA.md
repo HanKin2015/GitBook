@@ -97,18 +97,32 @@ IDA Pro切换图形或代码模式
 直接使用7z软件解压exe，可以看见里面有很多qt组件，也可以看见很多微软相关的dll文件。
 使用c语言的qt写的界面程序大约在30MB左右，python则是在70MB左右。
 
+## 7、利用ida软件+hex editor Neo软件改变二进制文件变量值
+https://developer.aliyun.com/article/1271409
 
+测试文件：D:\Github\Storage\c++\ida\Linux\modify_var.c
 
+- ida软件定位位置，界面左侧有一个 Function name 的窗口，点击右键，选择“Quick filter”，然后输入函数名字即可
+- 进入 大概的变量 后，直接按 F5 键，即可将其转化为 C 语言实现的伪代码，然后就可以正常阅读
+- 用鼠标选中 #2，然后切换到 Hex View-1 窗口，查看其十六进制的表示
+- 用 hex editor Neo 打开 二进制 文件，用 ctrl+F 调出搜索框，选择hex，粘贴刚刚拷贝的十六进制串，定位到对应的代码
 
+直接使用ida软件修改十六进制但是保存不了（点击编辑->修补文件->修补程序应用到输入文件），说权限不足，怀疑是不支持修改Linux的二进制文件。
+https://blog.csdn.net/Onlyone_1314/article/details/108697155
 
+## 8、利用ida软件改变exe文件变量值
+测试文件：D:\Github\Storage\c++\ida\Windows\StudyWindowsProgram.cpp
 
+我编译了一个exe文件，然而ida软件在选择【MS-DOS executable(EXE)[dos.dll]】时却解析不了。
+后面发现选择【portable executable for 80386(PE)[pe.dll]】才成功了。
 
+注意加载pdb文件的重要性，不加载pdb文件，那么有些函数名将会使用sub_xxxx代替，有了pdb文件就可以解析出来，如printf函数。
+另外在VS软件-》项目右键-》属性-》C/C++-》优化-》优化-》已禁用（/Od）才能看见更多的自定义函数。
 
-
-
-
-
-
-
-
+- ida软件定位位置，界面左侧有一个 Function name 的窗口，点击右键，选择“Quick filter”，然后输入example函数名字即可
+- 进入 大概的变量42h 后，直接按 F5 键，即可将其转化为 C 语言实现的伪代码，然后就可以正常阅读
+- 用鼠标选中 66，然后切换到 Hex View-1 窗口，查看其十六进制的表示
+- 右键-》Edit，输入44
+- 右键-》Apply changes
+- 点击编辑->修补文件->修补程序应用到输入文件（Edit->Patch program->Apply patchs to input file）
 

@@ -89,6 +89,18 @@ CH340，包括XP Win7 32位64位
 
 介绍一款 Windows 端拓展性很强的串口调试工具——串口调试助手：https://mp.weixin.qq.com/s/z9JT8DL3cBT-22ucTis_Kw
 
+## 9、com号码
+COM号码（也称为COM标识符）实际上存储在以下注册表路径中：
+```
+HKEY_CLASSES_ROOT\CLSID
+```
+在这个路径下，每个COM组件都有一个唯一的子键，其名称是COM号码（例如：{00000000-0000-0000-0000-000000000000}）。在每个COM组件的子键中，可以找到相关的注册信息，包括COM组件的路径、版本号、接口等。
 
+在Windows系统中，COM序号配置存储在注册表的以下位置：
+```
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Ole
+```
+在该注册表路径下，可以找到名为"EnableDCOM"的DWORD值，它用于启用或禁用DCOM（分布式组件对象模型）。此外，还可以找到名为"MachineAccessRestriction"和"MachineLaunchRestriction"的子键，它们用于配置COM的访问和启动限制。
 
+不同的设备可能有不同的注册表位置，没有找到可以将所有物理机固定为统一的com号，只能一个一个的设置，还原模式下会复原。
 

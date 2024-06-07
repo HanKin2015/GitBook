@@ -71,3 +71,17 @@ Corp 公司
 https://www.realtek.com/zh/
 https://www.realtek.com/zh/products/communications-network-ics/item/rtl8812au
 https://driverpack.io/zh-cn/devices/wifi/realtek/realtek-8812au-wireless-lan-802-11ac-usb-nic?os=windows-10-x64
+
+## 12、霍尼韦尔
+霍尼韦尔国际（Honeywell International）是一家营业额达300多亿美元的多元化高科技和制造企业，在全球，其业务涉及：航空产品和服务、楼宇、家庭和工业控制技术、汽车产品、涡轮增压器以及特殊材料。霍尼韦尔公司总部位于美国新泽西州莫里斯镇。
+霍尼韦尔是一家国际性从事自控产品开发及生产的公司，公司成立于1885年，有超过百年历史的国际公司，1996年，被美国"财富"杂志评为最受推崇的20家高科技企业之一。是一家销售额为333.7亿美元(2011年度)，在多元化技术和制造业方面占世界领导地位的跨国公司（500强排名280位）。宗旨是以增加舒适感，提高生产力，节省能源，保护环境，保障使用者生命及财产从而达到互利增长为目的。为全球的楼宇，工业，航天及航空市场的客户服务。
+霍尼韦尔国际公司是一个拥有多元化制造技术的领导者，服务于世界各地的客户，包括航天产品及服务、工业和家庭楼宇控制技术、汽车产品、涡轮增压器以及特种材料。霍尼韦尔在全球100多个国家/地区拥有116,000员工，以满足客户，力争成为世界自控先驱，从而实现互利增长的目标。
+2017年6月7日，2017年《财富》美国500强排行榜发布，霍尼韦尔排名第73位。
+
+## 13、无线网卡驱动
+https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet/AX88179
+https://www.altobeam.com/
+
+## 14、打印机
+win11可能不存在打印管理工具。
+惠普（Hewlett-Packard，简称HP）

@@ -421,4 +421,17 @@ dv /x myVar 以十六进制格式输出变量的值
 路径2：计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GetVideoDesciptor.exe
 创建一个字符串值REG_SZ的debugger，并设置值为"C:\program files (x86)\Windows Kits\10\Debuggers\x86\windbg.exe"。
 
+## 12、Windbg的gflags.exe调试堆栈溢出，访问越界等问题
+https://blog.csdn.net/bao_bei/article/details/73840674
+gflags.exe是Windbg下的一个小工具，非常好用，对于调试程序隐藏的bug很有帮助。
 
+加载方法：
+1、下载Debugging Tools for Windows，使用其中的gflags.exe。
+2、双击打开gflags.exe，选择Image File标签。前两个标签是对所有程序进行跟踪。
+3、在Image栏里输入你希望调试的程序名。比如，mytest.exe。（按Tab刷新）。
+4、勾选Debugger并输入vsjitdebugger.exe。（"C:\program files (x86)\Windows Kits\10\Debuggers\x64\windbg.exe"）
+5、点击OK或者Apply。
+
+卸载方法：
+HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/WindowsNT/CurrentVersion/Image File Execution Options/mytest.exe
+网上看到是取消Debugger的勾选，但是无效，最后清除注册表后程序恢复原有速度。（确实可以关闭windbg的挂载调试。

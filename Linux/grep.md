@@ -326,7 +326,39 @@ rk1314_64bit:/proc # grep -R "null pointer" /
 rk1314_64bit:/proc # grep -R "null pointer" / 2>/dev/null
 ```
 
-
+## 13、统计出现次数
+o参数的重要性，注意126行出现了两个int也统计出来了。
+```
+[root@ubuntu0006:~/cmake] #grep -Rn "int" a.cpp
+41:     * this bDeviceClass value indicates that each interface specifies its
+42:     * own class information and all interfaces operate independently.
+62:    /** Printer class */
+103:static void print_devs(libusb_device **devs)
+106:    int i = 0;
+110:        int r = libusb_get_device_descriptor(dev, &desc);
+112:            fprintf(stderr, "failed to get device descriptor");
+116:        printf("%04x:%04x (bus %d, port %d, device %d, speed %d, class 0x%x)\n",
+126:int main(int argc, char *argv[])
+129:    int r;
+138:        return (int) cnt;
+141:    print_devs(devs);
+[root@ubuntu0006:~/cmake] #grep -Rno "int" a.cpp
+41:int
+42:int
+62:int
+103:int
+106:int
+110:int
+112:int
+116:int
+126:int
+126:int
+129:int
+138:int
+141:int
+[root@ubuntu0006:~/cmake] #grep -Rno "int" a.cpp | wc -l
+13
+```
 
 
 

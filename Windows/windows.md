@@ -331,8 +331,26 @@ fsutil file createnew 4GB.txt 4294967296‬
 ### 2-9、sc命令
 SC命令是XP系统中功能强大的DOS命令,SC命令能与“服务控制器”和已安装设备进行通讯。SC是用于与服务控制管理器和服务进行通信的命令行程序。
 ```
-sc query jk
-sc del jk
+注册表路径：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services
+D:\Users\User\Desktop\nsi学习>sc query 3ware
+
+SERVICE_NAME: 3ware
+        TYPE               : 1  KERNEL_DRIVER
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1077  (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+D:\Users\User\Desktop\nsi学习>sc query 4ware
+[SC] EnumQueryServicesStatus:OpenService 失败 1060:
+
+指定的服务未安装。
+
+D:\Users\User\Desktop\nsi学习>sc delete 3ware（管理员权限）
+[SC] OpenService 失败 5:
+
+拒绝访问。
 ```
 
 ### 2-10、提示Windows已遇到关键问题一分钟后自动重新启动怎么办

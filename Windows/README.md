@@ -106,7 +106,7 @@ systeminfo命令
 使用netstat -aon可以看到当前操作系统的端口占用情况，但是我想匹配进程号为5是否占用端口。
 ```
 netstat -ano  
-netstat -ano|findstr "8081" 
+netstat -ano | findstr "8081" 
 taskkill /pid 4176 -t -f 
 tasklist | findstr 4176   查看进程信息
 ```
@@ -127,9 +127,27 @@ tasklist | findstr 4176   查看进程信息
   TCP    127.0.0.1:8118         0.0.0.0:0              LISTENING       9592
 ```
 
+1、点击“控制面板”。
+2、在控制面板窗口，点击打开“管理工具”。
+3、在管理工具窗口，双击打开“服务”。
+4、弹出服务窗口。
+5、在服务列表中找到“World Wide Web Publishing Service”服务，双击该服务，然后点击“停止”。
+
+ccmagent.exe是ON技术公司相关进程，现在该公司被Symantec收购。该进程是网络安全产品相关程序。
+
+一般而言，ccm agent(uniupdateservice.exe)设置默认开机自动启动，一定程度上将导致电脑开机时，系统需要花更多的时间和内存来启动电脑。除了ccm agent(uniupdateservice.exe)的自启动，电脑中还有其他软件也会设置自动启动。当自启动程序越多，电脑的开机速度就会受到影响，越来越慢。另外，ccm agent(uniupdateservice.exe)启动在开机以后，会运行在电脑后台，持续占用部分CPU，内存或者带宽性能，自启动软件过多同样会导致电脑的性能变差，网速变慢，从而影响电脑的使用体验。
+
 ## 11、YDArk系统内核安全辅助工具
 https://www.423down.com/10226.html
 
 ## 12、DWORD有这个类型时
 一定需要修改字符集为多字节字符集，否则使用%s打印的时候会是很意外的乱码。
 或者需要使用%S进行打印。
+
+## 13、procexp.exe工具的使用
+https://learn.microsoft.com/zh-cn/sysinternals/downloads/process-explorer
+
+打开View Handlers(ctrl+H)和View DLLs(ctrl+D)可以看进程加载的dll文件来分析，使用ctrl+A或者ctrl+S好像都是保存内容。
+
+
+

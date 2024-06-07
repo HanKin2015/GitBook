@@ -97,6 +97,18 @@ enum libusb_speed {
     LIBUSB_SPEED_SUPER_PLUS = 5
 };
 ```
+真是难受，代码中和开源中的枚举数字不统一，导致读者看着很混乱，一定要按标准来。
+libusb_get_device_speed函数可以获取速度：
+USB 1.0 【理论最大传输速率】1.5Mbps(192KB/s) 低速 (Low-Speed)
+USB 1.1【理论最大传输速率】12Mbps(1.5MB/s)全速(Full-Speed)
+USB 2.0【理论最大传输速率】480Mbps(60MB/s)高速(High-Speed)
+USB-IF 还规范了 USB 3标准的命名，之前的 USB 3.0、USB 3.1的版本命名都将通通砍掉，统一列为 USB 3.2标准，会有三个不同的名称，就是USB 3.2 Gen 1、USB 3.2 Gen 2、USB 3.2 Gen 2×2，各自有一个命名，就是SuperSpeed USB、SuperSpeed USB 10Gbps、SuperSpeed USB 20Gbps。
+【USB 3.0】USB 3.2 Gen 1【理论最大传输速率】5Gbps 超高速(Super-Speed)
+【USB 3.1】USB 3.2 Gen 2【理论最大传输速率】10Gbps超高速+(Super-speed+)
+【USB 3.2】USB 3.2 Gen 2×2【理论最大传输速率】20Gbps (能达到一秒2G的水平)
+USB4.0 理论最大传输速率 为40Gbps。（一秒5G）。
+
+可以直接通过lsusb -t命令查看到速度，从而推断其值。另外注意部分设备bcd显示usb2.0协议，实际上速度却是full speed。
 
 ## 3、X Window
  X Window即X Window图形用户接口，是一种计算机软件系统和网络协议，提供了一个基础的图形用户界面（GUI）和丰富的输入设备能力联网计算机。其中软件编写使用广义的命令集，它创建了一个硬件抽象层，允许设备独立性和重用方案的任何计算机上实现。

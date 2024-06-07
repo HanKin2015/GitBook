@@ -1032,6 +1032,136 @@ elem[7].right: $17 = 0
 elem[8].left: $18 = 6390640
 ```
 
+## 28、汇编指令调试
+测试文件：D:\Github\Storage\c++\gdb\example.c
+注意：对于pdb文件如果重新编译生成的符号是对不上的。
 
+有符号表：
+```
+(gdb) bt
+#0  0x00007ffff7a42438 in raise () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7a4403a in abort () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7a847fa in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7a8d38a in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x00007ffff7a9158c in free () from /lib/x86_64-linux-gnu/libc.so.6
+#5  0x000000000040075e in example1 () at l.c:40
+#6  0x00000000004007d3 in main (argc=1, argv=0x7fffffffe468) at l.c:62
+```
+
+没有符号表的调试技巧。
+```
+(gdb) bt
+#0  0x00007ffff7a42438 in raise () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7a4403a in abort () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7a847fa in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7a8d38a in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x00007ffff7a9158c in free () from /lib/x86_64-linux-gnu/libc.so.6
+#5  0x000000000040075e in example1 ()
+#6  0x00000000004007d3 in main ()
+```
+
+跳转到崩溃那一帧：f 5
+```
+(gdb) f 5
+#5  0x000000000040075e in example1 ()
+```
+
+使用diplay /20i $pc查看崩溃时在执行的汇编命令：
+```
+(gdb) display /20i $pc
+1: x/20i $pc
+=> 0x40075e <example1+81>:      movq   $0x0,-0x8(%rbp)
+   0x400766 <example1+89>:      nop
+   0x400767 <example1+90>:      leaveq
+   0x400768 <example1+91>:      retq
+   0x400769 <example2>: push   %rbp
+   0x40076a <example2+1>:       mov    %rsp,%rbp
+   0x40076d <example2+4>:       sub    $0x10,%rsp
+   0x400771 <example2+8>:       mov    $0x4,%edi
+   0x400776 <example2+13>:      callq  0x400550 <malloc@plt>
+   0x40077b <example2+18>:      mov    %rax,-0x8(%rbp)
+   0x40077f <example2+22>:      mov    -0x8(%rbp),%rax
+   0x400783 <example2+26>:      mov    %rax,%rdi
+   0x400786 <example2+29>:      callq  0x400500 <free@plt>
+   0x40078b <example2+34>:      mov    -0x8(%rbp),%rax
+   0x40078f <example2+38>:      movl   $0x14,(%rax)
+   0x400795 <example2+44>:      nop
+   0x400796 <example2+45>:      leaveq
+   0x400797 <example2+46>:      retq
+   0x400798 <main>:     push   %rbp
+   0x400799 <main+1>:   mov    %rsp,%rbp
+```
+崩溃点在<example1+81>地址。
+
+使用info r命令打印寄存器的值:
+```
+(gdb) info r
+rax            0x0                 0
+rbx            0x0                 0
+rcx            0x7ffff7a42438      140737348117560
+rdx            0x6                 6
+rsi            0x194               404
+rdi            0x194               404
+rbp            0x7fffffffe350      0x7fffffffe350
+rsp            0x7fffffffe340      0x7fffffffe340
+r8             0x4                 4
+r9             0x0                 0
+r10            0x8                 8
+r11            0x246               582
+r12            0x400570            4195696
+r13            0x7fffffffe460      140737488348256
+r14            0x0                 0
+r15            0x0                 0
+rip            0x40075e            0x40075e <example1+81>
+eflags         0x246               [ PF ZF IF ]
+cs             0x33                51
+ss             0x2b                43
+ds             0x0                 0
+es             0x0                 0
+fs             0x0                 0
+gs             0x0                 0
+```
+
+使用64位ida软件打开a.out文件，以ELF64 for x86-64 (Executable) [elf64.dll]打开：
+- 找好example1函数
+- 右键从Graph view切换到Text view
+- 找到public example1位置000000000040070D，计算000000000040070D+0x51(81)=0x40075E，即跳到<example1+81>地址
+- 按F5分析当前崩溃点前后的伪代码
+
+```
+和gdb命令中对的上
+.text:0000000000400756                 mov     rdi, rax        ; ptr
+.text:0000000000400759                 call    _free
+.text:000000000040075E                 mov     [rbp+s], 0
+.text:0000000000400766                 nop
+.text:0000000000400767                 leave
+.text:0000000000400768                 retn
+
+代码比较简单，直接被ida软件分析出大概的代码内容了
+void example1()
+{
+  size_t v0; // rax
+  char *s; // [rsp+8h] [rbp-8h]
+
+  s = (char *)malloc(0x28uLL);
+  v0 = strlen(s);
+  printf("strlen = %ld, sizeof = %ld\n", v0, 8LL);
+  free(s);
+  free(s);
+}
+```
+
+### IDA软件中的 "ELF64 for x86-64 (Executable) [elf64.dll]" 和 "Binary file" 是两种不同的文件类型。
+"ELF64 for x86-64 (Executable) [elf64.dll]":
+这是一种特定的文件类型，用于表示可执行的 ELF64 格式的文件。
+ELF（Executable and Linkable Format）是一种常见的可执行文件格式，广泛用于许多操作系统，包括 Linux 和 Unix 系统。
+"ELF64 for x86-64" 表示这是一个 64 位的 ELF 文件，用于 x86-64 架构的处理器。
+这种文件类型通常包含可执行代码、数据段、符号表、重定位信息等。
+
+"Binary file":
+这是一个通用的术语，用于表示任何二进制文件，无论其具体的文件格式或类型。
+二进制文件是一种以二进制形式存储的文件，其中包含机器可执行的指令、数据或其他二进制数据。
+"Binary file" 可以是任何类型的二进制文件，例如可执行文件、库文件、目标文件等。
+因此，"ELF64 for x86-64 (Executable) [elf64.dll]" 是一种特定的文件类型，表示可执行的 ELF64 格式文件，而 "Binary file" 是一个通用的术语，表示任何类型的二进制文件。
 
 
