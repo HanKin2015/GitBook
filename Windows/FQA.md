@@ -343,3 +343,29 @@ defrag d:
 使用notepad++转换成UTF-16LE编码后记事本打开正常，转换回ANSI编码后记事本直接打开是UTF-8编码并且正常。
 使用记事本另存为其他编码格式还是乱码。
 使用记事本-文件-打开，编码选择ANSI后显示正常。
+
+## 44、生物识别设备
+驱动安装目录：C:\Windows\System32\WinBioPlugIns\FaceDriver
+https://blog.csdn.net/mmmm0584/article/details/125382263
+另外发现只有特定的摄像头才能触发人脸识别功能，我找了一款做人脸识别的摄像头还是报错无Windows Hello摄像头。
+老版本里面还能找到该驱动例子：https://github.com/microsoft/Windows-driver-samples/tree/87776/biometrics
+https://iknow.lenovo.com.cn/detail/188967
+
+## 45、账户设置中的登录选项打不开
+- 网上最多的答案是Credential Manager服务和Windows Biometric Service服务未启动，无关
+- 安全模式下也是相同问题（高级启动-》选择“疑难解答” > “高级选项” > “启动设置”-》F4）
+- 新建用户使用也是同样问题（断外网，选择【将其他人添加到这台电脑】，如果用户没有Microsoft账户，则选择【添加一个没有Microsoft账户的用户】，输入用户名、密码和密码提示后完成添加）
+- 部分机器是正常的，与系统破解无关，与版本无关
+- 只能说明配置文件坏了，可能在C:\Windows\System32\config目录下的某个文件
+- 
+
+## 46、文件被相同文件名覆盖后回收站内不存在
+因此最好是先进行手动删除，不进行覆盖操作
+
+## 47、如何修改网卡mac地址
+方法一：设备管理器-》选择你想要修改MAC地址的网卡-》属性高级-》Network Address-》从不存在填写一个mac地址值FEFCFEF907BA
+方法二：打开注册表-》导航到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}-》在此路径下，找到代表网卡的0000、0001、0002等主键，查看DriverDesc以确认是正确的网卡。
+在选定的主键下，新建一个字符串值，命名为NetworkAddress（注意中间不能有空格），设置新的MAC地址-》需要将网卡禁用启用一下生效
+
+
+

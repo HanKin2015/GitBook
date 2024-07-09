@@ -298,3 +298,8 @@ UsbSerial.DriverDesc      = "Microsoft USB Serial Driver"
 REG_BINARY   = 0x00000001
 REG_MULTI_SZ = 0x00010000
 ```
+
+## 18、minifilter文件过滤框架
+https://www.cnblogs.com/iBinary/p/15809124.html
+https://www.freebuf.com/articles/database/333287.html
+https://blog.51cto.com/lyshark/6639503

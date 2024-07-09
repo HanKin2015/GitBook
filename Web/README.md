@@ -102,3 +102,10 @@ VPN 是一种通过公共网络（如互联网）建立私人网络连接的技�
 问题总结：
 可以通过scp命令测实际网速，发现网线是断开的居然还有10MB/s网速，很神奇（通过ethtool命令）
 
+## 创建在线编辑表格网页
+进行在线收集数据和查看数据使用：
+https://www.cnblogs.com/alexgl2008/articles/15819700.html
+https://blog.csdn.net/qq_36908841/article/details/82057066?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+有个想法，想制作一个todolist的网页：
+https://blog.csdn.net/qq_43485006/article/details/114605696

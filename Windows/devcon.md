@@ -75,10 +75,43 @@ PCI总线系统要求有一个PCI控制卡，它必须安装在一个PCI插槽�
 在win7和win10系统上面看见两个版本的pnputil工具。
 
 枚举具有问题的所有设备并显示硬件/兼容 ID:
-  pnputil /enum-devices /problem /ids
-
+pnputil /enum-devices /problem /ids
 不好找到指定USB设备。
 
+枚举安装的所有驱动
 pnputil /enum-drivers
 
+卸载驱动驱动程序包
+pnputil /delete-driver oem60.inf
+无法删除驱动程序包: 一个或多个设备目前使用指定的 INF 安装
+pnputil /delete-driver oem60.inf /force
 
+导出驱动程序包
+pnputil /export-driver oem60.inf d:\backup
+
+这个驱动程序包卸载后，并不影响当前驱动加载使用。是不是需要重新启动物理机才会生效？反正扫描硬件改动并没有效果。
+至少sys驱动还是会存在，重启物理机后该设备驱动并不影响当前驱动加载使用。
+
+这个时候添加程序驱动包
+```
+C:\Windows\system32>pnputil /add-driver "C:\Program Files (x86)\drivers_win10\Usbhub\usbhub.inf"
+Microsoft PnP 工具
+
+正在添加驱动程序包:  usbhub.inf
+已成功添加驱动程序包。(系统中已存在)
+发布名称:         oem19.inf
+
+驱动程序包总数:  1
+已添加驱动程序包数:  1
+```
+
+后面找到卸载参数
+```
+C:\Windows\system32>pnputil /delete-driver oem19.inf /uninstall
+Microsoft PnP 工具
+
+需要重新启动系统才能完成卸载操作!
+已成功删除驱动程序程序包。
+需要重新启动系统才能完成取消配置操作!
+```
+这个时候扫描检测硬件改动后设备就不存在了

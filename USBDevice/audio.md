@@ -14,6 +14,32 @@
 查看录音设备：arecord -l
 查看放音设备（即扬声器）：aplay -l
 查看支持的采样率：cat /proc/asound/card[012345]/stream0
+arecord和aplay其实就是一个文件，只不过执行的时候会根据文件名来判断执行哪种相关操作：
+```
+if (strstr(argv[0]，"arecord")) {
+    stream = SND_PCM_STREAM_CAPTURE;
+    file_type = FORMAT_WAVE;
+    command = "arecord";
+    start_delay =1;
+    direction = stdout;
+} else if (strstr(argv[0]，"aplay")) {
+    stream = SND_PCM_STREAM_PLAYBACK;
+    command = "aplay";
+    direction = stdin;
+} else {
+    error(_("command should be named either arecord or aplay"));
+    return 1;
+}
+```
+
+打印声卡列表：
+alsa_arecord -L
+录音：
+alsa_arecord -f cd -D default:CARD=Device /sdcard/filename.wav
+放音：
+alsa_aplay  -f cd -D default:CARD=Device /sdcard/filename.wav
+参数说明：
+ -D 指定声卡 -f 指定采样率
 
 ## 3、物理机插上耳机没有声音
 一开始以为是耳机坏了，然后在另外一台电脑发现能正常使用。

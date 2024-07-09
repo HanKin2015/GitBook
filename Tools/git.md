@@ -127,7 +127,7 @@ git config core.sparsecheckout false
 **举个例子：**
 
 > 现在有一个**test**仓库https://github.com/mygithub/test
-> 你要gitclone里面的**tt**子目录：
+> 你要git clone里面的**tt**子目录：
 > 在本地的硬盘位置打开**Git Bash**
 
 ```
@@ -141,15 +141,16 @@ git remote add origin git@github.com:mygithub/test.git  //这里换成你要克�
 git pull origin master    //下载
 ```
 
- https://blog.csdn.net/qq_35860352/article/details/80313078 不行
+https://blog.csdn.net/qq_35860352/article/details/80313078 不行
 
-### 1-1、下载指定分支
-git clone -b branch git@github.com:github/test.git 
+### 1-1、下载指定分支（20240704更新）
+（这种方式不可靠，还是会下载整个仓库）git clone -b branch git@github.com:github/test.git 
 
-### 1-2、20210813更新
+新仓库太大，达到惊人的155G，但是我只想使用其中一个分支不想下载整个仓库以此来节省磁盘空间：
 git clone --single-branch -b master url .
 git clone --depth=commit_num URL：可以只克隆最近几次提交的代码
 如：git clone --depth=2 --single-branch -b master git@yyds.hankin.org:OUR/YYDS.git .
+(亲测有效)只拉仓库中的某一个分支：git clone --single-branch -b 远程分支名 git@csgo.shit.city.org:IDV/Support.git
 
 ## 2、git add命令参数说明
 git add -u：将文件的修改、文件的删除，添加到暂存区。

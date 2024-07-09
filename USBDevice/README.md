@@ -85,3 +85,5 @@ https://www.altobeam.com/
 ## 14、打印机
 win11可能不存在打印管理工具。
 惠普（Hewlett-Packard，简称HP）
+
+柯达：https://support.alarisworld.com/zh-cn#section%201

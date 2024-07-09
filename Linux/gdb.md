@@ -1164,4 +1164,11 @@ ELF（Executable and Linkable Format）是一种常见的可执行文件格式�
 "Binary file" 可以是任何类型的二进制文件，例如可执行文件、库文件、目标文件等。
 因此，"ELF64 for x86-64 (Executable) [elf64.dll]" 是一种特定的文件类型，表示可执行的 ELF64 格式文件，而 "Binary file" 是一个通用的术语，表示任何类型的二进制文件。
 
-
+## 29、实战中下断点调试
+```
+break function_name
+continue
+bt
+启用core文件生成（可能不需要这一步）：ulimit -c unlimited
+generate-core-file core文件名（绝对路径，不绝对估计也行吧）
+```

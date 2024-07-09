@@ -89,7 +89,7 @@ IDA Pro切换图形或代码模式
 
 - Alt+T搜索strings：ERR_BUFFER_EMPTY（还是打开view->open subviews->strings窗口搜索吧）
 - 双击跳转到IDA View-A，选择db字段前面，然后按X
-- 选择后按F5，报错请使用ida，而不是ida64。重新来过
+- 选择后按F5（查看伪代码），报错请使用ida，而不是ida64。重新来过
 - 结果F5无法跳转到代码。。。。
 
 ## 6、判断一个exe文件是否使用qt语言
@@ -126,3 +126,5 @@ https://blog.csdn.net/Onlyone_1314/article/details/108697155
 - 右键-》Apply changes
 - 点击编辑->修补文件->修补程序应用到输入文件（Edit->Patch program->Apply patchs to input file）
 
+## 9、x64dbg动态调试逆向神器
+https://x64dbg.com/

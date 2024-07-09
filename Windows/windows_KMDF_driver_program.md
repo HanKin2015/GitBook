@@ -89,13 +89,13 @@ P.P.S：没有SDK你将得到无法打开包含文件：’ntdef.h’错误
 
 ##### 2、DDK（Driver Developer Kit）和WDK（Windows Driver Kit）的区别：
 
-　　这个要说说驱动相关的一些历史：
+这个要说说驱动相关的一些历史：
 
-　　1).95/98/ME下，驱动模型为：Vxd，相关资料可以看《编程高手箴言》的前几个章节，里面有很详细的介绍，虽然这个东西已经过时，但大概看看还是会增长见识的。
+1).95/98/ME下，驱动模型为：Vxd，相关资料可以看《编程高手箴言》的前几个章节，里面有很详细的介绍，虽然这个东西已经过时，但大概看看还是会增长见识的。
 
-　　2).2000/XP/2003下，Windows采用WDM驱动模型（Windows Driver Model），开发2000/XP/2003的驱动开发包为：DDK。
+2).2000/XP/2003下，Windows采用WDM驱动模型（Windows Driver Model），开发2000/XP/2003的驱动开发包为：DDK。
 
-　　3).Vista及以后版本，采用了WDF驱动模型（Windows Driver Foudation），对应的开发包：WDK。
+3).Vista及以后版本，采用了WDF驱动模型（Windows Driver Foudation），对应的开发包：WDK。
 
 其实WDK可以看做是DDK的升级版本，现在一般的WDK是包含以前DDK相关的功能，现在XP下也可以用WDK开发驱动，WDK能编译出2000-2008的各种驱动。
 

@@ -165,17 +165,18 @@ qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 tc qdisc add dev eth0 root netem delay 100ms 10ms
 想使用过滤器进行过滤，居然会失败。
 
-## 3、一次给指定ip增加延迟(完整流程，需要全部执行)
+## 3、给指定ip增加网络延迟和丢包(完整流程，需要全部执行2-3步)
+使用ifconfig命令找到网卡名字。
 把ip修改成指定物理机ip即可，中间可能出现当前主机网口不是eth0。支持多个ip指定。
 ```
 查看网卡 eth0 的流控的配置 (qdisc 表示排队规则 queueing discipline)
 tc qdisc show dev eth0
 
-设置指定IP的延迟和丢包
+1、设置指定IP的延迟和丢包
 tc qdisc add dev eth0 root handle 1: prio
 tc filter add dev eth0 parent 1: protocol ip prio 16 u32 match ip dst 123.2.3.6 flowid 1:1
 
-限制带宽, 延迟, 丢包
+2、限制带宽, 延迟, 丢包
 tc qdisc add dev eth0 parent 1:1 handle 10: netem delay 50ms loss 1%
 
 修改规则
