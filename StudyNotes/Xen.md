@@ -11,7 +11,7 @@ KVM（Keyboard Video Mouse）：通过直接连接键盘、视频或鼠标 (KVM)
 Xen 是一个开放源代码虚拟机监视器，由剑桥大学开发。它打算在单个计算机上运行多达100个满特征的操作系统。操作系统必须进行显式地修改（“移植”）以在Xen上运行（但是提供对用户应用的兼容性）。这使得Xen无需特殊硬件支持，就能达到高性能的虚拟化。
 
 ## 4、工作原理
-在Xen使用的方法中，没有指令翻译。这是通过两种方法之一实现的。第一，使用一个能理解和翻译虚拟操作系统发出的未修改指令的CPU（此方法称作完全虚拟化或full virtualization）。另一种，修改操作系统，从而使它发出的指令最优化，便于在虚拟化环境中执行（此方法称作准虚拟化或paravirtualization）。　
+在Xen使用的方法中，没有指令翻译。这是通过两种方法之一实现的。第一，使用一个能理解和翻译虚拟操作系统发出的未修改指令的CPU（此方法称作完全虚拟化或full virtualization）。另一种，修改操作系统，从而使它发出的指令最优化，便于在虚拟化环境中执行（此方法称作准虚拟化或paravirtualization）。
 
 在Xen环境中，主要有两个组成部分。一个是虚拟机监控器（VMM），也叫hypervisor。Hypervisor层在硬件与虚拟机之间，是必须最先载入到硬件的第一层。Hypervisor载入后，就可以部署虚拟机了。在Xen中，虚拟机叫做“domain”。在这些虚拟机中，其中一个扮演着很重要的角色，就是domain0，具有很高的特权。通常，在任何虚拟机之前安装的操作系统才有这种特权。
 
@@ -59,7 +59,7 @@ Hypervisor，又称虚拟机监视器（英语：virtual machine monitor，缩�
 ## 10、Virtio
 Virtio 是半虚拟化 hypervisor 中位于设备之上的抽象层。
 
-## 11、 USB系统结构
+## 11、USB系统结构
 [USB虚拟化和虚拟桌面USB重定向](https://blog.51cto.com/tasnrh/1760063)
 
 一般的USB系统架构可以分为以下三部分：USB主控制器/根集线器、USB集线器和USB设备。
@@ -118,5 +118,10 @@ Virtio驱动程序是KVM虚拟机的半虚拟化设备驱动程序。
 https://dl.fedoraproject.org/pub/alt/virtio-win/
 https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
-
 https://zhuanlan.zhihu.com/p/544929021
+
+## 17、
+
+
+
+

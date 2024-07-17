@@ -341,7 +341,5 @@ D:\Users\User\Desktop\usbip-win-0.3.6-dev>usbip.exe list -l
 2.1.0版本：https://github.com/Distrotech/sysfsutils
 2.1.1版本：https://github.com/linux-ras/sysfsutils
 
-
-
-
-
+## 7、关键文件
+usbip-host.ko和usbip-core.ko，这两个文件需要使用insmod命令安装后才能使用。

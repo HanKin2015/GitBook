@@ -58,6 +58,16 @@ Linux文件系统中，有所谓的链接(link)，我们可以将其视为档案
 lrwxrwxrwx 1 root root     11 12-07 16:01 link2013 -> log2013.log
 -rw-r--r-- 2 root bin      61 11-13 06:03 ln2013
 -rw-r--r-- 2 root bin      61 11-13 06:03 log2013.log
+
+注意硬链接只能创建文件：
+[root@ubuntu0006:~/cmake] #ln -d /root/cmake/hj jl
+ln: 无法创建硬链接'jl' => '/root/cmake/hj': 不允许的操作
+[root@ubuntu0006:~/cmake] #ln /root/cmake/hj jl
+ln: /root/cmake/hj: 不允许将硬链接指向目录
+[root@ubuntu0006:~/cmake] #ln /root/cmake/hj/ jl
+en_US.po  locale/   msg.pot   test.sh   zh_CN.po
+[root@ubuntu0006:~/cmake] #ln /root/cmake/hj/test.sh jl
+[root@ubuntu0006:~/cmake] #ln -d /root/cmake/hj/test.sh jm
 ```
 
 ## 7、Linux删除软链接的正确方式

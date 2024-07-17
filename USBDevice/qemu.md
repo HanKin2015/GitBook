@@ -249,12 +249,13 @@ Proceed anyway? (y,N) y
 ## os-posix:273 kvm: -device nec-usb-xhci,id=xhci,bus=pci.0,addr=0x1b.0x0: 'nec-usb-xhci' is not a valid device model name
 发现是qemu文件被重定向了，即qemu文件中没有放开xhci主控端口数量。
 
-## ovirt几种网卡（e1000, rtl8139,virtio）的简要说明
-ovirt创建网卡时候有3中选择，分别是e1000, rtl8139, virtio。
+## ovirt几种网卡（e1000, rtl8139, virtio）的简要说明
+ovirt创建网卡时候有3种选择，分别是e1000, rtl8139, virtio。
 
 “rtl8139”这个网卡模式是qemu-kvm默认的模拟网卡类型，RTL8139是Realtek半导体公司的一个10/100M网卡系列，是曾经非常流行（当然现在看来有点古老）且兼容性好的网卡，几乎所有的现代操作系统都对RTL8139网卡驱动的提供支持。
 “e1000”系列提供Intel e1000系列的网卡模拟，纯的QEMU（非qemu-kvm）默认就是提供Intel e1000系列的虚拟网卡。
 “virtio” 类型是qemu-kvm对半虚拟化IO（virtio）驱动的支持。
+virtio网卡数据交换性能大幅度领先平台上的e1000网卡和rtl8139网卡，一般情况下都建议使用virtio网卡。e1000网卡虽然性能比较差，但是兼容性比较好，有时候需要定位问题就要将网卡切换成e1000。
 
 这三个网卡的最大区别(此处指最需要关注的地方)是速度：
 rtl8139 10/100Mb/s

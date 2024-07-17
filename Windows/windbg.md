@@ -435,3 +435,19 @@ gflags.exe是Windbg下的一个小工具，非常好用，对于调试程序隐�
 卸载方法：
 HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/WindowsNT/CurrentVersion/Image File Execution Options/mytest.exe
 网上看到是取消Debugger的勾选，但是无效，最后清除注册表后程序恢复原有速度。（确实可以关闭windbg的挂载调试。
+
+## 13、配置windbg网络双机内核调试
+使用windows网络双机调试，相比串口双机调试，优势在于调试速度，提升调试效率。
+
+双机调试依赖网卡硬件实现，仅支持指定范围的网卡。virtio网卡不支持该功能。
+物理机配置网络双机调试一样，配置调试机和被调试虚拟机。（调试机称为host机， 被调试机被称为target机）
+虚拟机需要配置启动参数。增加hv_vendor_id=KVMKVMKVM。 解决网络双机调试默认在qemu环境无法使用的问题。（参考OSR上的一篇文章：https://www.osr.com/blog/2021/10/05/using-windbg-over-kdnet-on-qemu-kvm/） 
+
+
+
+
+
+
+
+
+

@@ -3,13 +3,9 @@
 ## 1、shell中函数的定义格式
 ```
 [ function ] funname [()]	#这里对括号加的中括号难道指参数???
-
 {
-
     action;
-
     [return int;]
-
 }
 ```
 说明：

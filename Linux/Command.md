@@ -72,7 +72,6 @@ dirname $0   当前脚步文件的目录（路径）
 echo \`pwd\`     ====   echo $PWD   ====   pwd
 
 ## 8、--prefix参数
-
 Linux编译安装中的--prefix。
 
 1、源码安装一般包括几个步骤：**配置（configure）**，**编译（make）**，**安装（make install）**。
@@ -87,8 +86,6 @@ Linux编译安装中的--prefix。
 ```
 
 之后再执行`make & make install`命令就可以将git安装到了/usr/local/git目录中，这样做的好处就是方便以后的维护。
-
-
 
 # 9、uname命令
 ```
@@ -510,35 +507,43 @@ bin为binary（二进制的，二元的）的简写
 首先区别下/sbin和/bin：
 
 从命令功能角度：
+```
 /sbin 下的命令属于基本的系统命令，如shutdown，reboot，用于启动系统，修复系统
 /bin下存放一些普通的基本命令，如ls,chmod等，这些命令在Linux系统里的配置文件脚本里经常用到
+```
+
 从用户权限的角度：
+```
 /sbin目录下的命令通常只有管理员才可以运行
 /bin下的命令管理员和一般的用户都可以使用
+```
+
 从可运行时间角度：
+```
 /sbin 和 /bin都能够在挂载其他文件系统前就可以使用。
+```
+
 接下来看/usr/bin，/usr/sbin 与 /sbin，/bin 目录的区别：
-
+```
 /bin，/sbin目录是在系统启动后挂载到根文件系统中的，所以/sbin，/bin目录必须和根文件系统在同一分区
-
 /usr/bin，usr/sbin 可以和根文件系统不在一个分区。
-
 /usr/sbin存放的一些非必须的系统命令；/usr/bin存放一些用户命令，如led(控制LED灯的)。
+```
 
 PS：
-
+```
 /bin是系统的一些指令。主要放置一些系统的必备执行档，例如 cat、cp、chmod df、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar等。
-
 /sbin一般是指超级用户指令。主要放置一些系统管理的必备程式，例如 cfdisk、dhcpcd、dump、e2fsck、fdisk、halt、ifconfig、ifup、 ifdown、init、insmod、lilo、lsmod、mke2fs、modprobe、quotacheck、reboot、rmmod、 runlevel、shutdown等。
-
 /usr/bin是你在后期安装的一些软件的运行脚本。主要放置一些应用的软体工具的必备执行档，例如 c++、g++、gcc、chdrv、diff、dig、du、eject、elm、free、gnome*、 gzip、htpasswd、kfm、ktop、last、less、locale、m4、make、man、mcopy、ncftp、 newaliases、nslookup passwd、quota、smb*、wget等
-
 /usr/sbin 放置一些用户安装的系统管理的必备程式，例如 dhcpd、httpd、imap、in.*d、inetd、lpd、named、netconfig、nmbd、samba、sendmail、squid、swap、tcpd、tcpdump等。
+```
 
 如果新装的系统，运行一些很正常的诸如：shutdown，fdisk的命令时，提示：bash:command not found。
 那么首先就要考虑root 的 $PATH 里是否已经包含了这些环境变量。
 可以查看PATH，如果是：PATH=$PATH:$HOME/bin则需要添加成如下：
 PATH=$PATH:$HOME/bin:/sbin:/usr/bin:/usr/sbin
 
+## 24、reverse-i-search 方式
+通过 “Ctrl + R” 快捷键，进入历史命令搜索模式，如下，输入目标命令的部分字符（第一个红框），会匹配到最近的历史命令（第二个红框），按 Enter 键就会执行匹配到的命令。如果匹配到的命令不是想要的命令，按住 ”Ctrl“ 键后，再按 “R" 键，可以查找上一个匹配的命令。
 
 

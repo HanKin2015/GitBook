@@ -998,7 +998,9 @@ pull代码的时候，可能会报出：filename too long
 git有可以创建4096长度的文件名，然而在windows最多是260，因为git用了旧版本的windows api
 
 解决：
+```
 git config --global core.longpaths true
+```
 
 ## 37、autocrlf
 痛点
@@ -1011,15 +1013,22 @@ Git可以在你提交时自动地把行结束符CRLF转换成LF，而在签出�
 解决办法1：
 将打包仓库里sh脚本、apppre、appsh1转换成unix行尾符LF。
 主要用dos2unix批量转换：
-
+```
 find . -name "*.sh" | xargs dos2unix
 find . -name "apppre" | xargs dos2unix
 find . -name "appsh1" | xargs dos2unix
+find . -name "*.inf" | xargs unix2dos
+find . -name "*.ini" | xargs unix2dos
+```
+
 解决办法2：
 好像可以设置过滤sh脚本文件，这个我也没研究过。
 
 建议各位小伙伴检查自己本地git的换行符自动转换设置（将换行符自动转换设置为开启）
+```
 git config --global --list
+```
+
 检查core.autocrlf的值，
 core.autocrlf=false => 换行符自动转换为关闭状态
 core.autocrlf=true => 换行符自动转换为开启状态
@@ -1624,3 +1633,10 @@ git commit -m"临时处理冲突文件"
 git reset --hard 前面某一个commit
 git pull -f
 ```
+
+## 73、更新本地分支同步远端提交
+切换到同名分支，直接git pull即可（不能同步可能存在冲突）
+可以使用git branch -vv查看分支对应的远端分支
+
+
+

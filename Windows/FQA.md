@@ -37,6 +37,8 @@ Microsoft Visual Studio自带错误码查询软件，在工具=》错误查找�
 0010 环境错误。
 ....
 ```
+另外有Microsoft 错误查找工具：
+https://learn.microsoft.com/zh-cn/windows/win32/debug/system-error-code-lookup-tool?eqid=aeb553800001961300000004646d87b0
 
 ## 3、error: LNK2019: 无法解析的外部符号 __imp_PostMessageW，函数 “private: void __cdecl Widget
 对于此类问题，一般来说是找不到具体报错的地方，原因是缺少库。

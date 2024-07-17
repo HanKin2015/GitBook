@@ -92,10 +92,15 @@ PuTTY 是 SSH 和 telnet 客户端，最初由 Simon Tatham 为 Windows 平台�
 Putty 主要是用来远程连接服务器，它支持 SSH、Telnet、Serial 等协议的连接。
 putty.org
 
+## 7、老版本连接报错
+Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 
+服务端更新了ssh库，需要高版本的mobaxterm软件才行，因此需要重新破解。
 
-
-
+亲测24.2版本破解有效。
+链接：https://pan.baidu.com/s/15Wbg5gDLHkjW6zVPzFA6PA
+提取码：ipc9
+运行crack中的keygen，单击Get Version from File从文件中获取版本，然后选择安装目录中的MobaXterm.exe
 
 
 
