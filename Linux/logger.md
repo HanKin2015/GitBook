@@ -18,7 +18,7 @@ LOG "hello world!"
 ```
 
 ## 2、logger命令
-终于明白logger命令使用后为啥什么都没有，原来是日志输出到vim /var/log/syslog文件中去了。
+终于明白logger命令使用后为啥什么都没有，原来是日志输出到vim /var/log/syslog文件中去了（/var/log/kern.log文件）。
 logger命令用于向系统日志中写入消息。它允许用户将自定义消息添加到系统日志中，这些消息可以用于跟踪系统活动、故障排除和记录重要事件。
 logger是一个shell命令接口，可以通过该接口使用Syslog的系统日志模块，还可以从命令行直接向系统日志文件写入一行信息。
 ```

@@ -369,5 +369,17 @@ https://iknow.lenovo.com.cn/detail/188967
 方法二：打开注册表-》导航到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}-》在此路径下，找到代表网卡的0000、0001、0002等主键，查看DriverDesc以确认是正确的网卡。
 在选定的主键下，新建一个字符串值，命名为NetworkAddress（注意中间不能有空格），设置新的MAC地址-》需要将网卡禁用启用一下生效
 
+## 48、读取记事本内容快捷键
+ctrl+End  到本文末尾
+ctrl+Home  到本文首
+End 行末
+Home 行首
+shift+End 选择当前光标到行尾
+shift+Home 选择当前光标到行首
+
+## 49、什么返回值才能被GetLastError函数捕获
+GetLastError 函数用于获取最近一次发生错误的错误代码。它通常与 Windows API 函数一起使用。大多数 Windows API 函数在发生错误时会返回一个特定的错误代码，这些错误代码可以被 GetLastError 函数捕获。一般来说，只要调用了 Windows API 函数并且该函数返回了一个表示错误的值，GetLastError 函数就可以捕获到这个错误代码。
+
+需要注意的是，并非所有的函数都会返回可以被 GetLastError 捕获的错误代码。有些函数可能会使用其他方式来表示错误，比如通过返回特定的错误值或者通过输出参数来传递错误信息。因此，具体取决于你调用的是哪个函数。
 
 

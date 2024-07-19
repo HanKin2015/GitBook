@@ -1067,6 +1067,9 @@ elem[8].left: $18 = 6390640
 ```
 
 使用diplay /20i $pc查看崩溃时在执行的汇编命令：
+- display 是调试器中的一个命令，用于显示特定变量或表达式的值。
+- /20i 是 display 命令的选项之一，表示显示当前指令指针 ($pc) 所指向的汇编指令及其周围的 20 条指令。
+- $pc 是一个特殊的调试器变量，代表当前指令指针寄存器的值，即正在执行的指令的地址。
 ```
 (gdb) display /20i $pc
 1: x/20i $pc
@@ -1172,3 +1175,36 @@ bt
 启用core文件生成（可能不需要这一步）：ulimit -c unlimited
 generate-core-file core文件名（绝对路径，不绝对估计也行吧）
 ```
+
+## 30、gdb重定向stdout和stderr
+调试的时候需要一个存在堆栈的程序，如除0崩溃。
+
+call命令：调用程序中可见的函数，并传递“参数”，如：call gdb_test(55)
+
+但运行中的进程可能启动方式不一致，导致gdb中调用call xxxx时无法输出在gdb调试内容中
+
+解决方式：
+尝试调用call查看gdb是否可以输出对应信息（stdout、stderr）
+```
+(gdb) call (void)printf("\n hello world \n")
+```
+如果看不到输出，关闭stdout和stderr的描述符
+```
+(gdb) call (int)close(1)
+(gdb) call (int)close(2)
+```
+
+获取到gdb窗口所在的虚拟终端
+```
+(gdb) shell tty
+/dev/pts/4
+```
+
+重新打开stdout和stderr，并且把他们关联到gdb窗口所在的虚拟终端
+```
+(gdb) p (int)open("/dev/pts/1", 2) 
+$1 = 1 
+(gdb) p (int)open("/dev/pts/1", 2) 
+$2 = 2
+```
+注意，如果执行结果不是以上的1、2，则需要重新close和open

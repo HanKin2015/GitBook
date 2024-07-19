@@ -443,9 +443,20 @@ HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/WindowsNT/CurrentVersion/Image File Execut
 物理机配置网络双机调试一样，配置调试机和被调试虚拟机。（调试机称为host机， 被调试机被称为target机）
 虚拟机需要配置启动参数。增加hv_vendor_id=KVMKVMKVM。 解决网络双机调试默认在qemu环境无法使用的问题。（参考OSR上的一篇文章：https://www.osr.com/blog/2021/10/05/using-windbg-over-kdnet-on-qemu-kvm/） 
 
+### 13-1、配置调试和被调试机双机调试
+被调试机配置
+（1）管理员权限启动cmd
+（2）执行命令：bcdedit /debug on
+（3）执行命令：bcdedit /dbgsettings net hostip:{调试机IP} port:{调试机的端口} key:{认证用的key}
+例如：bcdedit /dbgsettings net hostip:172.22.64.246 port:55555 key:kvm.kvm.kvm.kvm
 
+认证的key格式就是X.X.X.X 。X是一个或多个字母或数字。
 
+调试机配置
+（1）启动windbg
+（2）点击菜单"File"，"Kernel Debug"
 
+等待被调试机接入（正常两台物理机双机调试时，后面只需要重启被调试机，就会自动连接上来，但是被调试机是虚拟机时还需要额外的配置并重启，看接下来的步骤）
 
 
 

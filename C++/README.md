@@ -386,3 +386,23 @@ https://mp.weixin.qq.com/s/AMNPuISJyDohirU_KupDxA
 需要客户端把参数先转成一个字节流，传给服务端后，再把字节流转成自己能读取的格式。这个过程叫序列化和反序列化。同理，从服务端返回的值也需要序列化反序列化的过程。
 
 [谁能用通俗的语言解释一下什么是 RPC 框架？](https://www.zhihu.com/question/25536695)
+
+## 29、c++中的idl后缀文件是什么
+在C++中，IDL（Interface Definition Language）文件通常用于定义COM（Component Object Model）组件的接口。IDL文件使用.idl作为文件扩展名。COM是一种面向对象的组件技术，IDL文件用于描述COM组件的接口、方法和数据结构。
+
+在IDL文件中，你可以定义接口、结构、枚举和其他类型的COM组件所需的元素。IDL文件可以被编译器转换成其他语言的头文件，以便在不同的编程语言中使用COM组件。
+
+总之，IDL文件在C++中用于定义COM组件的接口和相关信息，它是COM编程模型的一部分。
+
+IDL文件通常只包含接口、方法、结构和枚举的声明，而不包含具体的函数体或实现。IDL文件的主要作用是定义接口和组件之间的通信协议，以及组件的公共接口。
+
+一旦定义了IDL文件中的接口和方法，开发人员可以使用特定的工具（如MIDL，Microsoft Interface Definition Language Compiler）来生成对应的头文件和代理/存根代码，然后在C++等语言中实现这些接口和方法的具体功能。
+
+因此，IDL文件在COM组件开发中起着重要的作用，它定义了组件的接口和通信协议，但不包含具体的函数实现。
+
+DshowIDL库是DirectShow（又称为DirectX Media）的一部分，它包含了用于定义DirectShow组件接口的IDL（Interface Definition Language）文件。DirectShow是一种Microsoft Windows平台上的多媒体框架，用于处理音频和视频数据流，以及创建多媒体应用程序。
+
+DshowIDL库中的IDL文件定义了DirectShow组件的接口、结构和枚举，这些接口和结构用于描述多媒体数据流的处理、编解码、渲染等功能。通过使用这些IDL文件，开发人员可以创建符合DirectShow标准的自定义组件，并与其他DirectShow组件进行交互。
+
+总之，DshowIDL库是DirectShow框架的一部分，其中包含了用于定义DirectShow组件接口的IDL文件，为开发人员提供了创建和扩展DirectShow组件的基础。
+

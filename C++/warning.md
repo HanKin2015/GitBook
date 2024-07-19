@@ -517,10 +517,62 @@ pthread_create(&tid, NULL, tfn, (void *)(long)i);
 进行左移操作时，超出了当前数据类型的最大范围。
 将数字末尾添加LL即可。
 
+## 47、发现vs编译器存在-Wunused-result警告，但是gcc没有
+https://cloud.tencent.com/developer/ask/sof/109615673
+您只能告诉gcc忽略使用warn_unused_result的所有-Wno-unused-result标志，但是相应的-Wunused-result只设置默认值(仅对标志发出警告)。
+虽然GCC似乎不可能，但您可以运行静态分析器，如coverity和lint来捕捉这些。
 
+D:\Github\Storage\c++\study\wunused_result.c
+```
+[root@ubuntu0006:~/cmake] #gcc l.c
+l.c: In function ‘main’:
+l.c:38:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     add(1, 1);
+     ^
+l.c:40:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     (void)add(3, 3);
+     ^
+[root@ubuntu0006:~/cmake] #gcc l.c -Wall
+l.c: In function ‘main’:
+l.c:39:9: warning: unused variable ‘result’ [-Wunused-variable]
+     int result = add(2, 2);
+         ^
+l.c:33:12: warning: unused variable ‘ret’ [-Wunused-variable]
+     double ret;
+            ^
+l.c:38:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     add(1, 1);
+     ^
+l.c:40:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     (void)add(3, 3);
+     ^
+[root@ubuntu0006:~/cmake] #gcc l.c -Wall -Wunused-result
+l.c: In function ‘main’:
+l.c:39:9: warning: unused variable ‘result’ [-Wunused-variable]
+     int result = add(2, 2);
+         ^
+l.c:33:12: warning: unused variable ‘ret’ [-Wunused-variable]
+     double ret;
+            ^
+l.c:38:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     add(1, 1);
+     ^
+l.c:40:5: warning: ignoring return value of ‘add’, declared with attribute warn_unused_result [-Wunused-result]
+     (void)add(3, 3);
+     ^
+[root@ubuntu0006:~/cmake] #gcc l.c -Wall -Wnounused-result
+gcc: error: unrecognized command line option ‘-Wnounused-result’
+[root@ubuntu0006:~/cmake] #gcc l.c -Wall -Wno-unused-result
+l.c: In function ‘main’:
+l.c:39:9: warning: unused variable ‘result’ [-Wunused-variable]
+     int result = add(2, 2);
+         ^
+l.c:33:12: warning: unused variable ‘ret’ [-Wunused-variable]
+     double ret;
+```
 
+https://segmentfault.com/q/1010000042766624
 
-
-
+-Wall这一类警告提示选项占了GCC警告选项的90%以上，它不仅包含打开所有警告等功能，还可以单独对常见错误分别指定警告，这些常见的警告选项如下表所示(这些选项可供读者在实际操作时查阅使用)。
 
 
