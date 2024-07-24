@@ -189,22 +189,73 @@ phase：阶段、时期
 人体学输入设备可以理解为HID设备吗？？？但可以肯定的是HID设备属于人体学输入设备。
 
 一个比较轻量级纯软件工具，软件界面看着就像上一个世纪的风格。官网为http://perisoft.net/index.htm。使用上也不是很麻烦，但是在实际使用中发现，对于某些USB报文无法抓取，这是个硬伤。而且，其也不具备USB协议分析功能。拿到报文后需要自行进行分析。安装后需要重启计算机才可用！
-  这是一个收费工具，目前不怎么更新了，最新版为 6.01。但是网上放出去了其最新版的注册码。还有个简单的中文使用说明。
+这是一个收费工具，目前不怎么更新了，最新版为 6.01。但是网上放出去了其最新版的注册码。还有个简单的中文使用说明。
 
 ## 4、udevadm monitor
 Linux下实时监控usb设备的拔插情况。
 
 ## 5、tcpdump抓包工具
-使用tcpdump抓取网络数据包
+使用tcpdump抓取网络数据包:
+```
 tcpdump -i eth0 host 10.70.55.130 -s 0 -w hj.pcap
-
+```
 抓取的文件可以使用wireshark软件打开分析。
 
-iftop -nNpP
-查看端口：tcpdump -D
-tcpdump -i usbmon2 > xxxx.pcap
+```
+nohup bash tcpdump_monitor.sh -c "pcapif1 icmp -c 10" -f "/var/log/today" 1>/dev/null 2>&1 &
+tcpdump -i eth0 -s0 host 172.22.18.156 -C 100 -W 3 -w ./vdi_server.pcap
+循环抓取eth0口，客户端IP为172.22.18.156 的数据包，并按照大小为100M，保留最新3个文件的方式保存到当前目录。
+```
 
-低版本无法使用tcpdump抓usb数据包
+使用tcpdump抓取usb数据包:
+查看流量使用情况：iftop -nNpP
+查看usbmon设备：tcpdump -D
+抓取usb数据包：tcpdump -i usbmon2 > /tmp/xxxx.pcap
+
+看着是抓取成功了：
+```
+root@hankin:/var/log# tcpdump -i usbmon1 > /tmp/usbmon.pcap
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header), capture size 262144 bytes
+1558 packets captured
+1558 packets received by filter
+0 packets dropped by kernel
+```
+但是在Windows系统上打开pcap文件报错：The capture file appears to be damaged or corrupt.(stanag4607: File has 976238906d-byte packet, bigger than maximum of 262144)
+
+使用vim命令查看应该是抓取失败了：
+```
+21:09:39.398361 CONTROL SUBMIT to 1:19:0
+21:09:39.398563 CONTROL COMPLETE from 1:19:0
+21:09:39.398599 CONTROL SUBMIT to 1:15:0
+21:09:39.399427 CONTROL COMPLETE from 1:15:0
+21:09:39.399452 CONTROL SUBMIT to 1:14:0
+21:09:39.399677 CONTROL COMPLETE from 1:14:0
+21:09:39.399700 CONTROL SUBMIT to 1:3:0
+21:09:39.401682 CONTROL COMPLETE from 1:3:0
+21:09:39.401725 CONTROL SUBMIT to 1:2:0
+21:09:39.401805 CONTROL COMPLETE from 1:2:0
+21:09:39.401842 CONTROL SUBMIT to 1:1:0
+21:09:39.401857 CONTROL COMPLETE from 1:1:0
+21:09:41.649188 INTERRUPT COMPLETE to 1:14:1
+21:09:41.649216 INTERRUPT SUBMIT from 1:14:1
+21:09:41.651186 INTERRUPT COMPLETE to 1:14:1
+```
+
+低版本无法使用tcpdump抓usb数据包:
+```
+root@hankin:/tmp# ./tcpdump --help
+tcpdump version 4.9.2
+libpcap version 1.8.1
+root@hankin:/tmp# tcpdump --version
+tcpdump version 4.6.2
+libpcap version 1.6.2
+OpenSSL 1.0.1k 8 Jan 2015
+
+```
+
+
+
 `0` 代表所有的USB总线，`1，2` 代表不同USB总线，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
 
 https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html

@@ -59,8 +59,12 @@ with open(img_name, 'wb') as save_img:
 强大如斯(速查)：https://www.jianshu.com/p/1b63c5f3c98e
 
 #### 准备工作
+https://zhuanlan.zhihu.com/p/110274934
 使用selenium，安装conda install selenium
-下载chrome驱动文件：http://npm.taobao.org/mirrors/chromedriver
+谷歌浏览器输入chrome://version
+下载chrome驱动文件（20240722发现过期）：http://npm.taobao.org/mirrors/chromedriver
+访问google的chromedriver官方下载站：https://chromedriver.storage.googleapis.com/index.html
+我的版本是109.0.5414.120，但是只找到最近的109.0.5414.74，测试有效。另外上面写的是chromedriver为32位，64位的谷歌浏览器也能使用。
 
 #### 基础调用
 ```    

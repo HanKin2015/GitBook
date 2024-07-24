@@ -7,19 +7,32 @@ https://blog.csdn.net/kanbide/article/details/129907180
 https://blog.csdn.net/wjy27/article/details/132831649
 使用python的win32com.client库通过WMI获取Win32_SerialPort类不成功。
 
-## 1、CEIWEI CommMonitor 串口监控精灵v12.0
+## 1、串口工具
+### 1-1、CEIWEI CommMonitor 串口监控精灵v12.0
 CEIWEI CommMonitor  串行端口监控精灵是用于RS232 / RS422 / RS485端口监控的专业强大的系统实用程序软件。CEIWEI  CommMonitor监控记录和分析系统中的所有串行端口活动，并不占用串行端口；追踪应用程序或驱动程序开发，串行设备测试和优化等过程中可能出现的问题的理想工具。还提供过滤、搜索、数据导出和强大的数据拦截功能，可以将指定端口的数据流、控制流信息拦截并保存下来，供分析之用。如察看端口状态的变化（波特率、数据位、校验位、停止位），拦截上行、下行的数据，处理速度快，拦截效率高，并且可以16进制、10进制、8进制、2进制显示输出数据，字符串则可以不同的编码显示输出，全面支持设备数据的Unicode/UTF8/UTF7编码解码 ，支持Modbus协议分析解析 。
 
-## 2、CommMonitor抓取串口Modbus协议数据包
-https://baijiahao.baidu.com/s?id=1728421275380437231&wfr=spider&for=pc
+### 1-2、猫猫串口网络调试助手 V4.9
+https://www.liqucn.com/rj/116250.shtml
+D:\将要上传到百度网盘\程序员工具箱(已更新待上传)\串口\amaoComV4.9.exe
 
-CommMonitor的最新版v12.0才支持Modbus RTU/ASCII协议分析功能，同ModbusMonitor RTU over TCP一样，完全分析了Modbus协议，不必我们再次分析了，监控即所得。
+### 1-3、串口调试助手 V2.2
+D:\将要上传到百度网盘\程序员工具箱(已更新待上传)\串口\串口调试助手V2.2.exe
 
-虚拟串口软件，用于虚拟出互通的两个串口，可以模拟通信，以便Modbus Slave/Poll软件调试串口Modbus RTU数据。
-```
-未注册版，无法保存或复制，请支持正版，谢谢!
-```
-可以看出，连续的三个IRP_MJ_READ，第一个是成功状态，第二个末尾字节是下一个数据长度-2。
+### 1-4、串口调试助手 V3.7
+https://www.cmsoft.cn/software.html?cid=0&sort=0&key=&page=2
+D:\将要上传到百度网盘\程序员工具箱(已更新待上传)\串口\UartAssist.exe
+
+## 2、串口短接自发自收
+参考：https://blog.csdn.net/dd_zhouqian/article/details/84531612
+
+短接串口线或者USB转串口线9针中的2和3
+短接这里有个问题，串口线是分公母的。然后将 2、3脚短接即可。
+
+参看：DB9 公头母头引脚定义及连接
+![](https://i-blog.csdnimg.cn/blog_migrate/09733831d3c9a93e3768748b94f261eb.jpeg)
+
+注意：短接后才能打开串口，否则请重新打开串口才能自发自收。
+我是使用钥匙进行短接的。
 
 ## 3、usb转串口驱动下载
 PL2303 Windows Driver Download   USB to UART RS232 Serial
@@ -104,3 +117,13 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Ole
 
 不同的设备可能有不同的注册表位置，没有找到可以将所有物理机固定为统一的com号，只能一个一个的设置，还原模式下会复原。
 
+## 10、CommMonitor抓取串口Modbus协议数据包
+https://baijiahao.baidu.com/s?id=1728421275380437231&wfr=spider&for=pc
+
+CommMonitor的最新版v12.0才支持Modbus RTU/ASCII协议分析功能，同ModbusMonitor RTU over TCP一样，完全分析了Modbus协议，不必我们再次分析了，监控即所得。
+
+虚拟串口软件，用于虚拟出互通的两个串口，可以模拟通信，以便Modbus Slave/Poll软件调试串口Modbus RTU数据。
+```
+未注册版，无法保存或复制，请支持正版，谢谢!
+```
+可以看出，连续的三个IRP_MJ_READ，第一个是成功状态，第二个末尾字节是下一个数据长度-2。
