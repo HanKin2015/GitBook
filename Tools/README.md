@@ -62,6 +62,7 @@ FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 |   md5校验    |                  md5sum                   |
 |  md文件编辑  |                   typro                   |
 
+非常齐全的Windows小工具：https://www.nirsoft.net/
 
 ## 4、外设工具箱
 
@@ -219,7 +220,9 @@ windows10未搜索到，版本是V1.3.4.686 (x64) 2014，下载新的版本再�
 
 当前最新版本：V1.4.1.1022 (x64)
 
+## 17、WPS生成二维码
+需要联网额，在word/excel中插入-》更多素材-》二维码。
 
-
-
+## 18、Microsoft Edge 中的 Internet Explorer 模式
+设置=》默认浏览器=》允许在Internet Explorer模式下重新加载网站（IE模式）=》允许
 

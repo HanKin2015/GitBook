@@ -31,8 +31,20 @@ http://www.foundertech.com/search.html?t=0&k=ks&x=0&y=0
 
 最终想尝试抓包，看是否是由于分包导致了问题，通过手动合包。
 
+## 6、打印机
+win11可能不存在打印管理工具。
+惠普（Hewlett-Packard，简称HP）
 
+柯达：https://support.alarisworld.com/zh-cn#section%201
+得力：https://www.nbdeli.com/products/productinfo/9333.html
 
+打印机会根据vpid+iSerialNumber描述符组成实例id，然后来绑定打印机驱动。如果iSerialNumber描述符为空，则会根据vpid+端口路径组成实例id，然后来绑定打印机驱动。当同型号打印机且存在iSerialNumber描述符时，则会按照vpid+端口路径，因此可以提前去掉iSerialNumber描述符。
+
+因此，部分打印机更换了usb端口后并不需要重装打印机驱动。
+
+斑马打印机：http://www.zebraservice.cn/#/product/64
+斑马官网：https://www.zebra.com/cn/zh/support-downloads/printers-cn/zd888ta.html?downloadId=4fd677df-5ae1-4e2f-89ce-f33134dc1e70#Tab-item-83dd8217ea-tab
+请认准官网，官网的驱动已经V10，但是盗版的还是V8，可以看出斑马图标区分。
 
 
 

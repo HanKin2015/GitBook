@@ -49,5 +49,82 @@ https://zhuanlan.zhihu.com/p/148017247
 
 周立功、广成
 
+## 6、Keil5软件使用
+https://blog.csdn.net/u012749085/article/details/125597424
+https://www.keil.com/demo/eval/arm.htm
+Keil提供了包括C编译器、宏汇编、链接器、库管理和一个功能强大的仿真调试器等在内的完整开发方案，通过一个集成开发环境（μVision）将这些部分组合在一起。
+目前软件对中文的支持不友好，不建议安装网上的一些汉化包之类的。另外建立的工程文件路径也尽量不要存在中文，否则可能会出现一些异常。
+
+## 7、烧录和仿真的区别
+烧录和仿真是两种不同的技术过程，用于开发和测试电子设备和系统。它们的主要区别如下：
+
+定义：
+烧录（Programming）是将软件或固件代码加载到目标设备的非易失性存储器（如闪存、EPROM等）中的过程。烧录通常是一次性的，将代码永久地存储在设备中，以便设备在启动时能够正确运行。
+仿真（Simulation）是使用计算机模型或仿真器来模拟设备或系统的行为。仿真可以用于验证和调试硬件和软件设计，而无需实际的物理设备。
+
+目的：
+烧录的目的是将代码加载到设备中，使其能够独立运行。烧录后，设备可以在没有连接到开发环境的情况下执行代码。
+仿真的目的是通过模拟设备或系统的行为来评估其性能、功能和可靠性。仿真可以在开发早期阶段进行，以验证设计的正确性，并在硬件制造之前进行系统级测试。
+
+过程：
+烧录通常需要使用专门的烧录器或编程器，将代码通过编程接口（如JTAG、SWD等）加载到目标设备的存储器中。这个过程是一次性的，一旦完成，代码将永久存储在设备中。
+仿真使用仿真器或软件工具来创建设备或系统的虚拟模型。通过在模型中运行代码，可以模拟设备的行为并进行各种测试和调试操作。
+
+应用：
+烧录通常用于将软件、固件或操作系统加载到嵌入式系统、微控制器、单片机等设备中。
+仿真广泛应用于电子设计自动化（EDA）、系统级设计（SLD）和硬件描述语言（HDL）开发中，用于验证和调试电路和系统设计。
+
+总的来说，烧录是将代码加载到设备中，使其能够独立运行，而仿真是通过模拟设备的行为来评估其性能和功能。烧录是一次性的，而仿真可以在开发早期进行，并且不需要实际的物理设备。
+
+烧录：就是将程序刻录在rom中
+仿真：临时将程序刻录在ram中，方便调试使用，实时查看寄存器或者地址中的值，类似debug
+
+## 8、J-link仿真器
+驱动下载：https://www.segger.com/downloads/jlink/
+https://blog.csdn.net/qq_48938498/article/details/139387709
+
+JLink_Windows_V798c_x86_64.exe，安装驱动的时候需要注意主动勾选安装驱动（install legacy USB Driver for J-Link），默认不安装驱动（JLinkx64.sys）。
+安装完后点击J-Link Commander V7.98c即可：
+```
+SEGGER J-Link Commander V7.98c (Compiled Aug  7 2024 15:41:14)
+DLL version V7.98c, compiled Aug  7 2024 15:40:25
+
+Connecting to J-Link via USB...O.K.
+Firmware: J-Link V9 compiled May  7 2021 16:26:12
+Hardware version: V9.40
+J-Link uptime (since boot): N/A (Not supported by this model)
+S/N: 69409340
+License(s): RDI, GDB, FlashDL, FlashBP, JFlash
+VTref=3.295V
 
 
+Type "connect" to establish a target connection, '?' for help
+J-Link>
+```
+
+## 9、stm32单片机
+http://www.openedv.com/forum-2-1.html
+[良许嵌入式](https://www.lxlinux.net/e/stm32/stm32-quick-start-for-beginner.html)
+[单片机在线编程网](http://www.mcuisp.com/)
+
+## 10、FTDI串口
+驱动：https://ftdichip.com/drivers/vcp-drivers/
+
+## 11、如何处理Keil uVision5注释无法输入汉字且输入汉字变成问号的问题
+KEIL点击edit,找到最下方的Configuration
+编辑Configuration页面的Editor项
+在General Editor Settings常规编辑器设置：下方Encoding编码框内将Encode in ANSI更改为：Chinese GB2312(Simplified)即可
+
+## 12、C语言开发单片机为什么大多数都采用全局变量的形式
+https://www.zhihu.com/question/396710272/answer/3533232116
+资源限制：在嵌入式系统中，包括单片机，资源是有限的。全局变量可以减少函数调用和局部变量带来的空间占用，避免由于过深的函数调用或过多的变量导致的内存溢出。在单片机资源有限的时期，全局变量的使用可以更有效地管理内存资源。
+
+访问速度：全局变量在所有函数内部都可以使用，这减少了参数传递的需要，避免了不必要的数据拷贝，从而提高了访问速度。在嵌入式系统中，数据的访问速度对程序的性能至关重要。
+
+方便性：全局变量可以方便地在程序中进行数据共享。在单片机开发中，有些数据需要在不同的函数之间进行传递，全局变量提供了这种方便性，减少了代码的冗余。
+
+方便调试：全局变量可以方便地进行调试。由于单片机没有屏幕和键盘，无法进行人机交互，使用全局变量可以方便地在所有函数中共享数据，从而简化调试过程。
+
+中断服务函数的交互：中断服务函数是单片机程序的重要组成部分，但中断服务函数是不能传参的。因此，使用全局结构体变量可以方便中断服务函数与主函数线程任务进行交互。
+
+综上所述，C语言开发单片机时大多数都采用全局变量的形式，这主要是基于资源限制、访问速度、方便性、调试方便性和中断服务函数的交互等方面的考虑。

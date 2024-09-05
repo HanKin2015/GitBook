@@ -7,9 +7,6 @@ https://www.usb.org/documents
 https://www.intel.cn/content/www/cn/zh/products/docs/io/universal-serial-bus/ehci-v1-1-addendum.html?wapkw=ehci
 https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/ehci-specification-for-usb.pdf
 居然是intel的资料。
-
-[List of USB ID](http://www.linux-usb.org/usb.ids)
-
 peripheral：外围设备
 
 ## 2、USB协议
@@ -82,8 +79,14 @@ https://driverpack.io/zh-cn/devices/wifi/realtek/realtek-8812au-wireless-lan-802
 https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet/AX88179
 https://www.altobeam.com/
 
-## 14、打印机
-win11可能不存在打印管理工具。
-惠普（Hewlett-Packard，简称HP）
+## 14、常见的厂商vendor
+USB设备的VID(Vendor ID)是指厂商ID。每一个USB设备都具有VID，通过VID可以获取到该USB设备对应的USB设备厂商。
+[List of USB ID](http://www.linux-usb.org/usb.ids)
+[USB-IF](https://www.usb.org/developers) 这个使用的十进制显示
+https://devicehunt.com/  该网站的USB VID数据是使用的方法二中linux-usb.org的usb.ids。
 
-柯达：https://support.alarisworld.com/zh-cn#section%201
+2109:0815  SuperSpeed集线器
+8087:0032  无线蓝牙网卡
+2109:2815  通用USB集线器
+
+

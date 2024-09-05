@@ -251,6 +251,20 @@ def zipDir(dirpath, outpath_zip):
 ::
 ```
 
+### powershell脚本
+```
+#
+# 文 件 名: test.ps1
+# 文件描述: powershell脚本练习
+# 备    注: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+# 作    者: HanKin
+# 创建日期: 2024.08.12
+# 修改日期：2024.08.12
+# 
+# Copyright (c) 2024 HanKin. All rights reserved.
+#
+```
+
 ### perl脚本
 ```
 #!/usr/bin/perl

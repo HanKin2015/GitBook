@@ -4,12 +4,13 @@
 VMware Workstation（中文名“威睿工作站”）是一款功能强大的桌面虚拟计算机软件，提供用户可在单一的桌面上同时运行不同的操作系统，和进行开发、测试 、部署新的应用程序的最佳解决方案。VMware Workstation可在一部实体机器上模拟完整的网络环境，以及可便于携带的虚拟机器，其更好的灵活性与先进的技术胜过了市面上其他的虚拟计算机软件。对于企业的 IT开发人员和系统管理员而言， VMware在虚拟网路，实时快照，拖曳共享文件夹，支持 PXE 等方面的特点使它成为必不可少的工具。
 
 ## 2、安装
-官网下载：https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html
+中文简体版：https://vmware.waltzsy.com/?bd_vid=8261744927183947044
+官网下载：https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion
 系统镜像：https://msdn.itellyou.cn/（只有20.04版本，但官网最新23.04版本）
 官方下载：https://releases.ubuntu.com/lunar/
 居然VMware是收费的。。。
 由于是去年下载的，一直未安装，拖延症严重啊，已经过来半年了，安装的是16.2.4 build-20089737版本，然后在网上找了破解码，直接许可通过。
-https://www.mvplm.com/239.html
+https://m.vqs.com/article/14740.html
 
 ## 3、安装Ubuntu23.04
 存在一个bug，不管怎么输入账号密码，都无法进入虚拟机。
@@ -50,3 +51,23 @@ NAT模式：在NAT模式下，虚拟机可以访问主机所在的局域网和�
 ## 6、虚拟机和主机之间复制粘贴
 设置-》选项-》客户机隔离是会一直是灰色的不能点击。
 只需要安装：apt install open-vm-tools-desktop即可，需要重启虚拟机。
+
+## 7、虚拟机使用的此版本VMware Workstation不支持的硬件版本
+很奇怪，重装Windows系统后这个位置变成了19，当前最新版本才17。
+- 在虚拟机名称上右键，选择【虚拟机目录】
+- 找到所使用的虚拟机的.vmx目录，用记事本打开，用于查看其支持的VMware Workstation版本
+- 查看字段，修改可支持的版本信息，搜索virtualHW.version，我使用的版本是VMware Workstation 16，所以改成16，你使用什么版本就改成什么版本，看你的虚拟机软件版本整数
+
+## 8、无法将xxxx链接到该虚拟机。主机需要使用该设备进行输入
+网上好多答案是配置文件.vmx里添加了一行就可以usb.generic.allowLastHID = "TRUE"。结果根本不行。
+最终解决办法是再插一个hid设备，如键鼠即可。这个报错是说这是最后一个输入设备了，不能将它给映射进去。
+
+## 9、不显示hid设备
+关闭虚拟机-》虚拟机-》设置-》usb控制器-》显示所有usb输入设备
+
+
+
+
+
+
+

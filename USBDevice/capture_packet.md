@@ -173,16 +173,31 @@ https://blog.csdn.net/baidu_37503452/article/details/87599038
 https://blog.csdn.net/baidu_37503452/article/details/87598982
 
 ## 2、wireshark
+
+### 2-1、安装wireshark
 windows系统安装需要勾选安装USBPcap软件，可以在C:\Program Files\USBPcap\USBPcapCMD.exe软件查找当前设备的连接情况。
 
 ubuntu安装wireshark使用，apt install wireshark，设置时勾选是即可。到这一步基本上就能直接使用了，运行命令wireshark即可。
+
 GUI：
 出于安全方面的考虑，普通用户不能够打开网卡设备进行抓包，Wireshark不建议用户通过sudo在root权限下运行。
 如果没有或者勾选了否，就安装好之后，运行下面命令行，出现上述页面选择“是”即可。
+```
 dpkg-reconfigure wireshark-common
 
 vim /etc/group
 在最后的一行wireshark:x:129:hankin
+```
+
+### 2-2、wireshark抓网络数据包
+- tcp连接的三次握手：客户端发送连接SYN-》服务端收到回复SYN/ACK-》客户端收到ACK
+- tcp断开的四次协商：服务端主动关闭FIN/ACK-》客户端收到ACK=》客户端关闭等待回复FIN/ACK=》服务端收到ACK
+- 数据包分片TCP segment of a reassembled PDU (TCP数据包重组的一部分)
+- 窗口更新:TCP Window Full/TCP ZeroWindow/TCP Keep-Alive/TCP Womdow Update
+- TCP DUP ACK （重复的ACK）
+- 乱序（TCP out-of-order）
+- 重传（TCP Restransmission ）
+- 丢片（TCP previous segment not captured ）
 
 ## 3、Bus Hound
 phase：阶段、时期
@@ -195,7 +210,9 @@ phase：阶段、时期
 Linux下实时监控usb设备的拔插情况。
 
 ## 5、tcpdump抓包工具
-使用tcpdump抓取网络数据包:
+https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
+
+### 5-1、使用tcpdump抓取网络数据包
 ```
 tcpdump -i eth0 host 10.70.55.130 -s 0 -w hj.pcap
 ```
@@ -207,13 +224,21 @@ tcpdump -i eth0 -s0 host 172.22.18.156 -C 100 -W 3 -w ./vdi_server.pcap
 循环抓取eth0口，客户端IP为172.22.18.156 的数据包，并按照大小为100M，保留最新3个文件的方式保存到当前目录。
 ```
 
-使用tcpdump抓取usb数据包:
+### 5-2、使用tcpdump抓取usb数据包
 查看流量使用情况：iftop -nNpP
 查看usbmon设备：tcpdump -D
 抓取usb数据包：tcpdump -i usbmon2 > /tmp/xxxx.pcap
+注意一定要使用-w参数输出，否则就会出现后面一系列问题：tcpdump -i usbmon2 -w /tmp/xxxx.pcap
 
 看着是抓取成功了：
 ```
+root@hankin:/tmp# tcpdump -D
+1.eth0 [Up, Running]
+2.any (Pseudo-device that captures on all interfaces) [Up, Running]
+3.lo [Up, Running, Loopback]
+4.nflog (Linux netfilter log (NFLOG) interface)
+5.nfqueue (Linux netfilter queue (NFQUEUE) interface)
+6.usbmon1 (USB bus number 1)
 root@hankin:/var/log# tcpdump -i usbmon1 > /tmp/usbmon.pcap
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header), capture size 262144 bytes
@@ -221,6 +246,8 @@ listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 1558 packets received by filter
 0 packets dropped by kernel
 ```
+`0` 代表所有的USB总线，`1，2` 代表不同USB总线，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
+
 但是在Windows系统上打开pcap文件报错：The capture file appears to be damaged or corrupt.(stanag4607: File has 976238906d-byte packet, bigger than maximum of 262144)
 
 使用vim命令查看应该是抓取失败了：
@@ -242,7 +269,8 @@ listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 21:09:41.651186 INTERRUPT COMPLETE to 1:14:1
 ```
 
-低版本无法使用tcpdump抓usb数据包:
+低版本无法使用tcpdump抓usb数据包，更新tcpdump文件，结果还是不行，原因是命令执行错误:
+tcpdump依赖libpcap库，因此需要先编译libpcap库，然后再编译tcpdump，直接configure和make即可。
 ```
 root@hankin:/tmp# ./tcpdump --help
 tcpdump version 4.9.2
@@ -251,14 +279,7 @@ root@hankin:/tmp# tcpdump --version
 tcpdump version 4.6.2
 libpcap version 1.6.2
 OpenSSL 1.0.1k 8 Jan 2015
-
 ```
-
-
-
-`0` 代表所有的USB总线，`1，2` 代表不同USB总线，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
-
-https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html
 
 ## 6、USBLzyer2.2
 软件功能

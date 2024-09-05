@@ -1,4 +1,4 @@
-# linux网络设置
+# 网络设置
 
 ## 1、重启网络服务
 ```
@@ -11,7 +11,7 @@ systemctl restart NetworkManager.service
 
 ### 2-1、ubuntu
 vi /etc/systemd/resolved.conf
-DNS= 10.0.0.3 10.0.0.4
+DNS= 19.0.0.3 19.0.0.4
 :wq
 
 这个文件/etc/resolv.conf是可以看见dns信息，并且可以设置。但是发现开头就写着这么一行：
@@ -56,16 +56,16 @@ Address:  114.114.114.114
 
 非权威应答:
 名称:    baidu.com
-Addresses:  39.156.66.10
-          110.242.68.66
+Addresses:  39.156.66.19
+          119.242.68.66
 (base) D:\Github\Storage\python\study\others>nslookup baidu.com 223.5.5.5
 服务器:  public1.alidns.com
 Address:  223.5.5.5
 
 非权威应答:
 名称:    baidu.com
-Addresses:  39.156.66.10
-          110.242.68.66
+Addresses:  39.156.66.19
+          119.242.68.66
 (base) D:\Github\Storage\python\study\others>nslookup baidu.com vip1.sfndns.cn
 DNS request timed out.
     timeout was 2 seconds.
@@ -84,7 +84,7 @@ DNS request timed out.
 ```
 如果两次查询结果一致，表明域名解析在指定的递归服务器已经生效，如果两次结果不一致，表明该递归服务器的尚存在DNS缓存，域名解析还没有生效。
 
-## 3、路由设置
+## 3、Linux路由设置
 Linux系统的route命令用于显示和操作IP路由表（show / manipulate the IP routing table）。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。
 在Linux系统中，设置路由通常是为了解决以下问题：该Linux系统在一个局域网中，局域网中有一个网关，能够让机器访问Internet，那么就需要将这台机器的IP地址设置为Linux机器的默认路由。要注意的是，直接在命令行下执行route命令来添加路由，不会永久保存，当网卡重启或者机器重启之后，该路由就失效了；可以在/etc/rc.local中添加route命令来保证该路由设置永久有效。
 
@@ -108,12 +108,12 @@ route add default gw 192.168.120.240
 ```
 
 遇到的问题场景：无法ping通目标ip，需要添加一条路由广播。
-解决方式：通过能访问的网络，然后ssh到目标主机，然后添加route add -net 172.22.0.0 netmask 255.255.0.0 gw 10.70.255.254 dev eth0就搞定了。
+解决方式：通过能访问的网络，然后ssh到目标主机，然后添加route add -net 172.22.0.0 netmask 255.255.0.0 gw 19.123.255.254 dev eth0就搞定了。
 
 如果要在不同网段直接通讯，需要添加路由。
 
 ### 3-1、添加主机路由
-如果想192.168.2.10主机 ping通192.168.0.8主机，则需要经过路由器2，就要在192.168.2.10的主机上添加一条到192.168.0.8的路由，添加命令如下：
+如果想192.168.2.19主机 ping通192.168.0.8主机，则需要经过路由器2，就要在192.168.2.19的主机上添加一条到192.168.0.8的路由，添加命令如下：
 ```
 route add -host 192.168.0.8  gw 192.168.2.1 dev eth0
 ```
@@ -121,7 +121,7 @@ route add -host 192.168.0.8  gw 192.168.2.1 dev eth0
 若要删除这条路由只需执行：route del 192.168.0.8 
 
 ### 3-2、添加网络路由
-第一种添加主机路由的方式只能访问到一台目录主机，如果192.168.2.10要访问0网段的所有主机的话把0网段主机都添加一遍显然很麻烦，通过添加网络路由的方式，只要在192.168.0.10主机上添加一条0网段的网络路由即可，添加命令如下：
+第一种添加主机路由的方式只能访问到一台目录主机，如果192.168.2.19要访问0网段的所有主机的话把0网段主机都添加一遍显然很麻烦，通过添加网络路由的方式，只要在192.168.0.19主机上添加一条0网段的网络路由即可，添加命令如下：
 ```
 route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.2.1 dev eth0
 ```
@@ -205,7 +205,7 @@ https://zhuanlan.zhihu.com/p/422812398
 很奇怪，不能ping通ip，但是能通过mstsc远程连接。
 关闭防火墙之后就能ping通。
 
-## 10、Ubuntu23.04
+## 10、vmware配置Ubuntu23.04虚拟机
 
 ### 10-1、hostname太长了
 hostname命令临时生效
@@ -249,18 +249,18 @@ root@hankin:~# cat /var/lib/dhcp/dhclient.leases | grep dhcp-server-identifier
 解决方案：使用一台非网段做代理进行访问。
 
 wget命令配置代理下载文件：
-wget --proxy=on --proxy-host=10.70.90.156 --proxy-port=3128 http://mirrors.org/assistants/ubuntu.sh
+wget --proxy=on --proxy-host=19.123.90.156 --proxy-port=3128 http://mirrors.org/assistants/ubuntu.sh
 
 查看配置的代理设置：
 ```
 hankin@ubuntu:~/Desktop$ env | grep proxy
 no_proxy=localhost,127.0.0.0/8,::1
-ftp_proxy=http://192.168.56.102:3128/
-https_proxy=http://192.168.56.102:3128/
-http_proxy=http://192.168.56.102:3128/
-all_proxy=socks://192.168.56.102:3128/
+ftp_proxy=http://192.168.56.192:3128/
+https_proxy=http://192.168.56.192:3128/
+http_proxy=http://192.168.56.192:3128/
+all_proxy=socks://192.168.56.192:3128/
 hankin@ubuntu:~/Desktop$ echo $http_proxy
-http://192.168.56.102:3128/
+http://192.168.56.192:3128/
 ```
 
 查看~/.bashrc或~/.profile文件：
@@ -294,16 +294,124 @@ apt命令设置代理：
 https://zhuanlan.zhihu.com/p/629584549
 ```
 $ cat  /etc/apt/apt.conf.d/proxy.conf
-Acquire::http::Proxy "http://192.168.56.102:3128/";
-Acquire::https::Proxy "http://192.168.56.102:3128/";
+Acquire::http::Proxy "http://192.168.56.192:3128/";
+Acquire::https::Proxy "http://192.168.56.192:3128/";
 ```
 
+## 12、网络不通问题排查
+问题现象：某个服务器ssh连接不上，ping也ping不通，但是另外一个服务器在同一个环境下却能ping通
+备注：两个服务器之间能通过ssh连接
 
+```
+C:\Users\User>ping 19.123.48.18
 
+正在 Ping 19.123.48.18 具有 32 字节的数据:
+请求超时。
+请求超时。
+请求超时。
+请求超时。
 
+19.123.48.18 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 0，丢失 = 4 (190% 丢失)，
 
+C:\Users\User>ping 19.123.48.17
 
+正在 Ping 19.123.48.17 具有 32 字节的数据:
+来自 19.19.119.163 的回复: 无法访问目标主机。
+来自 19.19.119.163 的回复: 无法访问目标主机。
+来自 19.19.119.163 的回复: 无法访问目标主机。
+来自 19.19.119.163 的回复: 无法访问目标主机。
 
+19.123.48.17 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+
+C:\Users\User>ping 19.123.48.34
+
+正在 Ping 19.123.48.34 具有 32 字节的数据:
+来自 19.123.48.34 的回复: 字节=32 时间=6ms TTL=61
+来自 19.123.48.34 的回复: 字节=32 时间=6ms TTL=61
+来自 19.123.48.34 的回复: 字节=32 时间=2ms TTL=61
+来自 19.123.48.34 的回复: 字节=32 时间=5ms TTL=61
+
+19.123.48.34 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 2ms，最长 = 6ms，平均 = 4ms
+```
+
+两者除了系统不一样，网络设置的网关、dns、以及ip都是一样的。
+神奇，换了一个ip地址后就正常了。莫非是被封堵了？？？不是很确定。
+
+使用arping -i ens18 19.123.48.34发现不通，但是能ping通也是够怪的。
+无解。
+
+## 13、Windows操作系统配置双网卡同时访问内外网
+```
+C:\Windows\System32>systeminfo
+
+主机名:           DESKTOP-B4VVGCN
+OS 名称:          Microsoft Windows 11 教育版
+OS 版本:          10.0.22631 暂缺 Build 22631
+OS 制造商:        Microsoft Corporation
+OS 配置:          独立工作站
+OS 构建类型:      Multiprocessor Free
+注册的所有人:     harlan
+注册的组织:       暂缺
+产品 ID:          00328-10000-00001-AA085
+初始安装日期:     2024/8/12, 18:58:59
+系统启动时间:     2024/8/21, 9:05:38
+系统制造商:       LENOVO
+系统型号:         90H80006CP
+系统类型:         x64-based PC
+处理器:           安装了 1 个处理器。
+                  [01]: Intel64 Family 6 Model 158 Stepping 9 GenuineIntel ~3600 Mhz
+BIOS 版本:        LENOVO O3AKT13A, 2017/5/16
+Windows 目录:     C:\WINDOWS
+系统目录:         C:\WINDOWS\system32
+启动设备:         \Device\HarddiskVolume2
+系统区域设置:     zh-cn;中文(中国)
+输入法区域设置:   zh-cn;中文(中国)
+时区:             (UTC+08:00) 北京，重庆，香港特别行政区，乌鲁木齐
+物理内存总量:     8,103 MB
+可用的物理内存:   4,675 MB
+虚拟内存: 最大值: 9,383 MB
+虚拟内存: 可用:   5,921 MB
+虚拟内存: 使用中: 3,462 MB
+页面文件位置:     C:\pagefile.sys
+域:               WORKGROUP
+登录服务器:       \\DESKTOP-B4VVGCN
+```
+
+默认状态下只能访问其中一个，基本上是一会儿能访问内网，一会儿能访问外网，两者在互抢。
+但总的来说，这个跟跳跃点数有关，可以通过route print命令查看两者的跳跃点数，少的访问优先级越高。
+
+修改接口跃点数（默认是自动跃点）：网络属性=》ipv4=》高级=》自动跃点
+
+设置双网：主要是0.0.0.0冲突了，0代表所有网络数，即1-255。
+```
+#删除所有的0.0.0.0的缺省路由
+route delete 0.0.0.0
+ 
+#设置缺省路由的下一跳为192.168.50.89（外网网关），-p是路由永久有效
+route add 0.0.0.0 mask 0.0.0.0 192.168.50.89 -p
+ 
+#将访问目的地址（内网）是10.70.0.0段的下一跳设置为172.22.16.254（内网网关）
+route add 10.70.0.0 mask 255.255.0.0 172.22.16.254 -p
+```
+
+我的这种方法是一个道理：
+```
+删除内网默认路由：route del 0.0.0.0 mask 0.0.0.0 172.22.16.254
+添加内网访问的地址段：route add 10.70.0.0 mask 255.255.0.0 172.22.16.254
+
+我发现经过上面操作后访问内外网是通了，但是发现内网通过mstsc却连接不上该电脑，发现ping不通。
+解决办法：该电脑ipconfig /all发现默认网关没有了，通过手动配置ip地址添加默认网关即可。
+```
+
+参考了网上诸多教程，发现都不行，折腾了快一个小时，这个靠谱些：https://blog.csdn.net/yangowen/article/details/121985350
+
+查看ipv4路由表：route -4 print
+还原路由表：netsh int ipv4  reset 
 
 
 

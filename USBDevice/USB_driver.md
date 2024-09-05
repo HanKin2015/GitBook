@@ -21,3 +21,6 @@ dism /online /export-driver /destination:"D:\driverbak"
 
 发现usbhub3.sys驱动没法进行备份，我直接找到一些临时文件夹进行安装也不行，要么直接替换文件，要么重装系统呗。
 
+## 4、Windows开发
+usb返回码：https://learn.microsoft.com/en-us/previous-versions/windows/hardware/usb/ff539136(v=vs.85)
+

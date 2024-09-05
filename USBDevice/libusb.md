@@ -333,9 +333,18 @@ https://blog.csdn.net/zb774095236/article/details/83748747
 
 ## 12、在windows系统上面无法使用libusb获取字符串描述符
 无法获取字符串描述符，需要进行通信获取，一定需要替换成特定的驱动才能完成，这样才能使用libusb_open或者libusb_open_device_with_vid_pid才能成功，否则使用不了。
-https://blog.csdn.net/qq_36098477/article/details/127525152
 
-因此不能使用libusb库。
+https://blog.csdn.net/qq_36098477/article/details/127525152
+假如我现在插入一个U盘就开始调用LibUSB库进行Open操作，这样是一定会返回错误的，因为LibUSB本身不是驱动，实际上也是要调用驱动留出的系统调用接口进行数据和指令传递的(这里类比linux的特性，表述可能些许不合适)。当这个设备底层根本不是LibUSB需要的接口的时候，当然是无法正常调用。
+
+此时需要将该设备的驱动换成合适的低级驱动(linux的优势就出来了)，LibUSB库在Windows平台上是基于WinUSB底层驱动去开发的。因此最适合LibUSB开发的底层驱动当然是WinUSB。博主尝试过使用linusb-win32等其他的驱动，他们可以open设备但是在claim接口的时候会有掉设备的情况(一claim就听到Windows掉USB设备的声音，正常后不会这样)，直接导致transfer的时候返回LIBUSB_ERROR_IO(-1)。因此，在进行Windows下的LibUSB开发之前先解决你的驱动问题。
+
+驱动问题的解决方式是通过zadig工具进行驱动替换，首先插入你的设备，list一下获得设备名单，选择你的设备，选择winUSB驱动，replace即可。不需要有网也能安装。
+
+因此不建议使用libusb库。
+但是测试成功demo有：
+U盘直接使用zadig替换成功了（无需重启），但是替换摄像头的时候花费很长时间，但是替换成功了，并且需要重启虚拟机后才能正常使用。
+备注：使用zadig替换驱动后设备无法正常使用。
 
 所以只能参考usbview代码去修改：https://github.com/microsoft/Windows-driver-samples/tree/main/usb/usbview
 参考uscview.c文件的RefreshTree函数

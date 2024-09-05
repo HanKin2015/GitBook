@@ -18,6 +18,35 @@ C:\Windows\System32\pnputil.exe
 
 C:\Users\Administrator>where devcon
 信息: 用提供的模式无法找到文件。
+
+C:\program files (x86)\Windows Kits\10\Tools\x64>devcon.exe help
+Device Console Help:
+devcon.exe [-r] [-m:\\<machine>] <command> [<arg>...]
+-r           Reboots the system only when a restart or reboot is required.
+<machine>    Specifies a remote computer.
+<command>    Specifies a Devcon command (see command list below).
+<arg>...     One or more arguments that modify a command.
+For help with a specific command, type: devcon.exe help <command>
+classfilter          Add, delete, and reorder class filters.
+
+classes              List all device setup classes.
+
+disable              Disable devices.
+
+driverfiles          List installed driver files for devices.
+
+drivernodes          List driver nodes of devices.
+
+enable               Enable devices.
+
+C:\program files (x86)\Windows Kits\10\Tools\x64>devcon.exe hwids *PCI*
+PCI\VEN_1AF4&DEV_1000&SUBSYS_00011AF4&REV_00\3&13C0B0C5&0&90
+    Name: Sangfor FastIO Ethernet Adapter #2
+    Hardware IDs:
+        PCI\VEN_1AF4&DEV_1000&SUBSYS_00011AF4&REV_00
+        PCI\VEN_1AF4&DEV_1000&SUBSYS_00011AF4
+        PCI\VEN_1AF4&DEV_1000&CC_020000
+        PCI\VEN_1AF4&DEV_1000&CC_0200
 ```
 
 DevCon (Devcon.exe)（即设备控制台）是一种命令行工具，用于显示有关运行 Windows 的计算机上的设备的详细信息。 可以使用 DevCon 启用、禁用、安装、配置以及删除设备。
@@ -115,3 +144,56 @@ Microsoft PnP 工具
 需要重新启动系统才能完成取消配置操作!
 ```
 这个时候扫描检测硬件改动后设备就不存在了
+
+## 6、sc命令
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SamSs
+```
+C:\Users\User>sc query samss
+
+SERVICE_NAME: samss
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        STATE              : 4  RUNNING
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+C:\Users\User>sc query hj
+[SC] EnumQueryServicesStatus:OpenService 失败 1060:
+
+指定的服务未安装。
+
+C:\Users\User>sc query scmbus
+
+SERVICE_NAME: scmbus
+        TYPE               : 1  KERNEL_DRIVER
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1077  (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+```
+
+https://www.jb51.net/article/266527.htm
+注册表服务中的Start值：
+Start=0 boot
+Start=1 system
+Start=2 自动
+Start=3 手动
+Start=4 禁用
+
+## 7、对象名已存在
+Windows无法初始化这个硬件的设备驱动程序。（代码37）
+一般来说是有两个驱动同时操作了此设备导致，删除相关的过滤驱动即可，还有一种情况就是驱动服务，两个驱动的服务同时启动了。
+
+sc命令查看服务状态，遇到过北信源软件阻止驱动卸载，导致原来的驱动服务还存在出现此情况。另外遇到过绿盾软件导致devcon.exe程序的返回值始终为空，导致返回值异常出现安装问题。
+
+摄像头相关注册表：
+```
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+```
+
+

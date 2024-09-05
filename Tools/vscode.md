@@ -76,7 +76,6 @@ run code插件直接运行
 
 上述是最常用的功能。其他功能请参考[VSCode 官网快捷键](https://link.zhihu.com/?target=https%3A//code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
-
 ## 6、插件离线安装
 教程一（需要版本匹配）：将C:\Users\Administrator\.vscode\extensions下面的文件夹拷贝到环境中，重启两次vscode即可。
 
@@ -84,6 +83,7 @@ run code插件直接运行
 
 教程三（插件网搜索下载vsix插件）：https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
 在右边Resources-》Downloads Extension即可。
+另外搜索的时候需要注意分类，我在下载drawio时一直没有找到网上说的插件，原来是分类限制了。
 
 ## 7、输出窗口中文乱码
 由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。

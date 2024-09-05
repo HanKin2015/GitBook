@@ -59,6 +59,13 @@ zip
 rar
     rar a all *.jpg
     unrar e all.rar
+
+rpm
+    解压：rpm2cpio package.rpm | cpio -idmv
+          rpm2cpio package.rpm | cpio -id
+
+lz4
+    解压：lz4 -d file.lz4
 ```
 
 ## 3、tar 压缩并删除源文件

@@ -270,7 +270,17 @@ d87ae880 2887601904 S Ii:2:041:7 -115:1 16 <
 
 因此，通过分析 bmAttributes 字段的不同取值，可以了解端点的传输类型和同步类型，从而更好地理解 USB 设备的通信特性。
 
+## 6、设备限定描述符(Device Qualifier Descriptor)
+https://blog.csdn.net/u012028275/article/details/109276309
+设备限定描述符(Device Qualifier Descriptor)说明了能进行高速操作的设备在其他速度时产生的变化信息。例如，如果设备当前在全速下操作，设备限定描述符返回它如何在高速运行的信息。
 
+如果设备既支持全速状态又支持高速状态，那么就必须含有设备限定描述符(Device Qualifier Descriptor)。设备限定描述符(Device Qualifier Descriptor)中含有当前没有使用的速度下这些字段的取值。
+
+设备限定描述符(Device Qualifier Descriptor)不包含标准设备描述符中的厂商、产品、设备、制造厂商、产品和序列号场，因为在所有支持的速度下设备的这些信息都是常数。这个描述符的版本号至少是2.0(0200H)。
+
+如果只能进行全速(full-speed)操作的设备(设备描述符的版本号等于0200H)接收到请求设备限定符的Get Descriptor请求，它必须用请求错误响应，回复STALL来响应。
+
+主机端只能在成功取得设备限定描述符(Device Qualifier Descriptor)之后，才能请求其他速度配置(other_speed_configuration)描述符。
 
 
 

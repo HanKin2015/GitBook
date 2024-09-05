@@ -1,4 +1,16 @@
-# 装系统入门
+# 刷机那些事儿
+
+## 0、新系统刷机的必备软件汇总
+360驱动大师网卡版（或者可以使用手机使用USB网络共享，有线网络也是不行的，也没有有线网卡驱动，除非是别人改过的iso镜像）
+http://dm.weishi.360.cn/home.html
+
+7z：https://7-zip.org/
+chrome：https://www.iplaysoft.com/tools/chrome/
+搜狗输入法：https://shurufa.sogou.com/
+企业微信：https://work.weixin.qq.com/
+微信：https://weixin.qq.com/
+everything：https://www.voidtools.com/zh-cn/
+notepad++：https://github.com/notepad-plus-plus/notepad-plus-plus
 
 ## 1、hp瘦客户机刷机
 参考：https://wenku.baidu.com/view/cc573f05a6c30c2259019e54.html
@@ -172,7 +184,6 @@ fromimage：选择partion→从图像中找到您准备的gho文件。
 
 用partition，Disk是还原整个硬盘的。前者：意为通过镜像文件还原分区。后者：意为通过镜像文件还原硬盘。
 
-
 ghost（美国赛门铁克公司旗下的硬盘备份还原工具）。
 该软件能够完整而快速地复制备份、还原整个硬盘或单一分区。
 1）由于Ghost在备份还原是按扇区来进行复制，所以在操作时一定要小心，不要把目标盘（分区）弄错了，要不将目标盘（分区）的数据全部抹掉就很惨的……根本没有多少恢复的机会，所以一定要认真、细心！但你也不要太紧张，其实Ghost的使用很简单，弄懂那几个单词的意思，就会理解它的用法，加上认真的态度，一定可以掌握它的。
@@ -276,17 +287,7 @@ F7、F11、F12、Delete都有可能是启动选项界面。
 https://jingyan.baidu.com/article/4ae03de306ccf53eff9e6bea.html
 原因是直接选择U盘启动，并不是制作U盘镜像时选择的各种模式，需要去BIOS里面修改启动顺序即可。
 
-## 18、win7系统刷机的必备软件汇总
-360驱动大师网卡版（或者可以使用手机使用USB网络共享，有线网络也是不行的，也没有有线网卡驱动，除非是别人改过的iso镜像）
-7z
-chrome
-搜狗输入法
-企业微信
-微信
-everything
-notepad++
-
-## 19、通过bios改变usb口主控类型导致win7系统使用不了外设
+## 18、通过bios改变usb口主控类型导致win7系统使用不了外设
 由于win7系统默认情况下是没有usb3.0。但是如果不切换到usb3.0状态，使用360驱动大师又扫描不到驱动缺少，使用驱动搜索功能又搜索不到。
 
 如果直接修改usb3.0主控，那么将会出现键鼠设备使用不了。如果在bios启动顺序中关闭磁盘，那么将会出现毁灭性打击，每次启动的时候都会在bios界面。
@@ -310,7 +311,7 @@ https://www.dell.com/support/home/zh-cn/drivers/DriversDetails?c=cn&driverid=VX8
 安装成功，此时键鼠无法使用了，只能强制重启物理机，重启后键鼠使用正常，查看设备管理器信息完美搞定，但是当时只备份到hub驱动，没有备份到host驱动（英特尔(R) USB 3.0 根集线器_5.0.4.43_5-11-2017_6.1_x64）。
 到时候使用我的笔记本再导出一个。
 
-## 20、关于win7系统激活
+## 19、关于win7系统激活
 KMSpico软件：http://kmspico.micaesoft.com/
 HEU_KMS_Activator（推荐）：https://heukmsactivator.com/
 KMS8软件（需要关注公众号获取）：https://www.pccppc.com/

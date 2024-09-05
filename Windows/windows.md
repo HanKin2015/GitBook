@@ -256,6 +256,15 @@ https://m.uc23.net/jiaocheng/76218.html
 consumer editions版本包含Home(家庭版)、Education(教育版)、Professional(专业版)；
 business editions版本包含Education(教育版)、Enterprise (企业版)、Professional(专业版)。
 
+### 1-26、插入良田高拍仪后软件就自动关闭退出
+修改Windows的设置-隐私-摄像头
+
+### 1-27、快捷键隐藏桌面图标
+没有，只能先按鼠标右键-》v键-》d键
+
+### 1-28、进入安全模式
+shift键+鼠标点击重启（最牛逼的操作，按F几都弱爆了），但是一开始尝试了一下，但是失败了。
+
 ## 2、其他windows
 
 ### 2-1、20210201
@@ -373,6 +382,20 @@ win7系统（旗舰版和企业版）：控制面板=》时钟、语言和区域
 https://tieba.baidu.com/p/8630913406
 https://www.xpwin7.com/jiaocheng/25004.html
 
+### 2-13、windows镜像区分amd和intel吗
+Windows镜像不区分AMD和Intel处理器。
+
+Windows操作系统镜像（无论是Windows Server 2012 R2还是Windows Server 2016）都支持在AMD和Intel的x86-64处理器上运行，这得益于amd64架构的兼容性。amd64架构的镜像可以在AMD和Intel的x86 64位处理器上运行，这是因为x86是一个指令集，它在个人电脑初期就已经存在，包括8086、286、386等，而amd64架构的镜像设计上就是兼容这些指令集的。因此，用户不必担心Windows镜像是否区分AMD和Intel处理器，因为它们都是兼容的。
+
+此外，虽然有观点认为AMD可以兼容Intel的处理器，而Intel不兼容AMD的处理器，但这并不适用于Windows操作系统的安装和使用场景。实际上，无论是AMD还是Intel的处理器，都可以运行相同的Windows镜像，这进一步证明了Windows操作系统的镜像在设计上是兼容这两种处理器的。
+
+### 2-14、远程桌面连接
+- 打开Windows设置（Windows + I键），然后单击左侧边栏上的“系统”。接下来，在右侧窗格中选择“远程桌面”。
+- 在电脑上按下“Windows + R”键，打开运行框，输入“sysdm.cpl”，然后点击“确定”以打开系统属性。
+
+### 2-15、win7系统设置超过分辨率的壁纸变大
+原因是图片位置需要从居中设置为填充即可。
+
 ## 3、win11那些事儿
 
 ### 3-1、提示这台电脑不符合安装此版本的Windows所需的最低系统要求
@@ -451,6 +474,22 @@ Windows系统中的C:\Windows\Temp文件夹也是用于存储临时文件的目�
 ### 3-4、dos创建直接进行复制粘贴
 设置：属性=》选项=》勾选快速编辑模式即可，这样可以直接标记，然后右键就可以复制粘贴了。
 
+### 3-5、安装Windows11
+这台电脑当前不满足Windows 11系统要求
+原因如下：
+- 此版本的Windows不支持该处理器
+- 该电脑必现支持TPM2.0
+- 此电脑必现支持安全启动
+
+解决方案：D:\Github\Storage\batch\install_windows11_check.bat
+但是只解决了处理器问题，依然存在后面两者问题：
+https://www.yoojia.com/ask/17-14389561330025684458.html
+https://www.php.cn/faq/635773.html
+https://zhidao.baidu.com/question/316785589826197724.html
+
+但请注意，此方法并不能绕过对TPM1.2的强制检查，因此，若设备未配备TPM硬件，仍将无法通过安装检查。
+解决方案：需打开文件资源管理器，进入到“C:\$WINDOWS.~BT\Sources”路径下，删除其中的appraiserres.dll文件。之后，创建一个新的空白文本文件，并将其重命名为appraiserres.dll。
+
 ## 4、激活Windows
 脚本：D:\Github\Storage\batch\windows10激活工具.bat
 ```
@@ -468,3 +507,13 @@ slmgr /skms 2.2.74.170
 @echo 
 slmgr /ato
 ```
+
+## 5、Windows7那些事儿
+
+### 5-1、进入安全模式
+- 开机按F8进入多启动菜单
+- msconfig修改启动项
+- 
+
+
+

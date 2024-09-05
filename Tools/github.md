@@ -113,3 +113,26 @@ http://30daydo.com/article/44566
 解决方案：
 1. 自己到vercel上部署一个这样的app （复杂）
 2. 换一个其他人部署好的链接 （容易)
+
+## 15、解决github的md使用toc无法生成目录
+markdown可以使用[toc]语法来生成目录，但github不支持[toc]标签
+
+### 15-1、目录语法规则
+目录支持另外一种语法，即
+```
+- [显示在目录上的一级标题名](#实际一级标题名)
+  - [显示在目录上的二级标题名](#实际二级标题名)
+```
+但()里的实际标题名有一些规则，如果是包含空格，则需要替换为-，如果是其他特殊字符直接忽略掉
+
+### 15-2、使用vs code插件生成目录
+- 安装插件markdown all in one
+- vscode中打开md文件
+- 光标定位到需要生成目录的行，打开命令面板（快捷建：Shift+Command+P），输入markdown all in one create table of contents
+
+## 16、remote: GitLab:You are not allowed to force push code to a protected branch on this project
+master分支被保护，所以无法强制推送。
+
+进入gitlab中的项目： 设置（Settings）-> 仓库（Repository） -> 保护分支（Protected Branches）->（把保护的分支选择 unprotected）解除保护
+
+进入gitlab中的项目：设置（Settings）-> 仓库（Repository） -> 保护分支（Protected Branches）-> 选择分支，Allowed to merge，Allowed to push（把保护的分支选择protect ）增加保护

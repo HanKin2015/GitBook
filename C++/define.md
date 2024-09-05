@@ -16,11 +16,11 @@ Jun 30 2022
 ```
 
 ```
-__FILE__　　：进行编译的源文件名字
-__LINE__　　：文件当前行的行号
-__DATE__　　：文件被编译的日期
-__TIME__　　：文件被编译的时间
-__STDC__　　：如果编译器遵循ANSIC，其值就为1，否则未定义
+__FILE__：进行编译的源文件名字
+__LINE__：文件当前行的行号
+__DATE__：文件被编译的日期
+__TIME__：文件被编译的时间
+__STDC__：如果编译器遵循ANSIC，其值就为1，否则未定义
 __FUNCTION__：当前的函数名
 ```
 
@@ -223,3 +223,12 @@ D:\Github\Storage\c++\standard_library\define\if_instruct_example.c
 
 `#if`只支持常量表达式,不能含有变量。
 
+## 6、判断系统是否是Windows平台
+```
+#if defined(_WIN32) || defined(__CYGWIN__) || defined(_WIN32_WCE)
+#define LIBUSB_CALL WINAPI
+#else
+#define LIBUSB_CALL
+#endif
+#endif
+```

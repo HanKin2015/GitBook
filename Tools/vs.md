@@ -188,6 +188,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDe
 "C:\Windows\system32\vsjitdebugger.exe" -p %ld -e %ld
 ```
 
-
+## 22、Debug和Release版本区别
+发现程序崩溃时Release版本没有任何输出，不清楚哪里出错。但是使用Debug版本后会告诉你哪里出错了。
 
 
