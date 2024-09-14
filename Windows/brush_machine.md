@@ -34,6 +34,7 @@ https://ventoy.net/en/download.html
 
 ## 2、刷Windows系统
 软碟通UltraISO必备
+傻瓜式安装：https://www.jianshu.com/p/7f602c4fee99
 
 ### 2-1、用U盘装系统，进去时只有一个光标
 可能是系统文件太大，读取数据慢的表现，多等待一会儿，我等了差不多5分钟成功了。
@@ -123,6 +124,12 @@ EFI在功能上完全等同于一个轻量化的OS，但是EFI在制定时就定
 
 ### 5-3、UEFI
 当EFI发展到1.1的时候，英特尔决定把EFI公之于众，于是后续的2.0吸引了众多公司加入，EFI也不再属于英特尔，而是属于了Unified EFI Form的国际组织，EFI在2.0后也遂改称为UEFI，UEFI，其中的EFI和原来是一个意思，U则是Unified（一元化、统一）的缩写，所以UEFI的意思就是“统一的可扩展固件接口”，与前身EFI相比，UEFI主要有以下改进：
+
+uefi是一种更快捷快速的电脑启动配置，它的全称是“统一可扩展固件接口”(Unified Extensible Firmware Interface)
+bios设置，它主要负责开机时检测硬件功能和引导操作系统启动的功能。而uefi则是用于操作系统自动从预启动的操作环境，加载到一种操作系统上从而节省开机时间。
+uefi启动是一种新的主板引导项，它被看做是bios的继任者。uefi最主要的特点是图形界面，更利于用户对象图形化的操作选择。
+简单的来说uefi启动是新一代的bios，功能更加强大，而且它是以图形图像模式显示，让用户更便捷的直观操作。
+如今很多新产品的电脑都支持uefi启动模式，甚至有的电脑都已抛弃bios而仅支持uefi启动。这不难看出uefi正在取代传统的bios启动。
 
 ### 5-4、EFI和UEFI区别
 首先，UEFI具有完整的图形驱动功能，之前的EFI虽然原则上加入了图形驱动，但为了保证EFI和BIOS的良好过渡，EFI多数还是一种类DOS界面（仍然是640*480VGA分辨率），只支持PS/2键盘操作（极少数支持鼠标操作），不支持USB键盘和鼠标。到了UEFI，则是拥有了完整的图形驱动，无论是PS/2还是USB键盘和鼠标，UEFI一律是支持的，而且UEFI在显卡也支持GOP VBIOS的时候，显示的设置界面是显卡高分辨率按640*480或1024*768显示，因此画面虽小但很清楚，但是这样会导致屏幕周围大片留黑，不过鱼和熊掌不可兼得，除非UEFI默认窗口大小也是最高分辨率
@@ -320,3 +327,44 @@ KMS8软件（需要关注公众号获取）：https://www.pccppc.com/
 https://blog.csdn.net/weixin_40191861/article/details/131240342
 GVLK 密匙是通过微软公司给与，用于 KMS 激话使用的，OEM 密匙一般是 OEM 生产商内嵌系统运用，OEM 密匙是永久性，GVLK 是 180 天时限。Windows 激话中 OEM 是永久性，KMS 激话时长是大半年的。
 
+## 20、刷Windows XP系统
+
+### 20-1、镜像
+iso文件：ed2k://|file|zh-hans_windows_xp_professional_with_service_pack_3_x86_cd_x14-80404.iso|630239232|CD0900AFA058ACB6345761969CBCBFF4|/
+深度技术：https://www.deepinghost.com/
+雨林木风：http://www.ylmfeng.com/
+
+WinSetupFromUSB是一款制作从usb磁盘(u盘和移动硬盘)启动安装操作系统的强大工具，支持各种windows、pe、linux操作系统。
+WinSetupFromUSB：http://www.winsetupfromusb.com/downloads/
+
+### 20-2、使用RMPREPUSB工具格式U盘时报错error insufficient access rights
+原因是U盘被它给分区后再次这样就会出现异常，需要使用分区助手把分区删除掉（使用磁盘管理器看不见多出的分区）
+
+### 20-3、U盘安装XP操作系统开机出现提示txtsetup.sif
+你的这个问题 是安装xp时把xp做成u盘出现的
+
+原因是xp没有在根本上支持这种安装
+
+到win7后才支持的
+
+解决方法有以下几种
+
+1,刻录成cd
+
+2重新下载xp ghost版的不会出现这个问题
+
+3证实UltrISO制作的U盘XP安装盘不能成功安装XP系统，原因是XP不支持，XP将U盘当做硬盘，故出现INF file txtsetup.sif is corrupt or missing,status 18的错误。
+
+使用 WinSetupFromUSB 免费软件制作U盘XP安装盘简单方便
+
+https://drivers.mydrivers.com/
+
+## 21、制作WINPE盘
+PE系统（Preinstallation Environment），是一种基于Windows操作系统的轻量级操作系统环境，Windows预安装环境（Windows PE）是一个轻量级的Windows操作系统，主要用于系统部署、系统维护、数据恢复等任务。Windows PE可以直接从CD、DVD、USB驱动器或网络位置启动，并且可以运行在计算机内存中，不需要安装到硬盘上。
+
+使用软碟通直接通过iso文件制作的U盘是能打开PE系统，但是键鼠使用不了。
+https://baijiahao.baidu.com/s?id=1760314243594407431&wfr=spider&for=pc
+微PE工具箱：https://www.wepe.com.cn/download.html
+微PE工具箱使用教程：https://blog.csdn.net/u014001523/article/details/138330056
+
+## 22、

@@ -11,16 +11,16 @@ https://www.canon.com.cn/supports/download/simsdetail/0100832109.html
 应用程序需要libglade2安装包，但不知为何CentOS的yum仓库里没有此包，使用下面一行手动安装需要的软件。
 sudo yum install -y http://vault.centos.org/7.6.1810/os/x86_64/Packages/libglade2-2.6.4-11.el7.x86_64.rpm
 
-## 3、百度搜索扫描仪驱动
+## 2、百度搜索扫描仪驱动
 找到一个公司和canon有合作关系，做了很多驱动适配：
 http://www.hyrh.com.cn/download-center/qudong.html
 这个网站有我需要的驱动，但是解压需要密码。
 
-## 4、sane通用扫描仪驱动
+## 3、sane通用扫描仪驱动
 https://gitlab.com/sane-project/backends/-/releases
 you may need a package called 'libusb-dev', 'libusb-devel' pr similar.
 
-## 5、方正高速文档扫描仪
+## 4、方正高速文档扫描仪
 s8660，居然在官网没有找到驱动，还是只能使用光盘中的驱动才能进行使用。
 http://www.foundertech.com/search.html?t=0&k=ks&x=0&y=0
 
@@ -31,7 +31,7 @@ http://www.foundertech.com/search.html?t=0&k=ks&x=0&y=0
 
 最终想尝试抓包，看是否是由于分包导致了问题，通过手动合包。
 
-## 6、打印机
+## 5、打印机
 win11可能不存在打印管理工具。
 惠普（Hewlett-Packard，简称HP）
 
@@ -46,10 +46,11 @@ win11可能不存在打印管理工具。
 斑马官网：https://www.zebra.com/cn/zh/support-downloads/printers-cn/zd888ta.html?downloadId=4fd677df-5ae1-4e2f-89ce-f33134dc1e70#Tab-item-83dd8217ea-tab
 请认准官网，官网的驱动已经V10，但是盗版的还是V8，可以看出斑马图标区分。
 
+## 6、打印机服务无法启动,错误1068
+使用命令sc config spooler depend= RPCSS来恢复Windows默认的依赖关系。
 
-
-
-
+发现出现问题时，其中多了一个依存关系是HTTP Service->MsQuic啥的，通过恢复默认后正常。我自己的虚拟机也是同样情况，但是不报错。
+打印机服务：Spooler(Print Spooler)
 
 
 

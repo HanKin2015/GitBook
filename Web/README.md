@@ -109,3 +109,14 @@ https://blog.csdn.net/qq_36908841/article/details/82057066?depth_1-utm_source=di
 
 有个想法，想制作一个todolist的网页：
 https://blog.csdn.net/qq_43485006/article/details/114605696
+
+# 通用路由封装
+通用路由封装（GRE: Generic Routing Encapsulation）是通用路由封装协议，可以对某些网络层协议的数据报进行封装，使这些被封装的数据报能够在IPv4网络中传输。
+
+
+
+
+
+
+
+

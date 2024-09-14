@@ -177,6 +177,19 @@ echo '
 ;
 ```
 
+### INF脚本
+```
+;
+; 文 件 名: inf_example.inf
+; 文件描述: inf脚本例子
+; 作    者: HanKin
+; 创建日期: 2024.09.12
+; 修改日期：2024.09.12
+; 
+; Copyright (c) 2024 HanKin. All rights reserved.
+;
+```
+
 ### python脚本
 ```
 # -*- coding: utf-8 -*-

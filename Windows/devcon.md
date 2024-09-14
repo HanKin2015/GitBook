@@ -146,6 +146,8 @@ Microsoft PnP 工具
 这个时候扫描检测硬件改动后设备就不存在了
 
 ## 6、sc命令
+
+### 6-1、基本用法
 计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SamSs
 ```
 C:\Users\User>sc query samss
@@ -182,6 +184,157 @@ Start=1 system
 Start=2 自动
 Start=3 手动
 Start=4 禁用
+
+### 6-2、创建服务
+demo：D:\Github\Storage\windows\MyWindowsService\MyWindowsService
+安装服务：sc create MyWindowsService binPath= "C:\path\to\your\MyWindowsService.exe"
+启动服务：sc start MyWindowsService
+```
+C:\WINDOWS\system32>sc query MywindowsService
+[SC] EnumQueryServicesStatus:OpenService 失败 1060:
+
+指定的服务未安装。
+
+
+C:\WINDOWS\system32>sc create MywindowsService binpath="D:\Users\User\My Document\Visual Studio 2015\Projects\MyWindowsService\Debug\MyWindowsService.exe"
+[SC] CreateService 成功
+
+C:\WINDOWS\system32>sc query MywindowsService
+
+SERVICE_NAME: MywindowsService
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1077  (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+C:\WINDOWS\system32>sc start MywindowsService
+
+SERVICE_NAME: MywindowsService
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 4  RUNNING
+                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 22680
+        FLAGS              :
+
+C:\WINDOWS\system32>sc stop MywindowsService
+
+SERVICE_NAME: MywindowsService
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 3  STOP_PENDING
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x4
+        WAIT_HINT          : 0x0
+
+C:\WINDOWS\system32>sc query MywindowsService
+
+SERVICE_NAME: MywindowsService
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+```
+
+如果我在代码中不处理stop命令，则无法停止该服务，如：
+```
+C:\WINDOWS\system32>sc stop MywindowsService
+
+SERVICE_NAME: MywindowsService
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 4  RUNNING
+                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+C:\WINDOWS\system32>sc stop MywindowsService
+[SC] ControlService 失败 1061:
+
+服务无法在此时接受控制信息。
+```
+
+### 6-3、[SC] ControlService 失败 1052
+```
+C:\WINDOWS\system32>sc stop commonusb2
+[SC] ControlService 失败 1052:
+
+请求的控件对此服务无效。
+
+C:\WINDOWS\system32>net stop commonusb2
+这项服务无法接受请求的“暂停”、“继续”或“停止”操作。
+
+请键入 NET HELPMSG 2191 以获得更多的帮助。
+
+C:\WINDOWS\system32>sc stop srv2
+[SC] ControlService 失败 1051:
+
+停止控制被发送到其他正在运行的服务所依赖的服务。
+
+
+C:\WINDOWS\system32>net stop srv2
+下面的服务依赖于 Server SMB 2.xxx Driver 服务。
+停止 Server SMB 2.xxx Driver 服务也会停止这些服务。
+
+   Server
+
+你想继续此操作吗? (Y/N) [N]: n
+
+You can neither start nor stop PnP filters with the Service Control Manager. You need to use an INF and Device Manager (or devcon).
+```
+https://community.osr.com/t/driver-service-cannot-be-stopped/54781
+
+```
+C:\WINDOWS\system32>sc qc commonusb2
+[SC] QueryServiceConfig 成功
+
+SERVICE_NAME: sangfor_commonusb2
+        TYPE               : 1  KERNEL_DRIVER
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : \??\C:\WINDOWS\system32\drivers\CommonUsb2.sys
+        LOAD_ORDER_GROUP   : Camera LowerFilters Extend
+        TAG                : 0
+        DISPLAY_NAME       : commonusb2
+        DEPENDENCIES       :
+        SERVICE_START_NAME :
+
+C:\WINDOWS\system32>sc qc srv2
+[SC] QueryServiceConfig 成功
+
+SERVICE_NAME: srv2
+        TYPE               : 2  FILE_SYSTEM_DRIVER
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : System32\DRIVERS\srv2.sys
+        LOAD_ORDER_GROUP   : Network
+        TAG                : 0
+        DISPLAY_NAME       : Server SMB 2.xxx Driver
+        DEPENDENCIES       : srvnet
+        SERVICE_START_NAME :
+
+C:\WINDOWS\system32>sc qc mywindowsservice
+[SC] QueryServiceConfig 成功
+
+SERVICE_NAME: mywindowsservice
+        TYPE               : 10  WIN32_OWN_PROCESS
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : D:\Users\User\My Document\Visual Studio 2015\Projects\MyWindowsService\Debug\MyWindowsService.exe
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : mywindowsservice
+        DEPENDENCIES       :
+        SERVICE_START_NAME : LocalSystem
+```
 
 ## 7、对象名已存在
 Windows无法初始化这个硬件的设备驱动程序。（代码37）

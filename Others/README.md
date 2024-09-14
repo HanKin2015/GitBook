@@ -14,8 +14,6 @@
 
 [古老的社工库查询](http://site3.sjk.space/)
 
-
-
 ## 取消招商银行的闪电贷
 打开app-》我的-》借钱-》我的贷款-》额度记录-》闪电贷额度-》关闭额度
 
@@ -31,10 +29,27 @@ https://baijiahao.baidu.com/s?id=1696841394317533854&wfr=spider&for=pc
 
 发现好像是四种模式，只需要找寻适合自己的模式即可。
 
-
-
 https://github.com/flaneur2020/pua-lang
 https://flaneur2020.github.io/pua-lang/?s=BQRgDABA1BBMCUEBUEDMkYFYg
 
+## 惠普电脑更新BIOS
+https://support.hp.com/cn-zh/document/ish_4339512-4209885-16
 
+我的电脑出现随机关机问题，然后点击开机键没有反应，需要把电源拔掉一段时间后再插上即可。
+售后说需要更新BIOS
+使用msinfo32查看BIOS版本，或者dxdiag命令
+将升级文件放在了百度网盘：我的资源/FHP_BIOS_F.32
 
+https://h10032.www1.hp.com/ctg/Manual/c06696065.pdf
+但是升级失败了，
+
+https://h30471.www3.hp.com/t5/cao-zuo-xi-tong-he-ruan-jian/ji-shu-xiao-ke-tang-ru-he-geng-xin-ji-qi-deBIOS-xi-tong/m-p/1164733#M39219
+https://h30471.www3.hp.com/t5/tai-shi-dian-nao/bios-sheng-ji/m-p/1284945
+
+亲亲，请问一下电脑的内存硬盘cpu有没有检测过呢？ 操作步骤如下：【F2硬件检测】先关机，完全关机之后，重新开机，在按开机键的同时，立刻快速多次点击ESC【不要等到屏幕亮了在按ESC，要按完开机键立马就快速点击ESC哦】 然后选择F2 进入硬件检测界面
+
+### 系统SKU
+SKU，即“Stock Keeping Unit”的缩写，代表库存单位，是分配给库存中每个产品或物料的唯一标识符。其目的在于提供数字或字母数字代码，以便轻松跟踪和管理产品，包括库存水平、定价和销售信息。零售商、批发商和制造商使用 SKU 来管理产品，简化运营，提高（什么是仓库管理系统（WMS）——（最近更新 2023-08-028））（什么是仓库管理系统（WMS）——（最近更新 2023-08-028））的准确性。
+
+孙悟空，金箍棒，能长能短
+牛魔王，芭蕉扇，可大可小

@@ -226,3 +226,11 @@ windows10未搜索到，版本是V1.3.4.686 (x64) 2014，下载新的版本再�
 ## 18、Microsoft Edge 中的 Internet Explorer 模式
 设置=》默认浏览器=》允许在Internet Explorer模式下重新加载网站（IE模式）=》允许
 
+## 19、eD2k链接
+eD2k链接是一种超链接，用于指示在eDonkey网络上存储的文件。
+
+https://www.emule-project.com/home/perl/general.cgi?l=42
+https://www.emulefans.com/news/emule/emule-official/
+
+（电驴）Donkey网络（英文：eDonkey Network，也称eDonkey2000 Network或eD2k、eD2k网络），由美国MetaMachine公司开发，创始人Jed.McCaleb和Sam.Yagan在2000年创立，是一种文件分享网络。最初用于共享音乐、电影和软件。与多数文件共享网络一样，它是分布式的；文件基于点对点原理传输，而不是由中枢服务器提供。客户端程序连接到ed2k网络来共享文件。而ed2k服务器作为一个通讯中心，帮助用户在ed2k网络内查找文件。它的客户端和服务端可以工作于Windows、Mac os、Linux、UNIX等操作系统。2005年因与美国唱片工业协会的官司败诉被美国联邦最高法院判为非法，被判罚向RIAA赔款3000万美元并且永久停止开发。
+
