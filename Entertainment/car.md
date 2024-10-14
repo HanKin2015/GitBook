@@ -17,10 +17,14 @@
 http://jjs.mof.gov.cn/zhengcefagui/202112/t20211231_3780322.htm
 
 ## 6、车机软件
+
+
 酷我音乐：http://www.kuwo.cn/down
 民间大神破解：https://docs.qq.com/doc/DQUJ2aWp0RGVsSFJ6
-高德地图：
+高德地图：https://auto.amap.com/download
 音乐便签：https://www.cnblogs.com/vinlxc/p/11347744.html#!comments
+
+
 
 ## 7、补胎液
 补胎液是一种用于汽车轮胎维护的液体，它可以帮助轮胎保持正常的气压和延长轮胎的使用寿命。补胎液通常是一种胶状物质，可以填补轮胎中的小孔或裂缝，防止气体泄漏。此外，补胎液还可以防止轮胎在行驶过程中因摩擦而产生的热量过高，从而减少轮胎的磨损和损坏。总之，补胎液是一种非常实用的汽车维护产品，可以帮助车主延长轮胎的使用寿命，提高行车安全性。

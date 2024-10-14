@@ -41,6 +41,9 @@ https://www.prolific.com.tw/US/ShowProduct.aspx?p_id=225&pcid=41
 CH340转串口芯片支持的平台驱动齐全，支持 Windows/Linux/Android/MacOS/WinCE 等操作系统。
 https://www.wch.cn/download/CH341SER_EXE.html
 
+FTDI: https://ftdichip.com/drivers/d2xx-drivers/
+通过ftd2xx64.dll文件来区分其驱动类型为d2xx-drivers
+
 ## 4、MAX232和PL2303_CH340的区别
 
 ### 4-1、什么是max232

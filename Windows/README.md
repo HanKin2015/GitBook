@@ -149,5 +149,9 @@ https://learn.microsoft.com/zh-cn/sysinternals/downloads/process-explorer
 
 打开View Handlers(ctrl+H)和View DLLs(ctrl+D)可以看进程加载的dll文件来分析，使用ctrl+A或者ctrl+S好像都是保存内容。
 
-## 14、
+## 14、使用inf安装驱动时报错这个驱动程序没有经过数字签名！
+设备管理器-》添加过时硬件-》下一页-》下一页-》下一页-》下一页-》从磁盘安装-》选择inf文件-》报错
+原因是inf文件的换行符是unix的，需要使用Windows的才行
+
+Windows 11记事本不支持转换换行符。
 

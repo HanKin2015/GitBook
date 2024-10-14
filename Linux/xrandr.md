@@ -37,6 +37,7 @@ xrandr -s 1600x900
 
 ## 3、显示器刷新率
 指令用法举例：xrandr -s 1024x768 -r 75
+xrandr --output HDMI-1 --mode 1920x1080 --rate 50.00
 
 xrandr -q
 

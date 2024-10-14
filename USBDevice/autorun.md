@@ -11,7 +11,7 @@
 
 什么是Autorun.inf文件呢，严格的说它是一个必须存放在驱动器根目录下的有一定格式的文本文件，它是由一个或多个“节”组成，每个“节”民须以节名作为开始的一行，节名必须用中括号[]括起来，节名之下则为本节中的命令。对于autorun.alpha来说我们很少用到，而Deviceinstall只能在Windows XP下使用，可以利用它指定硬件向导进行递归搜索的子目录。光盘一放入光驱就会自动被执行，主要依靠两个文件，一是光盘上的AutoRun.inf文件，另一个是操作系统本身的系统文件之一的Cdvsd.vxd。Cdvsd.vxd会随时侦测光驱中是否有放入光盘的动作，如果有的话，便开始寻找光盘根目录下的AutoRun.inf文件；如果存在AutoRun.inf文件则执行它里面的预设程序。
 
-其中Autorun.inf一共支持三个节，它们分虽为[autorun]、[autorun.alpha]、[Deviceinstall]，其中只有[autorun]是必须存在的。
+其中Autorun.inf一共支持三个节，它们分别为[autorun]、[autorun.alpha]、[Deviceinstall]，其中只有[autorun]是必须存在的。
 
 ## 2、SMI Mass Production Tool
 SMI Mass Production Tool是一款专业的U盘量产工具，如果您需要进行U盘量产的话就可选择这款工具，支持多种型号的主控芯片。
@@ -80,19 +80,51 @@ icon也可以用Defaulticon命令代替,效果是一样的!Iconname可以是.ico
 Shellexecute=1.exe
 
 ## 6、参数学习
-UseAutoPlay修改成2并没有什么区别。值只能等于1.用来使用autoplay的V2特性,只支持Xp的sp2以上版本。
-ShellExecute和Open都能执行exe、html、bat文件。
-Icon能将U盘的图标更换成exe的图标，后面数字为资源号索引，一般选择0。
-Label可以修改盘符名称（卷标）。
-Shell指定默认右键菜单名称（没搞懂）。
+UseAutoPlay：修改成2并没有什么区别。值只能等于1.用来使用autoplay的V2特性,只支持Xp的sp2以上版本。
+ShellExecute和Open：都能执行exe、html、bat文件。
+Label：可以修改盘符名称（卷标）。
+Shell：指定默认右键菜单名称（没搞懂）。
+Icon：能将U盘的图标更换成exe的图标，后面数字为资源号索引，一般选择0。
+
+icon 指令可以指定一个图标文件或可执行文件中的图标资源。格式如下：
+```
+icon=<文件路径>,<图标索引>
+```
+图标索引用于指定在文件中使用哪个图标资源。以下是一些常见的情况：
+- 单个图标文件：如果指定的是一个 .ico 文件，图标索引通常为 0，因为 .ico 文件通常只包含一个图标。
+- 可执行文件或DLL文件：如果指定的是一个 .exe 或 .dll 文件，这些文件可能包含多个图标资源。图标索引用于选择其中的一个图标。
+
+如何查看图标索引
+如果你不确定可执行文件或DLL文件中包含哪些图标资源，可以使用一些工具来查看和提取图标资源。例如：
+- Resource Hacker：一个免费的工具，可以查看和提取可执行文件和DLL文件中的资源。
+- IconsExtract（推荐，免安装，小巧，尝试使用procexp.exe实测有效）：一个小型工具，可以扫描文件并提取其中的图标。
 
 autorun.inf是我们电脑使用中比较常见的文件之一 ，其作用是允许在双击磁盘时自动运行指定的某个文件。但是近几年出现了用autorun.inf文件传播木马或病毒，它通过使用者的误操作让目标程序执行，达到侵入电脑的目的，带来了很大的负面影响。
 https://baike.baidu.com/item/autorun.inf/10548193?fr=aladdin
 自动运行功能仅支持CD和DVD媒体。
 
+## 7、补充
+如果为了美观U盘可以用(非管理员运行也可):
+```
+attrib +s +h E:/qtdemo.ico (l为u盘盘符名称) 设置文件属性为系统文件 隐藏文件
+attrib +s +h E:/autorun.inf
 
+attrib -s -h E:/qtdemo.ico
+attrib -s -h E:/autorun.inf
+```
 
+加了系统文件属性后，使用文件资源管理器即使显示隐藏的项目也无法看见，需要使用attrib命令才能看见：
+```
+E:\>attrib
+A                    E:\2.mp4
+A                    E:\2022.02.07重庆万州婚礼.mp4
+A  SH                E:\autorun.inf
+A                    E:\capture_hj_20240516.exe
+```
 
+从Windows 7开始，微软出于安全考虑，禁用了在可移动设备（如USB闪存驱动器）上的autorun.inf文件中使用OPEN命令自动运行程序的功能。这是为了防止恶意软件通过自动运行功能传播。
+autorun.inf文件曾经是Windows系统中用于自动运行程序的配置文件。它通常用于CD/DVD和USB驱动器等可移动设备上，以便在设备插入时自动执行某些操作。然而，这个功能也被恶意软件利用来自动传播病毒和恶意程序。因此，微软在Windows 7及更高版本中禁用了这一功能。
 
-
-
+在现代Windows系统中，autorun.inf文件的功能被大大限制，尤其是在可移动设备上。具体来说：
+- CD/DVD驱动器：autorun.inf文件仍然可以在某些情况下使用，但功能也受到限制。
+- USB驱动器：autorun.inf文件中的OPEN命令被禁用，无法自动运行程序。

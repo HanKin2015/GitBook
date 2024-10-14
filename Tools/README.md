@@ -63,6 +63,7 @@ FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 |  md文件编辑  |                   typro                   |
 
 非常齐全的Windows小工具：https://www.nirsoft.net/
+另一个工具下载推荐网站：http://www.7201.cn/
 
 ## 4、外设工具箱
 
@@ -174,6 +175,7 @@ https://mp.weixin.qq.com/s/QrMpX2DuGoB62gVKBbJBQA
 [Snatch](https://snatch.kasper.io/)
 [一个工具箱](http://www.atoolbox.net/)
 [RegCool](https://kurtzimmermann.com/index_e.html)
+[](https://openi.cn/)
 
 ## 12、新技巧之split.exe工具
 split.exe工具可以分隔文件，可以直接在git bash窗口使用，拿一个jpg图片为例。

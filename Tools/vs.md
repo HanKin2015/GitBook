@@ -1,9 +1,8 @@
 # Visual Studio
 
-## 1、轻松搞定VS生成sdf和ipch文件太大占用空间问题
-https://blog.csdn.net/songyi160/article/details/51612716
-
-目前的暴力行为删除大文件。
+## 1、快捷键
+Ctrl+K+C	注释
+Ctrl+K+U	取消注释
 
 ## 2、神奇的事情
 ```
@@ -22,7 +21,6 @@ warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。
 /std:c++latest -utf-8 
 
 原来是文件格式文件，文件是UTF-8格式，需要增加编译选项来支持UTF-8格式。
-
 
 ## 3、vs安全编码检查
 错误	C4996	'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -191,4 +189,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDe
 ## 22、Debug和Release版本区别
 发现程序崩溃时Release版本没有任何输出，不清楚哪里出错。但是使用Debug版本后会告诉你哪里出错了。
 
+## 23、轻松搞定VS生成sdf和ipch文件太大占用空间问题
+https://blog.csdn.net/songyi160/article/details/51612716
 
+目前的暴力行为删除大文件。

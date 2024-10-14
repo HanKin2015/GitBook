@@ -21,3 +21,36 @@ MariaDB的目标是成为一个完全兼容MySQL的替代品，它支持与MySQL
 统计date_time字段从2023-11-24到2023-12-25范围内device字段的总和：SELECT SUM(device) AS total_device FROM your_table_name WHERE date_time >= '2023-11-24' AND date_time <= '2023-12-25';
 计算数量：SELECT COUNT(device) AS device_count FROM your_table_name WHERE date_time >= '2023-11-24' AND date_time <= '2023-12-25';
 修改表格数据：UPDATE table_name SET column_name = new_value WHERE some_column = some_value;
+计算内容总和：SELECT SUM(device) AS device_sum FROM total WHERE date_time >= '2024-4-1' AND date_time <= '2024-6-30';
+导出数据库或表的数据：mysqldump -u username -p database_name table_name > table_name.sql
+使用 SQL 查询导出为 CSV：
+```
+SELECT * FROM table_name
+INTO OUTFILE '/path/to/your/local/directory/table_name.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+```
+
+## 3、注意
+
+### 3-1、保留字（关键字）
+使用 COUNT(change) 可能会导致一些问题，因为 change 是一个保留字（关键字），在某些 SQL 数据库中可能会引发语法错误或意外行为。为了避免这种情况，建议对列名使用反引号（\`）进行转义。
+```
+SELECT COUNT(`change`) AS device_count
+FROM total
+WHERE date_time >= '2024-04-01' AND date_time <= '2024-06-30';
+WHERE date_time >= '2024-04-01 00:00:00' AND date_time < '2024-07-01 00:00:00';
+```
+
+### 3-2、字符串匹配严格
+日期格式：确保日期格式为 YYYY-MM-DD，并且在 SQL 数据库中 date_time 列的数据类型支持这种格式（如 DATE、DATETIME 或 TIMESTAMP）。
+
+下面是错误的表现：
+```
+SELECT COUNT(`change`) AS device_count
+FROM total
+WHERE date_time >= '2024-4-1' AND date_time <= '2024-6-30';
+```
+
+## 4、

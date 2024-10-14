@@ -304,3 +304,25 @@ linux-5.13.7/include/uapi/linux/usb/video.h
 
 杂项设备
 https://blog.csdn.net/zhanghui962623727/article/details/117754604
+
+## 14、uvc_streaming_control 
+```
+struct uvc_streaming_control { 
+    __u16 bmHint; 
+    __u8  bFormatIndex; //视频格式索引 
+    __u8  bFrameIndex;  //视频帧索引 
+    __u32 dwFrameInterval;  //视频帧间隔 
+    __u16 wKeyFrameRate;    // 
+    __u16 wPFrameRate; 
+    __u16 wCompQuality; 
+    __u16 wCompWindowSize; 
+    __u16 wDelay;   //延时 
+    __u32 dwMaxVideoFrameSize;  //最大视频帧大小 
+    __u32 dwMaxPayloadTransferSize; 
+    __u32 dwClockFrequency; //时钟频率 
+    __u8  bmFramingInfo; 
+    __u8  bPreferedVersion; 
+    __u8  bMinVersion;  //版本 
+    __u8  bMaxVersion;  //版本 
+} __attribute__((__packed__));
+```

@@ -91,11 +91,15 @@ h是主机host，n是网络net，l是长整形long，s是短整形short。
 一定是无符号的。
 
 ### 3-1、头文件 
->#include <arpa/inet.h>
+```
+#include <arpa/inet.h>
+```
 有些系统包含的头文件是 <netinet/in.h>
 
 ### 3-2、定义函数
+```
 uint32_t htonl(uint32_t hostlong);
+```
 
 hostlong：主机字节顺序表达的32位数。
 

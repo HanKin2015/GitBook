@@ -1,7 +1,24 @@
 # RTTI
 
 ## 1、概念
-RTTI(Run Time Type Identification)即通过运行时类型识别，程序能够使用基类的指针或引用来检查着这些指针或引用所指的对象的实际派生类型。
+RTTI(Run Time Type Identification)即通过运行时类型识别，程序能够使用基类的指针或引用来检查这些指针或引用所指的对象的实际派生类型。
+注意：基类
+```
+class Base {
+public:
+    virtual ~Base() {}
+};
+
+class Derived : public Base {};
+
+void identify(Base* b) {
+    if (typeid(*b) == typeid(Derived)) {
+        std::cout << "Object is of type Derived" << std::endl;
+    } else {
+        std::cout << "Object is of unknown type" << std::endl;
+    }
+}
+```
 
 ## 2、RTTI机制的产生
 为什么会出现RTTI这一机制，这和C++语言本身有关系。和很多其他语言一样，C++是一种静态类型语言。其数据类型是在编译期就确定的，不能在运行时更改。然而由于面向对象程序设计中多态性的要求，C++中的指针或引用(Reference)本身的类型，可能与它实际代表(指向或引用)的类型并不一致。有时我们需要将一个多态指针转换为其实际指向对象的类型，就需要知道运行时的类型信息，这就产生了运行时类型识别的要求。和Java相比，C++要想获得运行时类型信息，只能通过RTTI机制，并且C++最终生成的代码是直接与机器相关的。

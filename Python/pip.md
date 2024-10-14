@@ -319,4 +319,45 @@ APScheduler       3.6.3
 bcrypt            3.2.0
 ```
 
+## 13、-m参数选项
+```
+D:\Demo\Tools\python>pip
+'pip' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+D:\Demo\Tools\python>Scripts\pip list
+Fatal error in launcher: Unable to create process using '"d:\users\user\desktop\tools4.0.0\python\python.exe"  "D:
+\Demo\Tools\python\Scripts\pip.exe" list': ???????????
+
+D:\Demo\Tools\python>Scripts\pip
+Fatal error in launcher: Unable to create process using '"d:\users\user\desktop\tools4.0.0\python\python.exe"  "D:
+\Demo\Tools\python\Scripts\pip.exe" ': ???????????
+
+D:\Demo\Tools\python>python -m pip list
+Package           Version
+----------------- ---------
+APScheduler       3.6.3
+bcrypt            3.2.0
+
+D:\Demo\Tools\python\Scripts>python --version
+
+D:\Demo\Tools\python\Scripts>cd ..
+
+D:\Demo\Tools\python>python --version
+Python 3.8.6
+```
+查找路径：使用 -m 时，Python 会在 sys.path 中查找指定的模块。
+环境隔离：在虚拟环境中使用 -m 可以确保你使用的是当前环境中的模块版本，而不是系统全局的版本。
+-m 是 module 的缩写。在 Python 中，-m 参数用于指定一个模块作为脚本来运行。通过使用 -m，你可以直接运行一个模块，而不需要知道模块的具体文件路径。这在使用像 pip 这样的工具时特别有用，因为它们通常是以模块的形式安装的。
+PS: 就好比我这里，我是找到了python.exe文件，但是我直接去执行pip.exe文件是无法正常运行，只能借助python.exe文件去执行pip模块。
+
+运行 Python 的内置 HTTP 服务器：
+```
+python -m http.server
+```
+
+运行 unittest 模块来执行测试：
+```
+python -m unittest discover
+```
 

@@ -180,6 +180,8 @@ https://blog.csdn.net/baidu_37503452/article/details/87598982
 64位仓库：https://2.na.dl.wireshark.org/win64/all-versions/
 win7支持的最高版本是4.0.17，但是我是32位系统，则最高版本是3.6.24，但是这个版本又需要安装Windows补丁包，因此建议安装3.0.14版本。
 
+4.4.0_x64版本似乎有问题，安装了usbcap但是不显示，使用不了。
+
 ### 2-1、安装wireshark
 windows系统安装需要勾选安装USBPcap软件，可以在C:\Program Files\USBPcap\USBPcapCMD.exe软件查找当前设备的连接情况。
 

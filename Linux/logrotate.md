@@ -118,9 +118,71 @@ compress：是否进行gzip压缩，一般配置
 delaycompress：缺少gzip这一步，下一次生效，一般不配置
 
 ## 5、crontab命令
+crontab是Linux和类Unix系统中用于定时执行任务的命令。它允许用户在特定的时间和日期运行脚本或命令。crontab的配置文件称为“cron表”，每个用户都有自己的cron表。
+
+### 5-1、用法
+```
+# 查看当前用户的cron任务
+crontab -l
+
+# 查看当前用户的cron任务
+cat /var/spool/cron/crontabs/root
+
+# 删除当前用户的所有定时任务
+crontab -r
+
+# 使用指定文件中的内容来替换当前用户的crontab
+crontab filename
+
+# 使用特定用户的crontab（需要root权限）
+crontab -u username -l
+crontab -u username -e
+crontab -u username -r
+
+# 查看系统的cron任务
+cat /etc/crontab
+```
+
 crontab -e可以直接进行编辑，和系统的不冲突。
 生成的配置文件路径：/var/spool/cron/crontabs/root
 
+### 5-2、crontab文件格式
+crontab文件中的每一行代表一个定时任务，格式如下：
+```
+* * * * * command_to_execute
+- - - - -
+| | | | |
+| | | | +---- 星期几 (0 - 7) (星期天为0或7)
+| | | +------ 月份 (1 - 12)
+| | +-------- 日期 (1 - 31)
+| +---------- 小时 (0 - 23)
++------------ 分钟 (0 - 59)
+```
+分钟：任务在每小时的第几分钟执行。
+小时：任务在每天的第几个小时执行。
+日期：任务在每月的第几天执行。
+月份：任务在每年的第几个月执行。
+星期几：任务在每周的第几天执行。
+*：表示任何值。例如，*在分钟位置表示每分钟都执行。
+,：用于分隔多个值。例如，1,15在分钟位置表示在第1和第15分钟执行。
+-：用于指定范围。例如，1-5在小时位置表示从1点到5点之间每小时执行。
+/：用于指定步长。例如，*/5在分钟位置表示每5分钟执行一次。
+
+每天凌晨2点执行脚本：
+0 2 * * * /path/to/script.sh
+
+每周一到周五的上午8点到下午5点，每小时执行一次：
+0 8-17 * * 1-5 /path/to/script.sh
+
+每5分钟执行一次：
+*/5 * * * * /path/to/script.sh
+
+每月的1号和15号的凌晨3点执行：
+0 3 1,15 * * /path/to/script.sh
+
+权限：只有在/etc/cron.allow中列出的用户才能使用crontab，如果该文件不存在，则所有不在/etc/cron.deny中的用户都可以使用。
+
+### 5-3、logrotate和crontab
 logrotate的行为也是受crontab控制，在/etc/cron.daily目录下。
 而crontab任务是受anacron控制，在/etc/anacron文件中配置(可能不存在这一层控制)
 

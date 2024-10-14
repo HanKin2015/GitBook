@@ -124,3 +124,12 @@ FlowUs：除了块编辑器和多维表格等功能外，原生应用开发、�
 ## 上传文件小技巧
 被封22端口，无法ssh进入后台上传文件，可以通过更改后缀为iso尝试从界面上传。或者使用软碟通把文件打包成ISO文件，通过上传ISO的方式上传，最后连接服务器改回来。
 
+## 六个国外高质量的技术网站
+https://zhuanlan.zhihu.com/p/654985718
+
+1、Stack Overflow——最权威的问答社区网站
+2、GitHub——最大的代码托管平台
+3、VisuAlgo-一个算法学习网站
+4、SourceForge——最全的软件资源网站
+5、CodeProject——高质量技术博客
+6、CodeWars

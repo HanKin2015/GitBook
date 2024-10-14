@@ -32,6 +32,7 @@ info：数据包信息。
 https://www.cnblogs.com/wangqiguo/p/5068602.html
 
 ## 3、使用wireshark抓取USB数据包
+更多详情见：D:\Github\GitBook\gitbook\USBDevice\capture_packet.md
 安装wireshark时需要点击安装USBPcap。
 
 可以在安装文件夹中查看USB设备在哪条线上，C:\Program Files\USBPcap\USBPcapCMD.exe。可以使用命令抓取，选择序列号，然后输入文件名即可。

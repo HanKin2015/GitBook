@@ -19,11 +19,46 @@ xinput map-to-output 10 HDMI1 把鼠标定位HDMI屏
 https://my.oschina.net/u/174445/blog/33329
 
 ## 3、常见的安装命令
-apt
-yum
 
-apt 和 apt-get区别
-apt search 和 apt-cache search区别
+### 3-1、apt 和 apt-get区别
+参考：https://blog.csdn.net/a3192048/article/details/86618314
+Ubuntu 16.04 发布时，一个引人注目的新特性便是 apt 命令的引入。其实早在 2014 年，apt 命令就已经发布了第一个稳定版，只是直到 2016 年的 Ubuntu 16.04 系统发布时才开始引人关注。
+
+随着 apt install package 命令的使用频率和普遍性逐步超过 apt-get install package，越来越多的其它 Linux 发行版也开始遵循 Ubuntu 的脚步，开始鼓励用户使用 apt 而不是 apt-get。
+
+apt 命令的引入就是为了解决命令过于分散的问题，它包括了 apt-get 命令出现以来使用最广泛的功能选项，以及 apt-cache 和 apt-config 命令中很少用到的功能。
+
+在使用 apt 命令时，用户不必再由 apt-get 转到 apt-cache 或 apt-config，而且 apt 更加结构化，并为用户提供了管理软件包所需的必要选项。
+
+简单来说就是：apt = apt-get、apt-cache 和 apt-config 中最常用命令选项的集合。
+
+虽然 apt 与 apt-get 有一些类似的命令选项，但它并不能完全向下兼容 apt-get 命令。也就是说，可以用 apt 替换部分 apt-get 系列命令，但不是全部。
+
+目前还没有任何 Linux 发行版官方放出 apt-get 将被停用的消息，至少它还有比 apt 更多、更细化的操作功能。对于低级操作，仍然需要 apt-get。
+
+### 3-2、apt和yum
+一般来说著名的linux系统基本上分两大类：
+1.RedHat系列：Redhat、Centos、Fedora等
+2.Debian系列：Debian、Ubuntu等
+
+RedHat 系列 
+1 常见的安装包格式 rpm包,安装rpm包的命令是“rpm -参数” 
+2 包管理工具 yum 
+3 支持tar包
+
+Debian系列 
+1 常见的安装包格式 deb包,安装deb包的命令是“dpkg -参数” 
+2 包管理工具 apt-get 
+3 支持tar包
+
+tar 只是一种压缩文件格式，所以，它只是把文件压缩打包而已。 
+rpm 相当于windows中的安装文件，它会自动处理软件包之间的依赖关系。 
+优缺点来说，rpm一般都是预先编译好的文件，它可能已经绑定到某种CPU或者发行版上面了。 
+tar一般包括编译脚本，你可以在你的环境下编译，所以具有通用性。 
+如果你的包不想开放源代码，你可以制作成rpm，如果开源，用tar更方便了。 
+tar一般都是源码打包的软件，需要自己解包，然后进行安装三部曲，./configure, make, make install. 来安装软件。
+
+rpm是redhat公司的一种软件包管理机制，直接通过rpm命令进行安装删除等操作，最大的优点是自己内部自动处理了各种软件包可能的依赖关系。
 
 ## 4、apt命令
 sudo apt-get clean

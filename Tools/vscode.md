@@ -86,6 +86,11 @@ run code插件直接运行
 在右边Resources-》Downloads Extension即可。
 另外搜索的时候需要注意分类，我在下载drawio时一直没有找到网上说的插件，原来是分类限制了。
 
+- Draw.io Integration
+- Chinese Language Pack for Visual Studio Code
+- PlantUML
+- Remote - SSH
+
 ## 7、输出窗口中文乱码
 由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 

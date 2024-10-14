@@ -1,33 +1,26 @@
-# memcpy_s和memcpy
-
+# memcpy和strncpy
 
 # 1、memcpy_s相比memcpy，安全在哪？
-
 strcpy_s、memcpy_s等具有缓冲区大小检查的函数，可以有效的检测内存溢出，找到出错的代码。但是strcpy、memcpy这样的出错了需要自己扒代码。
-
-memcpy_s strcpy_s 会故意使用特定数据填满未使用缓冲区,   这样程序调试阶段就容易暴露问题, 有助于程序员检查出越界操作代码问题。
+memcpy_s strcpy_s会故意使用特定数据填满未使用缓冲区, 这样程序调试阶段就容易暴露问题, 有助于程序员检查出越界操作代码问题。
 
 那主要就是帮助我们及早的检查出诸如访问越界这样的问题是吧。
-
+```
 int dest[10], src[100];
 memcpy(dest, src, 20 * sizeof (int)); 
 memcpy_s(dest, sizeof(dest), src, 20 * sizeof (int)); 
-
+```
 memcpy会访问越界，破坏了dest后面的数据，并且可能我们还不知道。而memcpy_s就会弹出一个对话框提醒我们。
 
 ## 2、strncpy 
-
 原型：extern char *strncpy(char *dest, char *src, int n);
 用法：#include <string.h>
 功能：把src所指由NULL结束的字符串的前n个字节复制到dest所指的数组中。
 说明：
-
 - 如果src的前n个字节不含NULL字符，则结果不会以NULL字符结束。
 - 如果src的长度小于n个字节，则以NULL填充dest直到复制完n个字节。
 - src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
 - 返回指向dest的指针。
-
-
 
 ## 3、memcpy 
 原型：extern void *memcpy(void *dest, void *src, unsigned int count);
@@ -37,7 +30,7 @@ memcpy会访问越界，破坏了dest后面的数据，并且可能我们还不�
 
 总结：strncpy遇到NULL会停止拷贝后面的内容，而用NULL来填充。而memcpy只是单纯的内存拷贝，不关心是否是NULL。
 
-## 注意点
+## 4、注意点
 - strncpy是char型，而memcpy是void型，无视字符串类型。
 - strncpy遇到'\0'就不拷贝了。
 - '0'和'\0'是一回事吗？学到了学到了，还真是
@@ -48,8 +41,7 @@ strncpy() 最初被设计为用来处理一种现在已经废弃的数据结构�
 
 解决memcpy末尾不自动加'\0'的问题：先对字符数组初始化0。
 
-## 各说各的好
-
+## 5、各说各的好
 今天不小心在该用memcpy的时候，用了strncpy使自己吃了亏，所以写出这个博文。memcpy就是纯字节拷贝，而strncpy就不同了，字符串是以'\0'结尾的。如果一个字符buffer长度为6个字节，内容是
 
 {'a', 'b', '\0', 'c', 'm', 'n'}，当你执行这一句：strncpy(dest, buffer, 4);
@@ -58,8 +50,7 @@ dest里的前四个字节内容将为{'a', 'b', '\0', '\0'}，注意第四个字
 
 所以如果buffer之间拷贝的话，还是用memcpy为妙。
 
-## 5、字符'0'和'\0',及整数0的区别
-
+## 6、字符'0'和'\0',及整数0的区别
 字符'0'：char c = '0';   它的ASCII码实际上是48。内存中存放表示：00110000
 
 字符'\0' : ASCII码为0，表示一个字符串结束的标志。这是转义字符。
@@ -73,22 +64,48 @@ http://www.asciima.com/
 百度知道：字符0和整数0区别
 http://zhidao.baidu.com/question/351626505.html
 
-
+## 7、实战
 ```
 #include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-	char s1[] = "123045";
+	char s1[] = "12 3\045";
 	int len = sizeof(s1);
+    printf("len = %d\n", len);
 	char s2[10], s3[10];
 
 	strncpy(s2, s1, len);
+    
 	memcpy(s3, s1, len);
+    
 	cout << "s2 = " << s2 << ' ' << sizeof(s2) << endl;
 	cout << "s3 = " << s3 << ' ' << sizeof(s3) << endl;
+    
+    // 打印 s2 的每个字符的 ASCII 值
+    printf("s2 ASCII values: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", s2[i]);
+    }
+    printf("\n");
+    // 打印 s3 的每个字符的 ASCII 值
+    printf("s3 ASCII values: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", s3[i]);
+    }
+    printf("\n");
 	return 0;
 }
-```
 
+len = 6
+s2 = 12 3% 10
+s3 = 12 3% 10
+s2 ASCII values: 49 50 32 51 37 0 0 0 0 0
+s3 ASCII values: 49 50 32 51 37 0 0 0 -64 9
+```
+strncpy 不会在遇到空字符时停止复制，而是继续复制直到达到指定的字符数 n。
+如果源字符串长度小于 n，strncpy 会在目标缓冲区中填充空字符。但是memcpy不会。
+如果源字符串长度大于或等于 n，目标字符串可能不是以空字符结尾的，因此需要手动添加空字符以确保其为有效的 C 字符串。
+
+在实际使用中，选择哪个函数取决于具体的需求和数据类型。对于字符串操作，通常使用 strncpy，而对于二进制数据或需要精确控制字节数的操作，使用 memcpy。

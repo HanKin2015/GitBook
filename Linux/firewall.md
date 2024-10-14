@@ -2,6 +2,7 @@
 
 ## 1、iptables
 iptables命令是Linux上常用的防火墙软件，是netfilter项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。
+iptables 是 Linux 系统中用于配置网络流量过滤规则的命令行工具。它可以用来设置、维护和检查 IP 数据包过滤规则。
 
 参考：http://lnmp.ailinux.net/iptables
 

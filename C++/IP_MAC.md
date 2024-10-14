@@ -319,11 +319,10 @@ in_addr_t inet_addr(const char* strptr);
 将字符串转换为32位二进制网络字节序的IPV4地址，即将一个点间隔地址转换成一个in_addr。
 
 2、inet_ntoa函数
-
- #include <arpa/inet.h>
-
-char* inet_ntoa(struct in_addr in);
-
+```
+#include <arpa/inet.h>
+char* inet_ntoa(struct in_addr in);
+```
 将一个十进制网络字节序转换为点分十进制IP格式的字符串。
 
 3、 inet_ntoa函数

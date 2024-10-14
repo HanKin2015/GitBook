@@ -38,6 +38,15 @@ s + 变量
 gdb 二进制文件 core文件
 ```
 
+### 下断点
+```
+handle SIGPIPE nostop
+handle SIGUSR1 nostop
+handle SIGSEGV nostop
+dir /var/kvm_debug
+b hcd-ehci.c:1659
+```
+
 ## 1、调试没有符号表的程序
 发行版的程序在编译的时候都是没有加上-g这个选项的，那么若是想调试一个程序，应该怎么办呢？
 在加了-g选项时，是可以通过行号、函数名等进行断点的设置的，但是没有符号表的情况下，那么怎么来进行程序的断点的设置并进行调试呢？
@@ -601,6 +610,7 @@ mv /var/lib/dpkg/info_old /var/lib/dpkg/info
 # 取消中断信号
 handle SIGPIPE nostop
 handle SIGUSR1 nostop
+handle SIGSEGV nostop
 dir /var/kvm_debug
 b hcd-ehci.c:1659
 ```

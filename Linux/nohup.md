@@ -219,3 +219,31 @@ root     26888 24207  0 09:18 pts/0    00:00:00 grep --color=auto a.out
 [root@ubuntu0006:~] #ps -ef | grep a.out
 root     27676 27535  0 09:18 pts/0    00:00:00 grep --color=auto a.out
 ```
+
+## 8、发现输出没有出现在nohup.out中
+```
+[root@ubuntu0006:~/cmake] #cat k.py
+import time
+
+while True:
+    time.sleep(1)
+    print(1)
+
+[root@ubuntu0006:~/cmake] #nohup python k.py &
+[2] 20506
+nohup: 忽略输入并把输出追加到'nohup.out'
+[root@ubuntu0006:~/cmake] #cat nohup.out
+Option -p with value a
+Extra argument: b
+Extra argument: c
+Option -p with value a
+Extra argument: b
+Extra argument: c
+```
+缓冲问题：Python的标准输出是缓冲的，这意味着输出可能不会立即写入到nohup.out文件中。你可以通过以下方法解决这个问题：
+
+使用-u选项来运行Python，这会使Python以unbuffered模式运行：
+```
+nohup python -u k.py &
+nohup python -u k.py > my_output.log 2>&1 &
+```

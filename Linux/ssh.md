@@ -2,7 +2,6 @@
 
 ## 1、使用ssh的原因
 远程管理linux系统基本上都要使用到ssh，原因很简单：
-
 - telnet、FTP等传输方式是以明文传送用户认证信息，本质上是不安全的，存在被网络窃听的危险。
 - SSH（Secure Shell）目前较可靠，是专为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题，透过SSH可以对所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
 
@@ -56,6 +55,17 @@ ssh_exchange_identification: read: Connection reset by peer
 (6)vi /etc/ssh/sshd.conf（有些可能是vi /etc/ssh/sshd.confg）
 找到X11Forwarding yes，将其注释掉或者改为no,重启启动ssh服务。
 测试不行
+
+### 在服务端操作
+查看ssh服务及端口：
+```
+iptables -nvL | grep 22     (查看22端口是否真的开启)
+netstat -tunlp | grep ssh   (查看sshd服务是否开启以及端口)
+```
+
+发现ssh服务正常了，但是iptables里面却没有22端口放行，因此需要命令放通：
+iptables 是一个用于配置 Linux 内核防火墙的命令行工具。它允许你定义规则来控制网络流量的进出。
+iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 
 ### 解决办法
 我的解决方法就是重新安装ssh。
@@ -581,4 +591,3 @@ cat /etc/ssh/sshd_config | grep Port
 sudo netstat -anp | grep sshd | grep 0.0.0.0
 ```
 如果不以管理员权限查看，可能会隐藏sshd进程名，但是能查到记录，做了一下隐秘措施。
-

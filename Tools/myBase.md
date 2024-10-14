@@ -42,7 +42,7 @@ hejian
 https://www.52pojie.cn/thread-611328-1-1.html
 https://www.52pojie.cn/thread-563578-1-1.html
 
-另外找到一个可行的办法：
+另外找到一个可行的办法(不好用，每次打开软件都需要重新加载笔记本文件)：
 https://www.cnblogs.com/leslie12956/p/11423309.html
 nyfedit8是软件的安装目录，在目录下面没有找到该文件。
 取消Mybase8.ini 文件的可写权限，该方法可永久使用，文件在C:\Users\User目录下，并且是隐藏的，还好我有everything软件，让隐藏的文件无所遁形。

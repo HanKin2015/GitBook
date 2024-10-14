@@ -43,5 +43,7 @@ https://www.editplus.com/
 https://github.com/zhongyang219/TrafficMonitor
 小巧，可以跟360等说拜拜
 
-
+win10任务栏透明以及实时显示网速，CPU和内存占有率
+一款Aero（大小：26.5 KB (27,136 字节)）
+单文件，不用安装没有花里胡哨的操作，双击就可以直接让任务栏透明
 
