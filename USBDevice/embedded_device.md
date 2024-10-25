@@ -103,9 +103,11 @@ J-Link>
 ```
 
 ## 9、stm32单片机
-http://www.openedv.com/forum-2-1.html
+[openedv论坛]http://www.openedv.com/forum-2-1.html)
+[良许嵌入式-知乎](https://zhuanlan.zhihu.com/p/666604170)
 [良许嵌入式](https://www.lxlinux.net/e/stm32/stm32-quick-start-for-beginner.html)
 [单片机在线编程网](http://www.mcuisp.com/)
+更多详情见：D:\Github\GitBook\gitbook\USBDevice\microcontroller.md
 
 ## 10、FTDI串口
 驱动：https://ftdichip.com/drivers/vcp-drivers/

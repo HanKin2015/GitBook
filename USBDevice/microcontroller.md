@@ -13,4 +13,5 @@ STM32 是一款由 STMicroelectronics 公司开发的 32 位微控制器，由�
 
 现在做 STM32 开发板比较有名的是正点原子和野火。
 
-
+## 3、FPGA入门
+JTAG 接口：大多数 FPGA 开发板，包括基于 Xilinx Artix-7 的板子，通常使用 JTAG 接口进行编程和调试。

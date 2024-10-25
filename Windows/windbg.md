@@ -459,7 +459,23 @@ HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/WindowsNT/CurrentVersion/Image File Execut
 
 等待被调试机接入（正常两台物理机双机调试时，后面只需要重启被调试机，就会自动连接上来，但是被调试机是虚拟机时还需要额外的配置并重启，看接下来的步骤）
 
+## 14、pdb符号表
+当应用程序崩溃并生成 dump 文件时，dump 文件中可能会包含有关 PDB 文件的路径信息。这些信息是在编译时由编译器嵌入到可执行文件中的。具体来说，编译器在生成可执行文件（如 .exe 或 .dll）时，会将 PDB 文件的完整路径嵌入到可执行文件的调试信息中。
+```
+D:\Demo\windows\x86\Release>"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\dumpbin.exe" /headers Session.exe
+Microsoft (R) COFF/PE Dumper Version 14.00.24210.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
+Dump of file Session.exe
+
+  Debug Directories
+
+        Time Type        Size      RVA  Pointer
+    -------- ------- -------- -------- --------
+    671A16E5 cv            6E 007E9B8C   7E838C    Format: RSDS, {7F55C1EC-845E-4F8E-9B61-1DC6DE28344B}, 54, D:\Demo\windows\x86\Release\Session.pdb
+```
+在输出中查找 .debug 部分，可能会看到 PDB 文件的路径信息。
+使用 WinDbg：在 WinDbg 中加载可执行文件或 dump 文件后，可以使用 lm 命令列出加载的模块及其符号信息，其中可能包含 PDB 路径。
 
 

@@ -161,3 +161,33 @@ https://blog.csdn.net/u010142729/article/details/127963874
 ## 18、设置搜索选中背景色以及相同字段背景色
 设置-》语言格式设置-》Selected text colour
 设置-》语言格式设置-》Smart HighLighting
+
+## 19、日志文件中搜索结果只显示行号，内容未显示
+原因：
+写文件的时候，每行开头含有特殊字符，通过在视图-》显示符号-》Show Control Characters & Unicode EOL后，看见开头含有NUL字符。
+
+解决方案：
+将日志重新复制粘贴到另外一个文件再搜索即可。或者直接转成其他编码格式也能消除。
+
+生成方式可能：
+WideCharToMultiByte函数写入宽字符，或者CP_ACP关键字，不研究。
+
+## 20、右键快捷方式创建
+注册表：
+```
+HKEY_CLASSES_ROOT\*\shell\Notepad++\command（"C:\Program Files\Notepad++\notepad++.exe" "%1"）
+
+针对特定文件类型: HKEY_CLASSES_ROOT\<FileType>\shell
+针对所有文件: HKEY_CLASSES_ROOT\*\shell
+针对文件夹: HKEY_CLASSES_ROOT\Directory\shell
+针对驱动器: HKEY_CLASSES_ROOT\Drive\shell
+针对快捷方式: HKEY_CLASSES_ROOT\lnkfile\shell
+针对特定用户: HKEY_CURRENT_USER\Software\Classes\*\shell
+针对所有用户: HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shell
+```
+
+notepad++很有趣：
+通过计算机\HKEY_CLASSES_ROOT\*\shell\ANotepad++64指向了一个CLSID（HKEY_CLASSES_ROOT\CLSID\{B298D29A-A6ED-11DE-BA8C-A68E55D89593}）
+然后再在CLSID中进行具体的操作，不同的版本配置不一样。
+
+在 Windows 注册表中，ThreadingModel 是与 COM（Component Object Model）对象相关的一个配置项。它定义了 COM 对象的线程模型，即对象如何处理来自不同线程的调用。虽然 Notepad++ 本身不是一个 COM 服务器，但它可能会使用某些插件或扩展，这些插件或扩展可能会注册 COM 组件。

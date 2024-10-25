@@ -1638,28 +1638,3 @@ git pull -f
 切换到同名分支，直接git pull即可（不能同步可能存在冲突）
 可以使用git branch -vv查看分支对应的远端分支
 
-## 74、
-```
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 829
-collection-patches-20240829
-collection-patches-20240829
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep "*829"
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep *829
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '*829'
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '829'
-collection-patches-20240829
-collection-patches-20240829
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 'patches'
-collection-patches-20240710
-collection-patches-20240829
-collection-patches-20240829
-collection-patches-20240928(20240929)
-collection-patches-20240821
-collection-patches-20240821
-collection-patches-20240821
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '829$'
-collection-patches-20240829
-collection-patches-20240829
-[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 'patches$'
-```
-

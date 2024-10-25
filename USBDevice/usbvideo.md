@@ -62,7 +62,6 @@ ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h(fatal error: 
 ./luvcview -d /dev/video0 -f mjpg -s 640x480
 ```
 
-
 直接make，报错SDL/SDL.h，安装libsdl1.2-dev，安装libsdl2-dev不行
 uvcvideo.h:5:10: fatal error: linux/videodev.h: No such file or directory
 #include <linux/videodev.h>
@@ -80,7 +79,6 @@ luvcview -d /dev/video0 -L
 其源代码也是挺简洁紧凑的，以后再找时间好好阅读学习下。这里主要是讲解这个工具基于创龙 TL570x-EVM 的编译与使用。
 
 工具项目地址：http://git.ideasonboard.org/yavta.git
-
 下载源码：git clone git://git.ideasonboard.org/yavta.git然后make即可。
 
 ./yavta /dev/video1 -c1 -n4 -s1920x1080 -fSRGGB10 -Fvideo.raw
@@ -326,3 +324,15 @@ struct uvc_streaming_control {
     __u8  bMaxVersion;  //版本 
 } __attribute__((__packed__));
 ```
+
+## 15、笔记本摄像头帧率问题
+ThinkPad-E14笔记本摄像头（04f2:b78e）加载了RsEyeContactCorrection_Assets.dll、RsDMFT64.dll、RsDMFT_Assets.dll三个文件后1280x720分辨率从10帧率提高到30帧率，很神奇。
+
+该摄像头伴随着一个camera DFU device设备，在虚拟机内部驱动是异常的，未安装驱动，物理机上面看它加载了卡巴斯基驱动和winusb.sys驱动，但是虚拟机里面是存在winusb.sys驱动的。
+
+该文件驱动：https://www.mypcrun.com/file-info-driver/rsdmft-cat-driver-file-download/
+
+## 16、联想笔记本摄像头含有两种驱动
+Thinkbook-5986:212a
+SunplusIT驱动，另外有些笔记本只含有RsDMFT64.dll、RsDMFT_Assets.dll这两个文件，如果强制安装RsEyeContactCorrection_Assets.dll三个文件的驱动，物理机没有问题，但是虚拟机会有问题。
+

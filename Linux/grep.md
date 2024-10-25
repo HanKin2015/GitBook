@@ -265,7 +265,7 @@ ping
 ^ #匹配行的开始 如：'^grep'匹配所有以grep开头的行。
 $ #匹配行的结束 如：'grep$'匹配所有以grep结尾的行。
 . #匹配一个非换行符的字符 如：'gr.p'匹配gr后接一个任意字符，然后是p。
-* #匹配零个或多个先前字符 如：'*grep'匹配所有一个或多个空格后紧跟grep的行。
+ * #匹配零个或多个先前字符 如：' *grep'匹配所有一个或多个空格后紧跟grep的行。
 .* #一起用代表任意字符。
 [] #匹配一个指定范围内的字符，如'[Gg]rep'匹配Grep和grep。
 [^] #匹配一个不在指定范围内的字符，如：'[^A-FH-Z]rep'匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。
@@ -303,6 +303,112 @@ a f g liker
 a f h g liker
 ```
 
+### 10-1、*符号的实战
+错误演示，也是问题来源：
+```
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 829
+collection-patches-20240829
+collection-patches-20240829
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep "*829"
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep *829
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '*829'
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '829'
+collection-patches-20240829
+collection-patches-20240829
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 'patches'
+collection-patches-20240710
+collection-patches-20240829
+collection-patches-20240829
+collection-patches-20240928(20240929)
+collection-patches-20240821
+collection-patches-20240821
+collection-patches-20240821
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep '829$'
+collection-patches-20240829
+collection-patches-20240829
+[root@ubuntu0006:/media] ((550cf74...)) #git tag | grep 'patches$'
+[root@ubuntu0006:/media] ((550cf74...)) #
+```
+
+正确的方式：
+```
+[root@ubuntu0006:~] #grep " *short" te.c
+        unsigned short vid = desc.idVendor;
+        unsigned short pid = desc.idProduct;
+            unsigned short vid = desc.idVendor;
+            unsigned short pid = desc.idProduct;
+[root@ubuntu0006:~] #cat te.c | grep ' *short'
+        unsigned short vid = desc.idVendor;
+        unsigned short pid = desc.idProduct;
+            unsigned short vid = desc.idVendor;
+            unsigned short pid = desc.idProduct;
+[root@ubuntu0006:~] #cat te.c | grep driver
+* 文 件 名: replace_kernel_driver.c
+            op_attach_kernel_driver(fd, 0);
+            op_attach_kernel_driver(fd, 1);
+            op_detach_kernel_driver(fd, 0);
+            op_detach_kernel_driver(fd, 1);
+            detach_kernel_driver_and_claim(fd, 0);
+            detach_kernel_driver_and_claim(fd, 1);
+[root@ubuntu0006:~] #cat te.c | grep *driver
+[root@ubuntu0006:~] #cat te.c | grep  *driver
+[root@ubuntu0006:~] #cat te.c | grep *short
+[root@ubuntu0006:~] #cat te.c | grep  *short
+[root@ubuntu0006:~] #cat te.c | grep   *short
+[root@ubuntu0006:~] #cat te.c | grep  .*driver
+* 文 件 名: replace_kernel_driver.c
+            op_attach_kernel_driver(fd, 0);
+            op_attach_kernel_driver(fd, 1);
+            op_detach_kernel_driver(fd, 0);
+            op_detach_kernel_driver(fd, 1);
+            detach_kernel_driver_and_claim(fd, 0);
+            detach_kernel_driver_and_claim(fd, 1);
+[root@ubuntu0006:~] #cat te.c | grep  driver*
+* 文 件 名: replace_kernel_driver.c
+            op_attach_kernel_driver(fd, 0);
+            op_attach_kernel_driver(fd, 1);
+            op_detach_kernel_driver(fd, 0);
+            op_detach_kernel_driver(fd, 1);
+            detach_kernel_driver_and_claim(fd, 0);
+            detach_kernel_driver_and_claim(fd, 1);
+[root@ubuntu0006:~] #cat te.c | grep  driver.
+* 文 件 名: replace_kernel_driver.c
+            op_attach_kernel_driver(fd, 0);
+            op_attach_kernel_driver(fd, 1);
+            op_detach_kernel_driver(fd, 0);
+            op_detach_kernel_driver(fd, 1);
+            detach_kernel_driver_and_claim(fd, 0);
+            detach_kernel_driver_and_claim(fd, 1);
+[root@ubuntu0006:~] #cat te.c | grep  driver***
+* 文 件 名: replace_kernel_driver.c
+            op_attach_kernel_driver(fd, 0);
+            op_attach_kernel_driver(fd, 1);
+            op_detach_kernel_driver(fd, 0);
+            op_detach_kernel_driver(fd, 1);
+            detach_kernel_driver_and_claim(fd, 0);
+            detach_kernel_driver_and_claim(fd, 1);
+```
+
+总结：使用grep命令时\*符号不能单独匹配使用，需要结合其他符号进行组合，另外grep命令不需要像find命令那样需要\*去通配，如：
+```
+[root@ubuntu0006:~] #find . -maxdepth 1 -name *c
+find: 路径必须在表达式之前: k.c
+用法: find [-H] [-L] [-P] [-Olevel] [-D help|tree|search|stat|rates|opt|exec|time] [path...] [expression]
+[root@ubuntu0006:~] #find . -maxdepth 1 -name "*c"
+./.xsm7l5yUc
+./.dmrc
+./Public
+./te.c
+./.bashrc
+./exec_shell_cmd_return_result.c
+./Music
+./k.c
+./.vnc
+./malloc_deallocated_with_delete.c
+[root@ubuntu0006:~] #find . -maxdepth 1 -name "c"
+[root@ubuntu0006:~] #
+```
+
 ## 11、grep统计文件个数
 1) 查看某文件夹下文件的个数:
 ```
@@ -334,33 +440,15 @@ o参数的重要性，注意126行出现了两个int也统计出来了。
 ```
 [root@ubuntu0006:~/cmake] #grep -Rn "int" a.cpp
 41:     * this bDeviceClass value indicates that each interface specifies its
-42:     * own class information and all interfaces operate independently.
-62:    /** Printer class */
-103:static void print_devs(libusb_device **devs)
-106:    int i = 0;
-110:        int r = libusb_get_device_descriptor(dev, &desc);
-112:            fprintf(stderr, "failed to get device descriptor");
-116:        printf("%04x:%04x (bus %d, port %d, device %d, speed %d, class 0x%x)\n",
 126:int main(int argc, char *argv[])
 129:    int r;
-138:        return (int) cnt;
-141:    print_devs(devs);
 [root@ubuntu0006:~/cmake] #grep -Rno "int" a.cpp
 41:int
-42:int
-62:int
-103:int
-106:int
-110:int
-112:int
-116:int
 126:int
 126:int
 129:int
-138:int
-141:int
 [root@ubuntu0006:~/cmake] #grep -Rno "int" a.cpp | wc -l
-13
+4
 ```
 
 ## 14、转义字符
@@ -397,5 +485,130 @@ d9219c80 814341660 C Ii:3:004:1 0:2 8 = 00010000 01000000
 d9219c80 814341726 S Ii:3:004:1 -115:2 8 <
 d9219c80 814343658 C Ii:3:004:1 0:2 8 = 0001ff00 0100ffff
 d9219c80 814343737 S Ii:3:004:1 -115:2 8 <
+```
+
+## 15、将grep过滤的内容输出到文件中
+
+### 15-1、需求
+统计某个进程一段时间的CPU使用率数据，并将结果输出到文件保存。
+```
+top -b -d 1 -p 1234 | grep 1234
+```
+
+### 15-2、解决方案
+咋一看，似乎是一个很简单的问题，就是 taif -f | grep 过滤出来的内容重定向到文件中就行了，但是为什么文件一直为空呢？
+
+其实这要从shell的输出机制说起，因为标准输出到终端时默认行缓冲或无缓冲，重定向到硬盘之后，就变成了全缓冲。
+
+因此 tail -f 往终端打印，和往文件中写是不一样的，往文件中写，需要先写到pipe的缓冲区中， 然后再写到文件中。tail -f 之后表示一个流还没有完成， 缓冲区不会自动写，因此导致内容无法写入文件。
+
+解决方法呢？很简单，既然缓冲区不自动写，那我们就强制写。方法不止一种，此处我们单讲 fflush：
+fflush是一个在C语言标准输入输出库中的函数，功能是冲洗流中的信息，该函数通常用于处理磁盘文件。fflush()会强迫将缓冲区内的数据写回参数stream 指定的文件中。
+
+以上是百度百科中对fflush释义，在shell中，我们可以使用awk来调用fflush,话不多说，先上shell：
+```
+tail -f xxx.log | awk '/china|beijing/ {print $0; fflush() }' >> out.txt
+```
+此命令即实现实时过滤 xxx.log 文件中的关键词 china 或 beijing ,并将对应的行输出到out.txt文件中。
+
+```
+[root@ubuntu0006:~] #top -b -d 1 -p 1956 | grep 1956 >> out.txt
+^C
+[root@ubuntu0006:~] #cat out.txt
+[root@ubuntu0006:~] #
+[root@ubuntu0006:~] #top -b -d 1 -p 1956 | awk '/1956/ {print $0}' >> out.txt
+^C
+[root@ubuntu0006:~] #cat out.txt
+[root@ubuntu0006:~] #
+[root@ubuntu0006:~] #top -b -d 1 -p 1956 | awk '/1956/ {print $0; fflush() }' >> out.txt
+^C
+[root@ubuntu0006:~] #cat out.txt
+ 1956 root      20   0  924764  21596  14088 S   0.0  0.3 122:42.61 ToolsAPI
+ 1956 root      20   0  924764  21472  14088 S   1.0  0.3 122:42.62 ToolsAPI
+ 1956 root      20   0  924764  21472  14088 S   1.0  0.3 122:42.63 ToolsAPI
+ 1956 root      20   0  924764  21472  14088 S   0.0  0.3 122:42.63 ToolsAPI
+ 1956 root      20   0  924764  21472  14088 S   0.0  0.3 122:42.63 ToolsAPI
+ 1956 root      20   0  924764  21472  14088 S   0.0  0.3 122:42.63 ToolsAPI
+```
+
+## 16、cat命令查看日志使用grep命令搜索关键字不全
+```
+[root@ubuntu0006:/var/log] #cat syslog  | grep 21514
+Nov  9 11:36:06 ubuntu0006 kernel: [    2.215148] uhci_hcd 0000:00:19.2: UHCI Host Controller
+匹配到二进制文件 (标准输入)
+
+[root@ubuntu0006:/var/log] #cat syslog  | grep -a 21514
+Nov  9 11:36:06 ubuntu0006 kernel: [    2.215148] uhci_hcd 0000:00:19.2: UHCI Host Controller
+Mar 19 04:17:01 ubuntu0006 CRON[21514]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+
+[root@ubuntu0006:/var/log] #cat syslog  | grep --text 21514
+Nov  9 11:36:06 ubuntu0006 kernel: [    2.215148] uhci_hcd 0000:00:19.2: UHCI Host Controller
+Mar 19 04:17:01 ubuntu0006 CRON[21514]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+
+[root@ubuntu0006:/var/log] #cat syslog  | grep --binary-files=text 21514
+Nov  9 11:36:06 ubuntu0006 kernel: [    2.215148] uhci_hcd 0000:00:19.2: UHCI Host Controller
+Mar 19 04:17:01 ubuntu0006 CRON[21514]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+
+[root@ubuntu0006:/var/log] #strings syslog | grep 21514
+Nov  9 11:36:06 ubuntu0006 kernel: [    2.215148] uhci_hcd 0000:00:19.2: UHCI Host Controller
+Mar 19 04:17:01 ubuntu0006 CRON[21514]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+```
+
+### 16-1、问题原因
+当 grep 显示“匹配到二进制文件（标准输入）”时，这意味着 grep 检测到输入数据包含二进制内容，而不是纯文本。默认情况下，grep 在遇到二进制数据时会停止处理并显示此消息。
+
+### 16-2、解决方案
+- 使用 -a 或 --text 选项来强制 grep 将文件视为文本文件，即使它包含二进制数据。这可以让 grep 继续处理文件中的文本部分。
+- 不需要处理二进制内容，可以使用 --binary-files=text 选项，这与 -a 类似。
+- 如果文件确实包含二进制数据，但你只关心其中的文本部分，可以使用 strings 命令提取文本，然后再用 grep 搜索
+
+### 16-3、检查文件是否含有二进制内容
+放弃，没有找到答案：
+```
+hj文件含有中文，jh不含有中文：
+[root@ubuntu0006:~] #hexdump -C hj
+00000000  31 32 33 0a 31 32 0a 39  38 e4 bd 95 e5 81 a5 31  |123.12.98......1|
+00000010  32 0a 6a 6b 0a 31 32 0a  e6 8b 89 e6 8b 89 0a 31  |2.jk.12........1|
+00000020  32 0a 31 32 0a                                    |2.12.|
+00000025
+[root@ubuntu0006:~] #hexdump -C jh
+00000000  31 32 33 0a 31 32 0a 39  38 31 32 0a 6a 6b 0a 31  |123.12.9812.jk.1|
+00000010  32 0a 0a 31 32 0a 31 32  0a                       |2..12.12.|
+00000019
+[root@ubuntu0006:~] #xxd hj
+00000000: 3132 330a 3132 0a39 38e4 bd95 e581 a531  123.12.98......1
+00000010: 320a 6a6b 0a31 320a e68b 89e6 8b89 0a31  2.jk.12........1
+00000020: 320a 3132 0a                             2.12.
+[root@ubuntu0006:~] #xxd jh
+00000000: 3132 330a 3132 0a39 3831 320a 6a6b 0a31  123.12.9812.jk.1
+00000010: 320a 0a31 320a 3132 0a                   2..12.12.
+[root@ubuntu0006:~] #od -c hj
+0000000   1   2   3  \n   1   2  \n   9   8 344 275 225 345 201 245   1
+0000020   2  \n   j   k  \n   1   2  \n 346 213 211 346 213 211  \n   1
+0000040   2  \n   1   2  \n
+0000045
+[root@ubuntu0006:~] #od -c jh
+0000000   1   2   3  \n   1   2  \n   9   8   1   2  \n   j   k  \n   1
+0000020   2  \n  \n   1   2  \n   1   2  \n
+0000031
+
+自己创建的文件并没有复现问题：
+[root@ubuntu0006:~] #grep '12' hj
+123
+12
+98何健12
+12
+12
+12
+[root@ubuntu0006:~] #grep -P '[^\x20-\x7E\t\r\n]' hj
+98何健12
+拉拉
+[root@ubuntu0006:~] #cat hj | grep 12
+123
+12
+98何健12
+12
+12
+12
 ```
 
