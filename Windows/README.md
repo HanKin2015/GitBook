@@ -155,3 +155,15 @@ https://learn.microsoft.com/zh-cn/sysinternals/downloads/process-explorer
 
 Windows 11记事本不支持转换换行符。
 
+## 15、自启动设置位置
+- msconfig命令查看（Windows 10及以上版本的自启动项管理主要通过任务管理器（Task Manager）而不是msconfig）
+- 注册表：HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run 和 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+- 启动文件夹：按Win + R，输入shell:startup
+- “任务计划程序”（Task Scheduler）
+- 有些应用可能会以服务的形式启动。按Win + R，输入services.msc
+
+推荐的工具autoruns（不好用，只显示了msconfig中的程序）
+
+一般程序会在msconfig中找到，部分例外：
+todesk自启动在服务中启动
+FRAPS自启动则在任务计划程序中

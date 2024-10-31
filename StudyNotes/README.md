@@ -133,3 +133,6 @@ https://zhuanlan.zhihu.com/p/654985718
 4、SourceForge——最全的软件资源网站
 5、CodeProject——高质量技术博客
 6、CodeWars
+
+## 镜像地址
+https://mirror.js.org/

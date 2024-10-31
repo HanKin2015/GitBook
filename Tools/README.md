@@ -126,6 +126,7 @@ imsdn：https://www.imsdn.cn/
 HelloWindows : https://hellowindows.cn
 系统库 : https://www.xitongku.com
 山己几子木 : https://msdn.sjjzm.com
+微信文件传输助手网页版：https://filehelper.weixin.qq.com/
 
 桌面录屏小工具：https://github.com/fandesfyf/JamTools
 

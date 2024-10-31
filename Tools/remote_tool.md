@@ -19,7 +19,8 @@ so
 
 ## 3、todesk
 https://www.todesk.com/
-缺点：页面错误是真的高
+缺点：任务管理器中进程页面错误是真的高
+注意：精简版仅支持被控，免安装运行（该版本仅支持主控登录账号为VIP时连接使用）
 
 ## 4、VNC
 下载地址：https://www.realvnc.com/en/connect/download/viewer/?lai_vid=xAE6MqeLyHGBE&lai_sr=15-19&lai_sl=l
@@ -124,6 +125,9 @@ Once you have done this, re-open your Preferences and untick 'Protect VNC Viewer
 重载配置：
 "C:\Program Files\RealVNC\VNC Server\vncserver.exe" -service -reload
 
+### 4-5、mstsc与VNC冲突
+如果之前使用mstsc连接未断开，这时候使用VNC连接，虽然连接成功，但是是黑屏状态。这时候只能把VNC完全关闭后再连接才能解决问题。
+
 ## 5、anyviewer
 https://www.anyviewer.cn/
 
@@ -220,3 +224,6 @@ Radmin (Remote Administrator)是一款屡获殊荣的远程控制软件，它将
 
 ## 6、网络人和pcanywhere
 http://netman123.cn/cw/lp_11.html
+
+## anydesk
+https://anydesk.com.cn/zhs

@@ -11,7 +11,7 @@ t: thread输出当前线程编号
 where：感觉跟bt效果一样
 h：help没啥用
 i：info
-p(print)x: x是变量名，表示打印变量x的值
+p(print) x: x是变量名，表示打印变量x的值
 s: set设置变量值
 wh: 查看代码位置
 n(next): 表示执行下一步
