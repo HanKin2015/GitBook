@@ -7,7 +7,7 @@ timeline：git上库日志
 显示空格和tab键：
 打开setting,在搜索框中输入renderControlCharacters,选中勾选框,即可显示tab.
 在搜索框中输入renderWhitespace,选择all,即可显示空格.
-主题：ctrl+shift+p搜索颜色主题，选择Dark High Contrast（推荐）
+主题：ctrl+shift+p搜索颜色主题，选择Dark（Visual Studio）（推荐）
 
 ## 1、sublime工具缺点
 编译运行c或c++需要单独搭建环境，比较麻烦，并且不支持程序输入，中文乱码，代码追踪不完善等问题。

@@ -139,59 +139,125 @@ or available locally via: info '(coreutils) uname invocation'
 ```
 
 # 10、 **blkid命令**
-
 **blkid命令**对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。 
 
-# 11、[Linux 下查看字体](https://www.cnblogs.com/yangzp/p/10791694.html)
-1.查看所有字体
-命令：fc-list
+# 11、Linux下查看字体
+fc-list 和 fc-match 是 Linux 系统中用于字体管理的命令，属于 fontconfig 工具集的一部分。它们用于查询和匹配系统中的字体信息。
 
-2.查看中文字体
-命令：fc-list :lang=zh
+## 11-1、fc-list 命令
+fc-list 用于列出系统中可用的字体及其属性。你可以使用它来查看系统中安装的所有字体。
 
-3.查看更多字体
-命令：fc-match -v "AR PL UKai CN"
-
-windows系统下字体：C://Windows/Fonts/微软雅黑（似乎里面没有ttf字体，格式为ttc）
-/usr/share/fonts/chinese/TrueType
-
+1.列出所有字体
 ```
-cp -rf 	"$UNPACK_FILE_DIR"/common/usr/local/share/fonts/*  "${VDI_WORD_FONT_PATH}"
-chmod 755 "${VDI_WORD_FONT_PATH}"* 
-mkfontscale 
-mkfontdir
-fc-cache -fv
-cd /tmp
-		
-安装字体
-创建 /usr/share/fonts/opentype文件夹,将要的字体opentype文件放在这个文件下
+fc-list
+```
+
+2.列出特定字体的详细信息（列出所有家族名称为 "Arial" 的字体）
+```
+fc-list :family=Arial
+```
+
+3.列出特定属性的字体（列出支持中文的字体）
+```
+命令：fc-list :lang=zh
+```
+
+4.列出字体的特定属性（只列出字体的家族名称）
+```
+fc-list : family
+```
+这个冒号的位置很刁钻！
+```
+[root@ubuntu0006:~] #fc-list:family
+-bash: fc-list:family: 未找到命令
+[root@ubuntu0006:~] #fc-list :family
+/usr/share/fonts/truetype/lato/Lato-Medium.ttf: Lato,Lato Medium:style=Medium,Regular
+/usr/share/fonts/truetype/tlwg/TlwgTypo-Bold.ttf: Tlwg Typo:style=Bold
+[root@ubuntu0006:~] #fc-list : family
+STIXIntegralsUp
+Noto Sans Gurmukhi
+[root@ubuntu0006:~] #fc-list
+/usr/share/fonts/truetype/lato/Lato-Medium.ttf: Lato,Lato Medium:style=Medium,Regular
+/usr/share/fonts/truetype/tlwg/TlwgTypo-Bold.ttf: Tlwg Typo:style=Bold
+```
+
+## 11-2、fc-match 命令
+fc-match 用于查找与指定模式最匹配的字体。它可以帮助你找到系统中最接近你所需的字体。
+
+1.匹配特定字体（返回与 "Arial" 最匹配的字体）
+```
+fc-match Arial
+```
+
+2.匹配并显示详细信息（使用 -v 选项可以显示匹配字体的详细信息）
+```
+fc-match -v Arial
+
+[root@ubuntu0006:~] #fc-list :family=Garuda
+/usr/share/fonts/truetype/tlwg/Garuda.ttf: Garuda:style=Regular
+/usr/share/fonts/truetype/tlwg/Garuda-Bold.ttf: Garuda:style=Bold
+/usr/share/fonts/truetype/tlwg/Garuda-Oblique.ttf: Garuda:style=Oblique
+/usr/share/fonts/truetype/tlwg/Garuda-BoldOblique.ttf: Garuda:style=Bold Oblique
+[root@ubuntu0006:~] #fc-match Garuda
+Garuda.ttf: "Garuda" "Regular"
+[root@ubuntu0006:~] #fc-match -v Garuda
+Pattern has 37 elts (size 48)
+        family: "Garuda"(s)
+        familylang: "en"(s)
+        style: "Regular"(s)
+```
+
+3.匹配特定属性的字体（返回支持中文的最匹配字体）
+```
+fc-match :lang=zh
+```
+
+## 11-3、fc-cache 命令
+- 更新字体缓存：fc-cache 会扫描指定目录（或默认的字体目录）中的字体文件，并更新字体缓存，以便系统能够快速访问这些字体。
+- 提高性能：通过缓存字体信息，fc-cache 可以显著提高应用程序启动时的字体加载速度。
+
+1.更新所有字体目录的缓存：
+```
+fc-cache
+```
+这将扫描所有已知的字体目录并更新缓存。
+
+2.更新特定目录的缓存：
+```
+fc-cache /path/to/fonts
+```
+这将只更新指定目录的字体缓存。
+
+3.强制重建缓存：
+```
+fc-cache -f
+```
+使用 -f 选项可以强制重建缓存，即使缓存已经是最新的。
+
+4.显示缓存更新的详细信息：
+```
+fc-cache -v
+```
+使用 -v 选项可以显示缓存更新过程的详细信息，帮助调试和确认缓存更新的状态。
+
+## 11-4、安装字体
+windows系统下字体：C://Windows/Fonts/微软雅黑（似乎里面没有ttf字体，格式为ttc）
+linux系统下字体：/usr/share/fonts/chinese/TrueType
+
+1.创建 /usr/share/fonts/opentype文件夹,将要的字体opentype文件放在这个文件下
+```
 fontconfig-infinality_1-2_all.deb			字体渲染
 freetype-infinality_2.4.9-3_all.deb			字体渲染
 libfreetype-infinality6_2.4.9-3_amd64.deb	字体渲染
 /usr/share/fonts/opentype/NotoSansCJKsc-DemiLight.otf 字体
-执行如下命令
+```
+2.执行如下命令
+```
 cd /usr/share/fonts/opentype/
 mkfontscale
 mkfontdir
 fc-cache -fv
 ```
-
-> 将字体文件ttf或者ttc拷贝到/usr/share/fonts/opentype
->
-> 使用fc-cache -fv即安装成功
->
-> fc-list可以查看到字体是否安装成功
->
-> fc-list :lang=zh
-
-命名方式（公司或者系统常用）：
-
-- Windows系统：
-- Linux系统：
-- 谷歌：
-- Java：
-- C++：
-- Python：
 
 # 12、快捷键
 ctrl+alt+F1	切换命令行模式

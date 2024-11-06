@@ -1,17 +1,18 @@
 # xset命令
 
 ## 1、简介
-xset命令是设置X-Window系统中的用户爱好的实用工具。 xset是上层应用程序，主要用于在X-Window启动之后，对X-Window进行一些设置。
-
+xset命令是设置X-Window系统中的用户爱好的实用工具。xset是上层应用程序，主要用于在X-Window启动之后，对X-Window进行一些设置。
 运行xset命令时要求启动本地X-Windows的图形界面后，在图形界面下的命令行中输入，否则将出现错误提示。
 
 ## 2、键盘粘连
 查看当前设置：xset -q  或者 xset q
 
-配置键盘输入粘连：xset r rate 666 25
-
+配置键盘输入粘连：
+```
+xset r rate 666 25
 export DISPLAY=:0
 echo $DISPLAY
+```
 
 可以适当的进行这个命令修改，666可以调低一些，25可以调高一些，这样使用起来体验好些。666指的是两个输入键之间的间隔时间，这个时间间隔越小越会出现键盘粘连，25表示的是每秒钟系统捕获键盘事件的频率，频率越高越顺畅。如果还有键盘粘连问题就把666调高些。
 
@@ -37,10 +38,10 @@ xset -display :0.0 dpms force on开启显示屏
 sleep 1 && xset dpms force off这个命令关闭屏幕
 出现了报错：xset: unable to open display “”
 解决方法：输入如下命令
-
+```
 export DISPLAY=:0
 xset q
-
+```
 之后再输入sleep 1 && xset dpms force off不再报错
 
 ## 6、屏保

@@ -165,7 +165,7 @@ qdisc pfifo_fast 0: parent :1 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
 tc qdisc add dev eth0 root netem delay 100ms 10ms
 想使用过滤器进行过滤，居然会失败。
 
-## 3、给指定ip增加网络延迟和丢包(完整流程，需要全部执行2-3步)
+## 3、给指定ip增加网络延迟和丢包(完整流程，需要全部执行1-2步)
 使用ifconfig命令找到网卡名字。
 把ip修改成指定物理机ip即可，中间可能出现当前主机网口不是eth0。支持多个ip指定。
 ```

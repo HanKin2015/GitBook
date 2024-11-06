@@ -14,6 +14,7 @@ icon是指定点击的图标，并不是demo中的title。
 加-F参数生成一个exe文件，运行起来慢。
 
 如果生成脚本，建议去掉w参数，即pyinstaller -F demo.py
+注：多个py文件只需要打包主文件即可
 
 ## 2、linux环境使用pyinstaller进行打包
 
