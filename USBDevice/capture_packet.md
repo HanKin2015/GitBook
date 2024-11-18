@@ -173,6 +173,7 @@ https://blog.csdn.net/baidu_37503452/article/details/87599038
 https://blog.csdn.net/baidu_37503452/article/details/87598982
 
 ## 2、wireshark
+更多详见：D:\Github\GitBook\gitbook\Tools\wireshark.md
 
 ### 2-1、wireshark安装包详解
 历史版本：https://www.wireshark.org/docs/relnotes/
@@ -204,8 +205,10 @@ vim /etc/group
 - 窗口更新:TCP Window Full/TCP ZeroWindow/TCP Keep-Alive/TCP Womdow Update
 - TCP DUP ACK （重复的ACK）
 - 乱序（TCP out-of-order）
-- 重传（TCP Restransmission ）
-- 丢片（TCP previous segment not captured ）
+- 重传（TCP Restransmission）
+- 丢片（TCP previous segment not captured）
+
+重传（TCP Restransmission）包在4.0.6版本及以下显示结果，但是发现在4.2.6版本却显示为[TCP Port numbers reused]。
 
 ## 3、Bus Hound
 phase：阶段、时期

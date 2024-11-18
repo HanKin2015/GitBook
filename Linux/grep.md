@@ -137,7 +137,7 @@ rk1314_64bit:/proc # grep -aR "null pointer" / 2>/dev/null
 ## 7、使用grep搜索多个字符串
 三种方法：
 - 转义字符\
-- grep -E   (-E, --extended-regexp     PATTERN 是一个可扩展的正则表达式(缩写为 ERE))
+- grep -E   (-E, --extended-regexp  PATTERN 是一个可扩展的正则表达式(缩写为 ERE))
 - egrep
 
 ```
@@ -166,9 +166,11 @@ export -f ltext
 
 root@hankin:/var/lock# cat /sys/kernel/debug/usb/usbmon/3u | grep "Ci\|Co"
 root@hankin:/var/lock# cat /sys/kernel/debug/usb/usbmon/3u | grep -E "Ci|Co"
+root@hankin:/var/lock# cat /sys/kernel/debug/usb/usbmon/3u | egrep "Ci|Co"
 ```
+亲测上面三种方式在xubuntu系统里面有效，但是在安卓8.1.0系统里面只有grep -E生效，其他方式行不通。但是发现egrep命令前面加入busybox命令也行得通，而grep "Ci\|Co"始终行不通。
 
-## 7、q参数
+## 8、q参数
 注意：直接在终端执行不会有任何返回值，不要以为没有找到相关内容。
 ```
 root@hankin:/usr/local/bin# grep -q root /proc/version
@@ -223,9 +225,6 @@ data.txt has not word 'world'
 0
 yes
 ```
-
-## 8、ps grep 不包括grep本身
-ps aux | grep defunct| grep -v "grep"
 
 ## 9、grep的-r和-R参数区别
 ```

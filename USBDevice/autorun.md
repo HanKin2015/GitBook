@@ -128,3 +128,23 @@ autorun.inf文件曾经是Windows系统中用于自动运行程序的配置文�
 在现代Windows系统中，autorun.inf文件的功能被大大限制，尤其是在可移动设备上。具体来说：
 - CD/DVD驱动器：autorun.inf文件仍然可以在某些情况下使用，但功能也受到限制。
 - USB驱动器：autorun.inf文件中的OPEN命令被禁用，无法自动运行程序。
+
+## 8、个性化U盘
+- 向U盘放入autorun.inf和qtdemo.ico
+```
+;
+; 文 件 名: autorun.inf
+; 文件描述: 给硬盘（U盘）DIY一个可爱的图标，使用attrib命令隐藏文件，attrib +s +h E:/qtdemo.ico
+; 备    注: 由于安全原因，Windows系统从Windows 7开始禁用了在可移动设备上的autorun.inf文件中使用OPEN命令自动运行程序的功能
+; 作    者: HanKin
+; 创建日期: 2024.09.12
+; 修改日期：2024.09.12
+; 
+; Copyright (c) 2024 HanKin. All rights reserved.
+;
+
+[autorun]
+ICON=qtdemo.ico,0
+LABEL=HJ-USB
+```
+- 使用attrib +s +h E:/qtdemo.ico和attrib +s +h E:/autorun.inf命令隐藏文件

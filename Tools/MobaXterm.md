@@ -102,7 +102,9 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 提取码：ipc9
 运行crack中的keygen，单击Get Version from File从文件中获取版本，然后选择安装目录中的MobaXterm.exe
 
-
-
-
+## 8、设置主密码
+- 可以显示本地保存session密码（Settings->Genneral->MobaXterm passwords mannagement->Show passwords）
+- 设置主密码（Settings->Genneral->MobaXterm passwords mannagement->Set a "Master Password" for strong passwords encryption）
+- 主密码重置工具（全部session密码都无了）（https://mobaxterm.mobatek.net/resetmasterpassword.html）
+- 主密码手动重置（全部session密码都无了）（找到Mobaxterm.ini文件，然后将mobauser@mobaserver=s0NHvIaCuVJN9zu+YhFX7mHz5uBkn6/8一行删除即可）
 

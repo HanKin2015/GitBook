@@ -412,3 +412,8 @@ FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算
 https://www.bilibili.com/read/cv13629164/
 打开火绒，找到安全设置=》找到高级防护-自定义防护-点击添加规则
 
+## 53、笔记本连接wifi使用有线共享网络给其他设备
+https://jingyan.baidu.com/article/ce09321b74ba072bfe858f45.html
+按Ctrl选中无线网和本地以太网两个连接然后将鼠标移到选中的无线连接上，然后右键，会看到桥接选项
+
+
