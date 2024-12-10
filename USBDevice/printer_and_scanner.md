@@ -35,6 +35,7 @@ http://www.foundertech.com/search.html?t=0&k=ks&x=0&y=0
 
 ## 3、打印机
 win11可能不存在打印管理工具。
+爱普生：https://www.epson.com.cn/services/guidedrive.html
 惠普（Hewlett-Packard，简称HP）
 柯达：https://support.alarisworld.com/zh-cn#section%201
 得力：https://www.nbdeli.com/products/productinfo/9333.html

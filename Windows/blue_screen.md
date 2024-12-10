@@ -1,6 +1,7 @@
 # 蓝屏调试
 
 以自身写的Windows驱动蓝屏为例，发现写Windows驱动不要拿物理机来开玩笑。
+在 Windows 系统中，蓝屏死机（BSOD）后会生成内存转储文件，这些文件用于帮助诊断系统崩溃的原因。
 
 ## 1、下载工具
 windbg(x64).msi
@@ -8,7 +9,11 @@ https://docs.microsoft.com/zh-cn/windows-hardware/drivers/debugger/debugger-down
 http://www.windbg.org/
 
 ## 2、系统蓝屏dump文件位置
-C:\Windows\MEMORY.DMP
+C:\Windows\MEMORY.DMP（完整内存转储）
+C:\Windows\Minidump（小型内存转储）
+
+完整内存转储需要足够的磁盘空间。如果磁盘空间不足，系统可能会选择生成较小的 Minidump。
+右键点击“此电脑”或“我的电脑”，选择“属性”-》“高级系统设置”-》“高级”-》“启动和故障恢复”-》“写入调试信息”，从下拉菜单中选择“完全内存转储”或“自动内存转储”。确保“覆盖现有的任何文件”选项被选中，以防止旧的转储文件阻止新文件的生成。
 
 ## 3、管理员运行windbg工具（调试）
 加载符号表：File->Symbol File Path (D:\Users\User\My Document\Visual Studio 2015\Projects\KMDFUSBDriver\x64\Debug)

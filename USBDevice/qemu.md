@@ -22,7 +22,7 @@ VMWare Workstation 就是这样一个可以完美满足我要求的桌面用户�
 
 QEMU 本身是一个非常强大的虚拟机，甚至在 Xen、KVM 这些虚拟机产品中都少不了 QEMU 的身影。在 QEMU 的官方文档中也提到，QEMU 可以利用 Xen、KVM 等技术来加速。为什么需要加速呢，那是因为如果单纯使用 QEMU 的时候，它自己模拟出了一个完整的个人电脑，它里面的 CPU 啊什么的都是模拟出来的，它甚至可以模拟不同架构的 CPU，比如说在使用 Intel X86 的 CPU 的电脑中模拟出一个 ARM 的电脑或 MIPS 的电脑，这样模拟出的 CPU 的运行速度肯定赶不上物理 CPU。使用加速以后呢，可以把客户操作系统的 CPU 指令直接转发到物理 CPU，自然运行效率大增。
 
-　　QEMU 同时也是一个非常简单的虚拟机，给它一个硬盘镜像就可以启动一个虚拟机，如果想定制这个虚拟机的配置，比如用什么样的 CPU 啊、什么样的显卡啊、什么样的网络配置啊，指定相应的命令行参数就可以了。它支持许多格式的磁盘镜像，包括 VirtualBox 创建的磁盘镜像文件。它同时也提供一个创建和管理磁盘镜像的工具 qemu-img。QEMU 及其工具所使用的命令行参数，直接查看其文档即可。
+QEMU 同时也是一个非常简单的虚拟机，给它一个硬盘镜像就可以启动一个虚拟机，如果想定制这个虚拟机的配置，比如用什么样的 CPU 啊、什么样的显卡啊、什么样的网络配置啊，指定相应的命令行参数就可以了。它支持许多格式的磁盘镜像，包括 VirtualBox 创建的磁盘镜像文件。它同时也提供一个创建和管理磁盘镜像的工具 qemu-img。QEMU 及其工具所使用的命令行参数，直接查看其文档即可。
 
 Intel Core i7-4770K 的 CPU，虚拟出的 XP 也分配了 2G 的内存和两个 CPU，但是流畅度仍较差。说明单纯使用 QEMU 还是不能满足我们桌面用户的需要。配合Xen 或者 KVM 呢？性能是否会有质的飞跃？
 
@@ -299,3 +299,12 @@ AI回答：在QEMU中，USBEndpoint结构体中的pipeline变量通常用于控�
 
 实践发现，设置pipeline为false后，整体数据包传输速度变慢，数据包大小也变小了。
 
+## 11、键盘按键适配
+KeyboardTest工具下载：https://www.passmark.com/products/keytest/index.php
+通过qemu的qemu_input_map_qnum_to_qcode 的qnum序列来查找
+资料：https://aeb.win.tue.nl/linux/kbd/scancodes-6.html#msinternet
+
+发现qemu2.5的Q_KEY_CODE_MAX = 125，而适配的韩语切换按键是242，因此在低版本的qemu无法进行适配。但确实也能在ui/sdl2-keymap.h搜索到Q_KEY_CODE_MAIL变量，但是却无法找到该变量的定义。
+只能在qemu5.0.0版本进行适配，需要修改qemu-5.0.0/ui/keycodemapdb/data/keymaps.csv、qemu-5.0.0/qapi/ui.json文件。
+ui.json：是按键宏定义的配置文件，qemu编译时，根据里面配置生成qapi-util-ui.c文件，该文件定义了所有按键的宏定义，比如：上面截图的Q_KEY_CODE_XXX
+keymaps.csv：各种按键的转换表，qemu编译时，根据这边的内容生成input-keymap-qnum-to-qcode.c、input-keymap-qcode-to-atset2.c等源码，生成qcode、atset等按键表

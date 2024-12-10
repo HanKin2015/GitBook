@@ -265,6 +265,10 @@ out = out.decode(encoding, errors='ignore')
 ```
 
 ## 11、pyqt5打包过大
+- numpy
+- cv2
+- pyautogui
+
 打出来居然有326MB，并且软件启动很慢。
 
 尝试使用pipenv打包：

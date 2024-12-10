@@ -16,3 +16,10 @@ https://learn.microsoft.com/zh-cn/visualstudio/debugger/introducing-spy-incremen
 - 在消息内容框右键，Logging Options过滤要捕获的消息类型：Keyboard和Pen/IME
 - 在菜单栏Messages中Save to File保存内容
 
+## 3、usbkey
+注意：usbkey好多组件可能需要依赖微软运行库。
+上海华申：http://www.hsic.cn/
+
+
+
+

@@ -17,8 +17,14 @@ MobaXterm 免费版（persional）和专业版（Professional）除了 sessions 
 破解MobaXterm20.2软件方法步骤：https://www.jianshu.com/p/fa5a2fac4148
 
 ### 1-2、快捷键
+https://blog.csdn.net/weixin_51658262/article/details/115318692
 快速tab切换：ctrl+tab   or    ctrl+shift+tab
 保存界面：右键->save to file    选择plant text file
+启动一个新的终端：Ctrl + Alt + T
+关闭当前标签页：Ctrl + Alt + Q
+上一个标签：Ctrl + Alt +左
+下一个标签：Ctrl + Alt + RIGHT
+切换全屏模式：F11
 
 ### 1-3、个性化设置
 打开Settings – Configuration 进行相关设置

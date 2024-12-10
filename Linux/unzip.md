@@ -14,7 +14,7 @@ unzip *.zip -d 解压到的文件夹
 附录：
 ```
 tar
-    解包：tar zxvf FileName.tar
+    解包：tar xzvf FileName.tar
     打包：tar czvf FileName.tar DirName
 
 gz
@@ -63,13 +63,26 @@ rar
 rpm
     解压：rpm2cpio package.rpm | cpio -idmv
           rpm2cpio package.rpm | cpio -id
+    压缩较麻烦，属于安装包
 
 lz4
-    解压：lz4 -d file.lz4
+    解压：lz4 -d file.lz4 output_file（解压后的输出文件名。如果不指定输出文件名，默认会生成 file）
+    压缩：lz4 myfile.txt myfile.txt.lz4
 ```
 
-## 3、tar 压缩并删除源文件
-tar -cvzf  a.tar.gz a --remove-files
+## 3、rpm包
+要解压 RPM 包，可以使用 rpm2cpio 工具将 RPM 包转换为 CPIO 格式，然后使用 cpio 命令提取内容。
+```
+# 解压 RPM 包
+rpm2cpio package.rpm | cpio -idmv
+```
+package.rpm 是您要解压的 RPM 包的文件名。
+-i 表示提取文件。
+-d 表示创建目录。
+-m 表示保留文件的修改时间。
+-v 表示显示详细输出。
+
+要创建 RPM 包，您需要使用 rpmbuild 工具。首先，您需要准备一个 SPEC 文件和要打包的文件。略！
 
 ## 4、gzip: unknown suffix -- ignored
 gunzip file#识别后缀，必须把后缀改为.gz //解压后的文件名，去掉.gz
@@ -78,6 +91,8 @@ gunzip file#识别后缀，必须把后缀改为.gz //解压后的文件名，�
 ## 5、发现在linux下面tar是万能的
 gunzip解压gz文件后，得到一个没有后缀的文件，一脸懵逼。
 后面不管三七二十一，就是tar再进行解压。
+
+tar压缩并删除源文件：tar -cvzf a.tar.gz a --remove-files
 
 ## 6、pkg文件的解压和压缩
 ```

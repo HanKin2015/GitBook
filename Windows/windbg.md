@@ -1,12 +1,20 @@
 # WinDbg调试
 
-## 1、运行调试
-- 加载
-查找关键字：STACK_COMMAND:  .ecxr ; kb ; ** Pseudo Context ** ; kb
-或者使用kb命令查看堆栈信息。
+## 1、工具下载
+最新版本要求：
+支持的操作系统：
+- Windows 11（所有版本）
+- Windows 10 周年更新（版本 1607）或更新版本
+处理器体系结构：
+- x64 和 ARM64
 
-ctrl+break中断下载操作，只发现右上角有个pause break键。
-正确方式是ctrl+c。
+官网：https://learn.microsoft.com/zh-cn/windows-hardware/drivers/debugger/
+微软商店：https://apps.microsoft.com/detail/9pgjgd53tn86?hl=zh-cn&gl=CN
+发现官网下载的是小exe文件，然后在安装的时候可能出现安装失败问题，因此不得不追求离线版本。
+
+
+Microsoft 公共符号服务器：https://learn.microsoft.com/zh-cn/windows-hardware/drivers/debugger/microsoft-public-symbols
+即添加符号表地址：SRV*https://msdl.microsoft.com/download/symbols
 
 ### 使用windbg捕获程序崩溃
 https://blog.csdn.net/dyzhen/article/details/6402226
@@ -19,6 +27,7 @@ https://blog.csdn.net/dyzhen/article/details/6402226
 
 ## 2、WinDbg调试内存泄露
 执行.reload /f之前!sym noisy很重要。
+.ecxr ; kb ;
 
 ### 2-1、直接在任务管理器右键创建转储文件
 1、首先要安装对版本，即你的程序是32位还是64位，对于的windbg版本也要一致，否则会报错；详情了解：点击这里

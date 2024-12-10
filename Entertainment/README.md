@@ -222,9 +222,6 @@ https://www.fosshub.com/
 # 免费观看大量影视综艺
 http://zyplayer.fun/
 
-# 壁纸
-https://ss.netnr.com/wallpaper
-
 ## 机场失物招领
 方法一：通过各机场微信公众号平台查询：
 长沙机场：微信搜索打开“湖南机场航享e+”微信公众号，点击“机场助手”，点击“失物招领”即可查询领取遗失物品。

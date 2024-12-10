@@ -43,6 +43,7 @@ gdb 二进制文件 core文件
 handle SIGPIPE nostop
 handle SIGUSR1 nostop
 handle SIGSEGV nostop
+handle SIGABRT nostop
 dir /var/kvm_debug
 b hcd-ehci.c:1659
 ```

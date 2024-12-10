@@ -342,6 +342,7 @@ struct uvc_streaming_control {
     __u8  bMaxVersion;  //版本 
 } __attribute__((__packed__));
 ```
+看官方文档：https://www.usb.org/documents?search=Video&items_per_page=50
 
 ## 15、笔记本摄像头帧率问题
 ThinkPad-E14笔记本摄像头（04f2:b78e）加载了RsEyeContactCorrection_Assets.dll、RsDMFT64.dll、RsDMFT_Assets.dll三个文件后1280x720分辨率从10帧率提高到30帧率，很神奇。
