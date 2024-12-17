@@ -388,7 +388,9 @@ collection-patches-20240829
             detach_kernel_driver_and_claim(fd, 1);
 ```
 
-总结：使用grep命令时\*符号不能单独匹配使用，需要结合其他符号进行组合，另外grep命令不需要像find命令那样需要\*去通配，如：
+总结：使用grep命令一般是不需要使用到通配符`*`，使用了你就错了！！！
+另外注意git branch和git tag显示出来的结果不一样额。
+使用grep命令时`*`符号不能单独匹配使用，需要结合其他符号进行组合，另外grep命令不需要像find命令那样需要`*`去通配，如：
 ```
 [root@ubuntu0006:~] #find . -maxdepth 1 -name *c
 find: 路径必须在表达式之前: k.c

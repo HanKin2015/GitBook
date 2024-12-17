@@ -1,7 +1,8 @@
 # WinDbg调试
 
 ## 1、工具下载
-最新版本要求：
+
+### 1-1、最新版本要求（20241212）
 支持的操作系统：
 - Windows 11（所有版本）
 - Windows 10 周年更新（版本 1607）或更新版本
@@ -12,17 +13,25 @@
 微软商店：https://apps.microsoft.com/detail/9pgjgd53tn86?hl=zh-cn&gl=CN
 发现官网下载的是小exe文件，然后在安装的时候可能出现安装失败问题，因此不得不追求离线版本。
 
+离线版本（msix 格式，可以直接离线用 Microsoft Store 安装，也可以直接把后缀改成 zip 解压即可运行）：https://www.mediafire.com/folder/0bv87669bneja/WinDbg_1.2402.24001.0_%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85
+https://www.cnblogs.com/s5689412/p/16596820.html
 
+### 1-2、Microsoft 公共符号服务器
 Microsoft 公共符号服务器：https://learn.microsoft.com/zh-cn/windows-hardware/drivers/debugger/microsoft-public-symbols
 即添加符号表地址：SRV*https://msdl.microsoft.com/download/symbols
+本地符号表默认保存地址：C:\ProgramData\Dbg\sym
+将联网电脑下载的符号表拷贝到离线主机上面，然后在符号表设置拷贝位置，最后7: kd> .reload /f即可。
+备注：直接拷贝到离线主机的C:\ProgramData\Dbg\sym目录，不手动添加符号表位置是不行的，符号表不生效。并且使用单独导入命令也不行：
+```
+7: kd> .reload /i  ntkrnlmp.exe C:\ProgramData\dbg\sym\ntkrnlmp.pdb\A3A6EBE530714799985ED058B2F0A0642\ntkrnlmp.pdb
+使用lm命令查看符号表链接情况。
+```
 
-### 使用windbg捕获程序崩溃
+### 1-3、使用windbg捕获程序崩溃
 https://blog.csdn.net/dyzhen/article/details/6402226
 
 注意是：windbg -I（是i不是l）
-
 有可能需要添加注册表：http://www.codeproject.com/KB/debug/automemorydump.aspx
-
 注意：x86编译的程序只能使用x86版本的windbg捕获。
 
 ## 2、WinDbg调试内存泄露

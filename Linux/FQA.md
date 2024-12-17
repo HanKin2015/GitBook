@@ -509,7 +509,7 @@ password@123
 一般文件都不是太小，最好用less来配合一下。
 格式：hexdump -C binfile | less
 
-## 25、Linux终端粘贴出现~0与1~字符解决办法
+## 25、Linux终端粘贴出现0~与1~字符解决办法
 方法一(实测有效)：
 ```
 shell终端输入命令    printf "\e[?2004l"

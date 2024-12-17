@@ -120,6 +120,11 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Ole
 
 不同的设备可能有不同的注册表位置，没有找到可以将所有物理机固定为统一的com号，只能一个一个的设置，还原模式下会复原。
 
+### 9-1、获取usb设备的com号码
+
+
+
+
 ## 10、CommMonitor抓取串口Modbus协议数据包
 https://baijiahao.baidu.com/s?id=1728421275380437231&wfr=spider&for=pc
 

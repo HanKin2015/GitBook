@@ -300,11 +300,50 @@ AI回答：在QEMU中，USBEndpoint结构体中的pipeline变量通常用于控�
 实践发现，设置pipeline为false后，整体数据包传输速度变慢，数据包大小也变小了。
 
 ## 11、键盘按键适配
+
+### 11-1、qemu不同版本现状
 KeyboardTest工具下载：https://www.passmark.com/products/keytest/index.php
-通过qemu的qemu_input_map_qnum_to_qcode 的qnum序列来查找
+通过qemu的qemu_input_map_qnum_to_qcode的qnum序列来查找
 资料：https://aeb.win.tue.nl/linux/kbd/scancodes-6.html#msinternet
 
-发现qemu2.5的Q_KEY_CODE_MAX = 125，而适配的韩语切换按键是242，因此在低版本的qemu无法进行适配。但确实也能在ui/sdl2-keymap.h搜索到Q_KEY_CODE_MAIL变量，但是却无法找到该变量的定义。
-只能在qemu5.0.0版本进行适配，需要修改qemu-5.0.0/ui/keycodemapdb/data/keymaps.csv、qemu-5.0.0/qapi/ui.json文件。
-ui.json：是按键宏定义的配置文件，qemu编译时，根据里面配置生成qapi-util-ui.c文件，该文件定义了所有按键的宏定义，比如：上面截图的Q_KEY_CODE_XXX
-keymaps.csv：各种按键的转换表，qemu编译时，根据这边的内容生成input-keymap-qnum-to-qcode.c、input-keymap-qcode-to-atset2.c等源码，生成qcode、atset等按键表
+发现qemu2.5的Q_KEY_CODE_MAX = 125，而适配的韩语切换按键是242，因此在低版本的qemu无法进行适配。但确实也能在ui/sdl2-keymap.h搜索到Q_KEY_CODE_MAIL变量，但是却无法找到该变量的定义。但是有个问题就是242这个按键消息确实传递到了虚拟机内部，只不过显示为0xFF，说明应该是支持的，说明有遗漏。
+但是在qemu5.0.0版本中，242按键消息是没有发给虚拟机的，需要进行适配，需要修改qemu-5.0.0/ui/keycodemapdb/data/keymaps.csv、qemu-5.0.0/qapi/ui.json文件。
+ui.json：是按键宏定义的配置文件，qemu编译时，根据里面配置生成qapi-util-ui.c文件，该文件定义了所有按键的宏定义，比如：上面截图的Q_KEY_CODE_XXX。
+keymaps.csv：各种按键的转换表，qemu编译时，根据这边的内容生成input-keymap-qnum-to-qcode.c、input-keymap-qcode-to-atset2.c等源码，生成qcode、atset等按键表。
+
+### 11-2、input-keymap-qnum-to-qcode.c文件内容生成
+keymaps.csv文件中对于242并没有填写atset1和atset2信息，导致并没有生成到input-keymap-qnum-to-qcode.c文件中去。
+该文件通过qemu-5.0.0/ui/keycodemapdb/keymap-gen脚本生成，命令如下：
+```
+python3 keymap-gen --lang=glib2 --varname=qemu_inpu_map_atset1_to_qcode code-map data/keymaps.csv atset1 qcode
+可以修改最后两个参数变量
+```
+添加atset1和atset2信息后就能把该按键信息生成了，但问题在于242按键的atset1和atset2信息是多少？
+
+### 11-3、atset1和atset2表
+atset2 keycodes：https://www.libvirt.org/manpages/
+https://blog.weghos.com/qemu/qemu/build/ui/input-keymap-atset1-to-qcode.c.html
+发现atset1和atset2信息表最大值只到了0xe07d值。
+
+发现github和gitlab仓库显示内容略有不同（github打不开keycodemapdb，但是gitlab可以）
+https://gitlab.com/qemu-project/qemu/-/tree/stable-8.0/ui?ref_type=heads
+https://github.com/qemu/qemu/tree/stable-8.0/ui
+
+开源qemu最终版：
+https://gitlab.com/qemu-project/keycodemapdb
+
+github单独仓库：
+https://github.com/qemu/keycodemapdb/blob/master/data/keymaps.csv
+
+最终适配方案：
+```
+KEY_VIDEO_NEXT,241,,,0xe071,0x19,,,VK_HANJA,0x19,,,,,,I249,hanja,,
+KEY_VIDEO_PREV,242,,,0xe072,0x39,,,VK_HANGEUL,0x15,,,,,,I250,hangeul,,
+```
+
+### 11-4、适配依据
+至少atset1和atset2缺一不可，这也是最难获取到的值，其中VK_HANJA,0x19和VK_HANGEUL,0x15可以通过rawinputtool.exe程序获取，使用spy++不行，使用KeyboardTest.exe软件获取到了0x19，另外一个值是0xE5，有点差距。
+
+对于atset1值，我们可以通过qemu2.5.1发现其qcode分别是113（0x71）和114（0x72），另外我们在https://www.libvirt.org/manpages/virkeycode-qnum.html找到其值。
+
+

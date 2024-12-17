@@ -311,3 +311,19 @@ Markdown也是可以实现简单的表格功能的.
 https://docs.github.com/en
 [github-img]:https://raw.githubusercontent.com/HanKin2015/Storage/master/images/dog.ico
 [github-url]:https://github.com/HanKin2015 "HanKin2015"
+
+## 锚点
+点是网页制作中的一种，又叫命名锚记。命名锚记像一个迅速定位器一样是一种页面内的超级链接，运用相当普遍。
+
+markdown语法中是不支持锚点的，但是它可以通过链接和标题来实现跳转。
+
+```
+## <a id="锚点名">标题名</a>
+[调用](#锚点名)
+
+上标[<sup>1</sup>](#锚点名)
+<div id="锚点名"></div>
+
+脚注[^1]
+[^1]: 脚注是对一个专业名词进行解释说明,在文章末尾给出解释内容.
+```

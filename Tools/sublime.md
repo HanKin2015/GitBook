@@ -27,7 +27,6 @@ Sublime Text 是一个文本编辑器（收费软件，可以无限期试用，�
 
 破解超简单：百度sublime text3211 破解码即可。
 
-
 ## 4、Sublime采用的flatland主题
 下载地址https://github.com/thinkpixellab/flatland
 下载之后 放在package目录下面

@@ -7,10 +7,7 @@
 - [](6、Windows XP那些事儿)
 
 ## 1、认识Windows10系统
-
 系统下载：https://msdn.itellyou.cn/
-
-截图快捷键：shift+win+s
 
 ### 1-1、版本、版本号、OS版本
 版本：企业版、教育版

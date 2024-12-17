@@ -360,6 +360,7 @@ SunplusIT驱动，另外有些笔记本只含有RsDMFT64.dll、RsDMFT_Assets.dll
 
 如Windows 10 神州网信政府版 V0-G、 Windows 10 神州网信政府版 V0-H、 Windows 10 神州网信政府版 V2020-L、 Windows 10 神州网信政府版 V2022-L等系统还会将该设置置灰，让用户无法手动配置。
 工具：https://support.cmgos.com/cmgetools/cmge_mic_camera_tool
+https://support.cmgos.com/updatedownload/cmgetools/cmge-net-3-5-framework#more-19591
 
 通过组策略编辑器开启：
 1.按下`Win + R`键打开运行对话框。

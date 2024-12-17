@@ -77,8 +77,10 @@ x86版本的exe文件缺失dll文件，安装了x64版本的运行库依然报�
 参考这个方法未解决：https://blog.csdn.net/sanqima/article/details/100625578
 各种卸载重装都不行，现在想想还是跟无法删除3的文件夹有关，重启电脑后解决。
 
-## 7、win10拍照快捷键
-shift+win+s
+## 7、常用快捷键
+win10截图快捷键：shift+win+s
+设备管理器：devmgmt.msc
+
 
 ## 8、cd命令
 ```
