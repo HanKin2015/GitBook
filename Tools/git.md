@@ -546,16 +546,32 @@ $ git cherry-pick A..B		将A之后到B应用过来
 $ git cherry-pick A^..B 	将包括A到B应用过来
 ```
 
-## 16、LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master' 
+## 16、LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master'
 remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a manual "git lfs push --all".
 
 无解，只能重新创建本地仓库。
 
 出现这种情况有3种原因：
-
 - 如果这些文件是你从别处克隆过来的，说明源头就不对，或者你克隆的方式不对，或者网络出错了；
 - 如果这些文件是你在本地新增的，说明.git目录下有些文件被你误删了；
 - 如果这些文件是你在本地新增的，但是是从别处目录拷贝过来的，你有可能拷贝的是git lfs pointer文件，这些文件会出发git lfs命令的bug，也就是文件被添加了，但.git下没有，也就遇到了上述git lfs fsck输出的错误。
+
+解决方式：
+https://stackoverflow.com/search?q=LFS+upload+missing+objects
+尝试复现问题现象，但是复现不出来，有同事通过git config xxx false成功解决了！但是无奈复现不了问题，无法验证。
+
+### 16-1、什么是Git LFS
+Git LFS（Large File Storage） 是 Github 开发的一个 Git 的扩展，用于实现 Git 对大文件的支持。
+简单的说，就是如果你想传超过100M的二进制文件到GitHub，你就要用Git LFS。
+```
+检查 LFS 对象状态: git lfs status
+检查当前版本: git lfs version
+清理 LFS 缓存: git lfs prune
+在 Git 中初始化 Git LFS: git lfs install
+跟踪大文件: git lfs track "*.psd"
+跟踪特定文件: git lfs track "path/to/your/largefile.zip"
+检查 .gitattributes 文件: cat .gitattributes
+```
 
 ## 17、git 查看最近或某一次提交修改的文件列表相关命令整理。
 git log --name-status 每次修改的文件列表, 显示状态

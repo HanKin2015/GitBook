@@ -20,6 +20,12 @@ https://learn.microsoft.com/zh-cn/visualstudio/debugger/introducing-spy-incremen
 注意：usbkey好多组件可能需要依赖微软运行库。
 上海华申：http://www.hsic.cn/
 
+## 4、Ukey安全管控系统
+NetworkUSB（RPUSI NETUSB Controller）：https://www.remoteusb.com/3
 
+发现此驱动无法在虚拟机内部安装成功，报错：系统资源不够，无法完成API。
+IDA逆向分析USBRDCtrl.sys驱动文件，通过错误码C000009A找到代码位置，发现代码中试图申请一个名为\\Device\\USBFDO-X的设备，X的范围是0-9，失败就返回C000009A。而通过DeviceTree或者WinObj软件发现虚拟机内部usbuhci、usbehci、usbxhci已经使用了0-10的\\Device\\USBFDO-X的设备地址，因此该驱动无法正常安装。
+DeviceTree：https://www.itmop.com/downinfo/367076.html
+WinObj：https://learn.microsoft.com/zh-cn/sysinternals/downloads/winobj
 
 

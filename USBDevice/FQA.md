@@ -128,6 +128,47 @@ https://blog.csdn.net/weixin_51575203/article/details/130406151
 修改注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR
 双击Start键值，弹出编辑DWORD（32位）值窗口，修改Start的数值，其中2代表自启动，3代表默认启动，4代表禁止启动，将数值改为2或者3，重启电脑后，插上U盘，可以正常访问U盘。
 
+### 11-1、行为监控
+这种驱动被禁用的行为可以被Windows的系统日志监控到：事件查看器-》Windows日志-》系统-》筛选当前日志-》事件来源Service Control Manager
+能看到类似语句“Usbhub Service 服务的启动类型从 按需启动 更改为 已禁用。”
+
+### 11-2、复现问题
+```
+C:\Users\Administrator>sc qc usbhub
+[SC] QueryServiceConfig 成功
+
+SERVICE_NAME: usbhub
+        TYPE               : 1  KERNEL_DRIVER
+        START_TYPE         : 4   DISABLED
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : \SystemRoot\system32\DRIVERS\usbhub.sys
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : Usbhub Service
+        DEPENDENCIES       :
+        SERVICE_START_NAME :
+
+C:\Users\Administrator>sc query usbhub
+
+SERVICE_NAME: usbhub
+        TYPE               : 1  KERNEL_DRIVER
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1077  (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+```
+有些服务没有在services.msc服务显示，需要通过sc命令操作，另外有些服务无法直接通过sc stop usbhub命令直接停止服务，而是需要使用sc config usbhub start=disabled命令操作，然后重启电脑后该设备就会报异常。（注意win7系统等号和值之间需要一个空格）
+```
+C:\WINDOWS\system32>sc config usbhub start=disabled
+[SC] QueryServiceConfig2 (delayed autostart flag) 失败 2:
+
+系统找不到指定的文件。
+```
+上面的原因是该设备需要重启电脑才能生效，因此当前无法获取其配置情况。
+
+恢复就sc config usbhub start=demand，然后禁用设备启用设备即可。但是正常的时候禁用设备却是需要重启的。
+
 ## 12、由于其配置信息(注册表中的)不完整或已损坏,Windows 无法启动这个硬件设备。 (代码19)
 声卡设备：找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}UpperFilters里面数据删除 (鼠标双击可打开UpperFilters)
 大容量存储设备：找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}UpperFilters里面数据删除 (鼠标双击可打开UpperFilters)或者LowerFilters

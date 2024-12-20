@@ -44,7 +44,9 @@ https://blog.csdn.net/weixin_44031074/article/details/116278958
 
 打开EHCI_DEBUG日志，看是否会进入异常q->qhaddr != q->qh.next。
 
-
+## 7、主控被禁用后需要重启
+如果是ehci、uhci禁用后可以恢复，xhci的roothub，禁用后，只能重启恢复。
+因为微软的实现有问题，物理机也有的，我们的虚拟主控跟xhci使用的一样的ucx框架。
 
 
 

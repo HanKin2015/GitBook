@@ -453,7 +453,7 @@ gflags.exe是Windbg下的一个小工具，非常好用，对于调试程序隐�
 
 卸载方法：
 HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/WindowsNT/CurrentVersion/Image File Execution Options/mytest.exe
-网上看到是取消Debugger的勾选，但是无效，最后清除注册表后程序恢复原有速度。（确实可以关闭windbg的挂载调试。
+网上看到是取消Debugger的勾选，但是无效，最后清除注册表后程序恢复原有速度。（确实可以关闭windbg的挂载调试）
 
 ## 13、配置windbg网络双机内核调试
 使用windows网络双机调试，相比串口双机调试，优势在于调试速度，提升调试效率。

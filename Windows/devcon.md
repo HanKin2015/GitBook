@@ -185,6 +185,30 @@ Start=2 自动
 Start=3 手动
 Start=4 禁用
 
+可以通过sc config命令查看其对应关系：
+```
+C:\WINDOWS\system32>sc config
+描述:
+        在注册表和服务数据库中修改服务项。
+用法:
+        sc <server> config [服务名称] <option1> <option2>...
+
+选项:
+注意: 选项名称包括等号。
+      等号和值之间需要一个空格。
+      要删除依赖关系，请使用单个“/”表示依赖关系值。
+ type= <own|share|interact|kernel|filesys|rec|adapt|userown|usershare>
+ start= <boot|system|auto|demand|disabled|delayed-auto>
+ error= <normal|severe|critical|ignore>
+ binPath= <.exe 文件的 BinaryPathName>
+ group= <LoadOrderGroup>
+ tag= <yes|no>
+ depend= <依赖关系(以 / (正斜杠)分隔)>
+ obj= <AccountName|ObjectName>
+ DisplayName= <显示名称>
+ password= <密码>
+```
+
 ### 6-2、创建服务
 demo：D:\Github\Storage\windows\MyWindowsService\MyWindowsService
 安装服务：sc create MyWindowsService binPath= "C:\path\to\your\MyWindowsService.exe"
@@ -335,6 +359,39 @@ SERVICE_NAME: mywindowsservice
         DEPENDENCIES       :
         SERVICE_START_NAME : LocalSystem
 ```
+
+### 6-4、优化电脑环境
+任务管理器中有一些进程无法杀死或者杀死后重新拉起，就可以通过sc命令关闭其服务。
+```
+C:\Users\User>sc query state=all | findstr eadr
+SERVICE_NAME: eadr_monitor
+DISPLAY_NAME: eadr_monitor
+DISPLAY_NAME: eadr_watcher
+
+C:\Users\User>sc query state=all | findstr eio
+SERVICE_NAME: eio_service
+DISPLAY_NAME: eio_service
+
+C:\WINDOWS\system32>sc qc eio_service
+[SC] QueryServiceConfig 成功
+
+SERVICE_NAME: eio_service
+        TYPE               : 10  WIN32_OWN_PROCESS
+        START_TYPE         : 2   AUTO_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : "C:/Program Files/EIO/eio_service.exe"
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : eio_service
+        DEPENDENCIES       :
+        SERVICE_START_NAME : LocalSystem
+
+C:\WINDOWS\system32>sc config eio_service start=disabled
+[SC] ChangeServiceConfig 成功
+
+C:\WINDOWS\system32>
+```
+最后在任务管理器杀死该进程即可。
 
 ## 7、对象名已存在
 Windows无法初始化这个硬件的设备驱动程序。（代码37）

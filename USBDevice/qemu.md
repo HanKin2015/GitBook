@@ -316,7 +316,9 @@ keymaps.csv文件中对于242并没有填写atset1和atset2信息，导致并没
 该文件通过qemu-5.0.0/ui/keycodemapdb/keymap-gen脚本生成，命令如下：
 ```
 python3 keymap-gen --lang=glib2 --varname=qemu_inpu_map_atset1_to_qcode code-map data/keymaps.csv atset1 qcode
-可以修改最后两个参数变量
+可以修改最后两个参数变量qemu_input_map_qnum_to_qcode 的索引就是其按键的scancode转换而来的，
+索引小于0x80的，scancsode = 索引值，比如：[0x1] = Q_KEY_CODE_ESC，即esc按键的scancode为0x1
+索引大于0x80的，scancsode = REDKEY_ESCAPE_BASE +（索引值 - 0x80），比如：[0xec] = Q_KEY_CODE_MAIL，即mail按键的scancode为REDKEY_ESCAPE_BASE + （0xec - 0x80）
 ```
 添加atset1和atset2信息后就能把该按键信息生成了，但问题在于242按键的atset1和atset2信息是多少？
 
@@ -339,11 +341,47 @@ https://github.com/qemu/keycodemapdb/blob/master/data/keymaps.csv
 ```
 KEY_VIDEO_NEXT,241,,,0xe071,0x19,,,VK_HANJA,0x19,,,,,,I249,hanja,,
 KEY_VIDEO_PREV,242,,,0xe072,0x39,,,VK_HANGEUL,0x15,,,,,,I250,hangeul,,
+
+qemu-5.0.0/ui/spice-input.c 修改kbd_push_key函数对于0xf1和0xf2按键（即>0x80）其keycode = scancode。
 ```
 
 ### 11-4、适配依据
 至少atset1和atset2缺一不可，这也是最难获取到的值，其中VK_HANJA,0x19和VK_HANGEUL,0x15可以通过rawinputtool.exe程序获取，使用spy++不行，使用KeyboardTest.exe软件获取到了0x19，另外一个值是0xE5，有点差距。
 
-对于atset1值，我们可以通过qemu2.5.1发现其qcode分别是113（0x71）和114（0x72），另外我们在https://www.libvirt.org/manpages/virkeycode-qnum.html找到其值。
+对于atset1值，我们可以通过在qemu2.5.1版本（正常传递242和241按键）增加调试日志发现其qcode分别是113（0x71）和114（0x72），另外我们在https://www.libvirt.org/manpages/virkeycode-qnum.html找到其值。
+然后就可以推断其扩展键为0xe071和0xe072。
+对于atset2值，也是只能通过qemu2.5.1版本中的hw/input/ps2.c文件中的数组去获取，其对应113和114下标的25和57，即0x19和0x39。
+```
+/* Table to convert from PC scancodes to raw scancodes.  */
+static const unsigned char ps2_raw_keycode[128] = {
+  0, 118,  22,  30,  38,  37,  46,  54,  61,  62,  70,  69,  78,  85, 102,  13,
+ 21,  29,  36,  45,  44,  53,  60,  67,  68,  77,  84,  91,  90,  20,  28,  27,
+ 35,  43,  52,  51,  59,  66,  75,  76,  82,  14,  18,  93,  26,  34,  33,  42,
+ 50,  49,  58,  65,  73,  74,  89, 124,  17,  41,  88,   5,   6,   4,  12,   3,
+ 11,   2,  10,   1,   9, 119, 126, 108, 117, 125, 123, 107, 115, 116, 121, 105,
+114, 122, 112, 113, 127,  96,  97, 120,   7,  15,  23,  31,  39,  47,  55,  63,
+ 71,  79,  86,  94,   8,  16,  24,  32,  40,  48,  56,  64,  72,  80,  87, 111,
+ 19,  25,  57,  81,  83,  92,  95,  98,  99, 100, 101, 103, 104, 106, 109, 110
+};
+static const unsigned char ps2_raw_keycode_set3[128] = {
+  0,   8,  22,  30,  38,  37,  46,  54,  61,  62,  70,  69,  78,  85, 102,  13,
+ 21,  29,  36,  45,  44,  53,  60,  67,  68,  77,  84,  91,  90,  17,  28,  27,
+ 35,  43,  52,  51,  59,  66,  75,  76,  82,  14,  18,  92,  26,  34,  33,  42,
+ 50,  49,  58,  65,  73,  74,  89, 126,  25,  41,  20,   7,  15,  23,  31,  39,
+ 47,   2,  63,  71,  79, 118,  95, 108, 117, 125, 132, 107, 115, 116, 124, 105,
+114, 122, 112, 113, 127,  96,  97,  86,  94,  15,  23,  31,  39,  47,  55,  63,
+ 71,  79,  86,  94,   8,  16,  24,  32,  40,  48,  56,  64,  72,  80,  87, 111,
+ 19,  25,  57,  81,  83,  92,  95,  98,  99, 100, 101, 103, 104, 106, 109, 110
+};
+```
+keycode是Windows键码
+scancode是BIOS键码
+发现114刚好等于242-0x80，113刚好等于241-0x80。
+
+qemu_input_map_qnum_to_qcode 的索引就是其按键的scancode转换而来的，
+索引小于0x80的，scancsode = 索引值，比如：[0x1] = Q_KEY_CODE_ESC，即esc按键的scancode为0x1
+索引大于0x80的，scancsode = REDKEY_ESCAPE_BASE +（索引值 - 0x80），比如：[0xec] = Q_KEY_CODE_MAIL，即mail按键的scancode为REDKEY_ESCAPE_BASE + （0xec - 0x80）
+REDKEY_ESCAPE_BASE = 0x100
+REDKEY_APP_MAIL = REDKEY_ESCAPE_BASE + 0x6c
 
 

@@ -268,6 +268,14 @@ business editions版本包含Education(教育版)、Enterprise (企业版)、Pro
 ### 1-28、进入安全模式
 shift键+鼠标点击重启（最牛逼的操作，按F几都弱爆了），但是一开始尝试了一下，但是失败了。
 
+### 1-29、音乐播放器
+win7-Windows Media Player
+win10-Groove
+win11-Windows Media Player和旧版Windows Media Player
+
+### 1-30、提高程序CPU优先级
+任务管理器-》详细信息-》右键-》设置优先级-》实时
+
 ## 2、其他windows
 
 ### 2-1、20210201

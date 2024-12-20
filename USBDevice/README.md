@@ -90,3 +90,5 @@ https://devicehunt.com/  该网站的USB VID数据是使用的方法二中linux-
 2109:2815  通用USB集线器
 
 
+
+

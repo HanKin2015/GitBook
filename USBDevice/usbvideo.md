@@ -344,6 +344,24 @@ struct uvc_streaming_control {
 ```
 看官方文档：https://www.usb.org/documents?search=Video&items_per_page=50
 
+假设代码中有个变量data类型是struct uvc_streaming_control，但是代码中没有struct uvc_streaming_control结构体的声明定义，我们不需要去百度找此结构体的详细信息，可以直接通过gdb将此结构体打印出来：
+```
+(gdb) f 8
+#8  0x00007eff6088e539 in UVCCommToVm::HandleCtrlCbk (this=0x6130003cf1c8, uvc_ctrl=0x604000332a90) at uvc_comm_usr.cpp:488
+488     uvc_comm_usr.cpp: No such file or directory.
+(gdb) info locals
+__PRETTY_FUNCTION__ = "void UVCCommToVm::HandleCtrlCbk(UVCSrvCtrl*)"
+rsp = 0x60300134a220
+logstr = '\000' <repeats 1023 times>
+__FUNCTION__ = "HandleCtrlCbk"
+(gdb) print *(struct uvc_streaming_control *)0x60300134a220
+$1 = {bmHint = 13, bFormatIndex = 0 '\000', bFrameIndex = 0 '\000', dwFrameInterval = 3200171710, wKeyFrameRate = 17424,
+  wPFrameRate = 213, wCompQuality = 24640, wCompWindowSize = 0, wDelay = 48, dwMaxVideoFrameSize = 3200122880,
+  dwMaxPayloadTransferSize = 48830, dwClockFrequency = 0, bmFramingInfo = 0 '\000', bPreferedVersion = 0 '\000',
+  bMinVersion = 0 '\000', bMaxVersion = 0 '\000'}
+(gdb)
+```
+
 ## 15、笔记本摄像头帧率问题
 ThinkPad-E14笔记本摄像头（04f2:b78e）加载了RsEyeContactCorrection_Assets.dll、RsDMFT64.dll、RsDMFT_Assets.dll三个文件后1280x720分辨率从10帧率提高到30帧率，很神奇。
 
