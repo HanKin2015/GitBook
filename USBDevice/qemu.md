@@ -384,4 +384,47 @@ qemu_input_map_qnum_to_qcode 的索引就是其按键的scancode转换而来的�
 REDKEY_ESCAPE_BASE = 0x100
 REDKEY_APP_MAIL = REDKEY_ESCAPE_BASE + 0x6c
 
+## 12、Windows7系统适配xhci主控
+```
+'ich9-usb-xhci'  => { bus => 0, addr => 27 },
+my $pciaddr_xhci = print_pci_addr("ich9-usb-xhci");
+push @$cmd, '-device', "nec-usb-xhci,id=xhci${pciaddr_xhci}.0x0";
 
+my $USB_XHCI_INDEX_START = 0;
+my $USB_XHCI_INDEX_END = 12;
+for ( my $i = $USB_XHCI_INDEX_START ; $i < $USB_XHCI_INDEX_END ; $i++ ) {
+    my $portid = $i - $USB_XHCI_INDEX_START + 1;
+    push @$cmd, '-chardev', "spicevmc,id=charredir$i,name=usbredir";
+    push @$cmd, '-device',  "usb-redir,chardev=charredir$i,id=redir$i,bus=xhci.0,port=$portid";
+}
+$camera_num = 2;
+for ( my $j = $camera_num ; $j < $camera_num + 2 ; $j++ ) {
+    my $portid = 14 + $j;
+    push @$cmd, '-chardev', "spicevmc,id=charrd$j,name=usbredir";
+    push @$cmd, '-device',  "redir-video,chardev=charrd$j,id=redirrd$j,bus=xhci.0,port=$portid";
+}
+```
+
+虚拟机内部就会出现通用串行总线（USB）控制器未安装驱动，之前把intel的usb3.0驱动尝试一遍都没有正确安装。
+最终通过360驱动大师解决了驱动问题。
+
+### 12-1、intel usb3.0驱动和renesas usb3.0驱动
+Intel 和 Renesas 是两家知名的芯片制造商，它们分别提供 USB 3.0 控制器和相应的驱动程序。
+
+### 12-2、Windows7虚拟机xhci主控assert异常
+```
+kvm: hw/usb/hcd-xhci.c:902: xhci_events_update: Assertion `intr->er_full' failed.
+```
+一头雾水，然后就去看开源代码，发现qemu2.5源码就是这样写的，然后发现qemu3.0版本已经没有异常的函数了，然后最终找到stable-2.9版本开始删除该函数的，然后找寻删除代码的提交记录：
+```
+https://gitlab.com/qemu-project/qemu/-/commit/898248a32915024a4f01ce4f0c3519509fb703cb
+
+xhci: drop ER_FULL_HACK workaround
+
+The nec/renesas driver problems have finally been debugged and root
+caused, see commit "7da76e12 xhci: fix event queue IRQ handling".
+
+大体意思是在"7da76e12 xhci: fix event queue IRQ handling"解决了问题，然后该函数就没有存在必要了，因此重点在另外一个提交记录：
+https://gitlab.com/qemu-project/qemu/-/commit/7da76e12cc5cc902dda4c168d8d608fd4e61cbc5
+```
+根据这个提交记录修改后，测试设备正常挂载到qemu2.5版本的Windows7系统的xhci主控上面。但是仔细分析修改内容弄不懂，放弃纠结。
