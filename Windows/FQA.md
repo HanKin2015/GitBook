@@ -81,8 +81,7 @@ x86版本的exe文件缺失dll文件，安装了x64版本的运行库依然报�
 win10截图快捷键：shift+win+s
 设备管理器：devmgmt.msc
 
-
-## 8、cd命令
+## 8、dos命令
 ```
 C:\迅雷下载\tcpdump_windows>help cd
 显示当前目录名或改变当前目录。
@@ -91,6 +90,12 @@ CHDIR [/D] [drive:][path]
 CHDIR [..]
 CD [/D] [drive:][path]
 CD [..]
+```
+
+```
+按访问时间顺序（按降序排列（从最新到最旧））列出文件dir /T:A /O:-D
+按创建时间顺序（从旧到新）列出文件：dir /T:C /O:D
+按最后写入时间排序（从旧到新）列出文件：dir /T:W /O:D
 ```
 
 ## 9、DOS窗口中文显示乱码
@@ -417,5 +422,9 @@ https://www.bilibili.com/read/cv13629164/
 ## 53、笔记本连接wifi使用有线共享网络给其他设备
 https://jingyan.baidu.com/article/ce09321b74ba072bfe858f45.html
 按Ctrl选中无线网和本地以太网两个连接然后将鼠标移到选中的无线连接上，然后右键，会看到桥接选项
+
+## 54、数据恢复
+牛学长：https://www.tenorshare.cn/products/any-data-recovery.html
+diskGenius、diskRecovery、EasyRecovery Pro
 
 

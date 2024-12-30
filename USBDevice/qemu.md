@@ -408,8 +408,15 @@ for ( my $j = $camera_num ; $j < $camera_num + 2 ; $j++ ) {
 虚拟机内部就会出现通用串行总线（USB）控制器未安装驱动，之前把intel的usb3.0驱动尝试一遍都没有正确安装。
 最终通过360驱动大师解决了驱动问题。
 
+这个没啥用，主要是制作win7镜像：https://gitcode.com/open-source-toolkit/658e1/overview
+
 ### 12-1、intel usb3.0驱动和renesas usb3.0驱动
 Intel 和 Renesas 是两家知名的芯片制造商，它们分别提供 USB 3.0 控制器和相应的驱动程序。
+
+Intel USB 3.0 驱动程序通常与 Intel 芯片组的主板和处理器紧密集成，提供良好的兼容性和性能。
+Renesas USB 3.0 驱动程序通常用于 Renesas 生产的 USB 3.0 控制器，广泛应用于各种主板和外部 USB 设备。
+硬件 ID 通常会包含厂商 ID 和设备 ID，例如 PCI\VEN_8086&DEV_1E31，其中 VEN_8086 表示 Intel（厂商 ID）。
+硬件 ID 通常会包含厂商 ID 和设备 ID，例如 PCI\VEN_1033&DEV_0194，其中 VEN_1033 表示 Renesas（厂商 ID）。
 
 ### 12-2、Windows7虚拟机xhci主控assert异常
 ```
@@ -428,3 +435,79 @@ caused, see commit "7da76e12 xhci: fix event queue IRQ handling".
 https://gitlab.com/qemu-project/qemu/-/commit/7da76e12cc5cc902dda4c168d8d608fd4e61cbc5
 ```
 根据这个提交记录修改后，测试设备正常挂载到qemu2.5版本的Windows7系统的xhci主控上面。但是仔细分析修改内容弄不懂，放弃纠结。
+
+### 12-3、驱动签名SHA-2算法
+SHA-1和SHA-2（SHA256）
+
+把所有的KB补丁卸载完后，驱动程序报错：
+Windows无法验证此设备所需的驱动程序的数字签名。最近的硬件或软件更改安装的文件可能未正确签名或已损坏，或者可能是来自未知来源的恶意软件。（代码 52）
+此时可以禁用驱动程序签名强制：控制台重启虚拟机，快速按F8键（也可进入安全模式），或者BIOS延迟开机时间
+注意开启测试模式不行：
+BCDEDIT -SET LOADOPTIONS DISABLE_INTEGRITY_CHECKS
+BCDEDIT -SET TESTSIGNING ON
+
+另外的方法是打Windows补丁：KB3033929即可（主要支持sha256证书https://blog.csdn.net/xcntime/article/details/142711945）。
+Windows补丁网站：https://www.catalog.update.microsoft.com/home.aspx
+适用于 x64 系统的 Windows 7 Service Pack 1 (KB976932) ，即Windows7升级到sp1版本
+
+### 12-4、接12-4关闭驱动签名验证后报新的错误
+Windows 无法初始化这个硬件的设备驱动程序。（代码 37）
+想不通，在客户的win7旗舰版环境本地就存在一个6.2.9200.22453驱动，签名是RioLin Limited，通过dism++软件导出到内部环境安装后就会报上面的错误，将此驱动安装到win10虚拟机就是正常的。
+
+内部win7虚拟机通过驱动人生和360驱动大师安装的版本是2.1.39.0。
+
+最终在这个网站找到了客户的驱动安装包：https://winraid.level1techs.com/t/solve-the-turbo-problem-of-intel-12th-to-14th-cpus-on-win7/99752
+https://disk.yandex.ru/d/rTMlnh8LKT43Jg
+
+### 12-5、PCI-Z 设备硬件检测
+PCI-Z 是一款专为 Windows 系统设计的硬件检测工具。它能够提供关于 PCI（包括 PCI-E、PCI-X 等）设备的详细信息，帮助用户识别和解决未知硬件的问题。
+
+官网：https://www.pci-z.com
+通过此软件发现硬件信息为uPD720200 USB 3.0 Host Controller，1033:019A，发现win10虚拟机和多台服务器就是这个型号，虽然未看客户的，基本确定应该是一样的。
+
+然后win7虚拟机直接把win10虚拟机的xhci主控驱动安装，报错：
+Windows 无法初始化这个硬件的设备驱动程序。驱动程序可能已损坏或不见了。（代码 39）
+
+### 12-6、PCI-Z软件驱动搜索下载
+谷歌搜索方式：NEC Corporation uPD720200 USB 3.0 Host Controller Microsoft Windows 7 driver
+https://www.station-drivers.com/index.php?option=com_remository&Itemid=353&func=fileinfo&id=119&lang=en
+可用，版本也是2.1.39.0。
+
+CPU-Z：https://www.cpuid.com/softwares/cpu-z.html
+PCI-Z 中的 Z 代表 "Zero"，强调其对 PCI 设备的管理功能。
+CPU-Z 中的 Z 没有特定的含义，主要是作为软件名称的一部分，用于区分和标识该工具。
+
+### 12-7、qm monitor命令
+```
+qm monitor $vmid
+info usb
+info pci
+info version
+info qtree
+```
+
+### 12-8、客户的win7驱动安装到win10虚拟机
+测试安装正常，然鹅在重启虚拟机后发现虚拟机蓝屏了，蓝屏代码：KERNEL_SECURITY_CHECK_FAILURE (139)
+然后虚拟机怎么都起不来，一启动就蓝屏。
+
+进入安全模式，无果，根本没有启动设置选项（https://www.jianshu.com/p/5101eb1cd1a9），只有命令行能使用。
+连续三次重启电源的方式也行不通。（如果连续三次引导尝试失败，Windows 10将在第四次尝试时引导到自动修复模式。）
+F8按键。
+
+最终发现ucx01000.sys驱动文件是罪魁祸首，它的签名只有RioLin Limited，正常来说win10系统是需要微软签名的，但是在命令行窗口使用del命令删除文件后还是蓝屏，发现ucx01000.sys驱动文件又恢复回来了，原来是该文件在注册表中存在。
+只能通过PE系统进去虚拟机，然后手动删除ucx01000.sys驱动文件后是能正常启动虚拟机的，而且ucx01000.sys驱动文件是恢复回来的，这时候发现xhci主控是感叹号状态，设备状态是Windows 无法初始化这个硬件的设备驱动程序。（代码 37）找不到对象名。此时xhci主控驱动没法装其他驱动，说是最新的，而且没法卸载。
+
+这时候删除计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ucx01000注册表后，ucx01000.sys驱动文件不再恢复，解决蓝屏问题，也解决了xhci主控是感叹号状态，成功卸载了win7驱动。但是xhci主控变成了符合 USB xHCI 的主机控制器，并且设备状态还是Windows 无法初始化这个硬件的设备驱动程序。（代码 37）找不到对象名。
+
+最终个人感觉应该需要ucx01000.sys驱动文件（依据是USBXHCI主控服务里面有写DepenOnService为Ucx010000），然后从另外一台虚拟机把ucx01000.sys驱动文件注册表导入进去，并把ucx01000.sys驱动文件放在C:\Windows\System32\drivers目录，问题最终解决。
+
+### 12-9、解决客户环境能正常加载ucx01000.sys驱动问题
+通过查看客户环境的Windows补丁安装情况，发现有windows6.1-kb2685811-x64_191e09df632b70fd4f4b27d4cb9227f7c5a1c98c.msu和windows6.1-kb2685813-x64_22a969bada171678b0936bb320e6a7778e8adc07.msu，其中发现kb2685811内核模式驱动框架安装后xhci驱动就正常了。
+对于驱动签名情况后面有时间再研究，暂时没有啥影响。
+
+
+
+
+
+
+

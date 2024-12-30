@@ -128,3 +128,57 @@ https://blog.csdn.net/Onlyone_1314/article/details/108697155
 
 ## 9、x64dbg动态调试逆向神器
 https://x64dbg.com/
+
+## 10、含金量还在上升
+自己写的exe文件不清楚是否合入了自己的改动，可以通过IDA软件逆向分析，找到修改的地方，通过伪代码查看是否合入了自己的修改。
+
+- 选择【portable executable for 80386(PE)[pe.dll]】
+- 提示是否需要根据exe文件内置的符号表路径加载符号表（no将会搜索不到函数名）
+- 界面左侧有一个 Function name 的窗口，点击右键，选择“Quick filter”，然后输入函数名字找到修改函数
+- 按 F5 键即可看见伪代码（注意一定要加载符号表，否则可能连函数名都找不到，符号表不全伪代码也无法看清楚写的什么）
+
+```
+void __thiscall WaveRecorder::init_ring(WaveRecorder *this, unsigned int samples_per_sec, unsigned int frame_bytes, unsigned int frame_align)
+{
+  unsigned __int8 *v5; // [esp+10h] [ebp-Ch]
+  unsigned int count; // [esp+14h] [ebp-8h]
+  unsigned __int8 *dst; // [esp+18h] [ebp-4h]
+
+  this->_ring_size = 500 * samples_per_sec / 0x3E800;
+  this->_ring_item_size = frame_bytes + 32;
+  count = this->_ring_item_size * this->_ring_size;
+  this->_ring = (unsigned __int8 *)operator new[](count);
+  dst = this->_ring;
+  v5 = &dst[count];
+  while ( dst != v5 )
+  {
+    memset(dst, 0, this->_ring_item_size);
+    *((_DWORD *)dst + 1) = frame_bytes;
+    *(_DWORD *)dst = dst + 32;
+    dst += this->_ring_item_size;
+  }
+}
+```
+其中的500就是我需要修改的全局宏变量，被我修改成50了。
+
+提示需要打开libusbtray.dll、SSLEAY32.dll、LIBEAY32.dll、log_base.dll文件，但是这些都不是关键，关键的还是符号表。
+注意关键字，anyway打开exe文件中符号表路径，打开错误的符号表会导致伪代码是错误的，如：
+```
+// positive sp value has been detected, the output may be wrong!
+void __usercall WaveRecorder::init_ring(WaveRecorder *this@<ecx>, int a2@<ebp>)
+{
+  ((void (__thiscall *)(_DWORD))this->_client->remove_event_source)(*(_DWORD *)(*(_DWORD *)(a2 - 24) + 20));
+  waveInClose(*(HWAVEIN *)(*(_DWORD *)(a2 - 24) + 24));
+  *(_DWORD *)(a2 - 16) = *(_DWORD *)(*(_DWORD *)(a2 - 24) + 28);
+  ((void (__cdecl *)(_DWORD))unk_7B88AA)(*(_DWORD *)(a2 - 16));
+  *(_DWORD *)(a2 - 20) = *(_DWORD *)(*(_DWORD *)(a2 - 24) + 48);
+  ((void (__cdecl *)(_DWORD))unk_7B88AA)(*(_DWORD *)(a2 - 20));
+  *(_BYTE *)(a2 - 4) = 0;
+  ((void (__thiscall *)(int))unk_8F7890)(*(_DWORD *)(a2 - 24) + 4);
+  *(_DWORD *)(a2 - 4) = -1;
+  ((void (__thiscall *)(_DWORD))loc_4397E0)(*(_DWORD *)(a2 - 24));
+}
+```
+
+另外特别注意的是，手动加载符号表时，注意路径不能含有中文，否则会加载失败。如果符号表不匹配，会提示PDB signature and/or age does not match the input file.
+有时会提示该地址无法访问，原因是IDA还没有分析到这里来，需耐心等待一段时间后再查看伪代码。

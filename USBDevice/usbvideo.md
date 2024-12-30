@@ -362,6 +362,33 @@ $1 = {bmHint = 13, bFormatIndex = 0 '\000', bFrameIndex = 0 '\000', dwFrameInter
 (gdb)
 ```
 
+发现Linux内核并没有完全支持UVC1.5协议，其中可以从linux-5.15.4/drivers/media/usb/uvc/uvc_video.c文件可以看出：
+```
+static size_t uvc_video_ctrl_size(struct uvc_streaming *stream)
+{
+    /*
+     * Return the size of the video probe and commit controls, which depends
+     * on the protocol version.
+     */
+    if (stream->dev->uvc_version < 0x0110)
+        return 26;
+    else if (stream->dev->uvc_version < 0x0150)
+        return 34;
+    else
+        return 48;
+}
+```
+Linux内核代码在线预览：https://elixir.bootlin.com/linux/v6.12.6/A/ident/uvc_streaming_control
+
+```
+usb/gadget/function/uvc_configfs.c:     h->desc.bcdUVC                  = cpu_to_le16(0x0110);
+usb/gadget/legacy/webcam.c:     .bcdUVC                 = cpu_to_le16(0x0110),
+```
+gadget驱动是一个提供给用户态，去模拟usb设备的驱动，gadget需要有otg口，可以用于模拟usb设备。
+
+windows系统是支持UVC1.5协议的：https://github.com/IntelRealSense/librealsense/blob/e1688cc318457f7dd57abcdbedd3398062db3009/src/uvc/uvc-types.h#L326
+还有其他模块，注意libuvc也不完全支持UVC1.5协议：https://github.com/search?q=bmRateControlModes&type=code
+
 ## 15、笔记本摄像头帧率问题
 ThinkPad-E14笔记本摄像头（04f2:b78e）加载了RsEyeContactCorrection_Assets.dll、RsDMFT64.dll、RsDMFT_Assets.dll三个文件后1280x720分辨率从10帧率提高到30帧率，很神奇。
 
