@@ -98,4 +98,15 @@ eval ${cmd}
 
 无论你选择哪种方法，都需要在脚本中添加适当的逻辑来处理多开情况。这样可以确保只有一个实例在运行，避免可能的冲突和错误。
 
+## 13、神奇的赋值
+```
+#!/bin/bash
 
+svn=2
+[[ $svn =~ 1 ]] && svn_path="aaaa" && package_path="bbbb"
+[[ $svn =~ 2 ]] && svn_path="cccc" && package_path="dddd"
+echo $svn_path          # 已验证输出cccc
+echo $package_path      # 已验证输出dddd
+```
+[[ ... ]] 是 Bash 中用于条件判断的语法，支持正则表达式匹配。
+=~ 运算符用于检查字符串是否匹配给定的正则表达式。

@@ -128,9 +128,14 @@ https://blog.csdn.net/weixin_51575203/article/details/130406151
 修改注册表：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR
 双击Start键值，弹出编辑DWORD（32位）值窗口，修改Start的数值，其中2代表自启动，3代表默认启动，4代表禁止启动，将数值改为2或者3，重启电脑后，插上U盘，可以正常访问U盘。
 
+改成4就能复现问题，改回默认的3就能恢复，只需要拔插一下U盘即可。
+另外使用sc query state=all | findstr usb并没有找到相关服务，在服务窗口找到一个storage service跟这个U盘也无关。
+
 ### 11-1、行为监控
+另外出现一起usbhub设备被禁用的情况，设备状态也是这样，需要找出是哪个安全软件禁用了？
 这种驱动被禁用的行为可以被Windows的系统日志监控到：事件查看器-》Windows日志-》系统-》筛选当前日志-》事件来源Service Control Manager
-能看到类似语句“Usbhub Service 服务的启动类型从 按需启动 更改为 已禁用。”
+能看到类似语句“Usbhub Service 服务的启动类型从 按需启动 更改为 已禁用。”，这个事件查看器只能看见存在这种行为，但是无法确认是哪个安全软件导致了这种行为。
+可以通过火绒软件监控注册表，然后出现修改行为后就会弹出提示框，另外一种方法就是使用processmonitor软件监控注册表。
 
 ### 11-2、复现问题
 ```
@@ -158,7 +163,9 @@ SERVICE_NAME: usbhub
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
 ```
-有些服务没有在services.msc服务显示，需要通过sc命令操作，另外有些服务无法直接通过sc stop usbhub命令直接停止服务，而是需要使用sc config usbhub start=disabled命令操作，然后重启电脑后该设备就会报异常。（注意win7系统等号和值之间需要一个空格）
+有些服务没有在services.msc服务显示，需要通过sc命令操作，另外有些服务无法直接通过sc stop usbhub命令直接停止服务，而是需要使用sc config usbhub start=disabled命令操作，然后重启电脑后该设备就会报这种设备状态异常。（注意win7系统等号和值之间需要一个空格）
+
+### 11-3、特殊情况
 ```
 C:\WINDOWS\system32>sc config usbhub start=disabled
 [SC] QueryServiceConfig2 (delayed autostart flag) 失败 2:
@@ -167,7 +174,21 @@ C:\WINDOWS\system32>sc config usbhub start=disabled
 ```
 上面的原因是该设备需要重启电脑才能生效，因此当前无法获取其配置情况。
 
+### 11-4、问题恢复
 恢复就sc config usbhub start=demand，然后禁用设备启用设备即可。但是正常的时候禁用设备却是需要重启的。
+
+### 11-5、使用processmonitor+自定义程序监控
+processmonitor软件会把所有的行为都监控，就会出现内存爆满，软件卡死的问题。
+发现注册表删除以及使用sc命令禁用服务都是操作注册表（sc命令相当于把注册表服务中的start值进行了改变）。
+
+processmonitor下载地址：https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
+使用教程：
+过滤器Filter（Path->contains->usbhub）
+保存记录限制（Options->History Depth->Enable ring buffer）文件大小100~4000MB，时间1~15分钟
+本地文件保存，默认放在了虚拟内存中（File->Backing Files->Use file named）文件以PML为后缀，只能通过procmon软件打开，记事本打开乱码
+
+由于保存信息极少，因此需要自定义程序关闭procmon软件并把保存的文件给及时留下来。
+代码见：D:\Github\Storage\windows\MonitorRegistry\MonitorRegistry
 
 ## 12、由于其配置信息(注册表中的)不完整或已损坏,Windows 无法启动这个硬件设备。 (代码19)
 声卡设备：找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}UpperFilters里面数据删除 (鼠标双击可打开UpperFilters)

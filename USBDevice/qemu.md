@@ -505,9 +505,39 @@ F8按键。
 通过查看客户环境的Windows补丁安装情况，发现有windows6.1-kb2685811-x64_191e09df632b70fd4f4b27d4cb9227f7c5a1c98c.msu和windows6.1-kb2685813-x64_22a969bada171678b0936bb320e6a7778e8adc07.msu，其中发现kb2685811内核模式驱动框架安装后xhci驱动就正常了。
 对于驱动签名情况后面有时间再研究，暂时没有啥影响。
 
+## 13、qemu开启asan内存检查
+asan内存扫描需要gcc4.9版本后支持，目前debian源服务器的gcc5.4要求libc 2.14以上版本），而我们打包环境的libc是2.13版本，无法通过源服务安装。
+解决方案：代码编译gcc到5.4版本，并使用gcc 5.4对qemu、spice server等模块进行编译。
+gcc源码下载：http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-5.4.0/
+```
+./configure --prefix=/usr/local/gcc-5.4.0 --enable-threads=posix --disable-checking --disable-multilib --enable-languages=c,c++
+make -j4
+make install
+```
+编译需要依赖mpfr-2.4.2、gmp-4.3.2、mpc-0.8.1等等，需要把缺少的东西都需要弄过来，才能编译出需要的gcc版本。
+```
+export CXXFLAGS="-g -O0 -Werror-implicit-function-declaration -fsanitize=address -fno-omit-frame-pointer -lasan"
+export CFLAGS="-g -O0 -Werror-implicit-function-declaration -fsanitize=address -fno-omit-frame-pointer -lasan"
+export LDFLAGS="$LDFLAGS -Werror-implicit-function-declaration -fsanitize=address -fno-omit-frame-pointer -lasan"
+ldd qemu-system-x86_64 | grep asan
+需要把libasan.so.2文件拷贝到运行环境
+```
 
+虚拟机需要启动脚本运行才能加载生效：
+```
+#!/bin/bash
 
+vmid=8521035828450
+qm-c stop ${vmid}
 
+rm -f asan/asan.log.*
 
+export ASAN_OPTIONS="halt_on_error=0:disable_coredump=0:unmap_shadow_on_exit=1:abort_on_error=1:detect_leaks=1:malloc_context_size=15:log_path=/data/local/asan/asan.log"
+
+cmd=$(qm showcmd ${vmid})
+cmd1=$(echo $cmd | sed -e 's/password=/password=f837667a/g')
+$cmd1
+```
+使用jemalloc自带的内存检查功能
 
 

@@ -321,7 +321,9 @@ linux-5.13.7/include/uapi/linux/usb/video.h
 杂项设备
 https://blog.csdn.net/zhanghui962623727/article/details/117754604
 
-## 14、uvc_streaming_control 
+## 14、struct uvc_streaming_control结构体
+
+### 14-1、定义
 ```
 struct uvc_streaming_control { 
     __u16 bmHint; 
@@ -344,6 +346,7 @@ struct uvc_streaming_control {
 ```
 看官方文档：https://www.usb.org/documents?search=Video&items_per_page=50
 
+### 14-2、通过gdb查找定义
 假设代码中有个变量data类型是struct uvc_streaming_control，但是代码中没有struct uvc_streaming_control结构体的声明定义，我们不需要去百度找此结构体的详细信息，可以直接通过gdb将此结构体打印出来：
 ```
 (gdb) f 8
@@ -362,6 +365,7 @@ $1 = {bmHint = 13, bFormatIndex = 0 '\000', bFrameIndex = 0 '\000', dwFrameInter
 (gdb)
 ```
 
+### 14-3、UVC1.5协议
 发现Linux内核并没有完全支持UVC1.5协议，其中可以从linux-5.15.4/drivers/media/usb/uvc/uvc_video.c文件可以看出：
 ```
 static size_t uvc_video_ctrl_size(struct uvc_streaming *stream)
@@ -388,6 +392,12 @@ gadget驱动是一个提供给用户态，去模拟usb设备的驱动，gadget�
 
 windows系统是支持UVC1.5协议的：https://github.com/IntelRealSense/librealsense/blob/e1688cc318457f7dd57abcdbedd3398062db3009/src/uvc/uvc-types.h#L326
 还有其他模块，注意libuvc也不完全支持UVC1.5协议：https://github.com/search?q=bmRateControlModes&type=code
+
+### 14-4、dwMaxVideoFrameSize和dwMaxPayloadTransferSize
+- dwMaxVideoFrameSize：表示单个视频帧的最大字节数，主要用于视频帧的大小限制。
+- dwMaxPayloadTransferSize：表示每个 USB 传输包的最大有效负载字节数，主要用于优化数据传输的效率。特别是在使用等时传输（Isochronous Transfer）时，确保数据流的连续性和实时性非常重要。
+
+wMaxVideoFrameSize 的值通常是分辨率乘积的 2 倍，而不是刚好 2 倍，主要是由于视频数据格式、内存对齐、填充字节、双缓冲技术、传输协议的开销以及流媒体的冗余等因素的综合影响。这些因素共同决定了实际视频帧的大小，以确保在传输和处理过程中能够有效地管理数据。
 
 ## 15、笔记本摄像头帧率问题
 ThinkPad-E14笔记本摄像头（04f2:b78e）加载了RsEyeContactCorrection_Assets.dll、RsDMFT64.dll、RsDMFT_Assets.dll三个文件后1280x720分辨率从10帧率提高到30帧率，很神奇。
