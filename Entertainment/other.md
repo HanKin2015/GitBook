@@ -79,12 +79,12 @@ https://zhuanlan.zhihu.com/p/632642623
 用户名：轻松学IT
 
 ## 9、壁纸
-https://pic.netbian.com/
+免费一张：https://pic.netbian.com/
 https://wallhere.com/
 https://www.3gbizhi.com/
 https://bz.zzzmh.cn/index
-https://haowallpaper.com/
-https://ss.netnr.com/wallpaper
+推荐：https://haowallpaper.com/
+不推荐：https://ss.netnr.com/wallpaper
 
 ## 10、书籍
 从小规划大学 电子版pdf

@@ -362,6 +362,20 @@ command是命令行，如果其不与“target:prerequisites”在一行，那�
 ## 14、一些通用的Makefile文件模板
 https://mp.weixin.qq.com/s/1nXoEcdURd5EUWo4fb_Umg
 
+## 15、重新编译
+有时候修改了配置文件想重新编译，但是代码文件没有任何修改，这时候可能会出现无法重新编译生成新的二进制文件。这时候有个技巧就是：
+```
+touch demo.c
+make
 
-
-
+[root@ubuntu0006:~/cmake/hj] #md5sum demo.c
+823f826efa54cfe4c75c77f480a549be  demo.c
+[root@ubuntu0006:~/cmake/hj] #ll demo.c
+-rw-r--r-- 1 root root 369 12月  4 09:00 demo.c
+[root@ubuntu0006:~/cmake/hj] #touch demo.c
+[root@ubuntu0006:~/cmake/hj] #ll demo.c
+-rw-r--r-- 1 root root 369 1月   2 17:11 demo.c
+[root@ubuntu0006:~/cmake/hj] #md5sum demo.c
+823f826efa54cfe4c75c77f480a549be  demo.c
+```
+原因就是使用touch命令更改了访问时间，从而可以触发重新编译条件。

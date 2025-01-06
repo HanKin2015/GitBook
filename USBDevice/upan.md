@@ -154,7 +154,7 @@ https://www.disktool.cn/content-center/usb-no-media-fix-windows-7-6540.html
 - 打开“计算机”窗口，双击光盘驱动器的图标，弹出“刻录光盘”对话框，选择刻录类型；
 - 这里有两个选项：一个是“类似于USB闪存驱动器”；另一个是“带有CD/DVD播放器”；
 
-### （1）Live File System 模式（类似于 USB 闪存驱动器）
+### 8-1、Live File System 模式（类似于 USB 闪存驱动器）
 特点：
 - 光盘可以像 USB 闪存驱动器一样直接读写。
 - 支持多次写入和删除文件。
@@ -164,7 +164,7 @@ https://www.disktool.cn/content-center/usb-no-media-fix-windows-7-6540.html
 - 无法在所有 CD/DVD 播放器上播放。
 - 兼容性较差。
 
-### （2）Mastered 模式（带有 CD/DVD 播放器）
+### 8-2、Mastered 模式（带有 CD/DVD 播放器）
 特点：
 - 光盘是一次性写入的，类似于传统的 CD/DVD。
 - 支持在大多数 CD/DVD 播放器上播放。
@@ -173,15 +173,15 @@ https://www.disktool.cn/content-center/usb-no-media-fix-windows-7-6540.html
 缺点：
 - 无法多次写入或删除文件。
 
-### 总结
+### 8-3、总结
 可以反复擦除，写入的DVD/EVD光盘，选择，类似于U盘模式，为佳。
 不可以反复擦除，写入的DVD/EVD光盘，选择，用于CD/DVD播放机模式，为佳。
 
-### 原因
+### 8-4、原因
 刻录模式一旦选择后写入过数据就无法进行切换了。
-另外Mastered模式一旦格式化光盘后
+另外Mastered模式一旦格式化光盘后，也将变成Live File System 模式，也再也变不回去了。另外不可以反复擦除的光盘格式化后内存不会再回来。
 
-### 光盘种类
+### 8-5、光盘种类
 国内市场较为常见的有DVD-R、DVD+R、DVD-RW、DVD+RW、DVD-R DL、DVD+R DL、DVD-ROM这几类以及国内市场不太常见的DVD-RAM。
 
 

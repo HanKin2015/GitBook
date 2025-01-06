@@ -138,3 +138,20 @@ index后面的数字是通道序号
 - 设置pulseaudio日志界别：set-log-level
 例如：set-log-level 4
 设置pulseaudio日志级别为debug
+
+## 5、amixer命令
+amixer 是一个用于控制和管理 ALSA（Advanced Linux Sound Architecture）音频设备的命令行工具。它允许用户查看和修改音量、音频通道、音频设备的状态等。
+查看音量和设备信息：amixer
+查看特定设备的音量：amixer get <control>
+设置音量：amixer set Master 50%
+将音量增加 10%：amixer set Master 10%+
+将音量减少 10%：amixer set Master 10%-
+静音：amixer set Master mute
+取消静音：amixer set Master unmute
+列出所有控制：amixer controls
+提取当前音量值：amixer get Master | grep -o '[0-9]*%'
+-D: 指定使用的音频设备：amixer -D pulse get Master
+alsamixer 是一个基于终端的音频混音器，用于控制和管理 ALSA（Advanced Linux Sound Architecture）音频设备。它提供了一个用户友好的界面，允许用户调整音量、静音、选择音频通道等。
+
+
+

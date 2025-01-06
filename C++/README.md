@@ -1,5 +1,4 @@
 # C++/C
-
 学习和膜拜：https://codechina.csdn.net/mirrors/fengbingchun/messy_test
 C++那些事：https://github.com/Light-City/CPlusPlusThings
 在线编译：https://wandbox.org/
@@ -406,3 +405,28 @@ DshowIDL库中的IDL文件定义了DirectShow组件的接口、结构和枚举�
 
 总之，DshowIDL库是DirectShow框架的一部分，其中包含了用于定义DirectShow组件接口的IDL文件，为开发人员提供了创建和扩展DirectShow组件的基础。
 
+## 30、long unsigned int和unsigned long int区别
+实际上是等价的，它们都表示无符号的长整型。尽管它们的书写顺序不同，但在语义上没有区别。C 和 C++ 语言允许在类型声明中改变关键字的顺序。
+尽管这两种写法是等价的，但在实际编程中，通常推荐使用 unsigned long int，因为这种写法更符合常见的习惯用法，且更易于阅读。
+
+## 31、long、long int和int区别
+int：
+在 32 位系统上：通常为 4 字节，范围为 -2,147,483,648 到 2,147,483,647。
+在 64 位系统上：通常为 4 字节，范围相同。
+
+long 和 long int 是同义词，表示无符号的长整型，通常用于表示更大的整数：
+在 32 位系统上：通常为 4 字节，范围与 int 相同。
+在 64 位系统上：通常为 8 字节，范围为 -9,223,372,036,854,775,808 到 9,223,372,036,854,775,807。
+
+## 32、百分号%转义
+```
+char card_number[BUFSIZ] = "3";
+snprintf(alsa_cmd, BUFSIZ,  "alsa_amixer -c %s sset 'PCM' 10%-", card_number);
+
+l.c:25:45: warning: conversion lacks type at end of format [-Wformat=]
+                 snprintf(alsa_cmd, BUFSIZ,  "alsa_amixer -c %s sset 'PCM' 10%+", card_number);
+```
+为了避免这种警告，你可以通过在百分号前添加一个额外的百分号来转义它。这样，snprintf 就不会将其视为格式说明符的开始。
+```
+snprintf(alsa_cmd, BUFSIZ, "alsa_amixer -c %s sset 'PCM' 10%%-", card_number);
+```

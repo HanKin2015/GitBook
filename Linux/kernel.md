@@ -89,6 +89,7 @@ int console_printk[4] = {
 
 echo "0 4 0 7" > /proc/sys/kernel/printk	关闭所有内核打印
 echo 8 > /proc/sys/kernel/printk		开启调试即所有日志
+命令行方式：sudo sysctl -w kernel.printk="7 4 1 7"
 
 ## 3-3、查看调试日志
 dmesg

@@ -263,7 +263,6 @@ git pull
 - git commit
 - git push
 
-
 Step 1. 获取并检出此合并请求的分支
 git fetch origin
 git checkout -b [bName] origin/冲突分支
@@ -1689,4 +1688,6 @@ git config --global core.quotepath false
 ### 74-6、窗口输入字母异常
 其实就是半角和全角的区别，快捷键是shift+space，我发现只有中文模式才能生效，英文模式没有效果。
 
-
+## 75、git pull和git fetch命令区别
+git fetch 用于从远程仓库获取最新的分支和提交，但不会自动合并或修改当前工作目录的内容。
+git pull 是 git fetch 和 git merge 的组合命令。

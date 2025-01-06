@@ -1,6 +1,8 @@
-# devcon工具
+# 命令行工具
 
-## 1、官方介绍
+## 1、devcon工具
+
+### 1-1、简介
 Windows 设备控制台 (Devcon.exe)
 
 备注：
@@ -49,17 +51,13 @@ PCI\VEN_1AF4&DEV_1000&SUBSYS_00011AF4&REV_00\3&13C0B0C5&0&90
         PCI\VEN_1AF4&DEV_1000&CC_0200
 ```
 
-DevCon (Devcon.exe)（即设备控制台）是一种命令行工具，用于显示有关运行 Windows 的计算机上的设备的详细信息。 可以使用 DevCon 启用、禁用、安装、配置以及删除设备。
-DevCon 在 Microsoft Windows 2000 和更高版本的 Windows 上运行。
+DevCon (Devcon.exe)（即设备控制台）是一种命令行工具，用于显示有关运行 Windows 的计算机上的设备的详细信息。 可以替代设备管理器，使用 DevCon 启用、禁用、安装、配置以及重新启动、更新、删除和查询单个设备或一组设备。DevCon 提供与开发人员有关但无法在设备管理器中看到的信息。
+DevCon 在 Microsoft Windows 2000 和更高版本的 Windows 上运行。不能将 Devcon 用于 Microsoft Windows 95、Windows 98、或 Windows Millennium Edition。
 https://docs.microsoft.com/zh-cn/windows-hardware/drivers/devtest/devcon
 
-## 2、其他介绍
-是一种命令行实用工具，可以替代设备管理器。使用 DevCon，您可以启用、禁用、重新启动、更新、删除和查询单个设备或一组设备。DevCon 提供与开发人员有关但无法在设备管理器中看到的信息。
-
-您可以将 DevCon 用于 Windows 2000 、Windows XP和Windows vista。不能将 Devcon 用于 Microsoft Windows 95、Windows 98、或 Windows Millennium Edition。
 看到有人用这个工具开关硬件,小巧也方便,微软出的很官方,举个例子: devcon disable "PCI\VEN_10EC&DEV_8136*" 这个是关闭我机器上的lan;
 
-## 3、介绍几个常用的命令和语法
+### 1-2、介绍几个常用的命令和语法
 ```
 devcon find *     [这个命令可以列出列出本地计算机上存在的所有设备的设备实例]
 devcon find pci\* [列出本地计算机上所有已知的“外围组件互连”(PCI) 设备（如果一个设备的硬件 ID 以“PCI\”为前缀，此命令就认为该设备是 PCI 设备]

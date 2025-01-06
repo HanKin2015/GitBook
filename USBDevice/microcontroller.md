@@ -63,6 +63,7 @@ USBD_CDC_CfgHSDesc和USBD_CDC_CfgFSDesc分别用于高速（High-Speed, HS）和
 测试代码见：
 
 ### 2-7、模拟设备测试
+需要安装驱动才能正常使用：VCP_V1.5.0_Setup_W8_x64_64bits.exe
 注意：不能插着JTAG设备进行测试，否则会枚举失败，并且会把Windows系统卡死。（把JTAG设备也同时插在任意一个usb口，设备会枚举成功，但是也不可取）
 ```
 [Wed Nov  6 17:22:54 2024] usb 1-3.1: new full-speed USB device number 55 using xhci_hcd

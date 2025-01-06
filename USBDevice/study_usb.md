@@ -163,8 +163,10 @@ dmesg -w也能看见write protect is on。
 银河麒麟出现界面无法写入，报错目标是只读的。但是终端和日志查看write protect is off，并且可以写入。
 解决：echo $DESKTOP_SESSION获取session类型，然后ps查找相关session进程，killall杀死进程，这时候界面重启，这时候就能正常写入了。
 
-## 23、ioctl
-在计算机中，ioctl(input/output control)是一个专用于设备输入输出操作的系统调用,该调用传入一个跟设备有关的请求码，系统调用的功能完全取决于请求码。举个例子，CD-ROM驱动程序可以弹出光驱，它就提供了一个对应的Ioctl请求码。设备无关的请求码则提供了内核调用权限。ioctl这名字第一次出现在Unix第七版中，他在很多类unix系统（比如Linux、Mac OSX等）都有提供，不过不同系统的请求码对应的设备有所不同。Microsoft Windows在Win32 API里提供了相似的函数，叫做DeviceIoControl。
+## 23、USB类码
+USB中interface代表其USB功能，这里判断设备类型就是根据interface的描述符中的bInterfaceClass，bInterfaceSubClass，bInterfaceProtocol。三个字段进行判断的。
+
+https://www.usb.org/defined-class-codes
 
 ## 24、会谈边界控制器
 会谈边界控制器（Session Border Controller, SBC），一种NAT穿透的方式。SBC可确保VoIP 安全，又可提供媒体代理服务器的套件。
@@ -205,7 +207,3 @@ vertical垂直的
 ## 30、块设备
 块设备是i/o设备中的一类，是将信息存储在固定大小的块中，每个块都有自己的地址，还可以在设备的任意位置读取一定长度的数据，例如硬盘,U盘，SD卡等。
 
-## 31、USB类码
-USB中interface代表其USB功能，这里判断设备类型就是根据interface的描述符中的bInterfaceClass，bInterfaceSubClass，bInterfaceProtocol。三个字段进行判断的。
-
-https://www.usb.org/defined-class-codes

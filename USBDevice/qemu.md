@@ -322,7 +322,13 @@ python3 keymap-gen --lang=glib2 --varname=qemu_inpu_map_atset1_to_qcode code-map
 ```
 添加atset1和atset2信息后就能把该按键信息生成了，但问题在于242按键的atset1和atset2信息是多少？
 
-### 11-3、atset1和atset2表
+### 11-3、AT set1 keycode和AT set2 keycode
+在 Linux 和其他操作系统中，AT（AT Keyboard）键盘的按键码（keycode）用于表示键盘上的特定按键。AT set1 和 AT set2 是两种不同的按键码集，通常用于不同的键盘布局或设备。
+
+AT set1 是最早的 AT 键盘按键码集，通常用于标准的 PC 键盘。
+按键码的范围通常是从 1 到 255，具体的按键码与按键的功能一一对应。
+
+### 11-4、atset1和atset2表
 atset2 keycodes：https://www.libvirt.org/manpages/
 https://blog.weghos.com/qemu/qemu/build/ui/input-keymap-atset1-to-qcode.c.html
 发现atset1和atset2信息表最大值只到了0xe07d值。
@@ -345,7 +351,7 @@ KEY_VIDEO_PREV,242,,,0xe072,0x39,,,VK_HANGEUL,0x15,,,,,,I250,hangeul,,
 qemu-5.0.0/ui/spice-input.c 修改kbd_push_key函数对于0xf1和0xf2按键（即>0x80）其keycode = scancode。
 ```
 
-### 11-4、适配依据
+### 11-5、适配依据
 至少atset1和atset2缺一不可，这也是最难获取到的值，其中VK_HANJA,0x19和VK_HANGEUL,0x15可以通过rawinputtool.exe程序获取，使用spy++不行，使用KeyboardTest.exe软件获取到了0x19，另外一个值是0xE5，有点差距。
 
 对于atset1值，我们可以通过在qemu2.5.1版本（正常传递242和241按键）增加调试日志发现其qcode分别是113（0x71）和114（0x72），另外我们在https://www.libvirt.org/manpages/virkeycode-qnum.html找到其值。

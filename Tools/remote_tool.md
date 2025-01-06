@@ -13,10 +13,6 @@ teamviwer收不到短信验证码，坑，居然没有提示错误。问题在�
 ## 2、Windows自带的远程桌面工具
 mstsc
 
-scons
-autoconfig
-so
-
 ## 3、todesk
 https://www.todesk.com/
 缺点：任务管理器中进程页面错误是真的高
@@ -225,5 +221,11 @@ Radmin (Remote Administrator)是一款屡获殊荣的远程控制软件，它将
 ## 6、网络人和pcanywhere
 http://netman123.cn/cw/lp_11.html
 
-## anydesk
+## 7、anydesk
 https://anydesk.com.cn/zhs
+
+
+
+
+
+

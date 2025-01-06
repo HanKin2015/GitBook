@@ -81,6 +81,20 @@ x86版本的exe文件缺失dll文件，安装了x64版本的运行库依然报�
 win10截图快捷键：shift+win+s
 设备管理器：devmgmt.msc
 
+### 7-1、读取记事本内容快捷键
+ctrl+End  到本文末尾
+ctrl+Home  到本文首
+End 行末
+Home 行首
+shift+End 选择当前光标到行尾
+shift+Home 选择当前光标到行首
+
+### 7-2、何时使用 .msc 后缀
+当您想要直接打开特定的管理工具或控制台时，使用 .msc 后缀。
+- devmgmt.msc：打开设备管理器
+- services.msc：打开服务管理器
+- eventvwr.msc：打开事件查看器
+
 ## 8、dos命令
 ```
 C:\迅雷下载\tcpdump_windows>help cd
@@ -379,13 +393,9 @@ https://iknow.lenovo.com.cn/detail/188967
 方法二：打开注册表-》导航到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}-》在此路径下，找到代表网卡的0000、0001、0002等主键，查看DriverDesc以确认是正确的网卡。
 在选定的主键下，新建一个字符串值，命名为NetworkAddress（注意中间不能有空格），设置新的MAC地址-》需要将网卡禁用启用一下生效
 
-## 48、读取记事本内容快捷键
-ctrl+End  到本文末尾
-ctrl+Home  到本文首
-End 行末
-Home 行首
-shift+End 选择当前光标到行尾
-shift+Home 选择当前光标到行首
+## 48、数据恢复
+牛学长：https://www.tenorshare.cn/products/any-data-recovery.html
+diskGenius、diskRecovery、EasyRecovery Pro
 
 ## 49、什么返回值才能被GetLastError函数捕获
 GetLastError 函数用于获取最近一次发生错误的错误代码。它通常与 Windows API 函数一起使用。大多数 Windows API 函数在发生错误时会返回一个特定的错误代码，这些错误代码可以被 GetLastError 函数捕获。一般来说，只要调用了 Windows API 函数并且该函数返回了一个表示错误的值，GetLastError 函数就可以捕获到这个错误代码。
@@ -420,11 +430,8 @@ https://www.bilibili.com/read/cv13629164/
 打开火绒，找到安全设置=》找到高级防护-自定义防护-点击添加规则
 
 ## 53、笔记本连接wifi使用有线共享网络给其他设备
+背景：盒子终端无法连接wifi，当前没有外网网线，只有内网网线，我需要给盒子终端连接外网。因此计划使用笔记本连接外网wifi，然后通过有线共享网络给盒子终端
 https://jingyan.baidu.com/article/ce09321b74ba072bfe858f45.html
 按Ctrl选中无线网和本地以太网两个连接然后将鼠标移到选中的无线连接上，然后右键，会看到桥接选项
-
-## 54、数据恢复
-牛学长：https://www.tenorshare.cn/products/any-data-recovery.html
-diskGenius、diskRecovery、EasyRecovery Pro
 
 

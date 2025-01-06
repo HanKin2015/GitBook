@@ -393,6 +393,9 @@ gadget驱动是一个提供给用户态，去模拟usb设备的驱动，gadget�
 windows系统是支持UVC1.5协议的：https://github.com/IntelRealSense/librealsense/blob/e1688cc318457f7dd57abcdbedd3398062db3009/src/uvc/uvc-types.h#L326
 还有其他模块，注意libuvc也不完全支持UVC1.5协议：https://github.com/search?q=bmRateControlModes&type=code
 
+总的来说，V4L2 对 UVC 1.5 的支持是有限的，主要是因为 V4L2 的设计和实现主要基于 UVC 1.0 和 UVC 1.1。虽然 UVC 1.5 设备可以在 Linux 系统上工作，但它们的某些新功能可能无法通过 V4L2 接口访问。
+总的来说，Linux 将 UVC 1.5 设备视为 UVC 1.1 设备进行处理，主要是因为 UVC 1.5 的向后兼容性。这使得 UVC 1.5 设备能够在 Linux 系统上正常工作，但可能无法充分利用其所有新特性和功能。
+
 ### 14-4、dwMaxVideoFrameSize和dwMaxPayloadTransferSize
 - dwMaxVideoFrameSize：表示单个视频帧的最大字节数，主要用于视频帧的大小限制。
 - dwMaxPayloadTransferSize：表示每个 USB 传输包的最大有效负载字节数，主要用于优化数据传输的效率。特别是在使用等时传输（Isochronous Transfer）时，确保数据流的连续性和实时性非常重要。
@@ -470,6 +473,8 @@ WDM不在 DriverEntry里创建设备，而是注册 DriverObject->DriverExtensio
 查看驱动程序详细信息，没有异常的第三方软件驱动。
 但是解决方案：卸载驱动后正常。
 
-
+## 21、Linux安装的驱动查看版本信息
+lsmod
+modinfo uvcvideo
 
 

@@ -28,4 +28,7 @@ IDA逆向分析USBRDCtrl.sys驱动文件，通过错误码C000009A找到代码�
 DeviceTree：https://www.itmop.com/downinfo/367076.html
 WinObj：https://learn.microsoft.com/zh-cn/sysinternals/downloads/winobj
 
+## 5、BitLocker
+BitLocker 是 Windows 提供的磁盘加密功能，它可以使用 USB 密钥（UKey）作为解锁密钥的一种方式。
+
 

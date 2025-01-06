@@ -96,7 +96,40 @@ https://winscp.net/
 ## 6、PuTTY
 PuTTY 是 SSH 和 telnet 客户端，最初由 Simon Tatham 为 Windows 平台开发。用 MIT 许可证授权。包含的组件有：PuTTY, PuTTYgen,PSFTP, PuTTYtel, Plink, PSCP, Pageant, 默认登录协议是 SSH，默认的端口为 22。
 Putty 主要是用来远程连接服务器，它支持 SSH、Telnet、Serial 等协议的连接。
-putty.org
+官网：putty.org
+注册表位置：计算机\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\SshHostKeys
+
+### 6-1、plink命令行工具
+与 SSH（Secure Shell）相关的命令行工具，通常与 PuTTY 套件一起使用。可以用作 SSH 客户端，允许用户通过命令行连接到远程服务器。
+```
+plink username@hostname -pw password
+```
+
+### 6-2、pscp命令行工具
+用于通过 SSH 协议在本地计算机和远程计算机之间安全地复制文件。允许用户从本地计算机向远程计算机上传文件，或从远程计算机下载文件到本地计算机。
+```
+pscp localfile.txt username@hostname:/path/to/remote/directory/
+pscp username@hostname:/path/to/remote/file.txt localfile.txt
+```
+
+### 6-3、使用集成的exe程序上传文件失败
+通过wireshark软件抓包发现本地向22端口发送数据失败，一直在重试，使用ping命令没有问题。
+原因是没有把对端的主机密钥缓存在注册表中（计算机\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\SshHostKeys）
+可以使用plink命令行工具进行添加:
+```
+The server's host key is not cached in the registry. You
+have no guarantee that the server is the computer you
+think it is.
+The server's rsa2 key fingerprint is:
+ssh-rsa 1024 00:3a:fd:42:ac:77:ec:6d:99:fe:89:a3:8d:7b:d3:8e
+If you trust this host, enter "y" to add the key to
+PuTTY's cache and carry on connecting.
+If you want to carry on connecting just once, without
+adding the key to the cache, enter "n".
+If you do not trust this host, press Return to abandon the
+connection.
+Store key in cache? (y/n) y
+```
 
 ## 7、老版本连接报错
 Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
