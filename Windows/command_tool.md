@@ -92,11 +92,11 @@ USB\ROOT_HUB\4&36880E1&0                                    : USB Root Hub
 
 注意：需要管理员运行cmd窗口。
 
-## 4、PCI 设备
+### 1-3、PCI 设备
 外设组件互连标准PCI(Peripheral Component Interconnect)是一种由英特尔（Intel）公司1991年推出的用于定义局部总线的标准。
 PCI总线系统要求有一个PCI控制卡，它必须安装在一个PCI插槽内。这种插槽是主板带有最多数量的插槽类型，在当前流行的台式机主板上，ATX结构的主板一般带有5～6个PCI插槽，而小一点的MATX主板也都带有2～3个PCI插槽。根据实现方式不同，PCI控制器可以与CPU一次交换32位或64位数据，它允许智能PCI辅助适配器利用一种总线主控技术与CPU并行地执行任务。PCI允许多路复用技术，即允许一个以上的电子信号同时存在于总线之上。
 
-## 5、pnputil工具
+## 2、pnputil工具
 个人感觉不好用。
 
 在win7和win10系统上面看见两个版本的pnputil工具。
@@ -143,9 +143,9 @@ Microsoft PnP 工具
 ```
 这个时候扫描检测硬件改动后设备就不存在了
 
-## 6、sc命令
+## 3、sc命令
 
-### 6-1、基本用法
+### 3-1、基本用法
 计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SamSs
 ```
 C:\Users\User>sc query samss
@@ -207,7 +207,7 @@ C:\WINDOWS\system32>sc config
  password= <密码>
 ```
 
-### 6-2、创建服务
+### 3-2、创建服务
 demo：D:\Github\Storage\windows\MyWindowsService\MyWindowsService
 安装服务：sc create MyWindowsService binPath= "C:\path\to\your\MyWindowsService.exe"
 启动服务：sc start MyWindowsService
@@ -284,7 +284,7 @@ C:\WINDOWS\system32>sc stop MywindowsService
 服务无法在此时接受控制信息。
 ```
 
-### 6-3、[SC] ControlService 失败 1052
+### 3-3、[SC] ControlService 失败 1052
 ```
 C:\WINDOWS\system32>sc stop commonusb2
 [SC] ControlService 失败 1052:
@@ -358,7 +358,7 @@ SERVICE_NAME: mywindowsservice
         SERVICE_START_NAME : LocalSystem
 ```
 
-### 6-4、优化电脑环境
+### 3-4、优化电脑环境
 任务管理器中有一些进程无法杀死或者杀死后重新拉起，就可以通过sc命令关闭其服务。
 ```
 C:\Users\User>sc query state=all | findstr eadr
@@ -391,17 +391,14 @@ C:\WINDOWS\system32>
 ```
 最后在任务管理器杀死该进程即可。
 
-## 7、对象名已存在
-Windows无法初始化这个硬件的设备驱动程序。（代码37）
-一般来说是有两个驱动同时操作了此设备导致，删除相关的过滤驱动即可，还有一种情况就是驱动服务，两个驱动的服务同时启动了。
+## 4、fltmc命令
+管理员运行cmd窗口，执行fltmc命令可以管理和监控文件系统过滤器驱动程序。文件系统过滤器驱动程序是用于拦截和处理文件系统操作的驱动程序，通常用于实现反病毒软件、备份软件、加密软件等功能。
 
-sc命令查看服务状态，遇到过北信源软件阻止驱动卸载，导致原来的驱动服务还存在出现此情况。另外遇到过绿盾软件导致devcon.exe程序的返回值始终为空，导致返回值异常出现安装问题。
+查看已加载的过滤器驱动程序：fltmc filters（和直接执行fltmc命令结果相同）
+查看已安装的过滤器驱动程序：fltmc instances
+列出系统中所有卷/RDR：fltmc volumes
+卸载过滤器驱动程序：fltmc unload <FilterName>
+加载过滤器驱动程序：fltmc load <FilterName>
 
-摄像头相关注册表：
-```
-计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}
-计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}
-计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
-```
 
 

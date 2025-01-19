@@ -197,10 +197,11 @@ echo '
 文 件 名: remove_eference_dimension.py
 文件描述: 移除引用标注
 作    者: HanKin
-创建日期: 2024.01.04
-修改日期：2024.01.04
+备    注: 
+创建日期: 2025.01.04
+修改日期：2025.01.04
 
-Copyright (c) 2024 HanKin. All rights reserved.
+Copyright (c) 2025 HanKin. All rights reserved.
 """
 
 import time

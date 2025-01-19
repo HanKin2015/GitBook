@@ -42,16 +42,8 @@ C:\Users\Administrator>netsh interface ipv4 show subinterfaces
    MTU  MediaSenseState   传入字节  传出字节      接口
 ------  ---------------  ---------  ---------  -------------
 4294967295                1          0      53346  Loopback Pseudo-Interface 1
-  1500                1  12656482286  16217215691  本地连接 2
+  1500                1  12656482286  16211415691  本地连接 2
   1400                2  143851773  100189034  本地连接 4
-
-C:\Users\User>netsh interface ipv4 show subinterfaces
-
-   MTU  MediaSenseState   传入字节  传出字节      接口
-------  ---------------  ---------  ---------  -------------
-4294967295                1          0     312703  Loopback Pseudo-Interface 1
-  1500                1   33808897   15365415  VNC
-  1500                1  34984008685  18444024522  以太网 4
 ```
 
 修改指定网络接口的MTU值：
@@ -147,3 +139,80 @@ BOOTPROTO=dhcp
 ONBOOT=yes
 MTU=1400
 ```
+
+## 4、通过ping大包确认网络链路中mtu的值
+注意：MTU值是限制当前主机发送出去的包大小限制，例如本机MTU值为1500，则只能ping出去1472字节的数据包。
+通过逐步增加数据包大小，找到最大成功的大小（例如 1472 字节），然后加上 28 字节的 ICMP 头部（IPv4 的 ICMP 头部大小为 8 字节，IPv4 头部大小为 20 字节），可以计算出 MTU。
+例如，如果最大成功的大小是 1472 字节，则 MTU 为 1472 + 28 = 1500 字节。
+
+windows通过-f 用于设置“不分片”标志。
+linux通过-M do 用于设置“不分片”标志。
+
+windows系统：
+```
+C:\Users\Default>netsh interface ipv4 show subinterfaces
+
+       MTU  MediaSenseState      输入字节     输出字节  接口
+----------  ---------------  ------------  ------------  -------------
+4294967295                1             0          3215  Loopback Pseudo-Interface 1
+      1500                1   10957538446    1349399113  以太网
+
+
+C:\Users\Default>ping 114.22.16.1 -l 1473 -f
+
+正在 Ping 114.22.16.1 具有 1473 字节的数据:
+需要拆分数据包但是设置 DF。
+需要拆分数据包但是设置 DF。
+
+114.22.16.1 的 Ping 统计信息:
+    数据包: 已发送 = 2，已接收 = 0，丢失 = 2 (100% 丢失)，
+Control-C
+^C
+C:\Users\Default>ping 114.22.16.1 -l 1472 -f
+
+正在 Ping 114.22.16.1 具有 1472 字节的数据:
+来自 114.22.16.1 的回复: 字节=1472 时间=1ms TTL=64
+来自 114.22.16.1 的回复: 字节=1472 时间=1ms TTL=64
+来自 114.22.16.1 的回复: 字节=1472 时间=1ms TTL=64
+来自 114.22.16.1 的回复: 字节=1472 时间=2ms TTL=64
+
+114.22.16.1 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 1ms，最长 = 2ms，平均 = 1ms
+```
+
+debian系统：
+```
+root@adesk:~# ifconfig eth0
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1400
+        inet 114.22.16.1  netmask 255.255.255.0  broadcast 114.22.16.255
+        inet6 fe80::56f6:c5ff:fef9:438c  prefixlen 64  scopeid 0x20<link>
+        ether 54:f6:c5:f9:43:8c  txqueuelen 1000  (Ethernet)
+        RX packets 5499057679  bytes 788193028726 (734.0 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1167590016  bytes 131873977454 (122.8 GiB)
+        TX errors 2  dropped 0 overruns 0  carrier 0  collisions 0
+
+root@adesk:~# ping 114.22.16.37 -s 1373 -M do
+PING 114.22.16.37 (114.22.16.37) 1373(1401) bytes of data.
+ping: local error: Message too long, mtu=1400
+ping: local error: Message too long, mtu=1400
+ping: local error: Message too long, mtu=1400
+
+--- 114.22.16.37 ping statistics ---
+3 packets transmitted, 0 received, +3 errors, 100% packet loss, time 2028ms
+
+root@adesk:~# ping 114.22.16.37 -s 1372 -M do
+PING 114.22.16.37 (114.22.16.37) 1372(1400) bytes of data.
+1380 bytes from 114.22.16.37: icmp_seq=1 ttl=128 time=1.62 ms
+1380 bytes from 114.22.16.37: icmp_seq=2 ttl=128 time=1.69 ms
+1380 bytes from 114.22.16.37: icmp_seq=3 ttl=128 time=1.67 ms
+
+--- 114.22.16.37 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.628/1.664/1.692/0.054 ms
+root@adesk:~#
+```
+
+

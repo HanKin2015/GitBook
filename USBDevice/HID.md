@@ -31,4 +31,7 @@ WinObj：https://learn.microsoft.com/zh-cn/sysinternals/downloads/winobj
 ## 5、BitLocker
 BitLocker 是 Windows 提供的磁盘加密功能，它可以使用 USB 密钥（UKey）作为解锁密钥的一种方式。
 
+BitLocker 功能在 Windows 10 专业版、企业版和教育版中可用。Windows 10 家庭版不支持 BitLocker。
+虽然使用 UKey 不需要 TPM（可信平台模块），但如果你的系统有 TPM，确保它在 BIOS/UEFI 中启用并正确配置。
 
+Citrix 的 Local App Access 方案是一种允许用户在虚拟桌面环境中访问本地应用程序的解决方案。这种方案的主要目的是在虚拟桌面基础架构（VDI）中提供更好的用户体验，尤其是在需要使用本地资源或应用程序时。

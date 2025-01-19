@@ -195,6 +195,17 @@ Windows 无法初始化这个硬件的设备驱动程序。 (代码 37)
 win7x64报错如下：
 Windows 无法初始化这个硬件的设备驱动程序。 (代码 37)
 
+一般来说是有两个驱动同时操作了此设备导致，删除相关的过滤驱动即可，还有一种情况就是驱动服务，两个驱动的服务同时启动了。
+
+sc命令查看服务状态，遇到过北信源软件阻止驱动卸载，导致原来的驱动服务还存在出现此情况。另外遇到过绿盾软件导致devcon.exe程序的返回值始终为空，导致返回值异常出现安装问题。
+
+摄像头相关注册表：
+```
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{36fc9e60-c465-11cf-8056-444553540000}
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+```
+
 排查：
 该摄像头加载了usb2.sys自定义驱动，但是通过sc命令查询发现usb1.sys驱动正在运行，而usb2.sys驱动则是停止状态。
 并且该驱动无法通过sc stop命令关闭usb1.sys，因此usb2.sys也无法通过sc start命令启动。
@@ -476,5 +487,11 @@ WDM不在 DriverEntry里创建设备，而是注册 DriverObject->DriverExtensio
 ## 21、Linux安装的驱动查看版本信息
 lsmod
 modinfo uvcvideo
+
+## 22、jpeg和mjpeg格式区别
+JPEG（Joint Photographic Experts Group）和 MJPEG（Motion JPEG）是两种不同的图像压缩格式，它们在用途、编码方式和应用场景上有显著的区别。
+
+JPEG 是一种静态图像压缩格式，主要用于存储和传输静态图像。
+MJPEG 是一种视频压缩格式，它将视频序列中的每一帧都编码为独立的 JPEG 图像。
 
 
