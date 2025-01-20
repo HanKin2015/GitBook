@@ -56,4 +56,11 @@ C:\Program Files\Wireshark\plugins\2.2.4 不知道那个目录的可以到wiresh
 
 网上教程很多 就不细说了。
 
+## 6、计算usb数据包之间的时间间隔
+demo见：D:\Github\Storage\python\script\calc_time_interval.py
+wireshark-》文件-》导出分组解析结果-》As CSV
+
+差点准备去写一个lua脚本了，然鹅wireshark上面是有时间间隔的，关键字段为usb.time > 0.7即可。
+
+
 

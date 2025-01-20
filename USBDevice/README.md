@@ -89,6 +89,7 @@ https://devicehunt.com/  该网站的USB VID数据是使用的方法二中linux-
 8087:0032  无线蓝牙网卡
 2109:2815  通用USB集线器
 
-
-
+## 15、tx常用于表示传输，xfer也表示传输
+tx 是 transmit 或 transmission 的缩写，通常用于表示数据的发送或传输。
+xfer 是 transfer 的缩写，表示数据的转移或传输。这个缩写通常用于描述数据在不同位置之间的移动。
 

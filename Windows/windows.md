@@ -521,6 +521,12 @@ https://zhidao.baidu.com/question/316785589826197724.html
 - Wallpaper Engine
 - Plastuer
 
+### 3-9、win11设置右键菜单默认显示所有，不需要再点击显示更多选项
+CMD窗口执行：reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+重启文件资源管理器：taskkill /f /im explorer.exe & start explorer.exe
+在 reg.exe 命令中，/ve 参数的含义是“设置默认值”。具体来说，它用于添加或修改指定注册表项的默认值（即没有名称的值）。
+注意：如果手动添加注册表的时候，一是要注意添加的是HKEY_CURRENT_USER，二是一定要给InprocServer32添加空值，直接添加项后，数据哪里会显示“数据未设置”，需要点击一下默认值项，然后点击确定后数据那里不再有“数据未设置”才能生效。
+
 ## 4、激活Windows
 脚本：D:\Github\Storage\batch\windows10激活工具.bat
 ```

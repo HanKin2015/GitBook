@@ -244,4 +244,16 @@ https://www.emulefans.com/news/emule/emule-official/
 https://www.nirsoft.net/utils/sound_volume_view.html
 使用工具，然后使用命令行设置。
 
+## 21、数据恢复工具
+牛学长：https://www.tenorshare.cn/products/any-data-recovery.html
+diskGenius、diskRecovery、EasyRecovery Pro
+官方数据恢复工具—Windows File Recovery，简称WinFR。
+Windows文件恢复（微软命令行程序）的免费图形界面：https://www.winfr.com.cn/
+
+## 22、MSYS vs MSYS2：功能、兼容性与易用性全面比拼，助你挑选最佳Windows开发伴侣
+在Windows平台上进行跨平台开发时，MSYS和MSYS2是两个不可忽视的工具。它们都为开发者提供了类似于Unix/Linux的开发环境，但在功能、兼容性、易用性等方面存在显著差异。
+
+MSYS（Minimal GNU(POSIX)system on Windows）是一个小型的GNU环境，旨在为Windows用户提供基本的Unix/Linux命令行工具。它是Cygwin的一个简化版，包含了bash、make等核心工具，但不具备Cygwin那样完整的类Unix环境。
+
+MSYS2（Minimal SYStem 2）是MSYS的一个升级版，旨在提供更强大、更灵活的跨平台开发环境。它集成了大量的GNU工具链、工具和库，同时引入了Pacman包管理器，方便用户安装、更新和卸载软件包。
 

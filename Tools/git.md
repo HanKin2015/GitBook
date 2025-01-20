@@ -1627,6 +1627,13 @@ log/*           //忽略log下的所有文件
 css/*.css       //忽略css目录下的.css文件
 ```
 
+在 .gitignore 文件中添加了 additional_data/common_file/toolTotals.json 后，仍然在 git status 中看到该文件的状态为“modified”，这通常是因为 Git 已经跟踪了该文件的更改。.gitignore 只会忽略未被跟踪的文件，而不会影响已经被 Git 跟踪的文件。
+如果希望 Git 忽略 toolTotals.json 文件，你需要先将其从 Git 的索引中移除。
+```
+git rm --cached additional_data/common_file/toolTotals.json
+```
+运行 git status，你应该会看到 toolTotals.json 被标记为“deleted”，但实际上文件仍然存在于你的工作目录中。但是会更新远端文件为删除状态。
+
 ## 70、本地存储空间不足但需要进行上库
 仓库可能有28GB左右，本地只有10GB，正常操作是git clone仓库，然而这样就会下载28GB内容，之前我也研究过使用git clone -b <branch_name> <repository_url>根本行不通，还是会有全部内容。
 

@@ -583,4 +583,58 @@ https://www.zhihu.com/question/361772293/answer/2896672510
 思路将其加密压缩成zip包，WinRAR软件在加密的时候有一个加密文件名，具体表现为：
 https://zhuanlan.zhihu.com/p/605941280?utm_id=0
 
-## 50、
+## 50、警告从外部作用域隐藏名称 'platform'
+通常是由于在同一作用域中使用了与外部作用域相同的变量名。这种情况可能会导致代码的可读性降低，并可能引起意外的错误或混淆。
+另外一个原因就是python第三方库模块有叫'platform'的。
+
+## 51、PEP 8: E302 expected 2 blank lines, found 1
+PEP 8 是 Python 的官方风格指南，其中包含了关于代码可读性和一致性的建议。E302 是 PEP 8 中的一条警告，表示在函数或类定义之间应该有两个空行。
+
+## 52、神奇的问题
+在桌面云文件夹执行python脚本异常，报错AttributeError: module 're' has no attribute 'compile'，但是新建一个文件夹就能正常执行。一开始还怀疑可能re库出现问题了，然鹅re 模块是 Python 的内置模块，因此你不需要单独安装它。它随 Python 的安装包一起提供，默认情况下就可以使用。
+```
+(base) D:\Users\User\Desktop>python
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] :: Anaconda, Inc. on win32
+Type "help", "copyright", "credits" or "license" for more information.
+SYSTEM\CurrentControlSet\Services\usbhub
+None\None, [WinError 2] 系统找不到指定的文件。
+SYSTEM\CurrentControlSet\Services\vusb
+(4, 4)
+[{'level': 'error', 'content': 'usbhub服务', 'cause': '服务不存在', 'suggestion': '该服务处于禁用状态，请检测本地是否安装了杀软软件，恢复方式为重装VDI'}, {'level': 'error', 'content': 'vusb服务', 'cause': '禁用状态', 'suggestion': '该服务处于禁用状态，请检测本地是否安装了杀软软件，恢复方式为重装VDI'}]
+Failed calling sys.__interactivehook__
+Traceback (most recent call last):
+  File "C:\Users\User\anaconda3\lib\site.py", line 408, in register_readline
+    import readline
+  File "C:\Users\User\anaconda3\lib\site-packages\readline.py", line 6, in <module>
+    from pyreadline.rlmain import Readline
+  File "C:\Users\User\anaconda3\lib\site-packages\pyreadline\__init__.py", line 12, in <module>
+    from . import logger, clipboard, lineeditor, modes, console
+  File "C:\Users\User\anaconda3\lib\site-packages\pyreadline\logger.py", line 10, in <module>
+    import socket, logging, logging.handlers
+  File "C:\Users\User\anaconda3\lib\logging\__init__.py", line 26, in <module>
+    import sys, os, time, io, traceback, warnings, weakref, collections.abc
+  File "C:\Users\User\anaconda3\lib\traceback.py", line 5, in <module>
+    import linecache
+  File "C:\Users\User\anaconda3\lib\linecache.py", line 11, in <module>
+    import tokenize
+  File "C:\Users\User\anaconda3\lib\tokenize.py", line 37, in <module>
+    cookie_re = re.compile(r'^[ \t\f]*#.*?coding[:=][ \t]*([-\w.]+)', re.ASCII)
+AttributeError: module 're' has no attribute 'compile'
+>>> exit()
+
+(base) D:\Users\User\Desktop>cd ..
+
+(base) D:\Users\User>python
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] :: Anaconda, Inc. on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit()
+
+(base) D:\Users\User>
+```
+
+原因是命名冲突：
+- 确保在桌面文件夹中没有名为 re.py 的文件。Python 会优先导入当前目录中的模块，如果有同名文件，会导致导入失败。
+- 检查是否有 re.pyc 或 __pycache__ 目录，这些可能是之前运行时生成的缓存文件。
+果然发现桌面上面有一个我测试使用的文件，并且命名为了re.py，尴尬！
+
+

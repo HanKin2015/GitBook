@@ -393,9 +393,10 @@ https://iknow.lenovo.com.cn/detail/188967
 方法二：打开注册表-》导航到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}-》在此路径下，找到代表网卡的0000、0001、0002等主键，查看DriverDesc以确认是正确的网卡。
 在选定的主键下，新建一个字符串值，命名为NetworkAddress（注意中间不能有空格），设置新的MAC地址-》需要将网卡禁用启用一下生效
 
-## 48、数据恢复
-牛学长：https://www.tenorshare.cn/products/any-data-recovery.html
-diskGenius、diskRecovery、EasyRecovery Pro
+## 48、笔记本连接wifi使用有线共享网络给其他设备
+背景：盒子终端无法连接wifi，当前没有外网网线，只有内网网线，我需要给盒子终端连接外网。因此计划使用笔记本连接外网wifi，然后通过有线共享网络给盒子终端
+https://jingyan.baidu.com/article/ce09321b74ba072bfe858f45.html
+按Ctrl选中无线网和本地以太网两个连接然后将鼠标移到选中的无线连接上，然后右键，会看到桥接选项
 
 ## 49、什么返回值才能被GetLastError函数捕获
 GetLastError 函数用于获取最近一次发生错误的错误代码。它通常与 Windows API 函数一起使用。大多数 Windows API 函数在发生错误时会返回一个特定的错误代码，这些错误代码可以被 GetLastError 函数捕获。一般来说，只要调用了 Windows API 函数并且该函数返回了一个表示错误的值，GetLastError 函数就可以捕获到这个错误代码。
@@ -428,10 +429,5 @@ FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算
 使用火绒软件监控注册表选项，当该注册表被某个软件操作时候询问自己，这样就会找到那个未知软件了。
 https://www.bilibili.com/read/cv13629164/
 打开火绒，找到安全设置=》找到高级防护-自定义防护-点击添加规则
-
-## 53、笔记本连接wifi使用有线共享网络给其他设备
-背景：盒子终端无法连接wifi，当前没有外网网线，只有内网网线，我需要给盒子终端连接外网。因此计划使用笔记本连接外网wifi，然后通过有线共享网络给盒子终端
-https://jingyan.baidu.com/article/ce09321b74ba072bfe858f45.html
-按Ctrl选中无线网和本地以太网两个连接然后将鼠标移到选中的无线连接上，然后右键，会看到桥接选项
 
 

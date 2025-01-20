@@ -46,9 +46,16 @@ https://baijiahao.baidu.com/s?id=1765421542320923566&wfr=spider&for=pc
 - Ctrl + Numpad+/-：展开/折叠代码块（当前位置的：函数，注释等）
 - Ctrl + shift + Numpad+/-：展开/折叠所有代码块
 
+### 2-3、pycharm启动慢、卡顿的问题
+https://zhuanlan.zhihu.com/p/17039590286
+找到PyCharm安装路径，并打开PyCharm安装路径下的bin文件夹，找到pycharm64.exe.vmoptions文件，双击打开，进行编辑。
+在打开的pycharm64.exe.vmoptions文件内容中，要修改两个变量的值。
+- Xms：表示PyCharm启动时可用的内存大小。
+- Xmx：表示PyCharm运行时可用的内存大小。
 
-
-
+另外就是关闭插件，我把所有的插件都关闭后pycharm确实变快了！
+在 PyCharm 中，依次点击 File -> Settings -> Plugins。在此页面中，查看已安装的插件，禁用那些不常用或不必要的插件。每个插件都需要占用一定的资源，因此减少插件数量能有效提升性能。
+仅仅保留了中文语言包和style sheets和UI，为了黑色主题。
 
 
 

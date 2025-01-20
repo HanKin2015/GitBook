@@ -89,13 +89,13 @@ print(data)
 ```
 
 ## 8、rsa加密解密
-
-
+demo见：D:\Github\Storage\python\文件操作\文件内容加密\RSA_example.py
 
 ## 9、异常
-
+demo见：D:\Github\Storage\python\study\exception
 
 ## 10、文件读写
+demo见：D:\Github\Storage\python\文件操作
 
 ## 11、提示弹框
 需要安装pywin32模块，pip install pywin32。不推荐，麻烦，还不能复制粘贴。
@@ -278,3 +278,8 @@ Python的元组与列表类似，元组一旦创建，元组中的数据一旦�
 元组中可以包含任何数据类型，也可以包含另一个元组，如：T=（1,2,3，('a','b')）
 
 空元组（没有元素的元组）：T=（），含1个元素的元组：T=（1，），注意有逗号,多个元素的元组：T=（1,2,3）
+
+## 29、获取当前函数的名称
+Python 没有像 C 语言中的 __FUNCTION__ 这样的宏
+
+

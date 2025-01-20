@@ -13,10 +13,9 @@ https://www.xmwav.com/ （推荐，缺点是歌曲少）
 ## 3、FLAC无损音乐
 https://www.fangpi.net/ （下载的是mp3）
 https://tools.liumingye.cn/music/#/artist/kAO4 （推荐）
-https://thewind.xyz/
 http://ayy.ayxhk.com（不推荐）
-https://music.y444.cn/#/?ifxdh
-http://music.jsososo.com/
+https://music.y444.cn/#/?ifxdh（无法访问了）
+http://music.jsososo.com/（无法访问了）
 另外一个差些：http://gequdaquan.net/gqss/
 
 ## 4、

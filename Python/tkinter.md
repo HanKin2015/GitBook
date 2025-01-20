@@ -157,3 +157,16 @@ pyinstaller -F -w copy_tool.py D:\Github\Storage\python\libary\entrywithplacehol
 使用pyqt5编写的程序也会存在这个问题，后面在https://blog.csdn.net/qq_47452807/article/details/124233469网址发现人家为啥能直接给出错误信息，以为是windows的错误信息服务没有打开，发现按照修改了还是不行，win7和win10都试过。https://jingyan.baidu.com/article/fc07f9895d0a2512ffe51927.html
 
 还是老老实实通过去掉w参数进行排查吧。
+
+## 12、窗口置顶
+确保窗口在最上层显示可以通过设置窗口的属性来实现。你可以使用 attributes 方法来设置窗口的置顶属性。
+```
+root = tk.Tk()
+root.withdraw()  # 隐藏主窗口
+
+# 设置窗口为置顶
+root.attributes('-topmost', True)
+
+# 销毁主窗口
+root.destroy()
+```
