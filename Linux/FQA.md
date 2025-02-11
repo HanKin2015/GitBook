@@ -321,7 +321,14 @@ unalias rm
 
 发现被人写在了/etc/profile中，需要删除对应的行
 
-## 21、时间不匹配
+## 21、dmesg -wT显示的时间和date命令显示的时间不匹配
+问题原因：dmesg -T 时间戳不精确
+解决方案：重启主机或者更换方式查看系统日志/var/log/messages
+查看当前系统的时区设置：date -R 或者 cat /etc/timezone
+查看硬件时间：hwclock
+同步硬件时间和系统时间：sudo hwclock --systohc
+检查NTP服务的配置和状态：timedatectl status
+
 ```
 [Tue Jun 13 16:13:30 2023] usb 2-3.2: USB disconnect, device number 96
 [Tue Jun 13 16:13:30 2023] usb 2-3.2.2: USB disconnect, device number 97

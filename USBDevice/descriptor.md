@@ -284,7 +284,51 @@ https://blog.csdn.net/u012028275/article/details/109276309
 
 主机端只能在成功取得设备限定描述符(Device Qualifier Descriptor)之后，才能请求其他速度配置(other_speed_configuration)描述符。
 
+## 7、二进制设备对象存储描述符BOS Descriptor
 
+### 7-1、简介
+二进制设备对象存储描述符(Binary Device Object Store Descriptor)，简写成BOS描述符(BOS Descriptor)。
+
+BOS描述符(BOS Descriptor)是用于存储特定某项技术或设备功能信息的描述符，和设备功能描述符(Device Capability Descriptor)一起由Wireless Universal Serial Bus Specification Revision 1.0规范引入，之后在USB 2.0 ECN: Link Power Management (LPM) 、USB3.x Specification、Microsoft OS 2.0 Descriptors Specification 等协议规范都加入了定义。
+
+BOS描述符(BOS Descriptor)定义了一个与配置描述符(Configuration Descriptor)类似的根描述符(root descriptor)，是一个或多个设备功能描述符(Device Capability Descriptor)的基础描述符。主机端通过BOS描述符的wTotalLength字段获取整个BOS描述符集的大小，再通过这个大小来获取完整的描述符集。
+
+主机使用GetDescriptor()请求获取BOS描述符(BOS Descriptor)。主机端不能单独读取单个的设备功能描述符(Device Capability Descriptor)，只能通过GetDescriptor()请求获取BOS描述符(BOS Descriptor)并通过wTotalLength字段得到长度来读取整个描述符集。
+
+在USB 2.0 ECN: Link Power Management (LPM)中定义，标准usb 2.0设备描述符(Device Descriptor)中bcdUSB字段的值，用于指示设备支持读取BOS描述符(即GetDescriptor（BOS）)的请求。支持BOS描述符的设备的bcdUSB值必须是0201H或更大的值。 另外，Microsoft OS 2.0 Descriptors Specification中定义，设备描述符(Device Descriptor)中的USB版本必须是usb 2.1及更高版本。
+
+bLength以字节为单位的描述符大小 (0x05)。
+bDescriptorTypeBOS描述符类型，为BOS(0x0F)。
+wTotalLength 此描述符及其所有子描述符的总长度。主机端通过BOS描述符的wTotalLength字段获取整个BOS描述符集的大小，再通过这个大小来获取完整的描述符集。
+bNumDeviceCaps 在BOS中独立的设备功能描述符(Device Capability Descriptor)数量。
+
+详细参考：https://blog.csdn.net/u012028275/article/details/109953472
+
+### 7-2、进一步理解
+BOS 描述符（Binary Object Store Descriptor）是 USB 设备中的一个可选描述符，用于标识设备中存储的二进制对象（Binary Objects）。这些二进制对象可以是固件、配置数据或其他设备相关的数据。BOS 描述符的作用是告诉主机设备中存在哪些二进制对象，以及如何访问它们。
+```
+typedef struct {
+    uint8_t  bLength;          // 描述符的总长度
+    uint8_t  bDescriptorType; // 描述符类型（BOS 描述符类型为 0x0F）
+    uint16_t wTotalLength;    // 所有 BOS 描述符的总长度（包括 BOS 描述符本身和后续的 BOS 元素描述符）
+    uint8_t  bNumDeviceCaps;   // 设备功能的数量（即后续 BOS 元素描述符的数量）
+    // 后续是 bNumDeviceCaps 个 BOS 元素描述符
+} BOS_DESCRIPTOR;
+```
+
+根据USB规范的官方定义，BOS描述符并不是USB 2.1版本引入的，而是USB 3.0及以上版本设备所特有的。USB 2.1版本主要改进了低速和全速设备的性能，以及引入了新的充电检测和电池充电规范，但并未包含BOS描述符的相关内容。
+
+因此，只有符合USB 3.0及以上版本规范的设备才会包含BOS描述符。BOS描述符的引入是为了支持USB 3.0新增的功能，如设备固件更新（DFU）和电源交付（PD）。这些功能在USB 2.1版本中并不存在，因此BOS描述符也是USB 3.0版本特有的。
+
+### 7-3、跳过BOS描述符查询
+注册表位置：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\0C4564AF2925
+其中0C4564AF是设备硬件ID，2925是设备描述符中的bcdDevice，用于标识USB当前产品的固件版本号，在Windows中生成的硬件ID中为REV，如USB\VID_12D1&PID_3A07&REV_0024。
+然后在当前路径下可以添加osvc、SkipBOSDescriptorQuery、SkipContainerIdQuery等二进制值，其中：
+osvc 是 "Operating System Vendor Class" 的缩写，用于标识设备的操作系统供应商类。
+SkipBOSDescriptorQuery 系统将跳过对该设备的 BOS 描述符的查询。这可能用于优化性能，或者处理某些不支持 BOS 描述符的设备。
+SkipContainerIdQuery 系统将跳过对该设备的 ContainerId 的查询。这可能用于优化性能，或者处理某些不需要 ContainerId 查询的设备。
+
+二进制值示例为01 00 00 00，ContainerId 是一个全局唯一标识符（GUID），用于标识 USB 设备的容器。这个容器可以是 USB 集线器、设备或其他类型的连接点。ContainerId 的主要作用是帮助操作系统识别和管理连接到计算机的 USB 设备，尤其是在多个设备连接到同一 USB 控制器时。
 
 
 

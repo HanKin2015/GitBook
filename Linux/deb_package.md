@@ -485,6 +485,7 @@ control文件中Architecture: all表示这个包适用于所有架构。
 
 安装包生成的文件无法被普通用户删除，会报错：是否删除有写保护的普通文件？解铃还须系铃人！
 demo见：D:\Github\Storage\linux\deb\hello_deb
+成品见：D:\Github\Storage\linux\deb\device-helper-uos.deb
 
 ## 11、dpkg --print-architecture和arch命令
 dpkg --print-architecture：这个命令是Debian包管理系统的一部分，它返回的是dpkg和apt用来管理和安装软件包的架构名称。这个命令的结果可能会受到多架构设置的影响，如果你的系统支持安装多个架构的软件包，那么dpkg --print-architecture返回的将是主架构的名称。

@@ -193,3 +193,19 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDe
 https://blog.csdn.net/songyi160/article/details/51612716
 
 目前的暴力行为删除大文件。
+
+## 24、切换主题
+工具-》选项-》环境-》常规-》颜色主题
+
+## 25、安装VS2019后编译内核模式驱动失败
+奇怪的现象有安装的物理机环境编译正常，但是另外一个环境在已安装了vs2010和vs2015基础上再安装了vs2019，编译失败。
+
+物理机报错：A WDK corresponding to target version '10.0.19041.0' was not found. Please install this WDK version before building.
+但是WDK确实安装了，安装的版本是10.0.19041.685。解决方案是修改Windows SDK版本为10.0.19041.0，默认写着“10.0（最新安装的版本）”。
+
+另外一个环境的项目属性页面和物理机的不一样，看着像是vs2015的界面，根本没有设置Windows SDK版本选项，编译出现大量的报错。最终发现原因是安装的vs2015软件给冲突了，卸载了Windows Driver Kit - Windows 10.0.14393.795软件后，vs2019的项目属性页面就变成vs2019的界面了，可以设置Windows SDK版本了。然鹅平台工具集却无法设置成WindowsKernelModeDriver10.0了，即使已经安装了10.0.19041.685，需要把10.0.19041.685卸载后重新安装解决。
+
+
+
+
+

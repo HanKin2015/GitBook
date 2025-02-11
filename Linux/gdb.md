@@ -15,6 +15,7 @@ p(print) x: x是变量名，表示打印变量x的值
 s: set设置变量值
 wh: 查看代码位置
 n(next): 表示执行下一步
+info line: 查看函数对应的行数
 ```
 bt			查看堆栈
 info thread 查看线程
@@ -1227,3 +1228,53 @@ $1 = 1
 $2 = 2
 ```
 注意，如果执行结果不是以上的1、2，则需要重新close和open
+
+## 31、使用info line查看函数对应的行数
+```
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x0000000000400646 <+0>:     push   %rbp
+   0x0000000000400647 <+1>:     mov    %rsp,%rbp
+   0x000000000040064a <+4>:     sub    $0x20,%rsp
+   0x000000000040064e <+8>:     movq   $0x400768,-0x18(%rbp)
+   0x0000000000400656 <+16>:    movq   $0x4,-0x10(%rbp)
+   0x000000000040065e <+24>:    mov    $0x400776,%esi
+   0x0000000000400663 <+29>:    mov    $0x400778,%edi
+   0x0000000000400668 <+34>:    callq  0x400520 <fopen@plt>
+   0x000000000040066d <+39>:    mov    %rax,-0x8(%rbp)
+   0x0000000000400671 <+43>:    cmpq   $0x0,-0x8(%rbp)
+   0x0000000000400676 <+48>:    jne    0x400689 <main+67>
+   0x0000000000400678 <+50>:    mov    $0x400783,%edi
+   0x000000000040067d <+55>:    callq  0x400530 <perror@plt>
+   0x0000000000400682 <+60>:    mov    $0x1,%eax
+   0x0000000000400687 <+65>:    jmp    0x4006d5 <main+143>
+   0x0000000000400689 <+67>:    mov    -0x10(%rbp),%rax
+   0x000000000040068d <+71>:    mov    %eax,%esi
+   0x000000000040068f <+73>:    mov    -0x18(%rbp),%rdx
+   0x0000000000400693 <+77>:    mov    -0x8(%rbp),%rax
+   0x0000000000400697 <+81>:    mov    %rdx,%rcx
+   0x000000000040069a <+84>:    mov    %esi,%edx
+   0x000000000040069c <+86>:    mov    $0x400796,%esi
+   0x00000000004006a1 <+91>:    mov    %rax,%rdi
+   0x00000000004006a4 <+94>:    mov    $0x0,%eax
+   0x00000000004006a9 <+99>:    callq  0x400510 <fprintf@plt>
+   0x00000000004006ae <+104>:   mov    -0x8(%rbp),%rax
+   0x00000000004006b2 <+108>:   mov    %rax,%rdi
+   0x00000000004006b5 <+111>:   callq  0x4004e0 <fclose@plt>
+   0x00000000004006ba <+116>:   mov    -0x10(%rbp),%rax
+   0x00000000004006be <+120>:   mov    %rax,%rsi
+   0x00000000004006c1 <+123>:   mov    $0x4007a0,%edi
+   0x00000000004006c6 <+128>:   mov    $0x0,%eax
+   0x00000000004006cb <+133>:   callq  0x4004f0 <printf@plt>
+   0x00000000004006d0 <+138>:   mov    $0x0,%eax
+   0x00000000004006d5 <+143>:   leaveq
+   0x00000000004006d6 <+144>:   retq
+End of assembler dump.
+(gdb) info line fopen
+No line number information available for address 0x400520 <fopen@plt>
+(gdb) info line main
+Line 3 of "i.c" starts at address 0x400646 <main> and ends at 0x40064e <main+8>.
+(gdb) info line 0x400689
+Function "0x400689" not defined.
+(gdb) q
+```

@@ -45,6 +45,8 @@ NAT模式：在NAT模式下，虚拟机可以访问主机所在的局域网和�
 因此需要设置成桥接模式即可，这样任何主机都能进行访问（可以通过ssh命令连接），记得安装ssh，并设置root可连接。
 所以就会出现一种情况，桥接模式有自己的独立ip地址，并且能ping通网段。也能ping通其他ip地址，然后却出现了火狐浏览器打不开网页的情况，排查了半天以为是代理问题，然鹅切换到NAT模式就能解决了。
 
+uos虚拟机：桥接模式+复制物理机网络状态（注意重启虚拟机不生效，需要先关机再开机才行）
+
 ## 5、虚拟机无法全屏问题
 不确认是不是需要安装VMware Tools，反正可以先安装，下载完成后需要使用命令进行安装。
 从磁盘中拖出VMwareTools.tar.gz，解压，执行vmware-install.pl脚本即可，一直回车默认安装即可。
@@ -52,8 +54,8 @@ NAT模式：在NAT模式下，虚拟机可以访问主机所在的局域网和�
 依然无法全屏原因居然是分辨率设置不对，设置正确的分辨率即可。
 
 ## 6、虚拟机和主机之间复制粘贴
-设置-》选项-》客户机隔离是会一直是灰色的不能点击。
-只需要安装：apt install open-vm-tools-desktop即可，需要重启虚拟机。
+虚拟机设置-》选项-》客户机隔离
+如果遇到一直是灰色的不能点击（即关机状态下），则只需要安装：apt install open-vm-tools-desktop即可，需要重启虚拟机。
 
 ## 7、虚拟机使用的此版本VMware Workstation不支持的硬件版本
 很奇怪，重装Windows系统后这个位置变成了19，当前最新版本才17。
@@ -71,6 +73,15 @@ NAT模式：在NAT模式下，虚拟机可以访问主机所在的局域网和�
 ## 10、另一个程序已锁定文件的一部分，进程无法访问
 删除报错的vmdk文件夹即可，只需要留下vmk文件夹就行，数据并不会丢失。可能是之前挂起或者物理机被重启后出现的问题。
 
+## 7、UOS虚拟机配置环境
+- 安装UOS操作系统：选择其他虚拟机类型，按照推荐安装会失败，原因是内存分配太少，默认才256MB，改为4GB就能正常安装了
+- 安装deb软件报错签名问题：安全中心-安全工具-应用安全-将仅签名应用改为任意应用
+- 进入开发者模式：安装develop_tools.deb即可
+- vmware中虚拟机拥有独立ip地址：将NAT模式改为桥接模式+复制物理机网络状态（注意重启虚拟机不生效，需要先关机再开机才行）
+- 配置ssh（默认已安装ssh）：systemctl start ssh，修改/etc/ssh/sshd_config添加PermitRootLogin yes允许root登录
+注意：报错root@12.22.16.33: Permission denied (publickey,password).，配置完PermitRootLogin yes后报错root@12.22.16.33: Permission denied (publickey).，原因是在本地计算机上不存在SSH密钥对（私钥和公钥）。通常，这些文件位于~/.ssh/目录下，文件名可能是id_rsa（私钥）和id_rsa.pub（公钥）。使用ssh-keygen -t rsa命令创建后即可。
+- USB设备映射：虚拟机设置-硬件-添加-USB控制器
+- 复制粘贴问题：apt autoremove open-vm-tools、apt install open-vm-tools、apt install open-vm-tools-desktop重启虚拟机即可（默认安装的open-vm-tools不匹配需要卸载）
 
 
 

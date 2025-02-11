@@ -7,6 +7,8 @@
 ## 1、统信软件技术有限公司（UnionTech Software Technology Co., Ltd.）
 统信软件技术有限公司（以下简称：统信软件）是以“打造中国操作系统创新生态”为使命的国内基础软件公司，由操作系统厂家于2019年联合成立。公司专注于操作系统等基础软件的研发与服务，致力于为不同行业的用户提供操作系统产品与解决方案。统信软件总部设立在北京，同时在武汉、上海、广州、南京等地设立了地方技术支持机构、研发中心和通用软硬件适配中心。作为国内操作系统研发团队，统信软件拥有操作系统研发、行业定制、国际化、迁移和适配、交互设计、咨询服务等多方面专业人才，能够满足不同用户和应用场景对操作系统产品的广泛需求。基于国产芯片架构的操作系统产品已经和龙芯、飞腾、申威、鲲鹏、兆芯、海光、海思麒麟等芯片厂商开展了广泛和深入的合作，与国内各主流整机厂商，以及数百家国内外软件厂商展开了全方位的兼容性适配工作。
 
+操作系统镜像下载：https://cdimage-download.chinauos.com/desktop-professional/
+
 ## 2、查看系统信息
 ```
 root@hankin-PC:~# lsb_release -a
@@ -101,17 +103,24 @@ root@hankin-PC:/home/hankin/usbip_driver# ls -l *.ko
 deb https://professional-packages.chinauos.com/desktop-professional eagle main contrib non-free
 #deb-src https://professional-packages.chinauos.com/desktop-professional eagle main contrib non-free
 ```
+参数解释：网址需要能访问打开，eagle表示一个目录，在网址的dists目录下，然后eagle目录下会存在main、contrib、non-free三个目录。
+注意在eagle目录下一般还需要存在InRelease和Release文件，否则使用apt update命令会报错“仓库https://professional-packages.chinauos.com/desktop-professional eagle Release没有Release文件”
+
 apt update
 
-发现有其他文件进行更新：
+发现存在其他网址访问获取软件更新列表：
 ```
 /etc/apt/sources.list.d/printer.list
 /etc/apt/sources.list.d/appstore.list
+/etc/apt/sources.list.d/driver.list
+/etc/apt/sources.list.d/security.list
 ```
 要么进行配置修改，要么就进行注释。
 
-## 6、linux的主机名
+另外UOS一般可以使用debian镜像源和deepin或者ubuntu镜像源，参考https://zhuanlan.zhihu.com/p/644769450和https://bbs.chinauos.com/zh/post/4196，实测deepin镜像源使用正常。
+[欢迎访问网易开源镜像站](http://mirrors.163.com/)
 
+## 6、linux的主机名
 有时候默认主机名过于长，操作很别扭。
 
 $之前@之后是主机名。
@@ -153,3 +162,10 @@ systemd
 ```
 重启计算机以使更改生效。
 ubuntu系统亲测有效。
+
+
+
+
+
+
+

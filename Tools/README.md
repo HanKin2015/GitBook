@@ -33,6 +33,7 @@ Saturday 星期六
 ## 1、md5工具
 Linux：md5sum
 Windows：certutil -hashfile {filename} {hash_algorithm}
+
 其中hash_algorithm可以指定MD5、SHA1、SHA256等
 certutil：
 
@@ -69,7 +70,6 @@ FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 另一个工具下载推荐网站：http://www.7201.cn/
 
 ## 4、外设工具箱
-
 | name        | desc                               | url                                                          |
 | ----------- | ---------------------------------- | ------------------------------------------------------------ |
 | amcap       | 一款小巧的视频捕获软件             | http://noeld.com/programs.asp?cat=video#amcap                |
@@ -180,6 +180,9 @@ https://mp.weixin.qq.com/s/QrMpX2DuGoB62gVKBbJBQA
 [一个工具箱](http://www.atoolbox.net/)
 [RegCool](https://kurtzimmermann.com/index_e.html)
 [](https://openi.cn/)
+[数字人-闪剪](https://shanjian.tv/)
+[CHATGPT汇总](https://openrouter.ai/)
+[文件格式转换](https://www.aconvert.com/cn/)
 
 ## 12、新技巧之split.exe工具
 split.exe工具可以分隔文件，可以直接在git bash窗口使用，拿一个jpg图片为例。
