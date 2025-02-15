@@ -89,3 +89,5 @@ API 模式：如果需要对打印机进行高级控制或开发特定的打印�
 朋友的一台hp 1020打印机，最近出现了一个奇怪的故障现象，无论打印什么内容，需要打印多份的时候，都只会打印一份；经过多次尝试摸索，排除了驱动、软件等原因，最终导致的原因是系统权限问题！
 https://jingyan.baidu.com/article/ca41422ff7c11a5fae99edf5.html
 
+## 8、UOS技术支持案例库
+打印机IP地址过滤：https://faq.uniontech.com/desktop/peripheral/8b6b/146d

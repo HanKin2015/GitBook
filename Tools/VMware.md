@@ -76,13 +76,26 @@ uos虚拟机：桥接模式+复制物理机网络状态（注意重启虚拟机�
 ## 7、UOS虚拟机配置环境
 - 安装UOS操作系统：选择其他虚拟机类型，按照推荐安装会失败，原因是内存分配太少，默认才256MB，改为4GB就能正常安装了
 - 安装deb软件报错签名问题：安全中心-安全工具-应用安全-将仅签名应用改为任意应用
-- 进入开发者模式：安装develop_tools.deb即可
+- 进入开发者模式：
+```
+#! /bin/bash
+
+if [ ! -d /var/lib/deepin/developer-mode/ ]
+then
+  mkdir -p /var/lib/deepin/developer-mode/
+fi
+chattr -i /var/lib/deepin/developer-mode/enabled
+chattr -e /var/lib/deepin/developer-mode/enabled
+chattr -u /var/lib/deepin/developer-mode/enabled
+echo -n -E '1' | tee /var/lib/deepin/developer-mode/enabled
+chattr +i /var/lib/deepin/developer-mode/enabled
+```
 - vmware中虚拟机拥有独立ip地址：将NAT模式改为桥接模式+复制物理机网络状态（注意重启虚拟机不生效，需要先关机再开机才行）
 - 配置ssh（默认已安装ssh）：systemctl start ssh，修改/etc/ssh/sshd_config添加PermitRootLogin yes允许root登录
 注意：报错root@12.22.16.33: Permission denied (publickey,password).，配置完PermitRootLogin yes后报错root@12.22.16.33: Permission denied (publickey).，原因是在本地计算机上不存在SSH密钥对（私钥和公钥）。通常，这些文件位于~/.ssh/目录下，文件名可能是id_rsa（私钥）和id_rsa.pub（公钥）。使用ssh-keygen -t rsa命令创建后即可。
 - USB设备映射：虚拟机设置-硬件-添加-USB控制器
 - 复制粘贴问题：apt autoremove open-vm-tools、apt install open-vm-tools、apt install open-vm-tools-desktop重启虚拟机即可（默认安装的open-vm-tools不匹配需要卸载）
-
+- 配置ll命令：在/etc/bash.bashrc文件中添加alias ll="ls -laF"
 
 
 

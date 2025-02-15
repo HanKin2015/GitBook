@@ -1,11 +1,22 @@
 # linux终端terminal个性化配置
 本文涵盖bashrc文件、alias个性化设置、vimrc配置、ssh配置等等。
 
-## 1、多个配置文件路径
+## 1、多个配置文件路径及介绍
 ~/.profile
-~/.bashrc
 ~/.viminfo
-修改完毕后记得使用source命令是文件生效。
+
+/etc/profile:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从/etc/profile.d目录的配置文件中搜集shell的设置.此文件默认调用/etc/bash.bashrc文件。
+但是我实测发现该文件并不会对每个用户生效，只对root用户生效，如添加alias命令，发现修改/etc/bash.bashrc文件是对每个用户生效。
+
+/etc/bashrc:为每一个运行bash shell的用户执行此文件.当bashshell被打开时,该文件被读取.
+
+~/.bash_profile/~/.bash_login/~/.profile:用户登录执行，source立即生效。每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.
+
+~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者～。
+
+~/.bash_logout:当每次退出系统(退出bashshell)时,执行该文件.
+
+可以明白的是：针对于用户的配置，应该将配置信息写入~/.bashrc文件。(只对当前用户有效，重新打开的如果不是当前用户的terminal当然没有效果！所以lz一般设置两次，一个root用户，一个当前普通用户)
 
 ## 2、个性化的显示PS1
 在/root/.bashrc文件末尾添加下面：
@@ -58,18 +69,8 @@ source xxxx/git-prompt.sh
 export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
 ```
 
-## 3、配置文件介绍
-/etc/profile:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从/etc/profile.d目录的配置文件中搜集shell的设置.此文件默认调用/etc/bash.bashrc文件。
-
-/etc/bashrc:为每一个运行bash shell的用户执行此文件.当bashshell被打开时,该文件被读取.
-
-~/.bash_profile/~/.bash_login/~/.profile:用户登录执行，source立即生效。每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.
-
-~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者～。
-
-~/.bash_logout:当每次退出系统(退出bashshell)时,执行该文件.
-
-可以明白的是：针对于用户的配置，应该将配置信息写入~/.bashrc文件。(只对当前用户有效，重新打开的如果不是当前用户的terminal当然没有效果！所以lz一般设置两次，一个root用户，一个当前普通用户)
+## 3、欢迎界面
+D:\Github\GitBook\gitbook\Linux\motd.md
 
 ## 4、终端terminal 补全设置为大小写不敏感
 编辑~/.inputrc（没有的话，就新建一个），在最后加一行： 
@@ -338,6 +339,5 @@ root权限 vi编辑/etc/profile文件在最后加上一行语句
 - $PWD和\\W区别：前者显示完整路径，后者只显示当前的路径，及文件夹名。注意使用\\w可以显示当前完整的工作路径
 - 其中\u显示当前用户账号，\h显示当前主机名，\w显示当前完整工作路径（**\W显示当前工作路径**），\\$显示对应的符号。
 
-## 12、欢迎界面
-D:\Github\GitBook\gitbook\Linux\motd.md
+
 

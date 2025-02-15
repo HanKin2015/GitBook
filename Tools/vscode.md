@@ -4,9 +4,13 @@
 outline：大纲，在视图窗口中，列举函数列表
 timeline：git上库日志
 解决程序无法输入：打开文件 -> 首选项 -> 设置，在上方的搜索框里输入run in terminal，勾选此项设置
+
 显示空格和tab键：
-打开setting,在搜索框中输入renderControlCharacters,选中勾选框,即可显示tab.
-在搜索框中输入renderWhitespace,选择all,即可显示空格.
+打开setting,在搜索框中输入render Control Characters,选中勾选框,即可显示tab.
+在搜索框中输入render Whitespace,选择all,即可显示空格.
+
+tab键改空格：勾选editor.insert Spaces和editor.tab Size设置tab键多少个空格
+
 主题：ctrl+shift+p搜索颜色主题，选择Dark（Visual Studio）（推荐）
 
 ## 1、sublime工具缺点
@@ -18,10 +22,17 @@ timeline：git上库日志
 
 vscode还有一个强大的优点：可以打开巨大的文本文件。
 
-## 2、VS Code User和System版区别
-User版本无法在系统分区(盘) 创建默认文件夹Microsoft VS Code，可见权限不足，解决方案是提前在该目录自建文件夹命名。对于System版无此问题，可next step到底。
+## 2、Visual Studio Code(VS Code) User版和System版区别
+安装包下载地址：https://code.visualstudio.com/Download
 
-## 3、VS Code insider和VS Code区别
+它们之间的主要区别在于安装方式、权限和适用场景。
+User版本无法在系统分区(盘) 创建默认文件夹Microsoft VS Code，可见权限不足，解决方案是提前在该目录自建文件夹命名。对于System版无此问题，可next step到底。
+User 版通常安装在用户的主目录下，%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code，用户可以在没有管理员权限的情况下安装和使用。
+System 版通常安装在系统的公共目录中，C:\Program Files\Microsoft VS Code，需要管理员权限进行安装和更新。
+
+现在最新版本版本不再区分，默认下载User版本。
+
+## 3、Visual Studio Code(VS Code) insider版和stable版区别
 前者是内测版，一般每个工作日都会有更新，后者是正式版。
 
 ## 4、软件下载
@@ -91,6 +102,8 @@ run code插件直接运行
 - PlantUML
 - Remote - SSH
 
+vscode-server安装是同样的方法，一个可以直接在vscode-app上面，一个可以直接在本地vscode通过ssh连接后Install from VSIX。
+
 ## 7、输出窗口中文乱码
 由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 
@@ -114,6 +127,8 @@ https://amahv.github.io/2020/06/24/vscode-shu-chu-chuang-kou-zhong-wen-luan-ma/#
 }
 ```
 注意：不是automation shell。
+
+快捷键：ctrl+~
 
 ## 9、解决vscode上编辑gb2312编码的源码导致乱码的问题
 痛点1：默认情况下vscode是用utf-8打开文件，因此我们打开一个gb2312编码的文件会是乱码的，必须手动调整用gb2312编码打开。
@@ -140,6 +155,11 @@ C:\Users\Administrator\.vscode\extensions\ms-vscode-remote.remote-ssh-0.66.0
 注意版本的一致性，只要相差不大就行，如果一个是user版本一个是system版本就可能有问题，会出现安装成功，但是无法使用问题。
 
 结果下载的vsix插件报错不匹配安装，下载了稍早的历史版本也不行（找不到更早的了），无奈试试更新vscode试试，然后就成功了。
+https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode-remote/vsextensions/remote-ssh/0.107.2023102615/vspackage
+如果要其他版本的话，可以把中间的版本号（0.107.2023102615）替换掉就行了，亲测有效。
+
+Open-SSH平替插件
+注意：Arm架构，Centos系统编译容器，由于GCC版本过低，缺少依赖，无法使用VScode客户端，只能使用VScode-Web端。
 
 ### 10-3、配置远程连接
 - 左侧导航栏电脑图标（新版本的vscode还变样了，不再是电脑图标，显示在左下角，勾选Connect to Host）
@@ -175,6 +195,7 @@ a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换
 b.用记事本打开目录下的settings.json，修改里面的对应配置可以解决对应的问题，重置的话全部删除就好了
 
 ## 12、关于个性化配置
+文件位置：C:\Users\User\AppData\Roaming\Code\User\settings.json
 ```
 {
     "workbench.startupEditor": "newUntitledFile",
@@ -319,3 +340,25 @@ Ctrl+光标点击 选择多个编辑位点
 
 两种模式的切换
 使用Shift+Ctrl+p快捷键调用查询输入栏，输入“cursor”，列表中会出现“切换多行修改键”这个选项。选择这个选项就可以在两种模式下切换。
+
+## 16、vscode-server实现代码跳转
+已安装cpptools和C/C++ Extension Pack插件但是无法实现代码跳转，但是同事的环境正常跳转，代码无法跳转很痛苦，并且代码高亮功能也失效。
+- 尝试过更换vscode版本（版本号、system->user）
+- 各种百度、google
+- 其他插件禁用以及更换插件版本
+
+最终在一台全新物理机上面安装vscode后发现代码跳转正常，并且代码高亮正常。发现vscode-server上面已安装的好多插件都生效了，如git。发现代码跳转是一个叫做IntelliSense失效的，翻译过来叫做代码分析，在vscode的下方呈{}形式。
+
+cpptools跳转插件：https://github.com/microsoft/vscode-cpptools/releases
+通过物理机对比发现可能是配置文件C:\Users\User\AppData\Roaming\Code\User\settings.json不同导致，修改完后依然存在问题，后面猜测可能是本地安装的插件冲突导致vscode-server中的众多插件失效，然后果断删除本地插件安装包C:\Users\User\.vscode\extensions，因为之前折腾过其他版本vscode的插件。插件删除后代码跳转功能正常。
+
+更换平替插件：https://blog.csdn.net/WhereYouSink/article/details/128253034，虽然没试，估计也不行。
+
+## 17、vscode ssh一直反复需要输入密码且最后显示连接失败
+问题原因是服务器上面有一个加锁的文件，即vscode-server压缩包自动下载了，但是并没有安装配置，需要手动安装配置后方可连接正常。
+
+插件安装位置：/root/.vscode-server/extensions
+另一个插件位置：/root/.vscode-server/bin/92da9481c0904c6adfe372c12da3b7748d74bdcb/extensions
+软件位置：/root/.vscode-server/bin/92da9481c0904c6adfe372c12da3b7748d74bdcb/bin/code-server
+
+
