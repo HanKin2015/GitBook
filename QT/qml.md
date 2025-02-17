@@ -1,16 +1,12 @@
 # 学习QML
 
 ## 1、简介
-声明式脚本语言，称为 QML（Qt Meta Language 或者 Qt Modeling Language），作为 C++ 语言的一种替代。
-Qt Quick 就是使用 QML 构建的一套类库。 QML 是一种基于 JavaScript 的声明式语言。
-同 C++ 并列成为 Qt 的首选编程语言。
-
-一个 QML 文档分为 import 和 declaration 两部分。
+QML（Qt Meta-Object Language）可以帮助您创建现代的用户界面。QML 是一种声明式语言，专门用于设计用户界面，结合 C++ 可以实现强大的功能
 
 qsTr()函数就是 QObject::tr()函数的 QML 版本，用于返回可翻译的字符串。
 
 ## 2、简单hello world例子
-
+直接在Qt Createor新建项目->Qt Quick Application即可运行。
 ```main.cpp
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>

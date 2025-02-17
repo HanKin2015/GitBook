@@ -16,10 +16,49 @@ Docker 是一个[开源](https://baike.baidu.com/item/开源/246339)的应用容
 拷贝文件或者文件夹导出docker：docker cp 86d66188df09:/root/compile/qemu/qemu-5.0.0/x86_64-softmmu/qemu-system-x86_64 .
 拷贝文件或者文件夹进入docker：docker cp uvc_qemu.c 86d66188df09:/home/
 进入docker环境：docker attach 86d66188df09
+进入容器时，指定 -l 选项来启动一个登录 shell：docker exec -it <container_id> /bin/bash -l
+查看 Docker 版本：docker --version
+查看 Docker 运行状态：systemctl status docker
+
+### 镜像管理
+查看本地镜像：docker images
+拉取镜像：docker pull <image_name>
+删除镜像：docker rmi <image_id>
+构建镜像：docker build -t <image_name>:<tag> <path>
+
+### 容器管理
+运行容器：docker run <options> <image_name>
+查看正在运行的容器：docker ps
+查看所有容器（包括停止的）：docker ps -a
+停止容器：docker stop <container_id>
+启动已停止的容器：docker start <container_id>
+删除容器：docker rm <container_id>
+进入正在运行的容器：docker exec -it <container_id> /bin/bash
+
+### 网络管理
+查看 Docker 网络：docker network ls
+创建网络：docker network create <network_name>
+删除网络：docker network rm <network_name>
+
+### 数据管理
+查看 Docker 卷：docker volume ls
+创建卷：docker volume create <volume_name>
+删除卷：docker volume rm <volume_name>
+
+### Docker Compose
+如果您使用 Docker Compose 来管理多容器应用，以下是一些常用命令：
+启动服务：docker-compose up
+后台启动服务：docker-compose up -d
+停止服务：docker-compose down
+查看服务状态：docker-compose ps
+
+### 其他常用命令
+查看 Docker 日志：docker logs <container_id>
+查看 Docker 资源使用情况：docker stats
 
 https://mp.weixin.qq.com/s/801GmqZk-dP2q_ESpxf94A
 
-## 2、docker中容器和镜像的关系是什么
+## 3、docker中容器和镜像的关系是什么
 https://mp.weixin.qq.com/s/hVqn-KrUjAnH11qclet-DA
 
 - 镜像你可以把它看成Java中的类，而容器可以看做是类的实例化对象。

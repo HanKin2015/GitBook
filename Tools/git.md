@@ -368,6 +368,8 @@ git stash pop
 git stash list
 git stash -h
 
+stash和add的区别：add添加到本地仓库不会消失，stash添加到磁盘中，断电后会消失
+
 ## 10、Git 全局设置（必须）
 ```
 git config --global user.name "张三"
@@ -613,6 +615,25 @@ git reset commitId和 在分支上面git checkout commitId都不是想要的结�
 
 git checkout -b 新的分支名 原有的分支
 
+### 合并分支实操
+两个人修改了文件同一行代码（将master分支内容合并到个人分支）：
+```
+git checkout master
+git pull origin master
+git checkout <个人分支名>
+git merge master
+```
+如果这时候有冲突的时候，需要手动修改
+
+### 冲突文件内容
+7个向左的尖括号-起点
+7个向右的尖括号-终点
+7个等于号-隔开
+
+删除额外的备注内容（三行），选择合并的内容留下哪些，然后继续add。
+
+git branch -av 查看具体的分支内容
+
 ### 撤销某次提交记录
 git revert commitId
 
@@ -772,26 +793,18 @@ git stash pop | 恢复储藏的内容，即撤销
 
 备注：HEAD 当前分支别名
 
-## 20、stash和add的区别
-add添加到本地仓库，stash添加到磁盘中，断电后会消失
+## 20、拉代码时出现冲突但又不想处理冲突
+```
+git pull
+git add .
+git commit -m"临时处理冲突文件"
+git reset --hard 前面某一个commit
+git pull -f
+```
 
-## 21、代码冲突
-两个人修改了文件同一行代码
-
-git checkout master
-git pull origin master
-git checkout <个人分支名>
-git merge master
-如果这时候有冲突的时候，需要手动修改
-
-### 冲突文件内容
-7个向左的尖括号-起点
-7个向右的尖括号-终点
-7个等于号-隔开
-
-删除额外的备注内容（三行），选择合并的内容留下哪些，然后继续add。
-
-git branch -av 查看具体的分支内容
+## 21、更新本地分支同步远端提交
+切换到同名分支，直接git pull即可（不能同步可能存在冲突）
+可以使用git branch -vv查看分支对应的远端分支
 
 ## 22、将当前更改追加到某个commit上
 - git stash 保存工作空间的改动（如果新增文件则无需这步）
@@ -1647,40 +1660,27 @@ git clone git@code.hankin.org:DCCT/aCloud/repository.git
 git clone http://code.hankin.org/DCCT/aCloud/repository.git
 ```
 
-## 72、拉代码时出现冲突但又不想处理冲突
-```
-git pull
-git add .
-git commit -m"临时处理冲突文件"
-git reset --hard 前面某一个commit
-git pull -f
-```
+## 72、强大的git bash软件
 
-## 73、更新本地分支同步远端提交
-切换到同名分支，直接git pull即可（不能同步可能存在冲突）
-可以使用git branch -vv查看分支对应的远端分支
-
-## 74、强大的git bash软件
-
-### 74-1、功能一
+### 72-1、功能一
 git是程序员必需品，因此git bash也是必需的。
 
-### 74-2、功能二
+### 72-2、功能二
 git bash是一个不错的Linux终端，可以在Windows下畅所欲言的使用各种bash命令。
 
 这样就无需再去安装其他Linux终端，如。
 
-### 74-3、升级更新
+### 72-3、升级更新
 输入：git update-git-for-windows
 使用命令更新下载太慢。
 
 国内镜像站下载：https://github.com/waylau/git-for-win
 https://npm.taobao.org/mirrors/git-for-windows/
 
-### 74-4、中文界面配置
+### 72-4、中文界面配置
 右键-》Options-》Window-》UI language-》zh_CN
 
-### 74-5、git status显示中文
+### 72-5、git status显示中文
 原因：
 在默认设置下，中文文件名在工作区状态输出，中文名不能正确显示，而是显示为八进制的字符编码。
 
@@ -1692,9 +1692,9 @@ quotepath表示引用路径
 git bash 终端输入命令：
 git config --global core.quotepath false
 
-### 74-6、窗口输入字母异常
+### 72-6、窗口输入字母异常
 其实就是半角和全角的区别，快捷键是shift+space，我发现只有中文模式才能生效，英文模式没有效果。
 
-## 75、git pull和git fetch命令区别
+## 73、git pull和git fetch命令区别
 git fetch 用于从远程仓库获取最新的分支和提交，但不会自动合并或修改当前工作目录的内容。
 git pull 是 git fetch 和 git merge 的组合命令。

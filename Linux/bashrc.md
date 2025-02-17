@@ -6,13 +6,14 @@
 ~/.viminfo
 
 /etc/profile:此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行.并从/etc/profile.d目录的配置文件中搜集shell的设置.此文件默认调用/etc/bash.bashrc文件。
-但是我实测发现该文件并不会对每个用户生效，只对root用户生效，如添加alias命令，发现修改/etc/bash.bashrc文件是对每个用户生效。
+备注：但是我实测发现该文件并不会对每个用户生效，只对root用户生效，如添加alias命令，发现修改/etc/bash.bashrc文件是对每个用户生效。
 
 /etc/bashrc:为每一个运行bash shell的用户执行此文件.当bashshell被打开时,该文件被读取.
 
 ~/.bash_profile/~/.bash_login/~/.profile:用户登录执行，source立即生效。每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.
 
-~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者～。
+~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者。
+备注：使用docker环境，每次bash都会进入一个新的 shell 会话，/etc/profile 中的设置可能不会被加载。将别名添加到 ~/.bashrc即可。
 
 ~/.bash_logout:当每次退出系统(退出bashshell)时,执行该文件.
 
@@ -67,6 +68,23 @@ source xxxx/git-prompt.sh
 完全可以使用__git_ps1自带函数代替git_branch函数
 ```/root/.bashrc
 export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
+```
+
+实战配置(source /etc/profile 是为了颜色设置）：
+```
+alias ll="ls -laF"
+source /etc/profile
+
+function git_branch {
+   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+   if [ "${branch}" != "" ];then
+       if [ $branch == *"HEAD"* ];then
+           branch="`git rev-parse --short HEAD`"
+       fi
+       echo "($branch)"
+   fi
+}
+export PS1="\[\033]0;$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "
 ```
 
 ## 3、欢迎界面
