@@ -212,3 +212,8 @@ C:\Users\test>telnet 172.22.64.246 21
 C:\Users\test>telnet 172.22.64.246 8852
 成功，没有错误提示
 ```
+
+## 15、连接报错：由于代理服务器没有设置为完全访问所以文件夹将为只读
+参考：https://zhidao.baidu.com/question/449264017.html
+
+用任务管理器重启explorer进程即可。

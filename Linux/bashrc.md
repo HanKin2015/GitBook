@@ -10,7 +10,7 @@
 
 /etc/bashrc:为每一个运行bash shell的用户执行此文件.当bashshell被打开时,该文件被读取.
 
-~/.bash_profile/~/.bash_login/~/.profile:用户登录执行，source立即生效。每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.
+~/.bash_profile、~/.bash_login、~/.profile:用户登录执行，source立即生效。每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!默认情况下,他设置一些环境变量,执行用户的.bashrc文件.
 
 ~/.bashrc:每次打开新窗口时执行。该文件包含专用于你的bashshell的bash信息。与/etc/bashrc冲突则执行前者。
 备注：使用docker环境，每次bash都会进入一个新的 shell 会话，/etc/profile 中的设置可能不会被加载。将别名添加到 ~/.bashrc即可。
@@ -84,7 +84,8 @@ function git_branch {
        echo "($branch)"
    fi
 }
-export PS1="\[\033]0;$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "
+export PS1="\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "
+alias git_diff="git status . -uno | grep -E '\.c$|\.cpp$|\.h$|\.ts$'"
 ```
 
 ## 3、欢迎界面

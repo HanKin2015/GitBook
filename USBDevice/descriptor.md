@@ -322,7 +322,9 @@ typedef struct {
 
 ### 7-3、跳过BOS描述符查询
 注册表位置：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\0C4564AF2925
+
 其中0C4564AF是设备硬件ID，2925是设备描述符中的bcdDevice，用于标识USB当前产品的固件版本号，在Windows中生成的硬件ID中为REV，如USB\VID_12D1&PID_3A07&REV_0024。
+
 然后在当前路径下可以添加osvc、SkipBOSDescriptorQuery、SkipContainerIdQuery等二进制值，其中：
 osvc 是 "Operating System Vendor Class" 的缩写，用于标识设备的操作系统供应商类。
 SkipBOSDescriptorQuery 系统将跳过对该设备的 BOS 描述符的查询。这可能用于优化性能，或者处理某些不支持 BOS 描述符的设备。

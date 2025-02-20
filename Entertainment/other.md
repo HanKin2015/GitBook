@@ -88,3 +88,10 @@ https://bz.zzzmh.cn/index
 
 ## 10、书籍
 从小规划大学 电子版pdf
+
+## 11、手机
+荣耀畅玩50m 8GB+256GB 碧空蓝 双卡 全网通版 1899
+荣耀畅玩50m 6GB+128GB 碧空蓝 双卡 全网通版 1499
+Redmi 14R 5G 6GB+128GB 1499
+Redmi 14R 5G 8GB+256GB 1899
+

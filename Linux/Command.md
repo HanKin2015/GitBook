@@ -21,7 +21,6 @@ alias soff='sleep 5 && xset dpms force off'
 tracepath指令可以追踪数据到达目标主机的路由信息，同时还能够发现MTU值。它跟踪路径到目的地，沿着这条路径发现MTU。它使用UDP端口或一些随机端口。它类似于Traceroute，只是不需要超级用户特权，并且没有花哨的选项。tracepath 6很好地替代了tracerout 6和Linux错误队列应用程序的典型示例。tracepath的情况更糟，因为商用IP路由器在ICMP错误消息中没有返回足够的信息。
 
 ## 5、mount使用u盘
-
 - fdisk -l    查看存储信息（硬盘、u盘）
 - mount /dev/sdb /mnt（搞了一半天报错）
   - 不应该输入Disk那里的/dev/sdb，而应该输入Device那里的/dev/sdb4
@@ -611,5 +610,13 @@ PATH=$PATH:$HOME/bin:/sbin:/usr/bin:/usr/sbin
 
 ## 24、reverse-i-search 方式
 通过 “Ctrl + R” 快捷键，进入历史命令搜索模式，如下，输入目标命令的部分字符（第一个红框），会匹配到最近的历史命令（第二个红框），按 Enter 键就会执行匹配到的命令。如果匹配到的命令不是想要的命令，按住 ”Ctrl“ 键后，再按 “R" 键，可以查找上一个匹配的命令。
+
+## 25、ls命令中-F参数
+-F 参数用于在列出文件和目录时，给每个文件或目录添加一个特定的后缀，以便更容易区分它们的类型。具体来说，-F 参数的作用如下：
+- 目录：在目录名称后加上一个斜杠 /，例如 myfolder/。
+- 可执行文件：在可执行文件名称后加上一个星号 *，例如 myprogram*。
+- 符号链接：在符号链接名称后加上一个 @，例如 mylink@。
+- 套接字：在套接字文件名称后加上一个 =，例如 mysocket=。
+- FIFO（命名管道）：在 FIFO 文件名称后加上一个 |，例如 mypipe|。
 
 

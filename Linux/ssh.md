@@ -126,7 +126,9 @@ service firewalld stop
 service sshd restart
 /etc/init.d/ssh restart
 
-好奇怪，到底哪个是真的？
+在某些发行版中，SSH 服务可能被称为 sshd。
+检查 SSH 服务是否在开机时启动：sudo systemctl is-enabled ssh（如果返回 enabled，则表示 SSH 服务已设置为在开机时自动启动。）
+设置 SSH 服务在系统启动时自动启动：sudo systemctl enable ssh
 
 ## 8、ssh反映特别慢，但是网络没有问题的时怎么办
 vi sshd_config找到注释的useDNS yes，修改为如下，并取消注释

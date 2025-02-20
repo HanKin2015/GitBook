@@ -170,6 +170,30 @@ root@hankin:/var/lock# cat /sys/kernel/debug/usb/usbmon/3u | egrep "Ci|Co"
 ```
 亲测上面三种方式在xubuntu系统里面有效，但是在安卓8.1.0系统里面只有grep -E生效，其他方式行不通。但是发现egrep命令前面加入busybox命令也行得通，而grep "Ci\|Co"始终行不通。
 
+注意：.一定需要使用\转义字符，而|没有-E参数则需要使用\转义字符，有-E则不需要。
+```
+root@292d069d5401  ~/code/src(person-TD2024123000056)
+# git status . -uno | grep ".cpp$|.h$"
+
+root@292d069d5401  ~/code/src(person-TD2024123000056)
+# git status . -uno | grep ".cpp$\|.h$"
+        修改：     client/X11/client_msg.cpp
+        修改：     client/X11/client_msg.h
+        修改：     usbredir-0.7/install-sh
+
+root@292d069d5401  ~/code/src(person-TD2024123000056)
+# git status . -uno | grep -E ".cpp$|.h$"
+        修改：     client/X11/client_msg.cpp
+        修改：     client/X11/client_msg.h
+        修改：     usbredir-0.7/install-sh
+
+root@292d069d5401  ~/code/src(person-TD2024123000056)
+# git status . -uno | grep -E ".cpp$|\.h$"
+        修改：     client/X11/client_msg.cpp
+        修改：     client/X11/client_msg.h
+
+```
+
 ## 8、q参数
 注意：直接在终端执行不会有任何返回值，不要以为没有找到相关内容。
 ```

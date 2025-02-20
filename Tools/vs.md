@@ -205,7 +205,7 @@ https://blog.csdn.net/songyi160/article/details/51612716
 
 另外一个环境的项目属性页面和物理机的不一样，看着像是vs2015的界面，根本没有设置Windows SDK版本选项，编译出现大量的报错。最终发现原因是安装的vs2015软件给冲突了，卸载了Windows Driver Kit - Windows 10.0.14393.795软件后，vs2019的项目属性页面就变成vs2019的界面了，可以设置Windows SDK版本了。然鹅平台工具集却无法设置成WindowsKernelModeDriver10.0了，即使已经安装了10.0.19041.685，需要把10.0.19041.685卸载后重新安装解决。
 
-
+VS2019破解激活秘钥（网上查找）：BF8Y8-GN2QH-T84XB-QVY3B-RC4DF
 
 
 

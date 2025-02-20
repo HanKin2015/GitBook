@@ -78,21 +78,145 @@ bool MainWindow::sleep(unsigned int msec)
 }
 ```
 
+## 8、QAbstractButton
+在 Qt 框架中，QAbstractButton 是一个抽象基类，代表所有按钮类的公共接口。它是 Qt GUI 模块中用于创建按钮的基础类，提供了按钮的基本功能和属性。QAbstractButton 主要用于定义按钮的行为和外观，而具体的按钮类型（如 QPushButton、QRadioButton、QCheckBox 等）则继承自这个类。
 
+- QAbstractButton 提供了按钮的状态管理功能，包括按下、释放、选中和未选中等状态。可以通过 isChecked() 和 setChecked(bool) 方法来获取和设置按钮的选中状态。
+- QAbstractButton 定义了一些信号，例如 clicked() 和 toggled(bool)。
 
+## 9、QListWidgetItem
+QListWidgetItem 是 Qt 中用于处理列表项的类。用于在 QListWidget 中表示单个列表项。它是 QListWidget 的一部分，提供了基本的功能来管理列表项的显示和行为。
 
+适用于一般的列表项管理，适合大多数需要在列表中显示数据的场景。
 
+## 10、托盘
+```
+QSystemTrayIcon *mSystemTray = new QSystemTrayIcon(this);
+mSystemTray->setIcon(QIcon(QString::fromStdString(".\\images\\logo.png")));
+mSystemTray->setToolTip(QString::fromLocal8Bit("VDI Client"));
+mSystemTray->setVisible(true); // 显示图标
+mSystemTray->setContextMenu(mMenu); /* 设置系统托盘的上下文菜单 */
+connect(mSystemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(ActiveTray(QSystemTrayIcon::ActivationReason)));
+```
 
+## 11、低版本Qmenu插件中QAction无法显示tooltip
+高版本方法：
+```
+QAction *mAction = new QAction("test");
+mAction->setToolTip("This is a QAction");
+mMenu->addAction(mAction);
+// 启用菜单项的工具提示（高版本QT支持，测试5.14.2支持，4.8.7不支持）
+mMenu->setToolTipsVisible(true);
+```
 
+低版本方法：https://blog.csdn.net/zhaoshuzhi/article/details/6178322
+```
+class CustomMenu : public QMenu {
+public:
+    CustomMenu(QWidget *parent = nullptr) : QMenu(parent) {
+        // 添加菜单项
+        QAction *action1 = new QAction("Action 1", this);
+        QAction *action2 = new QAction("Action 2", this);
+        addAction(action1);
+        addAction(action2);
+    }
 
+    CustomMenu(const QString &title, QWidget *parent = nullptr) : QMenu(title, parent) {
+    }
 
+protected:
+    bool event(QEvent *event) override {
+        if (event->type() == QEvent::ToolTip) {
+            QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+            QAction *action = actionAt(helpEvent->pos());
+            if (action && action->objectName() == TOOLTIP_VISIBLE_ACTION) {
+                qDebug("%s\n", action->text().toStdString().c_str());
 
+                // 显示自定义工具提示
+                QToolTip::showText(helpEvent->globalPos(), action->toolTip(), this);
+                return true; // 事件已处理
+            } else {
+                // 如果鼠标不在该 action 上，隐藏工具提示
+                QToolTip::hideText();
+            }
+        }
+        return QMenu::event(event); // 处理其他事件
+    }
+    
+    void enterEvent(QEvent *event) override {
+            // 鼠标进入菜单时执行的操作
+            QMessageBox::information(this, "Info", "Mouse entered the menu!");
+            QMenu::enterEvent(event); // 调用基类的 enterEvent
+        }
+    
+    void leaveEvent(QEvent *event) override {
+        // 鼠标离开菜单时执行的操作
+        QMessageBox::information(this, "Info", "Mouse left the menu!");
+        QMenu::leaveEvent(event); // 调用基类的 leaveEvent
+    }
+};
+```
 
+## 12、信号和槽机制
+两个类之间消息传递可以使用信号和槽机制。
 
+发送方定义信号并发射信号，接收方实例化发送方类，并connect信号和槽机制。
+```
+class CustomMenu : public QMenu {
+    Q_OBJECT
 
+public:
+    CustomMenu(QAction *action1, const QString &title, QWidget *parent = nullptr) 
+        : QMenu(title, parent), mAction1(action1) {
+    }
 
+signals:
+    void menuShown(const QString &message); // 定义信号
 
+protected:
+    void showEvent(QShowEvent *event) override {
+        // 在菜单显示之前禁用 action1
+        if (mAction1) {
+            mAction1->setDisabled(true);
+            emit menuShown("Action 1 is now disabled!"); // 发射信号
+        }
+        QMenu::showEvent(event); // 调用基类的 showEvent
+    }
 
+private:
+    QAction *mAction1; // 指向主菜单中 action1 的指针
+};
+
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+
+public:
+    MainWindow() {
+        // 创建主菜单
+        QMenu *menu = new QMenu("Main Menu", this);
+        mAction1 = new QAction("Action 1", this);
+        menu->addAction(mAction1);
+        
+        // 创建自定义菜单并传递 action1
+        CustomMenu *customMenu = new CustomMenu(mAction1, "Custom Menu", this);
+        menu->addMenu(customMenu);
+        
+        // 将主菜单添加到菜单栏
+        menuBar()->addMenu(menu);
+
+        // 连接信号和槽
+        connect(customMenu, &CustomMenu::menuShown, this, &MainWindow::onMenuShown);
+    }
+
+private slots:
+    void onMenuShown(const QString &message) {
+        QMessageBox::information(this, "Info", message); // 处理接收到的消息
+    }
+
+private:
+    QAction *mAction1; // 主菜单中的 action1
+};
+```
 
 
 

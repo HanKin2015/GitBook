@@ -2,7 +2,7 @@
 
 建议使用codeblocks。
 
-# 1、c-free5
+## 1、c-free5
 ## 1-1、安装
 官网：http://www.programarts.com/cfree_ch/
 下载有点慢，但是不大还好。
@@ -16,11 +16,11 @@
 缺点：差编译器、支持的编译标准少
 
 
-## 1-2、配置
+### 1-2、配置
 字体大小：工具-》编辑器选项
 
 
-## 1-3、argc argv
+### 1-3、argc argv
 ARGc和ARGv中的ARG指的是"参数"（外语：ARGuments, argument counter 和 argument vector ）
 
 ```
@@ -35,17 +35,17 @@ int main(int argc,char* argv[])    //整数类型主函数(整数类型统计参
 }
 ```
 
-## 1-4、字体选择
+### 1-4、字体选择
 个人比较喜欢Consolas字体
 
 c-free配置c++11，呵呵，配置了半天没有配置成功。提示语法错误，-std=c++11。
 
-# 2、dev-cpp
+## 2、dev-cpp
 让Dev C++支持C++11](https://blog.csdn.net/u011500062/article/details/44628441)
 
 缺点：支持的编译标准少
 
-# 3、codeblocks
+## 3、codeblocks
 https://www.fosshub.com/Code-Blocks.html?dwl=codeblocks-20.03-setup.exe
 
 C语言初学者，在电脑性能足够的情况下，VS2017，codeblocks，devcpp如何选择？
@@ -55,7 +55,7 @@ C语言初学者，在电脑性能足够的情况下，VS2017，codeblocks，dev
 
 安装codeblocks时建议安装带有编译环境的版本。
 
-## 3-1、使用新出的JetBrains Mono字体时不时出现报错弹框
+### 3-1、使用新出的JetBrains Mono字体时不时出现报错弹框
 参考：https://my.oschina.net/wwfifi/blog/4282989
 修改：%USERPROFILE%\AppData\Roaming\CodeBlocks\default.conf
 
@@ -77,24 +77,24 @@ C语言初学者，在电脑性能足够的情况下，VS2017，codeblocks，dev
 <BRACE_COMPLETION bool="1" />
 ```
 
-## 3-2、引入自定义封装的头文件
+### 3-2、引入自定义封装的头文件
 结果报错：
 
 正确方式：建立项目，在项目中使用，可以明显看到编译过程，会先编译头文件为链接文件xxx.o。
 https://blog.csdn.net/nzjdsds/article/details/85617006
 
 
-## 3-3、error: stray '\343' in program
+### 3-3、error: stray '\343' in program
 这个常见，一般从网上直接拷贝代码来运行，会有一些编码错误，对出现错误的行重新编写即可。
 
-## 3-4、error: invalid conversion from 'const char*' to 'char*' [-fpermissive]|
+### 3-4、error: invalid conversion from 'const char*' to 'char*' [-fpermissive]|
 如：string s = "abc";
     char* c = s.c_str();
 
 这时会报错：invalid conversion from `const char*' to `char*'
 解决方法： char* c = const_cast<char *>(s.c_str());
 
-# 4、gcc编译器
+## 4、gcc编译器
 c++支持foreach语句在c++11，所以必须要有高版本的编译器。
 
 官方地址（太卡）：https://jmeubank.github.io/tdm-gcc/
@@ -107,10 +107,20 @@ c++支持foreach语句在c++11，所以必须要有高版本的编译器。
 
 第三个坑点：当你安装好后软件，发现编译运行不弹出运行窗口或者编译按钮是灰色的。这时候你就要想到是不是换了编译器或编辑器引起的。删除编译的结果.exe和.a和.o文件即可。
 
-# 5、编译运行c或c++
+## 5、编译运行c或c++
 自己需要搭建环境，比较麻烦，并且不支持程序输入，中文乱码，代码追踪不完善等问题。
 结论：不建议使用sublime或者notepad++等工具编写工程项目。
 单个文件查看和修改可以推荐。
+
+## 6、Microsoft Visual C++ 6.0(SP6)
+安装包：VC++.6.0.with.SP6.ISO
+win10操作系统安装，装载，然后双击安装，默认安装是无法正常使用，会出现程序崩溃问题，会弹出“此应用可能无法正常工作”的提示。
+参考：https://www.bilibili.com/opus/632522290483953699
+
+- 将C:\program files (x86)\Microsoft Visual Studio\Common\MSDev98\Bin\MSDEV.EXE文件更名为任意其他名字，如MSDEV3.EXE
+- 调整兼容性选项：右键MSDEV3.EXE文件->属性->兼容性->Windows Vista（Servier Pack 2）兼容模式、以管理员身份运行此程序
+- 解决界面模糊问题：右键MSDEV3.EXE文件->属性->兼容性->更改高DPI设置->勾选替代高DPI缩放行为。缩放执行应用程序
+
 
 
 
