@@ -99,7 +99,7 @@ mSystemTray->setContextMenu(mMenu); /* 设置系统托盘的上下文菜单 */
 connect(mSystemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(ActiveTray(QSystemTrayIcon::ActivationReason)));
 ```
 
-## 11、低版本Qmenu插件中QAction无法显示tooltip
+## 11、低版本Qmenu组件中QAction无法显示tooltip
 高版本方法：
 ```
 QAction *mAction = new QAction("test");
@@ -217,6 +217,32 @@ private:
     QAction *mAction1; // 主菜单中的 action1
 };
 ```
+
+### 12-1、Q_OBJECT
+Q_OBJECT 是 Qt 的元对象系统的一部分，它是一个宏，用于启用 Qt 的信号和槽机制、属性系统以及其他一些特性。具体来说，Q_OBJECT 宏的作用包括以下几个方面：
+
+#### 1. 启用信号和槽机制
+在 Qt 中，信号和槽是用于对象之间通信的机制。通过在类中使用 Q_OBJECT 宏，您可以定义信号和槽，并在运行时连接它们。没有这个宏，Qt 的元对象系统将无法识别信号和槽。
+
+#### 2. 支持动态属性
+使用 Q_OBJECT 宏的类可以使用 Qt 的动态属性系统。这意味着您可以在运行时为对象添加、修改或删除属性。
+
+#### 3. 生成元对象代码
+当您使用 Q_OBJECT 宏时，Qt 的元对象编译器（MOC）会生成额外的代码，以支持信号和槽、属性等功能。您需要确保在构建项目时，MOC 能够处理包含 Q_OBJECT 的类。
+
+#### 4. 需要的条件
+类定义: Q_OBJECT 宏必须放在类的定义中，通常是在类的公有部分之前。
+MOC 处理: 确保您的构建系统（如 qmake 或 CMake）能够正确处理 MOC 生成的代码。
+
+### 12-2、发现在mainwindow.cpp文件中QMenu正常调用，但是在mainwindow.h文件中则缺头文件
+另外一个问题就是Q_OBJECT定义的类基本上一定要在mainwindow.h文件中，否则就报错debug/mainwindow.o:mainwindow.cpp:(.rdata$.refptr._ZTV10CustomMenu[.refptr._ZTV10CustomMenu]+0x0): undefined reference to `vtable for CustomMenu'。
+常表示 C++ 中的虚拟表（vtable）未能正确生成。主要是因为 C++ 的编译和链接机制以及 Qt 的元对象编译器（MOC）工作原理。
+
+## 13、不要依赖于文本内容去比较组件
+使用 tr("SBC Peripheral Manage") 进行比较时，如果存在中文翻译，可能会导致比较不匹配的问题。为了确保比较的准确性，您可以使用 QAction 的 objectName 或者直接使用 QAction 的指针进行比较，而不是依赖于文本内容。
+
+## 14、menu->menuAction()->setVisible(true);
+设置与 QMenu 相关联的 QAction 的可见性，直接也把自身给隐藏了。
 
 
 

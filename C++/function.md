@@ -40,6 +40,28 @@ static函数和普通函数的最大的区别在于作用域方面，static函�
 
 需要注意的是，静态函数并不是在所有情况下都比普通函数更优秀。如果函数需要在多个源文件中被调用，那么应该使用普通函数。如果函数只在一个源文件中被调用，那么应该使用静态函数。
 
+### 2-3、静态成员函数中尝试访问一个非静态成员变量
+报错：error: invalid use of member ‘SystemTray::mSessTypes’ in static member function
+静态成员函数不能直接访问类的非静态成员变量或非静态成员函数，因为静态成员函数不属于任何特定的对象实例，而是属于类本身。
+
+报错：error: cannot convert ‘SystemTray::HandlerCurSessInfo’ from type ‘int (SystemTray::)(const SfJsonParamsObj&, QString&)’ {aka ‘int (SystemTray::)(const _SfJsonParamsObj&, QString&)’} to type ‘std::map<std::__cxx11::basic_string<char>, int (*)(const _SfJsonParamsObj&, QString&)>::mapped_type’ {aka ‘int (*)(const _SfJsonParamsObj&, QString&)’}
+试图将一个成员函数指针赋值给一个普通函数指针。这是因为成员函数的指针和普通函数的指针在 C++ 中是不同的。
+在 C++ 中，成员函数的指针需要一个对象实例来调用，而普通函数的指针不需要。因此，您不能直接将一个成员函数指针赋值给一个期望普通函数指针的地方。
+解决方式：可以将其定义为静态成员函数。静态成员函数的指针可以被视为普通函数指针。
+
+在 C++ 中，this 指针是一个隐式参数，指向当前对象的实例。您可以在非静态成员函数中使用 this 指针，但在静态成员函数或普通函数中不能直接使用 this 指针，因为它们不属于任何特定的对象实例。
+解决方式：
+```
+类中定义：
+public:
+	static SystemTray* s_this;	//静态指针，用于回调函数中类成员函数以及信号的调用
+
+类的构造函数中赋值：
+s_this = this;
+
+然后就可以在静态函数中使用s_this指针访问成员变量。
+```
+
 ## 3、内联函数和宏的区别
 答：为什么要使用宏呢？因为函数的调用必须要将程序执行的顺序转移到函数所存放在内存中的某个地址，将函数的程序内容执行完后，再返回到转去执行该函数前的地方。这种转移操作要求在转去执行前要保存现场并记忆执行的地址，转回后要恢复现场，并按原来保存地址继续执行。因此，函数调用要有一定的时间和空间方面的开销，于是将影响其效率。而宏只是在预处理的地方把代码展开，不需要额外的空间和时间方面的开销，所以调用一个宏比调用一个函数更有效率。
 
