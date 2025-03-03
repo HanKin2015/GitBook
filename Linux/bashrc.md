@@ -76,15 +76,12 @@ alias ll="ls -laF"
 source /etc/profile
 
 function git_branch {
-   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
-   if [ "${branch}" != "" ];then
-       if [ $branch == *"HEAD"* ];then
-           branch="`git rev-parse --short HEAD`"
-       fi
-       echo "($branch)"
-   fi
+    # 这里是你获取当前 git 分支的逻辑
+    git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/^/(/;s/$/)/'
 }
-export PS1="\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "
+# 设置 PROMPT_COMMAND 以在每次显示提示符时更新 PS1
+PROMPT_COMMAND='PS1="\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "'
+
 alias git_diff="git status . -uno | grep -E '\.c$|\.cpp$|\.h$|\.ts$'"
 ```
 

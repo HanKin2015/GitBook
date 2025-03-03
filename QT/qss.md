@@ -1,34 +1,20 @@
 # QT之Qss
 
-# 1、Qt 的一些心得]( https://blog.csdn.net/lpt19832003/article/details/5381095 )
-
-圆角控件 用stylesheet方式
-
-setStyleSheet ("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+# 1、qss的使用
+```
+QFile file(":/qss/myStyleSheet.qss");
+file.open(QFile::ReadOnly);
+QString styleSheet = tr(file.readAll());
+this->setStyleSheet(styleSheet);          // 当前窗口设置样式表
+ui->pushButton->setStyleSheet(styleSheet);  // 指定按钮设置样式表
+```
 
 # 2、QT去除控件被选中后的焦点虚线框
-
-1.用qss,一句话搞定
-
-在qss文件中加上下面这行代码(下面号外里有怎么新建qss文件并调用)
-
-QWidget:focus{outline: none;}  /*remove all  QWidget's focus border*/
-1
-只有一行,感觉很神奇,上面是对QWidget做的限制,如果你想对按钮或者输入框做限制,换成相应的QPushButton,QLineEdit即可.
-
-或者用下面的这行也可以
-
-QPushButton:focus{padding: -1;} // 具体负多少可以调节 
-
-# 3、[Qt样式表之三：实现按钮三态效果的三种方法](https://www.cnblogs.com/linuxAndMcu/p/11039814.html)
-
 ```
-ui->pbut_boardimg_reset->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/image/showmodeimag/ok.png);}"
-"QPushButton:hover{border-image: url(:/new/prefix1/image/showmodeimag/ok.png);}"
-"QPushButton:pressed{border-image: url(:/new/prefix1/image/showmodeimag/ok1.png);}");
+QWidget:focus{outline: none;}
 ```
 
-## qss的使用
+# 3、实现按钮三态效果
 
 ```
 /*按钮普通态*/
@@ -38,46 +24,33 @@ QPushButton
     font-family:Microsoft Yahei;
     /*字体大小为20点*/
     font-size:20pt;
-    /*字体颜色为白色*/    
+    /*字体颜色为白色*/
     color:white;
-    /*背景颜色*/  
+    /*背景颜色*/
     background-color:rgb(14 , 150 , 254);
-    /*边框圆角半径为8像素*/ 
+    /*边框圆角半径为8像素*/
     border-radius:8px;
 }
 
 /*按钮停留态*/
 QPushButton:hover
 {
-    /*背景颜色*/  
+    /*背景颜色*/
     background-color:rgb(44 , 137 , 255);
 }
 
 /*按钮按下态*/
 QPushButton:pressed
 {
-    /*背景颜色*/  
+    /*背景颜色*/
     background-color:rgb(14 , 135 , 228);
-    /*左内边距为3像素，让按下时字向右移动3像素*/  
+    /*左内边距为3像素，让按下时字向右移动3像素*/
     padding-left:3px;
-    /*上内边距为3像素，让按下时字向下移动3像素*/  
+    /*上内边距为3像素，让按下时字向下移动3像素*/
     padding-top:3px;
 }
 ```
 
-```
-//这是在Qt的资源下的文件,可以不用在资源下
-QFile file(":/qss/myStyleSheet.qss");
-//只读方式打开文件
-file.open(QFile::ReadOnly);
-//读取文件的所有内容，并转换成QString类型
-QString styleSheet = tr(file.readAll());
-//当前窗口设置样式表
-//this->setStyleSheet(styleSheet);
-//指定按钮设置样式表
-ui->pushButton->setStyleSheet(styleSheet);
-ui->pushButton_2->setStyleSheet(styleSheet);
-```
 
 # 3、Qt为控件添加图片的几种方法
 
@@ -263,4 +236,41 @@ if (timer.isActive()) {  // 处理响应
 ```
 
 然后就发现上面这段代码，发现应该在200的情况下才能获取http状态码？？？
+
+## padding-left和margin-left的区别
+padding-left（内边距）：组件内部元素离左边的距离
+margin-left （外边距）：组件自身离左边的距离
+
+## warning: unused variable 'btn'
+```
+解决方法：Q_UNUSED(btn);
+```
+
+## 属性冲突
+在 CSS 中，属性的顺序通常不会影响最终的样式效果，除非有特定的属性相互影响或存在冲突。
+```
+border: [border-width] [border-style] [border-color];
+border: 1px solid silver;
+border-color: red;
+```
+在 CSS 中，border 属性用于设置元素的边框。它可以接受三个参数，分别是边框的宽度、样式和颜色。
+其中silver翻译过来是银色，相当于red这种。边框的颜色，可以使用颜色名称、十六进制颜色值、RGB、RGBA、HSL 等格式。
+边框的样式，决定边框的外观。常见的样式包括：
+- none：没有边框。
+- solid：实线边框。
+- dashed：虚线边框。
+- dotted：点状边框。
+- double：双线边框。
+- groove：凹槽边框。
+- ridge：凸起边框。
+- inset：内嵌边框。
+- outset：外突边框。
+
+border-radius 是 CSS 中用于设置元素边框圆角的属性。它可以使元素的角变得圆滑，而不是尖锐的直角。
+```
+border-radius: [radius];
+radius：表示圆角的半径，可以使用像素（px）、百分比（%）等单位。
+为不同的角设置不同的圆角半径，可以使用四个值: border-radius: 10px 20px 30px 40px;
+```
+
 

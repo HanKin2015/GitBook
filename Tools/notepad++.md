@@ -175,7 +175,7 @@ https://blog.csdn.net/u010142729/article/details/127963874
 WideCharToMultiByte函数写入宽字符，或者CP_ACP关键字，不研究。
 
 ## 20、右键快捷方式创建
-注册表：
+非官方方式注册表（通用方式）：
 ```
 HKEY_CLASSES_ROOT\*\shell\Notepad++\command（"C:\Program Files\Notepad++\notepad++.exe" "%1"）
 
@@ -187,9 +187,16 @@ HKEY_CLASSES_ROOT\*\shell\Notepad++\command（"C:\Program Files\Notepad++\notepa
 针对特定用户: HKEY_CURRENT_USER\Software\Classes\*\shell
 针对所有用户: HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shell
 ```
+创建完成后重启文件资源管理器居然没有生效。。。重启物理机后生效。
+后面觉得还是以官方创建快捷方式比较靠谱些，创建完成后也是重启物理机，发现还是未生效，原来是C:\Program Files\Notepad++\contextMenu\NppShell.dll文件被我重命名了，把这个文件重命名回去生效了。
 
 notepad++很有趣：
 通过计算机\HKEY_CLASSES_ROOT\*\shell\ANotepad++64指向了一个CLSID（HKEY_CLASSES_ROOT\CLSID\{B298D29A-A6ED-11DE-BA8C-A68E55D89593}）
 然后再在CLSID中进行具体的操作，不同的版本配置不一样。
 
 在 Windows 注册表中，ThreadingModel 是与 COM（Component Object Model）对象相关的一个配置项。它定义了 COM 对象的线程模型，即对象如何处理来自不同线程的调用。虽然 Notepad++ 本身不是一个 COM 服务器，但它可能会使用某些插件或扩展，这些插件或扩展可能会注册 COM 组件。
+
+## 21、菜单栏字体模糊问题
+一个就是菜单栏模糊问题，一个就是文件中内容会有红色波浪线问题。
+解决方式：找到软件exe文件，右键属性，兼容性，更改高DPI设置，替代高DPI缩放行为。两个问题同时解决。
+

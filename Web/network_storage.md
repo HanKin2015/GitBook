@@ -26,6 +26,10 @@ NAS是私有的，属于个人自己的云盘。它的本质是一体专门用�
 ## 3、Synology
 群晖科技（Synology ）自始便专注于打造高效能、可靠、功能丰富且绿色环保的 NAS 服务器，是全球少数几家以单纯的提供网络存储解决方案获得世界认同的华人企业。
 
+DSM 专用于 Synology 产品的操作系统，由 Synology Inc.拥有。DSM 提供综合存储解决方案、灵活的备份策略、随手成为更加智能的多媒体管理（以及更多！）。
+
+官网：https://kb.synology.cn/zh-cn/DSM
+
 ## 4、白群晖和黑群晖区别
 官方与非官方的区别。黑群晖是非官方的产品，所搭载的操作系统是经第三方人员修改后用非官方的方式安装，并未经群晖官方支持。黑群晖虽然在形式上实现了和群晖类似的功能，但是由于硬件是自己搭建，系统由未知来源的第三方提供，隐藏着巨大隐患。
 
@@ -36,5 +40,12 @@ https://www.sohu.com/a/670642524_99933502
 群晖
 威联通
 海康威视
+
+## 6、FreeNAS
+FreeNAS是一套免费的NAS服务器，它能将一部普通PC变成网络存储服务器。该软件基于FreeBSD， Python，支持CIFS (samba), FTP, NFS protocols, Software RAID (0,1,5) 及 web 界面的设定工具。
+
+## 7、做最好的HTTP文件服务器
+https://github.com/codeskyblue/gohttpserver
+https://github.com/codeskyblue
 
 

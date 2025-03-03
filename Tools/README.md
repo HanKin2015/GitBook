@@ -206,7 +206,7 @@ https://mp.weixin.qq.com/s/CVWudgKH3JP8hVXbeYxDFA
 https://www.coodesker.com/
 
 Glary Utilities
-CCleaner
+CCleaner：一款免费的系统优化和隐私保护工具（非开源）。CCleaner 的主要用来清除 Windows 系统不再使用的垃圾文件，以腾出更多硬盘空间。它的 另一大功能是清除使用者的上网记录。CCleaner 的体积小，运行速度极快，可以对临时文件夹、历史记录、回收站等进行垃圾清理，并可对注册表进行垃圾项扫描、清理。附带软件卸载功能。
 Wise Disk Cleaner
 
 ## 16、everything

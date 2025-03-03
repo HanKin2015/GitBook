@@ -7,18 +7,31 @@ FLAC（Free Lossless Audio Codec）是一种无损音频格式，它使用压缩
 
 总的来说，如果您需要高质量的音频并且不关心文件大小，那么WAV可能是更好的选择。如果您需要高质量的音频并且希望文件大小较小，那么FLAC可能是更好的选择。
 
-## 2、WAV无损音乐
-https://www.xmwav.com/ （推荐，缺点是歌曲少）
-
-## 3、FLAC无损音乐
-https://www.fangpi.net/ （下载的是mp3）
+## 2、无损音乐
+WAV: https://www.xmwav.com/ （推荐，缺点是歌曲少）
+FLAC: https://www.fangpi.net/ （下载的是mp3）
 https://tools.liumingye.cn/music/#/artist/kAO4 （推荐）
 http://ayy.ayxhk.com（不推荐）
 https://music.y444.cn/#/?ifxdh（无法访问了）
 http://music.jsososo.com/（无法访问了）
 另外一个差些：http://gequdaquan.net/gqss/
 
-## 4、
+## 3、修改软件
+[MP3TAG](https://www.mp3tag.de/en/index.html)
+mp3tag是一款功能强大的MP3文件ID3-tag信息修改工具，既是可以用mp3tag来编辑MP3文件中的曲名、演唱者、专辑、年月、流派等信息，喜欢收集歌曲的朋友们不妨下载使用MP3tag来编辑MP3文件，以便更好的收集整理歌曲。
+
+使用教程：https://blog.csdn.net/lly1122334/article/details/123330193
+中文切换：Files->Options->Language->简体中文
+[Scripting Functions – Mp3tag Documentation](https://docs.mp3tag.de/scripting/)
+
+批量根据歌曲信息命名文件：ctrl+a选中全部文件 → 转换 → 标签 - 文件名（%artist% - %title%）
+
+无法写入文件报错：mp3tag Error: unsupported format or corrupted file;()
+建议重新下载文件吧！
+
+[这款软件只能修改mp3格式](http://www.id3tageditor.com/)
+
+## 4、播放软件
 https://mcool.appinn.me/
 这款软件不错，比肩foobar2000，明显比酷我音质好，但是酷我开启HiFi音质了似乎差不多了。
 

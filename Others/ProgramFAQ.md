@@ -205,8 +205,9 @@ git clone时出现这个错误，参考： https://blog.csdn.net/luozhonghua2014
 # 11、DisplayLink 
 DisplayLink是一个通过USB接口实现显示器连接到电脑的连接技术，可以非常简单、方便的连接电脑和多个显示设备。该技术可以通过USB接口扩展虚拟的电脑的桌面。DisplayLink技术最多可以支持6台显示器同时显示32位色彩的任意分辨率画面。
 
-# 12、FreeNAS
-FreeNAS是一套免费的NAS服务器，它能将一部普通PC变成网络存储服务器。该软件基于FreeBSD， Python，支持CIFS (samba), FTP, NFS protocols, Software RAID (0,1,5) 及 web 界面的设定工具。
+# 12、2K分辨率
+2K分辨率（英文名2K resolution）是一个通用术语，指屏幕或者内容的水平分辨率达约2000像素的分辨率等级。
+因为16:9的比例是高清晰度视频规格的国际标准，所以2K分辨率在视频制作、显示屏等领域常见格式为1440P（Quad HD）和1080P（Full HD）。
 
 # 13、莫队算法
 https://www.cnblogs.com/WAMonster/p/10118934.html
@@ -244,10 +245,6 @@ Qt调用C语言接口出现提示Invalid parameter passed to C runtime function.
 安装后还是提示，在左上角安全里面允许flash
 
 QTAILQ队列是QEMU重要的数据结构，例如用来保存QEMU参数等。
-
-# 20、2K分辨率
-2K分辨率（英文名2K resolution）是一个通用术语，指屏幕或者内容的水平分辨率达约2000像素的分辨率等级。
-因为16:9的比例是高清晰度视频规格的国际标准，所以2K分辨率在视频制作、显示屏等领域常见格式为1440P（Quad HD）和1080P（Full HD）。
 
 
 
