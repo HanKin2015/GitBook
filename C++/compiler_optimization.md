@@ -36,6 +36,22 @@ a.out: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, 
 
 上面例子可以看出是否能调试跟not stripped无关？？？但是实际项目中如果是stripped就不包含符号表信息。
 
+### 3-1、not stripped
+定义：not stripped 表示可执行文件或目标文件中包含了符号信息和调试信息。这些信息通常用于调试程序。
+用途：在调试过程中，保留符号信息可以帮助开发者更容易地理解程序的运行状态、变量的值和函数调用等。使用调试器（如 GDB）时，开发者可以看到源代码中的函数名、变量名等信息。
+示例：在 Linux 系统中，使用 strip 命令可以去除可执行文件中的符号信息。如果一个文件是 not stripped，则表示它没有经过 strip 处理，仍然保留了调试信息。
+
+### 3-2、with debug_info
+定义：with debug_info 表示可执行文件或目标文件中包含调试信息，通常是以 DWARF 格式存储的。这些信息用于调试器在调试时提供源代码级别的调试支持。
+用途：与 not stripped 类似，with debug_info 也意味着程序包含了调试信息。它允许开发者在调试时查看源代码、变量、行号等信息。
+示例：在编译时，使用 -g 选项（如 gcc -g）可以生成包含调试信息的可执行文件。这样的文件通常被标记为 with debug_info。
+
+### 3-3、结论
+not stripped 更强调文件没有经过 strip 处理，保留了符号信息。
+with debug_info 更强调文件中包含调试信息，通常是为了调试目的。
+
+即使可执行文件被标记为 not stripped，如果不包含with debug_info信息，那么在gdb调试的时候也会报错(no debugging symbols found)...done。
+
 ## 4、Debug模式和Release模式区别
 编译器有这么多优化级别，Debug版本和Release版本其实就是优化级别的区别，Debug称为调试版本，编译的结果通常包含有调试信息，没有做任何优化，方便开发人员进行调试，Release称为发布版本，不会携带调试信息，同时编译器对代码进行了很多优化，使代码更小，速度更快，发布给用户使用，给用户使用以更好的体验。但Release模式编译比Debug模式花的时间也会更多。Debug模式下在内存分配上有所区别，在我们申请内存时，Debug模式会多申请一部分空间，分布在内存块的前后，用于存放调试信息。对于未初始化的变量，Debug模式下会默认对其进行初始化，而Release模式则不会，所以就有个常见的问题，局部变量未初始化时，Debug模式和Release模式表现有所不同。
 

@@ -494,4 +494,21 @@ JPEG（Joint Photographic Experts Group）和 MJPEG（Motion JPEG）是两种不
 JPEG 是一种静态图像压缩格式，主要用于存储和传输静态图像。
 MJPEG 是一种视频压缩格式，它将视频序列中的每一帧都编码为独立的 JPEG 图像。
 
+## 23、安装罗技摄像头官方驱动
+型号：HD Webcam C270
+硬件ID：046d:0825
+
+官网根本没有相关驱动文件及软件下载（注意： 请登录网站查看最新软件版本），只有软件介绍：https://support.logi.com/hc/en-us/articles/360025331313--FAQ-Webcam-C260#lws280。
+在FAQ中可以找到Logitech Webcam Software v2.x for Windows Release Notes介绍。
+
+结论：官方驱动是通过一个叫做Logitech Webcam Software v2.x软件间接安装的，最新版本为2.80.853.0。
+下载地址：
+https://logitech-hd-webcam-software.en.softonic.com/
+https://logitech-webcam-software.en.softonic.com/
+https://drivers.mydrivers.com/drivers/458_183507.htm
+
+第三方软件下载：360驱动大师根本找不到驱动，驱动总裁也是一样，windows自带的搜索功能好像不支持，发现一款宝藏软件可以搜索到https://www.drivereasy.com/knowledge/logitech-hd-webcam-c270-driver-download-for-windows/#Fix1。但是需要收费，应该有破解版drivereasy。
+
+
+
 

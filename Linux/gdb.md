@@ -592,26 +592,8 @@ ImportError: No module named site
 ## 17、gdb调试秒崩溃的闪退程序
 没有core文件生成，在/proc/sys/kernel/core_pattern发现生成在/tmp/目录下，但是是0大小的文件。
 然后使用ulimit -c发现结果就是0，但是此时是超级管理员执行，在非管理员执行时发现是unlimited，这是一个大坑啊。
-```
-#!/bin/bash
-#
-# 文 件 名: solve_dpkg_install_error.sh
-# 文件描述: 解决E: Sub-process /usr/bin/dpkg returned an error code (1)错误
-# 作    者: HanKin
-# 创建日期: 2022.09.13
-# 修改日期：2022.09.13
-# 
-# Copyright (c) 2022 HanKin. All rights reserved.
-#
 
-sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old
-sudo mkdir /var/lib/dpkg/info
-sudo apt-get update
-apt-get -f install
-mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old
-rm -rf /var/lib/dpkg/info
-mv /var/lib/dpkg/info_old /var/lib/dpkg/info
-```
+调试脚本见：D:\Github\Storage\shell\gdb_instantaneous_process.sh
 
 ## 18、下断点实战
 示例demo见：D:\Github\Storage\c++\gdb\breakpoint.cpp

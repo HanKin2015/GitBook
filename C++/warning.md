@@ -187,8 +187,6 @@ gcc -fPIC helloworld.c
 gcc -fpic helloworld.c
 ```
 
-
-
 ## 18、执行make出现“Warning: File `xxx.c‘ has modification time 2.6e+04 s in the future“警告的解决方法
 原因是宿主机与虚拟机的系统时间没有同步造成的。
 由于时钟同步问题，出现 warning:  Clock skew detected.  Your build may be incomplete.这样的警告，

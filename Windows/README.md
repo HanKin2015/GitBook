@@ -155,20 +155,7 @@ https://learn.microsoft.com/zh-cn/sysinternals/downloads/process-explorer
 
 Windows 11记事本不支持转换换行符。
 
-## 15、自启动设置位置
-- msconfig命令查看（Windows 10及以上版本的自启动项管理主要通过任务管理器（Task Manager）而不是msconfig）
-- 注册表：HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run 和 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
-- 启动文件夹：按Win + R，输入shell:startup
-- “任务计划程序”（Task Scheduler）
-- 有些应用可能会以服务的形式启动。按Win + R，输入services.msc
-
-推荐的工具autoruns（不好用，只显示了msconfig中的程序）
-
-一般程序会在msconfig中找到，部分例外：
-todesk自启动在服务中启动
-FRAPS自启动则在任务计划程序中
-
-## 16、 视频播放器选择软解好还是硬解好？
+## 15、 视频播放器选择软解好还是硬解好？
 1、视频软解和硬解二者原理不同。
 硬解是要机器中的专门的解码芯片来完成，质量因厂家的技术能力而定，部分厂商技术实力强，兼容性和解码效果做的比较好，而有些厂商技术实力稍差，兼容性和解码效果做的就不尽如意。
 软解就是用CPU来解码，需要CPU的性能与处理能力较强，但对流媒体格式兼容性比较好，因为软解库是自行开发的，质量能控制。

@@ -142,6 +142,11 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 因此，当 CMAKE_BUILD_TYPE 变量的值为 Debug 时，条件语句 if(CMAKE_BUILD_TYPE STREQUAL "Debug") 的判断结果为真，其后面的代码块将会被执行。这样可以在 Debug 构建时进行一些特殊的处理，例如开启调试信息、关闭优化等。
 
+构建debug版本：
+```
+mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j8
+```
+
 ## 8、代码覆盖率
 ```
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

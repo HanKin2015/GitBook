@@ -322,33 +322,23 @@ https://www.pianshen.com/article/40881199723/
 
 ntoskenl 是 Windows 的内核进程，负责 Windows 核心部分的操作，也就是负责操作系统核心的五大任务：处理机管理、存储管理、设备管理、文件管理、接口，这从它的 PID = 4 就能看出来它的地位是操作系统最先启动的进程。操作系统（四）操作系统的主要功能 - 魏亚林 - 博客园www.cnblogs.com因此它是接管整个电脑硬件的程序，具有最高权限，或者说它要运行在硬件的环境上。而我们日常使用的其他程序都是在 ntoskrnl 的掌管下运行的，而且运行方式是调用 Windows 的接口。如果你在 Windows 环境下直接运行它，那么就变成了 Windows 的环境，所以提示无法在 Win32 模式下运行。注意 win32 是指 Windows NT 系列内核，而不是指 32 位 Windows。64 位 Windows 同样也叫 Win32。应用程序在调用 Windows 接口时，功能的执行需要由 ntoskrnl 进行。因此当某些程序在大量调用系统接口或者系统功能时，会造成 ntoskrnl 的高占用。由于没有便捷的方式可以排查问题，你可以尝试逐个结束其他进程。这不会造成系统损坏。
 
-### 2-7、给软件添加开机启动项
+### 2-7、给软件添加开机启动项（win11亲测有效）
 - 给软件创建桌面快捷方式
 - 将桌面快捷方式剪切到C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 - cmd输入msconfig就可以在启动项中看见
 
-### 2-8、Fsutil 
-命令行工具，windows自带。
+### 2-8、自启动设置位置
+- msconfig命令查看（Windows 10及以上版本的自启动项管理主要通过任务管理器（Task Manager）而不是msconfig）
+- 注册表：HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run 和 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+- 启动文件夹：按Win + R，输入shell:startup
+- “任务计划程序”（Task Scheduler）
+- 有些应用可能会以服务的形式启动。按Win + R，输入services.msc
 
-Fsutil 是可用于执行多种与 FAT 和 NTFS 文件系统相关的任务（例如管理重解析点、管理稀疏文件、卸载卷或扩展卷）的命令行实用程序。由于 Fsutil 功能非常强大，因而只有完全掌握 Windows XP 的高级用户才能使用它。此外，必须作为管理员或管理员组的成员登录才能使用 Fsutil。
-```
-C:\WINDOWS\system32>fsutil volume diskfree D:
-可用字节总数        :  87,696,003,072 ( 81.7 GB)
-总字节数             : 343,596,265,472 (320.0 GB)
-配额可用字节总数  :  87,696,003,072 ( 81.7 GB)
+推荐的工具autoruns（不好用，只显示了msconfig中的程序）
 
-C:\WINDOWS\system32>fsutil fsinfo drives
-
-驱动器: C:\ D:\ E:\
-
-C:\WINDOWS\system32>fsutil fsinfo drivetype C:
-C: - 固定驱动器
-
-C:\WINDOWS\system32>fsutil fsinfo drivetype E:
-E: - CD-ROM 驱动器
-
-fsutil file createnew 4GB.txt 4294967296‬
-```
+一般程序会在msconfig中找到，部分例外：
+todesk自启动在服务中启动
+FRAPS自启动则在任务计划程序中
 
 ### 2-9、sc命令
 SC命令是XP系统中功能强大的DOS命令,SC命令能与“服务控制器”和已安装设备进行通讯。SC是用于与服务控制管理器和服务进行通信的命令行程序。
@@ -414,6 +404,29 @@ Windows操作系统镜像（无论是Windows Server 2012 R2还是Windows Server 
 
 ### 2-17、环境变量立即生效
 测试发现在界面上面修改完path值后保存就会立即生效，无需使用命令set path=%path%，并且命令并不会生效。
+
+### 2-18、Fsutil 
+命令行工具，windows自带。
+
+Fsutil 是可用于执行多种与 FAT 和 NTFS 文件系统相关的任务（例如管理重解析点、管理稀疏文件、卸载卷或扩展卷）的命令行实用程序。由于 Fsutil 功能非常强大，因而只有完全掌握 Windows XP 的高级用户才能使用它。此外，必须作为管理员或管理员组的成员登录才能使用 Fsutil。
+```
+C:\WINDOWS\system32>fsutil volume diskfree D:
+可用字节总数        :  87,696,003,072 ( 81.7 GB)
+总字节数             : 343,596,265,472 (320.0 GB)
+配额可用字节总数  :  87,696,003,072 ( 81.7 GB)
+
+C:\WINDOWS\system32>fsutil fsinfo drives
+
+驱动器: C:\ D:\ E:\
+
+C:\WINDOWS\system32>fsutil fsinfo drivetype C:
+C: - 固定驱动器
+
+C:\WINDOWS\system32>fsutil fsinfo drivetype E:
+E: - CD-ROM 驱动器
+
+fsutil file createnew 4GB.txt 4294967296‬
+```
 
 ## 3、win11那些事儿
 
