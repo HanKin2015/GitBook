@@ -238,10 +238,10 @@ tcpdump -i eth0 -s0 host 172.22.18.156 -C 100 -W 3 -w ./vdi_server.pcap
 ### 5-2、使用tcpdump抓取usb数据包
 查看流量使用情况：iftop -nNpP
 查看usbmon设备：tcpdump -D
-抓取usb数据包：tcpdump -i usbmon2 > /tmp/xxxx.pcap
+抓取usb数据包：tcpdump -i usbmon2 > /tmp/xxxx.pcap（错误的使用方式，不能使用>符号一定要使用-w参数）
 注意一定要使用-w参数输出，否则就会出现后面一系列问题：tcpdump -i usbmon2 -w /tmp/xxxx.pcap
 
-看着是抓取成功了：
+>文件重定向符号引发的一系列问题，看着像是抓取成功了：
 ```
 root@hankin:/tmp# tcpdump -D
 1.eth0 [Up, Running]
@@ -250,6 +250,7 @@ root@hankin:/tmp# tcpdump -D
 4.nflog (Linux netfilter log (NFLOG) interface)
 5.nfqueue (Linux netfilter queue (NFQUEUE) interface)
 6.usbmon1 (USB bus number 1)
+
 root@hankin:/var/log# tcpdump -i usbmon1 > /tmp/usbmon.pcap
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header), capture size 262144 bytes
@@ -257,7 +258,7 @@ listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 1558 packets received by filter
 0 packets dropped by kernel
 ```
-`0` 代表所有的USB总线，`1，2` 代表不同USB总线，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
+`0` 代表所有的USB总线，`1，2` 代表不同的USB总线，即001和002，`t` 代表 `text api`，`u`代表 `binary api`。如果不需要完整的数据，可以通过cat这些文件获得；
 
 但是在Windows系统上打开pcap文件报错：The capture file appears to be damaged or corrupt.(stanag4607: File has 976238906d-byte packet, bigger than maximum of 262144)
 
@@ -280,7 +281,7 @@ listening on usbmon1, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 21:09:41.651186 INTERRUPT COMPLETE to 1:14:1
 ```
 
-低版本无法使用tcpdump抓usb数据包，更新tcpdump文件，结果还是不行，原因是命令执行错误:
+低版本无法使用tcpdump抓usb数据包，需要更新tcpdump版本，结果还是不行，原因是命令执行错误:
 tcpdump依赖libpcap库，因此需要先编译libpcap库，然后再编译tcpdump，直接configure和make即可。
 ```
 root@hankin:/tmp# ./tcpdump --help

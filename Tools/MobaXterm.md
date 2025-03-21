@@ -112,11 +112,12 @@ pscp localfile.txt username@hostname:/path/to/remote/directory/
 pscp username@hostname:/path/to/remote/file.txt localfile.txt
 ```
 
-### 6-3、使用集成的exe程序上传文件失败
+### 6-3、使用集成的exe程序上传文件失败（签名工具）
 通过wireshark软件抓包发现本地向22端口发送数据失败，一直在重试，使用ping命令没有问题。
 原因是没有把对端的主机密钥缓存在注册表中（计算机\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\SshHostKeys）
 可以使用plink命令行工具进行添加:
 ```
+C:\Users\Administrator\Desktop\Windows双签名工具>plink 1.2.3.4
 The server's host key is not cached in the registry. You
 have no guarantee that the server is the computer you
 think it is.
@@ -129,6 +130,7 @@ adding the key to the cache, enter "n".
 If you do not trust this host, press Return to abandon the
 connection.
 Store key in cache? (y/n) y
+后面全回车键即可
 ```
 
 ## 7、老版本连接报错
@@ -146,4 +148,10 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 - 设置主密码（Settings->Genneral->MobaXterm passwords mannagement->Set a "Master Password" for strong passwords encryption）
 - 主密码重置工具（全部session密码都无了）（https://mobaxterm.mobatek.net/resetmasterpassword.html）
 - 主密码手动重置（全部session密码都无了）（找到Mobaxterm.ini文件，然后将mobauser@mobaserver=s0NHvIaCuVJN9zu+YhFX7mHz5uBkn6/8一行删除即可）
+
+## 9、使用local terminal读取GB2312（简体中文）文件出现中文乱码
+解决方案：Settings->Terminal->Default font settings->Courier New字体、字体集ANSI或者DEFAULT都行，终端集选择ISO-8859-1即可。
+进一步测试发现，只需要修改Term charset为ISO-8859-1就行了。
+
+注意：使用ISO-8859-1后其他编码的文件或者程序原先正常的此刻大概率会是中文乱码，因此还是建议恢复默认值UTF-8（设置成GBK也行），即鱼和熊掌不可兼得。
 

@@ -1,5 +1,9 @@
 # FAT32
 
+友情链接：
+D:\Github\Storage\c++\udev\bulk_only\README.md
+D:\Github\GitBook\gitbook\USBDevice\bulk.md
+
 ## 1、磁盘文件系统格式
 
 ### 1-1、**FAT32**
@@ -52,14 +56,194 @@ FAT32是一种常见的文件系统格式，用于格式化U盘、SD卡等可移
 ## 4、FATFS文件系统详解:关于SD卡、SD nand、spi nor flash等众多flash
 https://mp.weixin.qq.com/s/JoVw8QUxo4kT_PF92tZRtw
 
+## 5、NTFS格式
+
+### 5-1、NTFS格式U盘在只读状态文件资源管理器无法打开
+报错：介质受写入保护（发现使用DiskGenius软件是可以打开U盘的并能看见文件内容）
+
+只读状态修改方案：对USB存储的拦截靠一个MINIFILTER驱动，最终方案U盘读写权限其实是在投递scsi command的MODE_SENSE6指令来获取的。只需要我们能解析出
+MODE_SENSE6的指令，修改它的返回值 ，即可以产生写保护的功能(U盘只读功能)。DEVICE-SPECIFIC PARAMETER字段即表示其可读写标记，当为0x80表示其受写保护
+
+复现方式：NTFS格式U盘插入Linux物理机后，通过修改SCSI指令让它变成只读U盘接入windows虚拟机就会出现此现象
+
+大体原因：估计跟Linux物理机Write(10)指令写入了大量的数据，导致U盘部分分区数据发生了变化
+
+### 5-2、diskgenius软件
+官网：https://www.diskgenius.cn/
+尽量下载专业版，能修改分区表数据。
+
+属性中AR表示Read-Only，可读写为A属性或者为空。
+一个U盘以一个MBR分区表和多个分区组成，MBR分区表包含了U盘总体属性，名称大体为RD2:KingstonDataTraveler3.0(20GB)
+每个分区有一个起始扇区号，因此在跳转扇区的时候，选择跳转范围很重要，如果以子分区跳转，则0扇区则为起始扇区号，如果以MBR分区表跳转，则是整个U盘扇区从0开始
+
+### 5-3、分区表科普知识
+检查并修复U盘的文件系统错误：chkdsk X: /f
+
+NTFS-3G 是一个允许 Linux 系统读写 NTFS 文件系统的驱动程序。NTFS（New Technology File System）是 Windows 的主要文件系统，具有较高的性能和安全性。然而，由于 NTFS 的复杂性和专利保护，Linux 系统默认情况下无法完全支持 NTFS 文件系统。NTFS-3G 的出现解决了这一问题，使得 Linux 用户能够方便地读写 NTFS 格式的分区。
+[为什么linux内核只能支持ntfs只读?](https://www.zhihu.com/question/21885351)
+[NTFS-3G 与 Windows NTFS 文件系统的兼容性分析](https://my.oschina.net/emacs_8660624/blog/16912335)
+```
+sudo apt-get install ntfs-3g
+sudo mount -t ntfs-3g /dev/sdX /mnt/ntfs
+sudo mount -t ntfs-3g -o ro /dev/sdX /mnt/ntfs  设置分区为只读
+sudo mount -t ntfs-3g -o rw /dev/sdX /mnt/ntfs  设置分区为可写
+sudo ntfsfix /dev/sdX   使用 ntfsfix 工具修复分区
+sudo ntfsinfo /dev/sdXn
+```
+
+wireshark软件抓取的USB数据包：
+501	18.512710	host	1.14.2	USBMS	58	SCSI: Write(10) LUN: 0x00 (LBA: 0x005ebcb8, Len: 8)
+503	18.512730	host	1.14.2	USBMS	4123	SCSI: Data Out LUN: 0x00 (Write(10) Request Data) 
+506	18.537869	1.14.1	host	USBMS	40	SCSI: Response LUN: 0x00 (Write(10)) (Good)
+第一条是CBW指令，windows系统驱动告诉U盘设备的1.14.2端口地址0x02(OUT端点)我要下发Write(10)指令了
+第二条是DATA数据
+第三条是CSW指令，U盘设备的1.14.1端口地址0x81(IN端点)告诉windows系统驱动完成状态
+
+LBA: 0x005ebcb8表示逻辑块，即扇区地址，即U盘的第LBA: 0x005ebcb8个扇区开始向后写入8个扇区数据，U盘扇区大小一般为512字节，即写入4096个字节，URB包装占27字节，总的合起来4123字节。
+
+### 5-3、使用dd命令读取分区数据
+读取LBA为0扇区的数据（结合DiskGenius软件验证是否正常读取）：
+dd if=/dev/sdb of=output.img bs=512 count=1 skip=0
+dd if=/dev/sdb1 of=output.img bs=512 count=1 skip=0
+
+读取LBA为6208696扇区的数据（注意wireshark软件抓取的数据是以MBR分区表计算的LBA地址）：
+dd if=/dev/sdb of=output.img bs=512 count=1 skip=6208696
+
+写入到 U 盘的 LBA 为 6208696 的扇区：
+dd if=data.bin of=/dev/sdb bs=512 count=2048 seek=6208696
+
+写入数据文件data.bin说明：
+写入的数据为ASCII字符，即wireshark最右边翻译成字符的数据，因此data.bin文件内容应为这个数据，使用Notepad++统计字符length为272388，则除以512大约等于532个扇区，因此数据长度不足，即使dd命令指定写入数据为512x2048，但是实际只能写入到6209228扇区。
+6208696+2048=6210744
+6208696+532=6209228
+
+对于ASCII数据0xFF和0x00在wireshark都表现为.字符，但是通过DiskGenius软件查看0x00表现为.字符，而0xFF则表现为ÿ字符。因此需要在wireshark上面复制数据为as Printable Text即可，发现修改后使用DiskGenius软件查看数据也是不对的，最终还是选择使用dd命令读取512x8个字节数据保存成data.bin数据。
+另外0x00读取出现的字符使用vim命令查看是.字符，而0xFF则是空白字符，并不代表读取失败哦！
+
+最终测试发现在6208696扇区开始写入8个扇区数据后U盘使用正常。
+备注：如果U盘未正常挂载（fdisk -l命令看不见U盘设备），则写入数据最终是失败的。
+
+探究是否可以写入一个扇区，答案是不行的，U盘还是异常状态，但是报错变成了请将磁盘插入“U 盘（E:）”。
+
+### 5-4、使用c语言读取分区数据
+/dev/sg0 是 Linux 系统中的一个设备文件，表示 SCSI 通用设备（SCSI Generic device）。它通常用于与 SCSI 设备（如硬盘、光驱、磁带机等）进行低级别的交互。
+备注：当插入一个U盘时，系统中就会增加一个/dev/sg1设备文件。可以使用 sg_map 命令查看系统中所有 SCSI 设备及其对应的 /dev/sg 设备文件。
 
 
+### 5-5、fdisk -l命令看不见U盘设备
+使用dmesg -wT命令能看见U盘插入正常信息，lsusb命令也能正常查看U盘信息，使用ls /dev/sd*也能看见设备文件。
 
+sudo fdisk -l /dev/sdb 确认 U 盘的分区：
+```
+root@hankin:/home# fdisk -l /dev/sdb
+Disk /dev/sdb: 3 GiB, 3178869760 bytes, 6208730 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
 
+root@hankin:/home# fdisk -l /dev/sdb1
+Disk /dev/sdb1: 28.9 GiB, 31028412416 bytes, 60602368 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x73736572
 
+Device      Boot      Start        End    Sectors   Size Id Type
+/dev/sdb1p1      1920221984 3736432267 1816210284   866G 72 unknown
+/dev/sdb1p2      1936028192 3889681299 1953653108 931.6G 6c unknown
+/dev/sdb1p3               0          0          0     0B  0 Empty
+/dev/sdb1p4        27722122   27722568        447 223.5K  0 Empty
 
+Partition table entries are not in disk order.  # 这意味着分区表中的条目没有按照逻辑顺序排列，这通常是分区表损坏的一个迹象
+```
+发现跟这个可能无关，我使用另外一个U盘查看/dev/sb1设备文件显示一样的信息，发现异常U盘在Linux系统重启之后是正常挂载的，可能是Linux系统出现了问题。
+```
+异常状态：
+root@hankin:~# ll /dev/sd* -h
+brw-rw---- 1 root disk 8,  0 Mar 17 11:40 /dev/sda
+brw-rw---- 1 root disk 8,  1 Mar 17 11:40 /dev/sda1
+brw-rw---- 1 root disk 8,  2 Mar 17 11:40 /dev/sda2
+brw-rw---- 1 root disk 8,  3 Mar 17 11:40 /dev/sda3
+-rw-r--r-- 1 root root  3.0G Mar 17 16:15 /dev/sdb
+brw-rw---- 1 root disk 8, 17 Mar 17 16:16 /dev/sdb1
 
+root@hankin:~# fdisk -l /dev/sdb
+Disk /dev/sdb: 3 GiB, 3178853376 bytes, 6208698 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
 
+正常状态：
+root@hankin:~# ll /dev/sd*
+brw-rw---- 1 root disk 8,  0 Mar 17  2025 /dev/sda
+brw-rw---- 1 root disk 8,  1 Mar 17  2025 /dev/sda1
+brw-rw---- 1 root disk 8,  2 Mar 17  2025 /dev/sda2
+brw-rw---- 1 root disk 8,  3 Mar 17  2025 /dev/sda3
+brw-rw---- 1 root disk 8, 16 Mar 17 16:22 /dev/sdb
+brw-rw---- 1 root disk 8, 17 Mar 17 16:22 /dev/sdb1
+root@hankin:~# fdisk -l /dev/sdb
+Disk /dev/sdb: 28.9 GiB, 31029460992 bytes, 60604416 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x42c9bb0b
 
+Device     Boot Start      End  Sectors  Size Id Type
+/dev/sdb1  *     2048 60604415 60602368 28.9G  7 HPFS/NTFS/exFAT
+```
 
+另外一个U盘信息：
+```
+root@hankin:~# fdisk -l /dev/sdb
+Disk /dev/sdb: 7.3 GiB, 7801405440 bytes, 15237120 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe4d62e47
 
+Device     Boot    Start      End  Sectors  Size Id Type
+/dev/sdb1  *     1654784 14315519 12660736    6G  7 HPFS/NTFS/exFAT
+/dev/sdb2       14315520 15233022   917503  448M 1b Hidden W95 FAT32
+
+root@hankin:~# fdisk -l /dev/sdb1
+Disk /dev/sdb1: 6 GiB, 6482296832 bytes, 12660736 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x73736572
+
+Device      Boot      Start        End    Sectors   Size Id Type
+/dev/sdb1p1      1920221984 3736432267 1816210284   866G 72 unknown
+/dev/sdb1p2      1936028192 3889681299 1953653108 931.6G 6c unknown
+/dev/sdb1p3               0          0          0     0B  0 Empty
+/dev/sdb1p4        27722122   27722568        447 223.5K  0 Empty
+
+Partition table entries are not in disk order.
+```
+
+sudo fdisk /dev/sdb 创建分区
+sudo mkfs.ext4 /dev/sdb1 格式化分区
+sudo mkfs.vfat /dev/sdb1 格式化为 FAT32 格式
+
+修复分区表：
+sudo gdisk /dev/sdb 
+sudo parted /dev/sdb
+(parted) mklabel msdos
+
+挂载 U 盘：
+sudo mkdir /mnt/myusb
+sudo mount /dev/sdb1 /mnt/myusb
+
+读取和写入数据：
+sudo dd if=input_file of=/dev/sdb1 bs=512 count=1
+
+### 5-7、检查 U 盘的健康状态
+使用 smartctl 工具检查 U 盘的健康状态（安装失败因此没有测试）：
+```
+sudo apt-get install smartmontools
+sudo smartctl -a /dev/sdb
+```

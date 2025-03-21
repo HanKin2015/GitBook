@@ -97,5 +97,9 @@ chattr +i /var/lib/deepin/developer-mode/enabled
 - 复制粘贴问题：apt autoremove open-vm-tools、apt install open-vm-tools、apt install open-vm-tools-desktop重启虚拟机即可（默认安装的open-vm-tools不匹配需要卸载）
 - 配置ll命令：在/etc/bash.bashrc文件中添加alias ll="ls -laF"
 
+## 8、可移动设备无外设
+原因是设置-》硬件-》USB控制器-》显示所有USB输入设备
 
+## 9、复制粘贴失效问题
+大概率是vm-tools问题（如更新了vm-tools未重启虚拟机），可以尝试重启虚拟机试试。
 

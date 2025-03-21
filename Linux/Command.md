@@ -269,7 +269,7 @@ cd -	返回上一层所在工作区
 2. `view->load(QUrl("file:///home//test.html"));`
 3. `connect(view, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));`
 
-# 13、chown
+# 13、chown命令修改文件或文件夹所有者
 将文件 file1.txt 的拥有者设为 runoob，群体的使用者 runoobgroup :
 ```
 chown runoob:runoobgroup file1.txt

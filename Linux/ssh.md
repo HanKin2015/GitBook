@@ -108,9 +108,11 @@ pam_tally2 --reset -u xxx 解锁即可
 服务端SSH 服务配置了禁止root用户登录策略。
 
 通过 cat 等指令查看 /etc/ssh/sshd_config 中是否包含类似如下配置：
+```
 PermitRootLogin no
+或
 PermitRootLogin prohibit-password
-
+```
 修改为yes即可。
 
 ## 6、ssh配置正常却连接不上
@@ -294,7 +296,9 @@ Enter file in which to save the key (/root/.ssh/id_rsa): ^C
 然鹅密码输入正确还是报错：Permission denied (publickey,password).
 
 然后我使用普通用户登录，使用su命令切换都是正常，然后退出后使用root用户登录也正常
-猜测可能是ssh服务重启时间长？？？还是由于我先连接的原因？？？
+
+可以查看sshd的日志，日志文件/var/log/secure，可能会有打印“Authentication refused: bad ownership or modes for directory /home/admin”，也就是/home/admin目录的权限不对，使用ls -ld /home/admin命令查看该目录的权限已经是最高权限（777），但正常环境的权限为700。
+从网上资料确认，ssh要求/home/admin和/home/admin/.ssh目录对组不能有写权限。
 
 ## 12、ssh连接不上
 报错：

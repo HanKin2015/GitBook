@@ -3,6 +3,8 @@
 ## 1、快捷键
 Ctrl+K+C	注释
 Ctrl+K+U	取消注释
+Ctrl+R,Ctrl+W 查看空白
+Ctrl+F4     关闭当前文件
 
 ## 2、神奇的事情
 ```
@@ -123,7 +125,7 @@ error LNK2001: 无法解析的外部符号 "__declspec(dllimport)
 在头文件位置引入cpp后编译通过。
 https://docs.huihoo.com/doxygen/linux/kernel/3.7/index.html
 
-这种问题⼀般是没有正确添加lib库导致的，依我所⽤的visual studio 2019为例。主要需要改动的地⽅有两个地⽅。
+这种问题一般是没有正确添加lib库导致的，依我所⽤的visual studio 2019为例。主要需要改动的地⽅有两个地⽅。
 先需要改动：项目右键属性-》配置属性-》链接器 -> 常规 -> 附加库目录
 再则需要改动：项目右键属性-》配置属性-》链接器 -> 输入-> 附加依赖项
 解决办法：首先找你你缺的lib库名，比如我这缺少 SeetaFaceDetector2.lib这个库。然后我找到这个库在我计算机中的位置。
@@ -156,25 +158,18 @@ sln里有多个工程，当你移除某个工程时sln会有变化，sln并不�
 似乎vs2010没有固定显示的窗口，只能在左上角的搜索框或者下拉框获取。
 
 ## 17、visual studio 设置显示空格及缩进空格数
-Tools>Options>Text Editor>All Languages>Tabs>
+- 使用菜单, 打开Edit–> Advanced–> View White Space（查看空白）
+- 使用键盘的快捷键, 按下Ctrl+R, 然后按Ctrl+W
+- 工具-》选项-》文本编辑器-》常规-》查看空白
 
-似乎vs2010不支持智能选择空格和tab键，即无法根据上一行的情况选择。
+tab键改为4个空格：工具-》选项-》文本编辑器-》C/C++（或者所有语言，注意冲突）-》制表符-》插入空格
 
-## 18、visual studio中显示空格和tab
-开启这个功能有两种方式:
-
-使用菜单, 打开Edit–> Advanced–> View White Space
-使用键盘的快捷键, 按下Ctrl+R, 然后按Ctrl+W.
-
-## 19、切换字体
+## 18、切换字体
 工具-》选项-》环境-》字体和颜色
 
 推荐Consolas字体
 
-## 20、tab键改为4个空格
-工具-》选项-》文本编辑器-》C/C++-》制表符-》插入空格
-
-## 21、禁止VS JIT debugger
+## 19、禁止VS JIT debugger
 Just In Timer
 ```
 Delete the following registry key: 
@@ -186,18 +181,18 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDe
 "C:\Windows\system32\vsjitdebugger.exe" -p %ld -e %ld
 ```
 
-## 22、Debug和Release版本区别
+## 20、Debug和Release版本区别
 发现程序崩溃时Release版本没有任何输出，不清楚哪里出错。但是使用Debug版本后会告诉你哪里出错了。
 
-## 23、轻松搞定VS生成sdf和ipch文件太大占用空间问题
+## 21、轻松搞定VS生成sdf和ipch文件太大占用空间问题
 https://blog.csdn.net/songyi160/article/details/51612716
 
 目前的暴力行为删除大文件。
 
-## 24、切换主题
+## 22、切换主题
 工具-》选项-》环境-》常规-》颜色主题
 
-## 25、安装VS2019后编译内核模式驱动失败
+## 23、安装VS2019后编译内核模式驱动失败
 奇怪的现象有安装的物理机环境编译正常，但是另外一个环境在已安装了vs2010和vs2015基础上再安装了vs2019，编译失败。
 
 物理机报错：A WDK corresponding to target version '10.0.19041.0' was not found. Please install this WDK version before building.

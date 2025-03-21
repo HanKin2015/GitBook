@@ -372,4 +372,11 @@ https://baijiahao.baidu.com/s?id=1760314243594407431&wfr=spider&for=pc
 微PE工具箱：https://www.wepe.com.cn/download.html
 微PE工具箱使用教程：https://blog.csdn.net/u014001523/article/details/138330056
 
-## 22、
+## 22、老毛桃刷机
+完整版：https://www.laomaotao.net/
+U盘制作完毕后，放入ISO镜像或者GHO镜像（一般推荐使用GHO镜像），然后进入系统后使用一键装机即可（有时候需要优先使用分区助手格式化系统盘）
+注意：在安装Linux的GHO镜像时，使用一键装机会出现Missing operating system错误，需要使用Ghost 11.5或者Ghost 12.0软件安装GHO镜像（Disk->From image->选择U盘中的GHO镜像）
+
+
+
+

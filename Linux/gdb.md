@@ -593,7 +593,7 @@ ImportError: No module named site
 没有core文件生成，在/proc/sys/kernel/core_pattern发现生成在/tmp/目录下，但是是0大小的文件。
 然后使用ulimit -c发现结果就是0，但是此时是超级管理员执行，在非管理员执行时发现是unlimited，这是一个大坑啊。
 
-调试脚本见：D:\Github\Storage\shell\gdb_instantaneous_process.sh
+调试脚本见：D:\Github\Storage\c++\gdb\gdb_instantaneous_process.sh
 
 ## 18、下断点实战
 示例demo见：D:\Github\Storage\c++\gdb\breakpoint.cpp

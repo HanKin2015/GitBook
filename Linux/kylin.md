@@ -51,110 +51,14 @@ usage:  setstatus < Normal |Softmode > [ -p ]
         setstatus -f  < exectl | fpro | kmod >  < on | off >
 ```
 
-## 4、镜像源
-默认镜像源地址填写：
-```
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:/home/admin/usbip_driver# cat /etc/apt/sources.list
-# 本文件由源管理器管理，会定期检测与修复，请勿修改本文件
-deb http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1 main restricted universe multiverse
-deb http://archive2.kylinos.cn/deb/kylin/production/PART-V10-SP1/custom/partner/V10-SP1 default all
+## 4、安装ko文件
+可能会出现：insmod : ERROR: could not insert module usbip-core.ko: Permission denied。
 
-是不是写错了：http://archive2.kylinos.cn/deb/kylin/production/PART-V10-SP1/custom/partner/V10-SP1/dists/default/all/
-很奇怪，直接打开链接，然后点击dists会报错：
-HTTP 404: Not found.
-The URL you requested was not found on this server.
-但是通过点击Parent Directory，然后再重新点击就可以了。
-```
+解决方法：
+在安全中心-》应用控制与保护-》关闭检查应用程序完整性
 
-http://archive.kylinos.cn/kylin/KYLIN-ALL/
-
-在系统的/etc/apt/sources.list文件中，根据不同版本填入以下内容:
-```
-#V10 SP1 2107版本:
-deb http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107-updates main restricted universe multiverse
-
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# cat /etc/.kyinfo
-[dist]
-name=Kylin
-milestone=Desktop-V10-SP1-Release-2107
-arch=loongarch64
-beta=False
-time=2021-09-22 12:03:40
-dist_id=Kylin-Desktop-V10-SP1-Release-2107-loongarch64-2021-09-22 12:03:40
-
-[servicekey]
-key=0124212
-
-[os]
-to=
-term=2023-04-12
-```
-使用apt update命令更新库源。
-
-发现一个神奇的事情，难道是我理解错了？？？官网写着：
-```
-#V10 SP1版本:
-deb http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1 main restricted universe multiverse
-
-#V10 SP1 2107版本:
-deb http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107-updates main restricted universe multiverse
-```
-但是使用10.1-2107-updates根本无法获取clang库，但是写成10.1就可以了。
-那是不是应该理解为这两个链接地址都要添加上去，后面的是前面的补充，updates嘛。
-
-## 5、apt update执行失败
-```
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# apt update
-获取:1 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1 InRelease [67.3 kB]
-正在读取软件包列表... 完成
-E: http://archive.kylinos.cn/kylin/KYLIN-ALL/dists/10.1/InRelease 的 Release 文件已经过期(已经过期了 285天 7小时 42分 22秒)。该仓库的更新将不会应用。
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# date
-2021年 09月 06日 星期一 11:39:07 CST
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# date -s "20220705 14:40"
-2022年 07月 05日 星期二 14:40:00 CST
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# apt update
-获取:1 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1 InRelease [67.3 kB]
-获取:2 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1/main loongarch64 Packages [3,078 kB]
-获取:3 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1/restricted loongarch64 Packages [1,348 B]                                     
-获取:4 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1/universe loongarch64 Packages [17.7 MB]                                       
-获取:5 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1/multiverse loongarch64 Packages [176 kB]                                      
-已下载 21.0 MB，耗时 51秒 (414 kB/s)                                                                                                
-正在读取软件包列表... 完成
-正在分析软件包的依赖关系树
-正在读取状态信息... 完成
-有 188 个软件包可以升级。请执行 ‘apt list --upgradable’ 来查看它们。
-
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# apt update
-获取:1 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.0 InRelease [73.6 kB]
-已下载 73.6 kB，耗时 1秒 (134 kB/s)
-正在读取软件包列表... 完成
-正在分析软件包的依赖关系树
-正在读取状态信息... 完成
-所有软件包均为最新。
-N: 鉴于仓库 'http://archive.kylinos.cn/kylin/KYLIN-ALL 10.0 InRelease' 不支持 'loongarch64' 体系结构，跳过配置文件 'main/binary-loongarch64/Packages' 的获取。
-N: 鉴于仓库 'http://archive.kylinos.cn/kylin/KYLIN-ALL 10.0 InRelease' 不支持 'loongarch64' 体系结构，跳过配置文件 'restricted/binary-loongarch64/Packages' 的获取。
-N: 鉴于仓库 'http://archive.kylinos.cn/kylin/KYLIN-ALL 10.0 InRelease' 不支持 'loongarch64' 体系结构，跳过配置文件 'universe/binary-loongarch64/Packages' 的获取。
-N: 鉴于仓库 'http://archive.kylinos.cn/kylin/KYLIN-ALL 10.0 InRelease' 不支持 'loongarch64' 体系结构，跳过配置文件 'multiverse/binary-loongarch64/Packages' 的获取。
-
-
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# apt update
-忽略:1 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107 InRelease
-错误:2 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107 Release
-  404  Not Found [IP: 175.6.237.98 80]
-正在读取软件包列表... 完成
-E: 仓库 “http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107 Release” 没有 Release 文件。
-N: 无法安全地用该源进行更新，所以默认禁用该源。
-N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# vim /etc/apt/sources.list
-root@admin-LM-LS3A5000-7A1000-1w-V01-pcA2101:~# apt update
-获取:1 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107-updates InRelease [48.0 kB]
-获取:2 http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107-updates/universe loongarch64 Packages [13.7 kB]
-已下载 61.7 kB，耗时 1秒 (75.7 kB/s)
-正在读取软件包列表... 完成
-正在分析软件包的依赖关系树
-正在读取状态信息... 完成
-有 2 个软件包可以升级。请执行 ‘apt list --upgradable’ 来查看它们。
-```
+## 5、其他主机无法ping通银河麒麟
+发现是银河麒麟的网络保护中的防火墙搞的鬼，从公共网络设置为自定义配置即可。
 
 ## 6、安装linux内核头文件
 ```
@@ -470,12 +374,3 @@ lscpu
 
 因为后面找到一台龙芯3A4000的mips架构。
 我的理解是这两类跟硬件有关，是无法通过软件来更改的。
-
-## 10、安装ko文件
-可能会出现：insmod : ERROR: could not insert module usbip-core.ko: Permission denied。
-
-解决方法：
-在安全中心-》应用控制与保护-》关闭检查应用程序完整性
-
-## 11、其他主机无法ping通银河麒麟
-发现是银河麒麟的网络保护中的防火墙搞的鬼，从公共网络设置为自定义配置即可。

@@ -22,11 +22,11 @@ Options-》File Type Options
 ## 5、中文注释为乱码
 【解决办法】：
 单个文件乱码解决办法：
-      菜单栏中【File】 > 【Reload As Encoding...】 > 【Chinese Simplified (GB18030)】 > 选择后，点击load，问题解决！！！
+菜单栏中【File】 > 【Reload As Encoding...】 > 【Chinese Simplified (GB18030)】 > 选择后，点击load，问题解决！！！
 
 所有文件乱码解决办法：
-    我的理解，在做下面操作的时候，先设置，然后关闭所有打开的文件，然后再打开文件即可
-    菜单栏中 【Options】 > 【Preferences】 >File标签中，最下面的“Default encod­ing” ：改成System Default(Windows ANSI) 或者Chinese Simplified(GB2312) CP:936（简体中文的都可以选），点击确定，问题解决！！！
+我的理解，在做下面操作的时候，先设置，然后关闭所有打开的文件，然后再打开文件即可
+菜单栏中【Options】> 【Preferences】 >File标签中，最下面的“Default encoding”：改成System Default(Windows ANSI)或者Chinese Simplified(GB2312) CP:936（简体中文的都可以选），点击确定，问题解决！！！
 
 ## 6、使用Source Insight时出现"Symbol not found"的问题 —代码跳转
 然后在右边的panel面板（有一个Project Files的地方），再箭头指向的地方右键，接下来点击Open Project，然后选择你需要打开的项目确定，然后它会问你是否要同步，当然选择是咯，那么接来下就是Synchronizing了 ，那么结束后你再点击刚才的View，你会发现能跳转了。

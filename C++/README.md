@@ -5,11 +5,23 @@ C++那些事：https://github.com/Light-City/CPlusPlusThings
 汇编：https://godbolt.org/
 基准测试：https://quick-bench.com/q/paKQEp0HMpgT6BpAW6TA4BoRo-M
 benchmark库：https://github.com/google/benchmark
-综合网站：https://www.build-bench.com/b/UisJAsK0HhePtnse9KODYslfVm0
+在线编译器：https://www.build-bench.com/b/UisJAsK0HhePtnse9KODYslfVm0
+学习网站：https://www.runoob.com/cplusplus/cpp-libs-exception.html
 
 ## 1、isspace
-用于检查参数c是否为空格字符。
-头文件：ctype.h
+一个用于检查字符是否为空白字符的标准库函数。
+```
+#include <ctype.h>
+int isspace(int c); // 如果 c 是空白字符，isspace 返回一个非零值（通常是 1）。否则返回 0。
+```
+
+isspace 函数识别以下空白字符：
+- 空格（' '）
+- 制表符（'\t'）
+- 换行符（'\n'）
+- 回车符（'\r'）
+- 垂直制表符（'\v'）
+- 进纸符（'\f'）
 
 ## 2、std::string::npos
 std::string::npos是一个常数，它等于size_type类型可以表示的最大值，用来表示一个不存在的位置,类型一般是std::container_type::size_type。
@@ -142,8 +154,8 @@ switch(expression){
 ## 12、没有包含头文件unistd.h
 ```
 close’ was not declared in this scope
-‘read’ was not declared in this scope
-‘sysconf’ was not declared in this scope
+‘read’ was not declared in this scope
+‘sysconf’ was not declared in this scope
 ```
 没有包含头文件 unistd.h 造成的。
 

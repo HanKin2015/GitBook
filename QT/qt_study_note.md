@@ -3,7 +3,33 @@
 ## 1、
 
 
-# 2、中英文国际版
+## 2、中英文国际版
+
+### 2-1、ts文件和qm文件处理
+ts文件：
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
+<context>
+    <name>BindTargetSelectPanel</name>
+    <message>
+        <source>Are you OK?</source>
+        <translation type="vanished">你们还好吗？</translation>
+    </message>
+    <message>
+        <source>I am fine.</source>
+        <translation>我很好。</translation>
+    </message>
+</context>
+</TS>
+```
+Linux系统生成qm文件：lrelease test.ts
+Windows系统生成qm文件：
+QT Creator：在pro文件添加TRANSLATIONS += Translation_zh_CN.ts，然后工具-》外部-》Qt语言家-》更新翻译lupdate/发布翻译lrelease
+Microsoft Visual Studio：右键-》添加-》新建项-》Qt Translation File，选择ts文件右键lrelease
+
+### 2-2、qm文件加载示例
 ```
 #define QM_FILE_PATH "./"           //目录路径
 #define QMAIN_ZH_QM "qmain_ZH.qm"   //翻译文件
@@ -21,31 +47,75 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-QString title, vmid, hide, vdiuname, shutdown, snap_enflag = "0",
-    rcid = "", rcs_length = "", vmp_host = HANKIN_BAR_INVALID_HOST,
-    self_service;
-QStringList arglists = app.arguments();
-//加载语言
-QTranslator qtTranslator; 
-QSettings settings(LANGCONFIG_INI,QSettings::IniFormat);
-QString lang = settings.value(LANG_SCTION).toString();
-setLangBar(qtTranslator,lang);
-app.installTranslator( &qtTranslator );
-
-	/* 日志初始化函数 */
-if (logs_init(PROGRAM_NAME) < 0) {
-	fprintf(stderr, "logs_init failed\n");
-	return -1;
+    //加载语言
+    QTranslator qtTranslator; 
+    QSettings settings(LANGCONFIG_INI,QSettings::IniFormat);
+    QString lang = settings.value(LANG_SCTION).toString();
+    setLangBar(qtTranslator,lang);
+    app.installTranslator(&qtTranslator);
 }
 
-for(int i = 0; i < argc; i++){
-    if(arglists[i].compare("--vmid") == 0){
-        vmid = arglists[i+1];
-    }else if(arglists[i].compare("--title") == 0){
-        title = arglists[i+1];
+//中文
+void MainWindow::ChineseActionClicked()
+{
+    qDebug() << "Chinese";
+
+    if  (translator  !=  nullptr){
+        qApp->removeTranslator(translator);//如果之前加载过翻译文件，则移除之前的翻译文件。
+        delete  translator;
+        translator  =  nullptr;
+    }
+
+    translator  =  new  QTranslator;
+
+    if (translator->load(application_dir_path + "\\zh_CN.qm")) {
+        qApp->installTranslator(translator);
+        ui->retranslateUi(this);
+
+        qDebug() << "load zh_CN.qm sucssed!";
+    } else {
+        qDebug() << "load zh_CN.qm failed!";
+    }
+}
+//切换位原本英文语言
+void MainWindow::EnglishActionClicked()
+{
+    qDebug() << "English";
+
+    if (translator  !=  nullptr){
+        qApp->removeTranslator(translator);//如果之前加载过翻译文件，则移除之前的翻译文件。
+        delete  translator;
+        translator  =  nullptr;
+        qDebug() << "???";
+    }
+    qApp->installTranslator(nullptr);
+
+    ui->retranslateUi(this);
+}
 ```
 
-# 3、点击事件实现（按钮）
+### 2-3、文本内容换行翻译
+```
+mRadioButton->setToolTip(tr("No running virtual application detected, the USB management\n"
+                            "feature for virtual applications is currently unavailable."));
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
+<context>
+    <name>BindTargetSelectPanel</name>
+    <message>
+        <location filename="Systemtray.cpp" line="846"/>
+        <source>No running virtual application detected, the USB management
+feature for virtual applications is currently unavailable.</source>
+        <translation>未检测到运行的虚拟应用，虚拟
+应用USB管理功能暂不可用。</translation>
+    </message>
+</context>
+</TS>
+```
+
+## 3、点击事件实现（按钮）
 
 ```
 QPushButton *testButton = new QPushButton(this);
@@ -60,7 +130,7 @@ public slots:  //注意slots声明需要修饰符private或其他
 
 对于添加参数
 
-# 4、字体大小加粗
+## 4、字体大小加粗
 
 ```
 QLabel *label = new QLabel(tr("Current page cannot be accessed"), this);
@@ -95,9 +165,9 @@ font.setBold(false);
 a.setFont(font);
 ```
 
-# [QT字体的设置](https://www.cnblogs.com/findumars/p/4966027.html)
+[QT字体的设置](https://www.cnblogs.com/findumars/p/4966027.html)
 
-# 5、判断指针是否实例化
+## 5、判断指针是否实例化
 
 首先声明的时候需要初始化为空指针。
 
@@ -115,7 +185,7 @@ else {
 }
 ```
 
-# 6、void QTimer::timeout()’ is protected
+## 6、void QTimer::timeout()’ is protected
 
 神奇的错误。
 
@@ -134,7 +204,7 @@ connect(selfSeriveTimer, SIGNAL(timeout()), selfSeriveLoop, SLOT(quit()));
 connect(selfServiceReply, SIGNAL(finished()), selfSeriveLoop, SLOT(quit()))
 ```
 
-# 7、qwebview清理缓存
+## 7、qwebview清理缓存
 
 [QWebView加载html，程序退出时提示内存泄漏]( https://blog.csdn.net/jigetage/article/details/79548856 )
 
@@ -161,7 +231,7 @@ ui->webView->page()->networkAccessManager()->setCache(diskCache);
 ui->webView->page()->settings()->setMaximumPagesInCache(10);
 ```
 
-# 8、按钮的三种状态
+## 8、按钮的三种状态
 ```
 reloadButton->setStyleSheet("QPushButton{background-color:#17C1C5;border-radius:2px;color:#FFFFFF;}"
 		"QPushButton:hover{background-color:#17C1C5;border-radius:2px;color:#FFFFFF;}"
@@ -178,7 +248,7 @@ border-radius:2px  圆角
 注意：共有属性只在第一个框里设置即可，并不需要所有都进行设置。
 
 
-# 9、QLatin1String类的说明
+## 9、QLatin1String类的说明
 https://blog.csdn.net/qq_33266987/article/details/72843578 
 
  QLatin1String类对US-ASCII/Latin-1编码的字符串进行了简单封装，可理解为关于const char*的一个浅封装。 
@@ -195,7 +265,7 @@ DEFINES += \    QT_NO_CAST_FROM_ASCII
 
 char*就不能转换成QString，这时候就可以用 QLatin1String来代替在所有需要QString的地方。
 
-# 10、qwebview访问https网页
+## 10、qwebview访问https网页
 
 - 需要安装openssl环境
 - 如果遇到一些网站需要安装证书会报ssl握手失败
@@ -234,7 +304,7 @@ void HankinPopDialog::ignoreNetworkReplySslErrors(QNetworkReply* reply, const QL
 			newSslCertific
 ```
 
-# 11、QT给QWebView设置自定义cookie
+## 11、QT给QWebView设置自定义cookie
 
 头文件中定义：
 
@@ -260,9 +330,9 @@ m_pWebView->load(strUrl);
 
 使用QNetworkCookieJar类需要包含头文件#include <QtNetwork/QNetworkCookieJar>
 
-# 12、中文乱码
+## 12、中文乱码
 
-## qt4方式
+### qt4方式
 
 ```
 QTextCodec *codec = QTextCodec::codecForName("gbk");　
@@ -271,9 +341,9 @@ QTextCodec::setCodecForCStrings(codec);
 QTextCodec::setCodecForTr(codec);
 ```
 
-## qt5方式
+### qt5方式
 
-# 13、查看qt源代码
+## 13、查看qt源代码
 
 首先要保证在安装Qt时勾选了安装源码，如果没有安装源码，可以参考http://blog.csdn.net/xiaoyink/article/details/79384876 安装组件的方式安装源码，或者卸载Qt再重新安装，安装时勾选安装源码选项，或者在Qt官网下载源码，下载好的源码如何与Qt Creator相关联待研究。
 
@@ -289,7 +359,7 @@ inputMenu->setStyleSheet("QMenu{background-color: #FFFFFF;border-radius:2px;}"
 "QMenu::item:selected{background-color:#E7F8F9}");
 ```
 
-# 14、获取屏幕分辨率
+## 14、获取屏幕分辨率
 
 ```
 QDesktopWidget* desktopWidget = QApplication::desktop();
@@ -301,7 +371,7 @@ QRect deskRect = desktopWidget->availableGeometry();
 QRect screenRect = desktopWidget->screenGeometry();
 ```
 
-# 15、获取时间
+## 15、获取时间
 
 1 使用QDateTime类（毫秒精度）
 
@@ -331,7 +401,7 @@ QLabel* timestampLabel = new QLabel(qDateTime.toString(tr("Ti'm'e:yy-MM-dd hh:mm
 
 注意：转换的时候，如果要显示m、d、M、y等的时候需要使用单引号。
 
-# 16、隐藏最大化和最小化按钮
+## 16、隐藏最大化和最小化按钮
 
 ```
 MainWindow w;
@@ -341,7 +411,7 @@ w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint|Qt::WindowMaxmizeB
 在ubuntu16上，最大化按钮始终没有被隐藏，无从考证。
 ```
 
-# 17、关闭webview滚动条
+## 17、关闭webview滚动条
 
 关闭了有问题，无法进行鼠标滚轮滚动。
 
@@ -377,7 +447,7 @@ html.append(" ::-webkit-scrollbar-thumb{background:rgb(188,188,188);}");
 html.append("</style>");
 ```
 
-# 18、注销登录按钮样式非常棒
+## 18、注销登录按钮样式非常棒
 
 圆角、颜色透明、内间距、字体
 
@@ -398,7 +468,7 @@ void MyPopDialog::initLogoutPushButton(){
 }
 ```
 
-# 19、给窗体加边框
+## 19、给窗体加边框
 
 父窗口加边框后子窗口也会有。
 
@@ -408,10 +478,10 @@ border: none;
 border-radius:5px;
 ```
 
-# 20、禁止右键
+## 20、禁止右键
 setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
 
-# 21、QT判断鼠标是否在某子窗口控件上方
+## 21、QT判断鼠标是否在某子窗口控件上方
 
 需要注意的是，子窗口获取geometry，是相对于父窗口的相对位置，QCursor::pos()获取的是鼠标绝对位置，要不将父窗口的相对位置进行换算，要不将鼠标的绝对位置进行换算，这里本文采用将鼠标绝对位置换算到控件上，示例代码如下：
 
@@ -419,9 +489,9 @@ setContextMenuPolicy (Qt::NoContextMenu); //屏蔽默认鼠标右键功能
 if(ui->groupBox->geometry().contains(this->mapFromGlobal(QCursor::pos())))
 ```
 
-# 22、QPoint和SpicePoint类相像，都包含x和y值
+## 22、QPoint和SpicePoint类相像，都包含x和y值
 
-# 23、模态和非模态
+## 23、模态和非模态
 
 **1、主要讲的是对QWidget设置模态窗口**
 
@@ -467,19 +537,7 @@ setWindowModality(Qt::WindowModal);
 
   **解决办法就是自定义一个槽函数，当按键按下时才在槽函数里面创建对话框，此时QWidget已经创建完成，可以将this传入，这样就能够获得预想的结果。**
 
-# 24、
-
-
-
-**Noto Sans CJK SC DemiLight Regular**字体：免费商用。
-
-字体分为：Regular、Blod、
-
-# QT学习笔记2
-
-接qt_study_note1.md文件内容
-
-## 1、QString和string之间的转换
+## 24、QString和string之间的转换
 ```
 string str;
 QString qstr;
@@ -488,25 +546,24 @@ qstr = QString::fromStdString(str);
 str = qstr.toStdString();
 ```
 
-## 2、size_t和int之间的转换
+## 25、size_t和int之间的转换
 ```
 vector<int> vec;
 size_t cnt = vec.size();
 int i = static_cast<int>(cnt);
 ```
-## 3、中文乱码
+## 26、中文乱码
 qt中使用的是unicode编码或者utf8编码。注意转换。
 return QString::fromLocal8Bit(str.c_str());
 并且可以使用base64编码进行转码保存，然后再解码读取。安全可靠。
 
-## 4、QStandardItemModel 
-
+## 27、QStandardItemModel 
 QStandardItemModel 是标准的以项数据（item data）为基础的标准数据模型类，通常与 QTableView 组合成 Model/View 结构，实现通用的二维数据的管理功能。 
 
-## 5、Qt中通过ui怎么引用不了pushbutton呢？ 原来是这样…
+## 28、Qt中通过ui怎么引用不了pushbutton呢？ 原来是这样…
 可能是博主在创建ui时，使用可视化设计，用拖拽的方式进行布置按钮的。
 
-## 6、qt的相对路径
+## 29、qt的相对路径
 https://blog.csdn.net/love_gaohz/article/details/12085905
 https://tieba.baidu.com/p/3150302863
 
@@ -542,7 +599,7 @@ currentPath = QDir::tempPath();
 qDebug() << "currentPath = " << currentPath;
 ```
 
-## 7、Qt休眠函数
+## 30、Qt休眠函数
 可以使用Qt自带的Sleep()方法，但使用这个方法会导致主线程休眠，UI卡顿，所以采用以下函数进行休眠。
 ```
 // 调用此函数时，传入所需休眠的毫秒数
@@ -555,18 +612,18 @@ bool MainWindow::sleep(unsigned int msec)
 }
 ```
 
-## 8、QAbstractButton
+## 31、QAbstractButton
 在 Qt 框架中，QAbstractButton 是一个抽象基类，代表所有按钮类的公共接口。它是 Qt GUI 模块中用于创建按钮的基础类，提供了按钮的基本功能和属性。QAbstractButton 主要用于定义按钮的行为和外观，而具体的按钮类型（如 QPushButton、QRadioButton、QCheckBox 等）则继承自这个类。
 
 - QAbstractButton 提供了按钮的状态管理功能，包括按下、释放、选中和未选中等状态。可以通过 isChecked() 和 setChecked(bool) 方法来获取和设置按钮的选中状态。
 - QAbstractButton 定义了一些信号，例如 clicked() 和 toggled(bool)。
 
-## 9、QListWidgetItem
+## 32、QListWidgetItem
 QListWidgetItem 是 Qt 中用于处理列表项的类。用于在 QListWidget 中表示单个列表项。它是 QListWidget 的一部分，提供了基本的功能来管理列表项的显示和行为。
 
 适用于一般的列表项管理，适合大多数需要在列表中显示数据的场景。
 
-## 10、托盘
+## 33、托盘
 ```
 QSystemTrayIcon *mSystemTray = new QSystemTrayIcon(this);
 mSystemTray->setIcon(QIcon(QString::fromStdString(".\\images\\logo.png")));
@@ -576,7 +633,7 @@ mSystemTray->setContextMenu(mMenu); /* 设置系统托盘的上下文菜单 */
 connect(mSystemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(ActiveTray(QSystemTrayIcon::ActivationReason)));
 ```
 
-## 11、低版本Qmenu组件中QAction无法显示tooltip
+## 34、低版本Qmenu组件中QAction无法显示tooltip
 高版本方法：
 ```
 QAction *mAction = new QAction("test");
@@ -634,7 +691,7 @@ protected:
 };
 ```
 
-## 12、信号和槽机制
+## 35、信号和槽机制
 两个类之间消息传递可以使用信号和槽机制。
 
 发送方定义信号并发射信号，接收方实例化发送方类，并connect信号和槽机制。
@@ -695,7 +752,7 @@ private:
 };
 ```
 
-### 12-1、Q_OBJECT
+### 35-1、Q_OBJECT
 Q_OBJECT 是 Qt 的元对象系统的一部分，它是一个宏，用于启用 Qt 的信号和槽机制、属性系统以及其他一些特性。具体来说，Q_OBJECT 宏的作用包括以下几个方面：
 
 #### 1. 启用信号和槽机制
@@ -711,15 +768,108 @@ Q_OBJECT 是 Qt 的元对象系统的一部分，它是一个宏，用于启用 
 类定义: Q_OBJECT 宏必须放在类的定义中，通常是在类的公有部分之前。
 MOC 处理: 确保您的构建系统（如 qmake 或 CMake）能够正确处理 MOC 生成的代码。
 
-### 12-2、发现在mainwindow.cpp文件中QMenu正常调用，但是在mainwindow.h文件中则缺头文件
+### 35-2、发现在mainwindow.cpp文件中QMenu正常调用，但是在mainwindow.h文件中则缺头文件
 另外一个问题就是Q_OBJECT定义的类基本上一定要在mainwindow.h文件中，否则就报错debug/mainwindow.o:mainwindow.cpp:(.rdata$.refptr._ZTV10CustomMenu[.refptr._ZTV10CustomMenu]+0x0): undefined reference to `vtable for CustomMenu'。
 常表示 C++ 中的虚拟表（vtable）未能正确生成。主要是因为 C++ 的编译和链接机制以及 Qt 的元对象编译器（MOC）工作原理。
 
-## 13、不要依赖于文本内容去比较组件
+## 36、不要依赖于文本内容去比较组件
 使用 tr("SBC Peripheral Manage") 进行比较时，如果存在中文翻译，可能会导致比较不匹配的问题。为了确保比较的准确性，您可以使用 QAction 的 objectName 或者直接使用 QAction 的指针进行比较，而不是依赖于文本内容。
 
-## 14、menu->menuAction()->setVisible(true);
+## 37、menu->menuAction()->setVisible(true);
 设置与 QMenu 相关联的 QAction 的可见性，直接也把自身给隐藏了。
+
+## 38、窗口属性
+在 Qt 中，窗口属性是指用于控制窗口行为和外观的各种设置。
+
+### 38-1、窗口类型（Window Type）
+```
+Qt::Widget               //是一个窗口或部件，有父窗口就是部件，没有就是窗口，普通窗口
+Qt::Window               //是一个窗口，有窗口边框和标题
+Qt::Dialog               //是一个对话框窗口，通常用于获取用户输入
+Qt::Sheet                //是一个窗口或部件Macintosh表单
+Qt::Drawer               //是一个窗口或部件Macintosh抽屉，去掉窗口左上角的图标
+Qt::Popup                //是一个弹出式顶层窗口，通常用于上下文菜单或提示
+Qt::Tool                 //是一个工具窗口，通常用于辅助主窗口。
+Qt::ToolTip              //是一个提示窗口，没有标题栏和窗口边框
+Qt::SplashScreen         //是一个欢迎窗口，启动画面，通常在应用程序启动时显示
+Qt::Desktop              //是一个桌面窗口或部件
+Qt::SubWindow            //是一个子窗口
+Qt::ForeignWindow
+Qt::ForeignWindow
+```
+
+### 38-2、窗口状态（Window State）
+```
+Qt::WindowNoState：窗口没有状态。
+Qt::WindowMinimized：窗口最小化。
+Qt::WindowMaximized：窗口最大化。
+Qt::WindowFullScreen：窗口全屏显示。
+```
+### 38-3、窗口标志（Window Flags）
+窗口标志用于控制窗口的外观和行为。常用的标志包括：
+```
+Qt::X11BypassWindowManagerHint = Qt::BypassWindowManagerHint 
+X11BypassWindowManagerHint用于指示窗口管理器忽略该窗口的管理，窗口将不会被窗口管理器控制，窗口管理器将不会对其进行任何操作（如移动、调整大小、显示等）
+BypassWindowManagerHint与 X11BypassWindowManagerHint 类似，也用于指示窗口管理器忽略该窗口的管理。这个属性在不同的窗口系统中可能有不同的实现，但其核心功能是相同的
+
+Qt::FramelessWindowHint：无边框窗口。
+Qt::WindowTitleHint：显示窗口标题。
+Qt::WindowSystemMenuHint：显示系统菜单。
+Qt::WindowMinimizeButtonHint 显示最小化按钮。
+Qt::WindowMaximizeButtonHint 显示最大化按钮。
+Qt::WindowMinMaxButtonsHint = Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint
+Qt::WindowContextHelpButtonHint
+Qt::WindowShadeButtonHint
+Qt::WindowStaysOnTopHint	//总在最上面的窗口,置前
+Qt::WindowTransparentForInput   用于指示窗口对输入事件透明。设置此属性后，窗口将不会接收任何输入事件（如鼠标点击、键盘输入等），输入事件将直接传递给下面的窗口，通常用于创建透明窗口或覆盖窗口
+
+Qt::CustomizeWindowHint          //关闭默认窗口标题提示
+Qt::WindowStaysOnBottomHint
+Qt::WindowCloseButtonHint：显示关闭按钮。
+Qt::MacWindowToolBarButtonHint
+Qt::BypassGraphicsProxyWidget
+Qt::WindowFullscreenButtonHint
+```
+
+### 38-4、窗口尺寸策略（Size Policy）
+窗口的尺寸策略决定了窗口在布局中的行为。常用的尺寸策略包括：
+```
+QSizePolicy::Fixed：固定大小。
+QSizePolicy::Minimum：最小大小。
+QSizePolicy::Maximum：最大大小。
+QSizePolicy::Preferred：首选大小。
+QSizePolicy::Expanding：可扩展大小。
+```
+
+## 39、QLabel的文字内容分为中文和英文两种显示，怎么才能让文字自适应长度
+```
+#MyLabel
+{
+    min-width: 64px;
+    min-height: 18px;
+    max-width: 96px;
+    max-height: 18px;
+    background: #E5EDFF;
+    margin-right: 5px;
+    font-size: 12px;
+    border: 1px solid #A6BFFF;
+}
+```
+去掉width和height属性，这样QLabel就会根据文字内容进行匹配，注意最小长度倒是会生效，如果文字内容小于最大长度，则取文字内容长度，如果大于最大长度，则取最大长度。似乎没有完美的答案。
+
+## 40、QFrame
+QFrame 是 Qt 框架中的一个重要类，主要用于创建具有边框和背景的矩形区域。它可以用作其他小部件的容器，或者作为独立的界面元素。以下是对 QFrame 的详细介绍，包括其特性、用法和常见示例。
+
+1. 基本概念
+- 类定义：QFrame 是 QWidget 的子类，提供了一个可以显示边框和背景的矩形区域。
+- 用途：常用于创建分隔线、面板、容器等，可以包含其他小部件。
+
+2. 主要特性
+- 边框样式：可以设置不同的边框样式，如无边框、单线边框、双线边框等。
+- 背景颜色：可以设置背景颜色和样式。
+- 布局管理：可以使用布局管理器（如 QVBoxLayout、QHBoxLayout 等）来管理内部小部件的布局。
+- 可扩展性：可以通过继承 QFrame 来创建自定义的框架。
+
 
 
 

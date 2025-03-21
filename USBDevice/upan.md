@@ -19,7 +19,7 @@ dos窗口输入diskpart
 lisk disk（显示所有磁盘）
 select disk 1（数字表示选择你要操作的盘，如1表示为我的移动硬盘;）
 diskpart（显示帮助信息）
-att disk clear readonly（清楚只读属性）
+att disk clear readonly（清除只读属性）
 attribute disk（显示磁盘属性）
 ```
 结果显示已成功清除磁盘属性，但是还是存在问题。

@@ -10,7 +10,7 @@ timeline：git上库日志
 在搜索框中输入render Whitespace,选择all,即可显示空格.
 
 tab键改空格：勾选editor.insert Spaces和editor.tab Size设置tab键多少个空格
-默认根据文件内容自动检测缩进方式，而是使用用户设置的缩进方式：editor.detectIndentation取消勾选
+默认根据文件内容自动检测缩进方式，如果需求是使用用户设置的缩进方式：editor.detectIndentation取消勾选
 
 主题：ctrl+shift+p搜索颜色主题，选择Dark（Visual Studio）（推荐）
 

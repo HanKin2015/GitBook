@@ -495,8 +495,17 @@ JPEG 是一种静态图像压缩格式，主要用于存储和传输静态图像
 MJPEG 是一种视频压缩格式，它将视频序列中的每一帧都编码为独立的 JPEG 图像。
 
 ## 23、安装罗技摄像头官方驱动
-型号：HD Webcam C270
-硬件ID：046d:0825
+=== Start of device information =======================
+Device name:           Logitech HD Webcam C270
+USB Vendor ID (VID):   0x046D
+USB Product ID (PID):  0x0825
+USB Revision (BCD):    0x0012
+Firmware Version:      7.1.1011
+Firmware CRC:          0xF3E0
+EEPROM Version:        240.1
+Sensor Type:           2.0
+Driver Version:        13.80.853.0
+=== End of device information =========================
 
 官网根本没有相关驱动文件及软件下载（注意： 请登录网站查看最新软件版本），只有软件介绍：https://support.logi.com/hc/en-us/articles/360025331313--FAQ-Webcam-C260#lws280。
 在FAQ中可以找到Logitech Webcam Software v2.x for Windows Release Notes介绍。
@@ -509,6 +518,6 @@ https://drivers.mydrivers.com/drivers/458_183507.htm
 
 第三方软件下载：360驱动大师根本找不到驱动，驱动总裁也是一样，windows自带的搜索功能好像不支持，发现一款宝藏软件可以搜索到https://www.drivereasy.com/knowledge/logitech-hd-webcam-c270-driver-download-for-windows/#Fix1。但是需要收费，应该有破解版drivereasy。
 
-
+另外在物理机上面找到了另外一款驱动版本：D:\将要上传到百度网盘\USB工具\luvc2022v.inf_amd64_fec51da809c34f55.zip
 
 

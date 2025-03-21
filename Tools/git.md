@@ -143,14 +143,60 @@ git pull origin master    //下载
 
 https://blog.csdn.net/qq_35860352/article/details/80313078 不行
 
-### 1-1、下载指定分支（20240704更新）
-（这种方式不可靠，还是会下载整个仓库）git clone -b branch git@github.com:github/test.git 
+### 1-1、使用--single-branch参数只下载指定分支
+（这种方式不可靠，还是会下载整个仓库，只是切换到了指定分支）git clone -b branch git@github.com:github/test.git 
 
 新仓库太大，达到惊人的155G，但是我只想使用其中一个分支不想下载整个仓库以此来节省磁盘空间：
 git clone --single-branch -b master url .
 git clone --depth=commit_num URL：可以只克隆最近几次提交的代码
 如：git clone --depth=2 --single-branch -b master git@yyds.hankin.org:OUR/YYDS.git .
-(亲测有效)只拉仓库中的某一个分支：git clone --single-branch -b 远程分支名 git@csgo.shit.city.org:IDV/Support.git
+
+(亲测有效)只拉仓库中的某一个分支：git clone --single-branch -b 远程分支名 git@csgo.shit.city.org:IDV/Support.git .
+最后一个参数代码拉取到本地的位置路径。另外注意拉取的位置必须为空，否则报错fatal: destination path '.' already exists and is not an empty directory.
+
+如果当前仓库是通过git clone --single-branch拉取的，似乎无法更改成查看所有分支。
+
+### 1-2、使用--single-branch参数后如何让仓库可以看到全部分支
+当使用 git clone --single-branch 时，默认配置会限制 git fetch 只获取单个分支。即使执行 git fetch --all，如果不修改配置或显式指定参数，Git 可能仍然只获取单个分支的信息。
+```
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git config -l | grep fetch
+remote.origin.fetch=+refs/heads/feature/590/sm:refs/remotes/origin/feature/590/sm
+```
+
+解决方式：
+```
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git config -l | grep fetch
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git pull
+remote: Enumerating objects: 10291, done.
+remote: Counting objects: 100% (9518/9518), done.
+remote: Compressing objects: 100% (3289/3289), done.
+remote: Total 9261 (delta 6544), reused 8490 (delta 5830)
+Receiving objects: 100% (9261/9261), 43.60 MiB | 23.18 MiB/s, done.
+Resolving deltas: 100% (6544/6544), completed with 114 local objects.
+From cq.devops.hankin.org:HS/MAC/agent
+ * [new branch]        Branches/MAC1.1.0       -> origin/Branches/MAC1.1.0
+
+# 强制获取所有远程分支（包括未跟踪的）
+git fetch origin +refs/heads/*:refs/remotes/origin/*
+
+git branch -r  # 查看所有远程分支
+git branch -a  # 查看所有本地和远程分支
+
+git remote prune origin # 仅清理指定远程仓库origin的无效分支，适合只想清理而不需要更新的情况
+git fetch --all --prune # 获取最新的提交和分支信息同时删除本地已不存在于远程仓库的远程跟踪分支
+--prune 选项用于删除本地已不存在于远程仓库的分支
+
+# 重新克隆所有分支
+git clone --no-single-branch https://github.com/username/repository.git
+```
 
 ## 2、git add命令参数说明
 git add -u：将文件的修改、文件的删除，添加到暂存区。
@@ -547,10 +593,57 @@ $ git cherry-pick A..B		将A之后到B应用过来
 $ git cherry-pick A^..B 	将包括A到B应用过来
 ```
 
-## 16、LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master'
+## 16、Git LFS
+
+### 16-1、简介
+Git LFS（Large File Storage） 是 Github 开发的一个 Git 的扩展，用于实现 Git 对大文件的支持。
+简单的说，就是如果你想传超过 100MB 的二进制文件到GitHub，你就要用Git LFS。
+```
+检查 LFS 对象状态: git lfs status
+出所有被 LFS 跟踪的文件及其状态：git lfs ls-files
+检查当前版本: git lfs version
+清理 LFS 缓存: git lfs prune
+在 Git 中初始化 Git LFS: git lfs install
+跟踪大文件: git lfs track "*.psd"
+跟踪特定文件: git lfs track "path/to/your/largefile.zip"
+检查 .gitattributes 文件: cat .gitattributes
+
+git lfs pull --include="*" --exclude=""
+```
+配置常存储在 LFS 的配置文件中，例如 .gitattributes 或 .lfsconfig 文件中。
+还有可能在.git/config中。
+
+Git LFS 通过将仓库中的大文件替换为微小的指针（pointer）文件来做到这一点。安装了git lfs工具后，只要涉及到git checkout（包括git clone，git clone完成会切换到一个分支，默认是master分支）的操作，git都会拉取当前分支的lfs实际的大文件（没安装git lfs则不会）。
+
+git pull后还需要使用git lfs pull origin $branch_name拉取下，保证本地文件都是实际的文件而非指针文件。
+如想加快git 大文件拉取效率，可以使用git lfs clone和git lfs pull加快拉取速度。
+使用git lfs ls-files --all 可以查看 Git LFS 跟踪的所有文件。
+
+https://help.aliyun.com/document_detail/206889.html
+https://zhuanlan.zhihu.com/p/146683392
+
+### 16-2、Locking support detected on remote "origin". Consider enabling it with
+这条信息表示远程仓库支持锁定功能。你可以通过设置 lfs.locksverify 为 true 来启用锁定支持。这通常用于防止多个用户同时修改同一文件。
+```
+git config lfs.https://cq.devops.hankin.org/MAC/LMT-BUILD-PROJECT_LFS.git/info/lfs.locksverify true
+```
+
+### 16-3、info: Uploading failed due to unsupported Content-Type header(s).
+info: Consider disabling Content-Type detection with
+这条信息表示在上传 LFS 对象时，出现了不支持的 Content-Type 头。这可能是由于某些文件类型未被正确识别。
+```
+$ git config lfs.contenttype false
+```
+
+### 16-4、lfs.repositoryformatversion
+lfs.repositoryformatversion 字段是 Git LFS（Large File Storage）在其配置文件中使用的一个重要字段，主要用于指示 LFS 仓库的格式版本。
+在 Git LFS 的早期版本中，lfs.repositoryformatversion 的值通常为 0。随着 Git LFS 的发展，可能会引入新的版本号（如 1、2 等），以支持新的功能或改进。
+https://github.com/git-lfs/git-lfs/issues/4533
+
+### 16-5、LFS failed to upload object, also fails to upload missing object later with explicit 'git lfs push origin master'
 remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a manual "git lfs push --all".
 
-无解，只能重新创建本地仓库。
+这条信息表示远程仓库中缺少 LFS 对象，可能是因为 LFS 没有正确设置，或者在推送之前没有将 LFS 对象上传到远程。
 
 出现这种情况有3种原因：
 - 如果这些文件是你从别处克隆过来的，说明源头就不对，或者你克隆的方式不对，或者网络出错了；
@@ -560,19 +653,6 @@ remote: GitLab: LFS objects are missing. Ensure LFS is properly set up or try a 
 解决方式：
 https://stackoverflow.com/search?q=LFS+upload+missing+objects
 尝试复现问题现象，但是复现不出来，有同事通过git config xxx false成功解决了！但是无奈复现不了问题，无法验证。
-
-### 16-1、什么是Git LFS
-Git LFS（Large File Storage） 是 Github 开发的一个 Git 的扩展，用于实现 Git 对大文件的支持。
-简单的说，就是如果你想传超过100M的二进制文件到GitHub，你就要用Git LFS。
-```
-检查 LFS 对象状态: git lfs status
-检查当前版本: git lfs version
-清理 LFS 缓存: git lfs prune
-在 Git 中初始化 Git LFS: git lfs install
-跟踪大文件: git lfs track "*.psd"
-跟踪特定文件: git lfs track "path/to/your/largefile.zip"
-检查 .gitattributes 文件: cat .gitattributes
-```
 
 ## 17、git 查看最近或某一次提交修改的文件列表相关命令整理。
 git log --name-status 每次修改的文件列表, 显示状态
@@ -885,7 +965,7 @@ git clone 遇到问题：fatal: unable to access 'https://github.comxxxxxxxxxxx'
 
 不要把问题复杂化了。
 ```
-git remote get-url origin
+git remote get-url origin 可以简化为 git remote -v
 
 错误方式：
 git remote set-url origin git@github.com:HanKin2015/GitBook.git/
@@ -1623,7 +1703,7 @@ git add .
 git commit -m"上库基线代码"
 git remote add origin xxx.git
 git remote show origin
-git remote get-url origin
+git remote get-url origin 可以简化为 git remote -v
 git push -u origin branch
 
 error: src refspec 支持usb3.0主控功能 does not match any
@@ -1698,3 +1778,20 @@ git config --global core.quotepath false
 ## 73、git pull和git fetch命令区别
 git fetch 用于从远程仓库获取最新的分支和提交，但不会自动合并或修改当前工作目录的内容。
 git pull 是 git fetch 和 git merge 的组合命令。
+```
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git pull --all
+Fetching origin
+Already up to date.
+
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git fetch --all
+Fetching origin
+
+User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
+$ git merge
+Already up to date.
+```
+
+
+

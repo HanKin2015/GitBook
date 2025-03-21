@@ -2,6 +2,10 @@
 参考：http://t.zoukankan.com/shangdawei-p-3133526.html
 其他：D:\Github\Storage\udev\bulk_only
 
+友情链接：
+D:\Github\Storage\c++\udev\bulk_only\README.md
+D:\Github\GitBook\gitbook\USBDevice\FAT32.md
+
 ## 1、LBA(logical block address)
 存储类设备可以看做一个个固定大小逻辑块，我们可以对其每一个逻辑块进行编号方便进行寻址定位。
 第一个逻辑块的 LBA 为 0，最后一块逻辑块的 LBA 为 n1，其中 n 为逻辑块的总数。一般而言，逻辑块又称之为扇区。逻辑块的大小一般为 512 字节。

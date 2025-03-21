@@ -95,6 +95,8 @@ systeminfo命令
 一开始计划打算使用python脚本每秒自动检测该窗口进程并杀死。
 
 ## 10、findstr命令
+注意：findstr命令对大小写敏感！
+
 可以使用TCPUDPDbg.exe软件模拟端口占用。
 ```
 (base) D:\Users\User\Desktop>netstat -ano | findstr "9878"
