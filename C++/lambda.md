@@ -76,6 +76,13 @@ Lambda 函数可以引用在它之外声明的变量. 这些变量的集合叫�
 [=, &z]		//z按引用捕获.其它变量按值捕获
 ```
 
+&和=的区别：D:\Github\Storage\c++\study\advanced\lambda\lambda_example.cpp
+[x](int x)的区别：D:\Github\Storage\c++\study\advanced\lambda\lambda_example.cpp
+总结：
+- []这里面的变量是`当前函数体内`的全局变量传递到lambda函数体内，而()则是lambda函数`参数，只能声明`
+- &是当前函数体内的全局变量`全部`共享到lambda函数体内，可以进行修改
+- =是当前函数体内的全局变量`全部`共享到lambda函数体内，不可以进行修改，即只读变量
+
 ## 5、示例
 ```
 #include <iostream>

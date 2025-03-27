@@ -442,3 +442,24 @@ l.c:25:45: warning: conversion lacks type at end of format [-Wformat=]
 ```
 snprintf(alsa_cmd, BUFSIZ, "alsa_amixer -c %s sset 'PCM' 10%%-", card_number);
 ```
+
+## 33、魔数
+```
+const int EXPECTED_RET_COUNT = 3;   // 使用常量
+enum { EXPECTED_RET_COUNT = 3 };    // 使用枚举
+#define EXPECTED_RET_COUNT 3        // 使用宏（不推荐，但可选）
+```
+宏在预处理阶段进行文本替换，不会进行类型检查。这可能导致意外的错误，尤其是在复杂的表达式中。例如：
+```
+#define SQUARE(x) (x * x)
+
+int a = 5;
+int result = SQUARE(a + 1); // 结果是 5 + 1 * 5 + 1 = 11，而不是 36
+```
+
+
+
+
+
+
+

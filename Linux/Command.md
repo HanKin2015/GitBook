@@ -619,4 +619,17 @@ PATH=$PATH:$HOME/bin:/sbin:/usr/bin:/usr/sbin
 - 套接字：在套接字文件名称后加上一个 =，例如 mysocket=。
 - FIFO（命名管道）：在 FIFO 文件名称后加上一个 |，例如 mypipe|。
 
+## 26、basename 命令
+basename 命令可以直接提取路径中的文件名。
+```
+[root@ubuntu0006:~] #basename /usr/local/share/bpytop/doc/README.md
+README.md
+
+[root@ubuntu0006:~] #path="/usr/local/share/bpytop/doc/README.md"
+[root@ubuntu0006:~] #echo ${path##*/}
+README.md
+[root@ubuntu0006:~] #echo "$path" | awk -F'/' '{print $NF}'
+README.md
+```
+
 

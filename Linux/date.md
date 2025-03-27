@@ -2,14 +2,50 @@
 
 ## 1、系统时钟VS硬件时钟
 在Linux中有硬件时钟与系统时钟等两种时钟。硬件时钟是指主机板上的时钟设备，也就是通常可在BIOS画面设定的时钟。系统时钟则是指kernel中的时钟。当Linux启动时，系统时钟会去读取硬件时钟的设定，之后系统时钟即独立运作。所有Linux相关指令与函数都是读取系统时钟的设定。
+系统时间是操作系统运行时的时间，而硬件时钟是计算机主板上的时钟，通常在系统关闭时仍然保持运行。
 
 hwclock 查看硬件时间
-
+date 查看系统时间
 hwclock -w 或者 hwclock --systohc 将系统时间同步到硬件时间，以便在重启后保持一致
-
 timedatectl 查看时区
-
 ntp服务器（连接互联网）
+
+### 1-1、系统时间和硬件时钟的时间在不同的时间点上显示了不同的值
+如果系统时间被手动更改或通过网络时间协议（NTP）进行同步，而硬件时钟没有相应更新，可能会导致这两者之间的差异。
+
+auditd 是 Linux 的审计框架，可以用来监控系统中的各种操作，包括对时间的更改。你可以配置 auditd 来记录对 date 命令的调用。
+```
+apt-get install auditd
+编辑 /etc/audit/audit.rules 配置文件：-w /bin/date -p x -k date_change
+重启审计服务：sudo systemctl restart auditd
+查看审计日志：ausearch -k date_change
+
+```
+
+### 1-2、NTP服务（systemd-timesyncd）
+定期从网络时间服务器获取时间并更新系统时间。
+systemd-timesyncd 是一个轻量级的时间同步服务，属于 systemd 系统和服务管理器的一部分。它的主要功能是通过网络时间协议（NTP）来同步系统时间，以确保系统时间的准确性。
+与传统的 NTP 服务（如 ntpd）相比，systemd-timesyncd 更加轻量，适合于不需要复杂时间同步功能的系统。
+systemd-timesyncd 的配置文件通常位于 /etc/systemd/timesyncd.conf。
+```
+root@hankin:~# systemctl status ntpd
+Unit ntpd.service could not be found.
+root@hankin:~# systemctl status systemd-timesyncd
+● systemd-timesyncd.service - Network Time Synchronization
+   Loaded: loaded (/lib/systemd/system/systemd-timesyncd.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/systemd-timesyncd.service.d
+           └─disable-with-time-daemon.conf
+   Active: active (running) since Mon 2025-03-17 17:01:19 CST; 3 days ago
+     Docs: man:systemd-timesyncd.service(8)
+ Main PID: 539 (systemd-timesyn)
+   Status: "Idle."
+    Tasks: 2 (limit: 4915)
+   CGroup: /system.slice/systemd-timesyncd.service
+           └─539 /lib/systemd/systemd-timesyncd
+
+Mar 21 12:06:44 hankin systemd-timesyncd[539]: Timed out waiting for reply from 193.182.111.143:123 (1.debian.pool.ntp.org).
+Mar 21 12:06:54 hankin systemd-timesyncd[539]: Timed out waiting for reply from 139.199.215.251:123 (1.debian.pool.ntp.org).
+```
 
 ## 2、基本操作
 

@@ -242,8 +242,66 @@ sudo mount /dev/sdb1 /mnt/myusb
 sudo dd if=input_file of=/dev/sdb1 bs=512 count=1
 
 ### 5-7、检查 U 盘的健康状态
-使用 smartctl 工具检查 U 盘的健康状态（安装失败因此没有测试）：
+使用 smartctl 工具检查 U 盘的健康状态：
 ```
-sudo apt-get install smartmontools
-sudo smartctl -a /dev/sdb
+apt-get install smartmontools
+
+root@hankin:~#  smartctl -a /dev/sdb
+smartctl 6.6 2017-11-05 r4594 [x86_64-linux-4.9.168-amd64] (local build)
+Copyright (C) 2002-17, Bruce Allen, Christian Franke, www.smartmontools.org
+
+/dev/sdb: Unknown USB bridge [0x0951:0x1666 (0x110)]
+Please specify device type with the -d option.
+
+Use smartctl -h to get a usage summary
+
+root@hankin:~#  smartctl -a /dev/sdb1
+smartctl 6.6 2017-11-05 r4594 [x86_64-linux-4.9.168-amd64] (local build)
+Copyright (C) 2002-17, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               Kingston
+Product:              DataTraveler 3.0
+Revision:             PMAP
+Compliance:           SPC-4
+User Capacity:        31,029,460,992 bytes [31.0 GB]
+Logical block size:   512 bytes
+scsiModePageOffset: response length too short, resp_len=4 offset=4 bd_len=0
+scsiModePageOffset: response length too short, resp_len=4 offset=4 bd_len=0
+>> Terminate command early due to bad response to IEC mode page
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
 ```
+
+### 5-8、能够将数据持久化保存到 U 盘中的 SCSI 指令
+对于 U 盘而言，能够将数据持久化保存到 U 盘中的 SCSI 指令主要包括以下几种：
+1. WRITE(10)
+功能：将数据写入到 U 盘的指定位置。
+作用：这是最常用的写入指令，用于将数据持久化保存到 U 盘中。
+
+2. WRITE(12)
+功能：与 WRITE(10) 类似，但支持更大的地址空间。
+作用：用于写入数据，支持更大的 LBA（逻辑块地址）范围，适用于大容量 U 盘。
+
+3. WRITE AND VERIFY(10)
+功能：写入数据并验证数据的正确性。
+作用：在写入数据后，立即验证数据是否正确写入，确保数据的完整性。
+
+4. WRITE AND VERIFY(12)
+功能：与 WRITE AND VERIFY(10) 类似，但支持更大的地址空间。
+作用：适用于大容量 U 盘，确保数据写入的正确性。
+
+5. WRITE SAME(10)
+功能：将相同的块数据写入多个位置。
+作用：用于高效地写入重复数据，减少写入操作的次数。
+
+6. WRITE SAME(16)
+功能：与 WRITE SAME(10) 类似，但支持更大的地址空间。
+作用：适用于大容量 U 盘，提高写入效率。
+
+7. FORMAT UNIT
+功能：格式化存储设备。
+作用：虽然不直接写入数据，但格式化操作会清除 U 盘中的数据，并为后续写入操作做准备。	
+
+Mode Sense(6) 和 Mode Sense(10)：用于读取设备的模式参数。这些指令本身不会将数据持久化保存到 U 盘中，但可以用于配置设备的参数。
+TEST UNIT READY：用于检查设备是否准备好，不涉及数据写入。
+

@@ -102,5 +102,16 @@ interface.c:9:5: sorry, unimplemented: non-trivial designated initializers not s
 interface.c:9:5: sorry, unimplemented: non-trivial designated initializers not supported
 ```
 
+## 5、列表初始化（aggregate initialization）和统一初始化（uniform initialization）
+```
+struct Node {
+    int x;
+    int y;
+};
+
+Node a = { 0 }; // 1
+Node b{};       // 2
+```
+在 C++11 及以后的版本中，推荐使用统一初始化（如 Node b{}），因为它可以避免某些类型转换问题，并且在初始化时更为清晰，是更现代的做法。
 
 

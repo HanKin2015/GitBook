@@ -152,5 +152,7 @@ Kaspersky卡巴斯基
 AhnLab安博士
 Avira爱红伞
 
-## 14、
+## 14、DriverAssitant
+DriverAssitant是一个用于安装和管理瑞芯微（Rockchip）平台驱动的工具。它主要用于在Windows操作系统中安装和管理Rockchip设备的驱动程序，确保设备能够正常工作。
 
+AndroidTool_Release 是一个强大的工具，旨在帮助Android开发者轻松构建、测试和发布他们的应用程序。它包含了多种功能，包括APK构建、签名、资源优化、性能分析等。通过该工具，开发者可以提升工作效率，减少其在项目管理上所花费的时间。

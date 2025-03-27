@@ -36,6 +36,9 @@ QtApplication1
 ## 4、编译错误
 [QtRunWork] Error starting process /rcc: 系统找不到指定的文件。	QtWidgetsApplication1	C:\Users\Administrator\AppData\Local\QtMsBuild\qt_work.targets	138	
 
+There's no Qt version assigned to project QtWidgetsApplication1.vcxproj for configuration Release/Win32.
+Please set a Qt installation in 'Project|Properties|Configuration Properties|Qt Project Settings|Qt Installation'.	QtWidgetsApplication1	C:\Users\Administrator\AppData\Local\QtMsBuild\qt_vars.targets	43	
+
 原因是更改过QT Versions名称，因此需要在项目-》属性-》Qt Project Settings-》Qt Installation-》选择当前环境的QT Versions名称即可
 
 

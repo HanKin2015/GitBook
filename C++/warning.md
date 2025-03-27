@@ -8,6 +8,7 @@
 -Wshadow：某语句块作用域变量与更大作用域的另一变量同名时发出警告（此警告未包含在-Wall选项中，需单独开启）
 -Wno-error  <<====>>  -Wno-error=error
 -Wno-error=strict-overflow  <<====>>  -Wno-strict-overflow
+-Wextra：看到更多警告（D:\Github\Storage\c++\standard_library\file\已打开文件可删除\wunused-variable.cpp）
 
 注意：Werror需要在Wall参数下才能生效，默认是关闭所有警告的。
 
@@ -574,3 +575,36 @@ https://segmentfault.com/q/1010000042766624
 -Wall这一类警告提示选项占了GCC警告选项的90%以上，它不仅包含打开所有警告等功能，还可以单独对常见错误分别指定警告，这些常见的警告选项如下表所示(这些选项可供读者在实际操作时查阅使用)。
 
 结论：如文件wunused_result.c所示，需要代码中额外指定才能显示出该警告，不纠结了。
+
+## 48、与标准库中的 std::array 模板类产生混淆但不一定会产生编译警告
+虽然 C++ 允许你使用相同的名称，但这可能会导致代码的可读性下降，并可能在某些情况下引发警告。
+```
+#include <iostream>
+#include <array>
+#include <vector>
+using namespace std;
+using std::array;
+
+int main() {
+    // 定义一个包含 5 个整数的 std::array
+    std::vector<int> array = {1, 2, 3, 4, 5};
+    array.push_back(6);
+
+    // 输出数组的大小
+    std::cout << "Size of array: " << array.size() << std::endl;
+
+    // 遍历并输出数组元素
+    for (const auto& element : array) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<int> vector = {1, 2, 3, 4, 5};
+    return 0;
+}
+
+[root@ubuntu0006:~] #g++ test.cpp --std=c++17 -Wall -Werror -Wextra
+[root@ubuntu0006:~] #./a.out
+Size of array: 6
+1 2 3 4 5 6
+```

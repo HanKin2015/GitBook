@@ -5,6 +5,8 @@ Ctrl+K+C	注释
 Ctrl+K+U	取消注释
 Ctrl+R,Ctrl+W 查看空白
 Ctrl+F4     关闭当前文件
+Ctrl+K,Ctrl+D 格式化整个文档
+Ctrl+K,Ctrl+F 格式化选定的代码
 
 ## 2、神奇的事情
 ```
