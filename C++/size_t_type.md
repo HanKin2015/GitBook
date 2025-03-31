@@ -15,11 +15,9 @@ sizeof操作符的结果类型是size_t,
 它的意义大致是"适于计量内存中可容纳的数据项目的个数的无符号整数类型"。
 所以，它在数组下标和内存管理函数之类的地方广泛使用。
 
- 
 ## 2、有符号的ssize_t
 ssize_t:
 这个数据类型用来表示可以被执行读写操作的数据块的大小。它和size_t类似，但必须是signed。
-
 
 ## 3、size_t与size_type的区别
 我觉得有一句话总结的很好：
@@ -43,7 +41,7 @@ cc1: all warnings being treated as errors
 ```
 %zu用来输出size_t 类型。
 
-
+SCNx16
 
 
 

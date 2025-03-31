@@ -75,7 +75,6 @@ State 表达的是形态，而 Status 表达的是从一种形态转换成另一
 3. sudo cp xorg.conf.failsafe xorg.conf
 4. sudo reboot
 
-
 ## 8、chroot: failed to run command `/bin/bash': No such file or directory
 缺少依赖，lib和lib64、sbin虽然是软链接，但是chroot后路径会变化
 https://www.bbsmax.com/A/pRdBB4vDdn/ 

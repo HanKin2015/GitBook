@@ -60,7 +60,7 @@ mobaxterm标签页最下方默认有个服务器内存硬盘情况信息的状�
 
 可能上面的方法行不通，终极办法是：打开Session-》SSH，在里面进行连接。（这个方法果然行的通，+1）
 
-还有一个方法是更换软件，WInSCP你指得选择。
+还有一个方法是更换软件，WInSCP你值得选择。
 
 ### 1-7、使用scp命令
 直接可以在MobaXterm软件上面使用，注意需要插件CygUtils.plugin文件。
@@ -138,10 +138,12 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 
 服务端更新了ssh库，需要高版本的mobaxterm软件才行，因此需要重新破解。
 
-亲测24.2版本破解有效。
+亲测24.2、25.1版本破解有效。
 链接：https://pan.baidu.com/s/15Wbg5gDLHkjW6zVPzFA6PA
 提取码：ipc9
-运行crack中的keygen，单击Get Version from File从文件中获取版本，然后选择安装目录中的MobaXterm.exe
+我的网盘->我的资源->Mobaxterm破解软件
+运行crack中的keygen.exe，单击Get Version from File从文件中获取版本，然后选择安装目录中的MobaXterm.exe，最后点击Generate即可。
+最终会在安装目录中生成一个C:\program files (x86)\Mobatek\MobaXterm\Custom.mxtpro文件。
 
 ## 8、设置主密码
 - 可以显示本地保存session密码（Settings->Genneral->MobaXterm passwords mannagement->Show passwords）
@@ -154,4 +156,21 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 进一步测试发现，只需要修改Term charset为ISO-8859-1就行了。
 
 注意：使用ISO-8859-1后其他编码的文件或者程序原先正常的此刻大概率会是中文乱码，因此还是建议恢复默认值UTF-8（设置成GBK也行），即鱼和熊掌不可兼得。
+
+## 10、Mobaxterm使用ssh命令连接不上服务器，但是通过Session连接正常
+使用git窗口的ssh命令也是正常的。
+更换过CygUtils.plugin和CygUtils64.plugin组件，确实sshd版本更换了，更换过其他版本Mobaxterm软件。
+大概率连接是失败的，极小概率会成功那么一两次，但是通过Session连接正常。
+在服务端通过journal -f查看日志连接是成功的，说明是Mobaxterm出现了问题，目前想到的方法只能`重启电脑`。
+```
+没有任何连接相关日志打印：
+2025-03-31   11:12.45   /home/mobaxterm  ssh -v root@172.22.1.26
+2025-03-31   11:14.42   /home/mobaxterm 
+
+服务端有连接成功日志：
+Mar 28 14:21:20 adesk audit[32459]: CRED_REFR pid=32459 uid=0 auid=0 ses=6375 msg='op=PAM:setcred acct="root" exe="/usr/sbin/sshd" hostname=172.22.64.246 addr=172.22.64.246 terminal=ssh res=success'
+```
+
+
+
 
