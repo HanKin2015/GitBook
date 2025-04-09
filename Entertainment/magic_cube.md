@@ -1,4 +1,5 @@
 # 魔方
+
 ## 1、三阶魔方
 https://jingyan.baidu.com/article/f3e34a12d82ed2f5eb6535bd.html
 

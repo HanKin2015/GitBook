@@ -68,6 +68,8 @@ FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 
 非常齐全的Windows小工具：https://www.nirsoft.net/
 另一个工具下载推荐网站：http://www.7201.cn/
+窗口文本提取：https://github.com/AlexanderPro/WindowTextExtractor
+亿图图示：个人百度网盘/DrawMax 14.1.3.1228.rar
 
 ## 4、外设工具箱
 | name        | desc                               | url                                                          |

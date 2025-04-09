@@ -102,6 +102,7 @@ run code插件直接运行
 - Chinese Language Pack for Visual Studio Code
 - PlantUML
 - Remote - SSH
+- Markdown All in One
 
 vscode-server安装是同样的方法，一个可以直接在vscode-app上面，一个可以直接在本地vscode通过ssh连接后Install from VSIX。
 
@@ -362,4 +363,15 @@ cpptools跳转插件：https://github.com/microsoft/vscode-cpptools/releases
 另一个插件位置：/root/.vscode-server/bin/92da9481c0904c6adfe372c12da3b7748d74bdcb/extensions
 软件位置：/root/.vscode-server/bin/92da9481c0904c6adfe372c12da3b7748d74bdcb/bin/code-server
 
+## 18、vscode操作markdown文件
+插件：Markdown All in One
+快捷键：Ctrl + K，V（先同时按Ctrl键和k键，然后单独按v键）
 
+## 19、vscode操作PlantUML
+插件：PlantUML
+命令面板选择 “Preview Current Diagram” 或者使用快捷键 Alt + D（Windows/Linux）或 Option + D（macOS）来预览 UML 图。
+
+导出图片：
+- 按 Ctrl + Shift + P（Windows/Linux）或 Cmd + Shift + P（macOS）打开命令面板。
+- 输入并选择 PlantUML: Export Current Diagram。
+- 然后选择导出格式为 PNG。

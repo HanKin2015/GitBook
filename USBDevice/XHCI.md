@@ -13,7 +13,7 @@ USB3.0传输速度是多少？：http://www.usbzh.com/article/detail-252.html
 (RENESAS)于2003年4月1日—由日立制作所半导体部门和三菱电机半导体部门合并成立。RENESAS结合了日立与三菱在半导体领域方面的先进技术和丰富经验，是无线网络、汽车、消费与工业市场设计制造嵌入式半导体的全球领先供应商。
 
 
-
+USB 主控制器扩展 (UCX)：https://learn.microsoft.com/zh-cn/windows-hardware/drivers/usbcon/get-started-with-host-controller-driver-development
 
 
 

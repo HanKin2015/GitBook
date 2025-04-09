@@ -546,4 +546,29 @@ $cmd1
 ```
 使用jemalloc自带的内存检查功能
 
+## 14、0x80异常端点解析导致qemu崩溃
+```
+#2 0x00007f0bf78cc621 in_assert_fail ()from /1ib/x86_64-linux-gnu/libc.so.6
+#3 0x000055ce4af58361 in usb handTe_packet (dev=0x7fobe7bf4800，p=0x7f0be05f7030) at hw/usb/core.c:410
+#4 0x000055ce4af763aa in xhci fire ctl transfer (xhci=0x7fob55000000，xfer=0x7f0be05f7028) at hw/usb/hcd-xhci.c:1969
+#5 0x000055ce4af7700a in xhci_kick_ep(xhci=0x7f0b55000000，slotid=1,epid=1, streamid=0) at hw/usb/hcd-xhci.c:2210
+#6 0x000055ce4af7a10f in xhci_doorbell_write (ptr=0x7f0b55000000，reg=1，val=1, size=4) at hw/usb/hcd-xhci.c :3384
+#7 0x000055ce4ac9aa49 in memory_region_write_accessor (mr=0x7f0b55000d50，addr=4，value=0x7f0be0ffe8e8，size=4，shift=0，mask=4294967295，attrs=...) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:451
+#8 0x000055ce4ac9ac5b in access_with_adjusted_size (addr=4，value=0x7f0be0ffe8e8，size=4,access_size_min=1,access_size_max=4,access=0x55ce4ac9a9bf {<}memory_region_write_accessor{>} mr=0x7f0b55000d50， attrs=...) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:507
+#9 0x000055ce4ac9dd05 in memory_region_dispatch_write(mr=0x7f0b55000d50，addr=4，data=1,size=4, attrs=...) at /home/vtcompile/buildenv/Trunk/source/app/qemu/qemu-2.5.1/memory.c:1159
+#10 0x000055ce4ac3ec57 in address_space_rw(as=0x55ce4b7d5200，addr=4227948548，attrs=...,buf=0x7f0bfe6e1028{<}Address 0x7f0bfe6e1028 out of bounds{>},len=4, is_write=true)
 
+for (i = 0; i < ifp->bNumEndpoints; i++) {
+    struct libusb_endpoint_descriptor ep;
+    usbi_parse_descriptor(buffer, "bbbbwb", &ep, host_endian);
+    if (ep.bDescriptorType == LIBUSB_DT_ENDPOINT && (ep.bEndpointAddress & 0x0F) == 0) {
+        usbi_warn(ctx, "an invalid endpoint with address 0x%02X, skipping(%d)",
+            ep.bEndpointAddress, ep.bLength);
+        buffer += ep.bLength;
+        parsed += ep.bLength;
+        size   -= ep.bLength;
+        ifp->bNumEndpoints = (uint8_t)i;
+        break;
+    }
+}
+```
