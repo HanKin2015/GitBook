@@ -188,9 +188,33 @@ Host linux_x86_compile
 - 目录/root/.vscode-server/bin/下面有个文件夹名是commit，即~/.vscode-server/bin/
 - 稳定版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/stable
 - insider版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/insider
-- 下载成功后上传到远程服务器。复制到 ~/.vscode-server-insiders/bin/【commit号】，通过使用tar -xvf vscode-server-linux-x64.tar.gz --strip-components 1解压文件
+- 下载成功后上传到远程服务器。复制到 ~/.vscode-server/bin/【commit号】，通过使用tar -xvf vscode-server-linux-x64.tar.gz --strip-components 1解压文件
 - 使用chmod +x node server.sh为node和server.sh添加可执行权限
 - 重新打开vscode。
+
+最新版本教程：https://blog.csdn.net/weixin_63866037/article/details/145781207
+https://vscode.download.prss.microsoft.com/dbazure/download/stable/${commit_id}/vscode-server-linux-x64.tar.gz
+https://vscode.download.prss.microsoft.com/dbazure/download/stable/${commit_id}/vscode_cli_alpine_x64_cli.tar.gz
+```
+.vscode-server
+ ┣━ bin  # 存放旧方法下的vscode commit相关文件
+ ┃   ┗━ ${commit_id1}
+ ┣━ cli  # 存放新方法下的vscode commit相关文件
+ ┃   ┗━ servers
+ ┃   ┃   ┗━ Stable-${commit_id}
+ ┃   ┃   ┃   ┗━ server
+ ┃   ┃   ┃   ┗━ ···
+ ┃   ┃   ┗━ ···
+ ┃   ┗━ iru.json  # 存放最近的vscode commit_id,内容为["Stable-$commit_id"]
+ ┣━ code-${commit_id}  # 存放vscode_cli_alpine_x64_cli.tar.gz解压后的code-${commit_id}
+ ┣━ data # 可有可无
+ ┗━ extensions # 可有可无
+
+mv vscode-server-linux-x64 server
+mv server ~/.vscode-server/cli/servers/Stable-0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/
+mv code ~/.vscode-server/code-0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2
+iru.json文件内容 Stable-0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2
+```
 
 ## 11、visual studio code 重置所有设置（还原默认设置）
 a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换pcName为自己电脑设置的名称）

@@ -96,8 +96,28 @@ newType 和 expression 必须同时是指针类型或者引用类型。换句话
 2) 向下转型（Downcasting）
 向下转型是有风险的，dynamic_cast会借助 RTTI 信息进行检测，确定安全的才能转换成功，否则就转换失败。
 
+## 8、转换失败会有异常处理
+```
+#include <iostream>
+#include <cstdio>
 
+void test(void* p)
+{
+    int* ret = static_cast<int*>(p);
+    printf("ret = %d\n", *ret);
+    return;
+}
 
+int main()
+{
+    double scores = 95.5;
+    test(NULL);
+    return 0;
+}
+
+[root@ubuntu0006:~] #./a.out 
+段错误
+```
 
 
 

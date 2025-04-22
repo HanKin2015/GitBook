@@ -214,6 +214,10 @@ https://www.jianshu.com/p/7cbd50058ea3
 https://interviewguide.cn/
 
 
+设计模式：https://baijiahao.baidu.com/s?id=1757590341900686107&wfr=spider&for=pc
+事件驱动及其设计模式：https://blog.csdn.net/2501_90424634/article/details/145396493
+https://blog.csdn.net/2401_84862038/article/details/138832028?spm=1001.2101.3001.6650.13&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-13-138832028-blog-129222339.235%5Ev43%5Epc_blog_bottom_relevance_base4&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-13-138832028-blog-129222339.235%5Ev43%5Epc_blog_bottom_relevance_base4&utm_relevant_index=21
+https://blog.csdn.net/weixin_45904404/article/details/129222339
 
 
 

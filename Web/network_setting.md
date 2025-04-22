@@ -425,6 +425,8 @@ sudo lsof -i -P -n | grep LISTEN
 nmap -sT -O localhost
 ```
 
-
+## 15、wifi相关操作
+https://blog.csdn.net/qq_27413937/article/details/99714197
+https://wiki.archlinux.org/title/Network_configuration/Wireless
 
 

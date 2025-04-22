@@ -171,6 +171,8 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 Mar 28 14:21:20 adesk audit[32459]: CRED_REFR pid=32459 uid=0 auid=0 ses=6375 msg='op=PAM:setcred acct="root" exe="/usr/sbin/sshd" hostname=172.22.64.246 addr=172.22.64.246 terminal=ssh res=success'
 ```
 
-
-
+## 11、XTerminal
+官方网站：https://www.terminal.icu/
+和MobaXterm一样是收费软件
+https://mp.weixin.qq.com/s/CXNkdQSM3Duly366-BuUzQ
 

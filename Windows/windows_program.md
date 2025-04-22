@@ -180,3 +180,9 @@ FDO和PDO之间的关系可以这样理解：PDO是硬件设备在操作系统�
 
 ## 13、windows编程有时候头文件导入顺序不同会导致编译失败
 就很神奇，导入的还是Windows系统头文件。
+
+## 14、进程的通信 - WM_COPYDATA
+在Windows程序中，各个进程之间常常需要交换数据，进行数据通讯。其中使用SendMessage向另一进程发送WM_COPYDATA消息是一种比较经济实惠的方法。
+
+WM_COPYDATA通信需要将传递的消息封装在COPYDATASTRUCT结构体中，在SendMessage消息传递函数时作为lParam参数传递。
+

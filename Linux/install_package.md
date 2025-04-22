@@ -196,6 +196,21 @@ rpm -Uvh *.rpm --nodeps --force
 http://www.rpmfind.net/linux/rpm2html/search.php?query=vim&submit=Search+...&system=&arch=
 
 ## 6、配置镜像源
+```
+#!/bin/bash
+set -e
+
+code_name=$(lsb_release -c |awk '{print $2}')
+if [ "$code_name" = "" ]; then
+  echo "Failed!"
+  exit 1
+fi
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+echo "/etc/apt/sources.list  was bakup to /etc/apt/sources.list.bak"
+wget http://mirrors.hankin.org/assistants/ubuntu/sources.list -O /etc/apt/sources.list
+sed -i "s/CODE_NAME/${code_name}/" /etc/apt/sources.list
+apt update || apt-get update
+```
 
 ### 6-1、软件源格式详解
 Ubuntu的软件源配置文件路径：/etc/apt/sources.list
@@ -231,7 +246,6 @@ apt update
 
 另外UOS一般可以使用debian镜像源和deepin或者ubuntu镜像源，参考https://zhuanlan.zhihu.com/p/644769450和https://bbs.chinauos.com/zh/post/4196，实测deepin镜像源使用正常。
 [欢迎访问网易开源镜像站](http://mirrors.163.com/)
-
 
 ### 6-3、kylin系统配置
 默认镜像源地址填写：

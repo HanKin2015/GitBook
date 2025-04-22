@@ -134,12 +134,14 @@ Alice -> Bob: test
 果然，在Trust之后就可以使用插件了，并且其他插件也能正常使用了。
 
 ### 6-8、教程
+https://blog.csdn.net/sinat_39809957/article/details/124856191
 组件图：https://plantuml.com/zh/component-diagram
 组件必须用中括号括起来。
 还可以使用关键字component定义一个组件。 并且可以用关键字as给组件定义一个别名。 这个别名可以在稍后定义关系的时候使用。
 
 接口可以使用()来定义(因为这个看起来像个圆)。
 还可以使用关键字interface关键字来定义接口。 并且还可以使用关键字as定义一个别名。 这个别名可以在稍后定义关系的时候使用。
+且行为的可见性必须用 "+" 表示
 更多见：D:\Github\Storage\plantuml
 
 活动图（流程图）
@@ -154,7 +156,9 @@ end
 ```
 
 类图
+说明：属性和方法前面的“+”、“-”和“#”表示访问级别：
 ```
++表示public
 -表示private  
 #表示protected 
 ~表示default,也就是包权限  

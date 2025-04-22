@@ -1,4 +1,4 @@
-# CoolFormat
+# CoolFormat代码格式化工具
 
 ## 1、软件介绍
 CoolFormat源代码格式化是一款C\C++\C#\CSS\HTML\Java\JavaScript\JSON\Objective-C\PHP\SQL\XML代码格式化工具。软件可以快速多种风格格式化，并对语言进行着色。界面采用Office 2010风格，并有多种样式可以替换。并且支持代码高亮到网页上显示，方便博客文章之类的撰写阅读。
@@ -19,3 +19,5 @@ CoolFormat源代码格式化是一款C\C++\C#\CSS\HTML\Java\JavaScript\JSON\Obje
 
 正确使用方式：打开一个公用文件，然后复制粘贴代码快速格式化即可。
 
+## 4、Clang-Format：代码自动格式化
+https://blog.csdn.net/weixin_43717839/article/details/129382657
