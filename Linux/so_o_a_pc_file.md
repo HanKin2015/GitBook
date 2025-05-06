@@ -20,6 +20,17 @@ lib,dll,exe都算是最终的目标文件，是最终产物。而c/c++属于源�
 Archive档案文件档案室
 中间目标文件打个包，在Windows下这种包叫“库文件”（Library File），也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。
 
+### 2-1、ldconfig命令
+在/usr/local/lib目录下移入缺失的so文件后，执行文件依赖还是报错not found，原因默认情况下，动态链接器可能不会搜索/usr/local/lib。可以通过ldconfig命令手动更新库缓存。
+```
+root@3WQ3290329:/usr/local/bin# ll /usr/local/lib/libusbmagic_common.so
+-rw-r--r-- 1 root root 8866120  4月 27 17:25 /usr/local/lib/libusbmagic_common.so
+root@3WQ3290329:/usr/local/bin# ldd usbmagicd
+        linux-vdso.so.1 (0x00007ffc4114e000)
+        libusbmagic_common.so => not found
+        liblog4cplus.so.0 => not found
+```
+
 ## 3、linux查看so文件的一些信息命令
 查看so文件是32位还是64位
 ```

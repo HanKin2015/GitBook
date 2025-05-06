@@ -41,7 +41,7 @@ cppcheck是一个代码静态扫描工具，可以检查C/C++代码中的一些�
 cppcheck可以从http://cppcheck.sourceforge.net/下载最新版本。
 推荐TscanCode：https://blog.csdn.net/ybhuangfugui/article/details/133758880
 https://github.com/Tencent/TscanCode
-最新版本的release下已经去掉windows下的可执行文件。可使用V2.14.24版本的TscanCodeV2.14.24.windows.exe。
+最新版本的release下已经去掉windows下的可执行文件。可使用V2.14.24版本的TscanCodeV2.14.24.windows.exe（Windows最终版本）。
 
 ## 3、度量工具-CCCC
 CCCC是一种分析C++和Java文件并生成有关代码各种指标的报告的工具。支持的度量标准包括代码行，McCabe的 复杂性指标，和Chidamber＆Kemerer以及Henry＆Kafura提出的指标。

@@ -623,6 +623,20 @@ QListWidgetItem 是 Qt 中用于处理列表项的类。用于在 QListWidget �
 
 适用于一般的列表项管理，适合大多数需要在列表中显示数据的场景。
 
+- 对于不可用且不可选中的项，使用 item->setFlags(Qt::ItemIsEnabled);，这将使项不可选中且不可用。
+- 对于可选中的项，使用 item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);，这将使项可选中。
+
+去掉虚框：
+```
+"QListWidget::item:selected {"
+"   background-color: #A6BFFF;" // 选中项的背景色
+"   color: white;" // 选中项的文字颜色
+"   outline: none;" // 去掉选中项的虚框
+"}"
+
+button->setStyleSheet("QPushButton:focus { outline: none; }");
+```
+
 ## 33、托盘
 ```
 QSystemTrayIcon *mSystemTray = new QSystemTrayIcon(this);
@@ -869,6 +883,44 @@ QFrame 是 Qt 框架中的一个重要类，主要用于创建具有边框和背
 - 背景颜色：可以设置背景颜色和样式。
 - 布局管理：可以使用布局管理器（如 QVBoxLayout、QHBoxLayout 等）来管理内部小部件的布局。
 - 可扩展性：可以通过继承 QFrame 来创建自定义的框架。
+
+## 41、伸缩因子
+在 Qt 中，使用 QHBoxLayout 布局可以方便地将多个组件水平排列。要实现左对齐的组件之间间隔 8 像素，以及右对齐的组件之间间隔 5 像素。
+使用 addStretch()：在左对齐和右对齐的组件之间添加伸缩因子，以便将它们分开。
+
+## 42、width、height、min-width、min-height、max-width 和 max-heightwidth 和 height、
+如果元素的内容（如文本、图片等）超出了 width 和 height 的限制，浏览器可能会根据内容的大小调整元素的实际尺寸。
+通过同时设置 min-width 和 max-width，你可以确保元素的宽度始终保持在设置的值，不会因为内容的变化而改变。
+
+## 43、关闭setToolTip功能
+```
+yourWidget->setToolTip(""); // 设置空的工具提示
+
+yourWidget->setAttribute(Qt::WA_NoToolTips);
+
+#include <QWidget>
+#include <QToolTip>
+
+// 继承并重写 event 方法
+class NoToolTipWidget : public QWidget {
+public:
+    NoToolTipWidget(QWidget *parent = nullptr) : QWidget(parent) {}
+
+protected:
+    bool event(QEvent *event) override {
+        if (event->type() == QEvent::ToolTip) {
+            // 不处理工具提示事件
+            return true; // 返回 true 表示事件已处理，不再显示工具提示
+        }
+        return QWidget::event(event); // 处理其他事件
+    }
+};
+```
+
+
+
+
+
 
 
 
