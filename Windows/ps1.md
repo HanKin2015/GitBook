@@ -10,8 +10,8 @@ PowerShell (PS1) 脚本是一种由微软开发的命令行脚本语言和shell�
 
 HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\修改`默认`为以下三个值中的一个:
 ```
-0         可双击和cmd执行。
-Edit     使用powershell_ise.exe打开。
+0     可双击和cmd执行。
+Edit  使用powershell_ise.exe打开。
 Open  使用记事本打开。
 ```
 使用命令进行修改：ftype Microsoft.Powershellscript.1="%SystemRoot%\system32\windowspowershell\v1.0\powershell.exe" "%1"

@@ -87,14 +87,22 @@ int main()
 ```
 本地文件已存在，原因是GCC配置头文件搜索路径未包含/usr/include/x86_64-linux-gnu。
 查看 GCC 的搜索路径：gcc -v -E - < /dev/null
-在输出中，查找 #include <...> search starts here: 和 End of search list. 之间的路径，确保包含了 /usr/include/x86_64-linux-gnu。
+在输出中，查找 #include <...> search starts here: 和 End of search list. 之间的路径，确保包含了/usr/include/x86_64-linux-gnu。
 
 最简单和最常用的方法是使用 -I 选项或设置 CPATH 环境变量：
-export CPATH=/usr/include/x86_64-linux-gnu:$CPATH
-export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
+```
+gcc -I/usr/include/x86_64-linux-gnu c.c -o c
+export CPATH=/usr/include/x86_64-linux-gnu:$CPATH（推荐）
+```
+修改 GCC 的配置文件（重新编译gcc）：gcc -dumpspecs
+使用 gcc 的配置选项（重新编译gcc）：./configure --with-gxx-include-dir=/usr/include/x86_64-linux-gnu
 
+### 6-2、/usr/bin/ld: 找不到 crt1.o: 没有那个文件或目录
+同上，crt1.o 文件位于/usr/lib/x86_64-linux-gnu/crt1.o，这表明该文件确实存在于系统中，但链接器可能没有正确配置以查找该路径。
+设置 LIBRARY_PATH 环境变量：export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
+使用 -L 选项：gcc -L/usr/lib/x86_64-linux-gnu main.c -o main
 
-## Could not find OpenSSL.  Install an OpenSSL development package or configure CMake with -DCMAKE_USE_OPENSSL=OFF to build without OpenSSL.
+### 6-3、Could not find OpenSSL.  Install an OpenSSL development package or configure CMake with -DCMAKE_USE_OPENSSL=OFF to build without OpenSSL.
 cmake -DCMAKE_USE_OPENSSL=OFF .
 检查 OpenSSL 是否已安装以及其版本：openssl version
 检查 OpenSSL 是否已安装：dpkg -l | grep openssl

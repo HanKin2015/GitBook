@@ -177,11 +177,11 @@ C:\WINDOWS\system32>sc config usbhub start=disabled
 ### 11-4、问题恢复
 恢复就sc config usbhub start=demand，然后禁用设备启用设备即可。但是正常的时候禁用设备却是需要重启的。
 
-### 11-5、使用processmonitor+自定义程序监控
+### 11-5、使用process monitor+自定义程序监控
 processmonitor软件会把所有的行为都监控，就会出现内存爆满，软件卡死的问题。
 发现注册表删除以及使用sc命令禁用服务都是操作注册表（sc命令相当于把注册表服务中的start值进行了改变）。
 
-processmonitor下载地址：https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
+process monitor下载地址：https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
 使用教程：
 过滤器Filter（Path->contains->usbhub）
 保存记录限制（Options->History Depth->Enable ring buffer）文件大小100~4000MB，时间1~15分钟

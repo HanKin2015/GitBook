@@ -457,7 +457,7 @@ int a = 5;
 int result = SQUARE(a + 1); // 结果是 5 + 1 * 5 + 1 = 11，而不是 36
 ```
 
-## 函数存在返回值时如果不写return会导致程序卡死
+## 34、函数存在返回值时如果不写return会导致程序卡死
 简单demo测试发现并不会卡死，但是在项目中发现进程卡死了。
 如：
 ```
@@ -467,4 +467,7 @@ bool init(int id)
 }
 ```
 
+## 35、通信库nng
+https://github.com/nanomsg/nng
+https://blog.csdn.net/cnzzs/article/details/141762197
 
