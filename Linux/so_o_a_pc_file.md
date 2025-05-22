@@ -78,3 +78,21 @@ gcc a.c b.c c.c -fPIC -shared -o target.so
 重命名新版本的共享库文件为原来的文件名。
 重启依赖这个共享库的所有服务和应用程序。
 这样可以确保运行中的程序不会因为共享库的变动而受到影响。
+
+## 8、查看符号表
+```
+# 使用 nm -D 选项可以查看动态符号表
+nm -D libexample.so
+
+# 使用 readelf
+readelf -s libexample.so
+
+# 使用 objdump -T 选项可以查看动态符号表
+objdump -T libexample.so
+
+strings your_library.so | grep 'function_name'
+```
+
+objdump -t显示目标文件的符号表，包括静态符号和全局符号。
+objdump -T显示动态符号表，主要用于共享库（.so 文件）。
+

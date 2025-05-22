@@ -409,3 +409,5 @@ A5：要回答这个问题，首先要弄清我们设备的应用场景，请看
 ### 21-2、下载
 官网：https://www.extron.cn/download/download-center/?material=2
 相似软件：http://www.nirsoft.net/utils/monitor_info_view.html
+
+##

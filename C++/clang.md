@@ -9,8 +9,12 @@ Apple 使用 LLVM 在不支持全部 OpenGL 特性的 GPU (Intel 低端显卡) �
 
 Clang相对gcc的前端来说设：计清晰简单，容易理解，易于扩展增强。clang基于库的模块化设计，易于 IDE 集成及其他用途的重用。主要工具有clang-format, clang-ast，libclang, libtooling, address sanitizer等。
 
+Clang是一个C语言、C++、Objective-C语言的轻量级编译器。源代码发布于BSD协议下。Clang将支持其普通lambda表达式、返回类型的简化处理以及更好的处理constexpr关键字。
+Clang是一个由Apple主导编写，基于LLVM的C/C++/Objective-C编译器
+2013年4月，Clang已经全面支持C++11标准，并开始实现C++1y特性（也就是C++14，这是C++的下一个小更新版本）。Clang将支持其普通lambda表达式、返回类型的简化处理以及更好的处理constexpr关键字。
+Clang是一个C++编写、基于LLVM、发布于LLVM BSD许可证下的C/C++/Objective-C/Objective-C++编译器。它与GNU C语言规范几乎完全兼容（当然，也有部分不兼容的内容，包括编译命令选项也会有点差异），并在此基础上增加了额外的语法特性，比如C函数重载（通过__attribute__((overloadable))来修饰函数），其目标（之一）就是超越GCC。
 
-
+下载地址：https://github.com/llvm-mirror/clang
 
 ## 2、gcc: error: unrecognized command line option ‘-mlvz’; did you mean ‘-mlra’?
 make编译出现以上问题，可以通过根据建议修改，编译可能会成功，可能会出现其他大量的问题。

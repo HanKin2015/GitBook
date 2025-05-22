@@ -523,3 +523,19 @@ shell终端输入命令    printf "\e[?2004l"
 
 方法二：
 关闭当前终端，重新打开；
+
+## 26、引号的影响
+```
+root@665c3f2b3af1:/usr/local/lib# ll *avcodec*
+-rw-r--r-- 1 root staff 412825310 Apr 20 12:56 libavcodec.a
+lrwxrwxrwx 1 root staff        23 Apr 20 12:56 libavcodec.so -> libavcodec.so.59.37.100
+lrwxrwxrwx 1 root staff        24 Apr 10 20:48 libavcodec.so.57 -> libavcodec.so.57.107.100
+-rwxr-xr-x 1 root staff  12555152 Apr 10 20:48 libavcodec.so.57.107.100
+lrwxrwxrwx 1 root staff        23 Apr 20 12:56 libavcodec.so.59 -> libavcodec.so.59.37.100
+-rwxr-xr-x 1 root staff  13669224 Apr 20 12:56 libavcodec.so.59.37.100
+root@665c3f2b3af1:/usr/local/lib# ll '*avcodec*'
+ls: cannot access '*avcodec*': No such file or directory
+root@665c3f2b3af1:/usr/local/lib# ll "*avcodec*"
+ls: cannot access '*avcodec*': No such file or directory
+```
+ll *avcodec* 成功列出了以 avcodec 结尾的文件和符号链接，但在后续的命令中，使用 ll '*avcodec*' 和 ll "*avcodec*" 时却出现了 "No such file or directory" 的错误。这是因为在这两种情况下，使用了引号，导致 shell 将 *avcodec* 视为一个普通字符串，而不是通配符。

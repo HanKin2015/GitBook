@@ -109,8 +109,8 @@ struct Node {
     int y;
 };
 
-Node a = { 0 }; // 1
-Node b{};       // 2
+Node a = { 0 }; // 使用了列表初始化（aggregate initialization），将 a 的 x 成员初始化为 0，而 y 成员将被默认初始化为 0（因为 int 的默认初始化值是 0）
+Node b{};       // 使用了统一初始化（uniform initialization），也称为列表初始化。它会将 b 的所有成员都初始化为 0
 ```
 在 C++11 及以后的版本中，推荐使用统一初始化（如 Node b{}），因为它可以避免某些类型转换问题，并且在初始化时更为清晰，是更现代的做法。
 

@@ -112,8 +112,9 @@ $(addsuffix .c, foo bar)
 返回值为“foo.c bar.c”
 
 ## 6、编译so文件并使用
+注意-fPIC参数无法通过检测生成的文件判断出来是否添加该编译参数，但是神奇的是so文件时会告知需要添加。
 
-### 6-1、# 动态调用链接
+### 6-1、动态调用链接
 [-Wl,-export-dynamic参数](https://blog.csdn.net/zhensansan/article/details/104590688)
 
 ### 6-2、示例实战

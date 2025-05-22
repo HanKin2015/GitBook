@@ -399,3 +399,11 @@ cpptools跳转插件：https://github.com/microsoft/vscode-cpptools/releases
 - 按 Ctrl + Shift + P（Windows/Linux）或 Cmd + Shift + P（macOS）打开命令面板。
 - 输入并选择 PlantUML: Export Current Diagram。
 - 然后选择导出格式为 PNG。
+
+## 20、vscode显示好多错误提示，但是代码运行是正常的
+即使代码能编译，IntelliSense 可能因未正确包含头文件或声明而导致误报。
+IntelliSense 的缓存可能过期，导致解析结果不准确。
+
+清除缓存：
+删除 .vscode/cache 文件夹（通常位于项目根目录下）。
+重启 VSCode 或重新加载窗口（Ctrl+Shift+P → Developer: Reload Window）。

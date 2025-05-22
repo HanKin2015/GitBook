@@ -30,6 +30,20 @@ vmware一直卡在DHCP：
 修改不了BIOS启动：https://zhidao.baidu.com/question/1956045758975049508.html
 解决方法：注意需要在设置里面CD/DVD加载ISO文件，并且重点是设备状态勾选启动时连接，不勾选已连接。
 
+安装VMware Tools：
+安装包下载地址：https://packages-prod.broadcom.com/tools/frozen/linux/linux.iso
+加载ISO文件：虚拟机设置-》硬件-》CD/DVD-》启动时连接-》使用ISO映像文件
+将tar压缩包拷贝到桌面，然后解压安装sudo ./vmware-install.pl
+发现根本无法完成安装，服务启动不起来：https://zhuanlan.zhihu.com/p/710754741
+解决方式：
+```
+sudo ./vmware-install.pl走到卸载流程卸载VMware Tools
+sudo apt-get autoremove open-vm-tools
+sudo apt-get install open-vm-tools
+sudo apt-get install open-vm-tools-desktop
+reboot 
+```
+
 ## 4、没有网络，没有IP地址
 主机模式和NAT模式是虚拟机网络设置中的两种常见模式，它们的区别如下：
 
@@ -102,4 +116,11 @@ chattr +i /var/lib/deepin/developer-mode/enabled
 
 ## 9、复制粘贴失效问题
 大概率是vm-tools问题（如更新了vm-tools未重启虚拟机），可以尝试重启虚拟机试试。
+
+## 10、稍后安装操作系统
+https://zhuanlan.zhihu.com/p/677674195
+虚拟机设置-》硬件-》CD/DVD-》启动时连接-》使用ISO映像文件
+
+## 11、vmware主机的vulkan图形驱动程序版本不受支持
+https://blog.csdn.net/qq_31828933/article/details/134159230
 

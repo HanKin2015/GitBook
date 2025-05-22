@@ -186,3 +186,5 @@ FDO和PDO之间的关系可以这样理解：PDO是硬件设备在操作系统�
 
 WM_COPYDATA通信需要将传递的消息封装在COPYDATASTRUCT结构体中，在SendMessage消息传递函数时作为lParam参数传递。
 
+## 15、wsz
+wsz 前缀中的 w 表示 "wide"（宽），而 sz 是 "string zero-terminated" 的缩写，表示这是一个以空字符（'\0'）结尾的字符串。
