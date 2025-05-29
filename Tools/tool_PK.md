@@ -1,5 +1,9 @@
 # 工具PK
 
+## 0、个性化配置
+- 
+- 
+
 ## 1、下载工具
  
 ### 1-1、百度文库收费文档
@@ -47,3 +51,15 @@ win10任务栏透明以及实时显示网速，CPU和内存占有率
 一款Aero（大小：26.5 KB (27,136 字节)）
 单文件，不用安装没有花里胡哨的操作，双击就可以直接让任务栏透明
 
+https://github.com/cgbsmy/TrayS 硬件太新会有点问题，吾爱有1.3.9.1版的
+
+https://justalong.github.io/categories/
+
+## 4、复制粘贴
+推荐使用：https://zh.snipaste.com
+
+## 5、软件比较
+compare
+
+## 6、倒计时
+https://github.com/vladelaina/Catime/releases/tag/v1.1.1

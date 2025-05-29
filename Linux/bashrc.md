@@ -73,16 +73,16 @@ export PS1='[\u@\h: $PWD]\033[01;36m $(__git_ps1) \[\033[00m\] \$ '
 实战配置(source /etc/profile 是为了颜色设置）：
 ```
 alias ll="ls -laF"
+alias make="make -j9"
 source /etc/profile
 
 function git_branch {
     # 这里是你获取当前 git 分支的逻辑
     git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/^/(/;s/$/)/'
 }
+alias git_diff="git status . | grep -E '\.c$|\.cpp$|\.h$|\.ts$|\.txt$|Makefile'"
 # 设置 PROMPT_COMMAND 以在每次显示提示符时更新 PS1
 PROMPT_COMMAND='PS1="\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(git_branch)\[\033[0m\]\n# "'
-
-alias git_diff="git status . -uno | grep -E '\.c$|\.cpp$|\.h$|\.ts$'"
 ```
 
 ## 3、欢迎界面
