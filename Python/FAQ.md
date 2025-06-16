@@ -637,4 +637,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 - 检查是否有 re.pyc 或 __pycache__ 目录，这些可能是之前运行时生成的缓存文件。
 果然发现桌面上面有一个我测试使用的文件，并且命名为了re.py，尴尬！
 
+## 53、AttributeError: module 'os' has no attribute 'errno'
+python3不再支持os.errno语法。
+```
+import os
+print(os.errno)
+print(os.errno.EEXIST)
 
+改为
+
+import errno
+print(errno.EEXIST)
+```

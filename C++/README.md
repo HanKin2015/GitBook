@@ -471,3 +471,56 @@ bool init(int id)
 https://github.com/nanomsg/nng
 https://blog.csdn.net/cnzzs/article/details/141762197
 
+## 36、Fowler–Noll–Vo hash function
+源码如下看见是不是很懵逼！
+```
+auto hashString = [](const std::string& str) {
+		constexpr uint64_t FNV_PRIME = 1099511628211ULL;
+		constexpr uint64_t FNV_OFFSET = 14695981039346656037ULL;
+
+		uint64_t hash = FNV_OFFSET;
+		for (char c : str) {
+			hash ^= static_cast<uint64_t>(c);
+			hash *= FNV_PRIME;
+		}
+		return hash;
+		};
+```
+
+https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
+
+FNV-1 hash
+```
+algorithm fnv-1 is
+    hash := FNV_offset_basis
+
+    for each byte_of_data to be hashed do
+        hash := hash × FNV_prime
+        hash := hash XOR byte_of_data
+
+    return hash 
+```
+
+FNV-1a hash
+```
+algorithm fnv-1a is
+    hash := FNV_offset_basis
+
+    for each byte_of_data to be hashed do
+        hash := hash XOR byte_of_data
+        hash := hash × FNV_prime
+
+    return hash 
+```
+
+FNV-0 hash (deprecated)
+```
+algorithm fnv-0 is
+    hash := 0
+
+    for each byte_of_data to be hashed do
+        hash := hash × FNV_prime
+        hash := hash XOR byte_of_data
+
+    return hash
+```

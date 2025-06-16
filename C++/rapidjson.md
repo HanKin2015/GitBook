@@ -19,3 +19,11 @@ https://github.com/Tencent/rapidjson/releases/tag/v1.1.0
 
 备注：nlohmann这个命名大概就是作者的名字，作者名为nlohmann Niels Lohmann
 
+### 3-1、搭建编译环境
+- 下载json-3.12.0.zip源码文件
+- 解压后mkdir build
+- cmake ../
+- make -j8
+- make install
+
+### 3-2、

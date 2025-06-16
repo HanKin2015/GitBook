@@ -57,3 +57,5 @@ endlocal
 最终解决方案：设置中心-》高级威胁防护-》发现可以powershell脚本-》提醒我处理-》默认允许执行powershell脚本后就行了，但是最好是开启免打扰，这样是默认放行执行powershell脚本，设置成自动阻断脚本执行才不会处理
 
 删除2024041712A3.bat文件无果，会被自动创建。
+
+微软电脑管家下载地址：https://pcmanager.microsoft.com/zh-cn

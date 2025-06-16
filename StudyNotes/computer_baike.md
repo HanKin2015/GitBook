@@ -1,5 +1,15 @@
 # 电脑知识百度百科
 
+# 可移植操作系统接口
+可移植操作系统接口（英语：Portable Operating System Interface，缩写为POSIX）是IEEE为要在各种UNIX操作系统上运行软件，而定义API的一系列互相关联的标准的总称，其正式称呼为IEEE Std 1003，而国际标准名称为ISO/IEC 9945。此标准源于一个大约开始于1985年的项目。POSIX这个名称是由理查德·斯托曼（RMS）应IEEE的要求而提议的一个易于记忆的名称。它基本上是Portable Operating System Interface（可移植操作系统接口）的缩写，而X则表明其对Unix API的传承。
+
+当前的POSIX主要分为四个部分：Base Definitions、System Interfaces、Shell and Utilities和Rationale。
+
+# seabios
+SeaBIOS 是一个开源的 BIOS 实现，主要用于启动计算机和加载操作系统。它是一个轻量级的 BIOS，通常用于虚拟化环境（如 QEMU/KVM）和某些嵌入式系统。
+UEFI：是统一可扩展固件接口（Unified Extensible Firmware Interface），是一种现代的固件接口，支持 32 位和 64 位模式，提供更丰富的功能和更好的性能。
+SeaBIOS：是一种传统的 BIOS（基本输入输出系统），遵循 16 位实模式，主要用于启动操作系统。它的设计较为简单，主要用于兼容性。
+
 # UI设计师
 “UI”的本义是用户界面，是英文User和interface的缩写。UI设计师简称UID（User Interface Designer），指从事对软件的人机交互、操作逻辑、界面美观的整体设计工作的人。
 UI设计师的涉及范围包括高级网页设计、移动应用界面设计，是中国信息产业中最为抢手的人才之一。

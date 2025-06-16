@@ -262,3 +262,8 @@ MSYS（Minimal GNU(POSIX)system on Windows）是一个小型的GNU环境，旨�
 
 MSYS2（Minimal SYStem 2）是MSYS的一个升级版，旨在提供更强大、更灵活的跨平台开发环境。它集成了大量的GNU工具链、工具和库，同时引入了Pacman包管理器，方便用户安装、更新和卸载软件包。
 
+## 23、文件内容检索
+https://www.textseek.net/cn/download.htm
+https://www.filelocator.cn/
+https://anytxt.net/download/
+https://zhuanlan.zhihu.com/p/32302556687

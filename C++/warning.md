@@ -21,9 +21,12 @@
 prototype：原型、雏形
 
 ## 2、warning: no previous prototype for 'XXXX' [-Wmissing-prototypes]
-
 如果告警函数只在文件内部使用，在函数前面添加static即可消除告警
-
+-Wmissing-prototypes：如果函数被声明但没有定义，可能会发出警告。
+-Wimplicit-function-declaration：如果函数在使用前没有声明，编译器会发出警告。
+-Wreturn-type：如果函数声明了返回类型但没有返回值，可能会发出警告。
+-Wuninitialized：如果使用了未初始化的变量，可能会发出警告。
+-Wunused-function：如果函数声明但未使用，可能会发出警告。
 
 ## 3、warning: statement with no effect [-Wunused-value]
 for(j=1;j<m;j+2)

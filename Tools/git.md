@@ -537,28 +537,69 @@ git如何生成单个文件的补丁
 alias lg="git log --graph --pretty=format:’'Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
 ```
 
-### 14-4、git子模块使用
-一个大型工程总会被分拆为一些子工程,git-submodule 就是完成这样一种子工程拆分与整合的工具.
+### 14-4、git子模块submodule的使用
+一个大型工程总会被分拆为一些子工程，git-submodule 就是完成这样一种子工程拆分与整合的工具。
 
 添加一个子工程
+```
 git submodule add git@xxxx:subproj.git subproj
 git commit -m “submodule added”
+```
 
 克隆一个带submodule的git仓库
+```
 git clone git@domain.com:massproj.git
 git submodule init
 git submodule update
 或者
 git clone --rescursive git@domain.com:massproj.git
+```
 
-查看修改的文件
-git log --stat
+父仓库配置
+```.gitmodules
+[submodule "src/usbmagic2"]
+	path = src/usbmagic2
+	url = git@domain.com::usbmagic2.git
+	branch = develop-OMG2.3.8
+```
+拉取子仓库代码
+```
+git submodule update --init --remote --force
+```
+更新子仓库提交记录commit点位
+```
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git status
+Refresh index: 100% (17823/17823), done.
+On branch dev-238-usb
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   usbmagic2 (new commits)
 
-查看commitID的具体修改
-git log -p
+no changes added to commit (use "git add" and/or "git commit -a")
 
-查看文件最后的修改人
-git blame -L 起始行号,结束行号
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git commit -m"更新Submodule Commit"
+[dev-238-usb 452a99c3f] ds
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git show
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+Author: HanKin <12345@hankin.com>
+Date:   Thu Jun 12 14:36:42 2025 +0800
+
+    更新Submodule Commit
+
+diff --git a/src/usbmagic2 b/src/usbmagic2
+index d67394e87..3a93afa12 160000
+--- a/src/usbmagic2
++++ b/src/usbmagic2
+@@ -1 +1 @@
+-Subproject commit d67394e87012ab70eea223d2a7a001abe63c188e
++Subproject commit 3a93afa12bcb60d01a75985f979399acfdaa98d0
+```
 
 ## 15、git cherry-pick教程
 http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
@@ -1186,7 +1227,7 @@ Branch TD123456 set up to track remote branch TD123456 from origin.
 ## 41、只查看提交记录
 git log --oneline
 git log --stat
-git log -p
+git log -p  查看commitID的具体修改
 
 ## 42、.git文件夹太大问题及解决方法（该方法过程有些繁琐，不清楚有没有批量删除文件的方法）
 https://blog.csdn.net/lai1170137052/article/details/107009414/
@@ -1754,8 +1795,12 @@ git bash是一个不错的Linux终端，可以在Windows下畅所欲言的使用
 输入：git update-git-for-windows
 使用命令更新下载太慢。
 
-国内镜像站下载：https://github.com/waylau/git-for-win
-https://npm.taobao.org/mirrors/git-for-windows/
+国内镜像站下载：https://www.kernel.org/pub/software/scm/git/
+https://github.com/git-for-windows/git/releases
+gitforwindows.org
+
+Git for Windows for Windows v2.47 drops support for Windows 7 and for Windows 8, as announced previously.
+Git 从 v2.47.0 开始，不再支持 Windows 7 和 Windows 8，v2.46.2 是最后支持 Windows 7 和 Windows 8 的版本。
 
 ### 72-4、中文界面配置
 右键-》Options-》Window-》UI language-》zh_CN
@@ -1792,6 +1837,3 @@ User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
 $ git merge
 Already up to date.
 ```
-
-
-

@@ -25,6 +25,7 @@ vscode还有一个强大的优点：可以打开巨大的文本文件。
 
 ## 2、Visual Studio Code(VS Code) User版和System版区别
 安装包下载地址：https://code.visualstudio.com/Download
+内测版本：https://code.visualstudio.com/insiders/
 
 它们之间的主要区别在于安装方式、权限和适用场景。
 User版本无法在系统分区(盘) 创建默认文件夹Microsoft VS Code，可见权限不足，解决方案是提前在该目录自建文件夹命名。对于System版无此问题，可next step到底。
@@ -183,7 +184,7 @@ Host linux_x86_compile
 ```
 保存之后，左侧的远程资源管理面板中会显示刚刚添加的远程服务器。同样鼠标悬停在上面，右侧会显示一个文件夹图标，我们点击文件夹，会新开一个窗口并尝试连接该远程服务器。然后输入密码，会提示出错，因为我们的编译环境同样也无法连接外网，因此，vscode无法安装必须的远程代理。
 
-### 10-4、离线安装远程vs-server代理
+### 10-4、离线安装远程vscode-server代理
 - 进入远程服务器， 执行 ps aux | grep vscode，结果没有找到commit字符串，然后直接在windows的vscode的帮助-》关于中获取
 - 目录/root/.vscode-server/bin/下面有个文件夹名是commit，即~/.vscode-server/bin/
 - 稳定版：https://update.code.visualstudio.com/commit:c3f126316369cd610563c75b1b1725e0679adfb3/server-linux-x64/stable
@@ -215,6 +216,42 @@ mv server ~/.vscode-server/cli/servers/Stable-0ee08df0cf4527e40edc9aa28f4b5bd38b
 mv code ~/.vscode-server/code-0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2
 iru.json文件内容 Stable-0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2
 ```
+
+### 10-5、崩溃服务器系统版本过低无法使用最新版本vscode
+CentOS-7系统，安装高版本的vscode-server后无法连接，在服务器上面执行node命令，发现libstdc++库版本过老导致：
+```
+bash-4.2# cat /etc/os-release 
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+bash-4.2# cd /root/.vscode-server/bin/fee1edb8d6d72a0ddff41e5f71a671c23ed924b9/
+bash-4.2# ./node
+./node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by ./node)
+./node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by ./node)
+./node: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by ./node)
+./node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by ./node)
+./node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by ./node)
+./node: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by ./node)
+ash-4.2# gcc --version
+gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-28)
+Copyright © 2015 Free Software Foundation, Inc.
+本程序是自由软件；请参看源代码的版权声明。本软件没有任何担保；
+包括没有适销性和某一专用目的下的适用性担保。
+```
+算了，使用web访问方式也是挺不错滴！！！
 
 ## 11、visual studio code 重置所有设置（还原默认设置）
 a.打开如下目录：C:\Users\pcName\AppData\Roaming\Code\User（ 注意替换pcName为自己电脑设置的名称）
@@ -407,3 +444,8 @@ IntelliSense 的缓存可能过期，导致解析结果不准确。
 清除缓存：
 删除 .vscode/cache 文件夹（通常位于项目根目录下）。
 重启 VSCode 或重新加载窗口（Ctrl+Shift+P → Developer: Reload Window）。
+
+## 21、标签栏多行显示
+1、按住 ctrl + shift + p
+2、输入 open workspace settings,选择打开工作区设置
+3、输入workbench.editor.wrapTabs，勾选该设置项即可
