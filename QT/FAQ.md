@@ -232,5 +232,37 @@ if __name__ == '__main__':
 ```
 在Qt中，子窗口类数据可以通过信号和槽机制传递到父窗口。
 
+## 22、程序崩溃
+gdb调试无法跟踪：
+```
+(gdb) bt
+#0  0x00007f905e1843ff in __GI___poll (fds=0x5566374221a0, nfds=3, timeout=4) at ../sysdeps/unix/sysv/linux/poll.c:29
+#1  0x00007f905d83e0ae in  () at /lib/x86_64-linux-gnu/libglib-2.0.so.0
+#2  0x00007f905d83e1cf in g_main_context_iteration () at /lib/x86_64-linux-gnu/libglib-2.0.so.0
+#3  0x00007f905e7688e1 in QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) ()
+    at /lib/x86_64-linux-gnu/libQtCore.so.4
+#4  0x00007f905ece9207 in  () at /lib/x86_64-linux-gnu/libQtGui.so.4
+#5  0x00007f905e73a38f in QEventLoop::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) ()
+    at /lib/x86_64-linux-gnu/libQtCore.so.4
+#6  0x00007f905e73a65e in QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>) () at /lib/x86_64-linux-gnu/libQtCore.so.4
+#7  0x00007f905e73fb2a in QCoreApplication::exec() () at /lib/x86_64-linux-gnu/libQtCore.so.4
+#8  0x0000556635780599 in main ()
+```
 
+直接运行程序找到原因：
+```
+root@1BP3290329:/usr/local/bin# ./hankin-bar
+hankin-bar: cannot connect to X server
+root@1BP3290329:/usr/local/bin# export DISPLAY=:0
+root@1BP3290329:/usr/local/bin# ./hankin-bar
+QObject::connect: Cannot queue arguments of type 'QPair<size_t,char*>'
+(Make sure 'QPair<size_t,char*>' is registered using qRegisterMetaType().)
 
+recv: 资源暂时不可用
+```
+
+需要在代码中增加：
+```
+// 自定义信号槽函数参数所需
+qRegisterMetaType<QPair<size_t, char*>>("QPair<size_t, char*>");
+```

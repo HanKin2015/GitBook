@@ -57,13 +57,15 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 老版本编译无问题：
 [root@ubuntu0006:~/cmake] #/usr/bin/gcc-5 c.c
+
 未添加<stdio.h>头文件报错：
 [root@ubuntu0006:~/cmake] #gcc c.c
 /usr/bin/ld: 找不到 crt1.o: 没有那个文件或目录
 /usr/bin/ld: 找不到 crti.o: 没有那个文件或目录
 collect2: error: ld returned 1 exit status
-[root@ubuntu0006:~/cmake] #vi c.c
+
 添加<stdio.h>头文件报错：
+[root@ubuntu0006:~/cmake] #vi c.c
 [root@ubuntu0006:~/cmake] #gcc c.c
 In file included from /usr/include/stdio.h:27,
                  from c.c:1:
@@ -101,6 +103,12 @@ export CPATH=/usr/include/x86_64-linux-gnu:$CPATH（推荐）
 同上，crt1.o 文件位于/usr/lib/x86_64-linux-gnu/crt1.o，这表明该文件确实存在于系统中，但链接器可能没有正确配置以查找该路径。
 设置 LIBRARY_PATH 环境变量：export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 使用 -L 选项：gcc -L/usr/lib/x86_64-linux-gnu main.c -o main
+
+在/etc/profile文件中添加(解决每次接入出现此问题)：
+```
+export CPATH=/usr/include/x86_64-linux-gnu:$CPATH
+export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
+```
 
 ### 6-3、Could not find OpenSSL.  Install an OpenSSL development package or configure CMake with -DCMAKE_USE_OPENSSL=OFF to build without OpenSSL.
 cmake -DCMAKE_USE_OPENSSL=OFF .

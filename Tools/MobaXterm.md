@@ -170,6 +170,7 @@ Couldn't agree a host key algorithm (available: rsa-sha2-512,rsa-sha2-256)
 服务端有连接成功日志：
 Mar 28 14:21:20 adesk audit[32459]: CRED_REFR pid=32459 uid=0 auid=0 ses=6375 msg='op=PAM:setcred acct="root" exe="/usr/sbin/sshd" hostname=172.22.64.246 addr=172.22.64.246 terminal=ssh res=success'
 ```
+经测试跟软件版本无关系，跟操作系统环境有关系。
 
 ## 11、XTerminal
 官方网站：https://www.terminal.icu/

@@ -268,4 +268,5 @@ Wants=network-online.target
 
 因此，这两个选项不是必须的。
 
-
+## 7、Warning: The unit file, source configuration file or drop-ins of vdi_usbmagicd.service changed on disk. Run 'systemctl daemon-reload'
+修改/lib/systemd/system/目录下的服务之后，需要执行systemctl daemon-reload即可。

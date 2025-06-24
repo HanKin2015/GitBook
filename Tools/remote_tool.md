@@ -124,13 +124,9 @@ Once you have done this, re-open your Preferences and untick 'Protect VNC Viewer
 ### 4-5、mstsc与VNC冲突
 如果之前使用mstsc连接未断开，这时候使用VNC连接，虽然连接成功，但是是黑屏状态。这时候只能把VNC完全关闭后再连接才能解决问题。
 
-## 5、anyviewer
-https://www.anyviewer.cn/
+### 4-6、银河麒麟系统中安装x11vnc服务
+https://faq.uniontech.com/desktop/app/45ee
 
-## 6、向日葵
-https://sunlogin.oray.com/
-
-### 4-1、银河麒麟系统中安装x11vnc服务
 步骤1 ：更新系统
 sudo apt-get update
 
@@ -148,9 +144,14 @@ x11vnc.service文件内容如下：
 [Unit]
 Description=Start x11vnc at startup
 After=multi-user.target
+Requires=display-manager.service
+#After=display-manager.service
+
 [Service]
 Type=simple
 ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pwd -rfbport 5900 -shared
+ExecStop=/usr/bin/killall x11vnc
+
 [Install]
 WantedBy=multi-user.target
 ```
@@ -161,13 +162,14 @@ sudo chmod 755 /lib/systemd/system/x11vnc.service
 sudo chown root:root /lib/systemd/system/x11vnc.service
 
 步骤5 ：配置启动服务
-sudo systemctl enable x11vnc.service
 sudo systemctl daemon-reload
+sudo systemctl enable x11vnc.service
+sudo systemctl start x11vnc.service
 
 步骤6 ：重启生效
 sudo reboot
 
-### 4-2、Windows系统中安装客户端
+### 4-7、Windows系统中安装客户端
 步骤1 ： 下载并安装VNC Viewer
 下载地址：https://www.realvnc.com/en/connect/download/viewer/
 
@@ -176,7 +178,7 @@ sudo reboot
 在地址栏中输入银河麒麟系统的IP地址，回车连接。
 输入上面步骤3中设置的密码，即可成功连接。
 
-### 4-3、银河麒麟自身含有vncserver命令
+### 4-8、银河麒麟自身含有vncserver命令
 启动后无法直接连接
 
 打算以Xubuntu为例，手动安装使用。
@@ -224,7 +226,11 @@ http://netman123.cn/cw/lp_11.html
 ## 7、anydesk
 https://anydesk.com.cn/zhs
 
+## 8、anyviewer
+https://www.anyviewer.cn/
 
+## 9、向日葵
+https://sunlogin.oray.com/
 
 
 

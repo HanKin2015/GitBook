@@ -967,9 +967,7 @@ git diff c1 c2 > 123.patch
 git format-patch -5
 git show commit1 > 234.patch
 https://blog.csdn.net/wenjin359/article/details/83270146
-
 果断放弃了，不行。
-
 
 但是在另外一个仓库搞定解决了。
 ```

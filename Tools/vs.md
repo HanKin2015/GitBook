@@ -7,6 +7,10 @@ Ctrl+R,Ctrl+W 查看空白
 Ctrl+F4     关闭当前文件
 Ctrl+K,Ctrl+D 格式化整个文档
 Ctrl+K,Ctrl+F 格式化选定的代码
+Ctrl+W     关闭当前标签页或窗口
+Ctrl+Shift+W    关闭vscode
+Alt+<-     回退浏览
+注意：Ctrl + W 和 Cmd + W 在大多数浏览器中也用于关闭当前标签页。在 VSCode Web 中，关闭当前编辑器标签页的快捷键与浏览器相同，因此只能自定义快捷键。
 
 ## 2、神奇的事情
 ```

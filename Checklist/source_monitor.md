@@ -37,11 +37,19 @@ SourceMonitor是一款免费的软件，运行在Windows平台下。它可对多
 
 ## 2、静态扫描工具-cppcheck
 cppcheck是一个代码静态扫描工具，可以检查C/C++代码中的一些常见缺陷。
+Cppcheck是一款由Daniel Marjamäki创建并维护的静态代码分析工具，专注于C和C++代码的检查。它能够对源代码执行严格的逻辑检查，发现编译器无法检测到的潜在问题，如内存泄漏、未初始化的变量、数组越界等。Cppcheck以其高度的定制化、跨平台支持以及广泛的兼容性，成为C++开发者提升代码质量和可靠性的重要工具。
 
-cppcheck可以从http://cppcheck.sourceforge.net/下载最新版本。
+Cppcheck的官方网站为http://cppcheck.sourceforge.net，用户可以在此下载最新版本、查看文档和社区支持。此外，Cppcheck还提供了丰富的插件和集成选项，使其能够无缝接入主流IDE和持续集成（CI/CD）流程。
+
+## 3、静态扫描工具-TscanCode
 推荐TscanCode：https://blog.csdn.net/ybhuangfugui/article/details/133758880
 https://github.com/Tencent/TscanCode
 最新版本的release下已经去掉windows下的可执行文件。可使用V2.14.24版本的TscanCodeV2.14.24.windows.exe（Windows最终版本）。
 
-## 3、度量工具-CCCC
+## 4、静态扫描工具-clang-tidy
+Sonar代码质量静态分析工具的安装与使用
+
+## 5、度量工具-CCCC
 CCCC是一种分析C++和Java文件并生成有关代码各种指标的报告的工具。支持的度量标准包括代码行，McCabe的 复杂性指标，和Chidamber＆Kemerer以及Henry＆Kafura提出的指标。
+
+

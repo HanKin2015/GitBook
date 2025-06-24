@@ -120,7 +120,25 @@ SUMMARY: AddressSanitizer: alloc-dealloc-mismatch ??:0 operator delete(void*)
 ```
 
 开启-O编译优化选项，会导致asan无法定位：D:\Users\Administrator\Desktop\asan_O0123.cpp
-``
+```
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O0 l.cpp -Wl,-rpath,/lib/x86_64-linux-gnu/  -lasan
+[root@ubuntu0006:~] #./a.out
+
+=================================================================
+==18269==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4096 byte(s) in 1 object(s) allocated from:
+    #0 0x7fa8e5195602 in malloc (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x98602)
+    #1 0x4006ba in main /root/l.cpp:6
+    #2 0x7fa8e4d5383f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: 4096 byte(s) leaked in 1 allocation(s).
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O1 l.cpp -Wl,-rpath,/lib/x86_64-linux-gnu/  -lasan
+[root@ubuntu0006:~] #./a.out
+
+int *x = (int *)malloc(1024 * sizeof(int));
+//printf("%p\n", x);    // 如果使用了x指针后则-O编译优化选项无法影响，但是未使用则会影响
+```
 
 ## 3、ASAN_OPTIONS所有的配置项及其含义
 ASAN_OPTIONS是用于配置ASAN的选项的环境变量，可以用来控制ASAN的行为。ASAN_OPTIONS的值是一个用冒号分隔的字符串，每个部分都是一个配置项。下面列出了ASAN_OPTIONS所有的配置项及其含义：
@@ -159,6 +177,12 @@ symbolize=1 ：打印可读的堆栈信息，需要配合LLVM的llvm-symbolizer�
 verbosity=1 ：设置ASAN的输出级别，值越大输出的信息越详细。
 
 以上是ASAN_OPTIONS的所有配置项及其含义，可以根据需要进行配置。
+
+ASAN_OPTIONS的使用：
+```
+export ASAN_OPTIONS="halt_on_error=1:disable_coredump=0:unmap_shadow_on_exit=1:log_path=/home/test/asan:malloc_context_size=15"
+对单一的二进制文件立即生效，会生成/home/test/asan.10418等文件。
+```
 
 ## 4、举例使用
 demo见：D:\Github\Storage\c++\内存泄露工具\address_sanitizer
@@ -277,11 +301,6 @@ PVS-Studio：PVS-Studio 是一种商业静态分析工具，它可以检测 C/C+
 自己猜测的原因：首先它仅仅是一个数字，在程序关闭后会自动回收。如果在程序中打开同一个文件多次，文件描述符数字会自动增加，也应该没有办法判断后面会不会关闭。总的来说，个人感觉静态工具应该能检测出来的，但是搜索了大量资料也没有一个明确的工具可以对齐进行检测。
 https://blog.csdn.net/weixin_38331755/article/details/124545159
 
-## 7、-fsanitize=address和-lasan区别
-在大多数情况下，只需使用 -fsanitize=address 即可，编译器会自动处理所需的库链接。
--fsanitize=address 是编译器选项，用于启用 AddressSanitizer 功能，插入检测内存错误的代码。
--lasan 是链接器选项，用于链接 AddressSanitizer 的库，通常在使用 -fsanitize=address 时不需要显式指定。
-
 ## 8、asan报告分析
 D:\Users\Administrator\Desktop\testmemleak.cpp
 ```
@@ -317,9 +336,287 @@ gcc5版本内存泄露错误是可以一次性出，前提是不存在内存地�
 
 gcc5和gcc8链接的libasan.so版本不同，
 
-### 8-2、
+高版本新增参数，如-fsanitize-recover=address：
+```
+[root@ubuntu0006:~] #/usr/bin/g++-5 k.cpp -fsanitize=address -fsanitize-recover=address,all -fno-omit-frame-pointer -fsanitize=leak
+cc1plus: error: -fsanitize-recover=address is not supported
+[root@ubuntu0006:~] #/usr/bin/g++ k.cpp -fsanitize=address -fsanitize-recover=address,all -fno-omit-frame-pointer -fsanitize=leak
+[root@ubuntu0006:~] #./a.out
+./a.out: error while loading shared libraries: libasan.so.5: cannot open shared object file: No such file or directory
+```
 
+### 8-2、不同的gcc版本默认加载不同版本的libasan.so文件
+当前测试环境默认安装的g++是g++-5，后面将新版本的g++-8已编译的安装移到当前环境，即未在当前环境编译安装，只做解压操作后使用，因此g++-8需要找libasan.so.5版本，而当前环境默认路径则是/usr/lib/x86_64-linux-gnu/libasan.so.2，因此无法正常使用，但是通过-L指定路径编译后却变成了libasan.so.2？？？
+```
+[root@ubuntu0006:~] #g++ k.cpp  -lasan
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffdd82c6000)
+        libasan.so.5 => not found
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f12d33fb000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f12d30f2000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f12d2edc000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f12d2b12000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f12d377f000)
+[root@ubuntu0006:~] #./a.out
+./a.out: error while loading shared libraries: libasan.so.5: cannot open shared object file: No such file or directory
+[root@ubuntu0006:~] #g++ k.cpp -L/usr/lib/gcc/x86_64-linux-gnu/5/ -lasan
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffc5fdda000)
+        libasan.so.2 => /usr/lib/x86_64-linux-gnu/libasan.so.2 (0x00007f4436650000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f44362cc000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f4435fc3000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f4435dad000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f44359e3000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f44357c6000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f44355c2000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f44375bd000)
+[root@ubuntu0006:~] #./a.out
+on_device_info_change is null
+priv is null
+```
 
+-static-libasan：静态加载
+```
+动态加载：
+[root@ubuntu0006:~] #g++ k.cpp -g -O0 -fsanitize=address -lasan -std=c++11 -I /usr/include/ -pthread -lm
+[root@ubuntu0006:~] #./a.out
+./a.out: error while loading shared libraries: libasan.so.5: cannot open shared object file: No such file or directory
+[root@ubuntu0006:~] #!ldd
+ldd a.out
+        linux-vdso.so.1 =>  (0x00007fff2b9ee000)
+        libasan.so.5 => not found
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fc0e5112000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc0e4e09000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fc0e4bf3000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc0e49d6000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc0e460c000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fc0e5496000)
+
+静态加载asan，但是ldd命令则无法看到asan加载（ldd只能看见动态加载）：
+[root@ubuntu0006:~] #g++ k.cpp -g -O0 -fsanitize=address -static-libasan -std=c++11 -I /usr/include/ -pthread -lm
+[root@ubuntu0006:~] #./a.out
+hejian 0x602000000010
+=================================================================
+==19780==ERROR: AddressSanitizer: alloc-dealloc-mismatch (operator new [] vs operator delete) on 0x60b000000040
+    #0 0x4cf990 in operator delete(void*) ../../.././libsanitizer/asan/asan_new_delete.cc:135
+    #1 0x508d78 in main /root/k.cpp:19
+    #2 0x7fd9a20c783f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+    #3 0x405e68 in _start (/root/a.out+0x405e68)
+
+0x60b000000040 is located 0 bytes inside of 100-byte region [0x60b000000040,0x60b0000000a4)
+allocated by thread T0 here:
+    #0 0x4cede0 in operator new[](unsigned long) ../../.././libsanitizer/asan/asan_new_delete.cc:93
+    #1 0x508d68 in main /root/k.cpp:18
+    #2 0x7fd9a20c783f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: alloc-dealloc-mismatch ../../.././libsanitizer/asan/asan_new_delete.cc:135 in operator delete(void*)
+==19780==HINT: if you don't care about these errors you may set ASAN_OPTIONS=alloc_dealloc_mismatch=0
+==19780==ABORTING
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffd957ec000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fd7307be000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fd7304b5000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fd7302ad000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fd7300a9000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fd72fe8c000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fd72fc76000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fd72f8ac000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fd730b42000)
+
+这样写未加载asan：
+[root@ubuntu0006:~] #g++ k.cpp -g -O0 -static-libasan -std=c++11 -I /usr/include/ -pthread -lm
+[root@ubuntu0006:~] #./a.out
+hejian 0x7a7c20
+
+未静态加载无法正常运行，说明静态加载则是找当前系统的默认路径：
+[root@ubuntu0006:~] #g++ k.cpp -fsanitize=address
+[root@ubuntu0006:~] #./a.out
+./a.out: error while loading shared libraries: libasan.so.5: cannot open shared object file: No such file or directory
+
+使用系统的默认g++-5：
+[root@ubuntu0006:~] #/usr/bin/g++-5 k.cpp -fsanitize=address
+[root@ubuntu0006:~] #./a.out
+hejian 0x60200000eff0
+0x60200000efd0
+0x60400000dfd0
+=================================================================
+==433==ERROR: AddressSanitizer: alloc-dealloc-mismatch (operator new [] vs operator delete) on 0x60b00000af90
+    #0 0x7f32169e6b2a in operator delete(void*) (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x99b2a)
+    #1 0x400c5a in main (/root/a.out+0x400c5a)
+    #2 0x7f321621f83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+    #3 0x400a88 in _start (/root/a.out+0x400a88)
+
+0x60b00000af90 is located 0 bytes inside of 100-byte region [0x60b00000af90,0x60b00000aff4)
+allocated by thread T0 here:
+    #0 0x7f32169e66b2 in operator new[](unsigned long) (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x996b2)
+    #1 0x400c4a in main (/root/a.out+0x400c4a)
+    #2 0x7f321621f83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: alloc-dealloc-mismatch ??:0 operator delete(void*)
+==433==HINT: if you don't care about these warnings you may set ASAN_OPTIONS=alloc_dealloc_mismatch=0
+==433==ABORTING
+
+结果同上：
+[root@ubuntu0006:~] #/usr/bin/g++-5 k.cpp -lasan
+```
+
+### 8-3、低版本gcc强制指定高版本libasan.so
+```
+[root@ubuntu0006:~] #/usr/bin/g++-5 k.cpp -L/usr/local/gcc-8.1.0/lib64/ -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/ -fsanitize=address  -fno-omit-frame-pointer -fsanitize=leak -g
+/usr/lib/gcc/x86_64-linux-gnu/5/libasan_preinit.o:(.preinit_array+0x0)：对‘__asan_init_v4’未定义的引用
+/tmp/ccITnHqD.o：在函数‘_GLOBAL__sub_I_00099_0_main’中：
+/root/k.cpp:32：对‘__asan_init_v4’未定义的引用
+collect2: error: ld returned 1 exit status
+```
+
+## 9、-fsanitize=address和-lasan区别
+问题背景：发现使用-lasan编译的session程序在项目中启动无反应，直接运行报错manually preload it with LD_PRELOAD，但是另外一种虚拟机资源则是正常的，很奇怪，都是启动同一个session程序，为何有这两种截然不同的现象？？？
+
+原因居然是两种虚拟机资源在启动时加载了不同的环境变量：
+```
+setenv("ASAN_OPTIONS", "halt_on_error=0:detect_leaks=1:log_path=/opt/sangfor/vdiclient/log/asan_tray.log", 1 /*overwrite*/);
+setenv("LD_PRELOAD", "/lib/x86_64-linux-gnu/libasan.so.5", 1 /*overwrite*/);
+execlp(EXE_NAME, EXE_NAME, "-i", info->mSessId.data(), "-s", std::to_string(info->mSessSeq).data(), NULL););
+
+另外一个虚拟机资源启动时未添加setenv("ASAN_OPTIONS".....);，已省略setenv("LD_PRELOAD".....);无关，并且在Terminal中执行export ASAN_OPTIONS="";或者在/etc/profile也是无效的。
+```
+这个原因是：ASAN_OPTIONS或者LD_PRELOAD添加后，会让sessiong程序优先加载asan库，从而不会存在manually preload it with LD_PRELOAD问题。但是由于session程序其设置了setuid权限位。linux下对设置了setuid权限的可执行文件，忽略配置的LD_PRELOAD。因此对于session程序来说LD_PRELOAD配置无效。
+
+通过发现使用-fsanitize=address代替-lasan参数后，即使execlp启动程序时没有加载ASAN_OPTIONS或者LD_PRELOAD选项，也能优先加载asan库，这就是编译器会自动处理所需的库链接。
+因此建议在使用的时候-fsanitize=address -lasan结合使用最好。
+
+在大多数情况下，只需使用 -fsanitize=address 即可，编译器会自动处理所需的库链接。
+-fsanitize=address 是编译器选项，用于启用 AddressSanitizer 功能，插入检测内存错误的代码。
+-lasan 是链接器选项，用于链接 AddressSanitizer 的库，通常在使用 -fsanitize=address 时不需要显式指定。
+
+在使用 AddressSanitizer (ASan) 时，出现错误 ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD 通常是因为 ASan 的运行时库没有在链接时被正确放置在库列表的最前面。
+使用 -fsanitize=address 选项来编译和链接你的程序，而不是手动使用 -lasan。-fsanitize=address 会自动处理 ASan 运行时库的链接顺序。
+
+如果你确实需要手动链接 ASan 库（例如，使用 -lasan），你可以在运行程序时使用 LD_PRELOAD 来确保 ASan 运行时库在其他库之前加载。
+LD_PRELOAD=/path/to/libasan.so ./your_program
+
+在某些情况下，链接器可能会忽略未直接引用的库。你可以尝试使用 -Wl,--no-as-needed 选项来强制链接器链接所有库：
+g++ -fsanitize=address -Wl,--no-as-needed your_file.cpp -o your_program
+
+## 10、在编译时，使用 -Wl,-rpath 选项来指定运行时库的搜索路径
+不需要使用export LD_LIBRARY_PATH=/usr/local/gcc-8.1.0/lib64/:$LD_LIBRARY_PATH
+```
+[root@ubuntu0006:~] #/usr/bin/g++ -g -O0 -lasan -lpthread l.cpp -lusb-1.0 -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007fff18238000)
+        libasan.so.5 => /usr/local/gcc-8.1.0/lib64/libasan.so.5 (0x00007f03cd05c000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f03cce3f000)
+        libusb-1.0.so.0 => /usr/local/lib/libusb-1.0.so.0 (0x00007f03ccc23000)
+        libstdc++.so.6 => /usr/local/gcc-8.1.0/lib64/libstdc++.so.6 (0x00007f03cc89f000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f03cc596000)
+        libgcc_s.so.1 => /usr/local/gcc-8.1.0/lib64/libgcc_s.so.1 (0x00007f03cc37e000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f03cbfb4000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f03cbdb0000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f03cbba8000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f03ce021000)
+        libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007f03ce208000)
+[root@ubuntu0006:~] #/usr/bin/g++ -g -O0 -lasan -lpthread l.cpp -lusb-1.0
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffc09db0000)
+        libasan.so.5 => not found
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc442799000)
+        libusb-1.0.so.0 => /usr/local/lib/libusb-1.0.so.0 (0x00007fc44257d000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fc4421f9000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc441ef0000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fc441cda000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc441910000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fc4429b6000)
+        libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fc442b9e000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc441708000)
+```
+
+## 11、manually preload it with LD_PRELOAD.
+完整的错误信息：==23929==ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD.
+```
+g++-8版本编译，由于-Wl,-rpath,/usr/local/gcc-8.1.0/lib64/是程序运行时加载，因此都会最先加载：
+[root@ubuntu0006:~] #/usr/bin/g++ -g -O0 -lpthread l.cpp -lasan -lusb-1.0 -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/
+[root@ubuntu0006:~] #./a.out
+==12272==ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD.
+
+虽然程序中没有加载-lpthread，但是存在-Wl,-rpath,选项时则会生效（nonono，说明这个参数使用-lpthread，因此往前加-lm就没啥问题）：
+[root@ubuntu0006:~] #/usr/bin/g++ -g -O0 -lm -lasan -lpthread l.cpp -lusb-1.0 -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/
+[root@ubuntu0006:~] #./a.out
+
+=================================================================
+==20594==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4096 byte(s) in 1 object(s) allocated from:
+    #0 0x7f47fc0a37a0 in __interceptor_malloc ../../.././libsanitizer/asan/asan_malloc_linux.cc:86
+    #1 0x40084b in main /root/l.cpp:17
+    #2 0x7f47faf3383f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+Direct leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f47fc0a51d0 in operator new(unsigned long) ../../.././libsanitizer/asan/asan_new_delete.cc:90
+    #1 0x400859 in main /root/l.cpp:19
+    #2 0x7f47faf3383f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: 4100 byte(s) leaked in 2 allocation(s).
+[root@ubuntu0006:~] #/usr/bin/g++ -g -O0 -lm -lpthread -lasan l.cpp -lusb-1.0 -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/
+[root@ubuntu0006:~] #./a.out
+==5781==ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD.
+
+g++-5忽略-lpthrea和/usr/local/gcc-8.1.0/lib64/：
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O0 -lpthread l.cpp -lasan -Wl,-rpath,/usr/local/gcc-8.1.0/lib64/
+[root@ubuntu0006:~] #ldd a.out
+        linux-vdso.so.1 =>  (0x00007ffc7fde9000)
+        libasan.so.2 => /usr/lib/x86_64-linux-gnu/libasan.so.2 (0x00007fe1aee47000)
+        libstdc++.so.6 => /usr/local/gcc-8.1.0/lib64/libstdc++.so.6 (0x00007fe1aeac3000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe1ae6f9000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fe1ae4dc000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fe1ae2d8000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fe1adfcf000)
+        libgcc_s.so.1 => /usr/local/gcc-8.1.0/lib64/libgcc_s.so.1 (0x00007fe1addb7000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fe1afdb4000)
+[root@ubuntu0006:~] #./a.out
+
+=================================================================
+==13507==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4096 byte(s) in 1 object(s) allocated from:
+    #0 0x7fe450b62602 in malloc (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x98602)
+    #1 0x40084a in main /root/l.cpp:7
+    #2 0x7fe45039c83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+Direct leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7fe450b63532 in operator new(unsigned long) (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x99532)
+    #1 0x400858 in main /root/l.cpp:9
+    #2 0x7fe45039c83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: 4100 byte(s) leaked in 2 allocation(s).
+
+g++-5忽略-lpthrea和Wl,-rpath,/lib/x86_64-linux-gnu/：
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O0 -lpthread l.cpp -lasan -Wl,-rpath,/lib/x86_64-linux-gnu/
+[root@ubuntu0006:~] #./a.out
+
+=================================================================
+==14685==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4096 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3995db0602 in malloc (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x98602)
+    #1 0x40083a in main /root/l.cpp:7
+    #2 0x7f39955ea83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+Direct leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3995db1532 in operator new(unsigned long) (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x99532)
+    #1 0x400848 in main /root/l.cpp:9
+    #2 0x7f39955ea83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+SUMMARY: AddressSanitizer: 4100 byte(s) leaked in 2 allocation(s).
+
+结果同上：
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O0 l.cpp -lm -lpthread -lasan -lusb-1.0 -Wl,-rpath,/lib/x86_64-linux-gnu/
+
+程序中需要加载-lusb-1.0，因此-lasan靠后了报错：
+[root@ubuntu0006:~] #/usr/bin/g++-5 -g -O0 -lm l.cpp -lusb-1.0 -lasan
+[root@ubuntu0006:~] #./a.out
+==23929==ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD.
+```
+总之-lasan往最前面写准没错！
 
 
 

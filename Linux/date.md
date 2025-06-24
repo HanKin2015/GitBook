@@ -19,7 +19,6 @@ apt-get install auditd
 编辑 /etc/audit/audit.rules 配置文件：-w /bin/date -p x -k date_change
 重启审计服务：sudo systemctl restart auditd
 查看审计日志：ausearch -k date_change
-
 ```
 
 ### 1-2、NTP服务（systemd-timesyncd）

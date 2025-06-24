@@ -16,6 +16,7 @@ https://github.com/Tencent/rapidjson/releases/tag/v1.1.0
 仓库地址：https://github.com/nlohmann/json
 
 教程：https://blog.csdn.net/sexyluna/article/details/124720901
+https://blog.csdn.net/w451062810/article/details/122639304
 
 备注：nlohmann这个命名大概就是作者的名字，作者名为nlohmann Niels Lohmann
 
@@ -25,5 +26,18 @@ https://github.com/Tencent/rapidjson/releases/tag/v1.1.0
 - cmake ../
 - make -j8
 - make install
+其实也不用这么麻烦，只需要引入json.hpp文件就可以了。
+demo：D:\Github\Storage\c++\parse\nlohmann\README.md
 
 ### 3-2、
+
+## 4、cJSON
+cJSON本身不支持64位的整型数据解析和增加，对于部分应用场景不适用（例如时间戳，需要64位整数）。原因在于cJSON使用double来存储中间数据，转换为整形可能存在精度问题。本节作者提出了改进方案，让cJSON能够支持uint64类型。
+
+https://blog.csdn.net/u012084827/article/details/146494583
+
+
+
+
+
+
