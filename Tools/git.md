@@ -537,70 +537,6 @@ git如何生成单个文件的补丁
 alias lg="git log --graph --pretty=format:’'Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
 ```
 
-### 14-4、git子模块submodule的使用
-一个大型工程总会被分拆为一些子工程，git-submodule 就是完成这样一种子工程拆分与整合的工具。
-
-添加一个子工程
-```
-git submodule add git@xxxx:subproj.git subproj
-git commit -m “submodule added”
-```
-
-克隆一个带submodule的git仓库
-```
-git clone git@domain.com:massproj.git
-git submodule init
-git submodule update
-或者
-git clone --rescursive git@domain.com:massproj.git
-```
-
-父仓库配置
-```.gitmodules
-[submodule "src/usbmagic2"]
-	path = src/usbmagic2
-	url = git@domain.com::usbmagic2.git
-	branch = develop-OMG2.3.8
-```
-拉取子仓库代码
-```
-git submodule update --init --remote --force
-```
-更新子仓库提交记录commit点位
-```
-User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
-$ git status
-Refresh index: 100% (17823/17823), done.
-On branch dev-238-usb
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        modified:   usbmagic2 (new commits)
-
-no changes added to commit (use "git add" and/or "git commit -a")
-
-User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
-$ git commit -m"更新Submodule Commit"
-[dev-238-usb 452a99c3f] ds
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
-$ git show
-User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
-Author: HanKin <12345@hankin.com>
-Date:   Thu Jun 12 14:36:42 2025 +0800
-
-    更新Submodule Commit
-
-diff --git a/src/usbmagic2 b/src/usbmagic2
-index d67394e87..3a93afa12 160000
---- a/src/usbmagic2
-+++ b/src/usbmagic2
-@@ -1 +1 @@
--Subproject commit d67394e87012ab70eea223d2a7a001abe63c188e
-+Subproject commit 3a93afa12bcb60d01a75985f979399acfdaa98d0
-```
-
 ## 15、git cherry-pick教程
 http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
 
@@ -1835,3 +1771,92 @@ User@new-win10x60050 MINGW64 /d/Demo/agent (feature/590/sm)
 $ git merge
 Already up to date.
 ```
+
+## 74、git子模块submodule的使用
+一个大型工程总会被分拆为一些子工程，git-submodule 就是完成这样一种子工程拆分与整合的工具。
+
+### 74-1、基础语法
+添加一个子工程
+```
+git submodule add git@xxxx:subproj.git subproj
+git commit -m “submodule added”
+```
+
+克隆一个带submodule的git仓库
+```
+git clone git@domain.com:massproj.git
+git submodule init
+git submodule update
+或者
+git clone --rescursive git@domain.com:massproj.git
+```
+
+父仓库配置
+```.gitmodules
+[submodule "src/sleep2"]
+	path = src/sleep2
+	url = git@domain.com::sleep2.git
+	branch = develop-OMG2.3.8
+```
+拉取子仓库代码
+```
+git submodule update --init --remote --force
+```
+更新子仓库提交记录commit点位
+```
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git status
+Refresh index: 100% (17823/17823), done.
+On branch dev-238-usb
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sleep2 (new commits)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git commit -m"更新Submodule Commit"
+[dev-238-usb 452a99c3f] ds
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+$ git show
+User@new-win10x60050 MINGW64 /d/Demo/client/src (dev-238-usb)
+Author: HanKin <12345@hankin.com>
+Date:   Thu Jun 12 14:36:42 2025 +0800
+
+    更新Submodule Commit
+
+diff --git a/src/sleep2 b/src/sleep2
+index d67394e87..3a93afa12 160000
+--- a/src/sleep2
++++ b/src/sleep2
+@@ -1 +1 @@
+-Subproject commit d67394e87012ab70eea223d2a7a001abe63c188e
++Subproject commit 3a93afa12bcb60d01a75985f979399acfdaa98d0
+```
+
+## 74-2、更换了.gitmodules文件中文件夹路径后报错无法更新
+```
+root@32a43663383d ~/code(person-12345-sleep_debian)
+# cat .gitmodules 
+[submodule "hankin-common/hankin-sleep"]
+        path = hankin-common/hankin-sleep
+        url = git@cs.devops.sangfor.org:VDI/USB/sleep.git
+        branch = person/12345/sleep-debian 
+root@32a43663383d ~/code(person-12345-sleep_debian)
+# git submodule update --init --remote --force
+fatal: No url found for submodule path 'hankin-spicec/sleep' in .gitmodules
+```
+我修改了.gitmodules 文件中hankin-spicec/sleep改为hankin-common/hankin-sleep,但是为何会报这个错误，怎么解决？
+
+```
+git submodule add git@devops.org:USB/sleep.git hankin-spicec/sleep
+git rm --cached hankin-spicec/sleep
+git submodule sync
+git submodule update --init --remote --force
+git submodule status
+```
+
+

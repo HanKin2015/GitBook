@@ -172,6 +172,10 @@ Mar 28 14:21:20 adesk audit[32459]: CRED_REFR pid=32459 uid=0 auid=0 ses=6375 ms
 ```
 经测试跟软件版本无关系，跟操作系统环境有关系。
 
+最终解决：虽然问题原因并没有找到，但是找到了解决方案！
+测试发现是我的环境使用了Bash（32 bit）导致的问题，切换到Bash（64 bit）后就能正常使用了！（Settings->Terminal->Local terminal environmen）
+但是在其他操作系统中发现使用Bash（32 bit）并没有此问题，因此还是跟操作系统环境有关系。
+
 ## 11、XTerminal
 官方网站：https://www.terminal.icu/
 和MobaXterm一样是收费软件

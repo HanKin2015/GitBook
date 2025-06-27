@@ -36,7 +36,7 @@ int main() {
 void file_write(char* data)
 {
     char* usb_device_operation_header = "./usb_device_operation_";
-    char* vmid = "29996";
+    char* vmid = "12345";
 
     char* usb_device_operation_path = (char *) malloc(strlen(usb_device_operation_header) + strlen(vmid) + strlen(".log"));
 

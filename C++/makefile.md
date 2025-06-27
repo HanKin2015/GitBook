@@ -9,7 +9,12 @@ cmake是用来生成Makefile文件的工具，生成Makefile文件的工具不�
 
 -c和-o都是gcc编译器的可选参数。-c表示只编译(compile)源文件但不链接，会把.c或.cc的c源程序编译成目标文件，一般是.o文件。-o用于指定输出(out)文件名。不用-o的话，一般会在当前文件夹下生成默认的a.out文件作为可执行程序。
 
-make -C 编译的文件夹路径
+make -C 编译的文件夹路径（-C是可以指定编译的路径）
+干运行（Dry Run）：使用 make -n 或 make --dry-run 命令可以模拟执行 Makefile，而不实际执行命令。这可以帮助你查看哪些目标将被构建，以及依赖关系是否正确
+调试模式：使用 make -d 或 make --debug 可以提供详细的调试信息，帮助你理解 Makefile 的执行过程
+使用 make -p 命令可以打印出 Makefile 的所有变量、规则和目标。这可以帮助你检查变量的值和规则的定义
+使用 make -q 命令可以检查目标是否需要更新，而不实际执行构建。这可以帮助你确认目标的状态：make -q target_name
+更多demo见：D:\Github\Storage\c++\makefile
 
 ## 1、示例
 写了一个client.cpp和server.cpp
