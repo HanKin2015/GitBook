@@ -206,11 +206,13 @@ if [ "$code_name" = "" ]; then
   exit 1
 fi
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
-echo "/etc/apt/sources.list  was bakup to /etc/apt/sources.list.bak"
+echo "/etc/apt/sources.list was bakup to /etc/apt/sources.list.bak"
 wget http://mirrors.hankin.org/assistants/ubuntu/sources.list -O /etc/apt/sources.list
 sed -i "s/CODE_NAME/${code_name}/" /etc/apt/sources.list
 apt update || apt-get update
 ```
+
+阿里镜像源：https://developer.aliyun.com/mirror/
 
 ### 6-1、软件源格式详解
 Ubuntu的软件源配置文件路径：/etc/apt/sources.list
@@ -297,6 +299,22 @@ deb http://archive.kylinos.cn/kylin/KYLIN-ALL 10.1-2107-updates main restricted 
 ```
 但是使用10.1-2107-updates根本无法获取clang库，但是写成10.1就可以了。
 那是不是应该理解为这两个链接地址都要添加上去，后面的是前面的补充，updates嘛。
+
+### 6-4、debian系统配置
+https://developer.aliyun.com/mirror/debian?spm=a2c6h.13651102.0.0.3e221b1133DEit
+Debian过期源（debian-archive)：https://developer.aliyun.com/mirror/debian-archive
+使用最新的镜像源会有GPK问题，因此需要选择过期源才行。
+
+centos才有everything版本，debian系统没有：https://blog.csdn.net/weixin_45910254/article/details/131241888
+- DVD版：这个是常用版本，就是普通安装版了，推荐大家安装。里面包含大量的常用软件，大部分情况下安装时无需再在线下载，体积为4G左右。	
+- Everything版：顾名思义，包含了所有软件组件，当然体积也庞大，高达DVD版的2倍。
+- LiveCD版：就是一个光盘CentOS系统，可通过光盘启动电脑，启动出CentOS系统，也有图形界面，也有终端。也可以安装到计算机，但是有些内容可能还需要再次到网站下载（自动）。
+- Minimal版：精简版本，包含核心组件，体积才600多MB。
+- NetInstall版：顾名思义，网络安装版本，一般不用这个版本。
+
+阿里镜像源并没有找到debian系统的iso镜像，但是在官网是能找到老版本的镜像：https://blog.csdn.net/mageriletu2012/article/details/140234871
+注意iso文件可能会拆分成多个文件，需要在dos窗口进行合并：copy /b a.iso+b.iso+c.iso out.iso
+http://cdimage.debian.org/cdimage/archive/8.11.0/amd64/iso-dvd/
 
 ## 7、linux中make install指定安装目录
 ### 7-1、修改configure文件中prefix的值：

@@ -177,6 +177,22 @@ done
 ```
 ## 15、再生龙
 再生龙（Clonezilla）是一个免费的灾难恢复、硬盘克隆、硬盘映像档制作的部署和解决方案，由台湾的高速网络与计算中心所开发，以GNU通用公共许可协议（GPL）发布。
+官网：https://clonezilla.nchc.org.tw/intro/
+再生龙（Clonezilla）与Ghost的核心区别在于开源属性、系统兼容性和功能定位。再生龙是免费开源的跨平台备份工具，支持Linux、Windows、Mac等多系统及复杂文件系统，适合企业级批量操作；而Ghost是商业软件，以Windows系统为核心，提供更简化的分区管理和还原流程，更适合个人用户快速备份。
+
+- 再生龙：由中国台湾开发的开源软件，遵循GPL协议，可免费使用和修改。
+- Ghost：由Symantec开发的商业软件，需购买授权，主要面向Windows用户。
+
+Clonezilla是一个用于Linux，Free-Net-OpenBSD，Mac OS X，Windows以及Minix的分区和磁盘克隆程序。它支持所有主要的文件系统，包括EXT，NTFS，FAT，XFS，JFS和Btrfs，LVM2，以及VMWare的企业集群文件系统VMFS3和VMFS5。Clonezilla支持32位和64位系统，同时支持旧版BIOS和UEFI BIOS，并且同时支持MBR和GPT分区表。它是一个用于完整备份Windows系统和所有安装于上的应用软件的好工具，而我喜欢用它来为Linux测试系统做备份，以便我可以在其上做疯狂的实验搞坏后，可以快速恢复它们。
+
+Clonezilla也可以使用dd命令来备份不支持的文件系统，该命令可以复制块而非文件，因而不必在意文件系统。简单点说，就是Clonezilla可以复制任何东西。（关于块的快速说明：磁盘扇区是磁盘上最小的可编址存储单元，而块是由单个或者多个扇区组成的逻辑数据结构。）
+
+其实就是一个Linux版的Ghost，甚至比Ghost还要强大，支持PXE进行批量还原，并且通杀Linux，Mac，Windows的系统文件格式。
+
+克隆Linux不要使用ghost，它支持的格式分区有限。而且也不能完全克隆。
+再生龙可以安装ISO文件。再生龙（CloneZilla）是一个开源的磁盘成像和备份还原工具，支持从ISO文件启动并进行系统备份和还原操作。
+
+PS：下次装系统可以尝试使用再生龙试试。
 
 ## 16、其他
 /lib /usr/lib /usr/local/lib 区别

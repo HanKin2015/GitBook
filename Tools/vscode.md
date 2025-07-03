@@ -413,9 +413,14 @@ Ctrl+光标点击 选择多个编辑位点
 最终在一台全新物理机上面安装vscode后发现代码跳转正常，并且代码高亮正常。发现vscode-server上面已安装的好多插件都生效了，如git。发现代码跳转是一个叫做IntelliSense失效的，翻译过来叫做代码分析，在vscode的下方呈{}形式。
 
 cpptools跳转插件：https://github.com/microsoft/vscode-cpptools/releases
-通过物理机对比发现可能是配置文件C:\Users\User\AppData\Roaming\Code\User\settings.json不同导致，修改完后依然存在问题，后面猜测可能是本地安装的插件冲突导致vscode-server中的众多插件失效，然后果断删除本地插件安装包C:\Users\User\.vscode\extensions，因为之前折腾过其他版本vscode的插件。插件删除后代码跳转功能正常。
+
+最终解决方案：通过物理机对比发现可能是配置文件C:\Users\User\AppData\Roaming\Code\User\settings.json不同导致，修改完后依然存在问题，后面猜测可能是本地安装的插件冲突导致vscode-server中的众多插件失效，然后果断删除本地插件安装包C:\Users\User\.vscode\extensions，因为之前折腾过其他版本vscode的插件。插件删除后代码跳转功能正常。
 
 更换平替插件：https://blog.csdn.net/WhereYouSink/article/details/128253034，虽然没试，估计也不行。
+
+```
+Unable to write file '/root/.openvscode-server/extensions/extensions.json' (Unknown (FileSystemError): Error: EROFS: read-only file system, open '/root/.openvscode-server/extensions/extensions.json')
+```
 
 ## 17、vscode ssh一直反复需要输入密码且最后显示连接失败
 问题原因是服务器上面有一个加锁的文件，即vscode-server压缩包自动下载了，但是并没有安装配置，需要手动安装配置后方可连接正常。
