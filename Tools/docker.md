@@ -85,3 +85,12 @@ docker ps -a
 
 ```
 
+## 6、查看镜像详细信息
+问题报错：
+```
+# sudo mount -o remount,rw "/root/.openvscode-server/extensions"
+mount: permission denied
+```
+
+docker inspect <容器ID或容器名称>
+在输出中，查找 Mounts 部分。它会列出所有挂载的卷及其属性，包括是否为只读（ro）或读写（rw）

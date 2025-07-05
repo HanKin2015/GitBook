@@ -111,7 +111,23 @@ export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH
 ```
 
 ### 6-3、Could not find OpenSSL.  Install an OpenSSL development package or configure CMake with -DCMAKE_USE_OPENSSL=OFF to build without OpenSSL.
+```
 cmake -DCMAKE_USE_OPENSSL=OFF .
+
+实战解决方式是：
+[root@ubuntu0006:~/Desktop/cmake-3.26.2] #./bootstrap --DCMAKE_USE_OPENSSL=OFF
+Unknown option: --DCMAKE_USE_OPENSSL=OFF
+[root@ubuntu0006:~/Desktop/cmake-3.26.2] #./bootstrap -DCMAKE_USE_OPENSSL=OFF
+Unknown option: -DCMAKE_USE_OPENSSL=OFF
+[root@ubuntu0006:~/Desktop/cmake-3.26.2] #./bootstrap -- -DCMAKE_USE_OPENSSL=OFF
+---------------------------------------------
+CMake 3.26.2, Copyright 2000-2023 Kitware, Inc. and Contributors
+C compiler on this system is: /usr/local/gcc-8.1.0/bin/gcc-8.1.0
+[root@ubuntu0006:~/Desktop/cmake-3.26.2] #make -j$(nproc)
+[  0%] Building C object Source/kwsys/CMakeFiles/cmsys_c.dir/ProcessUNIX.c.o
+[  0%] Building C object Source/kwsys/CMakeFiles/cmsys.dir/MD5.c.o
+```
+
 检查 OpenSSL 是否已安装以及其版本：openssl version
 检查 OpenSSL 是否已安装：dpkg -l | grep openssl
 确认 OpenSSL 的开发包（例如 libssl-dev 或 openssl-devel）是否已安装：dpkg -l | grep libssl-dev

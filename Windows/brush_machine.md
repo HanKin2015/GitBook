@@ -29,11 +29,17 @@ Rufus 是一个开源免费的快速制作 U 盘系统启动盘和格式化 USB 
 
 Windows 7旗舰版是微软公司开发的Windows 7操作系统系列中功能最高级的版本，也被称为Windows 7 Ultimate。这个版本是作为取代Windows XP和Windows Vista等老系统的系统版本而设计的，于2009年10月22日正式发行。Windows 7旗舰版被视为Windows 7系列中的终级版本，它不仅集合了Windows 7系统的所有功能，还基本与企业版的功能相似，但在具体的服务和授权方式上有所改变。这个版本主要针对软件爱好者、高端用户，相比家庭版还新增了域和组策略功能、Windows XP模式以及多个安全功能。
 
+刷再生龙镜像iso：https://blog.csdn.net/qq_33216613/article/details/144546020
+以iso模式刷入失败，需要联网下载其他依赖的文件，因此选择dd模式刷入正常使用
+
 ### 1-3、Ventoy
 https://ventoy.net/en/download.html
 
 ## 2、刷Windows系统
 软碟通UltraISO必备
+大白菜
+rufus
+universal-usb-installer
 傻瓜式安装：https://www.jianshu.com/p/7f602c4fee99
 
 ### 2-1、用U盘装系统，进去时只有一个光标

@@ -539,3 +539,11 @@ root@665c3f2b3af1:/usr/local/lib# ll "*avcodec*"
 ls: cannot access '*avcodec*': No such file or directory
 ```
 ll *avcodec* 成功列出了以 avcodec 结尾的文件和符号链接，但在后续的命令中，使用 ll '*avcodec*' 和 ll "*avcodec*" 时却出现了 "No such file or directory" 的错误。这是因为在这两种情况下，使用了引号，导致 shell 将 *avcodec* 视为一个普通字符串，而不是通配符。
+
+## 27、输出一个字符串的哈希值
+```
+[root@ubuntu0006:~/Desktop] #echo -n "docker_file/qt4" | sha256sum
+958934843b3d92bedb81aa1a96e92a90e60d90a82d99d1eb072fa1450948e5f7  -
+[root@ubuntu0006:~/Desktop] #echo -n "docker_file/qt4" | sha512sum
+65cb4e0ff0f56c74ee94adf417b75869b000b8a189103e7e280269238b835a38d881bc060ed8aea8c83cdb42713e89e3efcdba5d515d23e63814b1e30ccb858c  -
+```

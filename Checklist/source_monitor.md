@@ -41,6 +41,8 @@ Cppcheck是一款由Daniel Marjamäki创建并维护的静态代码分析工具�
 
 Cppcheck的官方网站为http://cppcheck.sourceforge.net，用户可以在此下载最新版本、查看文档和社区支持。此外，Cppcheck还提供了丰富的插件和集成选项，使其能够无缝接入主流IDE和持续集成（CI/CD）流程。
 
+demo：D:\Github\Storage\c++\静态扫描工具\cppcheck_example.c
+
 ## 3、静态扫描工具-TscanCode
 推荐TscanCode：https://blog.csdn.net/ybhuangfugui/article/details/133758880
 https://github.com/Tencent/TscanCode

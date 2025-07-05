@@ -59,6 +59,8 @@ trojan 是较新的代理软件，trojan官网是 https://trojan-gfw.github.io/t
 
 trojan的缺点在于关注度不够，除了ios平台，官方客户端都比较简陋。trojan安装和使用请参考：[trojan教程](https://shop.mac163.com/17157/)，服务端一键部署请参考：[trojan一键脚本](https://shop.mac163.com/14326/)。
 
+https://linksc.laoyao.ltd/api/v1/client/subscribe?token=b948b231c05003de78f79777538220ca
+
 ## 6、发现新大陆（有bug）
 以notepad++软件升级为例，无法打开地址：https://notepad-plus-plus.org/
 

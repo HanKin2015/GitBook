@@ -421,6 +421,11 @@ cpptools跳转插件：https://github.com/microsoft/vscode-cpptools/releases
 ```
 Unable to write file '/root/.openvscode-server/extensions/extensions.json' (Unknown (FileSystemError): Error: EROFS: read-only file system, open '/root/.openvscode-server/extensions/extensions.json')
 ```
+原因是docker环境/root/.openvscode-server/extensions/文件夹卷的挂载模式是只读 ro，如果要改成可读写 rw，只能通过停止删除重新创建。但是可以直接在主机（host）上修改文件，从而影响容器内的文件。这是 Docker 的一个重要特性，允许你在主机和容器之间共享数据。
+
+解决方式：
+最好的方式Linux能直接安装vsix插件，我是直接从其他docker环境拷贝了一个ms-vscode.cpptools-1.24.1文件夹过来替换即可，不需要修改extensions.json文件。
+之前的docker环境也安装了ms-vscode.cpptools-1.14.5，vscode为1.76.0版本，可能是兼容性问题导致代码无法跳转，更换成ms-vscode.cpptools-1.24.1版本后就能正常跳转了。
 
 ## 17、vscode ssh一直反复需要输入密码且最后显示连接失败
 问题原因是服务器上面有一个加锁的文件，即vscode-server压缩包自动下载了，但是并没有安装配置，需要手动安装配置后方可连接正常。
