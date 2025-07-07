@@ -70,6 +70,7 @@ FDM开源，官方有绿bai色便携版；IDM收费，不过有du破解的。
 窗口文本提取：https://github.com/AlexanderPro/WindowTextExtractor
 亿图图示：个人百度网盘/DrawMax 14.1.3.1228.rar
 DiskGenius破解版：DG5611580_x64.zip
+Clumsy - 差网络环境模拟工具
 
 ## 4、外设工具箱
 | name        | desc                               | url                                                          |

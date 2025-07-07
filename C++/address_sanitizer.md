@@ -301,6 +301,12 @@ PVS-Studio：PVS-Studio 是一种商业静态分析工具，它可以检测 C/C+
 自己猜测的原因：首先它仅仅是一个数字，在程序关闭后会自动回收。如果在程序中打开同一个文件多次，文件描述符数字会自动增加，也应该没有办法判断后面会不会关闭。总的来说，个人感觉静态工具应该能检测出来的，但是搜索了大量资料也没有一个明确的工具可以对齐进行检测。
 https://blog.csdn.net/weixin_38331755/article/details/124545159
 
+## 7、对可执行文件进行asan检测时，只需要其中依赖的任何一个库启用了asan即可。（不用所有的库和可执行文件都编译时启用asan）
+例如A exec依赖 a、b、c库。其中b依赖c库。
+只要其中任何一个启用了asan即可实现，检测所有的库和可执行文件中的内存问题。
+
+判断一个文件是否启用asan检测：ldd xxx | grep asan
+
 ## 8、asan报告分析
 D:\Users\Administrator\Desktop\testmemleak.cpp
 ```

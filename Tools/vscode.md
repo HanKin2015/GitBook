@@ -14,6 +14,10 @@ tab键改空格：勾选editor.insert Spaces和editor.tab Size设置tab键多少
 
 主题：ctrl+shift+p搜索颜色主题，选择Dark（Visual Studio）（推荐）
 
+快捷键：
+重启窗口：Ctrl+Shift+P，输入Reload Window
+查找文件：Ctrl+P
+
 ## 1、sublime工具缺点
 编译运行c或c++需要单独搭建环境，比较麻烦，并且不支持程序输入，中文乱码，代码追踪不完善等问题。
 结论：不建议使用sublime或者notepad++等工具编写工程项目。
@@ -106,6 +110,8 @@ run code插件直接运行
 - Markdown All in One
 
 vscode-server安装是同样的方法，一个可以直接在vscode-app上面，一个可以直接在本地vscode通过ssh连接后Install from VSIX。
+
+https://github.com/microsoft/vscode-cpptools
 
 ## 7、输出窗口中文乱码
 由于没有配置g++环境变量，导致报错'g++' 不是内部或外部命令，也不是可运行的程序或批处理文件。
@@ -425,7 +431,11 @@ Unable to write file '/root/.openvscode-server/extensions/extensions.json' (Unkn
 
 解决方式：
 最好的方式Linux能直接安装vsix插件，我是直接从其他docker环境拷贝了一个ms-vscode.cpptools-1.24.1文件夹过来替换即可，不需要修改extensions.json文件。
-之前的docker环境也安装了ms-vscode.cpptools-1.14.5，vscode为1.76.0版本，可能是兼容性问题导致代码无法跳转，更换成ms-vscode.cpptools-1.24.1版本后就能正常跳转了。
+之前的docker环境也安装了ms-vscode.cpptools-1.14.5，vscode为1.76.0版本，可能是兼容性问题导致代码无法跳转（有报错C/C++ IntelliSense, debugging, and code browsing.），更换成ms-vscode.cpptools-1.24.1版本后就能正常跳转了。
+
+至于go语言的代码跳转，并没有提供vsix插件，但是可以自己开发，未测试https://blog.51cto.com/u_16175524/10263315
+可以使用在线的go语言服务器实现跳转：https://www.cnblogs.com/o0olele/p/13408963.html
+https://blog.51cto.com/u_16175439/12646219
 
 ## 17、vscode ssh一直反复需要输入密码且最后显示连接失败
 问题原因是服务器上面有一个加锁的文件，即vscode-server压缩包自动下载了，但是并没有安装配置，需要手动安装配置后方可连接正常。
@@ -459,3 +469,6 @@ IntelliSense 的缓存可能过期，导致解析结果不准确。
 1、按住 ctrl + shift + p
 2、输入 open workspace settings,选择打开工作区设置
 3、输入workbench.editor.wrapTabs，勾选该设置项即可
+
+## 22、web-vscode关闭窗口快捷键
+F11键进入全屏后，vscode的快捷键就不会和浏览器出现冲突了。
