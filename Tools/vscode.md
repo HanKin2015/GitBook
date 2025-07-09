@@ -472,3 +472,7 @@ IntelliSense 的缓存可能过期，导致解析结果不准确。
 
 ## 22、web-vscode关闭窗口快捷键
 F11键进入全屏后，vscode的快捷键就不会和浏览器出现冲突了。
+
+## 23、高版本无法支持win7
+win7支持的最高版本是1.70
+低版本下载：https://code.visualstudio.com/updates/v1_70（修改后面的版本号即可）

@@ -21,6 +21,9 @@ Windows下载安装很随意。有个注意点：尽量选择下载和上传git�
 
 git update-git-for-windows   更新git客户端
 
+官网：https://github.com/git-for-windows/git/releases?page=3
+注意：win7支持的最高版本是2.46.2
+
 ### 0-3、配置一个完整的环境简单步骤
 ```
 git config --global user.email "49660@zhangsan.com"
@@ -1859,4 +1862,46 @@ git submodule update --init --remote --force
 git submodule status
 ```
 
+## 75、To add an exception for this directory
+```
+$ git status
+fatal: detected dubious ownership in repository at 'D:/Github/Storage'
+'D:/Github/Storage' is owned by:
+        (inconvertible) (S-1-5-21-3454653907-3315404885-1188678774-1001)
+but the current user is:
+        HanKin-PC/HanKin (S-1-5-21-2310488727-2735866231-3522110792-1000)
+To add an exception for this directory, call:
 
+        git config --global --add safe.directory D:/Github/Storage
+```
+这个错误是 Git 2.35.2 版本引入的安全特性导致的。当仓库所有者与当前用户不匹配时，Git 会拒绝操作以防止潜在的安全风险。
+错误信息显示，仓库 'D:/Github/Storage' 的所有权属于另一个用户（S-1-5-21-...-1001），而你当前使用的是 HanKin-PC/HanKin（S-1-5-21-...-1000）。
+
+将该仓库添加到安全目录列表中：git config --global --add safe.directory D:/Github/Storage
+如果你拥有管理员权限，可以将仓库文件的所有权修改为当前用户：
+- 右键点击 'D:/Github/Storage' 文件夹
+- 选择 "属性" > "安全" > "高级"
+- 在 "所有者" 一栏点击 "更改"
+- 输入你的用户名（HanKin-PC/HanKin）并确认
+- 勾选 "替换子容器和对象的所有者" 并应用
+
+查看文件（夹）所有权：
+```
+PS C:\Users\HanKin> Get-Acl "D:\github\storage" | Select-Object Owner
+
+Owner
+-----
+HanKin-PC\HanKin
+
+PS C:\Users\HanKin> Get-Acl "D:\github\magictool" | Select-Object Owner
+
+Owner
+-----
+O:S-1-5-21-3454653907-3315404885-1188678774-1001
+```
+
+修改文件（夹）所有权：
+```
+# 修改文件/文件夹所有者
+icacls "D:\github\storage" /setowner "HanKin-PC\HanKin" /T
+```

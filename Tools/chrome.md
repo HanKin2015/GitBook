@@ -135,5 +135,11 @@ netsh winsock reset
 
 电脑使用Chrome有时候页面卡顿且内存占用很高，尝试方法：找到设置 -> 系统 -> 关闭对应的两项
 
+## 13、win7每次打开提示版本更新
+HKEY_CURRENT_USER/Software/Policies/Google/Chrome。若路径中不存在/Google/Chrome，需要自行新建。具体操作为：右键点击Policies，新建一个名为Google的项，再在Google项下新建一个名为Chrome的项。最后，在Chrome项下新建一个DWORD32位值，重命名为SuppressUnsupportedOSWarning，并双击该值将其键值修改为1即可。
+
+在政策页地址（Chrome://policy）中，您可以查看各项政策的名称和启用状态，以确认相关设置是否已正确应用。
+
+亲测无效！放弃，好像没有办法解决。
 
 

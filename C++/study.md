@@ -185,6 +185,14 @@ auto可以在声明变量的时候根据变量初始值的类型自动为此变�
     auto au_a = a;//自动类型推断，au_a为int类型
     cout << typeid(au_a).name() << endl;
 ```
+decltype 是 C++11 引入的一个关键字，用于在编译时推导表达式的类型，而无需实际执行表达式。它在模板编程、泛型编程和元编程中非常有用。
+decltype(expression) var;  // 声明 var 的类型为 expression 的类型
+
+特性|	auto	|decltype
+---|---|---
+推导依据	|初始化表达式的值类型	|表达式的类型（保留引用和 cv 限定符）
+类型是否可以为空	|否|	是（用于占位）
+常见用途	|变量类型自动推导、lambda 参数	|函数返回值类型推导、模板元编程
 
 ## 16、C++中bool型变量按位取反总是为true
 代码见：D:\Github\Storage\python\study\二进制数\invert_true.cpp
