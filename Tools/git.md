@@ -1777,6 +1777,7 @@ Already up to date.
 
 ## 74、git子模块submodule的使用
 一个大型工程总会被分拆为一些子工程，git-submodule 就是完成这样一种子工程拆分与整合的工具。
+git submodule 命令对于大型项目或需要将外部库集成到项目中的情况非常有用。 通过使用子模块，你可以将外部库作为你的项目的一部分来管理，而不必将其直接合并到主仓库中。
 
 ### 74-1、基础语法
 添加一个子工程
@@ -1861,6 +1862,12 @@ git submodule sync
 git submodule update --init --remote --force
 git submodule status
 ```
+
+### 74-3、其他语法
+git submodule deinit <path>：将子模块从 .git/config 文件中移除，并删除子模块目录中的文件。
+git rm <path>：将子模块的引用从主仓库中删除，并提交更改。
+git submodule 列出子模块
+git submodule status 检查子模块状态
 
 ## 75、To add an exception for this directory
 ```

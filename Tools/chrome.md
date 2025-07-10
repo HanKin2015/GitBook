@@ -142,4 +142,19 @@ HKEY_CURRENT_USER/Software/Policies/Google/Chrome。若路径中不存在/Google
 
 亲测无效！放弃，好像没有办法解决。
 
+## 14、Chrome 与 Chromium 有何不同
+Chrome 浏览器是最流行的网页浏览器。无论你是否喜欢使用它，Chrome 都能提供良好的用户体验。
+尽管它可以在 Linux 上使用，但它不是一个开源的网页浏览器。
+而且，如果你喜欢 Chrome 的外观和感觉，但又想使用一个开源的解决方案，Chromium 是一个选择。
+但是，Chrome 浏览器不是基于 Chromium 的吗？（是的。）而且，它也是由谷歌开发的吧？（也是的。）
 
+对于初学者来说，在 Chromium 中不再能使用由谷歌支持的登录/同步功能。它曾经支持签到和同步，直到谷歌决定将其从开源项目中删除。
+
+接下来，Chrome 内置了对高质量媒体编解码器的支持。因此，你可以加载来自 Netflix 的内容。但是，在 Chromium 中没有这些。
+
+之所以存在对浏览器的选择，是因为用户喜欢不同的东西。Chrome 提供了一个良好的功能集和用户体验。如果你以某种形式使用由谷歌提供的服务，Chrome 是一个简单的推荐。
+
+然而，如果你担心隐私和专有代码，Chromium 或 UnGoogled Chromium，或任何其他基于 Chromium 的浏览器，如 Brave，可以是一个不错的选择。
+
+Chromium官网下载：https://chromium.woolyss.com/download/zh-cn/
+https://www.chromium.org/getting-involved/download-chromium/

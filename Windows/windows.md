@@ -568,6 +568,15 @@ slmgr /skms 2.2.74.170
 slmgr /ato
 ```
 
+kms激活和oem激活工具有什么区别？
+Windows激活中OEM是永久，kms是半年的。
+
+所以建议使用oem激活。
+
+推荐软件：HEU_KMS_Activator_v19.6.0.exe
+使用永久激活Windows+office（即OME）
+官网：https://github.com/zbezj/HEU_KMS_Activator/releases
+
 ## 5、Windows7那些事儿
 
 ### 5-1、进入安全模式

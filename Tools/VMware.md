@@ -14,6 +14,7 @@ https://m.vqs.com/article/14740.html
 
 最新下载教程：https://blog.csdn.net/m0_72217974/article/details/145002631
 需要注册账号下载，并且下载链接极难找到，参考网上资料找到下载链接。
+账号密码已忘记。。。。。。
 
 ## 3、安装Ubuntu23.04
 存在一个bug，不管怎么输入账号密码，都无法进入虚拟机。
