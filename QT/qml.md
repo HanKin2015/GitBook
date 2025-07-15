@@ -5,6 +5,10 @@ QML（Qt Meta-Object Language）可以帮助您创建现代的用户界面。QML
 
 qsTr()函数就是 QObject::tr()函数的 QML 版本，用于返回可翻译的字符串。
 
+QML 自 Qt 4.7 引入以来，已成为 Qt 框架中构建跨平台 UI 的核心技术。Qt 5 和 Qt 6 均支持 QML 2.x，但功能不断演进。建议新项目使用 Qt 6.x 以获取最佳性能和最新特性，同时注意检查 API 文档以确保兼容性。
+
+最佳实践：根据项目需求灵活选择，必要时采用混合开发模式，充分发挥两者优势。
+
 ## 2、示例
 直接在Qt Createor新建项目->Qt Quick Application即可运行。
 demo见：D:\Github\Storage\qt\c++\QmlExample-helloworld

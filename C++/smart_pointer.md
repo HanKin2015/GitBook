@@ -36,7 +36,7 @@ p2 = p1; //auto_ptr不会报错
 （3）创建智能更高的指针，跟踪引用特定对象的智能指针数。这称为引用计数。例如，赋值时，计数将加 1，而指针过期时，计数将减 1。当减为 0 时才调用 delete。这是 shared_ptr 采用的策略。
 
 ## 2、unique_ptr和auto_ptr
-nique_ptr 由 C++11 引入，旨在替代不安全的 auto_ptr。unique_ptr 是一种定义在头文件<memory>中的智能指针。它持有对对象的独有权——两个unique_ptr 不能指向一个对象，即 unique_ptr 不共享它所管理的对象。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 （STL）算法。只能移动 unique_ptr，即对资源管理权限可以实现转移。这意味着，内存资源所有权可以转移到另一个 unique_ptr，并且原始 unique_ptr 不再拥有此资源。实际使用中，建议将对象限制为由一个所有者所有，因为多个所有权会使程序逻辑变得复杂。因此，当需要智能指针用于存 C++ 对象时，可使用 unique_ptr，构造 unique_ptr 时，可使用 make_unique Helper 函数。
+unique_ptr 由 C++11 引入，旨在替代不安全的 auto_ptr。unique_ptr 是一种定义在头文件<memory>中的智能指针。它持有对对象的独有权——两个unique_ptr 不能指向一个对象，即 unique_ptr 不共享它所管理的对象。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 （STL）算法。只能移动 unique_ptr，即对资源管理权限可以实现转移。这意味着，内存资源所有权可以转移到另一个 unique_ptr，并且原始 unique_ptr 不再拥有此资源。实际使用中，建议将对象限制为由一个所有者所有，因为多个所有权会使程序逻辑变得复杂。因此，当需要智能指针用于存 C++ 对象时，可使用 unique_ptr，构造 unique_ptr 时，可使用 make_unique Helper 函数。
 
 ### 2-1、auto_ptr淘汰原因
 使用 shared_ptr 时运行正常，因为 shared_ptr 采用引用计数，pwin 和 films[2] 都指向同一块内存，在释放空间时因为事先要判断引用计数值的大小因此不会出现多次删除一个对象的错误。
@@ -214,7 +214,8 @@ https://zhuanlan.zhihu.com/p/359964081
 
 原因分析：unique_ptr指向的内存区域只能由一个unique_ptr的对象来指定。把testPtr作为传入参数的时候，就会发现有两个unique_ptr同时指向一个内存区域，实际参数testPtr和形式参数ptrHandle。
 
-
+## 6、引用计数
+在 C++ 中，引用计数（Reference Counting）是一种实现内存管理的技术，主要用于智能指针和共享资源的场景。
 
 
 

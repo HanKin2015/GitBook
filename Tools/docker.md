@@ -94,3 +94,33 @@ mount: permission denied
 
 docker inspect <容器ID或容器名称>
 在输出中，查找 Mounts 部分。它会列出所有挂载的卷及其属性，包括是否为只读（ro）或读写（rw）
+
+## 7、离线创建镜像
+
+### 7-1、使用 docker save 导出单个或多个镜像
+```
+docker pull nginx:1.23  # 拉取需要的镜像
+docker pull mysql:8.0
+
+docker save -o offline_images.tar nginx:1.23 mysql:8.0
+# -o：指定输出文件
+
+docker load -i offline_images.tar
+# -i：指定输入文件
+```
+
+### 7-2、使用 docker export + docker import 导出容器快照（更轻量）
+适用于导出已运行容器的文件系统，生成不含历史层的镜像。
+```
+docker run -d --name mynginx nginx:1.23
+# 在容器内进行配置修改（如添加网站文件）
+docker exec -it mynginx bash
+
+docker export mynginx > nginx_container.tar
+
+docker import nginx_container.tar my-nginx:custom
+```
+
+
+
+

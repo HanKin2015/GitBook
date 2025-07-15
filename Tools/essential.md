@@ -69,3 +69,14 @@ HEU_KMS_Activator官网：https://github.com/zbezj/HEU_KMS_Activator/releases
 
 “文件传输助手网页版”网址，进行扫码登录
 网页地址：https://filehelper.weixin.qq.com
+
+## 14、腾讯会议
+官网：https://meeting.tencent.com/
+
+面试、客户远程、会议等。
+
+## 15、MobaXterm
+官网：https://mobaxterm.mobatek.net/download-home-edition.html
+
+## 16、wps
+官网：https://www.wps.cn/

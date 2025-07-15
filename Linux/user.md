@@ -6,6 +6,20 @@ sudo -i		切换root用户
 passwd hj	修改hj用户密码
 passwd		修改root用户密码
 su命令需要给root用户增加密码后使用，即需要执行passwd
+
+虽然Ubuntu操作系统有提示，但是设置密码为1还是成功了！
+hankin@hankin:~/桌面$ sudo -i
+[sudo] hankin 的密码： 
+root@hankin:~# passwd
+新的 密码： 
+无效的密码： 密码少于 8 个字符
+重新输入新的 密码： 
+passwd：已成功更新密码
+root@hankin:~# exit
+注销
+hankin@hankin:~/桌面$ su
+密码： 
+root@hankin:/home/hankin/桌面# 
 ```
 
 - sudo su

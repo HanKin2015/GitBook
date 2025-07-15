@@ -4,12 +4,11 @@
 
 2021年9月11日
 
-https://studygolang.com/pkgdoc
+## 1、学习资料
+Golang标准库文档：https://studygolang.com/pkgdoc
 
-
-
-
-https://learnku.com/docs/the-way-to-go
+《Go 入门指南》:https://learnku.com/docs/the-way-to-go
+《Go 入门指南》是 《The Way to Go》的中文译本，本书专为 Golang 初学者量身定制。
 
 
 [15个好用的百度网盘搜索引擎](https://zhuanlan.zhihu.com/p/60840594?utm_source=com.baidu.searchbox)
