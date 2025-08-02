@@ -22,17 +22,9 @@ apt install cmake
 cmake --version
 
 cd googletest-release-1.11.0
-
-# 下面这段操作有毒，根本行不通，害我花了大量时间去解决lpthreads找不到问题
-mkdir gtest-build
-cd gtest-build
-cmake ../googletest/
-报错：Looking for pthread_create - not found
-apt install doxygen
-
-# 实际上这个not found是正常的
-cd googletest-release-1.11.0
-cmake .
+mkdir build
+cd build
+cmake ..
 make
 
 报错：this file requires compiler and library support for the iso c++ 2011 standard
@@ -275,7 +267,7 @@ TEST宏的第一个参数是test_suite_name（测试套件名），第二个参�
 测试套件名和测试特例名的分开，使得我们编写的测试代码有着更加清晰的结构。
 
 ### 1-6、TEST_F宏
-使用TEST_F前需要创建一个固件类，继承esting::Test类。
+使用TEST_F前需要创建一个固件类，继承testing::Test类。
 
 在类内部使用public或者protected描述其成员，为了保证实际执行的测试子类可以使用其成员变量。在构造函数或者继承于::testing::Test类中的SetUp方法中可以实现我们需要构造的数据。在析构函数或者继承于::testing::Test类中的TearDown方法中可以实现一些资源释放的代码。
 
@@ -410,4 +402,17 @@ int main(int argc, char **argv) {
 }
 ```
 TEST函数的两个参数可以随便写，但是需要写出实际的意义，方便区分。
+
+## 7、核心特点
+Google Test 提供了一系列功能，使其成为C++开发者进行单元测试的首选框架：
+
+丰富的断言（Assertions）：支持多种断言类型，如 EXPECT_EQ, ASSERT_TRUE，帮助开发者验证代码行为。
+测试夹具（Test Fixtures）：允许共享测试代码，减少重复，提高测试代码的可维护性。
+参数化测试：支持在不同参数下运行同一测试，提升测试覆盖率。
+跨平台支持：兼容Windows、Linux、macOS等多种操作系统，适用于多样化的开发环境。
+与持续集成（CI）系统集成：易于与Jenkins、GitHub Actions等CI工具集成，实现自动化测试。
+
+
+
+
 

@@ -5,12 +5,7 @@ https://blog.csdn.net/sjin_1314/article/details/42029607
 
 [国内VDI市场之乱象分析，第一篇：市场分析篇](https://blog.csdn.net/weixin_33982670/article/details/92509613?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 
-## 1、很奇葩的一个问题
-RPUSI NETUSB Controller报错：无法加载所需的驱动程序，错误码31。系统资源不足，无法完成API。
-
-居然是修改启动参数，删除创建的UHCI主控。在系统内部也可以通过手动禁用UHCI主控解决。
-
-## 2、自定义多功能键盘缺失按键
+## 1、自定义多功能键盘缺失按键
 spice-0.12.6已经不存在red_key.h文件，并且也没有看见client代码了。
 
 https://tool.ip138.com/

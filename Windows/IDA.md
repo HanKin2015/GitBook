@@ -1,13 +1,13 @@
 # 逆向神器之IDA的使用
 
 ## 1、简介
-The Interactive Disassembler
-
 Interactive交互式的
 Disassembler反汇编程序
 expire到期
 
-IDA全称是交互式反汇编器专业版（Interactive Disassembler Professional），人们其简称为IDA，是目前最棒的一个静态反编译软件，为众多0day世界的成员和ShellCode安全分析人士不可缺少的利器！IDA Pro是一款交互式的，可编程的，可扩展的，多处理器的，交叉Windows或Linux WinCE MacOS平台主机来分析程序， 被公认为最好的花钱可以买到的逆向工程利器。IDA Pro已经成为事实上的分析敌意代码的标准并让其自身迅速成为攻击研究领域的重要工具。它支持数十种CPU指令集其中包括Intel x86，x64，MIPS，PowerPC，ARM，Z80，68000，c8051等等。
+IDA Pro全称是交互式反汇编器专业版（Interactive Disassembler Professional）简称“IDA”，是Hex-Rays公司出品的一款交互式反汇编工具，是目前最棒的一个静态反编译软件，为众多0day世界的成员和ShellCode安全分析人士不可缺少的利器。IDA Pro具有强大的功能，但操作较为复杂，需要储备很多知识，同时，它具有交互式、可编程、可扩展、多处理器等特点，可以通过Windows或Linux、MacOS平台来分析程序， 被公认为最好的逆向工程利器之一。
+
+IDA Pro已经成为分析敌意代码的标准并让其自身迅速成为攻击研究领域的重要工具。它支持数十种CPU指令集其中包括Intel x86、x64、MIPS、PowerPC、ARM、Z80、68000、c8051等等。
 
 早期的0day表示在软件发行后的24小时内就出现破解版本，现在我们已经引申了这个含义，只要是在软件或者其他东西发布后，在最短时间内出现相关破解的，都可以叫0day。 0day是一个统称，所有的破解都可以叫0day。
 0day是一种自发的网络运动而已，Warez是对破解的泛称。

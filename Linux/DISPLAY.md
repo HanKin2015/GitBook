@@ -7,13 +7,16 @@ DISPLAY=:0.0
 
 使用xdpyinfo可以查看到当前显示的更详细的信息.
 
-DISPLAY 环境变量格式如下hostname: displaynumber.screennumber,我们需要知道，在某些机器上，可能有多个显示设备共享使用同一套输入设备，例如在一台PC上连接 两台CRT显示器，但是它们只共享使用一个键盘和一个鼠标。这一组显示设备就拥有一个共同的displaynumber，而这组显示设备中的每个单独的设 备则拥有自己单独的 screennumber。displaynumber和screennumber都是从零开始的数字。这样，对于我们普通用户来说， displaynumber、screennumber就都是0。 hostname指Xserver所在的主机主机名或者ip地址, 图形将显示在这一机器上, 可以是启动了图形界面的Linux/Unix机器, 也可以是安装了Exceed, X-Deep/32等Windows平台运行的Xserver的Windows机器. 如果Host为空, 则表示Xserver运行于本机, 并且图形程序(Xclient)使用unix socket方式连接到Xserver, 而不是TCP方式. 使用TCP方式连接时, displaynumber为连接的端口减去6000的值, 如果displaynumber为0, 则表示连接到6000端口; 使用unix socket方式连接时则表示连接的unix socket的路径, 如果displaynumber为0, 则表示连接到/tmp/.X11-unix/X0 . screennumber则几乎总是0.
+DISPLAY=:0 通常用于 本地显示器（直接连接的物理屏幕或本地桌面环境），表示由本地 X 服务器（如 Xorg）直接管理的第一个显示器。
 
-使用ssh连接ubuntu默认是不会有DISPLAY变量，但是在ubuntu界面printenv是有的，这样可以确认该值是多少。
+远程服务器不会直接访问本地的 :0 显示器（权限和网络隔离不允许）。
+SSH 会在本地和远程之间建立一个 加密的 X11 转发通道，并为这个通道分配一个临时的 显示器编号（通常从 10 开始）。
 
-一般来说不是0就是1.
+因此通过vscode连接Ubuntu后，需要显示图片则需要执行export DISPLAY=:10.0（前提是本地安装了VcXsrv或XMing）
+参考：https://www.cnblogs.com/HeisenbergUncertainty/p/17629757.html
 
-echo $DISPLAY
+注意使用MobaXterm软件连接服务器后，设置为export DISPLAY=:10.0即可使用或者服务器ip地址:10.0。
+打开MobaXterm软件不连接，设置为export DISPLAY=windows物理机ip地址:0.0后，执行xclock命令后MobaXterm会弹出授权框。
 
 ## 2、未安装qxl驱动以及xrandr命令使用
 ```

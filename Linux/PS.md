@@ -15,6 +15,18 @@ kill -9 父进程ID
 - 这个进程是僵尸进程
 - 此进程是"核心态"进程。
 
+### 1-3、构造僵尸进程
+```
+vscode通过ssh连接服务器，然后执行a.out命令
+在服务端通过gdb挂载进去后使用ctrl+d方式退出
+此时进程已变成僵尸进程，通过ps -ef查看父进程后杀死后，该进程父进程id变成1
+此时再也无法杀死
+```
+僵死进程的唯一解决方法是让其父进程读取其退出状态。
+sudo systemctl daemon-reexec  # 重新执行systemd，保留现有进程树
+sudo telinit u  # 重新加载init配置，可能会影响系统服务
+sudo shutdown -r now  # 安全重启，优先推荐
+
 ## 2、LINUX下PS -EF和PS AUX的区别
 Linux下显示系统进程的命令ps，最常用的有ps -ef 和ps aux。这两个到底有什么区别呢？两者没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。
 

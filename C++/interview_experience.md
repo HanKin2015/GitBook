@@ -1,5 +1,9 @@
 # 面经
 
+HC 即 Headcount 的缩写，指企业在特定时期内被批准的招聘人数配额。它是人力资源规划的核心指标，直接反映团队扩张或人员替换需求。
+
+JD 即 Job Description 的缩写，是对具体岗位的职责、要求、汇报关系等信息的详细说明。它是招聘筛选的重要依据，也是候选人了解岗位的第一窗口。
+
 💥裸辞 30 天拿下 3 个 offer！我悟透了找工作的潜规则…
 谁说离职空窗期是减分项？这一个月我把焦虑调成静音模式，反而摸到了求职的通关密码👇
 🌱先给心态松绑：
@@ -20,6 +24,9 @@ https://blog.csdn.net/qq_40671063/article/details/148708387
 https://blog.csdn.net/little_stick_i/article/details/141433974
 
 https://github.com/BingyanStudio/LapisCV?tab=readme-ov-file
+https://blog.csdn.net/youngyangyang04/article/details/104491867
+https://zhuanlan.zhihu.com/p/387272899
+https://zhuanlan.zhihu.com/p/685949564
 
 vscode软件打开markdown文件默认支持预览，但是到出pdf文件时需要安装markdown-pdf插件，但是插件依赖Chromium进行导出。
 在.setting.json文件中增加"markdown-pdf.executablePath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
@@ -28,10 +35,13 @@ vscode软件打开markdown文件默认支持预览，但是到出pdf文件时需
 另外markdown生成的简历需要调整字体颜色或大小时，可以先导出html文件，然后通过F12查看其他字体参数对此进行调整。
 
 ## 2、自我介绍
-
 https://cplusplus.com/
 https://www.apiref.com/cpp-zh/index.html
 https://cppreference.cn/w/
+
+明确未来的开发方向：
+- Linux驱动
+- go语言开发
 
 ## 3、了解公司
 麒麟家族：https://zhuanlan.zhihu.com/p/269176597
@@ -39,8 +49,23 @@ https://cppreference.cn/w/
 
 统信软件技术有限公司（简称：统信软件），成立于2019年，其前身为自2004年组建的深度操作系统团队。
 
-## 4、公司的ABC轮融资
-公司的ABC轮融资是创业公司在不同发展阶段获取外部资金的重要方式，每轮融资对应公司不同的成长阶段和估值水平。
+## 4、导师经验
+- 部门简单介绍
+- 一些基础的知识指导
+- 人文关怀
+- 相关外设问题排查指导
+- Linux客户端使用libuvc库使用摄像头
 
-融资轮次是指创业公司在发展过程中，按时间顺序和发展阶段进行的多轮资金募集。常见的轮次包括：种子轮（Seed）、天使轮（Angel）、A 轮、B 轮、C 轮，以及后续的 D 轮、E 轮、IPO（首次公开募股）等。
+libuvc 是一个开源的跨平台库，用于与 USB 视频设备（如网络摄像头、USB 摄像头、工业相机等）进行通信。它基于 libusb 开发，提供了一套简洁的 API，允许开发者直接访问 UVC（USB Video Class）设备，无需依赖特定操作系统的驱动或框架。
+
+libuvc 通过 libusb 与 UVC 设备通信，主要流程：
+- 设备枚举：扫描并识别系统中所有 UVC 设备。
+- 设备打开：获取设备的访问权限。
+- 配置设置：设置视频格式、分辨率、帧率等参数。
+- 数据流控制：启动 / 停止视频流，并处理数据回调。
+- 设备释放：关闭设备并释放资源。
+
+## 5、离职原因
+部门产品功能趋于完善，最近两年部门都是在做一些重构和终端统一方面的开发，需求减少。市场发展行情成熟，最近两年不断缩编。刚好我的合同到期，公司未给我续约。
+
 

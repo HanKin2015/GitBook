@@ -1,4 +1,3 @@
-
 # string中的子函数
 
 ## 1、size_t
@@ -204,5 +203,13 @@ char *strstr(const char *str1, const char *str2)
     return(NULL);
 }
 ```
+
+## 11、size()和length()区别
+这是历史原因造成的：
+length() 是早期 C++ 标准中就存在的函数，延续了 C 语言中字符串处理的命名习惯
+size() 是后来为了与 C++ STL（标准模板库）中的容器（如 vector、list 等）保持命名一致性而添加的，这些容器都使用 size() 表示元素数量
+
+在实际编程中，这两个函数可以任意选用，效果完全一致。现代 C++ 代码中更倾向于使用 size()，以保持与其他容器的命名风格统一。
+
 
 

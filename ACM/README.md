@@ -12,6 +12,28 @@
 网站依然存在，但是不再有人再维护
 
 ## 3、leetcode周赛
+```
+解除输入输出流绑定：
+std::cin.tie(nullptr) 解除 cin 与 cout 的绑定。默认情况下，cin 会自动刷新 cout，导致频繁 IO 操作变慢。解除绑定后，输入输出可并行，提升效率。
+
+关闭同步：
+sync_with_stdio(false) 关闭 C++ 标准流（如 cin/cout）与 C 标准流（如 stdin/stdout）的同步。默认同步机制会保证两者的输出顺序一致，但会带来额外开销。关闭后，cin/cout 不再与 C 标准流同步，大幅提高 IO 速度。
+const auto _ = std::cin.tie(nullptr)->sync_with_stdio(false);
+
+// 运行时间隐藏（作弊检测规避）
+这段代码的核心是通过 std::atexit 在程序退出时创建一个文件 display_runtime.txt，并写入 0。这是针对某些在线评测系统（如 LeetCode）的作弊技巧。
+#define LC_HACK
+#ifdef LC_HACK
+const auto __ = []() {
+    struct ___ {
+        static void _() { std::ofstream("display_runtime.txt") << 0 << '\n'; }
+    };
+    std::atexit(&___::_);
+    return 0;
+}();
+#endif
+```
+
 
 ## 4、2020 力扣杯！Code Your Future 春季全国编程大赛 
 
@@ -39,5 +61,6 @@
 国内的程序员行业供过于求，非常内卷，这就必然滋生出八股文的考试。我们无法改变这一现状，只能改变自己。在2023年，祝愿各位求职的程序员都能找到满意的工作。
 
 
-
+https://cloud.tencent.com/developer/article/1535725?policyId=1004
 https://www.techiedelight.com/zh/get-size-file-python/
+

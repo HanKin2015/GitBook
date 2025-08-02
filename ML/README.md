@@ -41,6 +41,10 @@ OCR （Optical Character Recognition，光学字符识别）是指电子设备�
 - 比赛：
 
 Linux的设计艺术
+AI学习知识库：https://tianchi.aliyun.com/course/?spm=5176.27080692.sub-nav-dropdown-unknown-menu-2.d_main_0.31fe569983rN9H
+https://tianchi.aliyun.com/notebook/170913
+菜鸟教程：https://www.runoob.com/ml/ml-tutorial.html
+
 
 # 学习网站
 https://easyai.tech/ai-knowledge-hub/

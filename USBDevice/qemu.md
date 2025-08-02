@@ -576,3 +576,9 @@ for (i = 0; i < ifp->bNumEndpoints; i++) {
 ## 15、usb1.0协议设备可以挂载xhci主控
 只有ehci主控才需要注意uhci主控的位置，否则报错Warning: speed mismatch trying to attach。
 
+## 16、ubuntu安装qemu
+```
+apt install qemu-system
+
+
+```

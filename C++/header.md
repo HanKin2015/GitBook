@@ -65,8 +65,6 @@ https://www.cnblogs.com/qiumingcheng/p/6273918.html
 
 #include<Tleap/leap.h>。
 
-
-
 用include 引用头文件时，双引号和尖括号的区别：
 
 1.双引号：引用非标准库的头文件，编译器首先在程序源文件所在目录查找，如果未找到，则去系统默认目录查找，通常用于引用用户自定义的头文件。
@@ -79,7 +77,40 @@ https://www.cnblogs.com/qiumingcheng/p/6273918.html
 
 一般情况下 这么用：自己写的用双引号，第三方库或者系统的库的头文件用尖括号。要不然经常会出现乱七八糟的错误。
 
+## 4、头文件的包含顺序
+在 C++ 项目中，头文件的包含顺序通常遵循特定规范，主要目的是提高代码可读性、避免隐藏依赖以及尽早暴露潜在问题。
 
+```
+// MyClass.cpp
 
+// 1. 自身头文件（强制检查自包含性）
+#include "MyClass.h"
 
+// 2. 系统头文件（按字母序）
+#include <algorithm>
+#include <iostream>
+#include <memory>
+#include <vector>
 
+// 3. 第三方库头文件（按库的重要性或字母序）
+#include <glog/logging.h>
+#include <gtest/gtest.h>
+
+// 4. 项目内其他模块头文件（按模块层级或字母序）
+#include "core/base.h"      // 核心模块
+#include "utils/string.h"   // 工具模块
+#include "api/interface.h"  // 接口模块
+```
+
+许多代码格式化工具（如clang-format）支持自动排序头文件：
+```
+# .clang-format 配置示例
+IncludeCategories:
+  - Regex:           '^"(llvm|clang)/'
+    Priority:        2
+  - Regex:           '^(<|"(gtest|gmock|isl|json)/)'
+    Priority:        3
+  - Regex:           '.*'
+    Priority:        1
+SortIncludes:      true  # 自动排序头文件
+```

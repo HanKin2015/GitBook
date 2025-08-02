@@ -1,5 +1,15 @@
 # 超越自己
 
+公积金一年调整一次：7月1日至当年的6月30日。
+养老院通常由地方政府或慈善机构主办,；而敬老院是在农村实行“五保”的基础上发展起来的。
+
+<div class="entry-title">
+    <h3>武汉大学 (985院校)</h3>
+    <p style="white-space: pre;">                             计算机技术</p>
+    <p style="white-space: pre;">          硕士</p>
+    <p>2017.09 - 2019.06</p>
+</div>
+
 姓名：hejian
 自我介绍（读研时间、研究方向、论文发表情况、兴趣爱好）：I spent a good time as a graduate student in Wuhan University in 2017-2019, mainly do research on k-truss-based dense sub-graph community search, and my hobbies are singing, jumping, rap and basketball.
 目前所在地：changsha, hunan
@@ -131,6 +141,7 @@ qq邮箱：hejian0616@qq.com（1058198502@qq.com）
 学制： 2年
 预计毕业派遣时间： 20190630
 指导教师姓名、职务： 钟鸣 副教授
+10486320192007082114
 ```
 
 进入技术支持外设组后，一开始对外设相关知识一无所知。面对众多的客户外设问题，一边给客户排查问题，一边努力的学习外设相关知识。最艰难的时候会同时被邀请多个远程同时排查，渐渐地面对各种外设问题不再像最开始那么的迷茫，慢慢地能独立解决大多数问题。面对各种外设问题，做到及时排查和反馈给客户进展。面对疑难问题，虚心请教各位外设专家，竭尽所能的解决客户问题，恪守兢兢业业、踏踏实实的工作作风。没有不讲道理的客户，只有不周到的服务。

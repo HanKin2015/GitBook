@@ -3,10 +3,29 @@
 ## 1、给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度
 
 ## 2、01背包
+https://zhuanlan.zhihu.com/p/377231783
+```
+vector<int> dp(bagWeight + 1, 0);
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+    }
+}
+```
 
 ## 完全背包
 https://blog.csdn.net/txyyt_wst/article/details/130206572
 https://zhuanlan.zhihu.com/p/377231783
+```
+vector<int> dp(bagWeight + 1, 0);
+// 先遍历物品，再遍历背包
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = weight[i]; j < bagWeight ; j++) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+
+    }
+}
+```
 
 ## 最长回文串
 https://zhuanlan.zhihu.com/p/137172524

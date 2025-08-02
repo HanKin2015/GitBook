@@ -1,6 +1,39 @@
 # 英语学习
 
 ```
+mock 模拟，仿真的
+verbose 详细的，冗长的
+setup 设置
+tie 领带，领结
+TearDown 拆卸
+tuple 元组
+bootstrap 引导程序
+Rotation 旋转，交替
+matrix 矩阵
+affine 仿射的
+warp 扭曲，变形，经线
+threshold 阈，门槛
+substract 减
+flip 翻转
+GaussianBlur 高斯模糊
+blur 模糊
+pixel 像素
+scale 规模，范围
+angle 角度
+bitwise 逐位
+routine 例程，平常的
+critical 批判的，关键的，至关重要的
+parallel 并行
+pragma
+barrier 障碍，分界线，关卡
+duration 持续时间
+resolution 清晰度，分辨率
+measure 衡量，测量，判断
+Occur 产生
+numeric 数字
+literal 字面上的，文字
+prerequisite 先决条件
+
 wizard: n.向导(程序)；奇才；(传说中的)男巫，术士；行家；能手; adj.出色的；巫师的；巫术的；魔术的
 "manual troubleshooting" 和 "manual investigation" 都可以用来表示人工排查问题，具体使用哪个取决于上下文和具体的语境。一般来说，"manual troubleshooting" 更强调解决问题的过程，而 "manual investigation" 更强调调查和分析问题的过程。
 ingroup: n.内群体;内团体，内部集团，派系，小团体

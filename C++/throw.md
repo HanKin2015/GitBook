@@ -38,7 +38,8 @@ new(std::nothrow) 顾名思义，即不抛出异常，当new一个对象失败�
 
 因此，建议在c++代码中，凡是涉及到new操作，都采用new(std::nothrow)，然后if(p==NULL)的方式进行判断。
 
-
+## 2、throw是关键字
+throw 是 C++ 语言本身内置的关键字，用于触发异常，就像 if、for、return 等关键字一样，属于语言核心语法的一部分，不依赖任何命名空间（包括 std）。
 
 
 

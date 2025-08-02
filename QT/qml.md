@@ -1,4 +1,6 @@
 # 学习QML
+官方文档（强烈推荐）：https://doc.qt.io/qt-6/zh/qtquick-bestpractices.html
+QML Book中文版：https://www.bookstack.cn/read/QmlBook-In-Chinese/meet_qt_5-qt5_introduction.md
 
 ## 1、简介
 QML（Qt Meta-Object Language）可以帮助您创建现代的用户界面。QML 是一种声明式语言，专门用于设计用户界面，结合 C++ 可以实现强大的功能。
@@ -63,4 +65,16 @@ QSS 的性能相对较低，因为它主要用于静态样式定义，且不支�
 QML 是一种用于构建现代用户界面的声明式语言，支持复杂的交互和动画。
 QSS 是一种样式表语言，主要用于定制 Qt Widgets 的外观。
 
+## 6、QML和Qt Quick区别
+QML 是 Qt Quick 的基础：Qt Quick 依赖 QML 语言来描述 UI，但 QML 本身可以独立存在（如仅用于配置文件）。
+C++ 是 Qt Quick 的补充：通过QObject子类和Q_PROPERTY宏，C++ 代码可暴露功能给 QML 使用。
+典型工作流程：
+设计师用 QML 创建 UI 原型。
+开发者用 Qt Quick 框架扩展功能（如添加网络请求、数据库操作）。
+通过 C++ 优化性能瓶颈。
+
+Qt Quick是Qt5界面开发技术的统称，是以下几种技术的集合：
+QML - 界面标记语言
+JavaScript - 动态脚本语言
+Qt C++ - 跨平台C++封装库
 

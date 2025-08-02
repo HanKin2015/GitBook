@@ -524,3 +524,8 @@ algorithm fnv-0 is
 
     return hash
 ```
+
+https://www.oryoy.com/news/jie-mi-c-bian-cheng-ru-he-yong-c-mo-ni-cao-zuo-xi-tong-he-xin-yuan-li-yu-ji-qiao.html
+
+
+
