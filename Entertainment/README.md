@@ -1,5 +1,8 @@
 # 娱乐活动
 
+压片战争
+[世界编程大赛64k](https://64k-scene.github.io/index.html)
+
 ## 3、酒吧
 
 ## 4、团建游戏
@@ -255,3 +258,6 @@ https://www.4khdr.cn/
 政策背景与用户建议
 百度网盘通过功能分层引导用户付费，以平衡服务器成本与免费服务。
 长期使用者建议直接开通SVIP，短期需求可考虑联合会员或按需购买。
+
+## 学校排名
+https://www.ukpass.org/ranking/index-1-0-0.html

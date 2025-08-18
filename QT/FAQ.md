@@ -266,3 +266,8 @@ recv: 资源暂时不可用
 // 自定义信号槽函数参数所需
 qRegisterMetaType<QPair<size_t, char*>>("QPair<size_t, char*>");
 ```
+
+## 23、面试问题
+https://mp.weixin.qq.com/s/oXj7fwC9649rxUSe-GI04g
+
+学 C++ 到底能干啥？热门就业方向全攻略！：https://mp.weixin.qq.com/s/JaR0vF1UFKjx5e-KR-js7w

@@ -41,5 +41,20 @@ Please set a Qt installation in 'Project|Properties|Configuration Properties|Qt 
 
 原因是更改过QT Versions名称，因此需要在项目-》属性-》Qt Project Settings-》Qt Installation-》选择当前环境的QT Versions名称即可
 
+## 5、ubuntu安装qt creator
+```
+wget https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qtcreator/17.0/17.0.0/qt-creator-opensource-linux-x86_64-17.0.0.run
+chmod +x qt-creator-opensource-linux-x86_64-17.0.0.run
+./qt-creator-opensource-linux-x86_64-17.0.0.run
+中间需要登录个人账户，密码xx@123xxx
+```
+默认安装目录：/opt/qtcreator-17.0.0
 
+安装完后无法正常打开，需要安装apt-get install libxcb-cursor0
 
+## 6、ubuntu安装qt
+```
+wget https://mirrors.nju.edu.cn/qt/official_releases/online_installers/qt-online-installer-linux-x64-online.run
+```
+离线安装包：https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qt/6.9/6.9.1/single/
+估计是走编译安装路线。

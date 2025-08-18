@@ -98,4 +98,5 @@ https://blog.csdn.net/CSDNhuaong/article/details/127141000
 ## 未来计划
 https://mp.weixin.qq.com/s/qb0dhdFnXZS4LeW2mvG6fg
 
-
+## 
+trae和cursor工具的使用

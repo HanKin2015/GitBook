@@ -269,8 +269,12 @@ events 是 epoll 注册的事件，比如EPOLLIN、EPOLLOUT等等，这个参数
 学习之后，就可以去补充文件：D:\Github\Storage\udev\v4l2\验证VIDIOC_QBUF和VIDIOC_DQBUF\v4l2_tool.cpp。
 并且可以将client.c文件弄过去进行发送消息。
 
+## 5、边缘触发(edge trigger，ET)和水平触发（level trigger，LT)
+边缘触发（Edge Trigger，ET）和水平触发（Level Trigger，LT）是 I/O 多路复用机制（如 Linux 中的select、poll、epoll）中两种不同的事件通知方式，决定了内核如何通知应用程序文件描述符（FD）上的事件（如可读、可写）。
 
-
+核心区别
+水平触发（LT）：只要 FD 处于 “就绪状态”（如缓冲区非空可读取），内核就会持续通知应用程序，直到该状态被处理。
+边缘触发（ET）：仅在 FD 的 “状态发生变化时”（如从不可读变为可读）通知一次，之后即使状态仍为就绪，也不会再通知，除非状态再次变化。
 
 
 

@@ -183,6 +183,6 @@ import warnings
 warnings.filterwarnings("ignore")
 ```
 
-
-
+## 11、矩阵乘法计算优化
+理解矩阵乘法在深度学习的应用：https://blog.csdn.net/dongtuoc/article/details/134129326
 

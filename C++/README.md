@@ -527,5 +527,74 @@ algorithm fnv-0 is
 
 https://www.oryoy.com/news/jie-mi-c-bian-cheng-ru-he-yong-c-mo-ni-cao-zuo-xi-tong-he-xin-yuan-li-yu-ji-qiao.html
 
+## 37、Modern C++
+```
+cpp = "C++ 3.0" == "C++ 3.1 Gen 1" == "C++ 3.2 Gen 1×1"
+cpp-11 = "C++ 3.1" == "C++ 3.1 Gen 2" == "C++ 3.2 Gen 2×1"
+cpp-23 = "C++ 3.2" == "C++ 3.2 Gen 2×2"
+```
+标准化之前是古代，
+11前是近代，
+20前是现代，
+20后是当代。
 
+```
+root@hankin:~/opencv# g++ -v 2>&1 | grep -i modules
+root@hankin:~/opencv# gcc -v 2>&1 | grep -i modules
+root@hankin:~/opencv#
+```
 
+编译报错一：
+```
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts main.cpp -o main 
+In module imported at main.cpp:1:1:
+std: error: failed to read compiled module: 没有那个文件或目录
+std: note: compiled module file is ‘gcm.cache/std.gcm’
+std: note: imports must be built before being imported
+std: fatal error: returning to the gate for a mechanical issue
+compilation terminated.
+```
+报错的原因：
+标准库没有提供可直接导入的模块单元，如果要import标准库， 需要先将其编译成模块。
+```
+Module support in g++ is not complete as of the date of posting. In particular,
+
+standard Library Header Units
+
+The Standard Library is not provided as importable header units. If you want to import such units, you must explicitly build them first. If you do not do this with care, you may have multiple declarations, which the module machinery must merge—compiler resource usage can be affected by how you partition header files into header units.
+```
+修改编译操作：
+1. 先编译iostream的module文件
+```
+g++ -std=c++20 -fmodules-ts -xc++-system-header iostream
+```
+
+2. 编译main.cpp
+```
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts -xc++-system-header iostream
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts main.cpp -o main 
+root@hankin:~/opencv# ./main 
+Hello Modular World!
+```
+
+编译报错二：
+```
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts main.cpp -o main 
+In module imported at main.cpp:1:1:
+std: error: failed to read compiled module: 没有那个文件或目录
+std: note: compiled module file is ‘gcm.cache/std.gcm’
+std: note: imports must be built before being imported
+std: fatal error: returning to the gate for a mechanical issue
+compilation terminated.
+```
+暂时没有找到解决方法。
+
+编译报错三：
+```
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts math_lib.cppm -o main
+math_lib.cppm: file not recognized: file format not recognized
+collect2: error: ld returned 1 exit status
+root@hankin:~/opencv# g++ -std=c++20 -fmodules-ts -c math_lib.cppm -o main
+g++: warning: math_lib.cppm: linker input file unused because linking not done
+```
+问题原因是gcc无法识别cppm后缀文件，改成cpp后缀即可。
