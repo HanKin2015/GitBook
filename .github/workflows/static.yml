@@ -1,0 +1,61 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install Doxygen & Graphviz
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+        # 增加 apt-get update 避免包索引过时导致安装失败
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        # 升级到 checkout 最新稳定版 v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+        # 升级到 configure-pages 最新版 v5（适配 Pages 新特性）
+
+      - name: Install dependencies with Yarn
+        run: yarn install --frozen-lockfile
+        working-directory: ${{ github.workspace }}
+        # 增加 --frozen-lockfile 确保依赖版本与 lockfile 完全一致，提升构建稳定性
+
+      - name: Build website
+        run: yarn build
+        working-directory: ${{ github.workspace }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        # 核心升级：v3 版本底层已依赖 upload-artifact@v4，解决 deprecated 问题
+        with:
+          path: 'public'  # 保持原上传路径不变
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        # 升级到 deploy-pages 最新版 v4

@@ -1,0 +1,18 @@
+{
+  "name": "hankin2015",
+  "version": "1.0.0",
+  "description": "Use github pages and vitepress, process automation by github actions.",
+  "main": "index.js",
+  "repository": "https://github.com/hankin2015/Gitbook.git",
+  "author": "hankin2015",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.61",
+    "vue": "^3.2.45"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  }
+}
