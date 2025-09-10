@@ -1,6 +1,7 @@
 # 机器学习入门总结
 
 炼码学习：https://www.lintcode.com/problem/?typeId=7
+AI实战：https://github.com/MLEveryday/practicalAI-cn?tab=readme-ov-file
 
 分层：人工智能-》机器学习-》神经网络-》深度学习
 深度学习关键：数据+算力

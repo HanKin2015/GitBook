@@ -1,5 +1,9 @@
 # hosts
 
+参考：https://blog.csdn.net/weixin_45700528/article/details/130215392
+发现一个奇怪的现象，我明明使用Clash for Windows软件进行了翻墙。github确实能使用浏览器打开了，但是本地无法ping通github，并且也进行了8.8.8.8和114.114.114.114配置dns服务器。但还是无法git clone代码。后面使用https://www.ipaddress.com/website/www.github.com/网站获取ip地址后，修改了hosts文件后就能正常使用了。
+但是可以git进行代码上传和下载，但是无法通过浏览器访问github，但是可以访问github.io网站，你说奇不奇怪。
+
 ## 1、hosts本仓库在线同步地址
 参考：https://github.com/JohyC/Hosts
 

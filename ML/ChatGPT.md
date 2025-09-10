@@ -54,3 +54,29 @@ https://www.coze.com/
 ## 8、本地大模型体验
 https://zhuanlan.zhihu.com/p/680179871
 
+## 9、大模型对比
+搜索主题：AI市场行情
+
+秘塔AI搜索：https://metaso.cn/
+分析的不够透彻，并且总结的一般。
+
+阿里通用千问：https://bailian.console.aliyun.com/?tab=model#/efm/model_experience_center/text
+更拉跨，2025年9月询问分析数据居然是基于2023和2024，整体体验很差。
+
+文心一言：https://yiyan.baidu.com/
+中规中矩吧。
+
+kimi：https://www.kimi.com/
+体验不错，推荐。
+
+智谱清言（GLM）：https://chatglm.cn/main/alltoolsdetail?lang=zh
+中规中矩吧。
+
+豆包：https://doubao.com/
+推荐。
+
+天工AI（昆仑万维）：https://www.tiangong.cn/
+需要登录注册未测试。
+
+讯飞星火（科大讯飞）：https://xinghuo.xfyun.cn/
+需要登录注册未测试。

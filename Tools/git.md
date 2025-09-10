@@ -1912,3 +1912,51 @@ O:S-1-5-21-3454653907-3315404885-1188678774-1001
 # 修改文件/文件夹所有者
 icacls "D:\github\storage" /setowner "HanKin-PC\HanKin" /T
 ```
+
+## 76、从github下载zip包后如何关联远端仓库
+问题来源：使用git clone下载仓库太慢，直接下载zip包速度很快。
+发现并无法实现，实际上还是会把代码重新拉取一遍，还是很慢。
+```
+git init
+git remote add https://github.com/HanKin2015/Machine_to_DeepingLearning.git
+git fetch origin
+git pull
+```
+
+## 77、解决Git Push至GitHub还是很慢或报错的问题
+参考：https://www.cnblogs.com/alphainf/p/17150558.html
+
+### 问题描述
+从本地提交代码到 GitHub 远程仓库，由于 DNS 污染的问题，国内提交速度很慢，有时候还报错。笔者自己花钱买了一个梯子，但开启梯子的代理后仍然没有解决问题，不过 Google 等倒是可以访问了。
+
+### 原因分析
+虽然开启了代理，但可能 git push 并没有走代理，因为需要在 git 里面进行配置。
+
+### 解决方法
+配置 git push 直接走网络代理
+```
+git config --global http.proxy socks5://127.0.0.1:1080
+git config --global https.proxy socks5://127.0.0.1:1080
+```
+其中 1080 是 SOCKS 代理的端口，一般默认 1080，可以在代理工具的设置中查看。
+
+下面以Clash for windows为例，进行代理IP和PORT的配置和查询
+
+PORT可以在这里查询：Genera-》Port
+IP可以在这里配置和查询：Settings-》System Proxy-》Static Host
+
+然后就可以流畅push了！
+
+## 78、删除远端分支
+需求：gitbook仓库需要把gitbook分支重新命名为main分支，并把之前的master分支删除。
+
+```
+git branch -m gitbook main
+git branch -r  # 列出所有远程分支（前缀为 origin/）
+git push origin --delete gitbook
+git push origin --delete master
+git fetch --prune  # 清理本地缓存的已删除远程分支（测试执行后没有看出有啥区别）
+# 或简写为 git fetch -p
+
+```
+直接删除master默认分支是会失败的，需要在仓库中修改默认分支为main，Settings-》General-》Default branch-》Switch to another branch。

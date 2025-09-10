@@ -139,7 +139,8 @@ systemd
 重启计算机以使更改生效。
 ubuntu系统亲测有效。
 
-
+## 6、安装中文输入法
+Linux.Ubuntu.中文输入法设置：https://blog.csdn.net/sparkstrike/article/details/81487271
 
 
 

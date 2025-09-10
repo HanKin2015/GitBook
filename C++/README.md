@@ -7,6 +7,7 @@ C++那些事：https://github.com/Light-City/CPlusPlusThings
 benchmark库：https://github.com/google/benchmark
 在线编译器：https://www.build-bench.com/b/UisJAsK0HhePtnse9KODYslfVm0
 学习网站：https://www.runoob.com/cplusplus/cpp-libs-exception.html
+高质量学习资料：https://csguide.cn/cpp/modern_cpp/type_traits.html
 
 ## 1、isspace
 一个用于检查字符是否为空白字符的标准库函数。

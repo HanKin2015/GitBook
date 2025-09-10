@@ -78,3 +78,30 @@ https://mirrors.tuna.tsinghua.edu.cn/qt/online/qtsdkrepository/windows_x86/deskt
 https://mirrors.tuna.tsinghua.edu.cn/qt/online/qtsdkrepository/windows_x86/desktop/qt6_dev_src_doc_examples/
 https://mirrors.tuna.tsinghua.edu.cn/qt/online/qtsdkrepository/windows_x86/desktop/qt6_691_dev_wasm/
 ```
+
+## 8、入门教程真的少
+https://blog.csdn.net/m0_65635427/article/details/130780280
+
+### .pro文件
+.pro就是工程文件(project)，它是qmake自动生成的用于生产makefile的配置文件。类似于VS中的.sln 和vsproj文件。
+
+### 命名规范
+类名：单词首字母大写，单词和单词之间直接连接，无需连接字符 。
+函数名字，变量名：首字母小写，之后每个单词首字母大写，单词和单词之间直接连接，无需连接字符。
+
+### QtCreator常用快捷键
+运行  ctrl +R
+编译  ctrl +B
+帮助文档  F1 ，点击F1两次跳到帮助界面
+跳到符号定义 F2 或者ctrl + 鼠标点击
+注释 ctrl+/
+字体缩放  ctrl + 鼠标滚轮
+整行移动代码 ctrl + shift + ↑或↓
+自动对齐   ctrl + i
+同名之间的.h和.cpp文件跳转 F4
+
+### Qt窗口坐标体系
+以左上角为原点（0,0），以向右的方向为x轴的正方向，以向下方向为y轴的正方向。
+对于嵌套窗口，其坐标是相对于父窗口来说的。顶层窗口的父窗口就是屏幕。
+
+

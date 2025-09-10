@@ -324,8 +324,34 @@ GitHub对字母大小写铭感
 解决Github Page无法更新，发很多邮件告诉我rejucts。https://www.jianshu.com/p/938ec18e572a
 原因是：有个文档编码问题，使用了windows自带的记事本新建和编辑。
 
+## 11、GitHub Pages 支持 3 种部署源
+1. 方式一：直接使用仓库的「docs 目录」部署（无需 gh-pages 分支）
+GitHub Pages 支持 3 种部署源，除了 gh-pages 分支，还可以直接指定仓库的 docs 目录（需在仓库设置中配置）：
 
+开发者将 Markdown 文档源文件（如 GetStarted.md）直接放在仓库根目录的 docs 文件夹中；
+在 GitHub 仓库的「Settings → Pages → Build and deployment」中，选择「Source」为「Deploy from a branch」，并指定「Branch」为 main（或 master）、「Folder」为 docs；
+此时，GitHub 会自动将 main 分支下 docs 目录中的内容（若用静态站点生成器，可能是编译后输出到 docs 的 HTML）直接部署为 GitHub Pages，无需创建 gh-pages 分支。
 
+这种情况下，你在仓库中自然看不到 gh-pages 分支，因为部署逻辑根本没用到它。
+
+2. 方式二：使用「外部构建服务」部署（构建产物不提交到仓库分支）
+部分项目会通过 GitHub Actions 或第三方工具（如 Netlify、Vercel）编译文档，但不将编译后的 HTML 提交到仓库的任何分支，而是直接将构建产物推送到 GitHub Pages 的 “后端存储”：
+
+流程示例：开发者推送 Markdown 到 main 分支 → 触发 GitHub Actions 执行编译（生成 GetStarted.html 等文件） → Actions 调用 GitHub Pages 的 API，直接将编译产物上传到托管服务（跳过分支提交步骤）；
+结果：仓库中只有 main 等源代码分支，没有 gh-pages 分支，因为构建产物从未作为分支代码提交。
+
+这种方式更轻量化（避免仓库分支冗余），但会导致用户在仓库中看不到部署相关的分支。
+
+3. 方式三：文档部署在「独立的 “文档仓库”」中（与主项目仓库分离）
+async_simple 是主项目（代码仓库），其文档可能部署在一个单独的 GitHub 仓库中（而非主项目仓库内），例如：
+
+主项目仓库：github.com/alibaba/async_simple（存储代码和 Markdown 文档源文件）；
+文档部署仓库：github.com/alibaba/async_simple-docs（专门用于部署 GitHub Pages）；
+逻辑：主项目的 GitHub Actions 编译文档后，将产物推送到 async_simple-docs 仓库的 gh-pages 分支（或 docs 目录），再通过该仓库的 Pages 服务对外提供 alibaba.github.io/async_simple 访问（可通过自定义路径配置实现）。
+
+## 12、已验证无需上传编译好的html文件也可进行搭建网站
+demo：https://hankin2015.github.io/Machine_to_DeepingLearning/
+测试方法也在这个上面，gitbook已更新新的部署方式，删除了html源文件，只保留markdown文件。
 
 
 

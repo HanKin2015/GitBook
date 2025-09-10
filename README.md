@@ -228,3 +228,7 @@ git build  --gitbook=2.6.7
 ```
 $ gitbook build ./ --log=debug --debug
 ```
+
+## VitePress搭建文档网站
+https://www.cnblogs.com/Answer1215/p/18696254
+https://blog.csdn.net/qq_44793507/article/details/142521250

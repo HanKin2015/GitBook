@@ -15,15 +15,34 @@ Your site is published at https://hankin2015.github.io/learngit/
 
 异常的话会有相关错误提示，有可能还会发邮件通知。
 
+### 发现alibaba.github.io仓库查询不到
+但是https://alibaba.github.io却是能访问的，原因是该仓库设为了私有。
+
+免费账号
+仅支持 公开仓库 部署 GitHub Pages。如果将 alibaba.github.io 这类仓库设为私有，GitHub Pages 服务会自动失效（网站无法访问），且仓库仅对仓库成员可见，外部用户无法搜索或访问。
+
+付费账号（Pro / Team / Enterprise）：
+支持 私有仓库 部署 GitHub Pages，且可选择两种访问权限：
+“仅对仓库成员可见”：只有被添加为仓库协作者、拥有访问权限的人，才能通过 [组织名].github.io 域名访问网站（类似 “私有网站”）；
+“公开可见”：即使仓库是私有（代码仅成员可看），但部署后的 GitHub Pages 网站对所有人公开可访问（代码隐私与网站公开分离）。
+
 ## 2、查看GitHub仓库大小的几种方法
-### GitHub自带查看仓库大小的功能（public、private）
+以HanKin2015/Machine_to_DeepingLearning仓库为例
+
+### 2-1、GitHub自带查看仓库大小的功能（public、private）
 登录github网页首页，选择自己账户的settings-》点击repository
+查看为60.7MB
 
-### 利用GitHub提供的API查看（public）
-https://api.github.com/repos/HanKin2015/MagicTool
-其中的size就是仓库大小，单位是kb
+### 2-2、利用GitHub提供的API查看（public）
+https://api.github.com/repos/HanKin2015/Machine_to_DeepingLearning
+其中的size就是仓库大小，单位是KB
+```
+"homepage": null,
+"size": 62132,
+"stargazers_count": 0,
+```
 
-### 利用浏览器插件：Enhanced GitHub（public、private）
+### 2-3、利用浏览器插件：Enhanced GitHub（public、private）
 操作稍微复杂，不推荐
 
 ## 3、如何从 GitHub 上下载单个文件夹？
@@ -136,3 +155,8 @@ master分支被保护，所以无法强制推送。
 进入gitlab中的项目： 设置（Settings）-> 仓库（Repository） -> 保护分支（Protected Branches）->（把保护的分支选择 unprotected）解除保护
 
 进入gitlab中的项目：设置（Settings）-> 仓库（Repository） -> 保护分支（Protected Branches）-> 选择分支，Allowed to merge，Allowed to push（把保护的分支选择protect ）增加保护
+
+## 
+
+
+

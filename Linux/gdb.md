@@ -1260,3 +1260,114 @@ Line 3 of "i.c" starts at address 0x400646 <main> and ends at 0x40064e <main+8>.
 Function "0x400689" not defined.
 (gdb) q
 ```
+
+## 32、汇编操作
+1. 进入汇编调试模式
+在 gdb 中，使用 disassemble（缩写 disas）命令查看当前函数的汇编代码：
+```
+(gdb) disassemble  # 查看当前函数的汇编
+(gdb) disas main   # 查看指定函数（如main）的汇编
+```
+
+2. 混合显示源码与汇编
+如果程序编译时包含调试信息（-g），可以用 layout asm 或 disassemble /m 混合显示源码和对应的汇编：
+```
+(gdb) layout asm   # 分屏显示汇编（按Ctrl+L刷新，q退出分屏）
+(gdb) disassemble /m main  # 显示main函数的源码与汇编对应关系
+```
+
+3. 设置反汇编风格
+默认汇编风格可能因系统而异（如 AT&T 风格），可切换为 Intel 风格（更直观）：
+```
+(gdb) set disassembly-flavor intel  # 切换为Intel汇编风格
+(gdb) show disassembly-flavor       # 查看当前风格
+```
+
+## 33、二、查看和修改寄存器
+1. 查看所有寄存器
+使用 info registers（缩写 info reg）命令查看所有通用寄存器的值：
+```
+(gdb) info registers  # 显示所有寄存器（包括通用寄存器、段寄存器等）
+(gdb) info reg        # 简写形式
+```
+
+2. 查看指定寄存器
+直接指定寄存器名（如 rax、rip）查看单个寄存器：
+```
+(gdb) info reg rax    # 查看rax寄存器（64位）
+(gdb) info reg eip    # 查看eip寄存器（32位，指令指针）
+(gdb) info reg rip    # 查看rip寄存器（64位，指令指针，指向当前即将执行的指令）
+```
+
+3. 修改寄存器的值
+用 set $寄存器名 = 值 命令修改寄存器（常用于调试时临时调整程序状态）：
+```
+(gdb) set $rax = 0x100  # 将rax寄存器设置为0x100
+(gdb) set $rip = 0x400520  # 修改指令指针，跳转到指定地址执行
+```
+
+## 34、三、配合断点调试汇编
+在汇编指令处设置断点（通过地址）：
+```
+(gdb) break *0x400520  # 在地址0x400520处设置断点（注意*号）
+```
+
+单步执行汇编指令：
+stepi（缩写 si）：单步执行一条汇编指令（会进入函数调用）
+nexti（缩写 ni）：单步执行一条汇编指令（不进入函数调用）
+```
+(gdb) si  # 执行下一条汇编指令并停在新指令处
+(gdb) ni  # 类似si，但跳过函数调用
+```
+
+## 35、gdb如何调试多线程
+在 GDB 中调试多线程程序需要使用专门的线程调试命令，以跟踪、切换和控制不同线程的执行。以下是常用的多线程调试方法和命令：
+
+一、编译程序时的注意事项
+调试多线程程序前，需确保编译时包含调试信息，并避免过度优化（否则可能导致调试信息混乱）：
+```
+g++ -g -O0 -pthread test_threads.cpp -o test_threads  # -pthread 用于多线程编译
+```
+
+二、基本线程调试命令
+1. 查看线程信息
+```
+(gdb) info threads  # 列出所有线程，带 * 的是当前调试的线程
+  Id   Target Id         Frame 
+  1    Thread 0x7ffff7fc7700 (LWP 1234) "test_threads" main() at test_threads.cpp:10
+* 2    Thread 0x7ffff77c6700 (LWP 1235) "test_threads" thread_func() at test_threads.cpp:5
+```
+Id：GDB 分配的线程编号（调试时使用）
+LWP：操作系统的轻量级进程 ID（与 pthread_t 对应）
+
+2. 切换线程
+```
+(gdb) thread <线程ID>  # 切换到指定线程（使用 info threads 中的 Id）
+(gdb) thread 1         # 切换到 Id 为 1 的线程
+```
+
+3. 为线程设置断点
+默认断点会作用于所有线程，也可指定仅在某个线程触发：
+```
+(gdb) break <文件名>:<行号> thread <线程ID>  # 仅在指定线程触发断点
+(gdb) break test.cpp:20 thread 3             # 线程 3 执行到 test.cpp:20 时暂停
+```
+
+4. 单独控制线程执行
+thread apply <线程ID> <命令>：对指定线程执行命令（如打印变量）
+````
+(gdb) thread apply 2 print x  # 让线程 2 打印变量 x 的值
+(gdb) thread apply all bt     # 打印所有线程的调用栈（常用！）
+```
+
+set scheduler-locking on：锁定当前线程执行，其他线程暂停（避免干扰）
+```
+(gdb) set scheduler-locking on  # 仅当前线程执行
+(gdb) next                      # 单步执行当前线程，其他线程不运行
+(gdb) set scheduler-locking off # 恢复所有线程并发执行
+```
+
+5. 线程状态控制
+continue（c）：所有线程继续运行，直到下一个断点
+step（s）/next（n）：单步执行当前线程（受 scheduler-locking 影响）
+interrupt：中断所有线程的运行（在程序运行时按 Ctrl+C 触发）

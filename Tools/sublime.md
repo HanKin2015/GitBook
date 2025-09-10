@@ -5,6 +5,9 @@
 ### 缺点
 Sublime Text 2是一个非常不错的源代码及文本编辑器，但是不支持GB2312和GBK编码在很多情况下会非常麻烦。不过Sublime Package Control所以供的插件可以让Sublime Text 2几乎完美地支持CJK编码的文本。
 
+[sublime text 3.2.1 3207注册（自行破解）方法](https://www.cnblogs.com/nwgdk/p/10987247.html)
+[sublime之markdown语法高亮和修改主题](https://www.jianshu.com/p/2a4267e1bae8)
+
 ### 优点
 小巧、快
 

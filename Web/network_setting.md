@@ -4,7 +4,7 @@
 ```
 /etc/init.d/network-manager restart
 /etc/init.d/networking restart
-systemctl restart NetworkManager.service
+systemctl restart NetworkManager.service（注意大小写形式）
 ```
 
 ## 2、DNS设置
@@ -111,6 +111,10 @@ route add default gw 192.168.120.240
 解决方式：通过能访问的网络，然后ssh到目标主机，然后添加route add -net 172.22.0.0 netmask 255.255.0.0 gw 19.123.255.254 dev eth0就搞定了。
 
 如果要在不同网段直接通讯，需要添加路由。
+
+网段的最后一个地址 192.168.73.255 是广播地址，同样不分配给设备，ping 时通常也会失败或触发广播响应（视网络配置而定）。
+192.168.73.0 是网络标识地址（用于标识整个网段），不分配给任何具体设备（主机、路由器等）。
+你的路由配置 192.168.73.0/24 dev ens33 是正常的，说明本机正确识别了所在网段。
 
 ### 3-1、添加主机路由
 如果想192.168.2.19主机 ping通192.168.0.8主机，则需要经过路由器2，就要在192.168.2.19的主机上添加一条到192.168.0.8的路由，添加命令如下：
