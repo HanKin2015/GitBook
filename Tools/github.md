@@ -156,7 +156,12 @@ master分支被保护，所以无法强制推送。
 
 进入gitlab中的项目：设置（Settings）-> 仓库（Repository） -> 保护分支（Protected Branches）-> 选择分支，Allowed to merge，Allowed to push（把保护的分支选择protect ）增加保护
 
-## 
+## 17、Github为何把默认的master分支改为main分支
+GitHub 将默认分支从 master 改为 main，核心原因是出于对种族平等的考量，避免使用具有奴隶制相关历史联想的词汇（master 曾关联 “主人” 含义），以打造更包容的开发社区环境。
 
+具体背景和推动因素包括：
+- 社会运动影响：2020 年 “黑人的命也是命”（Black Lives Matter）运动引发全球对系统性种族歧视的反思，技术社区开始审视并替换具有争议性的术语。
+- 社区共识推动：开发者群体和相关组织（如 Python、Rust 社区）率先提出术语替换倡议，认为技术语言应避免任何可能隐含歧视的表述。
+- 平台主动调整：GitHub 响应社区诉求，于 2020 年 6 月宣布该变更，并提供工具（如 git branch -m master main 命令）帮助开发者平滑迁移现有仓库分支。
 
 

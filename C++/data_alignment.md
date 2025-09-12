@@ -26,8 +26,9 @@
 在所有的预处理指令中，#Pragma 指令可能是最复杂的了，它的作用是设定编译器的状态或者是指示编译器完成一些特定的动作。
 
 常会遇到#pragma pack(n)，#pragma pack()，#pragma pack(pack,n)，#pragma pack(pop,n)等，其中n是可以省略的，并且这些语句一般出现在结构体前面。
-
+```
 #pragma pack 的主要作用就是改变编译器的内存对齐方式，这个指令在网络报文的处理中有着重要的作用，#pragma pack(n)是他最基本的用法，其作用是改变编译器的对齐方式， 不使用这条指令的情况下，编译器默认采取#pragma pack(8)也就是8字节的默认对齐方式，n值可以取（1， 2， 4， 8， 16） 中任意一值。
+```
 
 ## 4、#pragma pack(show)
 #pragma pack(show)显示当前内存对齐的字节数。也就是packing aligment。
@@ -133,10 +134,24 @@ if (get_dwords(q->ehci, addr +  0, &qtd.next,    1) < 0 ||
 #pragma pack(0) //恢复编译器默认对齐方式
 #pragma pack() //恢复编译器默认对齐方式
 #pragma pack(push) //将当前的对齐字节数压入栈顶，不改变对齐字节数
-#pragma pack(push,n) //将当前的对齐字节数压入栈顶，并按照n字节对齐
-#pragma pack(pop) //弹出栈顶对齐字节数，不改变对齐字节数
-#pragma pack(pop,n) //弹出栈顶并直接丢弃，按照n字节对齐
+#pragma pack(push, n) //将当前的对齐字节数压入栈顶，并按照n字节对齐
+#pragma pack(pop) //弹出栈顶对齐字节数，改变对齐字节数为栈顶值
+#pragma pack(pop,n) //弹出栈顶并直接丢弃，按照n字节对齐（不推荐，大概率是不支持的语法）
 ```
+没有普适性的 #pragma pack(pop, n) 标准语法。它在某些编译器（如 MSVC）中被支持，但在其他编译器（如 GCC/Clang）中可能不被认可或存在兼容性问题。
 
+## 10、取消结构体对齐
+```
+#pragma pack(push)
+#pragma pack(1)
+
+struct bulk_cache_list_param {
+	uint32_t endpoint;          // 4
+	uint8_t no_transfers;       // 1
+	uint32_t bytes_per_transfer;// 4
+};
+
+#pragma pack(pop)
+```
 
 

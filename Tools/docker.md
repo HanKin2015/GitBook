@@ -160,3 +160,20 @@ Repository：具体的镜像仓库，如 nginx、mysql
 Docker 守护进程（通常是 dockerd）是 Docker 架构的核心，负责管理容器生命周期、构建镜像、分发镜像等任务。
 守护进程通常以后台进程的方式运行，等待来自 Docker 客户端的 API 请求。
 
+## 9、k8s和docker区别(4大核心区别详解)
+参考：https://mp.weixin.qq.com/s?__biz=Mzg2NTg1NTQ2NQ==&mid=2247505664&idx=1&sn=71dd81d1baec1022229e7b30fb43ede2&chksm=ce512586f926ac90387ab7994b859a0817638bb3af3043d07dc790732e9d89cb9bf62f9e9754&cur_album_id=3659003065127960582&scene=190#rd
+
+K8S和Docker是目前云原生的核心技术，也是云计算的最重要的技术。
+云原生（Cloud-Native）和云计算（Cloud Computing）是现代 IT 架构中的两个核心概念，前者聚焦 “如何在云上高效构建和运行应用”，后者聚焦 “如何通过网络提供计算资源服务”，二者相辅相成但定位不同。
+
+K8S，就是基于容器的集群管理平台，它的全称，是kubernetes，是由Google创造容器编排系统。
+Kubernetes 这个单词来自于希腊语，含义是舵手或领航员，K8S是它的缩写，用“8”字替代了“ubernete”这8个字符。
+
+
+
+
+
+
+
+
+
