@@ -46,14 +46,14 @@ jobs:
         # 增加 --frozen-lockfile 确保依赖版本与 lockfile 完全一致，提升构建稳定性
 
       - name: Build website
-        run: yarn build
+        run: yarn .:build
         working-directory: ${{ github.workspace }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         # 核心升级：v3 版本底层已依赖 upload-artifact@v4，解决 deprecated 问题
         with:
-          path: 'public'  # 保持原上传路径不变
+          path: './public'  # 保持原上传路径不变
 
       - name: Deploy to GitHub Pages
         id: deployment
