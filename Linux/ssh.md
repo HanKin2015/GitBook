@@ -206,29 +206,6 @@ null
 proc on /proc type proc (rw,relatime)
 [root@chroot <vtcompile> / ]#fdisk -l
 [root@chroot <vtcompile> / ]#df
-df: `/dev/pts': No such file or directory
-df: `/sys/kernel/security': No such file or directory
-df: `/dev/shm': No such file or directory
-df: `/sys/fs/cgroup': No such file or directory
-df: `/sys/fs/cgroup/systemd': No such file or directory
-df: `/sys/fs/pstore': No such file or directory
-df: `/sys/fs/cgroup/cpuset': No such file or directory
-df: `/sys/fs/cgroup/cpu,cpuacct': No such file or directory
-df: `/sys/fs/cgroup/devices': No such file or directory
-df: `/sys/fs/cgroup/freezer': No such file or directory
-df: `/sys/fs/cgroup/net_cls,net_prio': No such file or directory
-df: `/sys/fs/cgroup/blkio': No such file or directory
-df: `/sys/fs/cgroup/perf_event': No such file or directory
-df: `/dev/mqueue': No such file or directory
-df: `/sys/kernel/debug': No such file or directory
-df: `/dev/hugepages': No such file or directory
-df: `/home/envbaseroot/envbase_vt/run/lock': No such file or directory
-df: `/home/envbaseroot/envbase_vt/run/shm': No such file or directory
-df: `/home/envbaseroot/envbase_vt/dev': No such file or directory
-df: `/home/envbaseroot/envbase_vt/dev/pts': No such file or directory
-df: `/run/rpc_pipefs': No such file or directory
-df: `/home/envbaseroot/envbase_vt/home': No such file or directory
-df: `/home/envbaseroot/envbase_vt/part1': No such file or directory
 df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1': No such file or directory
 df: `/home/envbaseroot/envbase_vt/part1/VMP5.5.1/dev': No such file or directory
 df: `/home/envbaseroot/envbase_vt/home/envbaseroot/envbase_vt/part1/VMP5.5.1/dev': No such file or directory

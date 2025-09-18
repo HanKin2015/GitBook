@@ -108,4 +108,12 @@ Redmi 14R 5G 8GB+256GB 1899
 小米澎湃OS查看电池实际容量：
 在拨号界面，输入 *#*#284#*#* 字符，手机会生成Bug检测报告。然后解压报告文件查找: Estimated battery capacity
 
-
+## 12、随身wifi
+https://post.smzdm.com/p/a86x74d7/
+https://www.zhihu.com/tardis/zm/art/1915931882434041743?source_id=1005
+https://zhuanlan.zhihu.com/p/26823356531
+https://www.zhihu.com/tardis/bd/art/74276620
+https://www.zhihu.com/tardis/bd/art/453500010
+https://www.zhihu.com/tardis/zm/art/337725320
+https://zhuanlan.zhihu.com/p/1887896981810168246
+https://zhuanlan.zhihu.com/p/1947356743865704556

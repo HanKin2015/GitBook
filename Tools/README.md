@@ -9,6 +9,10 @@
 模型：FFC
 Feeling Facts Compare
 
+把网页做成轻的桌面应用：
+https://mp.weixin.qq.com/s/NolcKd-7BqfJK4h3fuKlJQ
+https://github.com/tw93/Pake
+
 一月：January
 二月：February
 三月：March

@@ -91,3 +91,13 @@ linux命令搜索大全：https://wangchujiang.com/linux-command/
 ## VitePress搭建文档网站
 https://www.cnblogs.com/Answer1215/p/18696254
 https://blog.csdn.net/qq_44793507/article/details/142521250
+
+## Actions报错
+```
+Branch "main" is not allowed to deploy to github-pages due to environment protection rules.
+The deployment was rejected or didn't satisfy other protection rules.
+```
+参考：https://github.com/withastro/docs/issues/1376
+在Settings-》Environments / Configure github-pages-》Deployment branches and tags将master修改为main即可。
+
+
