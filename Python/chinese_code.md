@@ -55,7 +55,7 @@ graftabl 936
 在HKEY_CLASSES_ROOT下的Folder下的shell下新建DOS项类型为REG_SZ，值为任意用于在右键菜单中显示,在其下再键command，REG_SZ,值为cmd.exe /E:ON /K c:cmd专用.bat %1
 在c:下建立文件：cmd专用.bat
 
-### 2-2、UnicodeEncodeError: 'charmap' codev can't encode characters in position 60-68: character maps to <undefined>
+### 2-2、UnicodeEncodeError: 'charmap' codev can't encode characters in position 60-68: character maps to \<undefined\>
 其实是logging库打印中文到本地txt文件导致。
 使用python的logging模块记录日志，有时会遇到中文编码问题错误。
 

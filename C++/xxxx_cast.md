@@ -89,7 +89,7 @@ dynamic_cast 用于在类的继承层次之间进行类型转换，它既允许�
 dynamic_cast 与 static_cast 是相对的，dynamic_cast 是“动态转换”的意思，static_cast 是“静态转换”的意思。dynamic_cast会在程序运行期间借助 RTTI 进行类型转换，这就要求基类必须包含虚函数；static_cast在编译期间完成类型转换，能够更加及时地发现错误。
 
 dynamic_cast 的语法格式为：
-dynamic_cast <newType> (expression)
+dynamic_cast \<newType\> (expression)
 
 newType 和 expression 必须同时是指针类型或者引用类型。换句话说，dynamic_cast 只能转换指针类型和引用类型，其它类型（int、double、数组、类、结构体等）都不行。
 

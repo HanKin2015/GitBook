@@ -51,7 +51,7 @@ b hcd-ehci.c:1659
 
 ### 编译器优化
 D:\Github\GitBook\gitbook\C++\compiler_optimization.md
-遇到部分变量<optimized out>时，需要重新编译一个二进制文件复现问题。
+遇到部分变量\<optimized out\>时，需要重新编译一个二进制文件复现问题。
 
 部分变量被优化，但是看二进制编译的时候是O0，并且直接在运行时下端点调试是能正常打印变量的，难道是生成dump后优化？
 没搞懂，内部强制把操作系统崩溃到dump文件一样，gdb发现并没有优化。并且优化参数是去年改的。
@@ -295,22 +295,25 @@ int main(int argc, char *argv[])
 ### 7-1、gdb查看源代码
 GDB 可以打印出所调试程序的源代码，当然，在程序编译时一定要加上-g的参数，把源程序信息编译到执行文件中。不然就看不到源程序了。当程序停下来以后，GDB会报告程序停在了那个文件的第几行上。你可以用list命令来打印程序的源代码。还是来看一看查看源代码的GDB命令吧。
 
-list<linenum>   显示程序第linenum行的周围的源程序。
-list<function>  显示函数名为function的函数的源程序。
+list\<linenum\>   显示程序第linenum行的周围的源程序。
+list\<function\>  显示函数名为function的函数的源程序。
 list    显示当前行后面的源程序。
 list -  显示当前行前面的源程序。
 
 一般是打印当前行的上5行和下5行，如果显示函数是是上2行下8行，默认是10行，当然，你也可以定制显示的范围，使用下面命令可以设置一次显示源程序的行数。
 
-setlistsize <count> 设置一次显示源代码的行数。
+setlistsize \<count\> 设置一次显示源代码的行数。
 showlistsize        查看当前listsize的设置。
 
 list命令还有下面的用法：
+```
 list<first>, <last> 显示从first行到last行之间的源代码。
 list ,<last>        显示从当前行到last行之间的源代码。
 list +              往后显示源代码。
+```
 
 一般来说在list后面可以跟以下这些参数：
+```
 <linenum>   行号。
 <+offset>   当前行号的正偏移量。
 <-offset>   当前行号的负偏移量。
@@ -318,6 +321,7 @@ list +              往后显示源代码。
 <function>  函数名。
 <filename:function>哪个文件中的哪个函数。
 <*address>  程序运行时的语句在内存中的地址。
+```
 
 ### 7-2、一些常用signal的含义
 SIGABRT：调用abort函数时产生此信号。进程异常终止。

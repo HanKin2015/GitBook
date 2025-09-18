@@ -242,7 +242,7 @@ logcat -f <FILE>: 将日志消息保存到指定文件中。
 logcat -v <FORMAT>: 指定日志消息的输出格式，常用的格式有brief、process、tag、thread、raw和time等。
 ```
 
-其中，“<format>”是您想要使用的输出格式。以下是一些常用的输出格式：
+其中，“\<format\>”是您想要使用的输出格式。以下是一些常用的输出格式：
 ```
 brief：简短格式，只显示日志消息的优先级和标记。
 process：显示进程ID和进程名称。

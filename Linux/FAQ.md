@@ -419,7 +419,7 @@ timedatectl
 timedatectl set-timezone <timezone>
 ```
 
-其中 <timezone> 是您所在的时区，例如 Asia/Shanghai。
+其中 \<timezone\> 是您所在的时区，例如 Asia/Shanghai。
 
 启用网络时间协议（NTP）：
 ```

@@ -131,7 +131,7 @@ proc->start("ls");
 
 可以使用这个进行调用python文件，并且使用start可以获取shell命令的返回值。
 
-[QT QProcess执行终端命令并实时输出回显]()
+[QT QProcess执行终端命令并实时输出回显](https://blog.csdn.net/zhizhengguan/article/details/110917027)
 
 注意：[解决QProcess对象调用execute执行cmd命令不支持中文和空格的问题](http://qiusuoge.com/12038.html)
 

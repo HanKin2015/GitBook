@@ -1,8 +1,8 @@
 # C++中如何区分std::endl、std::ends、std::flush的差异性
 
 ## 1、简介
-头文件：#include <iostream>
-更准确的说，其实是位于头文件：#include <ostream>
+头文件：#include \<iostream\>
+更准确的说，其实是位于头文件：#include \<ostream\>
 
 功能介绍：
 

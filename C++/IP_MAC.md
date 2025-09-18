@@ -338,11 +338,9 @@ IPv6 :
 2、inet_ntop函数
 
 程序示例：
-
-#Include <sys/types.h>
-
+```
+#include <sys/types.h>
 #include <sys/socket.h>
-
 #include <arpa/inet.h>
 
 strcut sockaddr_in   src;
@@ -350,8 +348,7 @@ strcut sockaddr_in   src;
 src.sin_addr.s_addr   =  inet_addr("*.*.*.*");                 //构建网络地址。
 
 printf("%s\n",inet_ntoa(src.sin_addr));                 //将网络地址转换成字符串。
-
-
+```
 
 in_addr_in   inet_addr(const char *strptr);
 

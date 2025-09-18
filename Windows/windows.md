@@ -1,10 +1,10 @@
 # windows相关
-
-- [](1、认识Windows10系统)
-- [](2、其他windows)
-- [](3、win11那些事儿)
-- [](5、Windows7那些事儿)
-- [](6、Windows XP那些事儿)
+- [1、认识Windows10系统](#1认识Windows10系统)
+- [2、其他windows](#2其他windows)
+- [3、win11那些事儿](#3win11那些事儿)
+- [4、激活Windows](#4激活windows)
+- [5、Windows7那些事儿](#5windows7那些事儿)
+- [6、Windows XP那些事儿](#6windows-xp那些事儿)
 
 ## 1、认识Windows10系统
 系统下载：https://msdn.itellyou.cn/

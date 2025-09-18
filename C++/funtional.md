@@ -3,7 +3,7 @@
 
 ## 1、简介
 C++中的functional库提供了一组函数对象，可以用于实现函数式编程。这些函数对象包括函数指针、函数对象、lambda表达式、bind表达式等，可以用于实现各种算法和数据结构。
-C++ 的 <functional> 库提供了一组通用的函数对象、绑定器和其他工具，用于处理函数和函数对象。这个库在 C++11 标准中引入，并在后续的标准中不断扩展。
+C++ 的 \<functional\> 库提供了一组通用的函数对象、绑定器和其他工具，用于处理函数和函数对象。这个库在 C++11 标准中引入，并在后续的标准中不断扩展。
 
 以下是一些常用的函数对象：
 function：可以用于封装任意可调用对象，包括函数指针、函数对象、lambda表达式等。
@@ -34,25 +34,25 @@ std::reference_wrapper 用于存储对象的引用，而不是对象本身。它
 std::hash 是一个模板类，用于生成对象的哈希值。它在实现哈希表（如 std::unordered_map 和 std::unordered_set）时非常有用。
 
 ## 8、仿函数
-C++ 的 <functional> 库还提供了一组预定义的函数对象（也称为仿函数），用于实现常见的算术运算和比较运算。这些仿函数可以用于标准算法和其他需要函数对象的地方。
+C++ 的 \<functional\> 库还提供了一组预定义的函数对象（也称为仿函数），用于实现常见的算术运算和比较运算。这些仿函数可以用于标准算法和其他需要函数对象的地方。
 
 ### 8-1、算术运算仿函数
 这些仿函数用于实现加、减、乘、除等算术运算：
-- std::plus<T>：加法
-- std::minus<T>：减法
-- std::multiplies<T>：乘法
-- std::divides<T>：除法
-- std::modulus<T>：取模
-- std::negate<T>：取负
+- std::plus\<T\>：加法
+- std::minus\<T\>：减法
+- std::multiplies\<T\>：乘法
+- std::divides\<T\>：除法
+- std::modulus\<T\>：取模
+- std::negate\<T\>：取负
 
 ### 8-2、比较运算仿函数
 这些仿函数用于实现比较运算：
-- std::greater<T>：大于
-- std::less<T>：小于
-- std::greater_equal<T>：大于等于
-- std::less_equal<T>：小于等于
-- std::equal_to<T>：等于
-- std::not_equal_to<T>：不等于
+- std::greater\<T\>：大于
+- std::less\<T\>：小于
+- std::greater_equal\<T\>：大于等于
+- std::less_equal\<T\>：小于等于
+- std::equal_to\<T\>：等于
+- std::not_equal_to\<T\>：不等于
 
 ## 9、std::bad_function_call
 std::bad_function_call 是一个异常类，当调用一个空的 std::function 对象时会抛出这个异常。

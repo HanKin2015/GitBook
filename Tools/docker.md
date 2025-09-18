@@ -49,11 +49,13 @@ Docker 从 17.03 版本之后分为 CE（Community Edition: 社区版） 和 EE�
 查看 Docker 运行状态：systemctl status docker
 
 ### 镜像管理
+```
 查看本地镜像：docker images
 拉取镜像：docker pull <image_name>
 删除镜像：docker rmi <image_id>
 构建镜像：docker build -t <image_name>:<tag> <path>
 构建镜像（基于当前目录的Dockerfile）：docker build -t my-app .
+```
 
 ### 容器管理
 运行容器（-d 后台运行，-p 映射端口）：docker run -d -p 80:80 nginx

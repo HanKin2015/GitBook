@@ -23,9 +23,11 @@ CentOS默认是C版本，Perl版本是 prename命令，需安装
 
 
 三种形式
+```
 匹配：m/<regexp>/  (可以省略m，直接写成/regexp/)
 替换：s/<pattern>/<replacement>/
 转化：tr/<pattern>/<replacement>/
+```
 
 ## 3、正则表达式
 ```

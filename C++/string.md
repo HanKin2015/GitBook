@@ -7,10 +7,10 @@ size_t strnlen(const char *str, size_t maxlen);
 计算字符串str的(unsigned int型）长度，不包括结束符NULL，该长度最大为maxlen。
 即size_t等价于unsigned int
 
-## 2、std::basic_string<char> str = "haha"
+## 2、std::basic_string\<char\> str = "haha"
 std::basic_string[类模板](https://baike.baidu.com/item/类模板)存储且操纵类似char的对象的序列。该对象类型的性质由特性类模板std::char_traits的实例来提供，并作为std::basic_string的第二个模板参数 。
 
-其中string是std::basic_string<T>的简写 。 
+其中string是std::basic_string\<T\>的简写 。 
 
 ## 3、strstr函数
 strstr是C语言中的函数，作用是返回字符串中首次出现子串的地址。

@@ -255,7 +255,7 @@ man systemd-journald
 
 ## 9、journalctl日志存储位置
 了解journalctl -f的日志存储地址：
-Ubuntu默认不使用持久日志日志文件。仅易失性/run/log/journal/<machine-id>/*.journal[~]会保留到下一次引导。每次重新启动时，所有内容都会丢失。
+Ubuntu默认不使用持久日志日志文件。仅易失性/run/log/journal/\<machine-id\>/*.journal[~]会保留到下一次引导。每次重新启动时，所有内容都会丢失。
 
 您可能会在日志中看到带有以下内容的引导列表：
 ```

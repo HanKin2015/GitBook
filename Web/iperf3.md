@@ -5,11 +5,11 @@ iperf3是一款网络性能测试工具，用于测量网络带宽、延迟和�
 
 - 在服务器上启动iperf3服务：iperf3 -s
 - 在客户端上连接服务器进行测试：iperf3 -c <server_ip>
-- 测试UDP带宽：iperf3 -u -b <bandwidth> -c <server_ip>
-- 测试指定时间内的带宽：iperf3 -t <time> -c <server_ip>
-- 测试指定带宽的最大传输单元（MTU）：iperf3 -M <MTU> -c <server_ip>
+- 测试UDP带宽：iperf3 -u -b \<bandwidth\> -c <server_ip>
+- 测试指定时间内的带宽：iperf3 -t \<time\> -c <server_ip>
+- 测试指定带宽的最大传输单元（MTU）：iperf3 -M \<MTU\> -c <server_ip>
 - 测试多个并发连接：iperf3 -P <num_connections> -c <server_ip>
-- 输出测试结果到文件：iperf3 -c <server_ip> -i <interval> -t <time> -J > <output_file>
+- 输出测试结果到文件：iperf3 -c <server_ip> -i \<interval\> -t \<time\> -J > <output_file>
 
 更多详细的命令和参数可以通过iperf3 --help命令查看。
 

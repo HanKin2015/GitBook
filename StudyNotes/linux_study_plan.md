@@ -1,5 +1,5 @@
 # linux学习方面的打算
-[Linux公社](www.linuxidc.com)
+[Linux公社](https://www.linuxidc.com)
 [UNIX环境高级编程 心得笔记](https://www.linuxidc.com/Linux/2017-10/147312.htm)
 
 # 内核

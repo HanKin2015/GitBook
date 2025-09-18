@@ -328,7 +328,10 @@ m_pCookieJar->setCookiesFromUrl(cookies, strUrl);
 m_pWebView->load(strUrl);
 ```
 
-使用QNetworkCookieJar类需要包含头文件#include <QtNetwork/QNetworkCookieJar>
+使用QNetworkCookieJar类需要包含头文件:
+```
+#include <QtNetwork/QNetworkCookieJar>
+```
 
 ## 12、中文乱码
 
@@ -412,16 +415,15 @@ w.setWindowFlags(w.windowFlags()&~Qt::WindowMinMaxButtonsHint|Qt::WindowMaxmizeB
 ```
 
 ## 17、关闭webview滚动条
-
 关闭了有问题，无法进行鼠标滚轮滚动。
 
-头文件：#include <QWebFrame>
-
 ```
-    view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
-    view->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
-    view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, 100);
-    view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
+#include <QWebFrame>
+
+view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+view->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
+view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, 100);
+view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
 ```
 
 wheelevent函数是鼠标滚轮事件。

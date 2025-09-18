@@ -80,10 +80,12 @@ hexo init
 我的仓库为https://gitee.com/hankin1994/gitee.io.git
 
 ### 4-6、本地调试
+```
 hexo clean
 hexo g
 hexo server
 http://localhost:4000/gitee.io/
+```
 
 解决方案参考：https://github.com/nodemailer/nodemailer/issues/1410
 ```

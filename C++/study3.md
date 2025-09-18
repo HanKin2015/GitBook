@@ -121,8 +121,8 @@ std::forward 是 C++ 中用于实现完美转发的关键工具，它能在函�
 正确使用 std::forward 的三个核心条件
 - 使用转发引用（Universal Reference）
 函数模板的参数必须是 T&& 形式，其中 T 是通过模板类型推导得出的。
-- 使用 std::forward<T>(arg)
-转发时必须显式指定模板参数 T，即 std::forward<T>(arg)，其中 T 是函数模板的类型参数。
+- 使用 std::forward\<T\>(arg)
+转发时必须显式指定模板参数 T，即 std::forward\<T\>(arg)，其中 T 是函数模板的类型参数。
 - 仅在需要保持值类别时使用
 不要在不需要转发的地方使用 std::forward（如普通函数、已知值类别的场景）。
 
@@ -132,7 +132,7 @@ CAS（Compare-And-Swap）是一种硬件级别的原子操作，用于实现无�
 基本概念
 - 核心思想：“先比较内存中的值是否等于期望值，如果相等则更新为新值，否则返回失败”。
 - 原子性保证：整个操作由 CPU 硬件直接支持，不可被中断。
-- 常见实现：C++：std::atomic<T>::compare_exchange_weak/strong
+- 常见实现：C++：std::atomic\<T\>::compare_exchange_weak/strong
 
 ## 14、自旋锁（Spinlock）
 自旋锁（Spinlock）是一种用于多线程同步的锁机制，它通过让线程持续循环（自旋）检查锁的状态，而不是进入睡眠状态来避免锁竞争。自旋锁适用于锁持有时间短、线程不希望在获取锁失败时被挂起的场景。

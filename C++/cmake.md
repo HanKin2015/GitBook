@@ -123,8 +123,8 @@ set命令用于定义一个普通类型的变量。
 ## 6、find_package命令
 find_package 是 CMake 中的一个命令，用于查找和加载外部依赖库。它的语法如下：
 
-find_package(<package> [version] [EXACT] [QUIET] [MODULE] [REQUIRED] [[COMPONENTS] [components...]])
-其中，<package> 表示要查找的依赖库的名称，version 表示要查找的依赖库的版本号，EXACT 表示要求精确匹配版本号，QUIET 表示不输出查找信息，MODULE 表示只查找 CMake 模块文件，REQUIRED 表示如果找不到依赖库则停止 CMake 构建过程，[COMPONENTS] 表示要查找的依赖库的组件。
+find_package(\<package\> [version] [EXACT] [QUIET] [MODULE] [REQUIRED] [[COMPONENTS] [components...]])
+其中，\<package\> 表示要查找的依赖库的名称，version 表示要查找的依赖库的版本号，EXACT 表示要求精确匹配版本号，QUIET 表示不输出查找信息，MODULE 表示只查找 CMake 模块文件，REQUIRED 表示如果找不到依赖库则停止 CMake 构建过程，[COMPONENTS] 表示要查找的依赖库的组件。
 
 find_package 命令会在系统中查找指定名称的依赖库，并设置相关变量，以便在后续的 CMake 构建过程中使用。通常情况下，find_package 命令会在系统路径中查找依赖库，如果找不到，则可以通过设置 CMAKE_PREFIX_PATH 变量来指定依赖库的安装路径。
 ```

@@ -29,7 +29,7 @@ root@hankin:~/opencv# uname -r
 6.14.0-24-generic
 ```
 
-在基于 Debian 或 Ubuntu 的系统中，Perf 工具通常包含在linux-tools-common和linux-tools-<kernel-version>包中。安装命令如下：
+在基于 Debian 或 Ubuntu 的系统中，Perf 工具通常包含在linux-tools-common和linux-tools-\<kernel-version\>包中。安装命令如下：
 ```
 sudo apt-get install linux-tools-common linux-tools-`uname -r`
 ```

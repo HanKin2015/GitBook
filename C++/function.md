@@ -44,7 +44,10 @@ static函数和普通函数的最大的区别在于作用域方面，static函�
 报错：error: invalid use of member ‘SystemTray::mSessTypes’ in static member function
 静态成员函数不能直接访问类的非静态成员变量或非静态成员函数，因为静态成员函数不属于任何特定的对象实例，而是属于类本身。
 
-报错：error: cannot convert ‘SystemTray::HandlerCurSessInfo’ from type ‘int (SystemTray::)(const SfJsonParamsObj&, QString&)’ {aka ‘int (SystemTray::)(const _SfJsonParamsObj&, QString&)’} to type ‘std::map<std::__cxx11::basic_string<char>, int (*)(const _SfJsonParamsObj&, QString&)>::mapped_type’ {aka ‘int (*)(const _SfJsonParamsObj&, QString&)’}
+报错：
+```
+error: cannot convert ‘SystemTray::HandlerCurSessInfo’ from type ‘int (SystemTray::)(const SfJsonParamsObj&, QString&)’ {aka ‘int (SystemTray::)(const _SfJsonParamsObj&, QString&)’} to type ‘std::map<std::__cxx11::basic_string<char>, int (*)(const _SfJsonParamsObj&, QString&)>::mapped_type’ {aka ‘int (*)(const _SfJsonParamsObj&, QString&)’}
+```
 试图将一个成员函数指针赋值给一个普通函数指针。这是因为成员函数的指针和普通函数的指针在 C++ 中是不同的。
 在 C++ 中，成员函数的指针需要一个对象实例来调用，而普通函数的指针不需要。因此，您不能直接将一个成员函数指针赋值给一个期望普通函数指针的地方。
 解决方式：可以将其定义为静态成员函数。静态成员函数的指针可以被视为普通函数指针。

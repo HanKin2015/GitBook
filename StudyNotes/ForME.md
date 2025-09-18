@@ -2,13 +2,14 @@
 
 公积金一年调整一次：7月1日至当年的6月30日。
 养老院通常由地方政府或慈善机构主办,；而敬老院是在农村实行“五保”的基础上发展起来的。
-
+```
 <div class="entry-title">
     <h3>武汉大学 (985院校)</h3>
     <p style="white-space: pre;">                             计算机技术</p>
     <p style="white-space: pre;">          硕士</p>
     <p>2017.09 - 2019.06</p>
 </div>
+```
 
 姓名：hejian
 自我介绍（读研时间、研究方向、论文发表情况、兴趣爱好）：I spent a good time as a graduate student in Wuhan University in 2017-2019, mainly do research on k-truss-based dense sub-graph community search, and my hobbies are singing, jumping, rap and basketball.

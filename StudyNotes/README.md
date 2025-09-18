@@ -224,7 +224,14 @@ FQA 并不是一个常见的缩写，通常不会用来表示“常见问题解�
 
 简言之，普通高等教育是 “适合年轻人的‘硬核’学历通道”，国家开放大学是 “适合成年人的‘灵活’学历补充”—— 两者没有绝对的 “优劣”，只有 “是否适配” 个人需求的区别。
 
-
+# 有趣的7个网站
+- [恐龙快跑](chrome://dino/)
+- [系统假装升级](https://fakeupdate.net)
+- [四大名著的地图](https://www.sdmz.net/map)
+- [网页版扫雷](https://www.saolei.org)
+- [在线迷宫](http://www.mazegenerator.net/)
+- [在线贪吃蛇](http://slither.io/)
+- [在线连连看](https://lines.frvr.com/)
 
 
 

@@ -12,6 +12,7 @@ RapidXml 为采用C++语言操作XML提供了机遇，同时结合XMPP协议也�
 ## 3、疑问
 https://blog.csdn.net/ljd680/article/details/104059667
 
+```
 doc.parse<0>();
 
 //! Parses zero-terminated XML string according to given flags.
@@ -25,7 +26,7 @@ doc.parse<0>();
 //! Document can be parsed into multiple times. 
 //! Each new call to parse removes previous nodes and attributes (if any), but does not clear memory pool.
 //! \param text XML data to parse; pointer is non-const to denote fact that this data may be modified by the parser.
-
+```
 
 
 

@@ -158,8 +158,11 @@ myweb->setUrl(QUrl("https://www.baidu.com/"));
 
 ## 4、QAxWidget
 qt5.2.1无法默认使用，没有头文件。
-工程文件里添加 QT += axcontainer
+工程文件里添加
+```
+QT += axcontainer
 #include <QAxWidget>
+```
 
 ## 5、解决 Project ERROR: Unknown module(s) in QT: webengine 办法
 

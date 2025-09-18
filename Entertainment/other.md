@@ -20,7 +20,7 @@ https://mp.weixin.qq.com/s/gn4sUTFMXrOZ02poD3sN5Q
 
 录像回放需要安装内存卡，即TF卡（Micro SD Card，原名Trans-flash Card），或者花钱买云平台。
 Class10(10MB/sec)是针对TF内存卡(SDHC)的传输规范。
-传输速度(写入速度及读取速度)被定义为[Class2(2MB/sec)、Class4(4MB/sec)、Class6(6MB/sec)、Class10(10MB/sec)](最低速度)
+传输速度(写入速度及读取速度)被定义为\[Class2(2MB/sec)、Class4(4MB/sec)、Class6(6MB/sec)、Class10(10MB/sec)\](最低速度)
 U3是美国著名的存储卡与闪存生产商SanDisk与以色列著名的闪存技术开发商Msystems共同研发的，基于USB闪盘的新一代随身智能应用平台。U3技术除了可以保存数据，还支持直接运行应用程序。同时U3平台在数据管理和安全都提出了新的规范，更有效的保障用户的数据安全。
 
 超详细知识：http://www.360doc.com/content/23/0923/15/46996736_1097596096.shtml

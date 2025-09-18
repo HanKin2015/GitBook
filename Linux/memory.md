@@ -1,7 +1,7 @@
 # Linux下查看内存使用情况方法总结
 
 ## 1、/proc/meminfo
-查看RAM使用情况最简单的方法是通过 /proc/meminfo。这个动态更新的虚拟文件实际上是许多其他内存相关工具(如：free / ps / top)等的组合显示。/proc/meminfo列出了所有你想了解的内存的使用情况。进程的内存使用信息也可以通过 /proc/<pid>/statm 和 /proc/<pid>/status 来查看。
+查看RAM使用情况最简单的方法是通过 /proc/meminfo。这个动态更新的虚拟文件实际上是许多其他内存相关工具(如：free / ps / top)等的组合显示。/proc/meminfo列出了所有你想了解的内存的使用情况。进程的内存使用信息也可以通过 /proc/\<pid\>/statm 和 /proc/\<pid\>/status 来查看。
 
 ## 2、top
 top命令提供了实时的运行中的程序的资源使用统计。你可以根据内存的使用和大小来进行排序。

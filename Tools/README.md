@@ -99,8 +99,8 @@ tudo需要下载一下。
 ## 8、网盘
 [文叔叔](https://www.wenshushu.cn/)
 [百度网盘](https://pan.baidu.com/disk/main#/index)
-[阿里云盘]()
-[蓝奏云]()
+[阿里云盘](https://www.alipan.com/)
+[蓝奏云](https://www.lanzou.com/)
 [奶牛快传](https://cowtransfer.com/)
 
 ## 9、PotPlayer

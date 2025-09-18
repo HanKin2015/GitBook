@@ -397,8 +397,8 @@ C:\WINDOWS\system32>
 查看已加载的过滤器驱动程序：fltmc filters（和直接执行fltmc命令结果相同）
 查看已安装的过滤器驱动程序：fltmc instances
 列出系统中所有卷/RDR：fltmc volumes
-卸载过滤器驱动程序：fltmc unload <FilterName>
-加载过滤器驱动程序：fltmc load <FilterName>
+卸载过滤器驱动程序：fltmc unload \<FilterName\>
+加载过滤器驱动程序：fltmc load \<FilterName\>
 
 
 

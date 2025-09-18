@@ -190,7 +190,9 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 
 使用pip help install查看r参数，结果如下：
+```
 -r, --requirement <file>    Install from the given requirements file. This option can be used multiple times.
+```
 
 输出当前目录环境的依赖：python -m pip freeze > requirements.txt
 

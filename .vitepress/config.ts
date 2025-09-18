@@ -69,18 +69,18 @@ function sidebarGuide() {
           collapsible: true,
           collapsed: true,
           items: [
-            {text: 'Get Started', link: '/docs.en/GetStarted'},
-            {text: 'Stackless Coroutine', link: '/docs.en/StacklessCoroutine'},
-            {text: 'Lazy', link: '/docs.en/Lazy'},
-            {text: 'Debugging Lazy', link: '/docs.en/DebuggingLazy'},
-            {text: 'Stackless Coroutine and Future', link: '/docs.en/StacklessCoroutineAndFuture'},
-            {text: 'Try', link: '/docs.en/Try'},
-            {text: 'Executor', link: '/docs.en/Executor'},
-            {text: 'Signal And Cancellation', link: '/docs.en/SignalAndCancellation'},
-            {text: 'Uthread', link: '/docs.en/Uthread'},
-            {text: 'Interacting with Stackless Coroutine', link: '/docs.en/InteractingWithStacklessCoroutine'},
-            {text: 'HybridCoro', link: '/docs.en/HybridCoro'},
-            {text: 'Improve NetLib', link: '/docs.en/ImproveNetLibWithAsyncSimple'},
+            {text: 'Get Started', link: '/GetStarted'},
+            {text: 'Stackless Coroutine', link: '/StacklessCoroutine'},
+            {text: 'Lazy', link: '/Lazy'},
+            {text: 'Debugging Lazy', link: '/DebuggingLazy'},
+            {text: 'Stackless Coroutine and Future', link: '/StacklessCoroutineAndFuture'},
+            {text: 'Try', link: '/Try'},
+            {text: 'Executor', link: '/Executor'},
+            {text: 'Signal And Cancellation', link: '/SignalAndCancellation'},
+            {text: 'Uthread', link: '/Uthread'},
+            {text: 'Interacting with Stackless Coroutine', link: '/InteractingWithStacklessCoroutine'},
+            {text: 'HybridCoro', link: '/HybridCoro'},
+            {text: 'Improve NetLib', link: '/ImproveNetLibWithAsyncSimple'},
           ]
         },
         {
@@ -88,11 +88,11 @@ function sidebarGuide() {
           collapsible: true,
           collapsed: true,
           items: [
-            {text: 'Future', link: '/docs.en/Future'},
-            {text: 'Lock', link: '/docs.en/Lock'},
-            {text: 'Latch', link: '/docs.en/Latch'},
-            {text: 'ConditionVariable', link: '/docs.en/ConditionVariable'},
-            {text: 'Semaphore', link: '/docs.en/Semaphore'},
+            {text: 'Future', link: '/Future'},
+            {text: 'Lock', link: '/Lock'},
+            {text: 'Latch', link: '/Latch'},
+            {text: 'ConditionVariable', link: '/ConditionVariable'},
+            {text: 'Semaphore', link: '/Semaphore'},
           ]
         },
         {
@@ -100,8 +100,8 @@ function sidebarGuide() {
           collapsible: true,
           collapsed: true,
           items: [
-            {text: 'Performance', link: '/docs.en/Performance'},
-            {text: 'Quantitative Analysis of Performance', link: '/docs.en/QuantitativeAnalysisReportOfCoroutinePerformance'},
+            {text: 'Performance', link: '/Performance'},
+            {text: 'Quantitative Analysis of Performance', link: '/QuantitativeAnalysisReportOfCoroutinePerformance'},
           ]
         },
       ]

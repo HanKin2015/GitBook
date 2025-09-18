@@ -223,7 +223,9 @@ coredumpctl list
 coredumpctl list --since=today
 
 “PID” 列包含用于标识转储的进程 ID。请注意这个数字，因为你会之后再用到它。或者，如果你不想记住它，使用下面的命令将它赋值给一个变量：
+```
 MYPID=<PID>
+```
 
 要查看关于核心转储的信息，请使用此命令（使用 $MYPID 变量或替换 PID 编号）：
 coredumpctl info $MYPID

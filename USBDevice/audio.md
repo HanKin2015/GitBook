@@ -142,7 +142,7 @@ index后面的数字是通道序号
 ## 5、amixer命令
 amixer 是一个用于控制和管理 ALSA（Advanced Linux Sound Architecture）音频设备的命令行工具。它允许用户查看和修改音量、音频通道、音频设备的状态等。
 查看音量和设备信息：amixer
-查看特定设备的音量：amixer get <control>
+查看特定设备的音量：amixer get \<control\>
 设置音量：amixer set Master 50%
 将音量增加 10%：amixer set Master 10%+
 将音量减少 10%：amixer set Master 10%-

@@ -4,7 +4,7 @@
 http://www.cplusplus.com/reference/cmath/tgamma/
 
 C99: Header <tgmath.h> provides a type-generic macro version of this function.
-C++11: Additional overloads are provided in this header (<cmath>) for the integral types: These overloads effectively cast x to a double before calculations (defined for T being any integral type).
+C++11: Additional overloads are provided in this header (\<cmath\>) for the integral types: These overloads effectively cast x to a double before calculations (defined for T being any integral type).
 
 给我整不会了。。。
 ```

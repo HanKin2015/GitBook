@@ -131,9 +131,9 @@ T* factory(Arg arg) {
 }
 ```
 这个简单的实现会遇到什么问题？
-传入右值：factory<MyClass>(MyClass())。这里 MyClass() 是一个右值，但当它在 factory 函数内部被传递给 T 的构造函数时，参数 arg 本身是一个有名字的变量，因此它是一个左值！我们丢失了原始参数是右值这一重要信息，导致本可以发生的移动构造变成了拷贝构造。
+传入右值：factory\<MyClass\>(MyClass())。这里 MyClass() 是一个右值，但当它在 factory 函数内部被传递给 T 的构造函数时，参数 arg 本身是一个有名字的变量，因此它是一个左值！我们丢失了原始参数是右值这一重要信息，导致本可以发生的移动构造变成了拷贝构造。
 
-传入左值：MyClass obj; factory<MyClass>(obj);。这里 arg 是 obj 的一个拷贝，如果 Arg 的拷贝构造代价很高，性能会劣化。我们更希望传递引用。
+传入左值：MyClass obj; factory\<MyClass\>(obj);。这里 arg 是 obj 的一个拷贝，如果 Arg 的拷贝构造代价很高，性能会劣化。我们更希望传递引用。
 
 ### 万能引用 (Universal Reference)
 当你看到 T&& 这样的语法时，你的第一反应可能是“右值引用”。但这不完全正确。在模板参数推导的上下文中，T&& 有一个特殊的名字——万能引用（Scott Meyers提出的术语），现在更被官方地称为转发引用（Forwarding Reference）。
@@ -150,7 +150,7 @@ A&& &  -> A&  （右值引用的左值引用 -> 左值引用）
 A&& && -> A&& （右值引用的右值引用 -> 右值引用）
 核心规则：只要有&（左值引用）出现，最终结果就是&。只有当所有引用都是&&（右值引用）时，结果才是&&。
 
-std::forward 的魔法：std::forward<T>(arg)
+std::forward 的魔法：std::forward\<T\>(arg)
 
 ## 变参模板
 

@@ -54,7 +54,7 @@ warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。
 最终解决方法：_CRT_SECURE_NO_WARNINGS
 
 ## 4、error: template with C linkage
-不要在extern "C"的中引用C++ STL库的头文件，如<map>, <vector>等具有template的头文件。
+不要在extern "C"的中引用C++ STL库的头文件，如\<map\>, \<vector\>等具有template的头文件。
 需要检查extern "C"后面为函数；extern "C" { }的定义是否完整。
 
 ## 5、错误	C7555 使用指定的初始值设定项至少需要“/std:c++latest”

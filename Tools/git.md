@@ -883,7 +883,7 @@ git commit --amend
 ## 23、剔除中间某个commit提交记录
 要从 Git 提交历史中删除某个提交，你可以使用 git rebase 命令。以下是一些步骤：
 - 首先，使用 git log 命令找到你想要删除的提交的哈希值。
-- 运行 git rebase -i <commit-before-the-one-you-want-to-remove> 命令，将 <commit-before-the-one-you-want-to-remove> 替换为你想要删除的提交的前一个提交的哈希值。
+- 运行 git rebase -i \<commit-before-the-one-you-want-to-remove\> 命令，将 \<commit-before-the-one-you-want-to-remove\> 替换为你想要删除的提交的前一个提交的哈希值。
 - 这将打开一个交互式 rebase 窗口，其中列出了你选择的提交历史。找到你想要删除的提交，并将其前面的单词由 "pick" 改为 "drop"，然后保存并关闭编辑器。
 - Git 将会继续重播这些提交，但会跳过你标记为 "drop" 的提交。
 - 最后，如果你已经将这些更改推送到远程仓库，你可能需要使用 git push --force 命令来覆盖远程分支的提交历史。
@@ -1864,8 +1864,8 @@ git submodule status
 ```
 
 ### 74-3、其他语法
-git submodule deinit <path>：将子模块从 .git/config 文件中移除，并删除子模块目录中的文件。
-git rm <path>：将子模块的引用从主仓库中删除，并提交更改。
+git submodule deinit \<path\>：将子模块从 .git/config 文件中移除，并删除子模块目录中的文件。
+git rm \<path\>：将子模块的引用从主仓库中删除，并提交更改。
 git submodule 列出子模块
 git submodule status 检查子模块状态
 
