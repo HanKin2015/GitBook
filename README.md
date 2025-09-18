@@ -100,4 +100,10 @@ The deployment was rejected or didn't satisfy other protection rules.
 参考：https://github.com/withastro/docs/issues/1376
 在Settings-》Environments / Configure github-pages-》Deployment branches and tags将master修改为main即可。
 
+## static.yml命令
+yarn docs:build 是一个基于 Yarn 包管理器的脚本命令，通常用于构建项目的文档站点（生成可部署的静态文件）。
+
+这个中的docs并不是文件夹的意思额，而是项目 package.json 中定义的一个自定义脚本名称，通常用于构建文档。
+只不过写成这样则是告知vuepress build docs构建的目录是docs，因此需要修改的是 package.json 文件额。
+
 
