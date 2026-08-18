@@ -123,14 +123,23 @@ GitHub 及其他大型网站使用多个 IP 地址是为了提高可用性、负
 
 虽然没有确切的数字，但可以估计 GitHub 的 IP 地址数量可能在几十到几百个之间，具体数量会根据实际情况而变化。如果需要获取最新的 IP 地址，可以使用 DNS 查询工具（如 nslookup 或 dig）来查看当前的 IP 地址列表。
 
-## 11、付费的机场真的好用
-官网：https://clashxiazai.com/
+## 11、自费科学上网
+付费的机场真的好用，官网：https://clashxiazai.com/
 
 之前一直使用同事的vpn账号，今天自己注册才发现，一个月30GB 6元，最多5个设备使用。
 真的香，想买60元400GB不限时套餐，也是很划算的。但是感觉能用10个月，我能用2年，主要是翻墙使用的不多。
 
 https://master.riolu.sbs/dashboard  密码当然是0708
 
+精灵学院：https://info.riolu.icu/app.html
+账号邮箱：1058
+账号密码：0708
+
+快捷跳转页： https://ok.riolu.work
+最新官网：
+https://portal.riolu00.link
+https://user.riolu.work
+https://user.riolu-node.link
 
 
 
