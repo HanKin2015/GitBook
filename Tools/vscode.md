@@ -476,3 +476,34 @@ F11键进入全屏后，vscode的快捷键就不会和浏览器出现冲突了�
 ## 23、高版本无法支持win7
 win7支持的最高版本是1.70
 低版本下载：https://code.visualstudio.com/updates/v1_70（修改后面的版本号即可）
+
+## 24、C/C++插件支持代码跳转
+C/C++ Extension Pack插件介绍：包含4个组件，是一个集合，其中就包含C/C++。
+
+demo见：D:\Github\Storage\c++\IntelliSense
+
+### 安装后无法跳转
+比如通过挂载方式挂载到本地进行打开代码，可能由于权限不足导致索引没有完全建立。服务器上的代码位于网络挂载目录（/mnt/code/... 通常是 NFS/SMB 挂载），C/C++ 插件的符号索引（Tag Parser）在远程文件系统上无法正常工作。
+
+解决方式：使用Remote-SSH远程连接打开代码
+
+### 配置c_cpp_properties.json
+```
+"includePath": [
+	"${workspaceFolder}/**",
+	"/path/to/your/external/include",
+	"/another/custom/include/path"
+],
+```
+发现网上好多说的以及软件自身说的使用"${workspaceFolder}/**"结果根本行不通，最终我花费了一天时间终于解决，需要在末尾添加斜杠解决即：
+```
+"${workspaceFolder}/**/"
+```
+
+直接导入include肯定行的通，这种方式主要解决头文件跳转，默认变量跳转不需要设置，直接支持，这样修改是头文件也能跳转。
+
+查看日志：
+```
+Ctrl+Shift+P → C/C++: Log Diagnostics
+Ctrl+Shift+P → C/C++: Reset IntelliSense Database
+```

@@ -197,3 +197,20 @@ https://blog.csdn.net/qq_23282479/article/details/107228634
 
 这时候就成功了。
 
+## 6、图片类型转换
+```
+for i in *.bmp; do 
+  ffmpeg -i "$i" -vf "format=gray" -s 120x186 "${i%.bmp}.png" -y
+done
+
+for i in *.bmp; do 
+  ffmpeg -i "$i" -vf "format=gray" -vf "transpose=1" "${i%.bmp}.png" -y
+done
+
+ffmpeg -i "$i" -vf "format=gray,transpose=1" "${i%.bmp}.png" -y
+
+screencatch -m -p /vendor/hj 0 0 800 1280 800 1280
+
+# 录制30秒后自动停止
+screenrecord --time-limit 10 /vendor/hj/my_recording.mp4
+```

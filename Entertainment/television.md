@@ -45,9 +45,12 @@ https://baijiahao.baidu.com/s?id=1688211366552871662&wfr=spider&for=pc
 总体上来讲，领衔主演是主角，其他所有的都是配角，但是特别主演的咖位比较大，这样就容易理解了。
 
 ## 7、电视盒子
+海信电视安装技巧：需要把apk后缀改为ap或者其他，否则电视机屏蔽不识别
+
 小苹果：https://xpgtv.com/
 tvbox下载：https://github.com/j4Uq/TVBoxOSC（镜像地址https://gitcode.com/GitHub_Trending/tv/TVBoxOSC）
 配置接口：https://github.com/qist/tvbox
+参考：https://kf369.cn/2838.html
 
 ```
 以下为本人试过的配置资源，都可以使用。
@@ -74,6 +77,13 @@ tvbox下载：https://github.com/j4Uq/TVBoxOSC（镜像地址https://gitcode.com
 21．http://pandown.pro/tvbox/tvbox.json
 ```
 
+## 8、其他apk分享
+轻松学IT百度云盘账户：ONE PICE/海信电视apk
 
+- tvbox
+- 小苹果
+- 宝宝巴士儿歌TV版
+- 喵影视
+- 家庭KTV
 
 
