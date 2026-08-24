@@ -233,5 +233,4 @@ FQA 并不是一个常见的缩写，通常不会用来表示“常见问题解�
 - [在线贪吃蛇](http://slither.io/)
 - [在线连连看](https://lines.frvr.com/)
 
-
-
+海森堡 Bug（Heisenbug） = 只要你开始调试、观察它，Bug 就消失 / 行为改变。

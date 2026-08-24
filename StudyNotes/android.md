@@ -314,3 +314,12 @@ log -t "tag" "there are 5 usb devices"
 中间的部分代表AID, settings应用的AID为system, 无法更新persist.usb.*的系统属性
 setprop persist.usb.dwc_driver 2
 setprop persist.sys.dwc_driver 2
+
+## 12、pm命令
+```
+pm -lf == pm list packages -f
+
+其中 -f 是 list packages 子命令的选项，表示同时输出 APK 路径
+```
+
+

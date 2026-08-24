@@ -322,12 +322,118 @@ marshall，英语单词，主要用作名词、及物动词、不及物动词，
 
 
 
+在汉语拼音（Pinyin）成为国际标准之前，西方世界长期使用威妥玛拼音来拼写中文。
+
+在威妥玛拼音中，“宋” 姓被拼写为 Soong。
+
+著名的 “宋氏三姐妹”（宋霭龄、宋庆龄、宋美龄）在英文历史文献中一直被称为 The Soong Sisters，而不是 “The Song Sisters”。
+
+很多早期的华人移民、海外家族或历史人物都保留了这种旧式拼法。
+
+推测：Soong 项目的创始人可能是一位熟悉中国历史或拥有相关背景的工程师，特意使用了这种更具历史感或特定家族色彩的拼写 Soong，以示区别或致敬（比如致敬宋氏家族，或者仅仅是因为觉得这个拼写更独特）。
+
+2. 避免冲突和增加辨识度
+在开源社区和技术领域，创建一个新项目时，开发者往往希望名字：
+
+独特：Song 是一个非常普通的英文单词（歌曲），如果项目叫 song，在代码搜索、域名注册、包命名时会非常麻烦，容易和普通词汇混淆。
+
+易记：Soong 看起来更像是一个专有名词（Proper Noun），让人一眼就知道这是一个特定的项目名字，而不是指 “唱歌”。
+
+总结
+标准拼音：Song (宋)
+
+威妥玛拼音 / 特定拼法：Soong (宋)
+
+Android 中的选择：采用了 Soong。
+
+这就好比：
+
+“北京” 标准拼音是 Beijing，但旧式拼法是 Peking（所以有 Peking University, Peking Duck）。
+
+“青岛” 标准拼音是 Qingdao，但啤酒依然叫 Tsingtao。
+
+“功夫” 标准拼音是 Gongfu，但国际上通用 Kung Fu。
+
+所以，Soong 就是 “宋”，只是用了一种非标准的、带有历史韵味或为了避嫌的拼写方式而已。
 
 
+分为**地名（邮政式 / 威妥玛）、人名姓氏、文化术语、品牌专有词**四大类，全部都是：现代汉语拼音有标准写法，但国际历史 / 品牌 / 学术保留老式拼法，和 Soong 逻辑完全一致 —— 要么为历史传承、要么规避普通英文词汇冲突、形成专属标识。
 
+旧式历史拼写标准汉语拼音中文沿用场景说明PekingBeijing北京Peking University、Peking Duck、Peking Opera 全球通用，不会改成 BeijingTsingtaoQingdao青岛青岛啤酒 Tsingtao Beer，百年品牌不改NankingNanjing南京Nanking Massacre（南京大屠杀）西方史料固定用词CantonGuangzhou广州Cantonese（粤语）、Canton Fair 广交会历史叫法，欧美古籍全用 CantonAmoyXiamen厦门厦门大学旧称 Amoy University，海外侨民仍常用FoochowFuzhou福州近代通商口岸外文记载标准拼写TientsinTianjin天津民国外贸、租界历史文献统一 TientsinSoochowSuzhou苏州古典园林、海外古籍固定写法HangchowHangzhou杭州西湖旧称 West Lake of HangchowZikaway / Zi-ka-weiXujiahui徐家汇上海徐家汇源景区官方保留旧式拼写
 
+## 一、城市地名（邮政式拼音，最经典，对标 Peking、Tsingtao）
 
+表格
 
+| 旧式历史拼写 | 标准汉语拼音 | 中文 | 沿用场景说明 |
+| --- | --- | --- | --- |
+| Peking | Beijing | 北京 | Peking University、Peking Duck、Peking Opera 全球通用，不会改成 Beijing |
+| Tsingtao | Qingdao | 青岛 | 青岛啤酒 Tsingtao Beer，百年品牌不改 |
+| Nanking | Nanjing | 南京 | Nanking Massacre（南京大屠杀）西方史料固定用词 |
+| Canton | Guangzhou | 广州 | Cantonese（粤语）、Canton Fair 广交会历史叫法，欧美古籍全用 Canton |
+| Amoy | Xiamen | 厦门 | 厦门大学旧称 Amoy University，海外侨民仍常用 |
+| Foochow | Fuzhou | 福州 | 近代通商口岸外文记载标准拼写 |
+| Tientsin | Tianjin | 天津 | 民国外贸、租界历史文献统一 Tientsin |
+| Soochow | Suzhou | 苏州 | 古典园林、海外古籍固定写法 |
+| Hangchow | Hangzhou | 杭州 | 西湖旧称 West Lake of Hangchow |
+| Zikaway / Zi-ka-wei | Xujiahui | 徐家汇 | 上海徐家汇源景区官方保留旧式拼写 |
 
+## 二、姓氏人名（对标 Soong 宋氏家族，威妥玛海外华人通用）
 
+1. **Soong = Song 宋**
+宋氏三姐妹 The Soong Sisters，海外宋姓华人、历史文献固定拼 Soong，避开英文普通单词 song（歌曲）。
+2. Chiang = Jiang 蒋
+蒋介石 Chiang Kai-shek，民国、欧美近代史唯一拼写，威妥玛标准姓氏拼法。
+3. Lee = Li 李
+海外华人通用 Lee，区别普通拼音 Li，辨识度更高（李小龙 Bruce Lee）。
+4. Wong = Huang 黄
+粤语旧式拼法，全球华人圈最常见黄姓拼写，极少用 Huang。
+5. Cheung = Zhang 张 / Chang = Zhang
+威妥玛 / 粤拼双版本，海外张姓几乎不用标准 Zhang。
+6. Mao Tse-tung = Mao Zedong
+老式威妥玛拼写，西方老档案、老书籍仍大量留存。
+7. Sun Yat-sen = Sun Zhongshan
+孙中山，粤语音译历史专属拼法，国际通用，不替换成 Sun Zhongshan。
+
+## 三、传统文化 / 武术哲学词汇（学术固定旧式拼写，不换拼音）
+
+1. Kung Fu = Gongfu 功夫
+你举例过，欧美无 gongfu 认知，Kung Fu 已成英文固有单词。
+2. Tai Chi / Tai-chi = Taiji 太极
+健身、武术圈全球只用 Tai Chi，几乎不用 Taiji。
+3. I Ching = Yijing 《易经》
+汉学经典威妥玛拼法，欧美图书馆古籍、哲学著作统一 I Ching。
+4. Tao / Dao = Dao 道
+Taoism（道教）是英文标准词汇，不用 Daoism；Tao Te Ching《道德经》固定旧式拼法。
+5. Ginseng = Renshen 人参
+早期传教士音译，直接收录进英语词典，不使用 renshen。
+6. Mahjong = Majiang 麻将
+粤语音译固定拼写，全球通用，无 Majiang 用法。
+
+## 四、品牌、院校专属旧式拼写（和安卓 Soong 项目逻辑高度相似：避重名、独特标识）
+
+1. Tsinghua University 清华（不是 Qinghua）
+建校之初采用威妥玛，校名永久保留，全球名校标识。
+2. Cheeloo University 齐鲁大学（近代教会大学，Qilu 旧式拼）
+3. Soochow University 东吴大学（台湾东吴大学至今沿用 Soochow，不用 Suzhou）
+4. Minolta（源自闽话 “美能达” 旧式音译，规避普通英文词）
+5. 补充技术圈类比：
+安卓 Soong 项目选择 Soong 而非 Song，和**清华 Tsinghua**逻辑完全一致：
+
+- Song 是英文基础词汇（歌曲），代码、域名、包名极易冲突；
+- Soong 是专属专有名词，自带中国历史背景，辨识度拉满。
+
+## 五、补充小众但典型例子
+
+1. Siam = Xiamen 暹罗（泰国旧称，历史固定）
+2. Cathay = Cathay 契丹 / 中国
+国泰航空 Cathay Pacific，中世纪欧洲对中国的称呼，专属品牌名。
+3. Swatow = Shantou 汕头（通商口岸老式邮政拼音）
+
+# 统一规律（呼应你对 Soong 的推测）
+
+1. **历史文献惯性**：1958 汉语拼音国标出台前，欧美传教士、外交、邮政统一用威妥玛 / 邮政式，史料、学术著作无法全部改写，永久留存；
+2. **专有名词差异化**：普通拼音容易和英文原生单词撞名（Song = 歌曲、Li = 化学元素锂），旧式加长 / 变体拼写（Soong、Lee）形成独立专有名词；
+3. **品牌 / 机构传承**：院校、百年企业早年注册旧式拼写，更换成本极高，同时自带复古东方文化辨识度，刻意保留；
+4. **海外方言拼写分流**：粤语、闽南语传教拼音在东南亚、欧美华人圈扎根，形成独立于普通话拼音的书写体系（Wong、Cheung、Amoy）。
 
