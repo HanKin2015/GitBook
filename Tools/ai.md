@@ -22,5 +22,7 @@ trae：
 头文件路径一般：
 `frameworks/native/services/surfaceflinger/renderengine/`
 
-> 
 > 配套上下文：RenderEngine 负责合成图层、输出到显示设备；`res_create_display_surface` 用于**创建面向显示输出的渲染 Surface**。
+
+### vitepress侧栏目录
+豆包一直告诉我说，然后询问kimi直接给出答案。

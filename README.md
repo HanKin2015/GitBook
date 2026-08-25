@@ -4,7 +4,13 @@
 此笔记在2019年9月10日搭建，通过gitbook+github pages技术搭建，至今2025年9月10日刚好6年时间（真的巧）
 原笔记部分文件备份路径：D:\interview\Storage\python\script\gitbook
 
-网页地址：https://hankin2015.github.io/GitBook/
+网页地址vitepress：https://hankin2015.github.io/GitBook/
+
+gitbook:https://gitee.com/turnon/gitbook-templates
+vitepress:https://hankin2015.github.io/Machine_to_DeepingLearning/
+just-the-docs：https://hankin2015.github.io/just-the-docs/
+readthedocs:https://ml-booknote.readthedocs.io/zh-cn/latest/
+github仓库：https://github.com/HanKin2015/ML_BookNote.git
 
 2025年9月10日以github pages、github actions和vitepress重新搭建，优势在于利用github actions自动化编译html网页流程，另外html文件不再上传至本仓库，由github服务器辅助缓存。
 

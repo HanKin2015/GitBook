@@ -1960,3 +1960,8 @@ git fetch --prune  # 清理本地缓存的已删除远程分支（测试执行�
 
 ```
 直接删除master默认分支是会失败的，需要在仓库中修改默认分支为main，Settings-》General-》Default branch-》Switch to another branch。
+
+master分支已成为历史：
+https://docs.github.com/zh/pull-requests/reference/branches
+https://baijiahao.baidu.com/s?id=1849846655547744202&wfr=spider&for=pc
+

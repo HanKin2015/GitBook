@@ -10,10 +10,10 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /ACM/
+      link: /ACM/bitmap
     - theme: alt
       text: View on GitHub
-      link: https://github.com/hankin2015/Gitbook.git
+      link: https://github.com/hankin2015/Gitbook
 
 features:
   - title: github pages

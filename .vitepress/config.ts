@@ -1,122 +1,95 @@
-export default {
+import { defineConfig } from 'vitepress'
+import { generateSidebar } from 'vitepress-sidebar'
+
+const autoSidebar = generateSidebar({ documentRootPath:"/" })
+
+// 在自动生成的侧边栏后面追加自定义外部链接分组
+const sidebar = [
+  autoSidebar,
+  {
+    text: "外部链接",
+    collapsible: true,
+    collapsed: true,
+    items: [
+      { text: 'my blog', link: 'https://hankin2015.github.io' },
+      { text: 'github', link: 'https://github.com/hankin2015' }
+    ]
+  }
+]
+
+export default defineConfig({
   lang: 'zh-CN',
   title: '学习笔记wiki',
-  description: 'Simple, light-weight and easy-to-use components',
+  description: '个人技术学习笔记Wiki，RK芯片、Android、协程等技术文档',
+
+  // 【关键】GitHub Pages必须配置！
+  // 仓库名：https://github.com/你的用户名/rk-docs
+  // base = '/仓库名/'，末尾斜杠不能丢
   base: '/Gitbook/',
-  lastUpdated: true,
+
+  lastUpdated: !!process.env.CI,
   ignoreDeadLinks: false,
-  outDir: "public",
-  locales: {
-    "/": {
-      lang: 'zh-CN',
-      title: '学习笔记wiki',
-      description: 'Simple, light-weight and easy-to-use components',
-    },
+
+  outDir: "public", // 如无特殊需求注释掉，使用默认输出目录，当前在static.yml写public
+
+  // 暗黑模式自动切换
+  appearance: true,
+
+  markdown: {
+    lineNumbers: true, // 代码块显示行号（写驱动日志必备）
   },
+
   head: [],
 
   themeConfig: {
+    // 右上角导航栏
     nav: nav(),
 
-    sidebar: {
-      "/": sidebarGuide(),
+    // 自动侧边栏
+    sidebar: sidebar,
+
+    // 右侧文章目录层级
+    outline: {
+      level: [2, 4],
+      label: '目录'
     },
 
+    // 上一页/下一页中文
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    },
+
+    // 内置本地全文搜索（中文开箱即用，不需要Algolia）
+    search: {
+      provider: 'local'
+    },
+
+    // 右上角github跳转链接
     socialLinks: [
-      {icon: 'github', link: 'https://github.com/hankin2015/Gitbook'}
+      { icon: 'github', link: 'https://github.com/hankin2015/Gitbook' }
     ],
 
     footer: {
       message: 'This website is released under the MIT License.',
-      copyright: 'Copyright © 2025 hankin2015 contributors'
+      copyright: 'Copyright © 2026 hankin2015 contributors'
     },
 
     editLink: {
       pattern: 'https://github.com/hankin2015/Gitbook/edit/main/:path'
     }
   }
-}
+})
 
 function nav() {
   return [
-    {text: 'Guide', link: '/', activeMatch: '/guide/'},
-    {
-      text: "Language",
-      items: [
-        {
-          text: "English", link: "/"
-        },
-        {
-          text: "简体中文", link: '/'
-        }
-      ]
-    },
+    { text: '首页', link: '/', activeMatch: '^/$|^/' },
+    { text: '个人简介', link: '/README' },
+    { text: '关于', link: '/Linux/cut' },
+    { text: '梦想', link: '/ML/ML' },
     {
       text: 'Github Issues',
       link: 'https://github.com/hankin2015/Gitbook/issues'
-    }
-  ]
-}
-
-function sidebarGuide() {
-  return [ {
-      text: '学习笔记',
-      collapsible: true,    // 启用折叠
-      collapsed: true,      // 默认折叠
-      items: [
-        {
-          text: 'Quick Start',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            {text: 'Get Started', link: '/GetStarted'},
-            {text: 'Stackless Coroutine', link: '/StacklessCoroutine'},
-            {text: 'Lazy', link: '/Lazy'},
-            {text: 'Debugging Lazy', link: '/DebuggingLazy'},
-            {text: 'Stackless Coroutine and Future', link: '/StacklessCoroutineAndFuture'},
-            {text: 'Try', link: '/Try'},
-            {text: 'Executor', link: '/Executor'},
-            {text: 'Signal And Cancellation', link: '/SignalAndCancellation'},
-            {text: 'Uthread', link: '/Uthread'},
-            {text: 'Interacting with Stackless Coroutine', link: '/InteractingWithStacklessCoroutine'},
-            {text: 'HybridCoro', link: '/HybridCoro'},
-            {text: 'Improve NetLib', link: '/ImproveNetLibWithAsyncSimple'},
-          ]
-        },
-        {
-          text: 'Utils',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            {text: 'Future', link: '/Future'},
-            {text: 'Lock', link: '/Lock'},
-            {text: 'Latch', link: '/Latch'},
-            {text: 'ConditionVariable', link: '/ConditionVariable'},
-            {text: 'Semaphore', link: '/Semaphore'},
-          ]
-        },
-        {
-          text: 'Performance',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            {text: 'Performance', link: '/Performance'},
-            {text: 'Quantitative Analysis of Performance', link: '/QuantitativeAnalysisReportOfCoroutinePerformance'},
-          ]
-        },
-      ]
-    },
-    {
-      text: 'my blog',
-      link: 'https://hankin2015.github.io'
-    },
-    {
-      text: 'github',
-      link: 'https://github.com/HanKin2015'
-    },
-    {
-      text: '知乎',
-      link: 'https://github.com/HanKin2015'
     }
   ]
 }
