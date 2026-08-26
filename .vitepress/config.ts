@@ -1,14 +1,17 @@
 import { defineConfig } from 'vitepress'
 import { generateSidebar } from 'vitepress-sidebar'
 
-const autoSidebar = generateSidebar({ documentRootPath:"/" })
+const autoSidebar = generateSidebar({
+  documentRootPath: '/',
+  collapsed: true,
+});
 
 // 在自动生成的侧边栏后面追加自定义外部链接分组
+// JavaScript/TypeScript 中的展开运算符...，把 autoSidebar 数组里的所有元素"展开"放到这里
 const sidebar = [
-  autoSidebar,
+  ...autoSidebar,
   {
     text: "外部链接",
-    collapsible: true,
     collapsed: true,
     items: [
       { text: 'my blog', link: 'https://hankin2015.github.io' },
@@ -24,8 +27,8 @@ export default defineConfig({
 
   // 【关键】GitHub Pages必须配置！
   // 仓库名：https://github.com/你的用户名/rk-docs
-  // base = '/仓库名/'，末尾斜杠不能丢
-  base: '/Gitbook/',
+  // base = '/仓库名/'，末尾斜杠不能丢，注意字母大小写敏感
+  base: '/GitBook/',
 
   lastUpdated: !!process.env.CI,
   ignoreDeadLinks: false,
@@ -67,7 +70,7 @@ export default defineConfig({
 
     // 右上角github跳转链接
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/hankin2015/Gitbook' }
+      { icon: 'github', link: 'https://github.com/hankin2015/GitBook' }
     ],
 
     footer: {
@@ -76,7 +79,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/hankin2015/Gitbook/edit/main/:path'
+      pattern: 'https://github.com/hankin2015/GitBook/edit/main/:path'
     }
   }
 })
@@ -84,12 +87,12 @@ export default defineConfig({
 function nav() {
   return [
     { text: '首页', link: '/', activeMatch: '^/$|^/' },
-    { text: '个人简介', link: '/README' },
-    { text: '关于', link: '/Linux/cut' },
-    { text: '梦想', link: '/ML/ML' },
+    { text: '梦想', link: '/README' },
+    { text: '个人简介', link: '/Linux/cut' },
+    { text: '关于', link: '/ML/ML' },
     {
       text: 'Github Issues',
-      link: 'https://github.com/hankin2015/Gitbook/issues'
+      link: 'https://github.com/hankin2015/GitBook/issues'
     }
   ]
 }

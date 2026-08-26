@@ -127,7 +127,31 @@ tar: Error is not recoverable: exiting now
 c====create
 x====extract
 
+## 8、z参数
+> 你打包命令：`tar -cvf hj.tar v2019/`
 
+- `‑cvf`：**普通 tar 包，没有做 gzip 压缩**，后缀只是`.tar`，**不是 tar.gz**
+- 后面你解压加了 `-z` 参数，`-z` 代表 gzip 解压，于是报错 `gzip: stdin: not in gzip format`，因为这个包根本没有 gzip 压缩。
 
+`‑z` 只用于 **`.tar.gz / .tgz`**；普通`.tar`包**不能带‑z**。
 
+## 9、tar解压到指定目录
+tar 解压到指定目录用 **`-C`（大写 C）**，注意：**-C 后面跟目标文件夹路径**。
+
+`-C` = **Change directory**，切换工作目录。
+
+全称：`--directory`
+```
+tar --directory=./my_extract -xvf hj.tar
+# 等价于
+tar -xvf hj.tar -C ./my_extract
+
+## 原理
+
+tar 在解压前，**先 cd 到 `-C` 指定的目录**，再把文件释放到这个目录。
+
+相当于自动做了两步：
+cd 目标目录
+tar -xvf /完整路径/hj.tar
+```
 
