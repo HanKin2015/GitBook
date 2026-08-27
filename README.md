@@ -141,4 +141,20 @@ ifconfig即可查看到media: autoselect (1000baseT <full-duplex>)关键字。
 ## [vitepress] 16 dead link(s) found.
 发现md文件中的内容均有一个特点，就是非http协议的链接都会认为是本地链接，然后就会去寻找其文件，发现文件未找到则就会认为是无效链接，就会报错。
 
+## 构建失败排查
+```
+The language 'sublime_addright' is not loaded, falling back to 'txt' for syntax highlighting.
+✗ Build failed in 7.32s
+✗ building client + server bundles...
+build error:
+Build failed with 1 error:
 
+[plugin vite:vue] /home/runner/work/GitBook/GitBook/BSP/README.md:10:109
+RolldownError: Element is missing end tag.
+SyntaxError: Element is missing end tag.
+    at createCompilerError (/home/runner/work/GitBook/GitBook/node_modules/@vue/compiler-core/dist/compiler-core.cjs.prod.js:1374:17)
+```
+从日志中可以定位问题所在，是/home/runner/work/GitBook/GitBook/BSP/README.md:10:109问题。
+
+## 排队状态
+等待了5分钟，纹丝不动，一直在queue状态，直接取消重试立即开始了。
