@@ -322,4 +322,17 @@ pm -lf == pm list packages -f
 其中 -f 是 list packages 子命令的选项，表示同时输出 APK 路径
 ```
 
+## 13、rc文件日志打印
+内核下：
+```
+echo "hello world" > /dev/kmsg
+```
 
+rc文件：
+```
+write /dev/kmsg "hello world"
+```
+
+/dev/kmsgLinux 2.6.37+ (现代标准)	/proc/kmsg已废弃，不推荐使用。Linux早期版本 (遗留接口)
+
+## 14、exec命令

@@ -98,7 +98,25 @@ ssh-keygen -t rsa -C "邮件地址"
 - 设置里面设置显示icon overlays
 
 ## 1、使用git下载单个指定的文件夹
-更多搜索“稀疏检出”。
+
+只下载显示单挑commit记录：
+```
+depth=1
+```
+
+更多搜索“稀疏检出”（仓库共有两个分支）：
+```
+默认git clone 938MB
+single-branch master 896MB
+single-branch develp 830MB
+
+稀疏检出
+git config --global http.postBuffer 524288000
+git config core.sparse checkout true
+echo 文件夹 >.git/info/sparse-checkout
+git remote add -forigin git@github.com:HanKin2015/GitBook.git 此时会有144MB
+git pull origin master 此时会有158MB
+```
 
 git log -p filename   注意-p参数必须在log后面
 
@@ -1964,4 +1982,18 @@ git fetch --prune  # 清理本地缓存的已删除远程分支（测试执行�
 master分支已成为历史：
 https://docs.github.com/zh/pull-requests/reference/branches
 https://baijiahao.baidu.com/s?id=1849846655547744202&wfr=spider&for=pc
+
+## 79、查看合并时间
+git cherry-pick会把其他人的信息和提交信息写上去，因此如果使用普通的git log查看commit时间有时候是有问题的，并不是当前仓库合并该记录的实际时间：
+```
+HanKin@HanKin-PC MINGW64 /d/Github/GitBook (main)
+$ git log --pretty=fuller .
+commit 2d835b47fb66a937e825ecd5965575a43d36da12 (HEAD -> main, origin/main)
+Author:     HanKin2015 <1058198502@qq.com>
+AuthorDate: Thu Aug 27 23:37:14 2026 +0800
+Commit:     HanKin2015 <1058198502@qq.com>
+CommitDate: Fri Aug 28 01:16:30 2026 +0800
+
+    [FIX] 居然是<>引起的构建失败问题
+```
 
