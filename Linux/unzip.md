@@ -155,3 +155,45 @@ cd 目标目录
 tar -xvf /完整路径/hj.tar
 ```
 
+## 10、软链接文件不存在直接压缩会报警告
+```
+hejian@android-hankin:~/hj$ ln -sf /system/etc etc
+hejian@android-hankin:~/hj$ ll
+total 8
+drwxrwxr-x  2 hejian hejian 4096  9 月 10 14:28 ./
+drwxrwxr-x 14 hejian hejian 4096  9 月 10 14:28 ../
+lrwxrwxrwx  1 hejian hejian   11  9 月 10 14:28 etc -> /system/etc
+hejian@android-hankin:~/hj$ mkdir BOOT
+hejian@android-hankin:~/hj$ mv etc BOOT/
+hejian@android-hankin:~/hj$ ll
+total 12
+drwxrwxr-x  3 hejian hejian 4096  9 月 10 14:29 ./
+drwxrwxr-x 14 hejian hejian 4096  9 月 10 14:28 ../
+drwxrwxr-x  2 hejian hejian 4096  9 月 10 14:29 BOOT/
+hejian@android-hankin:~/hj$ zip hj.zip * -r
+zip warning: name not matched: BOOT/etc
+adding: BOOT/ (stored 0%)
+hejian@android-hankin:~/hj$ ll
+total 16
+drwxrwxr-x  3 hejian hejian 4096  9 月 10 14:29 ./
+drwxrwxr-x 14 hejian hejian 4096  9 月 10 14:28 ../
+drwxrwxr-x  2 hejian hejian 4096  9 月 10 14:29 BOOT/
+-rw-rw-r--  1 hejian hejian  160  9 月 10 14:29 hj.zip
+hejian@android-hankin:~/hj$ unzip hj.zip -d j
+Archive:  hj.zip
+creating: j/BOOT/
+hejian@android-hankin:~/hj$ ll j/BOOT/
+total 8
+drwxrwxr-x 2 hejian hejian 4096  9 月 10 14:29 ./
+drwxrwxr-x 3 hejian hejian 4096  9 月 10 14:29 ../
+hejian@android-hankin:~/hj$
+```
+
+正确方式：zip hj.zip * -0ry
+
+- `-y`：**关键参数**，存储符号链接本身，而不是跟随链接、把目标文件打包进去。不加 `-y` 时，zip 会跳过软链接（你看到的 `name not matched: BOOT/etc` 就是这个原因）。
+- `-0`：只存储，**不压缩**，速度快。
+- `-r`：递归遍历目录。
+
+## 11、z参数
+排除不需要压缩的文件

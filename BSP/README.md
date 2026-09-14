@@ -49,3 +49,8 @@ ro.test.normal       u:object_r:default_prop:s0
 media.                  u:object_r:media_prop:s0
 ro.media.               u:object_r:media_prop:s0
 ```
+
+## 5、SOC
+SoC（System on Chip）
+
+efuse 电子熔丝
